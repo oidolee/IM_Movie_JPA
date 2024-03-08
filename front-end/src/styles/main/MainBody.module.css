@@ -1,0 +1,30 @@
+@charset "utf-8";
+
+.slide-box > div{
+    background-color: #000000;
+}
+
+/* 하단 콘텐츠 */
+.MainBody_contents{    
+    max-width: 980px;
+    margin: 0 auto;
+    height: 600px;
+    border: 1px solid;
+}
+
+.MainBody_contents .MainBody_section_1{
+    display: flex;
+    justify-content: space-between;
+}
+.MainBody_contents .MainBody_section_1 .MainBody_contents_left{
+    width: 680px;
+    border: 1px solid;
+}
+
+.MainBody_contents .MainBody_section_1 .MainBody_contents_right{
+    width: 290px;
+}
+
+.MainBody_contents .MainBody_section_1 .MainBody_contents_right img{
+    width: 100%;
+}

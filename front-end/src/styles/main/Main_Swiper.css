@@ -1,0 +1,82 @@
+/* #app {
+  height: 100%;
+}
+html,
+body {
+  position: relative;
+  height: 100%;
+} */
+.slide_box{
+  background-color: #000;
+}
+
+.Main_Swiper .swiper {
+  width: 1920px;
+  /* height: 100px; */
+  
+}
+
+.Main_Swiper .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.Main_Swiper .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-pagination{
+  z-index: 10;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+.swiper-pagination span{
+  margin-right: 10px;
+}
+
+.swiper-pagination-bullet {
+  z-index: 10;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  color: #000;
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.swiper-pagination-bullet-active {
+  color: #fff;
+  background: #007aff;
+}
+
+
+.Main_Swiper_control_box{
+  z-index: 1;
+  position: absolute;
+  bottom: 0;
+  right: 100px;
+}
+.Main_Swiper_control_box > i{
+  color: #fff;
+  font-size: 30px;
+}
+
+.Main_Swiper_control_box .moveActive{
+  border: 1px solid #fff;
+}
+

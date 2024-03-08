@@ -1,0 +1,74 @@
+.MyPage_resMoive{
+    display: flex;
+    border: 1px solid;
+    margin: 5px;
+    width: 973px;
+    justify-content: center;
+}
+
+.MyPage_resMoive .MyPage_res_date_List{
+    display: inline;
+    border: 1px solid;
+    margin: 5px;
+}
+
+.MyPage_resMoive .MyPage_res_MovieInfo_small{
+    display: flex;
+    border: 1px solid;
+    margin: 5px;
+}
+
+.MyPage_resMoive .MyPage_res_MovieInfo{
+    display: inline;
+    border: 1px solid;
+    margin: 5px;
+}
+
+.MyPage_res_MovieInfo_small .movie_Name{
+    color: brown;
+    border: 1px solid;
+    margin: 5px;
+}
+
+.MyPage_res_MovieInfo_small .movie_price{
+    color: brown;
+    border: 1px solid;
+    margin: 5px;
+}
+
+.MyPage_res_MovieInfo_small .res_code{
+    color: brown;
+    border: 1px solid;
+    margin: 5px;
+}
+
+.MyPage_res_MovieInfo_small .cancle_accept{
+    color: red;
+    border: 1px solid;
+    border-radius: 3px;
+    margin: 5px;
+}
+
+.MyPage_res_MovieInfo_detail {
+    display: inline;
+    border: 1px solid;
+    margin: 5px;
+}
+
+.MyPage_res_MovieInfo_detail {
+    display: inline;
+    border: 1px solid;
+    margin: 5px;
+}
+
+.MyPage_res_MovieInfo_detail .movie_info {
+    display: flex;
+    border: 1px solid;
+    margin: 5px;
+}
+
+.cancle_res{
+    border: 1px solid;
+    background: rgb(255, 30, 0);
+    color: white;
+}

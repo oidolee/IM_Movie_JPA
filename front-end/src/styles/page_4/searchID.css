@@ -1,0 +1,41 @@
+/* styles.css 파일에 추가 */
+.accordion-button::after {
+    display: none;
+}
+
+.hpfind input {
+    height: 1px;
+    
+}
+
+.hpfind {
+    text-align: left;
+    font-size: 15px;
+}
+
+.hpfind .text {
+    display: flex;
+    align-items: center; 
+    height: 20px; 
+}
+
+.hpfind .text .MuiInputBase-root {
+    height: 100%; 
+}
+
+.wrappage .redBtn {
+    background-color: red;
+    color: white;
+    width: 100px;
+    margin-left: 10px;
+}
+
+.wrappage .blackBtn {
+    background-color: black;
+    color: white;
+    width: 100px;
+}
+
+.wrappage h5 {
+    text-align: left;
+}

@@ -1,0 +1,245 @@
+@charset "utf-8";
+
+.store_detail{    
+    width: 980px;
+    margin: 0 auto;
+    padding: 50px 0 0 0;
+    display: flex;
+}
+
+
+.StoreDetail_store_d{    
+    max-width: 1000px;
+    margin: 0 auto;
+    height: 2000px;
+    border: 1px solid;
+    padding-top: 30px;
+}
+
+.store_detail  .StoreDetail_pd_detail .pd_table .tit {
+    padding: 10px 0 22px;
+    font-size: 28px;
+}
+
+.tit {
+    font-weight: normal;
+}
+.StoreDetail_table{
+    text-align: left;
+}
+
+.store_detail .pd_detStoreDetail_pd_detailail .txt_price_wrap {
+    font-size: 15px;
+    text-align: right;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+.txt_price_wrap {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-align: right;
+}
+.txt_price_str {
+    font-size: 25px;
+}
+
+.StoreDetail_txt_sale{
+    text-align: left;
+    color: #FF243E;
+    font-weight: bold;
+}
+
+
+
+.txt_price_str {
+    font-weight: bold;
+    color: #FF243E;
+}
+
+.store_detail  .btn_wrap button {
+    width: 212px;
+    margin-right: 6px;
+    box-sizing: border-box;
+}
+
+
+
+
+
+.pd_table {
+    margin-bottom: 20px;
+}
+
+
+.store_detail  .StoreDetail_pd_detail .pd_table th, .store_detail  .StoreDetail_pd_detail .pd_table td {
+    border-bottom: 1px solid #eeeeee;
+    padding: 20px 0;
+    font-size: 15px;
+}
+
+.bx_num {
+    border: 1px solid #DDD;
+    height: 60px;
+    display: flex;
+}
+
+.txt_num {
+    align-content: center;
+    margin: auto;
+}
+
+.btn_mins{
+    width: 60px;
+    border: none;
+}
+
+.btn_plus {
+    width: 60px;
+    border: none;
+}
+
+
+
+/* .store_detail .pd_detail .bx_num .btn_plus, .store_detail  .pd_detail .bx_num .btn_mins {
+    padding: 0 40px;
+}
+
+.bx_num .btn_mins {
+    left: 0;
+    background-image: url();
+}
+
+.bx_num .btn_plus, .bx_num .btn_mins{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: no-repeat 50% 50%;
+    border: 0 none;
+
+    font: 0 auto;
+} */
+
+
+
+
+.txt_num {
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.btn_col2.ty7 {
+    height: 52px;
+    line-height: 50px;
+    padding: 0 24px;
+}
+
+.btn_col1.ty7 {
+    height: 52px;
+    line-height: 50px;
+    padding: 0 24px;
+}
+
+.btn_col2 {
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid #414141;
+    font-size: 14px;
+    color: #ffffff !important;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #414141;
+}
+
+
+
+.tab_wrap >.tab_tit {
+    border: none;
+}
+
+.tab_tit {
+    border-bottom: 1px solid #CCC;
+    font-size: 15px;
+    color: #7F7F7F;
+    text-decoration: none; /* 파란색 밑줄 제거 */
+}
+
+
+
+
+
+button {
+    border: 1px solid #DDD;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.store_detail .tab_wrap {
+    margin-top: 100px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 검은색 배경, 투명도 조절 가능 */
+    z-index: 1000; /* 다른 요소 위에 위치하도록 z-index 설정 */
+    display: none; /* 초기에는 화면에 보이지 않도록 설정 */
+  }
+  
+  .overlay.active {
+    display: block; /* active 클래스가 추가되면 화면에 보이도록 변경 */
+  }
+
+
+/* 스와이퍼 */
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+  
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .swiper {
+    width: 100%;
+    height: 400px;
+    margin: 20px auto;
+  }
+  .append-buttons {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .append-buttons button {
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid #007aff;
+    color: #007aff;
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin: 0 10px;
+    font-size: 13px;
+  }
+  

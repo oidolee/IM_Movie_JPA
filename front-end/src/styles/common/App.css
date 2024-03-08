@@ -1,0 +1,12 @@
+@charset "utf-8";
+.App {
+  text-align: center;
+}
+
+.App {
+  height: auto;
+  min-height: 100%;
+  margin: 0 auto;
+  border: 1px solid ;  
+}
+

@@ -1,0 +1,56 @@
+@charset "utf-8";
+.header_section{
+    width: 100%;
+    position: initial;
+    left: initial;
+    transform: initial;
+    border: 1px solid red;
+    margin: 0 auto;
+}
+
+.header_section .gnb{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #a7a7a7;
+    padding: 10px 0;
+}
+.header_section .gnb a{
+    color: #a7a7a7;
+}
+
+/* 회원가입 쪽 박스 */
+.header_section .gnb .right-gnb ul.header-member-box * {
+    color: #000;
+}
+
+.header_section .gnb .right-gnb ul > li .bi-person{
+    color: #000;
+}
+
+.header_section .gnb .right-gnb ul > li .btn_reserve{
+    background:url("../../assets/main/nav_side_reserve.png") no-repeat 0 2px;
+}
+
+.header_section .gnb .right-gnb ul{
+    display: flex;
+} 
+
+
+.header_section .nav *{
+    color: #000;
+}
+
+.header_section .nav >ul{
+    display: flex;
+    width: 100%;
+    padding: 10px 0;
+    justify-content: center;
+}
+
+/* 하단 내역 */
+.header_section .nav >ul>li>div{
+    background-color: #000
+}
+
+

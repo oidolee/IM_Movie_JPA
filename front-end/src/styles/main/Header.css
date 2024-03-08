@@ -1,0 +1,113 @@
+@charset "utf-8";
+
+.header_section{
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.header_section .gnb{
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #a7a7a7;
+    padding: 10px 0;
+    position: relative;
+}
+.header_section .gnb a{
+    color: #a7a7a7;
+    font-size: 12px;
+    font-weight: 800;
+}
+/* 회원가입 쪽 박스 */
+.header_section .gnb .right-gnb ul.header-member-box{
+    z-index: 1;
+    position: absolute;
+    top: 93px;
+    right: 0;
+}
+
+.header_section .gnb .right-gnb ul.header-member-box * {
+    color: #fff;
+}
+
+.header_section .gnb .right-gnb ul.header-member-box >li:nth-of-type(1)>a{
+    padding-left: 5px;
+}
+
+.header_section .gnb .right-gnb ul{
+    display: flex;
+} 
+
+.header_section .gnb .right-gnb ul > li{
+    margin-right: 10px;
+}
+
+/* 회원가입 아이콘 */
+.header_section .gnb .right-gnb ul > li .bi-person{
+    color: #fff;
+}
+/* 바로예매 아이콘 */
+.header_section .gnb .right-gnb ul > li .btn_reserve{
+    margin-top:0; padding-left:18px; border:none; 
+    background:url("../../assets/main/nav_side_reserve_wht.png") no-repeat 0 2px;
+}
+
+.header_section .gnb .right-gnb ul > li .bi-list{
+    color: #fff;
+}
+
+.header_section .nav *{
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.header_section .nav >ul{
+    display: flex;
+    width: 100%;
+    padding: 10px 0;
+    justify-content: center;
+    position: relative;
+}
+
+.header_section .nav >ul>li{
+    padding: 10px 20px;
+    transition: border-bottom 0.3s ease; /* 애니메이션 효과 설정 */
+    border-bottom: 3px solid transparent; /* 초기에는 투명한 선으로 설정 */
+}
+/* 호버 효과 */
+.header_section .nav >ul>li:hover {
+    border-bottom: 3px solid red;
+  }
+
+/* 하단 내역 */
+.header_section .nav >ul>li>div{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 55px;
+    background-color: rgba(0, 0, 0);
+    padding: 10px 0;
+}
+.header_section .nav >ul>li>div>ul{
+    display: flex;
+    justify-content: center;
+}
+.header_section .nav >ul>li>div>ul>li{
+    margin-right: 20px;
+}
+.header_section .nav >ul>li>div>ul>li>a{
+    font-size: 12px;
+    color: #a7a7a7;
+}
+
+/* 오른쪽 메뉴 */
+
+

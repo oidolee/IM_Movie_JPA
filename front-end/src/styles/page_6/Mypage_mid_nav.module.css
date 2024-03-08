@@ -1,0 +1,23 @@
+.Mypage_mid_nav{
+    
+    justify-content: center;
+
+}
+
+.Mypage_mid_nav>div{
+    justify-content: center;
+    width: 100%;
+}
+
+.Mypage_mid_nav>div>*{
+   margin: auto;
+}
+
+.Mypage_mid_nav>div>*:hover{
+    color: white;
+    background-color: #FF7787;
+    text-emphasis-color: white;
+    border-radius: 10px;
+ }
+
+

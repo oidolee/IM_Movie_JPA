@@ -1,0 +1,31 @@
+.loginComponent_wrappage {
+    text-align: center;
+    
+}
+.login_box {
+    width: 500px;
+    height: 110px;
+    text-align: left;
+    margin: 0 auto;
+    display: flex;
+}
+
+.input_box {
+    width: 350px;
+}
+
+.loginComponent_btn{
+    width: 100px;
+    height: 70px;
+    margin-top: 33px !important;
+}
+
+.signup {
+    padding-right: 20px;
+}
+
+.confirmPassword {
+    padding-left: 20px;
+}
+
+

@@ -1,0 +1,35 @@
+.singupComponent {
+    width: 950px; /* 원하는 너비를 지정합니다. */
+    margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정합니다. */
+    text-align: left;
+}
+.singupComponent .singupComponent_company{
+    text-align: center;
+    margin-top: 20px;
+    margin-right: 20px;
+    
+}
+
+.singupComponent .singupComponent_text{
+    width: 300px;
+    margin-left: 20px;
+}
+
+.singupComponent .singupComponent_box {
+    width: 500px;
+    
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+
+.singupComponent .singupComponent_btn {
+    margin-left: 200px;
+}
+
+.singupComponent .addressBtn {
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+
