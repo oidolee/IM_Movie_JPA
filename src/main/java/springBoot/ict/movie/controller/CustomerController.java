@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import springBoot.ict.movie.dto.CustomerDTO;
 import springBoot.ict.movie.service.CustomerServiceImpl;
 
@@ -35,15 +36,13 @@ public class CustomerController {
 	
 	
 	// 회원 가입
-    @PostMapping
-    public Map<String, Object> customerInsert(Model model)
+    @PostMapping("/save")
+    public Map<String, Object> customerInsert(@RequestBody CustomerDTO dto)
             throws ServletException, IOException {
-        logger.info("<<< url - insert >>>");
-
-        CustomerDTO dto = new CustomerDTO();
+        logger.info("<<< url - insertstart >>>");
         
-        model.addAttribute("dto", dto);
-        
+        System.out.println("<<< url - insertstart >>>");
+      
         System.out.println(dto);
         
         

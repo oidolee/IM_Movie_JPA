@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 @Entity
@@ -19,13 +21,21 @@ public class CustomerDTO {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private int IC_No;
-    private String IC_email; 
+    @JsonProperty
+    private String IC_email;
+    @JsonProperty
     private String IC_name;
+    @JsonProperty
     private String IC_password;
+    @JsonProperty
     private String IC_hp;
+    @JsonProperty
     private Date IC_birthday;
+    @JsonProperty
     private String IC_address;
+    @JsonProperty
     private Date IC_regdate;
+    @JsonProperty
     private String IC_show;
     
     
