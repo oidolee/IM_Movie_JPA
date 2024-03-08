@@ -13,6 +13,7 @@ class ApiService {
 
     addSample(inpuData){
         console.log('addSample() 호출!!', inpuData);
+        console.log(SAMPLE_API_BASE_URL)
         return axios.post(SAMPLE_API_BASE_URL, inpuData);
     }
     // insert
@@ -39,8 +40,8 @@ class ApiService {
     
     // insert
     addCustomer(inputData) {
-        console.log('addCustomer 호출', inputData);
-        return axios.post(url + "/index", inputData);
+        console.log('addCustomer 호출 http://localhost:8081/index/save', inputData);
+        return axios.post("http://localhost:8081/index/save", inputData);
     }
 
     // 고객리스트
