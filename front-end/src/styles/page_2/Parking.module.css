@@ -1,0 +1,16 @@
+@charset "utf-8";
+*{
+    padding: 0;
+    margin: 0;
+}
+.Parking{
+    height: calc(95vh - 170px);
+
+}
+
+
+.Parking .Parking_panel{
+    width: 580px;
+    padding: 50px;
+    box-sizing: border-box;
+}

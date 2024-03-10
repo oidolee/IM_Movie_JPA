@@ -1,7 +1,12 @@
 @charset "utf-8";
 
+.footer_con{
+    border-top: 1px solid;
+    margin-top: 50px 
+}
+
 .footer_box{
-    margin: 0 auto;
+    margin: 25px auto;
     width: 980px;
     height: 100px;
 }

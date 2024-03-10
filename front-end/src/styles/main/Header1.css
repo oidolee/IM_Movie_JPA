@@ -4,8 +4,8 @@
     position: initial;
     left: initial;
     transform: initial;
-    border: 1px solid red;
     margin: 0 auto;
+    background: initial;
 }
 
 .header_section .gnb{

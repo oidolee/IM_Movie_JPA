@@ -9,12 +9,12 @@ class SignupComponent extends Component {
         super(props);
 
         this.state = {
-            IC_email: '',
-            IC_name: '',
-            IC_password: '',
-            IC_passwordConfirm: '',
-            IC_hp: '',
-            IC_birthday: null,
+            email: '',
+            name: '',
+            password: '',
+            passwordConfirm: '',
+            hp: '',
+            birthday: null,
             zipcode: '',
             address: '',
             addr1: '',
@@ -38,13 +38,13 @@ class SignupComponent extends Component {
     };
 
     // 유효성검사
-    validateEmail = (IC_email) => {
+    validateEmail = (email) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        return emailRegex.test(IC_email);
+        return emailRegex.test(email);
     };
 
-    validatePassword = (IC_password) => {
-        return IC_password.length >= 4;
+    validatePassword = (password) => {
+        return password.length >= 4;
     };
 
     validatePhone = (phone) => {
@@ -54,8 +54,8 @@ class SignupComponent extends Component {
 
     // 비밀번호 확인과 일치하는지 검사하는 함수
     checkPasswordMatch = () => {
-        const { IC_password, IC_passwordConfirm } = this.state;
-        const isMatched = IC_password === IC_passwordConfirm;
+        const { password, passwordConfirm } = this.state;
+        const isMatched = password === passwordConfirm;
         this.setState({ passwordMatched: isMatched });
     };
 
@@ -84,21 +84,21 @@ class SignupComponent extends Component {
     };
 
     onChange = (e) => {
-        if (e.target.name === 'IC_passwordConfirm') {
-            this.setState({ IC_passwordConfirm: e.target.value }, this.checkPasswordMatch);
-        } else if (e.target.name === 'IC_email') {
+        if (e.target.name === 'passwordConfirm') {
+            this.setState({ passwordConfirm: e.target.value }, this.checkPasswordMatch);
+        } else if (e.target.name === 'email') {
             const isValid = this.validateEmail(e.target.value);
-            this.setState({ IC_email: e.target.value, emailValid: isValid });
-        } else if (e.target.name === 'IC_password') {
+            this.setState({ email: e.target.value, emailValid: isValid });
+        } else if (e.target.name === 'password') {
             const isValid = this.validatePassword(e.target.value);
-            this.setState({ IC_password: e.target.value, passwordValid: isValid });
-        } else if (e.target.name === 'IC_hp') {
+            this.setState({ password: e.target.value, passwordValid: isValid });
+        } else if (e.target.name === 'hp') {
             const isValid = this.validatePhone(e.target.value);
-            this.setState({ IC_hp: e.target.value, phoneValid: isValid });
-        } else if (e.target.name === 'IC_name') {
-            this.setState({ IC_name: e.target.value });
-        } else if (e.target.name === 'IC_birthday') { // 이 부분을 수정
-            this.setState({ IC_birthday: e.target.value });
+            this.setState({ hp: e.target.value, phoneValid: isValid });
+        } else if (e.target.name === 'name') {
+            this.setState({ name: e.target.value });
+        } else if (e.target.name === 'birthday') { // 이 부분을 수정
+            this.setState({ birthday: e.target.value });
         }
     };
 
@@ -130,14 +130,14 @@ class SignupComponent extends Component {
             return;
         }
 
-        const IC_address = `${this.state.addr1} ${this.state.addr2}`;
+        const address = `${this.state.addr1} ${this.state.addr2}`;
         const inputData = {
-            IC_email: this.state.IC_email,
-            IC_name: this.state.IC_name,
-            IC_password: this.state.IC_password,
-            IC_hp: this.state.IC_hp,
-            IC_birthday: this.state.IC_birthday,
-            IC_address: IC_address
+            email: this.state.email,
+            name: this.state.name,
+            password: this.state.password,
+            hp: this.state.hp,
+            birthday: this.state.birthday,
+            address: address
         };
 
         console.log(inputData);
@@ -147,7 +147,6 @@ class SignupComponent extends Component {
             .then(res => {
                 this.setState({});
                 console.log('input 성공 : ', res.data);
-                console.log(res.data);
 
                 if (res.data.resultCode == 200) {
                     alert("회원가입 성공");
@@ -173,8 +172,8 @@ class SignupComponent extends Component {
                         variant="standard"
                         label="이메일"
                         type="text"
-                        name="IC_email"
-                        value={this.state.IC_email}
+                        name="email"
+                        value={this.state.email}
                         placeholder='이메일 입력'
                         onChange={this.onChange}
                         error={!this.state.emailValid}
@@ -190,8 +189,8 @@ class SignupComponent extends Component {
                         variant="standard"
                         label="이름"
                         type="text"
-                        name="IC_name"
-                        value={this.state.IC_name}
+                        name="name"
+                        value={this.state.name}
                         placeholder='이름 입력'
                         onChange={this.onChange}
                     />
@@ -204,8 +203,8 @@ class SignupComponent extends Component {
                         variant="standard"
                         label="비밀번호"
                         type="password"
-                        name="IC_password"
-                        value={this.state.IC_password}
+                        name="password"
+                        value={this.state.password}
                         placeholder='비밀번호 입력'
                         onChange={this.onChange}
                         error={!this.state.passwordValid}
@@ -219,8 +218,8 @@ class SignupComponent extends Component {
                         variant="standard"
                         label="비밀번호 확인"
                         type="password"
-                        name="IC_passwordConfirm"
-                        value={this.state.IC_passwordConfirm}
+                        name="passwordConfirm"
+                        value={this.state.passwordConfirm}
                         placeholder='비밀번호 확인'
                         onChange={this.onChange}
                         error={!this.state.passwordMatched} // 일치하지 않을 경우 에러 상태를 설정합니다.
@@ -235,8 +234,8 @@ class SignupComponent extends Component {
                         variant="standard"
                         label="핸드폰 번호"
                         type="text"
-                        name="IC_hp"
-                        value={this.state.IC_hp}
+                        name="hp"
+                        value={this.state.hp}
                         placeholder='핸드폰 번호 - 빼고 입력하세요'
                         onChange={this.onChange}
                         error={!this.state.phoneValid}
@@ -251,8 +250,8 @@ class SignupComponent extends Component {
                         required
                         variant="standard"
                         type="date"
-                        name="IC_birthday"
-                        value={this.state.IC_birthday}
+                        name="birthday"
+                        value={this.state.birthday}
                         onChange={this.onChange}
                         className={`singupComponent_text ${style.singupComponent_text}`}
                     />

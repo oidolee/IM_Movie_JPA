@@ -4,20 +4,19 @@
 .page3_contents{    
     max-width: 1000px;
     margin: 0 auto;
-    height: 2000px;
+    height: 2100px;
     border: 1px solid;
     padding-top: 30px;
 }
 
 .second_menu{
     display: flex;
+    border-bottom: 1px solid #CCC;
 }
 
 
 .second_menu > li > a {
-    display: block;
     line-height: 50px;
-    border-bottom: 1px solid #CCC;
     font-size: 18px;
     color: #7F7F7F;
 }
@@ -64,19 +63,13 @@ h1, h2, h3, h4, h5, h6, address, caption, em, th {
 }
 
 .store_item .item_title p {
-    height: 28px;
     font-size: 11px;
     color: #999;
 }
 
-
-.page3_store .page3_store2 .store_item {
+.page3_flex {
     display: inline-block;
-    width: 33%;
-    min-height: 320px;
-    margin-bottom: 35px;
-    text-align: center;
-    vertical-align: top;
+
 }
 
 .item_title {
@@ -84,3 +77,19 @@ h1, h2, h3, h4, h5, h6, address, caption, em, th {
     color: #000;
 }
 
+#store2 {
+    margin-top:80px;
+}
+
+#store3{
+    margin-top:80px;
+}
+
+/* .store_bottom {
+background-color: rgb(0, 92, 185);
+} */
+
+.store_bottom1 {
+    margin-top: 120px;
+    margin-bottom: 30px;
+}

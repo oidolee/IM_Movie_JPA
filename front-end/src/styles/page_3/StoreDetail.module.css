@@ -16,36 +16,29 @@
     padding-top: 30px;
 }
 
+
 .store_detail  .StoreDetail_pd_detail .pd_table .tit {
-    padding: 10px 0 22px;
     font-size: 28px;
 }
 
-.tit {
-    font-weight: normal;
-}
+
 .StoreDetail_table{
     text-align: left;
 }
 
-.store_detail .pd_detStoreDetail_pd_detailail .txt_price_wrap {
-    font-size: 15px;
-    text-align: right;
-    margin-bottom: 10px;
-    margin-top: 30px;
-}
+
 
 .txt_price_wrap {
     margin-top: 30px;
     margin-bottom: 10px;
     text-align: right;
 }
+
 .txt_price_str {
     font-size: 25px;
 }
 
 .StoreDetail_txt_sale{
-    text-align: left;
     color: #FF243E;
     font-weight: bold;
 }
@@ -53,7 +46,6 @@
 
 
 .txt_price_str {
-    font-weight: bold;
     color: #FF243E;
 }
 
@@ -62,9 +54,6 @@
     margin-right: 6px;
     box-sizing: border-box;
 }
-
-
-
 
 
 .pd_table {
@@ -92,15 +81,24 @@
 .btn_mins{
     width: 60px;
     border: none;
+    cursor: pointer;
+    background-color: #fff;
 }
 
 .btn_plus {
     width: 60px;
     border: none;
+    cursor: pointer;
+    background-color: #fff;
 }
 
 
-
+.btn_col1 ty7 {
+    border: none;
+    cursor: pointer;
+    background-color: #fff;  
+    
+}
 /* .store_detail .pd_detail .bx_num .btn_plus, .store_detail  .pd_detail .bx_num .btn_mins {
     padding: 0 40px;
 }
@@ -123,40 +121,11 @@
 
 
 
-.txt_num {
-    margin-left: auto;
-    margin-right: auto;
-    
-}
-
-.btn_col2.ty7 {
-    height: 52px;
-    line-height: 50px;
-    padding: 0 24px;
-}
-
-.btn_col1.ty7 {
-    height: 52px;
-    line-height: 50px;
-    padding: 0 24px;
-}
-
-.btn_col2 {
-    display: inline-block;
-    box-sizing: border-box;
-    border-radius: 4px;
-    border: 1px solid #414141;
-    font-size: 14px;
-    color: #ffffff !important;
-    text-align: center;
-    vertical-align: middle;
-    background-color: #414141;
-}
-
-
-
 .tab_wrap >.tab_tit {
     border: none;
+    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 50px;
+    
 }
 
 .tab_tit {
@@ -164,37 +133,16 @@
     font-size: 15px;
     color: #7F7F7F;
     text-decoration: none; /* 파란색 밑줄 제거 */
+    background-color: white;
 }
 
 
 
-
-
-button {
+.StoreDetail_store_d  {
     border: 1px solid #DDD;
     cursor: pointer;
     background-color: #fff;
 }
-
-.store_detail .tab_wrap {
-    margin-top: 100px;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* 검은색 배경, 투명도 조절 가능 */
-    z-index: 1000; /* 다른 요소 위에 위치하도록 z-index 설정 */
-    display: none; /* 초기에는 화면에 보이지 않도록 설정 */
-  }
-  
-  .overlay.active {
-    display: block; /* active 클래스가 추가되면 화면에 보이도록 변경 */
-  }
-
 
 /* 스와이퍼 */
 
@@ -243,3 +191,15 @@ button {
     font-size: 13px;
   }
   
+
+  .StoreDetail_bottom{
+    text-align: left;
+    color: #7F7F7F;
+    line-height:300%;
+    margin-right: 50px;
+  }
+
+.StoreDetail_store_d{
+    background-color: white;
+    background: white;
+}

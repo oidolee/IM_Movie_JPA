@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import style from '../../styles/page_4/searchID.css';
+import style from '../../styles/page_4/searchID.module.css';
 import Accordion from 'react-bootstrap/Accordion';
 import { TextField, Button } from '@mui/material';
 import ApiService from '../../ApiService';

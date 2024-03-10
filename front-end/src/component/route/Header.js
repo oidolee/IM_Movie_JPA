@@ -46,9 +46,10 @@ function Header() {
                     <ul>
                         <li><a href='/customerlist'>멤버쉽</a></li>
                         <li><a href='/FAQ'>고객센터</a></li>
-                        <li><a href='page_3'>단체관람/대관문의</a></li>
+                        <li><a href='/groupform'>단체관람/대관문의</a></li>
                         <li><a href='/login'>로그인</a></li>
                         <li><a href='/myPage'>마이페이지</a></li>
+                        <li><a href='/parking'>주차등록</a></li>
                     </ul>
                     <ul className='header-member-box'>
                         <li>
@@ -69,7 +70,7 @@ function Header() {
                             <div className='bottom-menu-box'>
                                 <ul>
                                     <li><a href="/page_1/Reservation_Movie">예매하기</a></li>
-                                    <li><a href="#">상영시간표</a></li>
+                                    <li><a href="/page_1/Reservation_Movie_screen">상영시간표</a></li>
                                     <li><a href="#">할인</a></li>
                                 </ul>
                             </div>
@@ -82,8 +83,8 @@ function Header() {
                             <div>
                                 <ul>
                                     <li><a href="/movieMain">홈</a></li>
-                                    <li><a href="#">현재상영작</a></li>
-                                    <li><a href="#">상영예정작</a></li>
+                                    <li><a href="/movieNow">현재상영작</a></li>
+                                    <li><a href="movieNext">상영예정작</a></li>
                                     <li><a href="#">아르뗴</a></li>
                                 </ul>
                             </div>
@@ -96,7 +97,7 @@ function Header() {
                             <div>
                                 <ul>
                                     <li><a href="#">스페셜관</a></li>
-                                    <li><a href="#">서울</a></li>
+                                    <li><a href="/moviePlace">서울</a></li>
                                     <li><a href="#">경기/인천</a></li>
                                     <li><a href="#">전라/광주</a></li>
                                 </ul>

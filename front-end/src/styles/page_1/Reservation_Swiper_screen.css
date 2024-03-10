@@ -1,0 +1,32 @@
+.Reservation_Swiper2 .swiper {
+  width: 100%;
+  height: 100px;
+}
+
+.Reservation_Swiper2 .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Reservation_Swiper2 .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.Reservation_Swiper2 .swiper_content {
+  display: flex;
+  width: 400x;
+}
+
+.Reservation_Swiper2 .swiper_content li {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-weight: 600;
+}
+
