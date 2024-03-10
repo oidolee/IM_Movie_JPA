@@ -1,0 +1,328 @@
+.Res_Payment div {
+    /* div 줄바꿈 없이 고정 */
+    white-space: nowrap;
+}
+
+.Res_Payment a {
+    text-decoration: none;
+    color: #666;
+}
+
+.Res_Payment ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.Res_Payment li {
+    list-style: none;
+}
+
+.Res_Payment {
+    background-color: #444;
+    padding: 50px;
+    height: 100%;
+    width: 100%;
+}
+
+.Res_Payment .Res_payment_content {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+}
+
+.Res_Payment .Res_menu1,
+.Res_Payment .Res_menu2,
+.Res_Payment .Res_menu3,
+.Res_Payment .Res_menu4 {
+    height: auto;
+    width: 100%;
+}
+
+.Res_Payment .Res_menu1 {
+    width: 100px;
+}
+
+.Res_Payment>div:not(.Res_menu1) {
+    /* Res_menu1을 제외하고 넓이 자동 맞춤 */
+    flex-grow: 1;
+}
+
+.Res_Payment .Res_payment_content>div>ul {
+    /* 부모 요소에 맞춰서 높이 설정 */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Res_Payment .Res_payment_content>div>ul>li {
+    /* 남은 공간을 모두 채우도록 설정 */
+    flex-grow: 1;
+}
+
+.Res_menu1 li {
+    border: 1px solid #666;
+    border-bottom: none;
+  }
+  
+  .Res_Payment .step {
+    padding: 100px 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+  
+  .Res_Payment .step_content,
+  .Res_Payment .step_content2 {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    z-index: 1;
+    left: 100%;
+    top: 0;
+    padding-left: 20px;
+  }
+  
+  .Res_Payment .step_content dt,
+  .Res_Payment .step_content2 dt {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    border: none;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  
+  .Res_Payment .step:hover .step_content,
+  .Res_Payment #step2:hover .step_content2 {
+    background-color: #FF243E;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .Res_Payment #step2:hover .step_content2 {
+    background-color: #333;
+  }
+  
+  .Res_Payment .step:hover {
+    background-color: #FF243E;
+    cursor: pointer;
+  }
+  
+  .Res_Payment .step:hover a {
+    color: white;
+  }
+  
+  .Res_Payment #step1 {
+    background-color: #FF243E;
+  }
+  
+  .Res_Payment #step1 a,
+  .Res_Payment #step2 a {
+    color: white;
+  }
+  
+  .Res_Payment #step2 {
+    background-color: #333;
+  }
+
+.Res_Payment .menu2,
+.Res_Payment .menu3 {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    background-color: white;
+}
+
+.Res_Payment .menu4 {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: white;
+}
+
+.Res_Payment .menu4_top {
+    order: -1; /* 맨 위로 배치 */
+  }
+  
+  .Res_Payment .menu4_bottom {
+    margin-top: auto; /* 맨 아래로 배치 */
+  }
+
+.Res_Payment .menu3 {
+    background-color: #F5F5F5;
+}
+
+.Res_Payment .menu2 ul,
+.Res_Payment .menu3 ul,
+.Res_Payment .menu4 ul {
+    list-style: none;
+    width: 100%;
+    font-size: 15px;
+}
+
+.Res_Payment .menu2_sub {
+    margin-top: 30px;
+    margin-left: 100px;
+}
+
+.Res_Payment .Res_tit {
+    font-size: 18px;
+    padding: 20px 150px;
+    border: 1px solid #666;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    background-color: black;
+    color: white;
+    font-weight: 600;
+    height: auto;
+}
+
+.Res_Payment .menu2_sub li {
+    text-align: left;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.Res_Payment .menu2_sub li strong {
+    font-size: 15px;
+}
+
+.Res_Payment .movie_img {
+    width: 130px;
+    height: 180px;
+    margin-top: 50px;
+}
+
+.Res_Payment .age_img {
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+}
+
+.Res_Payment .event_img {
+    margin-top: 20px;
+}
+
+.Res_Payment .menu3_main {
+    text-align: left;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+.Res_Payment .payment_seat,
+.Res_Payment .point_seat {
+    width: 150px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.Res_Payment .point_seat_main {
+    font-size: 12px;
+    margin-top: 20px;
+    background-color: white;
+}
+
+.Res_Payment .usePoint {
+    text-align: left;
+    padding: 10px;
+}
+
+.Res_Payment .usePoint li {
+    padding: 15px;
+    font-size: 13px;
+    border-top: 1px solid #666;
+}
+
+.Res_Payment .usePoint li input[type="text"] {
+    font-size: 11px;
+    text-align: center;
+    width: 150px;
+    height: 25px;
+    margin-left: 10px;
+}
+
+.Res_Payment .usePointBtn {
+    width: 150px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid #666;
+    margin-top: 10px;
+    font-size: 13px;
+    margin-left: 50%;
+}
+
+.Res_Payment .usePointBtn:hover {
+    background-color: #FF243E;
+    color: white;
+    border: 1px solid #FF243E;
+}
+
+.Payment {
+    transform: translate(120%, -160%);
+    width: 30%;
+    height: 50%;
+    align-items: center;
+    position: relative;
+    background-color: white;
+    border: 1px solid #666;
+}
+
+.Payment .Payment_close {
+    width: 150px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid #bbb;
+    margin-top: 10px;
+    font-size: 13px;
+    margin-left: 300px;
+    margin-bottom: 10px;
+}
+
+.Payment .Payment_close:hover {
+    background-color: #FF243E;
+    color: white;
+    border: 1px solid #FF243E;
+
+}
+
+.Res_Payment .paymentBtn,
+.Res_Payment .paymentBtn_total {
+    background-color: #333;
+    color: white;
+    font-size: 13px;
+    width: 100%;
+    height: 80px;
+    text-align: left;
+    float: bottom;
+    border: none;
+    border-bottom: 1px solid #666;
+    padding: 30px;
+}
+
+.Res_Payment .paymentBtn_total {
+    background-color: #FF243E;
+    border: none;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 600;
+}

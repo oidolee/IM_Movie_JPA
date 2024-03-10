@@ -1,4 +1,9 @@
 /* styles.css 파일에 추가 */
+.wrappage {
+   width: 950px;
+   margin: 0 auto;
+}
+
 .accordion-button::after {
     display: none;
 }

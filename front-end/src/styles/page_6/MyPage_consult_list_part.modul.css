@@ -1,0 +1,82 @@
+.consult_list{
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.consult_list > thead{
+    border-collapse: collapse;
+    border-bottom: 1px solid rgba(34, 33, 33, 0.815);
+    border-top: 1px solid rgba(34, 33, 33, 0.815);
+    border-width: 2px;
+    border-left: none;
+    border-right: none;
+}
+
+.consult_list >tbody{
+ 
+    border-bottom: 2px solid whitesmoke;
+}
+
+.consult_status{
+    border: none;
+    border-radius: 52px;
+    font-size: 13px;
+    background: rgba(73, 73, 73);
+    color: white;
+    text-align: center;
+}
+
+.innerTable {
+    margin: 0 auto; /* 가운데 정렬을 위해 margin을 사용합니다. */
+    width: 100%;
+}
+
+
+.innerTable>thead>tr {
+    margin: 0 auto; /* 가운데 정렬을 위해 margin을 사용합니다. */
+    width: 100%;
+    border-bottom: 1px solid rgb(105, 105, 105);
+}
+
+.innerTable>tbody>tr {
+    margin: 0 auto; /* 가운데 정렬을 위해 margin을 사용합니다. */
+    width: 100%;
+    border-bottom: 1px solid whitesmoke;
+}
+.text_qna::before {
+    content: "Q";
+    border-radius: 50%;
+    width: 24px;
+    height: 24px; /* 원 모양을 만들기 위해 너비와 높이를 같게 설정합니다. */
+    display: inline-block; /* 인라인 블록 요소로 설정하여 텍스트와 동일한 라인에 표시됩니다. */
+    text-align: center; /* 텍스트를 가운데 정렬합니다. */
+    line-height: 24px; /* 텍스트를 수직으로 가운데 정렬합니다. */
+    background-color: #FF7787; /* 배경 색상을 적절한 색상으로 변경합니다. */
+    color: white; /* 텍스트 색상을 흰색으로 설정합니다. */
+    font-weight: bold; /* 선택적으로 텍스트를 굵게 표시합니다. */
+}
+
+.circleBefore {
+    position: relative;
+  }
+  
+  .circleBefore::before {
+    content: 'Q';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background-color: #FF7787; /* 핑크색 배경 */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* 텍스트 색상을 흰색으로 설정합니다. */
+    font-weight: bold; /* 선택적으로 텍스트를 굵게 표시합니다. */
+  }
+  
+  /* 내부 테이블의 .innerTable 클래스에 .circleBefore::before 스타일을 추가합니다. */

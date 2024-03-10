@@ -1,132 +1,97 @@
-import React, { Component } from "react";
-import moment from "moment";
+import React from "react";
+import { useHistory } from "react-router-dom";
 import style from "../../styles/page_1/Reservation_Seat.css";
 import Res_movie from "../../assets/page_1/movie.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
-import Res_img12 from "../../assets/page_1/12.jpg";
-import Res_imgAll from "../../assets/page_1/all.jpg";
 
-class QuantityCounter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      quantity: 0,
-    };
-  }
+const QuantityCounter = () => {
+  const [quantity, setQuantity] = React.useState(0);
 
-  handleIncrement = () => {
-    this.setState((prevState) => ({
-      quantity: prevState.quantity + 1,
-    }));
+  const handleIncrement = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
   };
 
-  handleDecrement = () => {
-    if (this.state.quantity > 1) {
-      this.setState((prevState) => ({
-        quantity: prevState.quantity - 1,
-      }));
+  const handleDecrement = () => {
+    if (quantity >= 1) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
     }
   };
 
-  render() {
-    return (
-      <div>
-        <button onClick={this.handleDecrement}>-</button>
-        <span>{this.state.quantity}</span>
-        <button onClick={this.handleIncrement}>+</button>
+  return (
+    <div>
+      <button onClick={handleDecrement}>-</button>
+      <span>{quantity}</span>
+      <button onClick={handleIncrement}>+</button>
+    </div>
+  );
+};
+
+// 좌석
+const SingleSquare1 = () => <div className="single-square1" />;
+const SingleSquare2 = () => <div className="single-square2" />;
+const SingleSquare3 = () => <div className="single-square3" />;
+const SingleSquare4 = () => <div className="single-square4" />;
+
+const SeatMap = ({ rows, columns }) => {
+  const seats = [];
+
+  // 알파벳 행 추가
+  const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  for (let i = 0; i < rows; i++) {
+    const rowContent = [];
+    for (let j = 0; j < columns; j++) {
+      rowContent.push(<Square key={`${i}-${j}`} row={i} column={j} />);
+    }
+    seats.push(
+      <div className="seat_row">
+        <sapn className="seat_alphabet">{alphabets[i]}</sapn>
+        {rowContent}
       </div>
     );
-  }
-}
-
-class SingleSquare1 extends Component {
-  render() {
-    return <div className="single-square1" />;
-  }
-}
-
-class SingleSquare2 extends Component {
-  render() {
-    return <div className="single-square2" />;
-  }
-}
-
-class SingleSquare3 extends Component {
-  render() {
-    return <div className="single-square3" />;
-  }
-}
-
-class SingleSquare4 extends Component {
-  render() {
-    return <div className="single-square4" />;
-  }
-}
-
-class SeatMap extends Component {
-  render() {
-    const { rows, columns } = this.props;
-    const seats = [];
-
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < columns; j++) {
-        seats.push(<Square key={`${i}-${j}`} row={i} column={j} />);
-      }
-      seats.push(<br key={`br-${i}`} />);
-    }
-
-    return <div className="MovieSeats">{seats}</div>;
-  }
-}
-
-class Square extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false,
-    };
+    seats.push(<br key={`br-${i}`} />);
   }
 
-  handleChange = () => {
-    if (this.isDisabled()) {
+  return <div className="MovieSeats">{seats}</div>;
+};
+
+const Square = ({ row, column }) => {
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChange = () => {
+    if (isDisabled()) {
       return;
     }
-
-    this.setState((prevState) => ({
-      checked: !prevState.checked,
-    }));
+    setChecked(!checked);
   };
 
-  isDisabled = () => {
-    const { row, column } = this.props;
+  const isDisabled = () => {
     return column === 2 || column === 11;
   };
 
-  render() {
-    const { checked } = this.state;
-    const { row, column } = this.props;
-    const squareClass = checked ? "square checked" : "square";
+  const squareClass = checked ? "square checked" : "square";
+  const backgroundColor = column === 2 || column === 11 ? "#000" : "";
 
-    const backgroundColor = column === 2 || column === 11 ? "#000" : "";
+  return (
+    <div
+      className={squareClass}
+      onClick={handleChange}
+      style={{ backgroundColor }}
+    >
+      {checked && <div className="checked-square" />}
+    </div>
+  );
+};
 
-    return (
-      <div
-        className={squareClass}
-        onClick={this.handleChange}
-        style={{ backgroundColor }}
-      >
-        {checked && <div className="checked-square" />}
-      </div>
-    );
-  }
-}
+const Reservation_Seat = () => {
+  const history = useHistory();
 
-class Reservation_Movie extends Component {
-  render() {
-    const sysdate = moment().format("YYYY-MM-DD");
+  const handlePayment = () => {
+    history.push("/page_1/Reservation_Payment");
+  };
 
-    return (
-      <div className={`Res_seat ${style.Res_seat}`}>
+  return (
+    <div className={`Res_seat ${style.Res_seat}`}>
+      <div className="Res_seat_content">
         <div className="Res_seat1">
           <ul>
             <li className="step" id="step2">
@@ -138,7 +103,7 @@ class Reservation_Movie extends Component {
                     상영시간
                   </span>
                 </strong>
-                <div className="step_content">
+                <div className="step_content2">
                   <dl>
                     <dt>선택한 영화 제목</dt>
                     <dd></dd>
@@ -206,10 +171,12 @@ class Reservation_Movie extends Component {
           </ul>
         </div>
         <div className="Res_seat2">
-          <ul className="Res_left">
-            <li className="Res_tit">
-              인원/좌석 선택 <p>인원은 최대 8명까지 가능합니다.</p>
-            </li>
+          <ul>
+            <div className="Res_tit">
+              <li>
+                인원/좌석 선택 <p>인원은 최대 8명까지 가능합니다.</p>
+              </li>
+            </div>
             <div className="Res_seat2_header">
               <ul className="Res_movie">
                 <li>
@@ -246,27 +213,31 @@ class Reservation_Movie extends Component {
                 </ul>
               </ul>
             </div>
+            <div className="Res_seat2_main">
+              <span className="Res_screen_top">SCREEN</span>
+              <div className="seatOutput">
+                <SeatMap rows={8} columns={14} />
+              </div>
+              <div className="Res_seat2_bottom">
+                <SingleSquare1 /> 선택좌석
+                <SingleSquare2 /> 선택가능
+                <SingleSquare3 /> 예매완료
+                <SingleSquare4 /> 선택불가
+              </div>
+            </div>
+            <div className="seat_payment">
+              <span>총 합계 : 0원 </span>
+              <div>
+                <button name="paymentBtn" onClick={handlePayment}>
+                  결제하기
+                </button>
+              </div>
+            </div>
           </ul>
-
-          <div className="Res_seat2_main">
-            <span className="Res_screen">SCREEN</span>
-            <div className="seatOutput">
-              <SeatMap rows={8} columns={14} />
-            </div>
-            <div className="Res_seat2_bottom">
-              <SingleSquare1 /> 선택좌석
-              <SingleSquare2 /> 선택가능
-              <SingleSquare3 /> 예매완료
-              <SingleSquare4 /> 선택불가
-            </div>
-            <div>
-              
-            </div>
-          </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-export default Reservation_Movie;
+export default Reservation_Seat;

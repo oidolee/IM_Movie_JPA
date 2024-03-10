@@ -1,0 +1,26 @@
+.MyPage__myinfo{
+    display: inline;
+}
+
+.MyPage__myinfo_box{
+    display: flex;
+    padding: 0;
+    justify-content: center;
+}
+
+.MyPage__myinfo_box li {
+    margin-right: 10px; /* 각 li 요소 사이의 간격 설정 */
+    padding-top: 83px;
+    width: 188px;
+    height: 126px;
+    
+}
+
+.MyPage__myinfo p{
+    text-align: justify;
+    font-size: 10px;
+}
+
+.MyPage__myinfo_box2 li{
+    list-style-type: disc;
+}

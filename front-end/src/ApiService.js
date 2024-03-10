@@ -13,7 +13,6 @@ class ApiService {
 
     addSample(inpuData){
         console.log('addSample() 호출!!', inpuData);
-        console.log(SAMPLE_API_BASE_URL)
         return axios.post(SAMPLE_API_BASE_URL, inpuData);
     }
     // insert
@@ -40,26 +39,36 @@ class ApiService {
     
     // insert
     addCustomer(inputData) {
-        console.log('addCustomer 호출 http://localhost:8081/index/save', inputData);
-        return axios.post("http://localhost:8081/index/save", inputData);
+        console.log('addCustomer 호출', inputData);
+        return axios.post(url + "/index", inputData);
     }
 
     // 고객리스트
      listCustomer(inputData) {
          console.log('listCustomer 호출');
          return axios.get(url + "/index");
-     }
+    }
 
+    // 로그인 
     login(inputData) {
         console.log("login start:")
         console.log(inputData)
         return axios.post("http://localhost:8081/index/login", inputData);
     }
+
+    // 아이디 찾기
     findID(inputData) {
         console.log("findID 호출")
         console.log(inputData)
         return axios.post("http://localhost:8081/index/findID", inputData);
     }
+
+    // 비밀번호 찾기
+    findPWD(inputData) {
+        console.log("findPWD 호출")
+        console.log(inputData)
+        return axios.post("http://localhost:8081/index/findPWD", inputData);
+    } 
 
 }
 export default new ApiService();

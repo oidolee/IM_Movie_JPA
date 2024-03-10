@@ -7,14 +7,15 @@
     border: 1px solid;
     position: relative;
     height: 50px;
-    
+
 }
 
-.MyPage_coupon_useable > .My_coupon_usesable_count {
+.MyPage_coupon_useable>.My_coupon_usesable_count {
     border: 1px solid;
-   
+
 }
-.MyPage_coupon_useable >p {
+
+.MyPage_coupon_useable>p {
     position: absolute;
     right: 0;
     bottom: 3px;
@@ -28,37 +29,42 @@
     position: relative;
 }
 
-.coupon_delete_parent{
+.coupon_delete_parent {
     margin-right: 50px;
     border: 1px solid;
 }
 
-.coupon_delete_parent > .coupon_delete_child{
-    
+.coupon_delete_parent>.coupon_delete_child {
+
     border: 1px solid;
 }
 
-.coupon_menu1{
+.coupon_menu1 {
     margin-right: 50px;
     height: 100%;
 }
 
 
-.coupon_menu2{
+.coupon_menu2 {
     margin-right: 100px;
     height: 100%;
 }
 
-.couponRegButton{
+.couponRegButton {
     position: absolute;
     right: 0%;
 }
 
-.coupon_detail_table > tr{
+.coupon_detail_table>tr {
     border-bottom: 1px solid rgb(145, 145, 145);
 }
 
 
-.coupon_detail_detail1:hover + .coupon_detail_detail_detail {
-display: table-row;
+.coupon_detail_detail1:hover+.coupon_detail_detail_detail {
+    display: table-row;
+}
+
+.innerTable {
+    margin: 0 auto;
+    /* 가운데 정렬을 위해 margin을 사용합니다. */
 }

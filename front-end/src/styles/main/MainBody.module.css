@@ -1,30 +1,93 @@
 @charset "utf-8";
+*{
+    padding: 0;
+    margin: 0;
+}
 
 .slide-box > div{
     background-color: #000000;
 }
 
+.slide_box::after{
+    content: "";
+    width: 100%;
+    height: 80px;
+    background: red;
+    position: absolute;
+    left: 0;
+    /*  하단 그림자 */
+    background: linear-gradient(to bottom, rgba(29, 29, 31, 1) -43%, rgba(0, 0, 0, 0) 80%)
+}
+
+
 /* 하단 콘텐츠 */
 .MainBody_contents{    
     max-width: 980px;
     margin: 0 auto;
-    height: 600px;
-    border: 1px solid;
 }
-
 .MainBody_contents .MainBody_section_1{
     display: flex;
     justify-content: space-between;
 }
 .MainBody_contents .MainBody_section_1 .MainBody_contents_left{
     width: 680px;
-    border: 1px solid;
 }
 
+.MainBody_contents .MainBody_contents_top{
+    width: 100%;
+    position: relative;
+    margin-top: 100px;
+    display: flex;   
+    justify-content: space-between;
+
+}
+
+/* 가운데 이벤트 */
+.MainBody_contents .MainBody_section_1 .MainBody_contents_left .MainBody_contents1_leftTop > ul{
+   padding: 0;
+   display: flex;
+}
+
+.MainBody_contents .MainBody_section_1 .MainBody_contents_left .MainBody_contents1_leftTop > ul > li{
+    margin-right: 10px;
+}
+
+.MainBody_contents .MainBody_section_1 .MainBody_contents_left .MainBody_contents1_leftBottom > ul{
+    padding: 0;
+    display: flex;
+ }
+ 
+ .MainBody_contents .MainBody_section_1 .MainBody_contents_left .MainBody_contents1_leftBottom > ul > li{
+     margin-right: 10px;
+ }
+
+
 .MainBody_contents .MainBody_section_1 .MainBody_contents_right{
-    width: 290px;
+    width: 299px;
 }
 
 .MainBody_contents .MainBody_section_1 .MainBody_contents_right img{
-    width: 100%;
+    width: 300px;
+}
+
+
+/* 시사회 부분 */
+
+.MainBody_contents .MainBody_section_2 ul{
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 공지사항 */
+.MainBody_contents_top_3{
+    margin-bottom: 20px;
+    border-bottom: 1px solid;
+    justify-content: flex-start !important;
+}
+
+.MainBody_contents_top_3 button{
+    position: absolute;
+    right: 0;
+    bottom: 10px;
 }

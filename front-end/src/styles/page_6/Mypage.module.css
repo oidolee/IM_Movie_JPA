@@ -18,18 +18,6 @@
     background-color: #FF7787;
 }
 
-p {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start:0px;
-    margin-inline-end: 0px;
-}
-
-div{
-    display: block;
-}
-
 .mypage_top_infor {
     position: relative;
     margin: 0 auto 35px;
@@ -107,7 +95,8 @@ div{
 .MyPage_menu2 {
     border: 1px solid ;
     width: 100%;
-    height: 300px;
+    height: auto;
+    
 }
 
 .MyPage_banner{
@@ -115,3 +104,12 @@ div{
     width: 100%;
     height: 300px;
 }
+
+.MyPage_myinfo_update_part{
+    margin-bottom: 10px;
+}
+
+
+
+
+

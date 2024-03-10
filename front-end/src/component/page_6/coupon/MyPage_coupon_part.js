@@ -72,7 +72,7 @@ function MyPage_coupon_part() {
 
                         <tr className={`coupon_detail_detail ${style.coupon_detail_detail}`}>
                             <td colSpan={6} className={`coupon_detail_detail_detail ${style.coupon_detail_detail_detail}`}>
-                                <table>
+                                <table className={`innerTable ${style.innerTable}`}>
                                     <tr>
                                         <td>할인권 번호</td>
                                         <td>{coupon_num}</td>

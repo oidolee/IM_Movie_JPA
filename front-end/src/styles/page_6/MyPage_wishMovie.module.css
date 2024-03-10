@@ -1,0 +1,46 @@
+.MyPage_movie_wish{
+    display: inline;
+    width: 80%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.wishMovieCnt{
+    display: flex;
+}
+
+.wishMovieCnt1{
+    justify-content: left;
+    margin-left: 50px;
+    font-size: 26px;
+}
+
+
+.Mypage_moive_content{
+    display: flex;
+    border: 1px solid;
+    width: 95%;
+    height: 150px;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.Mypage_moive_detail{
+    display: flex;
+    border: 1px solid;
+    width: 300px;
+}
+
+.movieCnt{
+    color: red;
+    text-decoration: underline;
+}
+.Mypage_moive_detail .Mypage_moive_detailImg{
+    width: 40%;
+    height: 90%;
+    border: 1px solid;
+}
+
+.Mypage_moive_detail .Mypage_moive_info{
+    display: inline;
+}
