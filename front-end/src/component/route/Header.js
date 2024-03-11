@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../../assets/main/IM_Logo.png'
+import { useCookies } from 'react-cookie';
 
 function Header() {
     const [path, setPath] = useState('/');
     const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
     const [currentMenuValue, setCurrentMenuValue] = useState(null);
+    const [cookies, setCookie, removeCookie] = useCookies(['idCheck']);
 
     
 
@@ -32,6 +34,13 @@ function Header() {
        
     };
 
+    const handleLogout = () => {
+        // 쿠키 제거
+        removeCookie('idCheck');
+        alert('로그아웃 되었습니다.')
+    };
+        
+
 
     return (
         <div id="header_section" className='header_section'>
@@ -44,8 +53,15 @@ function Header() {
 
                 <div className='right-gnb'>
                     <ul>
-                        <li><a href='/login'>로그인</a></li>
-                        <li><a href='/MyPage_res'>마이페이지</a></li>
+                        
+                        {(cookies.idCheck == undefined) &&(<li><a href='/login'>로그인</a></li>)}
+                        {cookies.idCheck &&(
+                            <>
+                                <li><a href='/MyPage_res'>마이페이지</a></li>
+                                <li><a href='#' onClick={handleLogout}>로그아웃</a></li>
+                            </>
+                        )}
+                        
                         <li><a href='/customerlist'>멤버쉽</a></li>
                         <li><a href='/FAQ'>고객센터</a></li>
                         <li><a href='/parking'>주차등록</a></li>

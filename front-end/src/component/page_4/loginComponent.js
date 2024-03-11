@@ -5,12 +5,14 @@ import ApiService from '../../ApiService';
 import style from '../../styles/page_4/login.module.css';
 import SocialKakao from './SocialKakao';
 import GoogleLoginButton from './GoogleLoginButton';
+import { useCookies } from 'react-cookie'; // useCookies import
 
 function Login() {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const history = useHistory();
+    const [cookies, setCookie] = useCookies(['idCheck']); // 쿠키 훅 
 
     const handleLogin = () => {
         let inputData = {
@@ -24,10 +26,12 @@ function Login() {
             .then(res => {
                 console.log(res.data);
                 if(res.data.resultCode == 200){
-                    alert("로그인 성공")
+                    let name = res.data.customer.name;
+                    setCookie('idCheck', name)
+                    alert("로그인 성공.")
                     history.push('/');
                 } else {
-                    alert("로그인 실패")
+                    alert("로그인 실패\n로그인 정보 확인 바랍니다.")
                 }
                 
             })
