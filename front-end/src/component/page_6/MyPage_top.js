@@ -63,7 +63,7 @@ function MyPage_top() {
             <div className="btn_wrap">
                 <a href="#" target='_blank' title="포인트 페이지 이동">
                     <span className="txt_img">
-                        <img src='#' alt="IM_POINT" />
+                        <img src='#' alt="IM_POINT" /> 
                     </span>
                     <em>12345p</em>
                 </a>

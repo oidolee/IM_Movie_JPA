@@ -6,7 +6,7 @@ function Header() {
     const [path, setPath] = useState('/');
     const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
     const [currentMenuValue, setCurrentMenuValue] = useState(null);
-    const [cookies, setCookie, removeCookie] = useCookies(['idCheck']);
+    const [cookies, setCookie, removeCookie] = useCookies(['idCheck']); 
 
     
 
