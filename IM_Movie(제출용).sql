@@ -1,20 +1,4 @@
 -- 예진 시작 (page_1)
-    DROP TABLE mvc_sample_tbl CASCADE CONSTRAINTS;
-    CREATE TABLE mvc_sample_tbl(
-        id      number(5)    PRIMARY KEY,
-        name    varchar2(50) NOT NULL,
-        brand   varchar2(50) NOT NULL,
-        madein  varchar2(50) NOT NULL,
-        price   number(9)    NOT NULL
-    );
-    insert into mvc_sample_tbl 
-        values( nvl( (select max(id) from mvc_sample_tbl)+1 ,1), 'name_1', 'brand_1', 'madein_1', 1 );
-    insert into mvc_sample_tbl 
-        values( nvl( (select max(id) from mvc_sample_tbl)+1 ,1), 'name_2', 'brand_2', 'madein_2', 2 );
-    commit;    
-    SELECT * FROM mvc_sample_tbl;
-
-    ---------------------------------------------------------------
     DROP TABLE mvc_Reservation_tbl CASCADE CONSTRAINTS;
     CREATE TABLE mvc_Reservation_tbl(
         Res_id           NUMBER          PRIMARY KEY,
