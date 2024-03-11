@@ -30,3 +30,7 @@
   font-weight: 600;
 }
 
+.swiper-button-prev, .swiper-button-next {
+  color: red;
+}
+
