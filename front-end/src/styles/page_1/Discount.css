@@ -1,31 +1,11 @@
-.Res_screen div {
-    /* div 줄바꿈 없이 고정 */
-    white-space: nowrap;
-}
-
-.Res_screen a {
-    text-decoration: none;
-    color: #666;
-}
-
-.Res_screen ul {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-
-.Res_screen li {
-    list-style: none;
-}
-
-.Res_screen {
-    background-color: #444;
+.Discount {
+    background-color: white;
     padding: 50px;
     height: 100%;
     width: 100%;
 }
 
-.Res_screen .Res_screen_content {
+.Discount .Discount_content {
     display: flex;
     flex-direction: row;
     text-align: center;
@@ -36,233 +16,106 @@
     width: 100%;
 }
 
-.Res_screen .Res_menu1,
-.Res_screen .Res_menu2,
-.Res_screen .Res_menu3,
-.Res_screen .Res_menu4 {
-    height: auto;
-    width: 100%;
-    background-color: white;
-}
-
-.Res_screen .Res_menu1 {
-    width: 100px;
-}
-
-.Res_screen>div:not(.Res_menu1) {
-    /* Res_menu1을 제외하고 넓이 자동 맞춤 */
-    flex-grow: 1;
-}
-
-.Res_screen .Res_screen_content>div>ul {
-    /* 부모 요소에 맞춰서 높이 설정 */
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.Res_screen .Res_screen_content>div>ul>li {
-    /* 남은 공간을 모두 채우도록 설정 */
-    flex-grow: 1;
-}
-
-.Res_screen .Res_menu1 li {
-    border: 1px solid #666;
-    border-bottom: none;
-}
-
-.Res_screen .step {
-    padding: 100px 20px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-}
-
-.Res_screen .step_content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    z-index: 1;
-    left: 100%;
-    top: 0;
-    padding-left: 20px;
-}
-
-.Res_screen .step_content dt {
-    color: white;
-    padding: 10px;
-    text-decoration: none;
-    display: block;
-    border: none;
-    text-align: left;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.Res_screen .step:hover .step_content {
-    background-color: #FF243E;
-    display: flex;
-    align-items: center;
-    height: 100%;
-}
-
-.Res_screen .step:hover {
-    background-color: #FF243E;
-    cursor: pointer;
-}
-
-.Res_screen #step1 {
-    background-color: #FF243E;
-}
-
-.Res_screen #step1 a,
-.Res_screen .step:hover a {
-    color: white;
-}
-
-.Res_screen .menu2,
-.Res_screen .menu3,
-.Res_screen .menu4 {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    background-color: white;
-}
-
-.Res_screen .menu2 ul,
-.Res_screen .menu3 ul,
-.Res_screen .menu4 ul {
+.Discount ul {
     list-style: none;
-    font-size: 15px;
-    text-align: left;
 }
 
-.Res_screen .menu2 ul li,
-.Res_screen .menu3 ul li,
-.Res_screen .menu4_main,
-.Res_screen .menu4_sub {
-    margin-top: 20px;
-    padding-left: 20px;
-}
-
-.Res_screen .menu2_left {
-    background-color: #F5F5F5;
-    width: 300px;
-}
-
-.Res_screen .Res_tit {
-    font-size: 18px;
-    padding: 20px 150px;
-    border: 1px solid #666;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+.Discount .Discount_container {
     width: 100%;
-    background-color: black;
-    color: white;
-    font-weight: 600;
-    height: auto;
+    margin: 0 auto;
 }
 
-.Res_screen .menu2_left {
-    font-weight: 500;
-    color: black;
-    cursor: pointer;
-    font-weight: 500;
+.Discount .Discount_contents {
+    width: 100%;
+    margin: 0 auto;
+    min-height: 800px;
 }
 
-.Res_screen .menu3_left a,
-.Res_screen .menu4_left a {
-    font-weight: 600;
-    color: black;
-}
-
-.Res_screen img {
-    width: 20px;
-    margin-right: 10px;
-}
-
-.Res_screen .menu4_sub li {
-    height: 50px;
-    width: 150px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    cursor: pointer;
-    font-size: 14px;
+.Discount .Discount_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     text-align: center;
 }
 
-.Res_screen .popup {
-    position: fixed;
+.Discount .Discount_img {
+    position: relative;
+    width: 350px;
+    height: 200px;
+}
+
+.Discount .Discount_image {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.Discount .Discount_overlay {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    cursor: pointer;
+    content: "";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3px;
+    height: 3px;
+    margin: 8px 5px 0 0;
+    border-radius: 50%;
+    vertical-align: top;
+    text-align: left;
+}
+
+.Discount .Discount_img:hover .Discount_overlay {
+    opacity: 1;
+}
+
+.Discount .Discount_ex {
+    color: white;
+    font-size: 14px;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.5);
+    text-align: left;
+    width: 100%;
+    height: 200px;
+    font-weight: 500;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.Discount .Discount_ex .Discount_ex_content {
+    text-align: center;
+}
+
+.Discount .Discount_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    margin-left: 55px;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
 }
 
-.Res_screen .popup_content {
-    background-color: white;
+.Discount .Discount_list li {
+    width: 400px;
+    height: 350px;
+    padding: 15px;
+    padding-bottom: 60px;
+}
+
+.Discount .Discount_table_div h4 {
     padding: 20px;
-    text-align: center;
-    width: 500px;
-    height: 500px;
-    z-index: 10000;
+    font-weight: 400;
+    text-align: left;
 }
 
-.Res_screen .popup_content strong {
-    font-size: 18px;
-}
-
-.Res_screen .popup_content button {
-    margin: 0 5px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 40%;
-    height: 10%;
-    color: white;
-}
-
-.Res_screen .popup_content button[name="n"] {
-    margin-top: 20px;
-    background-color: #414141;
-    border: 1px solid #414141;
-}
-
-.Res_screen .popup_content button[name="y"] {
-    background-color: #FF243E;
-    border: 1px solid #FF243E;
-}
-
-.Res_screen .Res_screen {
-    width: 450px;
-    height: 250px;
-    margin-left: 15px;
-    background-color: white;
-}
-
-.Res_screen .menu2_left .subRegions.active {
-    background-color: white;
-    height: 60px;
-}
-
-.Res_screen .menu2_left .subRegions {
-    height: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.Res_screen .menu2_right {
+.Discount .Discount_right {
     width: 100%;
 }

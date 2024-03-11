@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import moment from "moment";
-import style from "../../styles/page_1/Reservation_Movie_screen.css";
-import Reservation_Swiper from "./Reservation_Swiper_screen.js";
-import Res_img15 from "../../assets/page_1/15.jpg";
+import style from "../../styles/page_1/Discount.css";
 import Res_img12 from "../../assets/page_1/12.jpg";
-import Res_imgAll from "../../assets/page_1/all.jpg";
-import Res_screen from "../../assets/page_1/screen.png";
+import Card from "../../assets/page_1/card.jpg";
 
 class Reservation_Movie extends Component {
   constructor(props) {
@@ -69,184 +66,129 @@ class Reservation_Movie extends Component {
     const { subRegions, selectedRegion } = this.state;
 
     return (
-      <div className={`Res_screen ${style.Res_Movie}`}>
-        <div className="Res_screen_content">
-          <div className="Res_menu1">
-            <ul>
-              <li className="step" id="step1">
-                <a href="#Res_step01">
-                  <strong>
-                    <span>
-                      01
-                      <br />
-                      상영시간
-                    </span>
-                  </strong>
-                  <div className="step_content">
-                    <dl>
-                      <dt>선택한 영화 제목</dt>
-                      <dd></dd>
-                      <dt>선택한 상영관</dt>
-                      <dd></dd>
-                      <dt>선택한 상영 날짜</dt>
-                      <dd></dd>
-                      <dt>선택한 상영 시간</dt>
-                      <dd></dd>
-                    </dl>
-                  </div>
-                </a>
-              </li>
-              <li className="step">
-                <a href="#Res_step02">
-                  <strong>
-                    <span>
-                      02
-                      <br />
-                      인원/좌석
-                    </span>
-                  </strong>
-                  <div className="step_content">
-                    <dl>
-                      <dt>인원</dt>
-                      <dd></dd>
-                      <dt>좌석</dt>
-                      <dd></dd>
-                    </dl>
-                  </div>
-                </a>
-              </li>
-              <li className="step">
-                <a href="#Res_step03">
-                  <strong>
-                    <span>
-                      03
-                      <br />
-                      결제
-                    </span>
-                  </strong>
-                  <div className="step_content">
-                    <dl>
-                      <dt>티켓금액</dt>
-                      <dd></dd>
-                      <dt>할인금액</dt>
-                      <dd></dd>
-                      <dt>총합계</dt>
-                      <dd></dd>
-                    </dl>
-                  </div>
-                </a>
-              </li>
-              <li className="step">
-                <a href="#Res_step04">
-                  <strong>
-                    <span>
-                      04
-                      <br />
-                      결제완료
-                    </span>
-                  </strong>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="Res_menu2">
-            <ul>
-              <div className="Res_tit">
-                <li>영화관별 상영시간표</li>
-              </div>
-              <li>
-                <div className="menu2">
-                  <ul className="menu2_left">
-                    {Object.keys(subRegions).map((region) => (
-                      <li
-                        className={`subRegions ${
-                          selectedRegion === region ? "active" : ""
-                        }`}
-                        key={region}
-                        onClick={(event) => {
-                          event.preventDefault(); // 기본 동작 막기
-                          this.handleRegionClick(region);
-                        }}
-                      >
-                        <a href="#">{region}</a>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="menu2_right">
-                    <ul>
-                      {selectedRegion &&
-                        subRegions[selectedRegion].map((subRegion, index) => (
-                          <li className="subRegions" key={index}>
-                            <a href="#">{subRegion}</a>
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div className="Res_menu4">
-            <ul>
-              <div className="Res_tit">
-                <li>{sysdate}</li>
-              </div>
-              <li>
-                <div className="menu4">
-                  <ul className="menu4_left">
-                    <li>
-                      <Reservation_Swiper />
-                    </li>
-                    <div className="menu4_main">
-                      <a href="#none">
-                        <img src={Res_img15} />
-                        파묘
-                      </a>
-                    </div>
-                    <div className="menu4_sub">
-                      <ul>
+      <div className={`Discount ${style.Discount}`}>
+        <div className="Discount_content">
+          <div className="Discount_container">
+            <div className="Discount_contents">
+              <div className="Discount_section">
+                <div className="Discount_right">
+                  <div className="Discount_table_div">
+                    <br />
+                    <h4>할인안내</h4>
+                    <div>
+                      <ul className="Discount_list">
                         <li>
-                          <a
-                            href="#none"
-                            onClick={() => this.setState({ popupOpen: true })}
-                          >
-                            <span>
-                              13:40
-                              <br />
-                              82/100 3관
-                            </span>
-                          </a>
+                          <div className="Discount_img">
+                            <img
+                              src={Card}
+                              alt="Discount_img"
+                              className="Discount_image"
+                            />
+                            <div className="Discount_overlay">
+                              <div className="Discount_ex">
+                                <span className="Discount_ex_content">
+                                  <br />
+                                  - 할인 금액 : 3천원 현장할인
+                                  <br />
+                                  - 전월 실적 20만원 이상, 매출금액 1만원 이상
+                                  시 서비스 제공
+                                  <br />
+                                  - 369 서비스 여부에 따라 차등할인
+                                  제공(상세내용 부산은행 문의)
+                                  <br />
+                                  - 기타 중복 할인 불가
+                                  <br />
+                                  - 할인 : 월 1회, 연 12회
+                                  <br />
+                                  - 고객센터 : 1588-4000
+                                  <br />
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <br />
+                          369체크카드
+                          <br />
+                          3천원 할인
+                          <br />
+                        </li>
+                        <li>
+                          <div className="Discount_img">
+                            <img
+                              src="https://cf.lottecinema.co.kr//Media/WebAdmin/f8ca74437ccf43098607603977f7c4d5.jpg"
+                              alt="Discount_img"
+                              className="Discount_image"
+                            />
+                            <div className="Discount_overlay">
+                              <div className="Discount_ex">
+                                <span className="Discount_ex_content">
+                                  <br />
+                                  - 할인 금액 : 3천원 현장할인
+                                  <br />
+                                  - 전월 실적 20만원 이상, 매출금액 1만원 이상
+                                  시 서비스 제공
+                                  <br />
+                                  - 369 서비스 여부에 따라 차등할인
+                                  제공(상세내용 부산은행 문의)
+                                  <br />
+                                  - 기타 중복 할인 불가
+                                  <br />
+                                  - 할인 : 월 1회, 연 12회
+                                  <br />
+                                  - 고객센터 : 1588-4000
+                                  <br />
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <br />
+                          울산시청 복지카드
+                          <br />
+                          2천원 할인
+                          <br />
+                        </li>
+                        <li>
+                          <div className="Discount_img">
+                            <img
+                              src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5181%2F2019%2F08%2F26%2F0001566018_001_20190826100220478.jpg&type=sc960_832"
+                              alt="Discount_img"
+                              className="Discount_image"
+                            />
+                            <div className="Discount_overlay">
+                              <div className="Discount_ex">
+                                <span className="Discount_ex_content">
+                                  <br />
+                                  - 할인 금액 : 3천원 현장할인
+                                  <br />
+                                  - 전월 실적 20만원 이상, 매출금액 1만원 이상
+                                  시 서비스 제공
+                                  <br />
+                                  - 369 서비스 여부에 따라 차등할인
+                                  제공(상세내용 부산은행 문의)
+                                  <br />
+                                  - 기타 중복 할인 불가
+                                  <br />
+                                  - 할인 : 월 1회, 연 12회
+                                  <br />
+                                  - 고객센터 : 1588-4000
+                                  <br />
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <br />
+                          아이조아 카드
+                          <br />
+                          1,500원 할인
+                          <br />
                         </li>
                       </ul>
                     </div>
-                  </ul>
+                  </div>
                 </div>
-              </li>
-            </ul>
-          </div>
-          {this.state.popupOpen && (
-            <div className="popup">
-              <div className="popup_content">
-                <strong>파묘/13:40(3관)</strong>
-                <p>
-                  잔여좌석 <strong>82</strong>/100
-                </p>
-
-                <img className="Res_screen" src={Res_screen} />
-                <p>
-                  <img src={Res_img15} />본 영화는 만 15세 이상 관람가
-                  영화입니다.
-                </p>
-                <button name="n" onClick={this.handleCancellation}>
-                  취소
-                </button>
-                <button name="y" onClick={this.handleConfirmation}>
-                  인원/좌석 선택
-                </button>
               </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
     );
