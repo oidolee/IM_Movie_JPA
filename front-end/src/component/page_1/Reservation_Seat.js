@@ -4,16 +4,22 @@ import style from "../../styles/page_1/Reservation_Seat.css";
 import Res_movie from "../../assets/page_1/movie.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
 
-const QuantityCounter = () => {
+const QuantityCounter = ({ onQuantityChange }) => {
   const [quantity, setQuantity] = React.useState(0);
 
   const handleIncrement = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+    if (quantity <= 7) {
+      const newQuantity = quantity + 1;
+      setQuantity(newQuantity);
+      onQuantityChange(newQuantity);
+    }
   };
 
   const handleDecrement = () => {
     if (quantity >= 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+      onQuantityChange(newQuantity);
     }
   };
 
@@ -32,7 +38,7 @@ const SingleSquare2 = () => <div className="single-square2" />;
 const SingleSquare3 = () => <div className="single-square3" />;
 const SingleSquare4 = () => <div className="single-square4" />;
 
-const SeatMap = ({ rows, columns }) => {
+const SeatMap = ({ rows, columns, canSelectSeat }) => {
   const seats = [];
 
   // 알파벳 행 추가
@@ -41,14 +47,22 @@ const SeatMap = ({ rows, columns }) => {
     const rowContent = [];
     let count = 1;
     for (let j = 0; j < columns; j++) {
-      rowContent.push(<Square key={`${i}-${j}`} row={i} column={j} count={count}>{j}</Square>);
-      if(j != 1 && j != 10){
+      rowContent.push(
+        <Square
+          key={`${i}-${j}`}
+          row={i}
+          column={j}
+          count={count}
+          canSelectSeat={canSelectSeat}
+        />
+      );
+      if (j !== 1 && j !== 10) {
         count++;
       }
     }
     seats.push(
       <div className="seat_row">
-        <sapn className="seat_alphabet">{alphabets[i]}</sapn>
+        <span className="seat_alphabet">{alphabets[i]}</span>
         {rowContent}
       </div>
     );
@@ -58,10 +72,14 @@ const SeatMap = ({ rows, columns }) => {
   return <div className="MovieSeats">{seats}</div>;
 };
 
-const Square = ({ row, column, count }) => {
+const Square = ({ row, column, count, canSelectSeat }) => {
   const [checked, setChecked] = React.useState(false);
 
   const handleChange = () => {
+    if (!canSelectSeat) {
+      alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
+      return;
+    }
     if (isDisabled()) {
       return;
     }
@@ -80,17 +98,22 @@ const Square = ({ row, column, count }) => {
     <div
       className={squareClass}
       onClick={handleChange}
-      style={{ position:"relative", backgroundColor, cursor }}
+      style={{ position: "relative", backgroundColor, cursor }}
     >
-      <span className="checked_square">
-        {count}
-      </span>
+      <span className="checked_square">{count}</span>
     </div>
   );
 };
 
 const Reservation_Seat = () => {
   const history = useHistory();
+  const [quantity, setQuantity] = React.useState(0);
+  const [canSelectSeat, setCanSelectSeat] = React.useState(false);
+
+  const handleQuantityChange = (newQuantity) => {
+    setQuantity(newQuantity);
+    setCanSelectSeat(newQuantity > 0);
+  };
 
   const handlePayment = () => {
     history.push("/page_1/Reservation_Payment");
@@ -200,19 +223,27 @@ const Reservation_Seat = () => {
                       <ul className="Res_cnt">
                         <li>
                           성인
-                          <QuantityCounter />
+                          <QuantityCounter
+                            onQuantityChange={handleQuantityChange}
+                          />
                         </li>
                         <li>
                           청소년
-                          <QuantityCounter />
+                          <QuantityCounter
+                            onQuantityChange={handleQuantityChange}
+                          />
                         </li>
                         <li>
                           경로
-                          <QuantityCounter />
+                          <QuantityCounter
+                            onQuantityChange={handleQuantityChange}
+                          />
                         </li>
                         <li>
                           장애인
-                          <QuantityCounter />
+                          <QuantityCounter
+                            onQuantityChange={handleQuantityChange}
+                          />
                         </li>
                       </ul>
                     </div>
@@ -223,7 +254,7 @@ const Reservation_Seat = () => {
             <div className="Res_seat2_main">
               <span className="Res_screen_top">SCREEN</span>
               <div className="seatOutput">
-                <SeatMap rows={8} columns={14} />
+                <SeatMap rows={8} columns={14} canSelectSeat={canSelectSeat} />
               </div>
               <div className="Res_seat2_bottom">
                 <SingleSquare1 /> 선택좌석
