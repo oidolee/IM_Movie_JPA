@@ -152,7 +152,7 @@ class Reservation_Movie extends Component {
           <div className="Res_menu2">
             <ul>
               <div className="Res_tit">
-                <li>영화관</li>
+                <li>영화관별 상영시간표</li>
               </div>
               <li>
                 <div className="menu2">
