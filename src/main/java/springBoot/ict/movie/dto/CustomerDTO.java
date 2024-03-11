@@ -21,22 +21,20 @@ public class CustomerDTO {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private int IC_No;
-    @JsonProperty
+    @JsonProperty("email")
     private String IC_email;
-    @JsonProperty
+    @JsonProperty("name")
     private String IC_name;
-    @JsonProperty
+    @JsonProperty("password")
     private String IC_password;
-    @JsonProperty
+    @JsonProperty("hp")
     private String IC_hp;
-    @JsonProperty
+    @JsonProperty("birthday")
     private Date IC_birthday;
-    @JsonProperty
+    @JsonProperty("address")
     private String IC_address;
-    @JsonProperty
+    @JsonProperty("regdate")
     private Date IC_regdate;
-    @JsonProperty
+    @JsonProperty("show")
     private String IC_show;
-    
-    
 }

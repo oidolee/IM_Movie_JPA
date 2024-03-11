@@ -41,7 +41,6 @@ class listCustomer extends Component {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell> No </TableCell>
                             <TableCell> email </TableCell>
                             <TableCell> name </TableCell>
                             <TableCell> password </TableCell>
@@ -56,8 +55,7 @@ class listCustomer extends Component {
                     <TableBody>
                         {this.state.lists.map(list =>
                         <TableRow key={list.No}>
-                            <TableCell component="th" scope="list"> {list.no} </TableCell>
-                            <TableCell> {list.email} </TableCell>
+                            <TableCell component="th" scope="row"> {list.email} </TableCell>
                             <TableCell> {list.name} </TableCell>
                             <TableCell> {list.password} </TableCell>
                             <TableCell> {list.hp} </TableCell>

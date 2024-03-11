@@ -129,6 +129,13 @@ class SignupComponent extends Component {
             alert("비밀번호가 일치하지 않습니다.");
             return;
         }
+        
+        // IC_regdate를 현재 날짜로 설정
+        const regdate = new Date();
+
+        // IC_show를 기본값으로 설정
+        const show = 'y';
+
 
         const address = `${this.state.addr1} ${this.state.addr2}`;
         const inputData = {
@@ -137,7 +144,9 @@ class SignupComponent extends Component {
             password: this.state.password,
             hp: this.state.hp,
             birthday: this.state.birthday,
-            address: address
+            address: address,
+            regdate: regdate,
+            show: show
         };
 
         console.log(inputData);
