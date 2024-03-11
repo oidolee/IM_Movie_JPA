@@ -6,13 +6,13 @@
         theater_id       VARCHAR2(50)    NOT NULL,
         screen_id       VARCHAR2(50)    NOT NULL,
         movie_age          VARCHAR2(255)   NOT NULL,
-        res_movieDate    Date            DEFAULT sysdate,
-        res_movieID      VARCHAR2(50)    NOT NULL,
-        res_movieName    VARCHAR2(100)   NOT NULL,
-        res_movieTime    VARCHAR2(100)   NOT NULL,
+        res_movie_date    Date            DEFAULT sysdate,
+        res_movie_id      VARCHAR2(50)    NOT NULL,
+        res_movie_name    VARCHAR2(100)   NOT NULL,
+        res_movie_time    VARCHAR2(100)   NOT NULL,
         res_seat         VARCHAR2(50)    NOT NULL,
         res_count        NUMBER          NOT NULL,
-        res_ticketPrice  NUMBER          NOT NULL,
+        res_ticket_price  NUMBER          NOT NULL,
         res_sysdate      DATE            DEFAULT sysdate,
         res_check        CHAR(1)         DEFAULT 'n'
     );
@@ -38,9 +38,9 @@
         c_email          VARCHAR2(50)    NOT NULL,
         c_grade          VARCHAR2(50)    NOT NULL,
         pay_method       VARCHAR2(50)    NOT NULL,
-        pay_payCompany   VARCHAR2(50)    NOT NULL,
-        res_movieName    VARCHAR2(100)   NOT NULL,
-        pay_cardNum      VARCHAR2(100)   NOT NULL,
+        pay_pay_company   VARCHAR2(50)    NOT NULL,
+        res_movie_name    VARCHAR2(100)   NOT NULL,
+        pay_card_num      VARCHAR2(100)   NOT NULL,
         pay_tel          VARCHAR2(50)    NOT NULL,
         pay_sysdate      DATE            DEFAULT sysdate,
         pay_check        CHAR(1)         DEFAULT 'n'
@@ -65,9 +65,9 @@
         st_id            NUMBER          PRIMARY KEY,
         theater_id       VARCHAR2(50)    NOT NULL,
         screen_id        VARCHAR2(50)    NOT NULL,
-        st_seatGroup     VARCHAR2(50)    NOT NULL,
+        st_seat_group     VARCHAR2(50)    NOT NULL,
         st_num           VARCHAR2(50)    NOT NULL,
-        st_lineNum       VARCHAR2(50)    NOT NULL,
+        st_line_num       VARCHAR2(50)    NOT NULL,
         st_check         CHAR(1)         DEFAULT 'n'
     );
 
@@ -88,10 +88,10 @@
     DROP TABLE mvc_Discount_tbl CASCADE CONSTRAINTS;
     CREATE TABLE mvc_Discount_tbl(
         dc_num            NUMBER          PRIMARY KEY,
-        dc_mainTitle      VARCHAR2(50)    NOT NULL,
-        dc_subTitle       VARCHAR2(50),
-        dc_mainImg        VARCHAR2(255)   NOT NULL,
-        dc_subImg         VARCHAR2(255)   NOT NULL,
+        dc_main_title      VARCHAR2(50)    NOT NULL,
+        dc_sub_title       VARCHAR2(50),
+        dc_main_img        VARCHAR2(255)   NOT NULL,
+        dc_sub_img         VARCHAR2(255)   NOT NULL,
         dc_show           CHAR(1)         DEFAULT 'n'
     );
 
