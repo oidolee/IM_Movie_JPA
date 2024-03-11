@@ -36,54 +36,104 @@
     width: 100%;
 }
 
+.Res_screen .Res_menu1,
 .Res_screen .Res_menu2,
+.Res_screen .Res_menu3,
 .Res_screen .Res_menu4 {
     height: auto;
     width: 100%;
     background-color: white;
 }
 
-.Res_screen .Res_menu2 ul,
-.Res_screen .Res_menu4 ul {
-    height: 100%;
-    width: 100%;
+.Res_screen .Res_menu1 {
+    width: 100px;
 }
 
-.Res_screen .Res_menu2 {
-    width: 400px;
-}
-
-.Res_screen>div:not(.Res_menu2) {
+.Res_screen>div:not(.Res_menu1){
     /* Res_menu1을 제외하고 넓이 자동 맞춤 */
     flex-grow: 1;
 }
 
-.Res_screen .Res_menu_content>div>ul {
+.Res_screen .Res_screen_content>div>ul {
     /* 부모 요소에 맞춰서 높이 설정 */
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.Res_screen .Res_menu_content>div>ul>li {
+.Res_screen .Res_screen_content>div>ul>li {
     /* 남은 공간을 모두 채우도록 설정 */
     flex-grow: 1;
 }
 
-.Res_screen .menu2 {
+.Res_screen .Res_menu1 li {
+    border: 1px solid #666;
+    border-bottom: none;
+}
+
+.Res_screen .step {
+    padding: 100px 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.Res_screen .step_content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    z-index: 1;
+    left: 100%;
+    top: 0;
+    padding-left: 20px;
+}
+
+.Res_screen .step_content dt {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    border: none;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.Res_screen .step:hover .step_content {
+    background-color: #FF243E;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.Res_screen .step:hover {
+    background-color: #FF243E;
+    cursor: pointer;
+}
+
+.Res_screen #step1 {
+    background-color: #FF243E;
+}
+
+.Res_screen #step1 a,
+.Res_screen .step:hover a {
+    color: white;
+}
+
+.Res_screen .menu2,
+.Res_screen .menu3,
+.Res_screen .menu4 {
     display: flex;
     flex-direction: row;
     height: 100%;
     background-color: white;
 }
 
-.Res_screen .menu4 {
-    height: 100%;
-    width: 100%;
-    background-color: white;
-}
-
 .Res_screen .menu2 ul,
+.Res_screen .menu3 ul,
 .Res_screen .menu4 ul {
     list-style: none;
     width: 100%;
@@ -96,13 +146,15 @@
 }
 
 .Res_screen .menu2 ul li,
+.Res_screen .menu3 ul li,
 .Res_screen .menu4_main,
 .Res_screen .menu4_sub {
     margin-top: 20px;
     padding-left: 20px;
 }
 
-.Res_screen .menu2_left {
+.Res_screen .menu2_left,
+.Res_screen .menu3_left {
     background-color: #F5F5F5;
 }
 
@@ -127,6 +179,7 @@
     font-weight: 500;
 }
 
+.Res_screen .menu3_left a,
 .Res_screen .menu4_left a {
     font-weight: 600;
     color: black;

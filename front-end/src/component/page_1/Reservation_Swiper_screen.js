@@ -42,7 +42,7 @@ export default function Reservation_Swiper() {
             <div>
               <ul className="swiper_content">
                 {getDates(getSlideStartDate(slideIndex)).map((date, index) => (
-                  <li key={index} style={{color: moment(date).day() === 0 ? 'red' : 'black'}}>
+                  <li key={index}>
                     <a href="">{moment(date).format("D")}<br />{moment(date).format("dd")}</a>
                   </li>
                 ))}
@@ -55,7 +55,7 @@ export default function Reservation_Swiper() {
           <div>
             <ul className="swiper_content">
               {getDates(getNextMonthStartDate()).map((date, index) => (
-                <li key={index} style={{color: moment(date).day() === 0 ? 'red' : 'black'}}>
+                <li key={index}>
                   <a href="">{moment(date).format("D")}<br />{moment(date).format("dd")}</a>
                 </li>
               ))}

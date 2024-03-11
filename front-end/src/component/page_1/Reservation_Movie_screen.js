@@ -71,7 +71,84 @@ class Reservation_Movie extends Component {
     return (
       <div className={`Res_screen ${style.Res_Movie}`}>
         <div className="Res_screen_content">
-          
+          <div className="Res_menu1">
+            <ul>
+              <li className="step" id="step1">
+                <a href="#Res_step01">
+                  <strong>
+                    <span>
+                      01
+                      <br />
+                      상영시간
+                    </span>
+                  </strong>
+                  <div className="step_content">
+                    <dl>
+                      <dt>선택한 영화 제목</dt>
+                      <dd></dd>
+                      <dt>선택한 상영관</dt>
+                      <dd></dd>
+                      <dt>선택한 상영 날짜</dt>
+                      <dd></dd>
+                      <dt>선택한 상영 시간</dt>
+                      <dd></dd>
+                    </dl>
+                  </div>
+                </a>
+              </li>
+              <li className="step">
+                <a href="#Res_step02">
+                  <strong>
+                    <span>
+                      02
+                      <br />
+                      인원/좌석
+                    </span>
+                  </strong>
+                  <div className="step_content">
+                    <dl>
+                      <dt>인원</dt>
+                      <dd></dd>
+                      <dt>좌석</dt>
+                      <dd></dd>
+                    </dl>
+                  </div>
+                </a>
+              </li>
+              <li className="step">
+                <a href="#Res_step03">
+                  <strong>
+                    <span>
+                      03
+                      <br />
+                      결제
+                    </span>
+                  </strong>
+                  <div className="step_content">
+                    <dl>
+                      <dt>티켓금액</dt>
+                      <dd></dd>
+                      <dt>할인금액</dt>
+                      <dd></dd>
+                      <dt>총합계</dt>
+                      <dd></dd>
+                    </dl>
+                  </div>
+                </a>
+              </li>
+              <li className="step">
+                <a href="#Res_step04">
+                  <strong>
+                    <span>
+                      04
+                      <br />
+                      결제완료
+                    </span>
+                  </strong>
+                </a>
+              </li>
+            </ul>
+          </div>
           <div className="Res_menu2">
             <ul>
               <div className="Res_tit">
