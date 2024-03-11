@@ -66,7 +66,7 @@ function Login() {
                 <Button id='btn' className={`loginComponent_btn ${style.loginComponent_btn}`} variant="contained" color="primary" onClick={handleLogin}>Login</Button>
             </div>
             <div id='login_bot' className={`login_bot ${style.login_bot}`}>
-                <a href='/sign-up' id='signupPage' className={`signup ${style.signup}`}>회원가입</a>
+                <a href='/signCheck' id='signupPage' className={`signup ${style.signup}`}>회원가입</a>
                 <a href='/searchID' id='confirmID' >아이디 찾기</a>
                 <a href='/searchPWD' id='confrimPwd' className={`confirmPassword ${style.confirmPassword}`}>비밀번호 찾기</a>
             </div>
