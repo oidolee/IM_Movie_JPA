@@ -73,14 +73,15 @@ function MyPage_consult_list_part() {
                                     <tr>
                                         <td style={{ textAlign: 'left', display: 'flex', justifyContent: 'space-between' }}>
                                             <dl>
-                                                <dt>
-                                                    <strong className={`txt_qna ${style.text_qna}`}>
-                                                        <div className={`circleBefore${style.circleBefore}`}></div>
+                                                <dt className={`q ${style.q}`}>
+                                                    <strong className={`txt_qna ${style.txt_qna}`}>
+                                                        <span className={`circleBefore ${style.circleBefore}`}></span>
                                                         <span>영화관</span>
                                                         &nbsp; | &nbsp;
-                                                        <span>문의내용 타이틀</span>
+                                                        
                                                     </strong>
-                                                    <dd style={{ width: '100%' }}>문의 내용</dd>
+                                                    <span>문의내용 타이틀</span>
+                                                    <dd style={{ width: '100%', marginLeft: '25px' }}>문의 내용</dd>
                                                 </dt>
                                             </dl>
                                             <div style={{ display: 'inline', justifyContent: 'right' }}>
@@ -92,7 +93,10 @@ function MyPage_consult_list_part() {
                                     <tr>
                                         <td style={{ textAlign: 'center' }}>
                                             <dl>
-                                                <dt>
+                                                <dt className={`a ${style.a}`}>
+                                                    <div>
+                                                        <span className={`circleBefore2 ${style.circleBefore2}`}></span>
+                                                    </div>
                                                     <dd style={{ width: '100%' }}>안녕하세요 답변드리겠습니다.</dd>
                                                 </dt>
                                             </dl>
