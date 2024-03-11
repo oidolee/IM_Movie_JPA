@@ -39,8 +39,12 @@ const SeatMap = ({ rows, columns }) => {
   const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   for (let i = 0; i < rows; i++) {
     const rowContent = [];
+    let count = 1;
     for (let j = 0; j < columns; j++) {
-      rowContent.push(<Square key={`${i}-${j}`} row={i} column={j} />);
+      rowContent.push(<Square key={`${i}-${j}`} row={i} column={j} count={count}>{j}</Square>);
+      if(j != 1 && j != 10){
+        count++;
+      }
     }
     seats.push(
       <div className="seat_row">
@@ -54,7 +58,7 @@ const SeatMap = ({ rows, columns }) => {
   return <div className="MovieSeats">{seats}</div>;
 };
 
-const Square = ({ row, column }) => {
+const Square = ({ row, column, count }) => {
   const [checked, setChecked] = React.useState(false);
 
   const handleChange = () => {
@@ -75,9 +79,12 @@ const Square = ({ row, column }) => {
     <div
       className={squareClass}
       onClick={handleChange}
-      style={{ backgroundColor }}
+      style={{ position:"relative", backgroundColor }}
     >
-      {checked && <div className="checked-square" />}
+      <span className="checked-square" style={{position:"absolute", left:"12px", top:"2px", color:"#000"}}>
+        {count}
+      </span>
+      {/* {checked && <span className="checked-square">11 </span>} */}
     </div>
   );
 };
