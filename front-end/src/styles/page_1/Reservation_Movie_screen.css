@@ -70,11 +70,16 @@
     flex-grow: 1;
 }
 
-.Res_screen .menu2,
-.Res_screen .menu4 {
+.Res_screen .menu2 {
     display: flex;
     flex-direction: row;
     height: 100%;
+    background-color: white;
+}
+
+.Res_screen .menu4 {
+    height: 100%;
+    width: 100%;
     background-color: white;
 }
 
