@@ -40,7 +40,7 @@ class ApiService {
     // insert
     addCustomer(inputData) {
         console.log('addCustomer 호출', inputData);
-        return axios.post(url + "/index", inputData);
+        return axios.post(url + "/index/save", inputData);
     }
 
     // 고객리스트

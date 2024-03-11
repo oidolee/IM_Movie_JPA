@@ -15,7 +15,7 @@ class resultFindID extends Component {
     render() {
 
         const foundEmail = this.props.location.state.foundEmail;
-        
+
         return (
             <div id='wrappage' className={`wrappage ${style.wrappage}`}>
                 <div id='result' className={`result ${style.result}`}>
@@ -30,13 +30,23 @@ class resultFindID extends Component {
                     아이디 찾기 결과
                     <hr />
                     IM_Movie ID
-                    <br/><br/>
-                    <h4>{foundEmail}</h4>
+                    <br /><br />
+
+                    {foundEmail != null ? (
+                        <h4>{foundEmail}</h4>
+                    ) : (
+                        <h4>해당 정보의 아이디는 찾을 수 없습니다.</h4>
+                    )}
+
+                        <br/><br/>
+
+
+
 
                     <Button id="blackBtn" className={`blackBtn ${style.blackBtn}`} onClick={this.gologin}>로그인</Button>
                     <Button id="redBtn" className={`redBtn ${style.redBtn}`} onClick={this.gofindPWD}>비밀번호 찾기</Button>
 
-                    
+
 
 
 
