@@ -80,37 +80,37 @@ class Reservation_Movie extends Component {
                         <li>
                           <div className="Discount_img">
                             <img
-                              src={Card}
+                              src="https://cf.lottecinema.co.kr//Media/WebAdmin/29eb9d8b3257480186229687fa879487.png"
                               alt="Discount_img"
                               className="Discount_image"
                             />
                             <div className="Discount_overlay">
                               <div className="Discount_ex">
-                                <span className="Discount_ex_content">
-                                  <br />
-                                  - 할인 금액 : 3천원 현장할인
-                                  <br />
-                                  - 전월 실적 20만원 이상, 매출금액 1만원 이상
-                                  시 서비스 제공
-                                  <br />
-                                  - 369 서비스 여부에 따라 차등할인
-                                  제공(상세내용 부산은행 문의)
-                                  <br />
-                                  - 기타 중복 할인 불가
-                                  <br />
-                                  - 할인 : 월 1회, 연 12회
-                                  <br />
-                                  - 고객센터 : 1588-4000
-                                  <br />
-                                </span>
+                                <br />
+                                - 할인 금액 : 3천원 현장할인
+                                <br />
+                                - 전월 실적 20만원 이상, 매출금액 1만원 이상 시
+                                서비스 제공
+                                <br />
+                                - 369 서비스 여부에 따라 차등할인 제공(상세내용
+                                부산은행 문의)
+                                <br />
+                                - 기타 중복 할인 불가
+                                <br />
+                                - 할인 : 월 1회, 연 12회
+                                <br />
+                                - 고객센터 : 1588-4000
+                                <br />
                               </div>
                             </div>
                           </div>
-                          <br />
-                          369체크카드
-                          <br />
-                          3천원 할인
-                          <br />
+                          <span className="Discount_ex_content">
+                            <br />
+                            <strong>369체크카드</strong>
+                            <br />
+                            3천원 할인
+                            <br />
+                          </span>
                         </li>
                         <li>
                           <div className="Discount_img">
@@ -121,31 +121,31 @@ class Reservation_Movie extends Component {
                             />
                             <div className="Discount_overlay">
                               <div className="Discount_ex">
-                                <span className="Discount_ex_content">
-                                  <br />
-                                  - 할인 금액 : 3천원 현장할인
-                                  <br />
-                                  - 전월 실적 20만원 이상, 매출금액 1만원 이상
-                                  시 서비스 제공
-                                  <br />
-                                  - 369 서비스 여부에 따라 차등할인
-                                  제공(상세내용 부산은행 문의)
-                                  <br />
-                                  - 기타 중복 할인 불가
-                                  <br />
-                                  - 할인 : 월 1회, 연 12회
-                                  <br />
-                                  - 고객센터 : 1588-4000
-                                  <br />
-                                </span>
+                                <br />
+                                - 할인 금액 : 3천원 현장할인
+                                <br />
+                                - 전월 실적 20만원 이상, 매출금액 1만원 이상 시
+                                서비스 제공
+                                <br />
+                                - 369 서비스 여부에 따라 차등할인 제공(상세내용
+                                부산은행 문의)
+                                <br />
+                                - 기타 중복 할인 불가
+                                <br />
+                                - 할인 : 월 1회, 연 12회
+                                <br />
+                                - 고객센터 : 1588-4000
+                                <br />
                               </div>
                             </div>
                           </div>
-                          <br />
-                          울산시청 복지카드
-                          <br />
-                          2천원 할인
-                          <br />
+                          <span className="Discount_ex_content">
+                            <br />
+                            <strong>울산시청 복지카드</strong>
+                            <br />
+                            2천원 할인
+                            <br />
+                          </span>
                         </li>
                         <li>
                           <div className="Discount_img">
@@ -156,31 +156,31 @@ class Reservation_Movie extends Component {
                             />
                             <div className="Discount_overlay">
                               <div className="Discount_ex">
-                                <span className="Discount_ex_content">
-                                  <br />
-                                  - 할인 금액 : 3천원 현장할인
-                                  <br />
-                                  - 전월 실적 20만원 이상, 매출금액 1만원 이상
-                                  시 서비스 제공
-                                  <br />
-                                  - 369 서비스 여부에 따라 차등할인
-                                  제공(상세내용 부산은행 문의)
-                                  <br />
-                                  - 기타 중복 할인 불가
-                                  <br />
-                                  - 할인 : 월 1회, 연 12회
-                                  <br />
-                                  - 고객센터 : 1588-4000
-                                  <br />
-                                </span>
+                                <br />
+                                - 할인 금액 : 3천원 현장할인
+                                <br />
+                                - 전월 실적 20만원 이상, 매출금액 1만원 이상 시
+                                서비스 제공
+                                <br />
+                                - 369 서비스 여부에 따라 차등할인 제공(상세내용
+                                부산은행 문의)
+                                <br />
+                                - 기타 중복 할인 불가
+                                <br />
+                                - 할인 : 월 1회, 연 12회
+                                <br />
+                                - 고객센터 : 1588-4000
+                                <br />
                               </div>
                             </div>
                           </div>
-                          <br />
-                          아이조아 카드
-                          <br />
-                          1,500원 할인
-                          <br />
+                          <span className="Discount_ex_content">
+                            <br />
+                            <strong>아이조아 카드</strong>
+                            <br />
+                            1,500원 할인
+                            <br />
+                          </span>
                         </li>
                       </ul>
                     </div>
