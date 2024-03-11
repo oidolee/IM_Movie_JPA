@@ -205,3 +205,9 @@
     background-color: white;
     background: white;
 }
+
+.StoreDetail_selectedTab{
+    font-weight: bold;
+    cursor: pointer;
+    border: 3px solid #f8a4ce !important; /* Red border */
+}

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import style from "../../styles/page_3/StoreDetail.module.css";
-import package1 from "../../assets/page_3/package1.jpg";
+import package1 from "../../assets/page_3/IM_package1.png";
 import StoreGift from "./StoreGift"; // StoreGift 컴포넌트를 import
 import StoreTicket from "./StoreTicket";
 import bottom1 from "../../assets/page_3/bottom1.jpg";
@@ -95,7 +95,7 @@ const StoreDetail = () => {
     <div className={`StoreDetail_store_d ${style.StoreDetail_store_d}`}>
       <div className={`store_detail ${style.store_detail}`}>
         <div className={`main_img ${style.main_img}`}>
-          <img src={package1} alt="[롯시와 봄] 패키지" />
+          <img src={package1} alt="[IM과 봄] 패키지" />
 
           <div style={{ width: "450px" }}>
             <Swiper
@@ -150,7 +150,7 @@ const StoreDetail = () => {
             >
               <tr>
                 <th className={`tit ${style.tit}`} colSpan="2">
-                  [롯시와 봄] 패키지
+                  [IM과 봄] 패키지
                 </th>
               </tr>
               <tr>
@@ -237,7 +237,7 @@ const StoreDetail = () => {
       <div className={`tab_wrap ${style.tab_wrap}`}>
         <button
           type="button"
-          className={`tab_tit ${style.tab_tit}`}
+          className={`tab_tit ${style.tab_tit} ${selectedValue === 1 ? style.StoreDetail_selectedTab : ''}`}
           onClick={() => handleSelect(1)}
           style={{ width: "50%", left: "0%", height: "70px" }}
         >
@@ -245,7 +245,7 @@ const StoreDetail = () => {
         </button>
         <button
           type="button"
-          className={`tab_tit ${style.tab_tit}`}
+          className={`tab_tit ${style.tab_tit} ${selectedValue === 2 ? style.StoreDetail_selectedTab : ''}`}
           onClick={() => handleSelect(2)}
           style={{ width: "50%", left: "0%", height: "70px" }}
         >
@@ -262,7 +262,7 @@ const StoreDetail = () => {
                 사용가능
                 <br />- 영화관람권은{" "}
                 <span style={{ color: "red" }}>2D 일반영화에만 적용 가능</span>
-                ,, 스페셜관 및 좌석에 적용 불가(일부 특수관 및 좌석에 한해 별도
+                , 스페셜관 및 좌석에 적용 불가(일부 특수관 및 좌석에 한해 별도
                 업차지 금액 지불 시 적용가능)/ 영화관람권은 L.point적립 불가,
                 관람권 사용 시 VIP 승급금액은 관람권 판매금액으로 반영
                 <br />
@@ -277,7 +277,7 @@ const StoreDetail = () => {
               <div>
                 <b>취소/환불</b>
                 <br />
-                - 롯시몰 상품의 취소기한은 구매일로부터 70일 입니다.
+                - IM몰 상품의 취소기한은 구매일로부터 70일 입니다.
                 <br />
                 - 구매취소는 취소기한 내 마이시네마 > 예매/구매내역에서만
                 가능합니다.(현장취소 불가)
