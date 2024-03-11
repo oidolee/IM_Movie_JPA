@@ -33,7 +33,6 @@
   padding: 0;
   height: 100%;
   width: 100%;
-  background-color: white;
 }
 
 .Res_seat .Res_seat1,
@@ -151,7 +150,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: auto;
+  width: 100%;
   background-color: black;
   color: white;
   font-weight: 600;
@@ -276,7 +275,7 @@
   width: 35px;
   height: 25px;
   display: inline-block;
-  margin: 3px;
+  margin: 0 3px;
   padding-top: 20px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -360,4 +359,7 @@
   border: none;
   color: white;
   font-size: 14px;
+}
+.checked-square{
+  
 }

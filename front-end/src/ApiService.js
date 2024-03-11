@@ -40,7 +40,7 @@ class ApiService {
     // insert
     addCustomer(inputData) {
         console.log('addCustomer 호출', inputData);
-        return axios.post(url + "/index", inputData);
+        return axios.post(url + "/index/save", inputData);
     }
 
     // 고객리스트
@@ -67,7 +67,7 @@ class ApiService {
     findPWD(inputData) {
         console.log("findPWD 호출")
         console.log(inputData)
-        return axios.post("http://localhost:8081/index/findPWD", inputData);
+        return axios.post("http://localhost:8081/index/searchPWD", inputData);
     } 
 
 }

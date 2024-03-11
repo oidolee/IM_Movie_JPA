@@ -10,6 +10,7 @@ class StoreGift extends Component {
       messageLength: 0,
       koreanLength: 0,
       englishLength: 0,
+      recipientNumber: "", //선물 받는 분 번호 상태 값
     };
   }
 
@@ -30,7 +31,37 @@ class StoreGift extends Component {
     });
   };
 
-  
+  handleRecipientInput = (e) => {
+    const recipientNumber = e.target.value;
+
+    // 정규표현식을 사용하여 숫자 12자 이상이면서 010으로 시작하지 않는 경우를 검사
+    const isValidNumber = /^[0-9]{12,}$/.test(recipientNumber) && !recipientNumber.startsWith("010");
+
+    this.setState({
+      recipientNumber,
+    });
+  };
+
+  handlePayment = () => {
+    // 결제하기 버튼 클릭 시 실행되는 로직
+    const { recipientNumber } = this.state;
+    const { isValidNumber, isSenderEmpty, isMessageEmpty } = this.state;
+
+    // 선물 받는 분 번호가 12자 이상이면 알림창 띄우기
+    if (recipientNumber.length >= 12 || recipientNumber.length < 10) {
+      alert("잘못된 형식입니다.");
+      return; // 결제 로직 중단
+    }
+
+    // 선물 받는 분 번호가 유효하지 않거나 선물하는 분 또는 메세지가 비어있는 경우 알림창 띄우기
+    if (!isValidNumber || isSenderEmpty || isMessageEmpty) {
+      alert("입력 내용을 확인해주세요.");
+      return; // 결제 로직 중단
+    }
+
+    // TODO: 결제 로직 구현
+  };
+
   render() {
     return (
       <div id="layerCouponGift" className="layer_coupon_gift">
@@ -86,6 +117,7 @@ class StoreGift extends Component {
                     placeholder="휴대폰 번호 입력(-없이)"
                     required
                     autofocus
+                    onChange={this.handleRecipientInput}
                   />
                 </td>
               </tr>
@@ -136,6 +168,7 @@ class StoreGift extends Component {
                       className={`StoreGift_inputButton ${style.StoreGift_inputButton}`}
                       type="submit"
                       value="결제하기"
+                      onClick={this.handlePayment}
                     />
                   </div>
                 </td>

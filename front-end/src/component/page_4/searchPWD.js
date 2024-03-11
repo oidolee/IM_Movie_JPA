@@ -12,7 +12,7 @@ class searchPWD extends Component {
 
         this.state = {
             activeKey: "0", // 아코디언 활성화 키
-            name: '',
+            emial: '',
             hp: ''
         };
     }

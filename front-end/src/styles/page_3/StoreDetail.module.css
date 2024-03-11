@@ -197,9 +197,17 @@
     color: #7F7F7F;
     line-height:300%;
     margin-right: 50px;
+    margin-left: 50px;
+    margin-bottom: 150px;
   }
 
 .StoreDetail_store_d{
     background-color: white;
     background: white;
+}
+
+.StoreDetail_selectedTab{
+    font-weight: bold;
+    cursor: pointer;
+    border: 3px solid #f8a4ce !important; /* Red border */
 }

@@ -38,25 +38,42 @@ public class CustomerServiceImpl implements CustomerService {
 		dao.save(dto);
 	}
 
-//	// 로그인
-//	@Override
-//	public int loginCustomer(CustomerDTO dto) throws ServletException, IOException {
-//		System.out.println("CustomerServiceImpl - loginCustomer");
-//		System.out.println(" login dto " + dto.toString());
-//		
-//		int selectCnt = dao.loginCustomer(dto.getEmail(), dto.getPassword());
-//		System.out.println(" selectCnt " + selectCnt);
-//		
-//		return selectCnt;
-//	}
-//	
-//	// 아이디 찾기 
-//    @Override
-//    public String findID(String name, String hp) throws ServletException, IOException {
-//        System.out.println("CustomerServiceImpl - findID");
-//        
-//        String foundEmail = dao.findID(name, hp);
-//        
-//        return foundEmail;
-//    }
+	// 로그인
+	@Override
+	public CustomerDTO loginCustomer(CustomerDTO dto) 
+			throws ServletException, IOException {
+		System.out.println("CustomerServiceImpl - loginCustomer");
+		System.out.println(" login dto " + dto.toString());
+		
+		String email = dto.getIC_email();
+		String password = dto.getIC_password();
+		
+		
+		
+		return dao.loginService(email, password);
+	}
+	
+	// 아이디 찾기 
+    @Override
+    public String findID(String name, String hp) throws ServletException, IOException {
+        System.out.println("CustomerServiceImpl - findID");
+        
+        String foundEmail = dao.findIdByNameAndHp(name, hp);
+        System.out.println("name : " + name + " hp : " + hp);
+        System.out.println("foundEmail :" + foundEmail);
+        
+        return foundEmail;
+    }
+
+    // 비밀번호 찾기
+	@Override
+	public String findPWD(String email, String hp) throws ServletException, IOException {
+		System.out.println("CustomerServiceImpl - findPWD");
+        
+        String findPWD = dao.findIdByEmailAndHp(email, hp);
+        System.out.println("email : " + email + " hp : " + hp);
+        System.out.println("foundEmail :" + findPWD);
+        
+        return findPWD;
+	}
 }
