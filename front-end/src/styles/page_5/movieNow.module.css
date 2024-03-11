@@ -39,19 +39,20 @@ body {
   object-fit: cover;
 }
 
-.next_movie_tit{
+.now_movie_tit1{
   padding-right:920px;
   margin-top: 50px;
   font-size:20px;
   font-weight: bold;
 }
 
-.next_movie_list{
+.now_movie_list1{
   margin-top:20px;
+  font-size:15px;
 }
 
-.next_movie_list1{
-  margin-right:450px;
+.now_movie_list2{
+  margin-right:663px;
   margin-top:20px;
 }
 

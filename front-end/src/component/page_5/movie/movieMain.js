@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import style from "../../../styles/page_5/movieMain.module.css";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import { Card, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom'; 
 
 
 // Import Swiper React components
@@ -66,6 +66,15 @@ function MovieMain() {
         }
     };
 
+    const [isHovered, setIsHovered] = useState(false);
+    const history = useHistory(); 
+
+    const handleDetailButtonClick = () => {
+      // 상세정보 버튼 클릭 시 실행되는 함수입니다.
+      // 상세정보 페이지로 이동합니다.
+      history.push('/movieDetail'); // '/detail' 경로로 이동합니다. 이 경로는 상세정보 페이지의 경로에 맞게 수정해야 합니다.
+    };
+
 
     return (
     <>
@@ -112,14 +121,22 @@ function MovieMain() {
         </div>    
     
         <div className={`now_movie_list ${style.now_movie_list}`}  style={{ display: 'flex', justifyContent: 'center' }}>
-            <Card style={{ width: '202px', margin: '0 10px' }}>
-            <Card.Img variant="top" src={movie1} style={{ width: '200px', height: 'auto' }}  />
-            <Card.Body>
-              <Card.Title>파묘</Card.Title>
-              <Card.Text>134분</Card.Text>
-              <Button variant="primary">Go somewhere</Button>
-            </Card.Body>
-          </Card>
+
+      <Card
+        style={{ width: '202px', margin: '0 10px', position: 'relative', opacity: isHovered ? '0.7' : '1' }}
+        onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      <Card.Img variant="top" src={movie1} style={{ width: '200px', height: 'auto' }} />
+      <Card.Body>
+        <Card.Title>파묘</Card.Title>
+        <Card.Text>134분</Card.Text>
+        {isHovered && (
+          <div className="card_hover_content" >
+            <Button className={`primary_button ${style.primary_button}`}>예매하기</Button>
+            <Button className={`secondary_button ${style.secondary_button}`} onClick={handleDetailButtonClick}>상세정보</Button> {/* 상세정보 버튼에 onClick 이벤트 핸들러를 추가합니다. */}
+          </div>
+        )}
+      </Card.Body>
+    </Card>
 
           <Card style={{ width: '202px', margin: '0 10px' }}>
             <Card.Img variant="top" src={movie2} style={{ width: '200px', height: 'auto' }}  />

@@ -36,6 +36,7 @@ import resultFindPWD from '../page_4/resultFindPWD';
 
 //page_5
 import movieMain from '../page_5/movie/movieMain';
+import movieDetail from '../page_5/movie/movieDetail';
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
 import moviePlace from '../page_5/theater/moviePlace';
@@ -106,6 +107,7 @@ const AppRouter = () => {
                     {/* page_5 */}
                     <Route>
                         <Route path="/movieMain" exact={true} component={movieMain} />
+                        <Route path="/movieDetail" exact={true} component={movieDetail} />
                         <Route path="/movieNow" exact={true} component={movieNow} />
                         <Route path="/movieNext" exact={true} component={movieNext} />
                         <Route path="/moviePlace" exact={true} component={moviePlace} />
