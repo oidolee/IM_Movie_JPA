@@ -39,3 +39,19 @@ body {
   object-fit: cover;
 }
 
+.now_movie_tit{
+  padding-right:920px;
+  margin-top: 50px;
+  font-size:20px;
+  font-weight: bold;
+}
+
+.now_movie_list{
+  margin-top:10px;
+}
+
+.mv_lastIMG1{
+  margin-top:30px;
+}
+
+
