@@ -69,12 +69,13 @@ class Reservation_Movie extends Component {
     const { subRegions, selectedRegion } = this.state;
 
     return (
-      <div className={`Res_screen ${style.Res_screen}`}>
+      <div className={`Res_screen ${style.Res_Movie}`}>
         <div className="Res_screen_content">
+          
           <div className="Res_menu2">
             <ul>
               <div className="Res_tit">
-                <li>영화관별 상영시간표</li>
+                <li>영화관</li>
               </div>
               <li>
                 <div className="menu2">

@@ -34,17 +34,17 @@
     padding: 0;
     height: 100%;
     width: 100%;
-    background-color: white;
 }
 
 .Res_screen .Res_menu2,
 .Res_screen .Res_menu4 {
     height: auto;
     width: 100%;
+    background-color: white;
 }
 
 .Res_screen .Res_menu2 {
-    width: 500px;
+    width: 400px;
 }
 
 .Res_screen>div:not(.Res_menu2) {
@@ -52,19 +52,20 @@
     flex-grow: 1;
 }
 
-.Res_screen .Res_screen_content>div>ul {
+.Res_screen .Res_menu_content>div>ul {
     /* 부모 요소에 맞춰서 높이 설정 */
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.Res_screen .Res_screen_content>div>ul>li {
+.Res_screen .Res_menu_content>div>ul>li {
     /* 남은 공간을 모두 채우도록 설정 */
     flex-grow: 1;
 }
 
-.Res_screen .menu2 {
+.Res_screen .menu2,
+.Res_screen .menu4 {
     display: flex;
     flex-direction: row;
     height: 100%;
@@ -79,11 +80,6 @@
     text-align: left;
 }
 
-.Res_screen .menu4 {
-    width: 100%;
-    background-color: white;
-}
-
 .Res_screen .menu4 ul {
     width: 300px;
 }
@@ -93,7 +89,6 @@
 .Res_screen .menu4_sub {
     margin-top: 20px;
     padding-left: 20px;
-
 }
 
 .Res_screen .menu2_left {
@@ -107,7 +102,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: auto;
+    width: 100%;
     background-color: black;
     color: white;
     font-weight: 600;
@@ -194,6 +189,7 @@
     width: 450px;
     height: 250px;
     margin-left: 15px;
+    background-color: white;
 }
 
 .Res_screen .menu2_left .subRegions.active {
