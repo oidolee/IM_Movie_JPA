@@ -79,7 +79,7 @@ const MainBody = () => {
           <span>이벤트</span>
           <ul style={{ height: '24px', overflowY: 'hidden' }}>
             {eventArr.map((item, index) => (
-                <li key={index} style={{ transition: 'transform 0.5s', transform: `translateY(${currentIndex * -24}px)` }}>
+                <li key={index} style={{ transition: 'transform 0.5s', transform: `translateY(${currentIndex * -20}px)` }}>
                     <a href="#">
                         {item}
                     </a>
@@ -125,7 +125,7 @@ const MainBody = () => {
           <span>공지사항</span>
           <ul style={{ height: '24px', overflowY: 'hidden' }}>
             {newsArr.map((item, index) => (
-                <li key={index} style={{ transition: 'transform 0.5s', transform: `translateY(${currentIndex * -24}px)` }}>
+                <li key={index} style={{ transition: 'transform 0.5s', transform: `translateY(${currentIndex * -20}px)` }}>
                     <a href="#">
                         {item}
                     </a>
