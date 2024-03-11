@@ -34,20 +34,22 @@
     padding: 0;
     height: 100%;
     width: 100%;
-    background-color: white;
 }
 
+.Res_screen .Res_menu1,
 .Res_screen .Res_menu2,
+.Res_screen .Res_menu3,
 .Res_screen .Res_menu4 {
     height: auto;
     width: 100%;
+    background-color: white;
 }
 
-.Res_screen .Res_menu2 {
-    width: 500px;
+.Res_screen .Res_menu1 {
+    width: 100px;
 }
 
-.Res_screen>div:not(.Res_menu2) {
+.Res_screen>div:not(.Res_menu1) {
     /* Res_menu1을 제외하고 넓이 자동 맞춤 */
     flex-grow: 1;
 }
@@ -64,7 +66,66 @@
     flex-grow: 1;
 }
 
-.Res_screen .menu2 {
+.Res_screen .Res_menu1 li {
+    border: 1px solid #666;
+    border-bottom: none;
+}
+
+.Res_screen .step {
+    padding: 100px 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.Res_screen .step_content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    z-index: 1;
+    left: 100%;
+    top: 0;
+    padding-left: 20px;
+}
+
+.Res_screen .step_content dt {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    border: none;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.Res_screen .step:hover .step_content {
+    background-color: #FF243E;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.Res_screen .step:hover {
+    background-color: #FF243E;
+    cursor: pointer;
+}
+
+.Res_screen #step1 {
+    background-color: #FF243E;
+}
+
+.Res_screen #step1 a,
+.Res_screen .step:hover a {
+    color: white;
+}
+
+.Res_screen .menu2,
+.Res_screen .menu3,
+.Res_screen .menu4 {
     display: flex;
     flex-direction: row;
     height: 100%;
@@ -72,32 +133,24 @@
 }
 
 .Res_screen .menu2 ul,
+.Res_screen .menu3 ul,
 .Res_screen .menu4 ul {
     list-style: none;
-    width: 100%;
     font-size: 15px;
     text-align: left;
 }
 
-.Res_screen .menu4 {
-    width: 100%;
-    background-color: white;
-}
-
-.Res_screen .menu4 ul {
-    width: 300px;
-}
-
 .Res_screen .menu2 ul li,
+.Res_screen .menu3 ul li,
 .Res_screen .menu4_main,
 .Res_screen .menu4_sub {
     margin-top: 20px;
     padding-left: 20px;
-
 }
 
 .Res_screen .menu2_left {
     background-color: #F5F5F5;
+    width: 300px;
 }
 
 .Res_screen .Res_tit {
@@ -107,7 +160,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: auto;
+    width: 100%;
     background-color: black;
     color: white;
     font-weight: 600;
@@ -121,6 +174,7 @@
     font-weight: 500;
 }
 
+.Res_screen .menu3_left a,
 .Res_screen .menu4_left a {
     font-weight: 600;
     color: black;
@@ -194,6 +248,7 @@
     width: 450px;
     height: 250px;
     margin-left: 15px;
+    background-color: white;
 }
 
 .Res_screen .menu2_left .subRegions.active {
