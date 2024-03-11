@@ -1,0 +1,53 @@
+.detail_info {
+  display: flex;
+  align-items: center; /* 세로 중앙 정렬 */
+}
+
+.detail_img_box{
+  width: 20%; /* 적절한 너비 설정 */
+  height: 350px; /* 적절한 높이 설정 */
+  padding: 20px; /* 적절한 안쪽 여백 설정 */
+  border-radius: 10px;
+  margin-left:100px;
+}
+
+.detail_img_box img {
+  width: 250px; /* 이미지 너비 조정 */
+}
+
+.detail_text {
+  margin-left: 20px; /* 이미지와 텍스트 간격 조정 */
+}
+
+.detail_title {
+  font-weight: bold; /* 제목 굵게 */
+  margin-top: 50px;
+  margin-right:50%;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.detail_con{
+  margin-left:165px;
+  margin-top: 10px;
+  text-align: left;
+  line-height: 30px;
+  font-weight: bold;
+  font-size:17px;
+}
+
+.detail_con1 label {
+  margin-left: 6px; /* 조절할 간격 크기 */
+}
+
+.btn_wrap1 {
+  margin-top: 10px; /* 버튼 그룹 위쪽 여백 추가 */
+  margin-top: 30px;
+  margin-right: 360px;
+}
+
+.place_btn {
+  margin-right: 5px; /* 버튼들 간격 조정 */
+  border:none;
+}
+

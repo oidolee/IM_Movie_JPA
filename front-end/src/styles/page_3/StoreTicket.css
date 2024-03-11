@@ -20,6 +20,7 @@
 .layer_header_StoreTicket{
     border-radius: 30px 30px 30px 30px;
     height: 550px; 
+    background-color: white;
 }
 
 .layer_header_StoreTicket {
@@ -77,9 +78,6 @@
 
 }
 
-.layer_header_StoreTicket {
-    background-color: white;
-}
 
 .StoreTicket_posible {
     display: flex;
@@ -90,13 +88,16 @@
 .StoreTicket_area {
     color: black;
     justify-content: center;
-    
-    border-right: 1px solid #CCC;
+
     /* position: absolute; 
     bottom: 0; */
 
 }
 
+#StoreTicket_area{
+    border-right: 1px solid #CCC;
+    height: 91.5%;
+}
 
 .StoreTicket_area > ul > li > a{
     display: block;
@@ -160,10 +161,6 @@
     display: flex;
 }
 
-
-.StoreTicket_area {
-     border-right: 1px solid #CCC;
-}
 
 .selectedButton {
     background-color: gray;

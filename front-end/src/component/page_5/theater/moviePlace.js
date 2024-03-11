@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
 import style from "../../../styles/page_5/moviePlace.module.css";
 
-// Import Swiper React components
-import { Swiper, SwiperSlide, Navigation, Pagination } from 'swiper/react';
 
+// Import Swiper React components
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -20,6 +21,8 @@ import Swiper5 from '../../../assets/page_5_4/Swiper5.jpg'
 import traffic from '../../../assets/page_5_4/traffic.png'
 import carpark from '../../../assets/page_5_4/carpark.png'
 import map from '../../../assets/page_5_4/map.png'
+
+
 
 function Place() {
     const swiperRef = useRef(null);
@@ -42,8 +45,9 @@ function Place() {
         clickable: true,
         renderBullet: function (index, className) {
         return '<span class="' + className + '">' + (index + 1) + '</span>';
-        },
+        }
     };
+
 
     return (
     <>
@@ -58,6 +62,7 @@ function Place() {
             disableOnInteraction: false,
           }}
           pagination={pagination}
+          modules={[Autoplay, Pagination, Navigation]}
           navigation={true}
           className="mySwiper"
         >
@@ -100,6 +105,16 @@ function Place() {
         <button className={`place_btn ${style.place_btn}`} id="6"><img src={map} alt='지도보기'/></button>
       </div>
 
+      <ul className={`time_wrap ${style.time_wrap}`}>
+          <li className={`active ${style.active}`}>
+            <button type="button" className={`tab_tit ${style.tab_tit}`}>
+              <span>상영시간표</span>
+            </button>
+
+          </li>
+      </ul>
+
+       
 
 
         
