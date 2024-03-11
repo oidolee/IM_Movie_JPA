@@ -81,7 +81,7 @@ const Square = ({ row, column, count }) => {
       onClick={handleChange}
       style={{ position:"relative", backgroundColor }}
     >
-      <span className="checked-square" style={{position:"absolute", left:"12px", top:"2px", color:"#000"}}>
+      <span className="checked-square" style={{position:"absolute", left:"10px", right:"12px", top:"2px", color:"#000", fontWeight: "500"}}>
         {count}
       </span>
       {/* {checked && <span className="checked-square">11 </span>} */}
