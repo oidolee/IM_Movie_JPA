@@ -28,6 +28,6 @@ public interface ConsultService {
 			throws ServletException, IOException;
 	
 	// 1:1문의 답변 1건 찾기
-		public CustomerDTO selectConsultAnswer(ConsultDTO csdto)
-				throws ServletException, IOException;
+	public CustomerDTO selectConsultAnswer(ConsultDTO csdto)
+			throws ServletException, IOException;
 }

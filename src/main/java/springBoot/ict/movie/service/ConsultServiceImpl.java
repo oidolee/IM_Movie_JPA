@@ -8,72 +8,58 @@ import javax.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import springBoot.ict.movie.dao.ConsultRepository;
 import springBoot.ict.movie.dao.CustomerRepository;
+import springBoot.ict.movie.dto.ConsultAnswerDTO;
+import springBoot.ict.movie.dto.ConsultDTO;
 import springBoot.ict.movie.dto.CustomerDTO;
 
 @Service
-public class ConsultServiceImpl implements CustomerService {
+public class ConsultServiceImpl implements ConsultService {
 	
 	@Autowired
-	private CustomerRepository dao;
-	
-	
-	// 고객 목록ㄴ
+	private ConsultRepository csdao;
+
+	// 1:1문의 목록
 	@Override
-	public List<CustomerDTO> listcustomer() 
+	public List<ConsultDTO> ConsultList() 
 			throws ServletException, IOException {
-		System.out.println("CustomerServiceImpl - listAll");
-		
-		return dao.findAll();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	// 회원 가입
+	// 1:1문의 등록
 	@Override
-	public void insertCustomer(CustomerDTO dto) 
+	public void insertConsult(ConsultDTO csdto) 
 			throws ServletException, IOException {
-		System.out.println("CustomerServiceImpl - insertCustomer");
+		// TODO Auto-generated method stub
 		
-		System.out.println(dto);
-		
-		dao.save(dto);
 	}
 
-	// 로그인
+	// 1:1문의 등록 1건 찾기
 	@Override
-	public CustomerDTO loginCustomer(CustomerDTO dto) 
+	public CustomerDTO selectConsult(ConsultDTO csdto) 
 			throws ServletException, IOException {
-		System.out.println("CustomerServiceImpl - loginCustomer");
-		System.out.println(" login dto " + dto.toString());
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// 1:1문의 답변 등록
+	@Override
+	public void insertConsultAnswer(ConsultAnswerDTO csadto) 
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		
-		String email = dto.getIC_email();
-		String password = dto.getIC_password();
-		
-		
-		
-		return dao.loginService(email, password);
+	}
+
+	// 1:1문의 답변 1건 찾기
+	@Override
+	public CustomerDTO selectConsultAnswer(ConsultDTO csdto) 
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
-	// 아이디 찾기 
-    @Override
-    public String findID(String name, String hp) throws ServletException, IOException {
-        System.out.println("CustomerServiceImpl - findID");
-        
-        String foundEmail = dao.findIdByNameAndHp(name, hp);
-        System.out.println("name : " + name + " hp : " + hp);
-        System.out.println("foundEmail :" + foundEmail);
-        
-        return foundEmail;
-    }
-
-    // 비밀번호 찾기
-	@Override
-	public String findPWD(String email, String hp) throws ServletException, IOException {
-		System.out.println("CustomerServiceImpl - findPWD");
-        
-        String findPWD = dao.findIdByEmailAndHp(email, hp);
-        System.out.println("email : " + email + " hp : " + hp);
-        System.out.println("foundEmail :" + findPWD);
-        
-        return findPWD;
-	}
+	
+	
 }

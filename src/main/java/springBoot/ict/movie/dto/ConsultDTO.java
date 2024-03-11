@@ -13,28 +13,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Entity
-@Table(name="IM_Customer")
+@Table(name="IM_BOARD")
 @Data
 public class ConsultDTO {
     
     
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
-    private int IC_No;
-    @JsonProperty("email")
-    private String IC_email;
-    @JsonProperty("name")
-    private String IC_name;
-    @JsonProperty("password")
-    private String IC_password;
-    @JsonProperty("hp")
-    private String IC_hp;
-    @JsonProperty("birthday")
-    private Date IC_birthday;
-    @JsonProperty("address")
-    private String IC_address;
-    @JsonProperty("regdate")
-    private Date IC_regdate;
-    @JsonProperty("show")
-    private String IC_show;
+    private int one_id;
+    @JsonProperty("c_email")
+    private String c_email;
+    @JsonProperty("cus_name")
+    private String cus_name;
+    @JsonProperty("ib_type")
+    private String ib_type;
+    @JsonProperty("ib_type_detail")
+    private String ib_type_detail;
+    @JsonProperty("ib_title")
+    private String ib_title;
+    @JsonProperty("ib_content")
+    private String ib_content;
+    @JsonProperty("ib_date")
+    private Date ib_date;
+    @JsonProperty("ib_show")
+    private String ib_show;
 }

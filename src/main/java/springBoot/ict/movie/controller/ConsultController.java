@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import springBoot.ict.movie.dto.ConsultDTO;
 import springBoot.ict.movie.dto.CustomerDTO;
+import springBoot.ict.movie.service.ConsultServiceImpl;
 import springBoot.ict.movie.service.CustomerServiceImpl;
 
 @CrossOrigin(origins="**", maxAge=3600)
@@ -36,9 +37,9 @@ public class ConsultController {
     @PostMapping("/save")
     public Map<String, Object> consultInsert(@RequestBody ConsultDTO dto)
             throws ServletException, IOException {
-        logger.info("<<< url - insertstart >>>");
+        logger.info("<<< url - consultInsert >>>");
         
-        System.out.println("<<< url - insertstart >>>");
+        System.out.println("<<< url - consultInsert >>>");
       
         System.out.println(dto);
         
