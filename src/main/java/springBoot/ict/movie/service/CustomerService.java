@@ -17,12 +17,15 @@ public interface CustomerService {
 	public void insertCustomer(CustomerDTO dto)
 			throws ServletException, IOException;
 
-//	// 로그인
-//	public int loginCustomer(CustomerDTO dto)
-//			throws ServletException, IOException;
-//	
-//	// 아이디 찾기
-//	public String findID(String name, String hp)
-//			throws ServletException, IOException; 
-//	
+	// 로그인
+	public CustomerDTO loginCustomer(CustomerDTO dto)
+			throws ServletException, IOException;
+	
+	// 아이디 찾기
+	public String findID(String name, String hp)
+			throws ServletException, IOException; 
+	
+	// 비밀번호 찾기
+		public String findPWD(String email, String hp)
+				throws ServletException, IOException;
 }
