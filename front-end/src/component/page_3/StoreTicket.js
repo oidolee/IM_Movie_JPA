@@ -40,7 +40,7 @@ class StoreGift extends Component {
           </button>
 
           <div className={`StoreTicket_posible ${style.StoreTicket_posible}`}>
-            <div className={`StoreTicket_area ${style.StoreTicket_area}`}>
+            <div id="StoreTicket_area" className={`StoreTicket_area ${style.StoreTicket_area}`}>
               <ul>
                 <li>
                   <a href="#none" onClick={() => this.handleSelect(1)} className={selectedValue === 1 ? style.selectedButton : ''}>

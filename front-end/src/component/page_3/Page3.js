@@ -1,11 +1,11 @@
 
 import React, {Component} from 'react';
 import storeBanner from '../../assets/page_3/storeBanner.jpg'
-import package1 from '../../assets/page_3/package1.jpg'
-import package2 from '../../assets/page_3/package2.jpg'
-import package3 from '../../assets/page_3/package3.jpg'
-import ticket1 from '../../assets/page_3/ticket1.jpg'
-import ticket2 from '../../assets/page_3/ticket2.jpg'
+import package1 from '../../assets/page_3/IM_package1.png'
+import package2 from '../../assets/page_3/IM_package2.png'
+import package3 from '../../assets/page_3/IM_package3.png'
+import ticket1 from '../../assets/page_3/IM_ticket1.png'
+import ticket2 from '../../assets/page_3/IM_ticket2.png'
 import foods1 from '../../assets/page_3/foods1.jpg'
 import foods2 from '../../assets/page_3/foods2.jpg'
 import foods3 from '../../assets/page_3/foods3.jpg'
@@ -136,7 +136,7 @@ class Page3 extends Component{
                         <div className={`page3_flex ${style.page3_flex}`}>
                             <a href="/StoreDetail?num=6" className={`store_item ${style.store_item}`}>
                                 <div className={`store_img ${style.store_img}`}>
-                                    <img src={foods1}></img>
+                                    <img src="https://cf.lottecinema.co.kr//Media/WebAdmin/113c4f562c6e4c9d94e973b590f594ab.jpg"></img>
                                 </div>
                                 <div className={`item_content ${style.item_content}`}>
                                     <div className={`item_title ${style.item_title}`}>
