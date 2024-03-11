@@ -45,6 +45,14 @@
     background-color: white;
 }
 
+.Res_Movie .Res_menu1 ul,
+.Res_Movie .Res_menu2 ul,
+.Res_Movie .Res_menu3 ul,
+.Res_Movie .Res_menu4 ul {
+    height: 100%;
+    width: 100%;
+}
+
 .Res_Movie .Res_menu1 {
     width: 100px;
 }

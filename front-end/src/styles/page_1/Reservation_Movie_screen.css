@@ -43,6 +43,12 @@
     background-color: white;
 }
 
+.Res_screen .Res_menu2 ul,
+.Res_screen .Res_menu4 ul {
+    height: 100%;
+    width: 100%;
+}
+
 .Res_screen .Res_menu2 {
     width: 400px;
 }
