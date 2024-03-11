@@ -67,7 +67,7 @@ class ApiService {
     findPWD(inputData) {
         console.log("findPWD 호출")
         console.log(inputData)
-        return axios.post("http://localhost:8081/index/findPWD", inputData);
+        return axios.post("http://localhost:8081/index/searchPWD", inputData);
     } 
 
 }
