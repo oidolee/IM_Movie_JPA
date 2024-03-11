@@ -39,3 +39,45 @@ body {
   object-fit: cover;
 }
 
+.now_movie_tit{
+  padding-right:920px;
+  margin-top: 50px;
+  font-size:20px;
+  font-weight: bold;
+}
+
+.now_movie_list{
+  margin-top:10px;
+}
+
+.mv_lastIMG1{
+  margin-top:30px;
+}
+
+.card_hover_content {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(50%);
+}
+
+.primary_button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.secondary_button {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
