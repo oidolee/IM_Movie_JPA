@@ -253,6 +253,7 @@
     width: 450px;
     height: 250px;
     margin-left: 15px;
+    background-color: white;
 }
 
 .Res_Movie .menu2_left .subRegions.active {
