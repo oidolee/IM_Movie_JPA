@@ -64,18 +64,47 @@ class Event_Home extends Component{
                     <h5>우리동네영화관</h5>
                     <ul>
                         <li>
-                            <a href="#" className={}>
+                            <a className={`bn_tit active ${style.bn_tit}`}>
                                 <span class="txt_zone ty1">수유</span>
                                 <strong>[수유] 조조시간 확대 시행 (~12시까지)</strong>
                                 <span class="bn_tit_date">2024.02.21 ~ 2024.12.31</span>
                             </a>
-                            <div class="bn_cont" style={{display: "block"}}>
+                            <div class="bn_cont" style={{display: "none"}}>
                                 내용1
                             </div>             
                         </li>
+
+                        <li>
+                            <a className={`bn_tit ${style.bn_tit}`}>
+                                <span class="txt_zone ty5">수유</span>
+                                <strong>[수유] 조조시간 확대 시행 (~12시까지)</strong>
+                                <span class="bn_tit_date">2024.02.21 ~ 2024.12.31</span>
+                            </a>
+                            <div class="bn_cont" style={{display: "none"}}>
+                                내용2
+                            </div>             
+                        </li>
                         
+                        <li>
+                            <a className={`bn_tit ${style.bn_tit}`}>
+                                <span class="txt_zone ty2">수유</span>
+                                <strong>[수유3] 조조시간 확대 시행 (~12시까지)</strong>
+                                <span class="bn_tit_date">2024.02.21 ~ 2024.12.31</span>
+                            </a>
+                            <div class="bn_cont" style={{display: "none"}}>
+                                내용3
+                            </div>             
+                        </li>
                     </ul>
                </div>
+
+               <div className={`event_section3 event_add1 ${style.event_add1}`}>
+                    <img src="https://cf2.lottecinema.co.kr/lotte_image/2024/BobMarley_OneLove/0311/BobMarley_OneLove_980180_2.jpg" alt='add1' />
+               </div>
+               <div className={`event_section3 event_add2 ${style.event_add2}`}>
+                   <img src="https://cf2.lottecinema.co.kr/lotte_image/2022/Hyundaicard/Hyundaicard_980240.jpg" alt="hyundai"/>
+               </div>
+
             </div>
         );
     }
