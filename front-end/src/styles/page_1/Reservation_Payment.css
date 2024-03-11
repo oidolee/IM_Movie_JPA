@@ -34,7 +34,6 @@
     padding: 0;
     height: 100%;
     width: 100%;
-    background-color: white;
 }
 
 .Res_Payment .Res_menu1,
@@ -43,6 +42,7 @@
 .Res_Payment .Res_menu4 {
     height: auto;
     width: 100%;
+    background-color: white;
 }
 
 .Res_Payment .Res_menu1 {
@@ -185,7 +185,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: auto;
+    width: 100%;
     background-color: black;
     color: white;
     font-weight: 600;

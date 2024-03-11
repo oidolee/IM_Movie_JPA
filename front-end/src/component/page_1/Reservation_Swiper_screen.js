@@ -13,7 +13,7 @@ export default function Reservation_Swiper() {
 
   const sysdate = moment().format("YYYY-MM-DD");
 
-  // 날짜 목록 생성(5일)
+  // 날짜 목록 생성(10일)
   const getDates = (start) => {
     const dates = [];
     for (let i = 0; i < 10; i++) {
@@ -35,14 +35,14 @@ export default function Reservation_Swiper() {
   }
 
   return (
-    <div className={`Reservation_Swiper2 ${style.Reservation_Swiper2}`}>
+    <div className={`Reservation_Swiper_screen ${style.Reservation_Swiper_screen}`}>
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper"> 
         {[0, 1, 2, 3, 4].map((slideIndex) => (
           <SwiperSlide key={slideIndex}>
             <div>
               <ul className="swiper_content">
                 {getDates(getSlideStartDate(slideIndex)).map((date, index) => (
-                  <li key={index} style={{color: moment(date).day() === 0 ? 'red' : 'black'}}>
+                  <li key={index}>
                     <a href="">{moment(date).format("D")}<br />{moment(date).format("dd")}</a>
                   </li>
                 ))}
@@ -55,7 +55,7 @@ export default function Reservation_Swiper() {
           <div>
             <ul className="swiper_content">
               {getDates(getNextMonthStartDate()).map((date, index) => (
-                <li key={index} style={{color: moment(date).day() === 0 ? 'red' : 'black'}}>
+                <li key={index}>
                   <a href="">{moment(date).format("D")}<br />{moment(date).format("dd")}</a>
                 </li>
               ))}

@@ -71,7 +71,7 @@ function Header() {
                                 <ul>
                                     <li><a href="/page_1/Reservation_Movie">예매하기</a></li>
                                     <li><a href="/page_1/Reservation_Movie_screen">상영시간표</a></li>
-                                    <li><a href="#">할인</a></li>
+                                    <li><a href="/page_1/Discount">할인안내</a></li>
                                 </ul>
                             </div>
                         )}
