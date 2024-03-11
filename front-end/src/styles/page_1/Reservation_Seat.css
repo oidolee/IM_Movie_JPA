@@ -253,6 +253,7 @@
 .Res_seat .MovieSeats {
   margin-top: 150px;
   color: white;
+
 }
 
 .seat_alphabet {
@@ -360,6 +361,12 @@
   color: white;
   font-size: 14px;
 }
-.checked-square{
-  
+
+.Res_seat .checked_square {
+  position: absolute;
+  left: 10px;
+  right: 12px;
+  top: 2px;
+  color: #000;
+  font-weight: 500;
 }
