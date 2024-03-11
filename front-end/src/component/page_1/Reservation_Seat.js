@@ -74,17 +74,17 @@ const Square = ({ row, column, count }) => {
 
   const squareClass = checked ? "square checked" : "square";
   const backgroundColor = column === 2 || column === 11 ? "#000" : "";
+  const cursor = column === 2 || column === 11 ? "auto" : "pointer";
 
   return (
     <div
       className={squareClass}
       onClick={handleChange}
-      style={{ position:"relative", backgroundColor }}
+      style={{ position:"relative", backgroundColor, cursor }}
     >
-      <span className="checked-square" style={{position:"absolute", left:"10px", right:"12px", top:"2px", color:"#000", fontWeight: "500"}}>
+      <span className="checked_square">
         {count}
       </span>
-      {/* {checked && <span className="checked-square">11 </span>} */}
     </div>
   );
 };
