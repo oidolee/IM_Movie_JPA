@@ -1,20 +1,20 @@
 -- 예진 시작 (page_1)
     DROP TABLE mvc_Reservation_tbl CASCADE CONSTRAINTS;
     CREATE TABLE mvc_Reservation_tbl(
-        Res_id           NUMBER          PRIMARY KEY,
+        res_id           NUMBER          PRIMARY KEY,
         c_email          VARCHAR2(50)    NOT NULL,
-        THEATER_ID       VARCHAR2(50)    NOT NULL,
-        SCREEN_ID        VARCHAR2(50)    NOT NULL,
-        MOV_AGE          VARCHAR2(255)   NOT NULL,
-        Res_movieDate    Date            DEFAULT sysdate,
-        Res_movieID      VARCHAR2(50)    NOT NULL,
-        Res_movieName    VARCHAR2(100)   NOT NULL,
-        Res_movieTime    VARCHAR2(100)   NOT NULL,
-        Res_seat         VARCHAR2(50)    NOT NULL,
-        Res_count        NUMBER          NOT NULL,
-        Res_ticketPrice  NUMBER          NOT NULL,
-        Res_sysdate      DATE            DEFAULT sysdate,
-        Res_check        CHAR(1)         DEFAULT 'n'
+        theater_id       VARCHAR2(50)    NOT NULL,
+        screen_id       VARCHAR2(50)    NOT NULL,
+        movie_age          VARCHAR2(255)   NOT NULL,
+        res_movieDate    Date            DEFAULT sysdate,
+        res_movieID      VARCHAR2(50)    NOT NULL,
+        res_movieName    VARCHAR2(100)   NOT NULL,
+        res_movieTime    VARCHAR2(100)   NOT NULL,
+        res_seat         VARCHAR2(50)    NOT NULL,
+        res_count        NUMBER          NOT NULL,
+        res_ticketPrice  NUMBER          NOT NULL,
+        res_sysdate      DATE            DEFAULT sysdate,
+        res_check        CHAR(1)         DEFAULT 'n'
     );
 
     select * from mvc_Reservation_tbl;
@@ -33,17 +33,17 @@
 
     DROP TABLE mvc_PayMent_tbl CASCADE CONSTRAINTS;
     CREATE TABLE mvc_PayMent_tbl(
-        Pay_id           NUMBER          PRIMARY KEY,
-        Res_id           NUMBER          NOT NULL,
+        pay_id           NUMBER          PRIMARY KEY,
+        res_id           NUMBER          NOT NULL,
         c_email          VARCHAR2(50)    NOT NULL,
         c_grade          VARCHAR2(50)    NOT NULL,
-        Pay_method       VARCHAR2(50)    NOT NULL,
-        Pay_payCompany   VARCHAR2(50)    NOT NULL,
-        Res_movieName    VARCHAR2(100)   NOT NULL,
-        Pay_cardNum      VARCHAR2(100)   NOT NULL,
-        Pay_tel          VARCHAR2(50)    NOT NULL,
-        Pay_sysdate      DATE            DEFAULT sysdate,
-        Pay_check        CHAR(1)         DEFAULT 'n'
+        pay_method       VARCHAR2(50)    NOT NULL,
+        pay_payCompany   VARCHAR2(50)    NOT NULL,
+        res_movieName    VARCHAR2(100)   NOT NULL,
+        pay_cardNum      VARCHAR2(100)   NOT NULL,
+        pay_tel          VARCHAR2(50)    NOT NULL,
+        pay_sysdate      DATE            DEFAULT sysdate,
+        pay_check        CHAR(1)         DEFAULT 'n'
     );
 
     select * from mvc_PayMent_tbl;
@@ -62,13 +62,13 @@
 
     DROP TABLE mvc_Seat_tbl CASCADE CONSTRAINTS;
     CREATE TABLE mvc_Seat_tbl(
-        St_id            NUMBER          PRIMARY KEY,
-        THEATER_ID       VARCHAR2(50)    NOT NULL,
-        SCREEN_ID        VARCHAR2(50)    NOT NULL,
-        St_seatGroup     VARCHAR2(50)    NOT NULL,
-        St_num           VARCHAR2(50)    NOT NULL,
-        St_lineNum       VARCHAR2(50)    NOT NULL,
-        St_check         CHAR(1)         DEFAULT 'n'
+        st_id            NUMBER          PRIMARY KEY,
+        theater_id       VARCHAR2(50)    NOT NULL,
+        screen_id        VARCHAR2(50)    NOT NULL,
+        st_seatGroup     VARCHAR2(50)    NOT NULL,
+        st_num           VARCHAR2(50)    NOT NULL,
+        st_lineNum       VARCHAR2(50)    NOT NULL,
+        st_check         CHAR(1)         DEFAULT 'n'
     );
 
     select * from mvc_Seat_tbl;
@@ -87,12 +87,12 @@
 
     DROP TABLE mvc_Discount_tbl CASCADE CONSTRAINTS;
     CREATE TABLE mvc_Discount_tbl(
-        Dc_num            NUMBER          PRIMARY KEY,
-        Dc_mainTitle      VARCHAR2(50)    NOT NULL,
-        Dc_subTitle       VARCHAR2(50),
-        Dc_mainImg        VARCHAR2(255)   NOT NULL,
-        Dc_subImg         VARCHAR2(255)   NOT NULL,
-        Dc_show           CHAR(1)         DEFAULT 'n'
+        dc_num            NUMBER          PRIMARY KEY,
+        dc_mainTitle      VARCHAR2(50)    NOT NULL,
+        dc_subTitle       VARCHAR2(50),
+        dc_mainImg        VARCHAR2(255)   NOT NULL,
+        dc_subImg         VARCHAR2(255)   NOT NULL,
+        dc_show           CHAR(1)         DEFAULT 'n'
     );
 
     select * from mvc_Discount_tbl;
