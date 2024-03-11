@@ -48,7 +48,7 @@ function Header() {
                         <li><a href='/FAQ'>고객센터</a></li>
                         <li><a href='/groupform'>단체관람/대관문의</a></li>
                         <li><a href='/login'>로그인</a></li>
-                        <li><a href='/myPage'>마이페이지</a></li>
+                        <li><a href='/MyPage_res'>마이페이지</a></li>
                         <li><a href='/parking'>주차등록</a></li>
                     </ul>
                     <ul className='header-member-box'>
@@ -109,7 +109,7 @@ function Header() {
                         {isSubMenuVisible && currentMenuValue === 4 && (
                             <div>
                                 <ul>
-                                    <li><a href="#">홈</a></li>
+                                    <li><a href="/event_Home">홈</a></li>
                                     <li><a href="#">영화</a></li>
                                     <li><a href="#">시사회/무대인사</a></li>
                                     <li><a href="#">HOT</a></li>
