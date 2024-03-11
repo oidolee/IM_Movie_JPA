@@ -631,7 +631,8 @@ WHERE ic_num = 3;
 -- 포인트 테이블
 DROP TABLE IM_POINT CASCADE CONSTRAINTS;
 CREATE TABLE IM_POINT(
-C_EMAIL         VARCHAR2(50)    PRIMARY KEY,
+C_EMAIL         VARCHAR2(50)    PRIMARY KEY, -- FK
+c_grade			VARCHAR2(50)	NOT NULL,
 ip_usePoint     NUMBER          NOT NULL,
 ip_havePoint    NUMBER          NOT NULL
 );
