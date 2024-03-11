@@ -1,3 +1,9 @@
+.detail_movie_wrap{
+  width: 950px;
+  margin: 0 auto; 
+  text-align: center; 
+}
+
 .detail_info {
   display: flex;
   align-items: center; /* 세로 중앙 정렬 */
@@ -5,18 +11,19 @@
 
 .detail_img_box{
   width: 20%; /* 적절한 너비 설정 */
-  height: 350px; /* 적절한 높이 설정 */
+  height: 400px; /* 적절한 높이 설정 */
   padding: 20px; /* 적절한 안쪽 여백 설정 */
   border-radius: 10px;
   margin-left:100px;
+  margin-bottom:90px;
 }
 
 .detail_img_box img {
   width: 250px; /* 이미지 너비 조정 */
 }
 
-.detail_text {
-  margin-left: 20px; /* 이미지와 텍스트 간격 조정 */
+.detail_text{
+  margin-bottom: 70px;
 }
 
 .detail_title {
@@ -28,7 +35,7 @@
 }
 
 .detail_con{
-  margin-left:165px;
+  margin-left:115px;
   margin-top: 10px;
   text-align: left;
   line-height: 30px;
@@ -37,17 +44,127 @@
 }
 
 .detail_con1 label {
-  margin-left: 6px; /* 조절할 간격 크기 */
+  margin-right:10px; /* 조절할 간격 크기 */
 }
 
 .btn_wrap1 {
-  margin-top: 10px; /* 버튼 그룹 위쪽 여백 추가 */
-  margin-top: 30px;
-  margin-right: 360px;
+  margin-top: 30px; /* 버튼 그룹 위쪽 여백 추가 */
+  margin-right: 60px;
 }
 
-.place_btn {
+.detail_btn1 {
+  width:27%;
+  height:40px;
   margin-right: 5px; /* 버튼들 간격 조정 */
+  border:1px solid black;
+  border-radius: 20px;
+  font-size: 17px;
+  font-weight: bold;
+  background-color: white;
+}
+
+.detail_btn2{
+  width:19%;
+  height:40px;
+  margin-left: 10px; /* 버튼들 간격 조정 */
+  border:1px solid black;
+  border-radius: 20px;
+  font-size: 17px;
+  font-weight: bold;
+  background-color: white;
+}
+
+.detail_btn3{
+  margin-left: 10px; /* 버튼들 간격 조정 */
   border:none;
 }
 
+ /*이용약관 내용  */
+ .detail_box {
+  margin-left: 110px;
+  margin-bottom: 300px;
+  margin-top:30px;
+  width:90%;
+  height:120px;
+  padding: 10px;
+  overflow-y: auto; /* 수직 스크롤바를 표시하도록 설정합니다 */
+  max-height: 200px; /* 스크롤바가 나타날 최대 높이를 지정합니다 */
+}
+
+.detail_con2{
+	font-size: 14px;
+  font-weight:bold;
+	color:black;
+  text-align: left;
+  
+}
+
+.btn_wrap2{
+  margin-bottom: 20px; /* 상세내용 박스 위쪽 여백 설정 */
+  margin-top: -250px; /* 예매하기 버튼을 상세내용 박스 위로 이동 */
+  
+}
+
+.detail_btn4{
+  width:45%;
+  height:55px;
+  border-radius: 30px;
+  border:none;
+  font-size:23px;
+  color:white;
+  background-color: red;
+  margin-right: 130px;
+}
+
+.detail_down{
+  margin-bottom:100px;
+}
+
+.detail_down2{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.con_1{
+  margin-right: 400px;
+  border:none;
+  background-color:white;
+  font-weight: bold;
+}
+
+.con_2{
+  border:none;
+  background-color:white;
+  font-weight: bold;
+}
+
+.detail_box1{
+  position: relative;
+  width: 100%; /* 적절한 너비 설정 */
+  height: 200px; /* 적절한 높이 설정 */
+  background-color: #d3d3d321; /* 적절한 배경색 설정 */
+  padding: 20px; /* 적절한 안쪽 여백 설정 */
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.detail_down3{
+  text-align: left;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.detail_trailer1{
+  margin-top:30px;
+  border-radius: 20px;
+  border:none;
+}
+
+.detail_trailer2{
+  margin-right: 370px;
+  margin-left: 20px;
+  border-radius: 20px;
+  border:none;
+}
