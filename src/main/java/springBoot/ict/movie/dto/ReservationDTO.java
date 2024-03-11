@@ -5,9 +5,9 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-@Entity
-@Table(name="IM_Reservation")
-@Data
+//@Entity
+//@Table(name="IM_Reservation")
+//@Data
 public class ReservationDTO {
 
 	

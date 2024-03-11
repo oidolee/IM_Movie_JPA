@@ -51,7 +51,7 @@ class ApiService {
 
     // 로그인 
     login(inputData) {
-        console.log("login start:")
+        console.log("login start 로그인:")
         console.log(inputData)
         return axios.post("http://localhost:8081/index/login", inputData);
     }

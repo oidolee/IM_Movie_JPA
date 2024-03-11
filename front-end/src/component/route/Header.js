@@ -44,12 +44,12 @@ function Header() {
 
                 <div className='right-gnb'>
                     <ul>
-                        <li><a href='/customerlist'>멤버쉽</a></li>
-                        <li><a href='/FAQ'>고객센터</a></li>
-                        <li><a href='/groupform'>단체관람/대관문의</a></li>
                         <li><a href='/login'>로그인</a></li>
                         <li><a href='/MyPage_res'>마이페이지</a></li>
+                        <li><a href='/customerlist'>멤버쉽</a></li>
+                        <li><a href='/FAQ'>고객센터</a></li>
                         <li><a href='/parking'>주차등록</a></li>
+                        <li><a href='/groupform'>단체관람/대관문의</a></li>
                     </ul>
                     <ul className='header-member-box'>
                         <li>
