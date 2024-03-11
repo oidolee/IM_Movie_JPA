@@ -1,113 +1,115 @@
 -- 예진 시작 (page_1)
-    DROP TABLE mvc_Reservation_tbl CASCADE CONSTRAINTS;
-    CREATE TABLE mvc_Reservation_tbl(
-        res_id           NUMBER          PRIMARY KEY,
-        c_email          VARCHAR2(50)    NOT NULL,
-        theater_id       VARCHAR2(50)    NOT NULL,
-        screen_id       VARCHAR2(50)    NOT NULL,
-        movie_age          VARCHAR2(255)   NOT NULL,
-        res_movie_date    Date            DEFAULT sysdate,
-        res_movie_id      VARCHAR2(50)    NOT NULL,
-        res_movie_name    VARCHAR2(100)   NOT NULL,
-        res_movie_time    VARCHAR2(100)   NOT NULL,
-        res_seat         VARCHAR2(50)    NOT NULL,
-        res_count        NUMBER          NOT NULL,
-        res_ticket_price  NUMBER          NOT NULL,
-        res_sysdate      DATE            DEFAULT sysdate,
-        res_check        CHAR(1)         DEFAULT 'n'
-    );
+DROP TABLE IM_Reservation;
+CREATE TABLE IM_Reservation (
+    res_id INT AUTO_INCREMENT PRIMARY KEY,
+    c_email VARCHAR(50) NOT NULL,
+    theater_id VARCHAR(50) NOT NULL,
+    screen_id VARCHAR(50) NOT NULL,
+    movie_age VARCHAR(255) NOT NULL,
+    res_movie_date DATE DEFAULT CURRENT_TIMESTAMP,
+    res_movie_id VARCHAR(50) NOT NULL,
+    res_movie_name VARCHAR(100) NOT NULL,
+    res_movie_time VARCHAR(100) NOT NULL,
+    res_seat VARCHAR(50) NOT NULL,
+    res_count INT NOT NULL,
+    res_ticket_price DECIMAL(10, 2) NOT NULL,
+    res_sysdate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    res_check CHAR(1) DEFAULT 'n'
+);
 
-    select * from mvc_Reservation_tbl;
+SELECT * FROM IM_Reservation;
 
-    insert into mvc_Reservation_tbl(Res_id, c_email, THEATER_ID, SCREEN_ID, MOV_AGE, Res_movieDate, Res_movieID, Res_movieName, Res_movieTime, Res_seat, Res_count, Res_ticketPrice, Res_sysdate, Res_check)
-    values ((SELECT NVL(MAX(Res_id)+1, 1) FROM mvc_Reservation_tbl), 'aa', 'aa', 'aa', 'aa', sysdate, 'aa', 'aa', 'aa', 'aa', 5, 5, sysdate, 'n');
+INSERT INTO IM_Reservation (c_email, theater_id, screen_id, movie_age, res_movie_id, res_movie_name, res_movie_time, res_seat, res_count, res_ticket_price)
+VALUES ('aa', 'aa', 'aa', 'aa', 'aa', 'aa', 'aa', 'aa', 5, 5);
 
-    update mvc_Reservation_tbl
-    set Res_check='y'
-    where Res_id=1;
 
-    delete from mvc_Reservation_tbl
-    where Res_id=1;
+UPDATE IM_Reservation
+SET res_check='y'
+WHERE res_id=1;
 
-    commit;
+DELETE FROM IM_Reservation
+WHERE res_id=1;
 
-    DROP TABLE mvc_PayMent_tbl CASCADE CONSTRAINTS;
-    CREATE TABLE mvc_PayMent_tbl(
-        pay_id           NUMBER          PRIMARY KEY,
-        res_id           NUMBER          NOT NULL,
-        c_email          VARCHAR2(50)    NOT NULL,
-        c_grade          VARCHAR2(50)    NOT NULL,
-        pay_method       VARCHAR2(50)    NOT NULL,
-        pay_pay_company   VARCHAR2(50)    NOT NULL,
-        res_movie_name    VARCHAR2(100)   NOT NULL,
-        pay_card_num      VARCHAR2(100)   NOT NULL,
-        pay_tel          VARCHAR2(50)    NOT NULL,
-        pay_sysdate      DATE            DEFAULT sysdate,
-        pay_check        CHAR(1)         DEFAULT 'n'
-    );
+commit;
 
-    select * from mvc_PayMent_tbl;
+DROP TABLE IM_PayMent;
+CREATE TABLE IM_PayMent (
+    pay_id INT AUTO_INCREMENT PRIMARY KEY,
+    res_id INT NOT NULL,
+    c_email VARCHAR(50) NOT NULL,
+    c_grade VARCHAR(50) NOT NULL,
+    pay_method VARCHAR(50) NOT NULL,
+    pay_pay_company VARCHAR(50) NOT NULL,
+    res_movie_name VARCHAR(100) NOT NULL,
+    pay_card_num VARCHAR(100) NOT NULL,
+    pay_tel VARCHAR(50) NOT NULL,
+    pay_sysdate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    pay_check CHAR(1) DEFAULT 'n'
+);
 
-    insert into mvc_PayMent_tbl(Pay_id, Res_id, c_email, c_grade, Pay_method, Pay_payCompany, Res_movieName, Pay_cardNum, Pay_tel, Pay_sysdate, Pay_check)
-    values ((SELECT NVL(MAX(Pay_id)+1, 1) FROM mvc_PayMent_tbl), 1, 'aa', 'aa', 'aa', 'aa', 'aa', 'aa', 'aa', sysdate, 'n');
+SELECT * FROM IM_PayMent;
 
-    update mvc_PayMent_tbl
-    set Pay_check='y'
-    where Res_id=1;
+INSERT INTO IM_PayMent(res_id, c_email, c_grade, pay_method, pay_pay_company, res_movie_name, pay_card_num, pay_tel, pay_check)
+VALUES (1, 'aa', 'aa', 'aa', 'aa', 'aa', 'aa', 'aa', 'n');
 
-    delete from mvc_PayMent_tbl
-    where Res_id=1;
 
-    commit;
+UPDATE IM_PayMent
+SET pay_check='y'
+WHERE res_id=1;
 
-    DROP TABLE mvc_Seat_tbl CASCADE CONSTRAINTS;
-    CREATE TABLE mvc_Seat_tbl(
-        st_id            NUMBER          PRIMARY KEY,
-        theater_id       VARCHAR2(50)    NOT NULL,
-        screen_id        VARCHAR2(50)    NOT NULL,
-        st_seat_group     VARCHAR2(50)    NOT NULL,
-        st_num           VARCHAR2(50)    NOT NULL,
-        st_line_num       VARCHAR2(50)    NOT NULL,
-        st_check         CHAR(1)         DEFAULT 'n'
-    );
+DELETE FROM IM_PayMent
+WHERE res_id=1;
 
-    select * from mvc_Seat_tbl;
+commit;
 
-    insert into mvc_Seat_tbl(St_id, THEATER_ID, SCREEN_ID, St_seatGroup, St_num, St_lineNum, St_check)
-    values ((SELECT NVL(MAX(St_id)+1, 1) FROM mvc_Seat_tbl), 'aa', 'aa', 'aa', 'aa', 'aa', 'n');
+DROP TABLE IM_Seat;
+CREATE TABLE IM_Seat(
+    st_id INT AUTO_INCREMENT PRIMARY KEY,
+    theater_id VARCHAR(50) NOT NULL,
+    screen_id VARCHAR(50) NOT NULL,
+    st_seat_group VARCHAR(50) NOT NULL,
+    st_num VARCHAR(50) NOT NULL,
+    st_line_num VARCHAR(50) NOT NULL,
+    st_check CHAR(1) DEFAULT 'n'
+);
 
-    update mvc_Seat_tbl
-    set St_check='y'
-    where St_id=1;
+SELECT * FROM IM_Seat;
 
-    delete from mvc_Seat_tbl
-    where St_id=1;
+INSERT INTO IM_Seat(theater_id, screen_id, st_seat_group, st_num, st_line_num, st_check)
+VALUES ('aa', 'aa', 'aa', 'aa', 'aa', 'n');
 
-    commit;
+UPDATE IM_Seat
+SET st_check='y'
+WHERE st_id=1;
 
-    DROP TABLE mvc_Discount_tbl CASCADE CONSTRAINTS;
-    CREATE TABLE mvc_Discount_tbl(
-        dc_num            NUMBER          PRIMARY KEY,
-        dc_main_title      VARCHAR2(50)    NOT NULL,
-        dc_sub_title       VARCHAR2(50),
-        dc_main_img        VARCHAR2(255)   NOT NULL,
-        dc_sub_img         VARCHAR2(255)   NOT NULL,
-        dc_show           CHAR(1)         DEFAULT 'n'
-    );
+DELETE FROM IM_Seat
+SHERE St_id=1;
 
-    select * from mvc_Discount_tbl;
+commit;
 
-    insert into mvc_Discount_tbl(Dc_num, Dc_mainTitle, Dc_subTitle, Dc_mainImg, Dc_subImg, Dc_show)
-    values ((SELECT NVL(MAX(Dc_num)+1, 1) FROM mvc_Discount_tbl), 'aa', 'aa', 'aa', 'aa', 'n');
+DROP TABLE IM_Discount;
+CREATE TABLE IM_Discount(
+    dc_num INT AUTO_INCREMENT PRIMARY KEY,
+    dc_main_title VARCHAR(50) NOT NULL,
+    dc_sub_title VARCHAR(50),
+    dc_main_img VARCHAR(255) NOT NULL,
+    dc_sub_img VARCHAR(255) NOT NULL,
+    dc_show CHAR(1) DEFAULT 'n'
+);
 
-    update mvc_Discount_tbl
-    set Dc_show='y'
-    where Dc_num=1;
+SELECT * FROM IM_Discount;
 
-    delete from mvc_Discount_tbl
-    where Dc_num=1;
+INSERT INTO IM_Discount(dc_main_title, dc_sub_title, dc_main_img, dc_sub_img, dc_show)
+VALUES ('aa', 'aa', 'aa', 'aa', 'n');
 
-    commit;
+UPDATE IM_Discount
+SET dc_show='y'
+WHERE dc_num=1;
+
+DELETE FROM IM_Discount
+WHERE dc_num=1;
+
+commit;
 
 -- 예진 끝
 
