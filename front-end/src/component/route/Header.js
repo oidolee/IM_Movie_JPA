@@ -109,7 +109,7 @@ function Header() {
                         {isSubMenuVisible && currentMenuValue === 4 && (
                             <div>
                                 <ul>
-                                    <li><a href="#">홈</a></li>
+                                    <li><a href="/event_Home">홈</a></li>
                                     <li><a href="#">영화</a></li>
                                     <li><a href="#">시사회/무대인사</a></li>
                                     <li><a href="#">HOT</a></li>
