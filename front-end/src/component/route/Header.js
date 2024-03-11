@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import logo from '../../assets/main/IM_Logo.png'
 import { useCookies } from 'react-cookie';
 
-function Header() {
+function Header() { 
     const [path, setPath] = useState('/');
     const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
     const [currentMenuValue, setCurrentMenuValue] = useState(null);
