@@ -10,7 +10,7 @@ CREATE TABLE IM_Reservation (
     res_movie_id VARCHAR(50) NOT NULL,
     res_movie_name VARCHAR(100) NOT NULL,
     res_movie_time VARCHAR(100) NOT NULL,
-    res_seat VARCHAR(50) NOT NULL,
+    st_id VARCHAR(50) NOT NULL,
     res_count INT NOT NULL,
     res_ticket_price DECIMAL(10, 2) NOT NULL,
     res_sysdate DATETIME DEFAULT CURRENT_TIMESTAMP,
