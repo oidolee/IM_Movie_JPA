@@ -60,6 +60,7 @@ import MyPage_myinfo from '../page_6/myinfo/MyPage_myinfo';
 import MyPage_myinfo_update from '../page_6/myinfo/MyPage_myinfo_update';
 import MyPage_consult_list from '../page_6/myinfo/MyPage_consult_list';
 import Event_Home from '../page_6/event/Event_Home';
+import MyPage_Event from '../page_6/event/MyPage_Event';
 
 
 
@@ -136,6 +137,7 @@ const AppRouter = () => {
                         <Route path="/MyPage_myinfo_update" exact={true} component={MyPage_myinfo_update} />
                         <Route path="/MyPage_consult_list" exact={true} component={MyPage_consult_list} />
                         <Route path="/event_Home" exact={true} component={Event_Home} />
+                        <Route path="/MyPage_Event" exact={true} component={MyPage_Event} />
 
                     </Route>
             

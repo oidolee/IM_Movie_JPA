@@ -3,8 +3,8 @@ import React, {Component} from 'react';
 import style from '../../../styles/page_6/Mypage.module.css'
 import Mypage_mid_nav from '../Mypage_mid_nav'
 import MyPage_top from '../MyPage_top'
-import MyPage_myinfo_part from './MyPage_myinfo_part'
-class MyPage_myinfo extends Component{
+import Mypage_Event_part from './Mypage_Event_part'
+class MyPage_Event extends Component{
     render(){
         return(
             <div>
@@ -18,11 +18,11 @@ class MyPage_myinfo extends Component{
                             <Mypage_mid_nav />
                         </div>
                         <div>
-                            <MyPage_myinfo_part />
+                            <Mypage_Event_part />
                         </div>
                     </div>
                     <div className={`MyPage_banner ${style.MyPage_banner}`} id='MyPage_banner'>
-                        <img src='https://cf2.lottecinema.co.kr/lotte_image/2024/TheBraveBeluga/TheBraveBeluga_980180.png' alt="배너" />
+                    <img src='https://cf2.lottecinema.co.kr/lotte_image/2024/TheBraveBeluga/TheBraveBeluga_980180.png' alt="배너" />
                     </div>
                </div>
             </div>
@@ -30,4 +30,4 @@ class MyPage_myinfo extends Component{
     }
 }
 
-export default MyPage_myinfo;
+export default MyPage_Event;

@@ -30,15 +30,16 @@ public class ConsultServiceImpl implements ConsultService {
 
 	// 1:1문의 등록
 	@Override
-	public void insertConsult(ConsultDTO csdto) 
+	public ConsultDTO insertConsult(ConsultDTO csdto) 
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		return null;
 	}
 
 	// 1:1문의 등록 1건 찾기
 	@Override
-	public CustomerDTO selectConsult(ConsultDTO csdto) 
+	public ConsultDTO selectConsult(ConsultDTO csdto) 
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		return null;

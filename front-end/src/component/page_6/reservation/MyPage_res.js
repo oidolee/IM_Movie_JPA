@@ -22,7 +22,7 @@ class MyPage_res extends Component{
                         </div>
                     </div>
                     <div className={`MyPage_banner ${style.MyPage_banner}`} id='MyPage_banner'>
-
+                    <img src='https://cf2.lottecinema.co.kr/lotte_image/2024/TheBraveBeluga/TheBraveBeluga_980180.png' alt="배너" />
                     </div>
                </div>
             </div>

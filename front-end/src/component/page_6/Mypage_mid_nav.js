@@ -15,7 +15,7 @@ function Mypage_mid_nav() {
               <Nav.Link href="/MyPage_resCancle">취소내역</Nav.Link>
             </NavDropdown>
             <Nav.Link href="/MyPage_coupon">쿠폰함</Nav.Link>
-            <Nav.Link href="/MyPage_event">MY 이벤트</Nav.Link>
+            <Nav.Link href="/MyPage_Event">MY 이벤트</Nav.Link>
             <NavDropdown title="MY 무비로그" href="/MyPage_wishMovie">
               <Nav.Link href="/MyPage_wishMovie">보고싶어요</Nav.Link>
             </NavDropdown>
