@@ -112,5 +112,8 @@
 }
 
 /* 오른쪽 메뉴 */
-
+.header_section .Header_user_name {
+    position:absolute; right:5px; bottom:-5px;
+    color: #a7a7a7;
+}
 

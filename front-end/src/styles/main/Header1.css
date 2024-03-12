@@ -50,7 +50,8 @@
 
 /* 하단 내역 */
 .header_section .nav >ul>li>div{
-    background-color: #000
+    background-color: #000;
+    z-index: 10;
 }
 
 
