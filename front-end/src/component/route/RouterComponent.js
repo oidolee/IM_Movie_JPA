@@ -8,6 +8,8 @@ import EditSampleComponent from "../sample/EditSampleComponent";
 
 //main
 import MainBody from '../main/MainBody';
+import Header from '../../component/route/Header';
+import Footer from '../main/Footer';
 
 //page_1
 import Reservation_Movie from '../page_1/Reservation_Movie';
@@ -58,6 +60,7 @@ import MyPage_myinfo from '../page_6/myinfo/MyPage_myinfo';
 import MyPage_myinfo_update from '../page_6/myinfo/MyPage_myinfo_update';
 import MyPage_consult_list from '../page_6/myinfo/MyPage_consult_list';
 import Event_Home from '../page_6/event/Event_Home';
+import MyPage_Event from '../page_6/event/MyPage_Event';
 
 
 
@@ -66,6 +69,7 @@ const AppRouter = () => {
 
     return(
         <div>
+            <Header />
             <BrowserRouter>
                 <div style={style}>
                     <Route path="/" exact={true} component={MainBody} />
@@ -133,8 +137,10 @@ const AppRouter = () => {
                         <Route path="/MyPage_myinfo_update" exact={true} component={MyPage_myinfo_update} />
                         <Route path="/MyPage_consult_list" exact={true} component={MyPage_consult_list} />
                         <Route path="/event_Home" exact={true} component={Event_Home} />
+                        <Route path="/MyPage_Event" exact={true} component={MyPage_Event} />
 
                     </Route>
+            
 
                     {/* sample */}
                     <Route>
@@ -145,6 +151,7 @@ const AppRouter = () => {
 
                 </div>
             </BrowserRouter>
+             <Footer />
         </div>
     )
 }

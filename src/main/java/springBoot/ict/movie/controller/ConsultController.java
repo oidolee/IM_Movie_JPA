@@ -33,7 +33,7 @@ public class ConsultController {
 	private static final Logger logger = LoggerFactory.getLogger(ConsultController.class);
 	
 	
-	// 1:1문의
+	// 1:1문의 목록
     @PostMapping("/save")
     public Map<String, Object> consultInsert(@RequestBody ConsultDTO dto)
             throws ServletException, IOException {
@@ -67,16 +67,16 @@ public class ConsultController {
         return map;
     }
 
-     //고객 리스트
+    // 1:1문의 등록
     @GetMapping()
-    public List<CustomerDTO> customerList(Model model)
+    public ConsultDTO consultInsert(Model model)
             throws ServletException, IOException {
         logger.info("<<< url -> customerList");
-        List<CustomerDTO> list = service.listcustomer();
-        model.addAttribute("list", list);
-        System.out.println(list);
+      	service.insertConsult(csdto);
+        model.addAttribute("csdto", csdto);
+        System.out.println(csdto);
         
-        return list;
+        return csdto;
     } 
 		
 	
