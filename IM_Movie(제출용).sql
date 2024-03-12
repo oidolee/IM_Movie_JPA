@@ -14,7 +14,7 @@ CREATE TABLE IM_Reservation (
     res_count INT NOT NULL,
     res_ticket_price DECIMAL(10, 2) NOT NULL,
     res_sysdate DATETIME DEFAULT CURRENT_TIMESTAMP,
-    res_check CHAR(1) DEFAULT 'n'
+    res_check CHAR(1) DEFAULT 'n' 
 );
 
 SELECT * FROM IM_Reservation;
