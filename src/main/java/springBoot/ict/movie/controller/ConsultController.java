@@ -72,7 +72,7 @@ public class ConsultController {
     public List<CustomerDTO> customerList(Model model)
             throws ServletException, IOException {
         logger.info("<<< url -> customerList");
-        List<CustomerDTO> list = service.listcustomer();
+        List<CustomerDTO> list = service.ConsultList();
         model.addAttribute("list", list);
         System.out.println(list);
         
