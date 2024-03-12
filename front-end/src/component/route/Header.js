@@ -57,12 +57,13 @@ function Header() {
                         {(cookies.idCheck == undefined) &&(<li><a href='/login'>로그인</a></li>)}
                         {cookies.idCheck &&(
                             <>
+                                <li><a href='/admin'>관리자</a></li>
                                 <li><a href='/MyPage_res'>마이페이지</a></li>
                                 <li><a href='#' onClick={handleLogout}>로그아웃</a></li>
                             </>
                         )}
-                        
                         <li><a href='/customerlist'>멤버쉽</a></li>
+                        
                         <li><a href='/FAQ'>고객센터</a></li>
                         <li><a href='/parking'>주차등록</a></li>
                         <li><a href='/groupform'>단체관람/대관문의</a></li>
@@ -75,6 +76,10 @@ function Header() {
                         <li><a href='#' class="btn_reserve">바로예매</a></li>
                         <li><i class="bi bi-list" className='bi-list'></i></li>
                     </ul>
+                    {cookies.idCheck &&(
+                        <p className="Header_user_name">{cookies.idCheck}님 환영합니다.</p>
+                    )}
+                    
                 </div>
             </div>
             <div className='nav'>

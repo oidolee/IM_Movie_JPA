@@ -8,6 +8,8 @@ import EditSampleComponent from "../sample/EditSampleComponent";
 
 //main
 import MainBody from '../main/MainBody';
+import Header from '../../component/route/Header';
+import Footer from '../main/Footer';
 
 //page_1
 import Reservation_Movie from '../page_1/Reservation_Movie';
@@ -66,6 +68,7 @@ const AppRouter = () => {
 
     return(
         <div>
+            <Header />
             <BrowserRouter>
                 <div style={style}>
                     <Route path="/" exact={true} component={MainBody} />
@@ -135,6 +138,7 @@ const AppRouter = () => {
                         <Route path="/event_Home" exact={true} component={Event_Home} />
 
                     </Route>
+            
 
                     {/* sample */}
                     <Route>
@@ -145,6 +149,7 @@ const AppRouter = () => {
 
                 </div>
             </BrowserRouter>
+             <Footer />
         </div>
     )
 }

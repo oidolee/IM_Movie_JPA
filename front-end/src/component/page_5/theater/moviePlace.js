@@ -89,7 +89,10 @@ function Place() {
       </div>
 
         <div className={`place_title ${style.place_title}`}>
-        <label for="pp_name">가산디지털</label>
+          <label for="pp_name">가산디지털</label>
+          <button type="button" class="btn_col4 ty3 mr10">
+            <span id="cinemalike" class="ico_heart ty2"><em>관심등록</em></span>MY 영화관
+          </button>
         </div>
 
         <div className={`place_con ${style.place_con}`}>
