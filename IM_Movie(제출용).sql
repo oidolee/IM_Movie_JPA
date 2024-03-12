@@ -1,5 +1,5 @@
 -- 예진 시작 (page_1)
-DROP TABLE IM_Reservation;
+DROP TABLE IM_Reservation; 
 CREATE TABLE IM_Reservation (
     res_id INT AUTO_INCREMENT PRIMARY KEY,
     c_email VARCHAR(50) NOT NULL,
