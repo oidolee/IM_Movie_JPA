@@ -1,5 +1,5 @@
 -- 예진 시작 (page_1)
-DROP TABLE IM_Reservation;
+DROP TABLE IM_Reservation; 
 CREATE TABLE IM_Reservation (
     res_id INT AUTO_INCREMENT PRIMARY KEY,
     c_email VARCHAR(50) NOT NULL,
@@ -10,11 +10,11 @@ CREATE TABLE IM_Reservation (
     res_movie_id VARCHAR(50) NOT NULL,
     res_movie_name VARCHAR(100) NOT NULL,
     res_movie_time VARCHAR(100) NOT NULL,
-    res_seat VARCHAR(50) NOT NULL,
+    st_id VARCHAR(50) NOT NULL,
     res_count INT NOT NULL,
     res_ticket_price DECIMAL(10, 2) NOT NULL,
     res_sysdate DATETIME DEFAULT CURRENT_TIMESTAMP,
-    res_check CHAR(1) DEFAULT 'n'
+    res_check CHAR(1) DEFAULT 'n' 
 );
 
 SELECT * FROM IM_Reservation;
