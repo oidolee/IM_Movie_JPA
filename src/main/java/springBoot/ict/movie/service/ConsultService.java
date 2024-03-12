@@ -16,11 +16,11 @@ public interface ConsultService {
 			throws ServletException, IOException;
 	
 	// 1:1문의 등록 
-	public void insertConsult(ConsultDTO csdto)
+	public ConsultDTO insertConsult(ConsultDTO csdto)
 			throws ServletException, IOException;
 
 	// 1:1문의 등록 1건 찾기
-	public CustomerDTO selectConsult(ConsultDTO csdto)
+	public ConsultDTO selectConsult(ConsultDTO csdto)
 			throws ServletException, IOException;
 	
 	// 1:1문의 답변 등록
