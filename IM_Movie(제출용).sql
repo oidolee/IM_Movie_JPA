@@ -94,7 +94,8 @@ CREATE TABLE IM_Discount(
     dc_sub_title VARCHAR(50),
     dc_main_img VARCHAR(255) NOT NULL,
     dc_sub_img VARCHAR(255) NOT NULL,
-    dc_show CHAR(1) DEFAULT 'n'
+    dc_show CHAR(1) DEFAULT 'n',
+    dc_sysdate DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 SELECT * FROM IM_Discount;
