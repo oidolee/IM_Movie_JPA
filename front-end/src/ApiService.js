@@ -1,6 +1,6 @@
 import axios from 'axios'; // npm install -f axios@^1.3.5
 const SAMPLE_API_BASE_URL = "http://localhost:8081/samples";
-const url = "http://localhost:8081";
+let url = "http://localhost:8081";
 
 class ApiService {
 
@@ -17,10 +17,10 @@ class ApiService {
         return axios.post(url + "/page_1/DiscountInsert", inputData);
     }
 
-    page_3
+    //page_3
     ListStore_Admin() {
          console.log('ListStore_Admin 호출');
-         return axios.get(url + "/page_3");
+         return axios.get(url + "/page_3/ListStore_Admin");
     }
 
     // ListStore_Admin(inputData) {

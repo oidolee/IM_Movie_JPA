@@ -77,7 +77,9 @@ public class ConsultController {
         System.out.println(list);
         
         return list;
-    } 
+
+    }
+}
 		
 	
 //	// 로그인
@@ -164,12 +166,4 @@ public class ConsultController {
 //
 //        return map;
 //    }
-<<<<<<< HEAD
-		
 
-}
-=======
-//		
-//
-//}
->>>>>>> 33f094577c14cad581ea574d8f0ba353b5e09397

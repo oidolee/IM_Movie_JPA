@@ -20,27 +20,27 @@ public class StoreDTO {
     @Id
     
     //@JsonProperty("item_code")
-    @Column(name= "subscribe_num")
+    @Column(name= "item_code")
     private int item_code;
     //@JsonProperty("item_type")
-	@Column(name= "subscribe_num")
+	@Column(name= "item_type")
     private String item_type;
     //@JsonProperty("item_name")
-	@Column(name= "subscribe_num")
+	@Column(name= "item_name")
     private String item_name;
     //@JsonProperty("item_detail")
-	@Column(name= "subscribe_num")
+	@Column(name= "item_detail")
     private String item_detail;
     //@JsonProperty("item_price")
-	@Column(name= "subscribe_num")
+	@Column(name= "item_price")
     private int item_price;
     //@JsonProperty("item_sale_price")
-	@Column(name= "subscribe_num")
+	@Column(name= "item_sale_price")
     private int item_sale_price;
     //@JsonProperty("item_image")
-	@Column(name= "subscribe_num")
+	@Column(name= "item_image")
     private String item_image;
     //@JsonProperty("item_exp")
-	@Column(name= "subscribe_num")
+	@Column(name= "item_exp")
     private String item_exp;
 }
