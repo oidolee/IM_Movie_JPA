@@ -33,27 +33,27 @@ public class ConsultController {
 	private static final Logger logger = LoggerFactory.getLogger(ConsultController.class);
 	
 	
-	// 1:1문의 목록
+	// 1:1문의 목록 등록
     @PostMapping("/save")
-    public Map<String, Object> consultInsert(@RequestBody ConsultDTO dto)
+    public Map<String, Object> consultInsert(@RequestBody ConsultDTO csdto)
             throws ServletException, IOException {
         logger.info("<<< url - consultInsert >>>");
         
         System.out.println("<<< url - consultInsert >>>");
       
-        System.out.println(dto);
+        System.out.println(csdto);
         
         
         String resultCode = "";
         String resultMsg = "";
 
         Map<String, Object> map = new HashMap<String, Object>();
-
+        
         try {
         	
-            service.insertCustomer(dto);
+            service.insertConsult(csdto);
             resultCode = "200";
-            resultMsg = "CustomerInform Success";
+            resultMsg = "ConsultInsert Success";
         } catch(Exception e) {
             resultCode = "400";
             resultMsg = e.getMessage();
@@ -61,109 +61,109 @@ public class ConsultController {
         }
         map.put("resultCode", resultCode);
         map.put("resultMsg", resultMsg);
-        map.put("dto", dto);
+        map.put("csdto", csdto);
 
 
         return map;
     }
 
-    // 1:1문의 등록
+    // 1:1문의 목록
     @GetMapping()
-    public ConsultDTO consultInsert(Model model)
+    public List<ConsultDTO> consultList(Model model)
             throws ServletException, IOException {
-        logger.info("<<< url -> customerList");
-      	service.insertConsult(csdto);
-        model.addAttribute("csdto", csdto);
-        System.out.println(csdto);
+        logger.info("<<< url -> consultList");
+        List<ConsultDTO> list= service.ConsultList();
+        model.addAttribute("list", list);
+        System.out.println(list);
         
-        return csdto;
+        return list;
     } 
 		
 	
-	// 로그인
-    @PostMapping("/login")
-    public Map<String, Object> login(@RequestBody CustomerDTO dto) 
-    		throws ServletException, IOException {
-    	
-        CustomerDTO customer = service.loginCustomer(dto);
-        Map<String, Object> response = new HashMap<>();
-        if (customer != null) {
-            response.put("resultCode", "200");
-            response.put("resultMsg", "로그인 성공!");
-            response.put("customer", customer);
-        } else {
-            response.put("resultCode", "400");
-            response.put("resultMsg", "로그인 실패!");
-        }
-        return response;
-    }
-	
-	// 아이디 찾기
-    @PostMapping("/findID")
-    public Map<String, Object> findID(@RequestBody CustomerDTO dto) 
-    		throws ServletException, IOException {
-        logger.info("<<< url -> findID start");
-        System.out.println("dto" + dto.toString());
-
-        String resultCode = "";
-        String resultMsg = "";
-
-        Map<String, Object> map = new HashMap<String, Object>();
-
-        try {
-            String foundEmail = service.findID(dto.getIC_name(), dto.getIC_hp());
-            if (foundEmail != null) {
-                resultCode = "200";
-                resultMsg = "ID found";
-                map.put("foundEmail", foundEmail);
-            } else {
-                resultCode = "404";
-                resultMsg = "ID not found";
-            }
-        } catch (Exception e) {
-            resultCode = "400";
-            resultMsg = e.getMessage();
-            e.printStackTrace();
-        }
-        map.put("resultCode", resultCode);
-        map.put("resultMsg", resultMsg);
-
-        return map;
-    }
-	
-	
- // 비밀번호찾기 
-    @PostMapping("/searchPWD")
-    public Map<String, Object> findPWD(@RequestBody CustomerDTO dto) 
-    		throws ServletException, IOException {
-        logger.info("<<< url -> searchPWD start");
-        System.out.println("dto" + dto.toString());
-
-        String resultCode = "";
-        String resultMsg = "";
-
-        Map<String, Object> map = new HashMap<String, Object>();
-
-        try {
-            String foundPWD = service.findPWD(dto.getIC_email(), dto.getIC_hp());
-            if (foundPWD != null) {
-                resultCode = "200";
-                resultMsg = "PWD found";
-                map.put("foundPWD", foundPWD);
-            } else {
-                resultCode = "404";
-                resultMsg = "PWD not found";
-            }
-        } catch (Exception e) {
-            resultCode = "400";
-            resultMsg = e.getMessage();
-            e.printStackTrace();
-        }
-        map.put("resultCode", resultCode);
-        map.put("resultMsg", resultMsg);
-
-        return map;
-    }
+//	// 로그인
+//    @PostMapping("/login")
+//    public Map<String, Object> login(@RequestBody CustomerDTO dto) 
+//    		throws ServletException, IOException {
+//    	
+//        CustomerDTO customer = service.loginCustomer(dto);
+//        Map<String, Object> response = new HashMap<>();
+//        if (customer != null) {
+//            response.put("resultCode", "200");
+//            response.put("resultMsg", "로그인 성공!");
+//            response.put("customer", customer);
+//        } else {
+//            response.put("resultCode", "400");
+//            response.put("resultMsg", "로그인 실패!");
+//        }
+//        return response;
+//    }
+//	
+//	// 아이디 찾기
+//    @PostMapping("/findID")
+//    public Map<String, Object> findID(@RequestBody CustomerDTO dto) 
+//    		throws ServletException, IOException {
+//        logger.info("<<< url -> findID start");
+//        System.out.println("dto" + dto.toString());
+//
+//        String resultCode = "";
+//        String resultMsg = "";
+//
+//        Map<String, Object> map = new HashMap<String, Object>();
+//
+//        try {
+//            String foundEmail = service.findID(dto.getIC_name(), dto.getIC_hp());
+//            if (foundEmail != null) {
+//                resultCode = "200";
+//                resultMsg = "ID found";
+//                map.put("foundEmail", foundEmail);
+//            } else {
+//                resultCode = "404";
+//                resultMsg = "ID not found";
+//            }
+//        } catch (Exception e) {
+//            resultCode = "400";
+//            resultMsg = e.getMessage();
+//            e.printStackTrace();
+//        }
+//        map.put("resultCode", resultCode);
+//        map.put("resultMsg", resultMsg);
+//
+//        return map;
+//    }
+//	
+//	
+// // 비밀번호찾기 
+//    @PostMapping("/searchPWD")
+//    public Map<String, Object> findPWD(@RequestBody CustomerDTO dto) 
+//    		throws ServletException, IOException {
+//        logger.info("<<< url -> searchPWD start");
+//        System.out.println("dto" + dto.toString());
+//
+//        String resultCode = "";
+//        String resultMsg = "";
+//
+//        Map<String, Object> map = new HashMap<String, Object>();
+//
+//        try {
+//            String foundPWD = service.findPWD(dto.getIC_email(), dto.getIC_hp());
+//            if (foundPWD != null) {
+//                resultCode = "200";
+//                resultMsg = "PWD found";
+//                map.put("foundPWD", foundPWD);
+//            } else {
+//                resultCode = "404";
+//                resultMsg = "PWD not found";
+//            }
+//        } catch (Exception e) {
+//            resultCode = "400";
+//            resultMsg = e.getMessage();
+//            e.printStackTrace();
+//        }
+//        map.put("resultCode", resultCode);
+//        map.put("resultMsg", resultMsg);
+//
+//        return map;
+//    }
 		
 
 }
