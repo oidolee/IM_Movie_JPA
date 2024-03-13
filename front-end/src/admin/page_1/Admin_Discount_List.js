@@ -53,7 +53,6 @@ class Admin_Discount_List extends Component {
               <TableCell>Main_Title</TableCell>
               <TableCell>Sub_Title</TableCell>
               <TableCell>Main_Img</TableCell>
-              <TableCell>Sub_Img</TableCell>
               <TableCell>Show</TableCell>
               <TableCell>Sysdate</TableCell>
               <TableCell>Edit</TableCell>
@@ -69,15 +68,14 @@ class Admin_Discount_List extends Component {
                   <TableCell>{list.dc_main_title}</TableCell>
                   <TableCell>{list.dc_sub_title}</TableCell>
                   <TableCell>{list.dc_main_img}</TableCell>
-                  <TableCell>{list.dc_sub_img}</TableCell>
                   <TableCell>{list.dc_show}</TableCell>
                   <TableCell>{list.dc_sysdate}</TableCell>
-                  <TableCell onClick={() => this.editDiscount(list.dc_num)}>
+                  {/* <TableCell onClick={() => this.editDiscount(list.dc_num)}>
                     <Create />
                   </TableCell>
                   <TableCell onClick={() => this.deleteDiscount(list.dc_num)}>
                     <Delete />
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
             )}
           </TableBody>
