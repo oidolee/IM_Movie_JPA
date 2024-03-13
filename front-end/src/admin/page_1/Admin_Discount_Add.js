@@ -10,6 +10,8 @@ class Admin_Discount_Add extends Component {
       dc_main_title: "",
       dc_sub_title: "",
       dc_main_img: "",
+      dc_show: "n",
+      dc_sysdate: new Date().toISOString(),
     };
   }
 
@@ -23,18 +25,20 @@ class Admin_Discount_Add extends Component {
     e.preventDefault();
 
     let iputDate = {
-      main: this.state.dc_main_title,
-      sub: this.state.dc_sub_title,
-      img: this.state.dc_main_img,
+      dc_main_title: this.state.dc_main_title,
+      dc_sub_title: this.state.dc_sub_title,
+      dc_main_img: this.state.dc_main_img,
+      dc_show: this.state.dc_show,
+      dc_sysdate: this.state.dc_sysdate,
     };
 
     ApiService.addDiscount(iputDate)
-      .then(res => {
-        this.setState({})
+      .then((res) => {
+        this.setState({});
         console.log("DiscountInsert 성공 : ", res.data);
         this.props.history.push("/admin/page_1/Admin_Discount_List");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("DiscountInsert 실패 : ", err);
       });
   };
@@ -52,7 +56,7 @@ class Admin_Discount_Add extends Component {
           label="Main_Title"
           type="text"
           name="dc_main_title"
-          value={this.state.main}
+          value={this.state.dc_main_title}
           placeholder="Input Main_Title"
           onChange={this.onChange}
         />
@@ -64,7 +68,7 @@ class Admin_Discount_Add extends Component {
           label="Sub_Title"
           type="text"
           name="dc_sub_title"
-          value={this.state.sub}
+          value={this.state.dc_sub_title}
           placeholder="Input Sub_Title"
           onChange={this.onChange}
         />
@@ -76,7 +80,7 @@ class Admin_Discount_Add extends Component {
           label="Main_Img"
           type="text"
           name="dc_main_img"
-          value={this.state.img}
+          value={this.state.dc_main_img}
           placeholder="Input Main_Img"
           onChange={this.onChange}
         />
