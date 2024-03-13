@@ -6,6 +6,7 @@ import Admin_Contents from '../main/Admin_Contents'
 
 // page_1
 import Test_1 from '../page_1/Test_1';
+import Admin_Discount from '../page_1/Admin_Discount'
 
 
 
@@ -18,6 +19,11 @@ const Admin_RouterComponent = () => {
                     {/* admin */}
                     <Route>
                         <Route path="/admin" exact={true} component={Admin_Contents} />
+                    </Route>
+
+                    {/* admin */}
+                    <Route>
+                        <Route path="/admin/page_1/Admin_Discount" exact={true} component={Admin_Discount} />
                     </Route>
 
                     {/* page_2 */}
