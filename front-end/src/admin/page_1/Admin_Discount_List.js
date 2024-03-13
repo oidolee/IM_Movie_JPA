@@ -13,7 +13,7 @@ class Admin_Discount_List extends Component {
         </Typography>
         <br />
         <br />
-        <Button variant="contained" color="primary" onClick={this.Admin_Discount_Add}>
+        <Button variant="contained" color="primary" className="Add_btn" onClick={this.Admin_Discount_Add}>
           Discount_Add
         </Button>
         <br />

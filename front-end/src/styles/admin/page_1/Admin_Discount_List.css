@@ -2,3 +2,12 @@
     display: flex;
     justify-content: center;
 }
+
+.Admin_Discount .Add_btn {
+    background-color: black;
+    padding: 10px 20px;
+}
+
+.Admin_Discount .Add_btn:hover {
+    background-color: #FF243E;
+}
