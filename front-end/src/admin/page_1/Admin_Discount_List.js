@@ -14,6 +14,11 @@ class Admin_Discount_List extends Component {
     }
   }
 
+  componentDidMount() {
+    this.discountList(); 
+  }
+
+  // 목록
   discountList = () => {
     ApiService.listDiscount()
     .then(res => {
@@ -56,10 +61,7 @@ class Admin_Discount_List extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.state.lists.map(
-              (
-                list
-              ) => (
+            {this.state.lists.map(list => 
                 <TableRow key={list.dc_num}>
                   <TableCell component="th" scope="list">
                     {list.dc_num}
@@ -77,7 +79,6 @@ class Admin_Discount_List extends Component {
                     <Delete />
                   </TableCell>
                 </TableRow>
-              )
             )}
           </TableBody>
         </Table>
