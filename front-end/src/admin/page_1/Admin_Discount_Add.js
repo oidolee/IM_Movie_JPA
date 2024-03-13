@@ -10,8 +10,8 @@ class Admin_Discount_Add extends Component {
       dc_main_title: "",
       dc_sub_title: "",
       dc_main_img: "",
-      dc_show: "n",
-      dc_sysdate: new Date().toISOString(),
+      dc_show: "n", // 기본값 설정
+      dc_sysdate: new Date().toISOString() // 기본값 설정
     };
   }
 
