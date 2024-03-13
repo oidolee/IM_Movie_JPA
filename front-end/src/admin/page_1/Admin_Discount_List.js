@@ -1,8 +1,31 @@
 import React, { Component } from "react";
 import {Table, TableHead, TableRow, TableCell, TableBody, Typography, Button} from "@mui/material"
 import style from '../../styles/admin/page_1/Admin_Discount_List.css';
+import ApiService from "../../ApiService";
 
 class Admin_Discount_List extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      lists: [],
+      mseeage: null 
+    }
+  }
+
+  discountList = () => {
+    ApiService.listDiscount()
+    .then(res => {
+      this.setState({
+        lists: res.data
+      })
+    })
+    .catch(err => {
+      console.log("listDiscount Error", err)
+    });
+  }
+
   render() {
     return (
       <div className={`Admin_Discount ${style.Admin_Discount}`}>
@@ -27,32 +50,35 @@ class Admin_Discount_List extends Component {
               <TableCell>Main_Img</TableCell>
               <TableCell>Sub_Img</TableCell>
               <TableCell>Show</TableCell>
+              <TableCell>Sysdate</TableCell>
               <TableCell>Edit</TableCell>
               <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {this.state.samples.map(
+            {this.state.lists.map(
               (
-                sample // 6.
+                list
               ) => (
-                <TableRow key={sample.id}>
-                  <TableCell component="th" scope="sample">
-                    {sample.id}
+                <TableRow key={list.dc_num}>
+                  <TableCell component="th" scope="list">
+                    {list.dc_num}
                   </TableCell>
-                  <TableCell>{sample.name}</TableCell>
-                  <TableCell>{sample.brand}</TableCell>
-                  <TableCell>{sample.madein}</TableCell>
-                  <TableCell>{sample.price}</TableCell>
-                  <TableCell onClick={() => this.editSample(sample.id)}>
+                  <TableCell>{list.dc_main_title}</TableCell>
+                  <TableCell>{list.dc_sub_title}</TableCell>
+                  <TableCell>{list.dc_main_img}</TableCell>
+                  <TableCell>{list.dc_sub_img}</TableCell>
+                  <TableCell>{list.dc_show}</TableCell>
+                  <TableCell>{list.dc_sysdate}</TableCell>
+                  <TableCell onClick={() => this.editDiscount(list.dc_num)}>
                     <Create />
                   </TableCell>
-                  <TableCell onClick={() => this.deleteSample(sample.id)}>
+                  <TableCell onClick={() => this.deleteDiscount(list.dc_num)}>
                     <Delete />
                   </TableCell>
                 </TableRow>
               )
-            )} */}
+            )}
           </TableBody>
         </Table>
       </div>

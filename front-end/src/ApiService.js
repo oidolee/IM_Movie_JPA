@@ -5,7 +5,11 @@ const url = "http://localhost:8081";
 class ApiService {
 
     // page_1
-
+    // 목록
+    listDiscount() {
+        console.log("listDiscount 호출");
+        return axios.get(url + "/page_1");
+    }
 
     // page_4
     
