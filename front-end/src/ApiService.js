@@ -50,7 +50,22 @@ class ApiService {
         console.log("findPWD 호출")
         console.log(inputData)
         return axios.post("http://localhost:8081/index/searchPWD", inputData);
-    } 
+    }
+
+    // page_6
+
+    // 1:1 문의 리스트
+    fetchConsult(){
+        console.log('fetchConsult() 호출!!')
+        return axios.get(url + '/page_6'); 
+    }
+
+    // 1:1 문의 등록
+    addConsult(inputData){
+        console.log('addConsult() 호출!!')
+        console.log(inputData)
+        return axios.post(url + '/page_6/save', inputData); 
+    }
 
 }
 export default new ApiService();

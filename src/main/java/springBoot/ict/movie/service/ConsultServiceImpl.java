@@ -24,8 +24,8 @@ public class ConsultServiceImpl implements ConsultService {
 	@Override
 	public List<ConsultDTO> ConsultList() 
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return csdao.findAll();
 	}
 
 	// 1:1문의 등록
