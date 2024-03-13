@@ -40,7 +40,7 @@ class EditStore_Admin extends Component {
             console.log('loadSample() Error!!', err);
         })
     }
-
+ 
     // 2. 화면에서 수정한 값을 state 변경
     onChange = (e) => {
         this.setState({
