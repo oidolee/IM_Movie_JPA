@@ -38,13 +38,19 @@ class Admin_Discount_List extends Component {
       });
   };
 
+  // 등록
+  discountAdd = () => {
+    window.localStorage.removeItem("dc_num");
+    this.props.history.push("/admin/page_1/Admin_Discount_Add");
+  };
+
   render() {
     return (
       <div className={`Admin_Discount ${style.Admin_Discount}`}>
         <br />
         <br />
         <Typography variant="h5" className="Admin_Discount_List">
-          할인 리스트
+          Discount_List
         </Typography>
         <br />
         <br />
@@ -52,7 +58,7 @@ class Admin_Discount_List extends Component {
           variant="contained"
           color="primary"
           className="Add_btn"
-          onClick={this.Admin_Discount_Add}
+          onClick={this.discountAdd}
         >
           Discount_Add
         </Button>

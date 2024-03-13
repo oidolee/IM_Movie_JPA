@@ -11,6 +11,12 @@ class ApiService {
         return axios.get(url + "/page_1/DiscountList");
     }
 
+    // 등록
+    addDiscount(inputData) {
+        console.log("addDiscount 호출", inputData);
+        return axios.post(url + "/page_1/DiscountInsert", inputData);
+    }
+
     // page_4
     
     // insert
