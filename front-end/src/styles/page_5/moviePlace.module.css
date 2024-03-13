@@ -46,8 +46,14 @@ body {
   font-weight: bold;
 }
 
+.ddgroup_btn{
+  border:none;
+  background-color: white;
+  margin-left: 10px;
+}
+
 .place_con{
-  margin-left:225px;
+  margin-left:190px;
   margin-top: 20px;
   text-align: left;
   line-height: 30px;
@@ -56,8 +62,7 @@ body {
 
 .btn_wrap{
   margin-top: 30px;
-  margin-right: 360px;
-  
+  margin-right: 560px;
 }
 
 .place_btn{

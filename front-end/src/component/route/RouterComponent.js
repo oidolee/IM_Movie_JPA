@@ -42,6 +42,7 @@ import movieMain from '../page_5/movie/movieMain';
 import movieDetail from '../page_5/movie/movieDetail';
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
+import arte from '../page_5/movie/arte';
 import moviePlace from '../page_5/theater/moviePlace';
 import FAQ from '../page_5/board/FAQ';
 import NOTICE from '../page_5/board/NOTICE';
@@ -116,6 +117,7 @@ const AppRouter = () => {
                         <Route path="/movieDetail" exact={true} component={movieDetail} />
                         <Route path="/movieNow" exact={true} component={movieNow} />
                         <Route path="/movieNext" exact={true} component={movieNext} />
+                        <Route path="/arte" exact={true} component={arte} />
                         <Route path="/moviePlace" exact={true} component={moviePlace} />
                         <Route path="/FAQ" exact={true} component={FAQ} />
                         <Route path="/NOTICE" exact={true} component={NOTICE} />

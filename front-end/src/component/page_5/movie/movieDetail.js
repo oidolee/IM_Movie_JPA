@@ -9,6 +9,8 @@ import send from "../../../assets/page_5_5/send.png";
 import trailer1 from "../../../assets/page_5_5/trailer1.png";
 import trailer2 from "../../../assets/page_5_5/trailer2.png";
 
+import BobMarley_OneLove from '../../../assets/page_5/BobMarley_OneLove.jpg';
+
 function MovieDetail() {
   const [showModal, setShowModal] = useState(false); // 모달 창 열림/닫힘 상태
   const [selectedValue, setSelectedValue] = useState(1); // 선택된 값
@@ -55,7 +57,7 @@ function MovieDetail() {
             </div>
 
             <div className={`btn_wrap1 ${style.btn_wrap1}`}>
-              <button className={`detail_btn1 ${style.detail_btn1}`} id="10">
+              <button className={`detail_btn1 ${style.detail_btn1}`} id="10" onClick={() => handleTrailerClick("https://cf.lottecinema.co.kr//Media/MovieFile/MovieMedia/202402/20808_301_1.mp4")}>
                 &#9658;예고편 재생{" "}
               </button>
               <button className={`detail_btn2 ${style.detail_btn2}`} id="11">
@@ -128,7 +130,6 @@ function MovieDetail() {
                 </div>
               )}
 
-              
               {selectedValue === 2 && (
                 <div>
                   {/* 관람평 영역 */}
@@ -170,6 +171,14 @@ function MovieDetail() {
           </div>
         </div>
       )}
+      
+      
+      <div className={`detail_last ${style.detail_last}`}>
+          <ul>
+            <li><a href='#'><img src={BobMarley_OneLove} alt="detail.img" /></a></li>
+          </ul>
+      </div>
+
     </>
   );
 }
