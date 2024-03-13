@@ -5,12 +5,17 @@ import { Link, useLocation } from 'react-router-dom';
 import '../../styles/main/Header.css'; 
 
 
-function Header() { 
+function Header() {
     const [path, setPath] = useState('/');
     const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
     const [currentMenuValue, setCurrentMenuValue] = useState(null);
-    const [cookies, setCookie, removeCookie] = useCookies(['idCheck']); 
+    const [cookies, setCookie, removeCookie] = useCookies(['idCheck']);
 
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> 33f094577c14cad581ea574d8f0ba353b5e09397
     // 페이지 로딩 시 경로 설정 (실제로는 해당 경로를 얻는 방법에 따라 다를 수 있음)
     useEffect(() => {
         const currentPath = window.location.pathname;
@@ -26,7 +31,7 @@ function Header() {
     const handleMouseOut = () => {
         setIsSubMenuVisible(false);
         setCurrentMenuValue(null);
-       
+
     };
 
     const handleLogout = () => {
@@ -34,9 +39,14 @@ function Header() {
         removeCookie('idCheck');
         alert('로그아웃 되었습니다.')
     };
+<<<<<<< HEAD
     //헤더 동적 처리         
     const location = useLocation();
     const isHomePage = location.pathname === '/';
+=======
+
+
+>>>>>>> 33f094577c14cad581ea574d8f0ba353b5e09397
 
     return (
         <div className={`header_section ${isHomePage ? '' : 'special_header'}`}>
@@ -79,10 +89,10 @@ function Header() {
                         </li>
                         <li><i class="bi bi-list" className='bi-list'></i></li>
                     </ul>
-                    {cookies.idCheck &&(
+                    {cookies.idCheck && (
                         <p className="Header_user_name">{cookies.idCheck}님 환영합니다.</p>
                     )}
-                    
+
                 </div>
             </div>
             <div className='nav'>
@@ -159,9 +169,9 @@ function Header() {
                             </div>
                         )}
                     </li>
-                  
+
                 </ul>
-               
+
             </div>
 
 

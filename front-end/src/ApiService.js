@@ -67,6 +67,8 @@ class ApiService {
         return axios.post(url + '/page_6/save', inputData); 
     }
 
+    
+
 }
 export default new ApiService();
 
