@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ApiService from '../../ApiService';
 import { TextField, Typography, Button } from '@mui/material';
-import DaumPostcode from 'react-daum-postcode';
+
 
 class AddStore_Admin extends Component {
 
@@ -21,7 +21,7 @@ class AddStore_Admin extends Component {
 
     onChange = (e) => {  // 1. 입력한 값으로 변경한다.
         this.setState({
-            [e.target.item_name] : e.target.value  // ★이건 어떻게 사용하는 거지???????
+            [e.target.name] : e.target.value  // ★★★★★★★이건 어떻게 사용하는 거지???????
         });
     }
 
@@ -29,13 +29,13 @@ class AddStore_Admin extends Component {
         e.preventDefault();
 
         let inputData = {   // 3. state값을 읽어온다.
-            item_type: this.state.item_type,
-            item_name: this.state.item_name,
-            item_detail: this.state.item_detail,
-            item_price: this.state.item_price,
-            item_sale_price: this.state.item_sale_price,
-            item_image: this.state.item_image,
-            item_exp: this.state.item_exp
+            itemType: this.state.itemType,
+            itemName: this.state.itemName,
+            itemDetail: this.state.itemDetail,
+            itemPrice: this.state.itemPrice,
+            itemSalePrice: this.state.itemSalePrice,
+            itemImage: this.state.itemImage,
+            itemExp: this.state.itemExp
         }
         
         // 3. 등록처리(화면에서 입력한 값 -> onChange() -> setState() -> inputData)
@@ -44,7 +44,7 @@ class AddStore_Admin extends Component {
                 this.setState({                    
                 })
                 console.log('input 성공 : ', res.data);  // 컨트롤러에서 전달함(resultCode, resultMsg)
-                this.props.history.push('/ListStore_Admin');  // RouterComponent.js - ListSampleComponent 호출
+                this.props.history.push('page_3/ListStore_Admin');  // RouterComponent.js - ListSampleComponent 호출
             })
             .catch(err => {
                 console.log('AddStore_Admin() 에러!! : ', err);

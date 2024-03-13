@@ -20,6 +20,10 @@ public class StoreDTO {
     @Id
     @JsonProperty("itemCode")
     private int item_code;
+    // setGift_num 메서드 추가
+    public void setItem_code(int item_code) {
+        this.item_code = item_code;
+    }
     @JsonProperty("itemType")
     private String item_type;
     @JsonProperty("itemName")
