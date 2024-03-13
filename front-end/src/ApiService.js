@@ -4,36 +4,18 @@ const url = "http://localhost:8081";
 
 class ApiService {
 
-    // list
-    fetchSamples(){ // 3.
-        console.log('fetchSamples() 호출!!')
-        return axios.get(SAMPLE_API_BASE_URL); // 스프링부트와 통신
+    // page_1
+    // 목록
+    listDiscount() {
+        console.log("listDiscount 호출");
+        return axios.get(url + "/page_1/DiscountList");
     }
 
-
-    addSample(inpuData){
-        console.log('addSample() 호출!!', inpuData);
-        return axios.post(SAMPLE_API_BASE_URL, inpuData);
+    // 등록
+    addDiscount(inputData) {
+        console.log("addDiscount 호출", inputData);
+        return axios.post(url + "/page_1/DiscountInsert", inputData);
     }
-    // insert
-
-    // 1건 select
-    fetchSampleByID(sampleID){
-        console.log("fetchSampleByID 호출 !! ", sampleID);
-        return axios.get(SAMPLE_API_BASE_URL + "/" + sampleID);
-    }
-
-    // update
-    editSample(inputData) {
-        console.log('editsSample() 호출!!', inputData);
-        return axios.put(SAMPLE_API_BASE_URL + "/"+ inputData.id, inputData);
-    }
-
-    // delete
-    deleteSample(sampleID){
-        console.log('editsSample() 호출!!', sampleID);
-        return axios.delete(SAMPLE_API_BASE_URL + "/"+ sampleID);
-    };
 
     // page_4
     

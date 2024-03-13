@@ -71,7 +71,7 @@ function Header() {
                                     {/* 페이지 설정 */}
                                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                         <nav class="sb_sidenav_menu-nested nav">
-                                            <a class="nav-link" href="/admin/page_2/test_1">page_1 / Test_1</a>
+                                            <a class="nav-link" href="/admin/page_1/Admin_Discount_List">Discount</a>
                                             <a class="nav-link" href="/admin/page_2/test_2">page_2 / Test_2</a>
                                         </nav>
                                     </div>
