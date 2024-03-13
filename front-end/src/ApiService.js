@@ -70,6 +70,8 @@ class ApiService {
         return axios.post("http://localhost:8081/index/searchPWD", inputData);
     } 
 
+    
+
 }
 export default new ApiService();
 

@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import logo from '../../assets/main/IM_Logo.png'
 import { useCookies } from 'react-cookie';
 
-function Header() { 
+function Header() {
     const [path, setPath] = useState('/');
     const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
     const [currentMenuValue, setCurrentMenuValue] = useState(null);
-    const [cookies, setCookie, removeCookie] = useCookies(['idCheck']); 
+    const [cookies, setCookie, removeCookie] = useCookies(['idCheck']);
 
-    
+
 
     // 페이지 로딩 시 경로 설정 (실제로는 해당 경로를 얻는 방법에 따라 다를 수 있음)
     useEffect(() => {
@@ -31,7 +31,7 @@ function Header() {
     const handleMouseOut = () => {
         setIsSubMenuVisible(false);
         setCurrentMenuValue(null);
-       
+
     };
 
     const handleLogout = () => {
@@ -39,7 +39,7 @@ function Header() {
         removeCookie('idCheck');
         alert('로그아웃 되었습니다.')
     };
-        
+
 
 
     return (
@@ -53,33 +53,44 @@ function Header() {
 
                 <div className='right-gnb'>
                     <ul>
-                        
-                        {(cookies.idCheck == undefined) &&(<li><a href='/login'>로그인</a></li>)}
-                        {cookies.idCheck &&(
+
+                        {cookies.idCheck === "admin" && (
                             <>
                                 <li><a href='/admin'>관리자</a></li>
-                                <li><a href='/MyPage_res'>마이페이지</a></li>
+                                <li><a href='/FAQ'>고객센터</a></li>
+                                <li><a href='/parking'>주차등록</a></li>
+                                <li><a href='/groupform'>단체관람/대관문의</a></li>
                                 <li><a href='#' onClick={handleLogout}>로그아웃</a></li>
                             </>
                         )}
-                        <li><a href='/customerlist'>멤버쉽</a></li>
-                        
-                        <li><a href='/FAQ'>고객센터</a></li>
-                        <li><a href='/parking'>주차등록</a></li>
-                        <li><a href='/groupform'>단체관람/대관문의</a></li>
+                        {cookies.idCheck !== "admin" && cookies.idCheck && (
+                            <>
+                                <li><a href='/customerlist'>멤버쉽</a></li>
+                                <li><a href='/MyPage_res'>마이페이지</a></li>
+                                <li><a href='/FAQ'>고객센터</a></li>
+                                <li><a href='/parking'>주차등록</a></li>
+                                <li><a href='/groupform'>단체관람/대관문의</a></li>
+                                <li><a href='#' onClick={handleLogout}>로그아웃</a></li>
+                            </>
+                        )}
+                        {!cookies.idCheck && <li><a href='/login'>로그인</a></li>}
                     </ul>
                     <ul className='header-member-box'>
                         <li>
-                            <i class="bi bi-person" className='bi-person'></i>
-                            <a href='/signCheck'>회원가입</a>
+                            {!cookies.idCheck && (
+                                <li>
+                                    <i class="bi bi-person" className='bi-person'></i>
+                                    <a href='/signCheck'>회원가입</a>
+                                </li>
+                            )}
                         </li>
                         <li><a href='#' class="btn_reserve">바로예매</a></li>
                         <li><i class="bi bi-list" className='bi-list'></i></li>
                     </ul>
-                    {cookies.idCheck &&(
+                    {cookies.idCheck && (
                         <p className="Header_user_name">{cookies.idCheck}님 환영합니다.</p>
                     )}
-                    
+
                 </div>
             </div>
             <div className='nav'>
@@ -152,9 +163,9 @@ function Header() {
                             </div>
                         )}
                     </li>
-                  
+
                 </ul>
-               
+
             </div>
 
 

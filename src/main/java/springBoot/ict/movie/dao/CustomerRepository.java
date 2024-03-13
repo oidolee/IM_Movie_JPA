@@ -21,4 +21,6 @@ public interface CustomerRepository extends JpaRepository<CustomerDTO, Integer> 
 	@Query("SELECT c.IC_password FROM CustomerDTO c WHERE c.IC_email = :email AND c.IC_hp = :hp")
 	String findIdByEmailAndHp(@Param("email") String email, @Param("hp") String hp);
 	
+	// 회원정보 수정 
+	
 }
