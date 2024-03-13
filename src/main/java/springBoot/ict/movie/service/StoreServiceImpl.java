@@ -6,10 +6,12 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import springBoot.ict.movie.dao.StoreRepository;
 import springBoot.ict.movie.dto.StoreDTO;
 
+@Service
 public class StoreServiceImpl implements StoreService {
 
 	@Autowired
@@ -22,7 +24,7 @@ public class StoreServiceImpl implements StoreService {
 		
 		//List<StoreDTO> list = dao.sampleList();
 		//System.out.println("list : " + list);
-		return null;
+		return dao.findAll();
 	}
 
 	// 스토어 등록

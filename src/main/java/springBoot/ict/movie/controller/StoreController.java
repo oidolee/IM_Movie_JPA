@@ -21,6 +21,7 @@ import springBoot.ict.movie.service.StoreServiceImpl;
 @RestController
 @RequestMapping(value="/page_3")	
 public class StoreController {
+	
 	@Autowired
 	private StoreServiceImpl service;	
 	
@@ -28,7 +29,7 @@ public class StoreController {
 	
 	// 스토어 리스트 조회
 	@PostMapping("/list")	// ★페이지 이름 아니고, 어떤걸 쓰는거지???
-	public List<StoreDTO> customerList(Model model)
+	public List<StoreDTO> StoreList(Model model)
             throws ServletException, IOException {
         logger.info("<<< url -> customerList");
         List<StoreDTO> list = service.listStore();
@@ -38,6 +39,14 @@ public class StoreController {
         return list;
     } 
 	
+	// 스토어 등록
 	
 	
+	
+	
+	// 스토어 수정
+	
+	// 스토어 삭제
+	
+	// 스토어 상세페이지
 }
