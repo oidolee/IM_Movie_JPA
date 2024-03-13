@@ -41,7 +41,7 @@ function FIND() {
       </div>
       <div className={`FIND_help_wrap ${style.FIND_help_wrap}`}>
           <p>더 궁금한 점이 있거나, 이미 문의한 내용과 답변을 확인하려면?</p>
-          <a href = "#none">1:1문의 바로가기</a>
+          <a href = "/consult">1:1문의 바로가기</a>
       </div>
     </div> 
   );

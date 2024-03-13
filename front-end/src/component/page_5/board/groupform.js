@@ -89,21 +89,9 @@ function Form() {
                 <input type="text" id="con2" className={`con1 ${style.con2}`}  name="con2" placeholder="제목을 입력해주세요" required /> 
             </div>
                 <textarea className={`con3 ${style.con3}`} id="con3" name="con3" rows="3" placeholder="내용 및 첨부파일에 개인정보(카드번호,계좌번호,주민번호)가 포함되지 않도록 유의하여 입력해주세요." required></textarea>
-            <hr></hr>
             </div>
 
-            <div className={`Form_group1 ${style.Form_group1}`}>
-              <label for="g_recol">답변수신 여부</label>
-              <input type="checkbox" id="category3" className={`category3 ${style.category3}`}  name="category" value="category3" />
-                <label for="category3">이메일 알림받기</label>
-                
-                <input type="checkbox" id="category4" className={`category4 ${style.category4}`} name="category" value="category4" />
-                <label for="category4">SMS 알림받기</label>
-
-                <label className={`warning ${style.warning}`}>비회원 문의 시 이메일로 답변 내용이 발송되므로 이메일로 답변 알림 받기는 필수입니다.</label>
-              <hr></hr>
-            </div>
-
+            
             <div className={`Form_make2 ${style.Form_make2}`}>
                 <p>신청자 정보</p>
                 <hr></hr>
@@ -134,16 +122,6 @@ function Form() {
               <input type="tel" id="tel2" className={`tel2 ${style.tel2}`}  name="tel" />
               <input type="tel" id="tel3" className={`tel3 ${style.tel3}`}  name="tel" />
               
-              <hr></hr>
-            </div>
-
-            <div className={`Form_group ${style.Form_group}`}>
-              <label for="gg_email">이메일</label>
-              <input type="email" id="email1" className={`email1 ${style.email1}`}  name="email" />
-               &nbsp;@
-              <input type="email" id="email2" className={`email2 ${style.email2}`}  name="email" />
-
-              <label className={`warning2 ${style.warning2}`}> 답변 등록시 해당 이메일로 자동 발송 됩니다.</label>
               <hr></hr>
             </div>
 

@@ -9,18 +9,26 @@ import send from "../../../assets/page_5_5/send.png";
 import trailer1 from "../../../assets/page_5_5/trailer1.png";
 import trailer2 from "../../../assets/page_5_5/trailer2.png";
 
+import BobMarley_OneLove from '../../../assets/page_5/BobMarley_OneLove.jpg';
+
 function MovieDetail() {
   const [showModal, setShowModal] = useState(false); // 모달 창 열림/닫힘 상태
+  const [selectedValue, setSelectedValue] = useState(1); // 선택된 값
+  const [selectedTrailer, setSelectedTrailer] = useState("");
 
-  // 클릭된 버튼의 트레일러 URL을 출력하는 함수
-  const handleTrailerClick = () => {
+  const handleTrailerClick = (trailerUrl) => {
+    setSelectedTrailer(trailerUrl);
     setShowModal(true); // 모달 창 열기
-    
   };
 
   // 모달 창을 닫는 함수
   const handleCloseModal = () => {
     setShowModal(false); // 모달 창 닫기
+  };
+
+  // 탭 선택 핸들러
+  const handleSelect = (value) => {
+    setSelectedValue(value);
   };
 
   return (
@@ -49,7 +57,7 @@ function MovieDetail() {
             </div>
 
             <div className={`btn_wrap1 ${style.btn_wrap1}`}>
-              <button className={`detail_btn1 ${style.detail_btn1}`} id="10">
+              <button className={`detail_btn1 ${style.detail_btn1}`} id="10" onClick={() => handleTrailerClick("https://cf.lottecinema.co.kr//Media/MovieFile/MovieMedia/202402/20808_301_1.mp4")}>
                 &#9658;예고편 재생{" "}
               </button>
               <button className={`detail_btn2 ${style.detail_btn2}`} id="11">
@@ -86,69 +94,91 @@ function MovieDetail() {
             </div>
           </div>
         </div>
+
         <div className={`detail_down ${style.detail_down}`}>
-          <div className={`detail_down2 ${style.detail_down2}`}>
-            <button className={`con_1 ${style.con_1}`} id="14">
-              상세정보
-            </button>
-            <button className={`con_2 ${style.con_2}`} id="15">
-              관람평
-            </button>
-            <hr></hr>
-          </div>
-
-          <div className={`detail_box1 ${style.detail_box1}`}>
-            <p>영화정보</p>
-            <p>
-              <span style={{ color: "gray" }}>.장르</span> 미스터리/한국
-            </p>
-            <p>
-              <span style={{ color: "gray" }}>.감독</span> 장재현
-            </p>
-            <p>
-              <span style={{ color: "gray" }}>.출연</span>{" "}
-              최민식,김고은,유해진,이도현
-            </p>
-          </div>
-
-          <div className={`detail_down3 ${style.detail_down3}`}>
-            <label for="de_title">트레일러</label>
-          </div>
           <button
-            className={`detail_trailer1 ${style.detail_trailer1}`}
-            onClick={handleTrailerClick}
+            type="button"
+            className={`tit ${style.tit} ${selectedValue === 1 ? style.StoreDetail_selectedTab : ''}`}
+            onClick={() => handleSelect(1)}
+            style={{ width: "50%", left: "0%", height: "70px" }}
           >
-            <img src={trailer1} alt="트레일러1" />
+            <span>상세정보</span>
           </button>
-          <button className={`detail_trailer2 ${style.detail_trailer2}`}>
-            <img src={trailer2} alt="트레일러2" />
+          <button
+            type="button"
+            className={`tit ${style.tit} ${selectedValue === 2 ? style.StoreDetail_selectedTab : ''}`}
+            onClick={() => handleSelect(2)}
+            style={{ width: "50%", left: "0%", height: "70px" }}
+          >
+            <span>관람평</span>
           </button>
+          <div>
+            <div className={`detail_box1 ${style.detail_box1}`}>
+              {selectedValue === 1 && (
+                <div>
+                  <p>영화정보</p>
+                  <p>
+                    <span style={{ color: "gray" }}>.장르</span> 미스터리/한국
+                  </p>
+                  <p>
+                    <span style={{ color: "gray" }}>.감독</span> 장재현
+                  </p>
+                  <p>
+                    <span style={{ color: "gray" }}>.출연</span>{" "}
+                    최민식,김고은,유해진,이도현
+                  </p>
+                </div>
+              )}
+
+              {selectedValue === 2 && (
+                <div>
+                  {/* 관람평 영역 */}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
+
+        <div className={`detail_down3 ${style.detail_down3}`}>
+          <label htmlFor="de_title">트레일러</label>
+        </div>
+        <button
+          className={`detail_trailer1 ${style.detail_trailer1}`}
+          onClick={() => handleTrailerClick("https://cf.lottecinema.co.kr//Media/MovieFile/MovieMedia/202402/20808_301_1.mp4")}
+        >
+          <img src={trailer1} alt="트레일러1" />
+        </button>
+        <button 
+          className={`detail_trailer2 ${style.detail_trailer2}`} 
+          onClick={() => handleTrailerClick("https://cf.lottecinema.co.kr//Media/MovieFile/MovieMedia/202402/20808_301_2.mp4")}
+        >
+          <img src={trailer2} alt="트레일러2" />
+        </button>
       </div>
+
       {showModal && (
         <div className={`modal ${style.modal}`} onClick={handleCloseModal}>
           <div
             className={`modal_content ${style.modal_content}`}
             onClick={(e) => e.stopPropagation()}
-            style={{
-                position: 'fixed',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                backgroundColor: '#FFF',
-                padding: '20px',
-                borderRadius: '10px',
-                boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-              }}
           >
             <video
-              src="https://cf.lottecinema.co.kr//Media/MovieFile/MovieMedia/202402/20808_301_1.mp4"
+              src={selectedTrailer}
               controls
               autoPlay
+              className={style.modal_video}
             ></video>
           </div>
         </div>
       )}
+      
+      
+      <div className={`detail_last ${style.detail_last}`}>
+          <ul>
+            <li><a href='#'><img src={BobMarley_OneLove} alt="detail.img" /></a></li>
+          </ul>
+      </div>
+
     </>
   );
 }

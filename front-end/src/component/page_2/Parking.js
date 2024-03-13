@@ -9,11 +9,47 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
 function Parking() {
+
+  let parkingLot = {
+    'A' : [
+      [1, 'N'],
+      [2, 'N'],
+      [3, 'N'],
+      [4, 'N'],
+      [5, 'Y'],
+    ],
+    'B' : [
+      [1, 'N'],
+      [2, 'N'],
+      [3, 'N'],
+      [4, 'N'],
+      [5, 'Y'],
+    ]
+  }
+ 
+  
   return (
     // 컴포넌트의 JSX 코드 작성
     <div className={`Parking ${sytle.Parking}`}>
-      <h1>주차등록</h1>
       <Container className={`Parking_panel ${sytle.Parking_panel}`}>
+      <h1>주차등록</h1>
+      <div className={`Parking_seat_box ${sytle.Parking_seat_box}`}>
+        {Object.keys(parkingLot).map(lot => (
+          <div key={lot} className={`Parking_lot ${sytle.Parking_lot}`}>
+            <h3>{lot}</h3>
+            <ul className={`Parking_row ${sytle.Parking_row}`}>
+              {parkingLot[lot].map(([seatNumber, status]) => (
+                <li key={`${lot}-${seatNumber}`} className={`seat_${status}`}>
+                  Seat {seatNumber}: {status === 'Y' ? 'x' : seatNumber}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+
+
         <Form>
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
             <Col sm>

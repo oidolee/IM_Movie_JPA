@@ -4,36 +4,37 @@ const url = "http://localhost:8081";
 
 class ApiService {
 
-    // list
-    fetchSamples(){ // 3.
-        console.log('fetchSamples() 호출!!')
-        return axios.get(SAMPLE_API_BASE_URL); // 스프링부트와 통신
+    // page_1
+    // 목록
+    listDiscount() {
+        console.log("listDiscount 호출");
+        return axios.get(url + "/page_1/DiscountList");
     }
 
-
-    addSample(inpuData){
-        console.log('addSample() 호출!!', inpuData);
-        return axios.post(SAMPLE_API_BASE_URL, inpuData);
-    }
-    // insert
-
-    // 1건 select
-    fetchSampleByID(sampleID){
-        console.log("fetchSampleByID 호출 !! ", sampleID);
-        return axios.get(SAMPLE_API_BASE_URL + "/" + sampleID);
+    // 등록
+    addDiscount(inputData) {
+        console.log("addDiscount 호출", inputData);
+        return axios.post(url + "/page_1/DiscountInsert", inputData);
     }
 
-    // update
-    editSample(inputData) {
-        console.log('editsSample() 호출!!', inputData);
-        return axios.put(SAMPLE_API_BASE_URL + "/"+ inputData.id, inputData);
+    page_3
+    ListStore_Admin() {
+         console.log('ListStore_Admin 호출');
+         return axios.get(url + "/page_3");
     }
 
-    // delete
-    deleteSample(sampleID){
-        console.log('editsSample() 호출!!', sampleID);
-        return axios.delete(SAMPLE_API_BASE_URL + "/"+ sampleID);
-    };
+    // ListStore_Admin(inputData) {
+    //     console.log('ListStore_Admin 호출', inputData);
+    //     return axios.get(url + "/page_3", inputData)
+    //         .then(response => {
+    //             console.log('ListStore_Admin 응답 데이터:', response.data);
+    //             return response.data;  // 받아온 데이터 반환
+    //         })
+    //         .catch(error => {
+    //             console.error('ListStore_Admin 에러:', error);
+    //             throw error;  // 에러를 다시 던져서 상위 컴포넌트에서 처리하도록 함
+    //         });
+    // }
 
     // page_4
     
@@ -68,7 +69,24 @@ class ApiService {
         console.log("findPWD 호출")
         console.log(inputData)
         return axios.post("http://localhost:8081/index/searchPWD", inputData);
-    } 
+    }
+
+    // page_6
+
+    // 1:1 문의 리스트
+    fetchConsult(){
+        console.log('fetchConsult() 호출!!')
+        return axios.get(url + '/page_6'); 
+    }
+
+    // 1:1 문의 등록
+    addConsult(inputData){
+        console.log('addConsult() 호출!!')
+        console.log(inputData)
+        return axios.post(url + '/page_6/save', inputData); 
+    }
+
+    
 
 }
 export default new ApiService();
