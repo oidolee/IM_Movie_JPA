@@ -1,62 +1,60 @@
 import React, { Component } from "react";
-import{ Table, TableCell, TableRow } from '@mui/material';
+import {Table, TableHead, TableRow, TableCell, TableBody, Typography, Button} from "@mui/material"
+import style from '../../styles/admin/page_1/Admin_Discount_List.css';
 
 class Admin_Discount_List extends Component {
   render() {
     return (
-      <div>
-        <form action="#" method="post">
-          <input type="hidden" name="dc_num" value={this.props.dc_num} />
-          <Table>
+      <div className={`Admin_Discount ${style.Admin_Discount}`}>
+        <br />
+        <br />
+        <Typography variant="h5" className="Admin_Discount_List">
+          할인 리스트
+        </Typography>
+        <br />
+        <br />
+        <Button variant="contained" color="primary" onClick={this.Admin_Discount_Add}>
+          Discount_Add
+        </Button>
+        <br />
+        <br />
+        <Table>
+          <TableHead>
             <TableRow>
-              <TableCell
-                width="20%"
-                name="dc_num"
-                value={this.props.dc_num}
-              >
-                {this.props.dc_num}
-              </TableCell>
-
-              <TableCell width="20%" name="dc_main_title">
-                {this.props.dc_main_title}
-              </TableCell>
-
-              <TableCell width="20%" name="dc_sub_title">
-                {this.props.dc_sub_title}
-              </TableCell>
-
-              <TableCell width="20%" name="dc_main_img">
-                {this.props.dc_main_img}
-              </TableCell>
-
-              <TableCell width="20%" name="dc_sub_img">
-                {this.props.dc_sub_img}
-              </TableCell>
-
-              <TableCell width="20%" name="dc_show">
-                {this.props.dc_show}
-              </TableCell>
-
-              <TableCell width="10%" name="dc_regdate">
-                <input
-                  type="button"
-                  class="btn"
-                  value="수정"
-                  onClick={this.displayUpdateClick}
-                />
-              </TableCell>
-
-              <TableCell width="10%" name="dc_regdate">
-                <input
-                  type="button"
-                  class="btn"
-                  value="삭제"
-                  onClick={this.displayDeleteClick}
-                />
-              </TableCell>
+              <TableCell>Num</TableCell>
+              <TableCell>Main_Title</TableCell>
+              <TableCell>Sub_Title</TableCell>
+              <TableCell>Main_Img</TableCell>
+              <TableCell>Sub_Img</TableCell>
+              <TableCell>Show</TableCell>
+              <TableCell>Edit</TableCell>
+              <TableCell>Delete</TableCell>
             </TableRow>
-          </Table>
-        </form>
+          </TableHead>
+          <TableBody>
+            {/* {this.state.samples.map(
+              (
+                sample // 6.
+              ) => (
+                <TableRow key={sample.id}>
+                  <TableCell component="th" scope="sample">
+                    {sample.id}
+                  </TableCell>
+                  <TableCell>{sample.name}</TableCell>
+                  <TableCell>{sample.brand}</TableCell>
+                  <TableCell>{sample.madein}</TableCell>
+                  <TableCell>{sample.price}</TableCell>
+                  <TableCell onClick={() => this.editSample(sample.id)}>
+                    <Create />
+                  </TableCell>
+                  <TableCell onClick={() => this.deleteSample(sample.id)}>
+                    <Delete />
+                  </TableCell>
+                </TableRow>
+              )
+            )} */}
+          </TableBody>
+        </Table>
       </div>
     );
   }
