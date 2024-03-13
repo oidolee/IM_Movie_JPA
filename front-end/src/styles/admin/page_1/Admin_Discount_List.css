@@ -1,6 +1,7 @@
 .Admin_Discount .Admin_Discount_List {
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 .Admin_Discount .Add_btn {
@@ -10,4 +11,12 @@
 
 .Admin_Discount .Add_btn:hover {
     background-color: #FF243E;
+}
+
+.Admin_Discount  .css-1ex1afd-MuiTableCell-root {
+    text-align: center;
+}
+
+.Admin_Discount .Discount_List_Head {
+    border-bottom: 1px solid #ccc;
 }
