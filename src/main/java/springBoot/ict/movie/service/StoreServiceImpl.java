@@ -20,10 +20,10 @@ public class StoreServiceImpl implements StoreService {
 	// 스토어 목록
 	@Override
 	public List<StoreDTO> listStore() throws ServletException, IOException {
-		System.out.println("서비스 - listAll");
+		System.out.println("서비스 - listStore");
 		
-		//List<StoreDTO> list = dao.sampleList();
-		//System.out.println("list : " + list);
+		System.out.println(dao.findAll());
+		
 		return dao.findAll();
 	}
 

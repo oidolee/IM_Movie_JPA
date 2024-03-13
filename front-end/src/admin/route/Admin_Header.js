@@ -73,6 +73,7 @@ function Header() {
                                         <nav class="sb_sidenav_menu-nested nav">
                                             <a class="nav-link" href="/admin/page_2/test_1">page_1 / Test_1</a>
                                             <a class="nav-link" href="/admin/page_2/test_2">page_2 / Test_2</a>
+                                            <a class="nav-link" href="/admin/page_3/ListStore_Admin">page_3 / ListStore_Admin</a>
                                         </nav>
                                     </div>
                                    

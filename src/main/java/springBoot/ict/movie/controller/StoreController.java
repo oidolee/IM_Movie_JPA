@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,13 +28,14 @@ public class StoreController {
 	private static final Logger logger = LoggerFactory.getLogger(StoreController.class);
 	
 	// 스토어 리스트 조회
-	@PostMapping("/list")	// ★페이지 이름 아니고, 어떤걸 쓰는거지???
-	public List<StoreDTO> StoreList(Model model)
+	@GetMapping	// ★페이지 이름 아니고, 어떤걸 쓰는거지???
+	public List<StoreDTO> storeList(Model model)
             throws ServletException, IOException {
-        logger.info("<<< url -> customerList");
+        logger.info("<<< url -> storeList");
         List<StoreDTO> list = service.listStore();
-        model.addAttribute("list", list); //★list 설정 필요함!
-        System.out.println(list);
+        System.out.println("list : " + list);
+        model.addAttribute("list", list); //★listStore_Admin list 설정
+        
         
         return list;
     } 
