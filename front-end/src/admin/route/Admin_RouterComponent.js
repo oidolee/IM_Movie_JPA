@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route} from 'react-router-dom' // npm install react-router-dom@5
+import {BrowserRouter, Route, Link} from 'react-router-dom' // npm install react-router-dom@5
 
 // admin
 import Admin_Contents from '../main/Admin_Contents'
