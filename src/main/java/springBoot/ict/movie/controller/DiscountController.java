@@ -67,6 +67,7 @@ public class DiscountController {
 			service.DiscountInsert(dto);
 			resultCode = "200";
 			resultMsg = "DiscountInsert Success";
+			
 		} catch(Exception e) {
 			
 			resultCode = "400";
