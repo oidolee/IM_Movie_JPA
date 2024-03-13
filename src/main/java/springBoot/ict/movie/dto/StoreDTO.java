@@ -16,31 +16,22 @@ import lombok.Data;
 @Data
 public class StoreDTO {
 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
-    
-    //@JsonProperty("item_code")
-    @Column(name= "subscribe_num")
+    @JsonProperty("itemCode")
     private int item_code;
-    //@JsonProperty("item_type")
-	@Column(name= "subscribe_num")
+    @JsonProperty("itemType")
     private String item_type;
-    //@JsonProperty("item_name")
-	@Column(name= "subscribe_num")
+    @JsonProperty("itemName")
     private String item_name;
-    //@JsonProperty("item_detail")
-	@Column(name= "subscribe_num")
+    @JsonProperty("itemDetail")
     private String item_detail;
-    //@JsonProperty("item_price")
-	@Column(name= "subscribe_num")
+    @JsonProperty("itemPrice")
     private int item_price;
-    //@JsonProperty("item_sale_price")
-	@Column(name= "subscribe_num")
+    @JsonProperty("itemSalePrice")
     private int item_sale_price;
-    //@JsonProperty("item_image")
-	@Column(name= "subscribe_num")
+    @JsonProperty("itemImage")
     private String item_image;
-    //@JsonProperty("item_exp")
-	@Column(name= "subscribe_num")
+    @JsonProperty("itemExp")
     private String item_exp;
 }

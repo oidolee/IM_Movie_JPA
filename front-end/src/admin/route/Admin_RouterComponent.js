@@ -9,7 +9,7 @@ import Test_1 from '../page_1/Test_1';
 
 // page_3
 import ListStore_Admin from '../page_3/ListStore_Admin';
-
+import AddStore_Admin from '../page_3/AddStore_Admin';
 
 const Admin_RouterComponent = () => {
 
@@ -30,6 +30,17 @@ const Admin_RouterComponent = () => {
                     <Route>
                         <Route path="/admin/page_3/ListStore_Admin" exact={true} component={ListStore_Admin} />
                     </Route>
+
+
+                    {/* page_3 */}
+                    <Route>
+                        <Route path="/admin/page_3/AddStore_Admin" exact={true} component={AddStore_Admin} />
+                    </Route> 
+
+                    {/* page_3 */}
+                    {/* <Route>
+                        <Route path="/admin/page_3/EditStore_Admin" exact={true} component={EditStore_Admin} />
+                    </Route> */}
 
             </BrowserRouter>
         </div>

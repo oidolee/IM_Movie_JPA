@@ -35,11 +35,20 @@ class ApiService {
         return axios.delete(SAMPLE_API_BASE_URL + "/"+ sampleID);
     };
 
+    // page3 list
     page_3
     ListStore_Admin() {
          console.log('ListStore_Admin 호출');
          return axios.get(url + "/page_3");
     }
+
+    // page3 insert
+    AddStore_Admin(inputData) {
+        console.log('AddStore_Admin 호출!!', inputData);
+        return axios.post(Surl + "/page_3/AddStore_Admin", inputData)
+    }
+
+
 
     // ListStore_Admin(inputData) {
     //     console.log('ListStore_Admin 호출', inputData);
