@@ -14,7 +14,7 @@ public interface DiscountService {
 		throws ServletException, IOException;
 	
 	// 등록
-	public int DiscountInsert(DiscountDTO dto)
+	public void DiscountInsert(DiscountDTO dto)
 			throws ServletException, IOException;
 	
 	// 상세페이지

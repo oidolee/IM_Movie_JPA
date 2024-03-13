@@ -16,7 +16,9 @@ import springBoot.ict.movie.dto.DiscountDTO;
 import springBoot.ict.movie.service.DiscountServiceImpl;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 
@@ -34,7 +36,7 @@ public class DiscountController {
 	private static final Logger logger = LoggerFactory.getLogger(DiscountController.class);
 	
 	// 목록
-	@GetMapping() 
+	@GetMapping("/DiscountList") 
 	public List<DiscountDTO> DiscountList(Model model) 
 			throws ServletException, IOException {
 		
@@ -44,6 +46,39 @@ public class DiscountController {
 		model.addAttribute("list", list);
 		
 		return list;
+	}
+	
+	// 등록
+	@PostMapping("/DiscountInsert") 
+	public Map<String, Object> DiscountInsert(@RequestBody DiscountDTO dto) 
+			throws ServletException, IOException {
+		
+		logger.info("url - DiscountInsert");
+		
+		System.out.println(dto);
+		
+		String resultCode = "";
+		String resultMsg = "";
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+			
+			service.DiscountInsert(dto);
+			resultCode = "200";
+			resultMsg = "DiscountInsert Success";
+		} catch(Exception e) {
+			
+			resultCode = "400";
+			resultMsg = e.getMessage();
+			e.printStackTrace();
+		}
+		
+		map.put("resultCode", resultCode);
+		map.put("resultMsg", resultMsg);
+		map.put("dto", dto);
+		
+		return map;
 	}
 	
 	

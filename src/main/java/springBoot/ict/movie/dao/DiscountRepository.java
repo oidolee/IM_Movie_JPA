@@ -9,4 +9,6 @@ public interface DiscountRepository extends JpaRepository<DiscountDTO, Integer> 
 
 	
 	
+	
+	
 }

@@ -29,12 +29,14 @@ public class DiscountServiceImpl implements DiscountService {
 	}
 
 	@Override
-	public int DiscountInsert(DiscountDTO dto) 
+	public void DiscountInsert(DiscountDTO dto) 
 			throws ServletException, IOException {
 		
 		System.out.println("DiscountServiceImpl - DiscountInsert");
 		
-		return 0;
+		System.out.println(dto);
+		
+		dao.save(dto);
 	}
 
 	@Override
