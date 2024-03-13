@@ -77,7 +77,9 @@ public class ConsultController {
         System.out.println(list);
         
         return list;
-    } 
+
+    }
+}
 		
 	
 //	// 로그인
@@ -163,6 +165,3 @@ public class ConsultController {
 //        map.put("resultMsg", resultMsg);
 //
 //        return map;
-//    }		
-}
-
