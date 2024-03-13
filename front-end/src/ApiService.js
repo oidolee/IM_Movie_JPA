@@ -8,7 +8,7 @@ class ApiService {
     // 목록
     listDiscount() {
         console.log("listDiscount 호출");
-        return axios.get(url + "/page_1/list");
+        return axios.get(url + "/page_1/DiscountList");
     }
 
     // page_4
