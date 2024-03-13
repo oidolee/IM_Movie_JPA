@@ -12,10 +12,6 @@ function Header() {
     const [cookies, setCookie, removeCookie] = useCookies(['idCheck']);
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 33f094577c14cad581ea574d8f0ba353b5e09397
     // 페이지 로딩 시 경로 설정 (실제로는 해당 경로를 얻는 방법에 따라 다를 수 있음)
     useEffect(() => {
         const currentPath = window.location.pathname;
@@ -39,14 +35,9 @@ function Header() {
         removeCookie('idCheck');
         alert('로그아웃 되었습니다.')
     };
-<<<<<<< HEAD
     //헤더 동적 처리         
     const location = useLocation();
     const isHomePage = location.pathname === '/';
-=======
-
-
->>>>>>> 33f094577c14cad581ea574d8f0ba353b5e09397
 
     return (
         <div className={`header_section ${isHomePage ? '' : 'special_header'}`}>
