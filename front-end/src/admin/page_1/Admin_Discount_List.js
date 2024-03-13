@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import style from "../../styles/admin/page_1/Admin_Discount_List.css";
 import ApiService from "../../ApiService";
-import moment from "moment";
+import { Create, Delete } from "@mui/icons-material";
 
 class Admin_Discount_List extends Component {
   constructor(props) {
@@ -43,6 +43,26 @@ class Admin_Discount_List extends Component {
   discountAdd = () => {
     window.localStorage.removeItem("dc_num");
     this.props.history.push("/admin/page_1/Admin_Discount_Add");
+  };
+
+  // 수정
+  editDiscount = (dc_num) => {
+    window.localStorage.removeItem("dc_num", dc_num);
+    this.props.history.push("/admin/page_1/Admin_Discount_Edit");
+  };
+
+  // 삭제
+  deleteDiscount = (dc_num) => {
+    ApiService.deleteDiscount(dc_num)
+      .then((res) => {
+        this.setState({
+          lists: this.state.lists.filter((list) => list.dc_num !== dc_num),
+        });
+        console.log("deleteDiscount 성공 : ", res.data);
+      })
+      .catch((err) => {
+        console.log("deleteDiscount 실패 : ", err);
+      });
   };
 
   render() {
@@ -89,12 +109,12 @@ class Admin_Discount_List extends Component {
                 <TableCell>{list.dc_main_img}</TableCell>
                 <TableCell>{list.dc_show}</TableCell>
                 <TableCell>{list.dc_sysdate}</TableCell>
-                {/* <TableCell onClick={() => this.editDiscount(list.dc_num)}>
-                    <Create />
-                  </TableCell>
-                  <TableCell onClick={() => this.deleteDiscount(list.dc_num)}>
-                    <Delete />
-                  </TableCell> */}
+                <TableCell onClick={() => this.editDiscount(list.dc_num)}>
+                  <Create />
+                </TableCell>
+                <TableCell onClick={() => this.deleteDiscount(list.dc_num)}>
+                  <Delete />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

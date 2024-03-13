@@ -17,6 +17,7 @@ public class DiscountServiceImpl implements DiscountService {
 	@Autowired
 	private DiscountRepository dao;
 	
+	// 목록
 	@Override
 	public List<DiscountDTO> DiscountList() 
 			throws ServletException, IOException {
@@ -28,6 +29,7 @@ public class DiscountServiceImpl implements DiscountService {
 		return dao.findAll();
 	}
 
+	// 등록
 	@Override
 	public void DiscountInsert(DiscountDTO dto)
 			throws ServletException, IOException {
@@ -39,13 +41,18 @@ public class DiscountServiceImpl implements DiscountService {
 		dao.save(dto);
 	}
 
+	// 상세페이지
 	@Override
 	public DiscountDTO DiscountDetailList(int dc_num) 
 			throws ServletException, IOException {
 		
 		System.out.println("DiscountServiceImpl - DiscountDetailList");
 		
-		return null;
+		System.out.println(dc_num);		
+		
+		DiscountDTO dto = dao.DiscountDetailList(dc_num);
+		
+		return dto;
 	}
 
 	@Override

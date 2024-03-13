@@ -17,6 +17,17 @@ class ApiService {
         return axios.post(url + "/page_1/DiscountInsert", inputData);
     }
 
+    // 1건조회
+    fetchDiscountByID(dc_num) {
+        console.log("selectDiscount 호출", dc_num);
+        return axios.get(url + "/page_1/DiscountDetailList" + "?dc_num=" + dc_num);
+    }
+
+    // 수정
+    editDiscount(dc_num) {
+
+    }
+
     //page_3
     ListStore_Admin() {
          console.log('ListStore_Admin 호출');
