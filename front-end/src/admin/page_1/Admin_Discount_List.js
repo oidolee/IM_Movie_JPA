@@ -18,7 +18,7 @@ class Admin_Discount_List extends Component {
 
     this.state = {
       lists: [],
-      mseeage: null,
+      message: null,
     };
   }
 

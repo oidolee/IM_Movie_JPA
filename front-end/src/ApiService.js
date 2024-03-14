@@ -29,6 +29,12 @@ class ApiService {
 
     }  
 
+    // 삭제
+    deleteDiscount(dc_num) {
+        console.log("deleteDiscount 호출", dc_num);
+        return axios.delete(url + "/page_1/DiscountDelete" + "/" + dc_num);
+    }
+
     // page3 list
     page_3
     ListStore_Admin() {
