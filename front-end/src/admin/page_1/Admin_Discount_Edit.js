@@ -10,6 +10,7 @@ class Admin_Discount_Edit extends Component {
       dc_num: "",
       dc_main_title: "",
       dc_sub_title: "",
+      dc_content: "",
       dc_main_img: "",
       dc_show: "",
       dc_sysdate: "",
@@ -29,6 +30,7 @@ class Admin_Discount_Edit extends Component {
           dc_num: list.dto.dc_num,
           dc_main_title: list.dto.dc_main_title,
           dc_sub_title: list.dto.dc_sub_title,
+          dc_content: list.dto.dc_content,
           dc_main_img: list.dto.dc_main_img,
           dc_show: list.dto.dc_show,
           dc_sysdate: list.dto.dc_sysdate,
@@ -53,6 +55,7 @@ class Admin_Discount_Edit extends Component {
       dc_num: this.state.dc_num,
       dc_main_title: this.state.dc_main_title,
       dc_sub_title: this.state.dc_sub_title,
+      dc_content: this.state.dc_content,
       dc_main_img: this.state.dc_main_img,
       dc_show: this.state.dc_show,
       dc_sysdate: this.state.dc_sysdate,
@@ -108,6 +111,19 @@ class Admin_Discount_Edit extends Component {
           name="dc_sub_title"
           value={this.state.dc_sub_title}
           placeholder="dc_sub_title"
+          onChange={this.onChange}
+        />
+        <br />
+
+        <TextField
+          required
+          id="standard-required"
+          variant="standard"
+          label="Content"
+          type="text"
+          name="dc_content"
+          value={this.state.dc_content}
+          placeholder="dc_content"
           onChange={this.onChange}
         />
         <br />

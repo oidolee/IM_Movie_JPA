@@ -18,6 +18,7 @@
 
 .Discount ul {
     list-style: none;
+    width: 100%;
 }
 
 .Discount .Discount_container {
@@ -37,6 +38,7 @@
     align-items: center;
     flex-direction: column;
     text-align: center;
+    width: 100%;
 }
 
 .Discount .Discount_img {

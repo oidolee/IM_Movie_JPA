@@ -91,6 +91,7 @@ class Admin_Discount_List extends Component {
               <TableCell>Num</TableCell>
               <TableCell>Main_Title</TableCell>
               <TableCell>Sub_Title</TableCell>
+              <TableCell>Content</TableCell>
               <TableCell>Main_Img</TableCell>
               <TableCell>Show</TableCell>
               <TableCell>Sysdate</TableCell>
@@ -107,6 +108,7 @@ class Admin_Discount_List extends Component {
                 <TableCell>{list.dc_main_title}</TableCell>
                 <TableCell>{list.dc_sub_title}</TableCell>
                 <TableCell>{list.dc_main_img}</TableCell>
+                <TableCell>{list.dc_content}</TableCell>
                 <TableCell>{list.dc_show}</TableCell>
                 <TableCell>{list.dc_sysdate}</TableCell>
                 <TableCell onClick={() => this.editDiscount(list.dc_num)}>

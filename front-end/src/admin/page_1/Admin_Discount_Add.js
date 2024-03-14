@@ -9,6 +9,7 @@ class Admin_Discount_Add extends Component {
     this.state = {
       dc_main_title: "",
       dc_sub_title: "",
+      dc_content: "",
       dc_main_img: "",
       dc_show: "n", // 기본값 설정
       dc_sysdate: new Date().toISOString(), // 기본값 설정
@@ -27,6 +28,7 @@ class Admin_Discount_Add extends Component {
     let iputDate = {
       dc_main_title: this.state.dc_main_title,
       dc_sub_title: this.state.dc_sub_title,
+      dc_content: this.state.dc_content,
       dc_main_img: this.state.dc_main_img,
       dc_show: this.state.dc_show,
       dc_sysdate: this.state.dc_sysdate,
@@ -70,6 +72,18 @@ class Admin_Discount_Add extends Component {
           name="dc_sub_title"
           value={this.state.dc_sub_title}
           placeholder="Input Sub_Title"
+          onChange={this.onChange}
+        />
+        <br />
+        <TextField
+          required
+          id="standard-required"
+          variant="standard"
+          label="Content"
+          type="text"
+          name="dc_content"
+          value={this.state.dc_content}
+          placeholder="Input Content"
           onChange={this.onChange}
         />
         <br />
