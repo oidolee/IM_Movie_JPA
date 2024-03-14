@@ -22,13 +22,12 @@ public class ConsultAnswerDTO {
     @Id
     private int one_id_answer;
     
-    @JsonProperty("iba_title")
+    private int one_id;
+    
     private String iba_title;
     
-    @JsonProperty("iba_content")
     private String iba_content;
     
-    @JsonProperty("iba_date")
     private Date iba_date;
    
 }

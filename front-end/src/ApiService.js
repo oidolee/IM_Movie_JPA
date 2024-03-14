@@ -89,12 +89,26 @@ class ApiService {
         return axios.get(url + '/page_6'); 
     }
 
+    // 1:1 문의 상세
+    fetchConsultDetail(one_id){
+        console.log('fetchConsultDetail() 호출!!')
+        return axios.get(url + '/page_6/select/' + one_id); 
+    }
+
     // 1:1 문의 등록
     addConsult(inputData){
         console.log('addConsult() 호출!!')
         console.log(inputData)
         return axios.post(url + '/page_6/save', inputData); 
     }
+
+    // 1:1 문의 답변
+    fetchConsultAnswer(one_id){
+        console.log('fetchConsultAnswerById() 호출!!')
+        
+        return axios.get(url + '/page_6/select'+ one_id); 
+    }
+
 
     
 
