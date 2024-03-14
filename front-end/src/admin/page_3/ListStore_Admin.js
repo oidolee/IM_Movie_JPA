@@ -37,10 +37,10 @@ class ListStore_Admin extends Component {
     }
 
     // insert
-    addSample = () => {
+    AddStore_Admin = () => {
         window.localStorage.removeItem("sampleID"); // SQL에서 max + 1로 자동증가 처리하므로
         // RoutConponent.js의 <Route path="/add-sample" exact={true} component={AddSampleComponent} /> 호출
-        this.props.history.push("/add-sample");
+        this.props.history.push("../page_3/AddStore_Admin");
     }
 
     // update
@@ -70,7 +70,7 @@ class ListStore_Admin extends Component {
             <div><br/><br/>
 
                 <Typography variant="h4" style={style}> STORE ITEM LIST </Typography><br/><br/>
-                <Button variant="contained" color="primary" onClick={this.addSample}> Add Sample </Button>
+                <Button variant="contained" color="primary" onClick={this.AddStore_Admin}> Add Sample </Button>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -88,13 +88,13 @@ class ListStore_Admin extends Component {
                     <TableBody>
                         {this.state.lists.map(list => 
                             <TableRow key={list.item_code}>
-                                <TableCell component="th" scope="sample"> {list.item_type} </TableCell> scope="row" 이건 뭐지????
-                                <TableCell> {list.item_name} </TableCell>
-                                <TableCell> {list.item_detail} </TableCell>
-                                <TableCell> {list.item_price} </TableCell>
-                                <TableCell> {list.item_sale_price} </TableCell>
-                                <TableCell> {list.item_image} </TableCell>
-                                <TableCell> {list.item_exp} </TableCell>
+                                <TableCell component="th" scope="lists"> {list.itemCode} </TableCell>
+                                <TableCell> {list.itemName} </TableCell>
+                                <TableCell> {list.itemDetail} </TableCell>
+                                <TableCell> {list.itemPrice} </TableCell>
+                                <TableCell> {list.itemSalePrice} </TableCell>
+                                <TableCell> {list.itemImage} </TableCell>
+                                <TableCell> {list.itemExp} </TableCell>
                                 <TableCell onClick={() => this.EditStore_Admin(list.item_code)}>
                                     <Create />
                                 </TableCell>

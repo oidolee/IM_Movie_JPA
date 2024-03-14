@@ -17,24 +17,34 @@ class ApiService {
         return axios.post(url + "/page_1/DiscountInsert", inputData);
     }
 
-    //page_3
+    // 1건조회
+    fetchDiscountByID(dc_num) {
+        console.log("selectDiscount 호출", dc_num);
+        return axios.get(url + "/page_1/DiscountDetailList" + "?dc_num=" + dc_num);
+    }
+
+    // 수정
+    editDiscount(dc_num) {
+
+
+    }  
+
+    // page3 list
+    page_3
     ListStore_Admin() {
          console.log('ListStore_Admin 호출');
          return axios.get(url + "/page_3/ListStore_Admin");
     }
 
-    // ListStore_Admin(inputData) {
-    //     console.log('ListStore_Admin 호출', inputData);
-    //     return axios.get(url + "/page_3", inputData)
-    //         .then(response => {
-    //             console.log('ListStore_Admin 응답 데이터:', response.data);
-    //             return response.data;  // 받아온 데이터 반환
-    //         })
-    //         .catch(error => {
-    //             console.error('ListStore_Admin 에러:', error);
-    //             throw error;  // 에러를 다시 던져서 상위 컴포넌트에서 처리하도록 함
-    //         });
-    // }
+    // page3 insert
+    AddStore_Admin(inputData) {
+        console.log('AddStore_Admin 호출!!', inputData);
+        return axios.post(url + "/page_3/AddStore_Admin", inputData)
+    }
+
+
+
+
 
     // page_4
     

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import springBoot.ict.movie.dto.DiscountDTO;
@@ -81,6 +82,41 @@ public class DiscountController {
 		
 		return map;
 	}
+	
+	// 상세페이지
+	@GetMapping("/DiscountDetailList/{dc_num}") 
+	public Map<String, Object> DiscountDetailList(@RequestParam("dc_num") int dc_num) 
+			throws ServletException, IOException {
+		
+		logger.info("url - DiscountDetailList");
+		
+		String resultCode = "";
+		String resultMsg = "";
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+			
+			service.DiscountDetailList(dc_num);
+			resultCode = "200";
+			resultMsg = "DiscountInsert Success";
+		} 
+		
+		catch(Exception e) {
+			
+			resultCode = "400";
+			resultMsg = e.getMessage();
+			e.printStackTrace();
+		}
+		
+		map.put("resultCode", resultCode);
+		map.put("resultMsg", resultMsg);
+		map.put("dc_num", dc_num);
+		
+		return map;
+	}
+	
+	
 	
 	
 }
