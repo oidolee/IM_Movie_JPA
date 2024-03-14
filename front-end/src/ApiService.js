@@ -18,9 +18,9 @@ class ApiService {
     }
 
     // 1건조회
-    fetchDiscountByID(dc_num) {
+    selectDiscount(dc_num) {
         console.log("selectDiscount 호출", dc_num);
-        return axios.get(url + "/page_1/DiscountDetailList" + "?dc_num=" + dc_num);
+        return axios.get(url + "/page_1/DiscountDetailList" + "/" + dc_num);
     }
 
     // 수정

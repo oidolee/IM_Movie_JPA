@@ -21,21 +21,21 @@ class Admin_Discount_Edit extends Component {
   }
 
   selectDiscount = () => {
-    ApiService.fetchDiscountByID(window.localStorage.getItem("dc_num"))
-      .then((res) => {
-        let select = res.data;
+    ApiService.selectDiscount(window.localStorage.getItem("dc_num"))
+      .then(res => {
+        let list = res.data;
 
         this.setState({
-          dc_num: select.dc_num,
-          dc_main_title: select.dc_main_title,
-          dc_sub_title: select.dc_sub_title,
-          dc_main_img: select.dc_main_img,
-          dc_show: select.dc_show,
-          dc_sysdate: select.dc_sysdate,
-        });
+          dc_num: list.dc_num,
+          dc_main_title: list.dc_main_title,
+          dc_sub_title: list.dc_sub_title,
+          dc_main_img: list.dc_main_img,
+          dc_show: list.dc_show,
+          dc_sysdate: list.dc_sysdate,
+        }) 
         console.log("selectByIdDiscount 성공 : ", res.data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log("selectByIdDiscount 실패 : ", err);
       });
   };
@@ -49,7 +49,7 @@ class Admin_Discount_Edit extends Component {
   editDiscount = (e) => {
     e.preventDefault();
 
-    let iputDate = {
+    let inputData = {
       dc_num: this.state.dc_num,
       dc_main_title: this.state.dc_main_title,
       dc_sub_title: this.state.dc_sub_title,
@@ -58,7 +58,7 @@ class Admin_Discount_Edit extends Component {
       dc_sysdate: this.state.dc_sysdate
     }
 
-    ApiService.editDiscount(iputDate)
+    ApiService.editDiscount(inputData)
       .then(res => {
         this.setState({});
         console.log("editDiscount 성공 : ", res.data);
