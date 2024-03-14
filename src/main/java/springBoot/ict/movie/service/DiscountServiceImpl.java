@@ -63,6 +63,10 @@ public class DiscountServiceImpl implements DiscountService {
 		
 		System.out.println("DiscountServiceImpl - DiscountUpdate");
 		
+		System.out.println(dto);
+		
+		
+		
 		return 0;
 	}
 
