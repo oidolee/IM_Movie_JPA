@@ -32,9 +32,9 @@ public class ConsultServiceImpl implements ConsultService {
 	@Override
 	public ConsultDTO insertConsult(ConsultDTO csdto) 
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		return null;
+		
+		return csdao.save(csdto);
 	}
 
 	// 1:1문의 등록 1건 찾기

@@ -14,28 +14,31 @@ function Consult_part() {
     const history = useHistory();
 
     const cus_grade = 'VIP';
-    const [cookies, setCookie, removeCookie] = useCookies(['c_email']);
-    const [c_email, setIdCheck] = useState('');
+    const [cookies, setCookie, removeCookie] = useCookies(['cus_name']);
+    const [cus_name, setIdCheck] = useState('');
 
     useEffect(() => {
-        if (cookies.idCheck !== undefined) {
-            setIdCheck(cookies.c_email);
+        if (cookies.cus_name !== undefined) {
+            setIdCheck(cookies.cus_name);
         }
-    }, [cookies.c_email]);
+    }, [cookies.cus_name]);
 
+    const c_email = 'abc';
+    let a = 'abc';
     const [consultData, setConsultData] = useState({
-        c_email: '',
+        c_email: c_email,
+        cus_name: a,
         ib_type: '',
         ib_type_detail: '',
         ib_title: '',
-        ib_content: '',
+        ib_content: ''
     });
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setConsultData({
-            ...consultData,
+        setConsultData(prevState  =>({
+            ...prevState,
             [name]: value
-        });
+        }));
     }
     
     const saveConsult = (e) => {
@@ -45,7 +48,7 @@ function Consult_part() {
             .then(res => {
                 console.log('입력 성공:', res.data);
                 // 필요한 작업 수행
-                if (res.data.resultCode === 200) {
+                if (res.data.resultCode == '200') {
                     alert("문의 등록 성공");
                     history.push('/MyPage_consult_list'); // history.push()로 페이지를 이동합니다.
                 } else {
@@ -181,7 +184,9 @@ function Consult_part() {
                 </div>
             </div>
             <div>
-                <input type="hidden" value={consultData.c_email}  name="c_email"/>
+                <input type="hidden" value={consultData.cus_name}  name="cus_name" onChange={handleChange}/>
+                <input type="hidden" value={consultData.ib_date}  name="ib_date" onChange={handleChange}/>
+                <input type="hidden" value={consultData.ib_show}  name="ib_show" onChange={handleChange}/>
                 <Button className={`btn_cancle ${style.btn_cancle}`} variant="contained" color="primary" onClick={saveConsult}> 확인 </Button>
                 <Button className={`btn_submit ${style.btn_submit}`} variant="contained" color="primary" onClick={resetForm}> 취소 </Button>
             </div>
