@@ -17,12 +17,12 @@ class Admin_Discount_Edit extends Component {
   }
 
   componentDidMount() {
-    this.selectDiscount();
+    this.selectLoad();
   }
 
-  selectDiscount = () => {
+  selectLoad = () => {
     ApiService.selectDiscount(window.localStorage.getItem("dc_num"))
-      .then(res => {
+      .then((res) => {
         let list = res.data;
 
         this.setState({
@@ -32,10 +32,10 @@ class Admin_Discount_Edit extends Component {
           dc_main_img: list.dc_main_img,
           dc_show: list.dc_show,
           dc_sysdate: list.dc_sysdate,
-        }) 
+        });
         console.log("selectByIdDiscount 성공 : ", res.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("selectByIdDiscount 실패 : ", err);
       });
   };
@@ -46,28 +46,28 @@ class Admin_Discount_Edit extends Component {
     });
   };
 
-  editDiscount = (e) => {
-    e.preventDefault();
+  // editDiscount = (e) => {
+  //   e.preventDefault();
 
-    let inputData = {
-      dc_num: this.state.dc_num,
-      dc_main_title: this.state.dc_main_title,
-      dc_sub_title: this.state.dc_sub_title,
-      dc_main_img: this.state.dc_main_img,
-      dc_show: this.state.dc_show,
-      dc_sysdate: this.state.dc_sysdate
-    }
+  //   let inputData = {
+  //     dc_num: this.state.dc_num,
+  //     dc_main_title: this.state.dc_main_title,
+  //     dc_sub_title: this.state.dc_sub_title,
+  //     dc_main_img: this.state.dc_main_img,
+  //     dc_show: this.state.dc_show,
+  //     dc_sysdate: this.state.dc_sysdate,
+  //   };
 
-    ApiService.editDiscount(inputData)
-      .then(res => {
-        this.setState({});
-        console.log("editDiscount 성공 : ", res.data);
-        this.props.history.push("/admin/page_1/Admin_Discount_List");
-      })
-      .catch(err => {
-        console.log("editDiscount 실패 : ", err);
-      });
-  };
+  //   ApiService.editDiscount(inputData)
+  //     .then((res) => {
+  //       this.setState({});
+  //       console.log("editDiscount 성공 : ", res.data);
+  //       this.props.history.push("/admin/page_1/Admin_Discount_List");
+  //     })
+  //     .catch((err) => {
+  //       console.log("editDiscount 실패 : ", err);
+  //     });
+  // };
 
   render() {
     return (
