@@ -48,9 +48,10 @@ public class DiscountServiceImpl implements DiscountService {
 		
 		System.out.println("DiscountServiceImpl - DiscountDetailList");
 		
-		System.out.println(dc_num);		
-		
 		DiscountDTO dto = dao.DiscountDetailList(dc_num);
+		
+		System.out.println(dc_num);	
+		System.out.println(dto);
 		
 		return dto;
 	}

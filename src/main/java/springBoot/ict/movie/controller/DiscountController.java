@@ -85,19 +85,21 @@ public class DiscountController {
 	
 	// 상세페이지
 	@GetMapping("/DiscountDetailList/{dc_num}") 
-	public Map<String, Object> DiscountDetailList(@RequestParam("dc_num") int dc_num) 
+	public Map<String, Object> DiscountDetailList(@PathVariable("dc_num") int dc_num) 
 			throws ServletException, IOException {
 		
 		logger.info("url - DiscountDetailList");
 		
+		System.out.println(dc_num);
 		String resultCode = "";
 		String resultMsg = "";
+		DiscountDTO dto = null;
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
 			
-			service.DiscountDetailList(dc_num);
+			dto = service.DiscountDetailList(dc_num);
 			resultCode = "200";
 			resultMsg = "DiscountInsert Success";
 		} 
@@ -112,6 +114,7 @@ public class DiscountController {
 		map.put("resultCode", resultCode);
 		map.put("resultMsg", resultMsg);
 		map.put("dc_num", dc_num);
+		map.put("dto", dto);
 		
 		return map;
 	}
