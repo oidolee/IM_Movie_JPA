@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ApiService from "../../ApiService";
 import { Typography, TextField, Button } from "@mui/material";
+import style from "../../styles/admin/page_1/Admin_Discount_Add.css";
 
 class Admin_Discount_Add extends Component {
   constructor(props) {
@@ -9,9 +10,10 @@ class Admin_Discount_Add extends Component {
     this.state = {
       dc_main_title: "",
       dc_sub_title: "",
+      dc_content: "",
       dc_main_img: "",
-      dc_show: "n", // 기본값 설정
-      dc_sysdate: new Date().toISOString() // 기본값 설정
+      dc_show: "y",
+      dc_sysdate: new Date().toISOString(),
     };
   }
 
@@ -27,6 +29,7 @@ class Admin_Discount_Add extends Component {
     let iputDate = {
       dc_main_title: this.state.dc_main_title,
       dc_sub_title: this.state.dc_sub_title,
+      dc_content: this.state.dc_content,
       dc_main_img: this.state.dc_main_img,
       dc_show: this.state.dc_show,
       dc_sysdate: this.state.dc_sysdate,
@@ -45,10 +48,12 @@ class Admin_Discount_Add extends Component {
 
   render() {
     return (
-      <div align="center">
+      <div className={`Admin_Discount_Add ${style.Admin_Discount_Add}`}>
         <br />
         <br />
-        <Typography variant="h5">Discount_Add</Typography>
+        <Typography variant="h5" className="discountAdd">
+          Discount_Add
+        </Typography>
         <TextField
           required
           id="standard-required"
@@ -57,7 +62,6 @@ class Admin_Discount_Add extends Component {
           type="text"
           name="dc_main_title"
           value={this.state.dc_main_title}
-          placeholder="Input Main_Title"
           onChange={this.onChange}
         />
         <br />
@@ -69,7 +73,17 @@ class Admin_Discount_Add extends Component {
           type="text"
           name="dc_sub_title"
           value={this.state.dc_sub_title}
-          placeholder="Input Sub_Title"
+          onChange={this.onChange}
+        />
+        <br />
+        <TextField
+          required
+          id="standard-required"
+          variant="standard"
+          label="Content"
+          type="text"
+          name="dc_content"
+          value={this.state.dc_content}
           onChange={this.onChange}
         />
         <br />
@@ -81,13 +95,17 @@ class Admin_Discount_Add extends Component {
           type="text"
           name="dc_main_img"
           value={this.state.dc_main_img}
-          placeholder="Input Main_Img"
           onChange={this.onChange}
         />
         <br />
         <br />
-        <Button variant="contained" color="primary" onClick={this.saveDiscount}>
-          saveDiscount
+        <Button
+          className="saveBtn"
+          variant="contained"
+          color="primary"
+          onClick={this.saveDiscount}
+        >
+          save_Discount
         </Button>
       </div>
     );

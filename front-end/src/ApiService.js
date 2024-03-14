@@ -5,6 +5,11 @@ let url = "http://localhost:8081";
 class ApiService {
 
     // page_1
+    // --------------------------------------------Payment 시작--------------------------------------------
+
+    // --------------------------------------------Payment 끝--------------------------------------------
+
+    // --------------------------------------------Discount 시작--------------------------------------------
     // 목록
     listDiscount() {
         console.log("listDiscount 호출");
@@ -18,16 +23,23 @@ class ApiService {
     }
 
     // 1건조회
-    fetchDiscountByID(dc_num) {
+    selectDiscount(dc_num) {
         console.log("selectDiscount 호출", dc_num);
-        return axios.get(url + "/page_1/DiscountDetailList" + "?dc_num=" + dc_num);
+        return axios.get(url + "/page_1/DiscountDetailList" + "/" + dc_num);
     }
 
     // 수정
-    editDiscount(dc_num) {
-
-
+    editDiscount(inputData) {
+        console.log("editDiscount 호출", inputData);
+        return axios.put(url + "/page_1/DiscountUpdate" + "/" + inputData.dc_num, inputData);
     }  
+
+    // 삭제
+    deleteDiscount(dc_num) {
+        console.log("deleteDiscount 호출", dc_num);
+        return axios.delete(url + "/page_1/DiscountDelete" + "/" + dc_num);
+    }
+    // --------------------------------------------Discount 끝--------------------------------------------
 
     // page3 list
     page_3

@@ -22,10 +22,10 @@ public interface DiscountService {
 			throws ServletException, IOException;
 	
 	// 수정
-	public int DiscountUpdate(DiscountDTO dto)
+	public void DiscountUpdate(DiscountDTO dto)
 			throws ServletException, IOException;
 	
 	// 삭제
-	public int DiscountDelete(int dc_num)
+	public void DiscountDelete(int dc_num)
 			throws ServletException, IOException;
 }

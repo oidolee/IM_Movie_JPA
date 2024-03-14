@@ -48,28 +48,37 @@ public class DiscountServiceImpl implements DiscountService {
 		
 		System.out.println("DiscountServiceImpl - DiscountDetailList");
 		
-		System.out.println(dc_num);		
-		
 		DiscountDTO dto = dao.DiscountDetailList(dc_num);
+		
+		System.out.println(dc_num);	
+		System.out.println(dto);
 		
 		return dto;
 	}
 
+	// 수정
 	@Override
-	public int DiscountUpdate(DiscountDTO dto) 
+	public void DiscountUpdate(DiscountDTO dto) 
 			throws ServletException, IOException {
 		
 		System.out.println("DiscountServiceImpl - DiscountUpdate");
 		
-		return 0;
+		System.out.println(dto);
+		
+		//int selectCnt = dao.DiscountUpdate(dto);
+		
+		dao.save(dto);
 	}
 
+	// 삭제
 	@Override
-	public int DiscountDelete(int dc_num) 
+	public void DiscountDelete(int dc_num) 
 			throws ServletException, IOException {
 		
 		System.out.println("DiscountServiceImpl - DiscountDelete");
 		
-		return 0;
+		System.out.println(dc_num);
+		
+		dao.deleteById(dc_num);
 	}
 }
