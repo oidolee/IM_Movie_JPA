@@ -34,8 +34,12 @@ public class StoreController {
 	private static final Logger logger = LoggerFactory.getLogger(StoreController.class);
 	
 	// 스토어 리스트 조회
+<<<<<<< Updated upstream
 	@GetMapping()	// ★페이지 이름 아니고, 어떤걸 쓰는거지???
 	//@GetMapping("/")	// ★페이지 이름 아니고, 어떤걸 쓰는거지???
+=======
+	@GetMapping("/ListStore_Admin")	// ★페이지 이름 아니고, 어떤걸 쓰는거지???
+>>>>>>> Stashed changes
 	public List<StoreDTO> storeList(Model model)
             throws ServletException, IOException {
         logger.info("<<< url -> storeList");

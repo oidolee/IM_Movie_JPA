@@ -18,6 +18,7 @@ public class StoreDTO {
 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
+<<<<<<< Updated upstream
     @JsonProperty("itemCode")
     private int item_code;
     // setGift_num 메서드 추가
@@ -37,5 +38,14 @@ public class StoreDTO {
     @JsonProperty("itemImage")
     private String item_image;
     @JsonProperty("itemExp")
+=======
+    private int item_code;
+    private String item_type;
+    private String item_name;
+    private String item_detail;
+    private int item_price;
+    private int item_sale_price;
+    private String item_image;
+>>>>>>> Stashed changes
     private String item_exp;
 }

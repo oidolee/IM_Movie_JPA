@@ -3,6 +3,7 @@
     padding: 0;
     margin: 0;
 }
+
 .Parking{
     height: calc(95vh - 170px);
     margin-top: 50px;
@@ -27,4 +28,8 @@
 
 .Parking .Parking_row{
     display: flex;
+}
+/* 주차라인 */
+.Parking .Parking_row>li{
+    border: 1px solid red;
 }
