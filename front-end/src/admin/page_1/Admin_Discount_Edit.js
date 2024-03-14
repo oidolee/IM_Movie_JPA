@@ -26,12 +26,12 @@ class Admin_Discount_Edit extends Component {
         let list = res.data;
 
         this.setState({
-          dc_num: list.dc_num,
-          dc_main_title: list.dc_main_title,
-          dc_sub_title: list.dc_sub_title,
-          dc_main_img: list.dc_main_img,
-          dc_show: list.dc_show,
-          dc_sysdate: list.dc_sysdate,
+          dc_num: list.dto.dc_num,
+          dc_main_title: list.dto.dc_main_title,
+          dc_sub_title: list.dto.dc_sub_title,
+          dc_main_img: list.dto.dc_main_img,
+          dc_show: list.dto.dc_show,
+          dc_sysdate: list.dto.dc_sysdate,
         });
         console.log("selectByIdDiscount 성공 : ", res.data);
       })
@@ -46,28 +46,28 @@ class Admin_Discount_Edit extends Component {
     });
   };
 
-  // editDiscount = (e) => {
-  //   e.preventDefault();
+  editDiscount = (e) => {
+    e.preventDefault();
 
-  //   let inputData = {
-  //     dc_num: this.state.dc_num,
-  //     dc_main_title: this.state.dc_main_title,
-  //     dc_sub_title: this.state.dc_sub_title,
-  //     dc_main_img: this.state.dc_main_img,
-  //     dc_show: this.state.dc_show,
-  //     dc_sysdate: this.state.dc_sysdate,
-  //   };
+    let inputData = {
+      dc_num: this.state.dc_num,
+      dc_main_title: this.state.dc_main_title,
+      dc_sub_title: this.state.dc_sub_title,
+      dc_main_img: this.state.dc_main_img,
+      dc_show: this.state.dc_show,
+      dc_sysdate: this.state.dc_sysdate,
+    };
 
-  //   ApiService.editDiscount(inputData)
-  //     .then((res) => {
-  //       this.setState({});
-  //       console.log("editDiscount 성공 : ", res.data);
-  //       this.props.history.push("/admin/page_1/Admin_Discount_List");
-  //     })
-  //     .catch((err) => {
-  //       console.log("editDiscount 실패 : ", err);
-  //     });
-  // };
+    ApiService.editDiscount(inputData)
+      .then((res) => {
+        this.setState({});
+        console.log("editDiscount 성공 : ", res.data);
+        this.props.history.push("/admin/page_1/Admin_Discount_List");
+      })
+      .catch((err) => {
+        console.log("editDiscount 실패 : ", err);
+      });
+  };
 
   render() {
     return (
@@ -93,7 +93,7 @@ class Admin_Discount_Edit extends Component {
           label="Main_Title"
           type="text"
           name="dc_main_title"
-          value={this.state.dc_main_title||""}
+          value={this.state.dc_main_title}
           placeholder="dc_main_title"
           onChange={this.onChange}
         />
@@ -106,7 +106,7 @@ class Admin_Discount_Edit extends Component {
           label="Sub_Title"
           type="text"
           name="dc_sub_title"
-          value={this.state.dc_sub_title||""}
+          value={this.state.dc_sub_title}
           placeholder="dc_sub_title"
           onChange={this.onChange}
         />
