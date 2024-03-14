@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ApiService from "../../ApiService";
-import { Typography, TextField, Button } from "@mui/material";
+import { Typography, TextField, Button, Select, MenuItem } from "@mui/material";
+import style from "../../styles/admin/page_1/Admin_Discount_Edit.css";
 
 class Admin_Discount_Edit extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class Admin_Discount_Edit extends Component {
       dc_num: "",
       dc_main_title: "",
       dc_sub_title: "",
+      dc_content: "",
       dc_main_img: "",
       dc_show: "",
       dc_sysdate: "",
@@ -17,21 +19,22 @@ class Admin_Discount_Edit extends Component {
   }
 
   componentDidMount() {
-    this.selectDiscount();
+    this.selectLoad();
   }
 
-  selectDiscount = () => {
-    ApiService.fetchDiscountByID(window.localStorage.getItem("dc_num"))
+  selectLoad = () => {
+    ApiService.selectDiscount(window.localStorage.getItem("dc_num"))
       .then((res) => {
-        let select = res.data;
+        let list = res.data;
 
         this.setState({
-          dc_num: select.dc_num,
-          dc_main_title: select.dc_main_title,
-          dc_sub_title: select.dc_sub_title,
-          dc_main_img: select.dc_main_img,
-          dc_show: select.dc_show,
-          dc_sysdate: select.dc_sysdate,
+          dc_num: list.dto.dc_num,
+          dc_main_title: list.dto.dc_main_title,
+          dc_sub_title: list.dto.dc_sub_title,
+          dc_content: list.dto.dc_content,
+          dc_main_img: list.dto.dc_main_img,
+          dc_show: list.dto.dc_show,
+          dc_sysdate: list.dto.dc_sysdate,
         });
         console.log("selectByIdDiscount 성공 : ", res.data);
       })
@@ -49,32 +52,35 @@ class Admin_Discount_Edit extends Component {
   editDiscount = (e) => {
     e.preventDefault();
 
-    let iputDate = {
+    let inputData = {
       dc_num: this.state.dc_num,
       dc_main_title: this.state.dc_main_title,
       dc_sub_title: this.state.dc_sub_title,
+      dc_content: this.state.dc_content,
       dc_main_img: this.state.dc_main_img,
       dc_show: this.state.dc_show,
-      dc_sysdate: this.state.dc_sysdate
-    }
+      dc_sysdate: this.state.dc_sysdate,
+    };
 
-    ApiService.editDiscount(iputDate)
-      .then(res => {
+    ApiService.editDiscount(inputData)
+      .then((res) => {
         this.setState({});
         console.log("editDiscount 성공 : ", res.data);
         this.props.history.push("/admin/page_1/Admin_Discount_List");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("editDiscount 실패 : ", err);
       });
   };
 
   render() {
     return (
-      <div align="center">
+      <div className={`Admin_Discount_Edit ${style.Admin_Discount_Edit}`}>
         <br />
         <br />
-        <Typography variant="h5">Discount_Edit</Typography>
+        <Typography variant="h5" className="discountEdit">
+          Discount_Edit
+        </Typography>
         <TextField
           required
           id="standard-required"
@@ -94,7 +100,6 @@ class Admin_Discount_Edit extends Component {
           type="text"
           name="dc_main_title"
           value={this.state.dc_main_title}
-          placeholder="dc_main_title"
           onChange={this.onChange}
         />
         <br />
@@ -107,7 +112,18 @@ class Admin_Discount_Edit extends Component {
           type="text"
           name="dc_sub_title"
           value={this.state.dc_sub_title}
-          placeholder="dc_sub_title"
+          onChange={this.onChange}
+        />
+        <br />
+
+        <TextField
+          required
+          id="standard-required"
+          variant="standard"
+          label="Content"
+          type="text"
+          name="dc_content"
+          value={this.state.dc_content}
           onChange={this.onChange}
         />
         <br />
@@ -120,12 +136,11 @@ class Admin_Discount_Edit extends Component {
           type="text"
           name="dc_main_img"
           value={this.state.dc_main_img}
-          placeholder="dc_main_img"
           onChange={this.onChange}
         />
         <br />
 
-        <TextField
+        <Select
           required
           id="standard-required"
           variant="standard"
@@ -133,10 +148,13 @@ class Admin_Discount_Edit extends Component {
           type="text"
           name="dc_show"
           value={this.state.dc_show}
-          placeholder="dc_show"
           onChange={this.onChange}
-        />
+        >
+          <MenuItem value="n">n</MenuItem>
+          <MenuItem value="y">y</MenuItem>
+        </Select>
         <br />
+
         <TextField
           required
           id="standard-required"
@@ -145,14 +163,12 @@ class Admin_Discount_Edit extends Component {
           type="text"
           name="dc_sysdate"
           value={this.state.dc_sysdate}
-          placeholder="dc_sysdate"
-          onChange={this.onChange}
         />
         <br />
         <br />
 
-        <Button variant="contained" color="primary" onClick={this.editDiscount}>
-          Discount_Edit
+        <Button className="editBtn" variant="contained" color="primary" onClick={this.editDiscount}>
+          edit_Discount
         </Button>
       </div>
     );

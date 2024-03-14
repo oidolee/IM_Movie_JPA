@@ -20,6 +20,7 @@ public class DiscountDTO {
     private int dc_num;
 	private String dc_main_title;
 	private String dc_sub_title;
+	private String dc_content;
 	private String dc_main_img;
 	private String dc_show;
 	private Date dc_sysdate;
