@@ -40,6 +40,7 @@ import resultFindPWD from '../page_4/resultFindPWD';
 //page_5
 import movieMain from '../page_5/movie/movieMain';
 import movieDetail from '../page_5/movie/movieDetail';
+import movieUpdate from '../page_5/movieUpdate/movieUpdate';
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
 import arte from '../page_5/movie/arte';
@@ -48,6 +49,7 @@ import FAQ from '../page_5/board/FAQ';
 import NOTICE from '../page_5/board/NOTICE';
 import NOTICE2 from '../page_5/board/NOTICE2';
 import groupform from '../page_5/board/groupform';
+import re_answer_list from '../page_5/board/re_answer_list';
 
 
 //page_6
@@ -115,6 +117,7 @@ const AppRouter = () => {
                     <Route>
                         <Route path="/movieMain" exact={true} component={movieMain} />
                         <Route path="/movieDetail" exact={true} component={movieDetail} />
+                        <Route path="/movieUpdate" exact={true} component={movieUpdate} />
                         <Route path="/movieNow" exact={true} component={movieNow} />
                         <Route path="/movieNext" exact={true} component={movieNext} />
                         <Route path="/arte" exact={true} component={arte} />
@@ -123,6 +126,7 @@ const AppRouter = () => {
                         <Route path="/NOTICE" exact={true} component={NOTICE} />
                         <Route path="/NOTICE2" exact={true} component={NOTICE2} />
                         <Route path="/groupform" exact={true} component={groupform} />
+                        <Route path="/re_answer_list" exact={true} component={re_answer_list} />
                        
                     </Route>
                     

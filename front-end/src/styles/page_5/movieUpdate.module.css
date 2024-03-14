@@ -1,0 +1,184 @@
+.detail_movie_wrap{
+    width: 950px;
+    margin: 0 auto; 
+    text-align: center; 
+    margin-bottom: 100px;
+  }
+
+  /* 이미지 업로드 컨테이너 스타일 */
+  .image-upload-container {
+    margin-right: 50px;
+  }
+
+  /* 파일 버튼 스타일 */
+  .image-upload-container input[type="file"] {
+    display: none; /* 파일 버튼 숨기기 */
+    margin-left: 10px;
+  }
+
+.file-image{
+  margin-left: 30px;
+}
+
+.selected-image {
+  max-width: 100px; /* 이미지 최대 너비 설정 */
+  max-height: 100px; /* 이미지 최대 높이 설정 */
+  display: block; /* 이미지를 블록 요소로 표시하여 다른 요소와 겹치지 않도록 함 */
+}
+  
+  .detail_text{
+    margin-top: 70px;
+  }
+
+  .inputbox1{
+    width: 10%;
+  }
+
+  .detail_con1 input {
+    margin-right: 10px;
+  }
+  
+  .detail_con1 {
+    margin-right: 30px;
+    margin-top:20px;
+  }
+  
+  
+   /*이용약관 내용  */
+   .detail_box {
+    margin-bottom: 90px;
+    margin-top:30px;
+    width:90%;
+    height:120px;
+    padding: 10px;
+    overflow-y: auto; /* 수직 스크롤바를 표시하도록 설정합니다 */
+    max-height: 200px; /* 스크롤바가 나타날 최대 높이를 지정합니다 */
+  }
+  
+  .detail_con2{
+    width: 100%;
+    height:300px;
+    border: none;
+    font-size: 14px;
+    font-weight:bold;
+    color:black;
+    text-align: left;
+    
+  }
+  
+  .btn_wrap2{
+    margin-bottom: 20px; /* 상세내용 박스 위쪽 여백 설정 */
+    margin-top: -250px; /* 예매하기 버튼을 상세내용 박스 위로 이동 */
+    
+  }
+  
+  .detail_btn4{
+    width:10%;
+    height:40px;
+    margin-top: 30px;
+    border:none;
+    font-size:15px;
+    color:white;
+    background-color: red;
+    margin-right: 130px;
+  }
+  
+  .detail_down{
+    margin-bottom:300px;
+  }
+  
+  .detail_down2{
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  
+  .detail_box1{
+    position: relative;
+    width: 100%; /* 적절한 너비 설정 */
+    height: 200px; /* 적절한 높이 설정 */
+    background-color: #d3d3d321; /* 적절한 배경색 설정 */
+    padding: 20px; /* 적절한 안쪽 여백 설정 */
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+   
+    
+  }
+  
+  .detail_down >.tit {
+    border: none;
+    border-bottom: 1px solid #eeeeee;
+  }
+  
+  .tit {
+    border-bottom: 1px solid #CCC;
+    font-size: 15px;
+    color: #7F7F7F;
+    text-decoration: none; /* 파란색 밑줄 제거 */
+    background-color: white;
+  }
+
+  .input_box2{
+    margin-left: 10px;
+    border:none;
+    background-color: #d3d3d305; ;
+  }
+  
+  .detail_down3{
+    text-align: left;
+    font-size:30px;
+    font-weight: bold;
+   
+  }
+  
+  .detail_trailer1{
+    margin-top:30px;
+    border-radius: 20px;
+    border:none;
+  }
+  
+  .detail_trailer2{
+    margin-right: 370px;
+    margin-left: 20px;
+    border-radius: 20px;
+    border:none;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명한 배경 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal_content {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal_content2 {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .video_con{
+    margin-bottom:300px ;
+  }
+  
+  .detail_last{
+    margin-top:50px;
+  }
+
+  
+  
+  

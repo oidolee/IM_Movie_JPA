@@ -117,7 +117,7 @@ function Header() {
                         {isSubMenuVisible && currentMenuValue === 3 && (
                             <div>
                                 <ul>
-                                    <li><a href="#">스페셜관</a></li>
+                                    <li><a href="/movieUpdate">스페셜관</a></li>
                                     <li><a href="/moviePlace">서울</a></li>
                                     <li><a href="#">경기/인천</a></li>
                                     <li><a href="#">전라/광주</a></li>
