@@ -5,6 +5,11 @@ let url = "http://localhost:8081";
 class ApiService {
 
     // page_1
+    // --------------------------------------------Reservation 시작--------------------------------------------
+
+    // --------------------------------------------Reservation 끝--------------------------------------------
+
+    // --------------------------------------------Discount 시작--------------------------------------------
     // 목록
     listDiscount() {
         console.log("listDiscount 호출");
@@ -34,6 +39,7 @@ class ApiService {
         console.log("deleteDiscount 호출", dc_num);
         return axios.delete(url + "/page_1/DiscountDelete" + "/" + dc_num);
     }
+    // --------------------------------------------Discount 끝--------------------------------------------
 
     // page3 list
     page_3
