@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ApiService from "../../ApiService";
 import { Typography, TextField, Button, Select, MenuItem } from "@mui/material";
+import style from "../../styles/admin/page_1/Admin_Discount_Edit.css";
 
 class Admin_Discount_Edit extends Component {
   constructor(props) {
@@ -74,10 +75,12 @@ class Admin_Discount_Edit extends Component {
 
   render() {
     return (
-      <div align="center">
+      <div className={`Admin_Discount_Edit ${style.Admin_Discount_Edit}`}>
         <br />
         <br />
-        <Typography variant="h5">Discount_Edit</Typography>
+        <Typography variant="h5" className="discountEdit">
+          Discount_Edit
+        </Typography>
         <TextField
           required
           id="standard-required"
@@ -97,7 +100,6 @@ class Admin_Discount_Edit extends Component {
           type="text"
           name="dc_main_title"
           value={this.state.dc_main_title}
-          placeholder="dc_main_title"
           onChange={this.onChange}
         />
         <br />
@@ -110,7 +112,6 @@ class Admin_Discount_Edit extends Component {
           type="text"
           name="dc_sub_title"
           value={this.state.dc_sub_title}
-          placeholder="dc_sub_title"
           onChange={this.onChange}
         />
         <br />
@@ -123,7 +124,6 @@ class Admin_Discount_Edit extends Component {
           type="text"
           name="dc_content"
           value={this.state.dc_content}
-          placeholder="dc_content"
           onChange={this.onChange}
         />
         <br />
@@ -136,7 +136,6 @@ class Admin_Discount_Edit extends Component {
           type="text"
           name="dc_main_img"
           value={this.state.dc_main_img}
-          placeholder="dc_main_img"
           onChange={this.onChange}
         />
         <br />
@@ -149,7 +148,6 @@ class Admin_Discount_Edit extends Component {
           type="text"
           name="dc_show"
           value={this.state.dc_show}
-          placeholder="dc_show"
           onChange={this.onChange}
         >
           <MenuItem value="n">n</MenuItem>
@@ -169,8 +167,8 @@ class Admin_Discount_Edit extends Component {
         <br />
         <br />
 
-        <Button variant="contained" color="primary" onClick={this.editDiscount}>
-          Discount_Edit
+        <Button className="editBtn" variant="contained" color="primary" onClick={this.editDiscount}>
+          edit_Discount
         </Button>
       </div>
     );

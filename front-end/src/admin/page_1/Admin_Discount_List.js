@@ -46,7 +46,7 @@ class Admin_Discount_List extends Component {
   };
 
   // 수정
-  editDiscount = (dcNum) => {
+  selectDiscount = (dcNum) => {
     window.localStorage.setItem("dc_num", dcNum);
     this.props.history.push("/admin/page_1/Admin_Discount_Edit");
   };
@@ -67,10 +67,10 @@ class Admin_Discount_List extends Component {
 
   render() {
     return (
-      <div className={`Admin_Discount ${style.Admin_Discount}`}>
+      <div className={`Admin_Discount_List ${style.Admin_Discount_List}`}>
         <br />
         <br />
-        <Typography variant="h5" className="Admin_Discount_List">
+        <Typography variant="h5" className="discountList">
           Discount_List
         </Typography>
         <br />
@@ -86,7 +86,7 @@ class Admin_Discount_List extends Component {
         <br />
         <br />
         <Table className="Discount_List_Content">
-          <TableHead className="Discount_List_Head">
+          <TableHead>
             <TableRow>
               <TableCell>Num</TableCell>
               <TableCell>Main_Title</TableCell>
@@ -107,14 +107,20 @@ class Admin_Discount_List extends Component {
                 </TableCell>
                 <TableCell>{list.dc_main_title}</TableCell>
                 <TableCell>{list.dc_sub_title}</TableCell>
-                <TableCell>{list.dc_main_img}</TableCell>
                 <TableCell>{list.dc_content}</TableCell>
+                <TableCell>{list.dc_main_img}</TableCell>
                 <TableCell>{list.dc_show}</TableCell>
                 <TableCell>{list.dc_sysdate}</TableCell>
-                <TableCell onClick={() => this.editDiscount(list.dc_num)}>
+                <TableCell
+                  className="selectBtn"
+                  onClick={() => this.selectDiscount(list.dc_num)}
+                >
                   <Create />
                 </TableCell>
-                <TableCell onClick={() => this.deleteDiscount(list.dc_num)}>
+                <TableCell
+                  className="deleteBtn"
+                  onClick={() => this.deleteDiscount(list.dc_num)}
+                >
                   <Delete />
                 </TableCell>
               </TableRow>

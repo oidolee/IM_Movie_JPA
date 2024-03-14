@@ -20,7 +20,6 @@ class Reservation_Movie extends Component {
     ApiService.listDiscount()
       .then((res) => {
         const discounts = res.data.map((discount) => {
-          // 할인 정보에서 각 부분을 "-"로 분할하여 개행하여 저장
           return {
             dc_num: discount.dc_num,
             dc_main_title: discount.dc_main_title,
