@@ -12,7 +12,7 @@ class Admin_Discount_Add extends Component {
       dc_sub_title: "",
       dc_content: "",
       dc_main_img: "",
-      dc_show: "n",
+      dc_show: "y",
       dc_sysdate: new Date().toISOString(),
     };
   }

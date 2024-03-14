@@ -29,7 +29,8 @@ class Reservation_Movie extends Component {
             dc_show: discount.dc_show,
             dc_sysdate: discount.dc_sysdate
           };
-        });
+        })
+        .filter((discount) => discount.dc_show === 'y');
   
         this.setState({
           discounts: discounts
