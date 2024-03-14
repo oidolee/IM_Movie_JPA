@@ -39,18 +39,20 @@ public class StoreServiceImpl implements StoreService {
 
 	// 스토어 수정
 	@Override
-	public int updateStore(StoreDTO dto) throws ServletException, IOException {
+	public void updateStore(StoreDTO dto) throws ServletException, IOException {
 		System.out.println("서비스 - updateStore");
 		
-		return 0;
+    
+	    // 저장 또는 업데이트합니다.
+	    dao.save(dto);
 	}
 
 	// 스토어 삭제
 	@Override
-	public int deleteStore(int item_code) throws ServletException, IOException {
+	public void deleteStore(int item_code) throws ServletException, IOException {
 		System.out.println("서비스 - deleteStore");
 		
-		return 0;
+		dao.deleteById(item_code);
 	}
 
 	// 스토어 상세페이지
@@ -58,7 +60,7 @@ public class StoreServiceImpl implements StoreService {
 	public StoreDTO findById(int item_code) throws ServletException, IOException {
 		System.out.println("서비스 - findById");
 		
-		return null;
+		return dao.findById(item_code).get();
 	}
 
 }

@@ -30,10 +30,9 @@ class ApiService {
     }  
 
     // page3 list
-    page_3
     ListStore_Admin() {
-         console.log('ListStore_Admin 호출');
-         return axios.get(url + "/page_3/ListStore_Admin");
+         console.log('storeList 호출');
+         return axios.get(url + "/page_3");
     }
 
     // page3 insert
@@ -42,9 +41,23 @@ class ApiService {
         return axios.post(url + "/page_3/AddStore_Admin", inputData)
     }
 
+    // page3 1건 select
+    fetchStoreByID(sampleID) {
+        console.log('page3 fetchSampleByID 호출!!', sampleID);
+        return axios.get(url + "/page_3" + "/EditStore_Admin/" +  sampleID ); // 주의 : "/"+ 
+    }
 
+    // page3 update
+    EditStore_Admin(inputData) {
+        console.log(' AddStore_Admin 호출!!', inputData);
+        return axios.put(url + "/page_3/EditStore_Admin/" + inputData.itemCode, inputData);
+    }
 
-
+    // page3 delete 
+    DeleteStore_Admin(sampleID) { 
+        console.log('DeleteStore_Admin 호출!!', sampleID);
+        return axios.delete(url + "/page_3/DeleteStore_Admin/" + sampleID);
+    }
 
     // page_4
     

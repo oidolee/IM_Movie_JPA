@@ -13,6 +13,7 @@ import Admin_Discount_Edit from '../page_1/Admin_Discount_Edit'
 // page_3
 import ListStore_Admin from '../page_3/ListStore_Admin';
 import AddStore_Admin from '../page_3/AddStore_Admin';
+import EditStore_Admin from '../page_3/EditStore_Admin';
 
 const Admin_RouterComponent = () => {
 
@@ -39,18 +40,10 @@ const Admin_RouterComponent = () => {
                     {/* page_3 */}
                     <Route>
                         <Route path="/admin/page_3/ListStore_Admin" exact={true} component={ListStore_Admin} />
+                        <Route path="/admin/page_3/AddStore_Admin" exact={true} component={AddStore_Admin} />
+                        <Route path="/admin/page_3/EditStore_Admin" exact={true} component={EditStore_Admin} />
                     </Route>
 
-
-                    {/* page_3 */}
-                    <Route>
-                        <Route path="/admin/page_3/AddStore_Admin" exact={true} component={AddStore_Admin} />
-                    </Route> 
-
-                    {/* page_3 */}
-                    {/* <Route>
-                        <Route path="/admin/page_3/EditStore_Admin" exact={true} component={EditStore_Admin} />
-                    </Route> */}
 
             </BrowserRouter>
         </div>

@@ -44,17 +44,19 @@ class ListStore_Admin extends Component {
     }
 
     // update
-    EditStore_Admin = (ID) =>  {
-        window.localStorage.setItem("sampleID", ID);    
-        this.props.history.push("/edit-sample");
+    EditStore_Admin = (itemCode) =>  {
+        console.log("edit 버튼 호출");
+        window.localStorage.setItem("sampleID", itemCode);
+        ApiService.fetchStoreByID(itemCode);   
+        this.props.history.push("../page_3/EditStore_Admin");
     }
 
     // delete
-    DeleteListStore_Admin = (sampleID) => {
-        ApiService.DeleteListStore_Admin(sampleID)
+    DeleteStore_Admin = (sampleID) => {
+        ApiService.DeleteStore_Admin(sampleID)
             .then(res => {
                 this.setState({
-                    samples: this.state.samples.filter(sample => sample.id !== sampleID)
+                    lists: this.state.lists.filter(list => list.itemCode !== sampleID)
                 });
                 console.log('delete 성공', res.data); // 컨트롤러에서 전달함(resultCode, resultMsg)
             })
@@ -88,17 +90,17 @@ class ListStore_Admin extends Component {
                     <TableBody>
                         {this.state.lists.map(list => 
                             <TableRow key={list.item_code}>
-                                <TableCell component="th" scope="lists"> {list.itemCode} </TableCell>
+                                <TableCell component="th" scope="lists"> {list.itemType} </TableCell>
                                 <TableCell> {list.itemName} </TableCell>
                                 <TableCell> {list.itemDetail} </TableCell>
                                 <TableCell> {list.itemPrice} </TableCell>
                                 <TableCell> {list.itemSalePrice} </TableCell>
                                 <TableCell> {list.itemImage} </TableCell>
                                 <TableCell> {list.itemExp} </TableCell>
-                                <TableCell onClick={() => this.EditStore_Admin(list.item_code)}>
+                                <TableCell onClick={() => this.EditStore_Admin(list.itemCode)}>
                                     <Create />
                                 </TableCell>
-                                <TableCell onClick={() => this.DeleteListStore_Admin(list.item_code)}>
+                                <TableCell onClick={() => this.DeleteStore_Admin(list.itemCode)}>
                                     <Delete />
                                 </TableCell>
                             </TableRow>    
