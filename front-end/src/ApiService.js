@@ -26,6 +26,9 @@ class ApiService {
     // 수정
     editDiscount(dc_num) {
 
+
+    }  
+
     // page3 list
     page_3
     ListStore_Admin() {
@@ -38,6 +41,8 @@ class ApiService {
         console.log('AddStore_Admin 호출!!', inputData);
         return axios.post(url + "/page_3/AddStore_Admin", inputData)
     }
+
+
 
 
 
