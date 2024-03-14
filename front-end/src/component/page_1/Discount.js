@@ -55,7 +55,7 @@ class Reservation_Movie extends Component {
                 <li key={index}>
                   <div className="Discount_img">
                     <img
-                      src={Card}
+                      src={discount.dc_sub_title}
                       alt="Discount_img"
                       className="Discount_image"
                     />
