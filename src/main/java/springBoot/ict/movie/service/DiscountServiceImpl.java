@@ -65,9 +65,9 @@ public class DiscountServiceImpl implements DiscountService {
 		
 		System.out.println(dto);
 		
+		int selectCnt = dao.DiscountUpdate(dto);
 		
-		
-		return 0;
+		return selectCnt;
 	}
 
 	// 삭제

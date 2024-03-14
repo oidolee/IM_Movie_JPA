@@ -120,7 +120,7 @@ public class DiscountController {
 	}
 	
 	// 수정
-	@PostMapping("/DiscountUpdate/{dc_num}") 
+	@PutMapping("/DiscountUpdate/{dc_num}") 
 	public Map<String, Object> DiscountUpdate(@PathVariable("dc_num") int dc_num, @RequestBody DiscountDTO dto) 
 			throws ServletException, IOException {
 		
@@ -135,9 +135,12 @@ public class DiscountController {
 		
 		try {
 			
-			service.DiscountInsert(dto);
-			resultCode = "200";
-			resultMsg = "DiscountInsert Success";
+			int updateCnt = service.DiscountUpdate(dto);
+			
+			if(updateCnt == 1) {
+				resultCode = "200";
+				resultMsg = "DiscountInsert Success";
+			}			
 			
 		} catch(Exception e) {
 			
@@ -171,6 +174,11 @@ public class DiscountController {
 			service.DiscountDelete(dc_num);			
 			resultCode = "200";
 			resultMsg = "DiscountInsert Success";
+			
+//			if(deleteCnt == 1) {
+//				resultCode = "200";
+//				resultMsg = "DiscountInsert Success";
+//			}
 		} 
 		
 		catch(Exception e) {
