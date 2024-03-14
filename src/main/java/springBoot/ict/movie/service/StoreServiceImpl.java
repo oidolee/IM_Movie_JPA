@@ -29,10 +29,12 @@ public class StoreServiceImpl implements StoreService {
 
 	// 스토어 등록
 	@Override
-	public int insertStore(StoreDTO dto) throws ServletException, IOException {
+	public void insertStore(StoreDTO dto) throws ServletException, IOException {
 		System.out.println("서비스 - insertStore");
 		
-		return 0;
+		System.out.println(dto);
+		
+		dao.save(dto);
 	}
 
 	// 스토어 수정
