@@ -25,8 +25,8 @@ class ApiService {
 
     // 수정
     editDiscount(dc_num) {
-
-
+        console.log("editDiscount 호출", dc_num);
+        return axios.put(url + "/page_1/DiscountUpdate" + "/" + dc_num);
     }  
 
     // 삭제

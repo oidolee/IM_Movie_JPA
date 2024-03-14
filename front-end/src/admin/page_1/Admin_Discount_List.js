@@ -47,9 +47,7 @@ class Admin_Discount_List extends Component {
 
   // 수정
   editDiscount = (dc_num) => {
-    console.log("editDiscount 호출");
     window.localStorage.setItem("dc_num", dc_num);
-    ApiService.selectDiscount(dc_num);
     this.props.history.push("/admin/page_1/Admin_Discount_Edit");
   };
 
