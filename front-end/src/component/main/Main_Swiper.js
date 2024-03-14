@@ -13,6 +13,7 @@ import style from  "../../styles/main/Main_Swiper.css";
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import slide_1 from '../../assets/main/slide_1.jpg'
 import slide_2 from '../../assets/main/slide_2.jpg'
+import slide_3 from '../../assets/main/slide_3.png'
 
 export default function Main_Swiper() {
   const swiperRef = useRef(null);
@@ -49,7 +50,7 @@ export default function Main_Swiper() {
        centeredSlides={true}
        loop={true} // 무한 스크롤 옵션
        autoplay={{
-         delay: 2500,
+         delay: 3500,
          disableOnInteraction: false,
        }}
        pagination={pagination}
@@ -58,10 +59,15 @@ export default function Main_Swiper() {
        className="mySwiper"
       >
         <SwiperSlide>
-          <img src={slide_1}></img>
+          <img src={slide_1} alt='slide_1'></img>
         </SwiperSlide>
         <SwiperSlide>
-          <img src={slide_2}></img>
+          <img src={slide_2} alt='slide_2'></img>
+          
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <img src={slide_3} alt='slide_3'></img>
         </SwiperSlide>
         
         <div className='Main_Swiper_control_box'>

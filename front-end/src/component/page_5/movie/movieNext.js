@@ -20,20 +20,14 @@ import Swiper3 from '../../../assets/page_5_4/Swiper3.jpg'
 import Swiper4 from '../../../assets/page_5_4/Swiper4.jpg'
 import Swiper5 from '../../../assets/page_5_4/Swiper5.jpg'
 
-import movie1 from '../../../assets/page_5/movie1.jpg';
-import movie2 from '../../../assets/page_5/movie2.jpg';
-import movie3 from '../../../assets/page_5/movie3.jpg';
-import movie4 from '../../../assets/page_5/movie4.jpg';
+
 import movie5 from '../../../assets/page_5/movie5.jpg';
 import movie6 from '../../../assets/page_5/movie6.jpg';
 import movie7 from '../../../assets/page_5/movie7.jpg';
 import movie8 from '../../../assets/page_5/movie8.jpg';
 import movie9 from '../../../assets/page_5/movie9.jpg';
 import movie10 from '../../../assets/page_5/movie10.jpg';
-import movie11 from '../../../assets/page_5/movie11.jpg';
-import movie12 from '../../../assets/page_5/movie12.jpg';
 import movie13 from '../../../assets/page_5/movie13.jpg';
-import movie14 from '../../../assets/page_5/movie14.jpg';
 import movie15 from '../../../assets/page_5/movie15.jpg';
 import movie16 from '../../../assets/page_5/movie16.jpg';
 import movie17 from '../../../assets/page_5/movie17.jpg';

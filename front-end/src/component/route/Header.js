@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../../assets/main/IM_Logo.png'
 import { useCookies } from 'react-cookie';
+import { Link, useLocation } from 'react-router-dom';
+import '../../styles/main/Header.css'; 
 
-function Header() { 
+
+function Header() {
     const [path, setPath] = useState('/');
     const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
     const [currentMenuValue, setCurrentMenuValue] = useState(null);
-    const [cookies, setCookie, removeCookie] = useCookies(['idCheck']); 
+    const [cookies, setCookie, removeCookie] = useCookies(['idCheck']);
 
-    
 
     // 페이지 로딩 시 경로 설정 (실제로는 해당 경로를 얻는 방법에 따라 다를 수 있음)
     useEffect(() => {
@@ -17,12 +19,6 @@ function Header() {
         setPath(currentPath);
     }, []);
 
-    // 경로에 따라 다른 CSS 파일 import
-    if (path.length === 1) {
-        require('../../styles/main/Header.css');
-    } else {
-        require('../../styles/main/Header1.css');
-    }
     const handleMouseOver = (value) => {
         setIsSubMenuVisible(true);
         setCurrentMenuValue(value);
@@ -31,7 +27,7 @@ function Header() {
     const handleMouseOut = () => {
         setIsSubMenuVisible(false);
         setCurrentMenuValue(null);
-       
+
     };
 
     const handleLogout = () => {
@@ -39,74 +35,86 @@ function Header() {
         removeCookie('idCheck');
         alert('로그아웃 되었습니다.')
     };
-        
-
+    //헤더 동적 처리         
+    const location = useLocation();
+    const isHomePage = location.pathname === '/';
 
     return (
-        <div id="header_section" className='header_section'>
+        <div className={`header_section ${isHomePage ? '' : 'special_header'}`}>
+
             <div className='gnb'>
                 <div className='logo'>
-                    <a href="/">
+                    <Link to="/">
                         <img src={logo} style={{ width: '100px' }} />
-                    </a>
+                    </Link>
                 </div>
 
                 <div className='right-gnb'>
                     <ul>
                         
-                        {(cookies.idCheck == undefined) &&(<li><a href='/login'>로그인</a></li>)}
+                        {(cookies.idCheck == undefined) &&(<li><Link to="/login">로그인</Link></li>)}
                         {cookies.idCheck &&(
-                            <>
-                                <li><a href='/admin'>관리자</a></li>
-                                <li><a href='/MyPage_res'>마이페이지</a></li>
+                            <>                              
+                                <li><a href="/admin">관리자</a></li>
+                                {/* <li><Link to="/admin">관리자</Link></li> */}
+                                <li><Link to="/MyPage_res">마이페이지</Link></li>
                                 <li><a href='#' onClick={handleLogout}>로그아웃</a></li>
                             </>
-                        )}
-                        <li><a href='/customerlist'>멤버쉽</a></li>
-                        
-                        <li><a href='/FAQ'>고객센터</a></li>
-                        <li><a href='/parking'>주차등록</a></li>
-                        <li><a href='/groupform'>단체관람/대관문의</a></li>
+                        )}                                                  
+                          <li><Link to="/customerlist">멤버쉽</Link></li>   
+                          <li><Link to="/FAQ">고객센터</Link></li>   
+                          <li><Link to="/parking">주차등록</Link></li>   
+                          <li><Link to="/groupform">단체관람/대관문의</Link></li>   
                     </ul>
-                    <ul className='header-member-box'>
+                    <ul className='header-member-box'>                      
                         <li>
                             <i class="bi bi-person" className='bi-person'></i>
-                            <a href='/signCheck'>회원가입</a>
+                            <Link to="/signCheck">회원가입</Link>
                         </li>
-                        <li><a href='#' class="btn_reserve">바로예매</a></li>
+                        
+                        <li>
+                            <Link to="/">
+                                <a class="btn_reserve">바로예매</a>
+                            </Link>
+                            
+                        </li>
                         <li><i class="bi bi-list" className='bi-list'></i></li>
                     </ul>
-                    {cookies.idCheck &&(
+                    {cookies.idCheck && (
                         <p className="Header_user_name">{cookies.idCheck}님 환영합니다.</p>
                     )}
-                    
+
                 </div>
             </div>
             <div className='nav'>
                 <ul>
                     {/* 이벤트 버블링 */}
                     <li onMouseOver={() => handleMouseOver(1)} onMouseOut={handleMouseOut}>
-                        <a href="/page_1/Reservation_Movie" onMouseEnter={() => handleMouseOver(1)} onMouseOut={handleMouseOut}>예매</a>
+                        <Link to="/page_1/Reservation_Movie">
+                            <a onMouseEnter={() => handleMouseOver(1)} onMouseOut={handleMouseOut}>예매</a>
+                        </Link>
                         {isSubMenuVisible && currentMenuValue === 1 && (
                             <div className='bottom-menu-box'>
                                 <ul>
-                                    <li><a href="/page_1/Reservation_Movie">예매하기</a></li>
-                                    <li><a href="/page_1/Reservation_Movie_screen">상영시간표</a></li>
-                                    <li><a href="/page_1/Discount">할인안내</a></li>
+                                    <li><Link to="/page_1/Reservation_Movie">예매하기</Link></li>
+                                    <li><Link to="/page_1/Reservation_Movie_screen">상영시간표</Link></li>
+                                    <li><Link to="/page_1/Discount">할인안내</Link></li>
                                 </ul>
                             </div>
                         )}
                     </li>
 
                     <li onMouseOver={() => handleMouseOver(2)} onMouseOut={handleMouseOut}>
-                        <a href="#" onMouseEnter={() => handleMouseOver(2)} onMouseOut={handleMouseOut}>영화</a>
+                        <Link to="/movieMain">
+                            <a  onMouseEnter={() => handleMouseOver(2)} onMouseOut={handleMouseOut}>영화</a>
+                        </Link>
                         {isSubMenuVisible && currentMenuValue === 2 && (
                             <div>
                                 <ul>
-                                    <li><a href="/movieMain">홈</a></li>
-                                    <li><a href="/movieNow">현재상영작</a></li>
-                                    <li><a href="movieNext">상영예정작</a></li>
-                                    <li><a href="#">아르뗴</a></li>
+                                    <li><Link to="/movieMain">홈</Link></li>
+                                    <li><Link to="/movieNow">현재상영작</Link></li>
+                                    <li><Link to="/movieNext">상영예정작</Link></li>
+                                    <li><Link to="/">아르떼</Link></li>
                                 </ul>
                             </div>
                         )}
@@ -117,10 +125,10 @@ function Header() {
                         {isSubMenuVisible && currentMenuValue === 3 && (
                             <div>
                                 <ul>
-                                    <li><a href="#">스페셜관</a></li>
-                                    <li><a href="/moviePlace">서울</a></li>
-                                    <li><a href="#">경기/인천</a></li>
-                                    <li><a href="#">전라/광주</a></li>
+                                    <li><Link to="/moviePlace">스페셜관</Link></li>
+                                    <li><Link to="/moviePlace">서울</Link></li>
+                                    <li><Link to="/moviePlace">경기/인천</Link></li>
+                                    <li><Link to="/moviePlace">전라/광주</Link></li>
                                 </ul>
                             </div>
                         )}
@@ -130,12 +138,12 @@ function Header() {
                         {isSubMenuVisible && currentMenuValue === 4 && (
                             <div>
                                 <ul>
-                                    <li><a href="/event_Home">홈</a></li>
-                                    <li><a href="#">영화</a></li>
-                                    <li><a href="#">시사회/무대인사</a></li>
-                                    <li><a href="#">HOT</a></li>
-                                    <li><a href="#">제휴할인</a></li>
-                                    <li><a href="#">우리동네영화관</a></li>
+                                    <li><Link to="/event_Home">홈</Link></li>
+                                    <li><Link to="/event_Home">영화</Link></li>
+                                    <li><Link to="/event_Home">시사회/무대인</Link></li>
+                                    <li><Link to="/event_Home">HOT</Link></li>
+                                    <li><Link to="/event_Home">제휴할인</Link></li>
+                                    <li><Link to="/event_Home">우리동네영화관</Link></li>
                                 </ul>
                             </div>
                         )}
@@ -145,16 +153,16 @@ function Header() {
                         {isSubMenuVisible && currentMenuValue === 5 && (
                             <div>
                                 <ul>
-                                    <li><a href="page3#store1">베스트</a></li>
-                                    <li><a href="page3#store2">관람권</a></li>
-                                    <li><a href="page3#store3">스낵음료</a></li>
+                                    <li><Link to="/page3#store1">베스트</Link></li>
+                                    <li><Link to="/page3#store2">관람권</Link></li>
+                                    <li><Link to="/page3#store3">스낵음료</Link></li>
                                 </ul>
                             </div>
                         )}
                     </li>
-                  
+
                 </ul>
-               
+
             </div>
 
 

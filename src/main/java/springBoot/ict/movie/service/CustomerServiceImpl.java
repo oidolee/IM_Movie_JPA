@@ -22,7 +22,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<CustomerDTO> listcustomer() 
 			throws ServletException, IOException {
-		System.out.println("CustomerServiceImpl - listAll");
+		System.out.println("CustomerServiceImpl - findAll");
 		
 		return dao.findAll();
 	}

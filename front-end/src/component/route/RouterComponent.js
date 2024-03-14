@@ -42,6 +42,7 @@ import movieMain from '../page_5/movie/movieMain';
 import movieDetail from '../page_5/movie/movieDetail';
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
+import arte from '../page_5/movie/arte';
 import moviePlace from '../page_5/theater/moviePlace';
 import FAQ from '../page_5/board/FAQ';
 import NOTICE from '../page_5/board/NOTICE';
@@ -62,96 +63,102 @@ import MyPage_consult_list from '../page_6/myinfo/MyPage_consult_list';
 import Event_Home from '../page_6/event/Event_Home';
 import MyPage_Event from '../page_6/event/MyPage_Event';
 
-
+// import Admin_main from '../../admin/main/Admin_main'
 
 
 const AppRouter = () => {
 
     return(
         <div>
-            <Header />
             <BrowserRouter>
-                <div style={style}>
-                    <Route path="/" exact={true} component={MainBody} />
+                    <div style={style}>
+                        <Route>
+                            <Header />  
+                            <Route path="/" exact={true} component={MainBody} />
+                            {/* page_1 */}
+                            <Route>
+                                <Route path="/page_1/Reservation_Movie" exact={true} component={Reservation_Movie} />
+                                <Route path="/page_1/Reservation_Seat" exact={true} component={Reservation_Seat} />
+                                <Route path="/page_1/Reservation_Payment" exact={true} component={Reservation_Payment} />
+                                <Route path="/page_1/Reservation_Movie_screen" exact={true} component={Reservation_Movie_screen} />
+                                <Route path="/page_1/Discount" exact={true} component={Discount} />                       
+                            </Route>
 
-                    {/* page_1 */}
-                    <Route>
-                        <Route path="/page_1/Reservation_Movie" exact={true} component={Reservation_Movie} />
-                        <Route path="/page_1/Reservation_Seat" exact={true} component={Reservation_Seat} />
-                        <Route path="/page_1/Reservation_Payment" exact={true} component={Reservation_Payment} />
-                        <Route path="/page_1/Reservation_Movie_screen" exact={true} component={Reservation_Movie_screen} />
-                        <Route path="/page_1/Discount" exact={true} component={Discount} />                       
-                    </Route>
+                            {/* page_2 */}
+                            <Route>
+                                <Route path="/page_2" exact={true} component={Page2} />
+                                <Route path="/parking" exact={true} component={Parking} />
+                                
+                            </Route>
 
-                    {/* page_2 */}
-                    <Route>
-                        <Route path="/page_2" exact={true} component={Page2} />
-                        <Route path="/parking" exact={true} component={Parking} />
-                         
-                    </Route>
+                            {/* page_3 */}
+                            <Route>
+                                <Route path="/Page3" exact={true} component={Page3} />
+                                <Route path="/StoreDetail" exact={true} component={StoreDetail} />
+                            </Route>
 
-                    {/* page_3 */}
-                    <Route>
-                        <Route path="/Page3" exact={true} component={Page3} />
-                        <Route path="/StoreDetail" exact={true} component={StoreDetail} />
-
+                            {/* page_4 */}
+                            <Route>
+                                <Route path="/login" exact={true} component={loginComponent} />
+                                <Route path="/sign-up" exact={true} component={singupComponent} />
+                                <Route path="/signCheck" exact={true} component={signupCheck} />
+                                <Route path="/customerlist" exact={true} component={listCustomer} />
+                                <Route path="/searchID" exact={true} component={searchID} />
+                                <Route path="/findID" exact={true} component={resultFindID} />
+                                <Route path="/searchPWD" exact={true} component={searchPWD} />
+                                <Route path="/findPWD" exact={true} component={resultFindPWD} />
+                            </Route>
                         
-                    </Route>
+                            {/* page_5 */}
+                            <Route>
+                                <Route path="/movieMain" exact={true} component={movieMain} />
+                                <Route path="/movieDetail" exact={true} component={movieDetail} />
+                                <Route path="/movieNow" exact={true} component={movieNow} />
+                                <Route path="/movieNext" exact={true} component={movieNext} />
+                                <Route path="/moviePlace" exact={true} component={moviePlace} />
+                                <Route path="/FAQ" exact={true} component={FAQ} />
+                                <Route path="/NOTICE" exact={true} component={NOTICE} />
+                                <Route path="/NOTICE2" exact={true} component={NOTICE2} />
+                                <Route path="/groupform" exact={true} component={groupform} />
+                            
+                            </Route>
+                            
 
-                    {/* page_4 */}
-                    <Route>
-                        <Route path="/login" exact={true} component={loginComponent} />
-                        <Route path="/sign-up" exact={true} component={singupComponent} />
-                        <Route path="/signCheck" exact={true} component={signupCheck} />
-                        <Route path="/customerlist" exact={true} component={listCustomer} />
-                        <Route path="/searchID" exact={true} component={searchID} />
-                        <Route path="/findID" exact={true} component={resultFindID} />
-                        <Route path="/searchPWD" exact={true} component={searchPWD} />
-                        <Route path="/findPWD" exact={true} component={resultFindPWD} />
-                    </Route>
-                   
-                    {/* page_5 */}
-                    <Route>
-                        <Route path="/movieMain" exact={true} component={movieMain} />
-                        <Route path="/movieDetail" exact={true} component={movieDetail} />
-                        <Route path="/movieNow" exact={true} component={movieNow} />
-                        <Route path="/movieNext" exact={true} component={movieNext} />
-                        <Route path="/moviePlace" exact={true} component={moviePlace} />
-                        <Route path="/FAQ" exact={true} component={FAQ} />
-                        <Route path="/NOTICE" exact={true} component={NOTICE} />
-                        <Route path="/NOTICE2" exact={true} component={NOTICE2} />
-                        <Route path="/groupform" exact={true} component={groupform} />
-                       
-                    </Route>
-                    
+                            {/* page_6 */}
+                            <Route>
+                                <Route path="/MyPage" exact={true} component={MyPage} />
+                                <Route path="/MyPage_res" exact={true} component={MyPage_res} />
+                                <Route path="/MyPage_resCancle" exact={true} component={MyPage_resCancle} />
+                                <Route path="/MyPage_coupon" exact={true} component={MyPage_coupon} />
+                                <Route path="/MyPage_wishMovie" exact={true} component={MyPage_wishMovie} />
+                                <Route path="/Consult" exact={true} component={Consult} />
+                                <Route path="/MyPage_myinfo" exact={true} component={MyPage_myinfo} />
+                                <Route path="/MyPage_myinfo_update" exact={true} component={MyPage_myinfo_update} />
+                                <Route path="/MyPage_consult_list" exact={true} component={MyPage_consult_list} />
+                                <Route path="/event_Home" exact={true} component={Event_Home} />
+                                <Route path="/MyPage_Event" exact={true} component={MyPage_Event} />
+                            </Route>
 
-                    {/* page_6 */}
-                    <Route>
-                        <Route path="/MyPage" exact={true} component={MyPage} />
-                        <Route path="/MyPage_res" exact={true} component={MyPage_res} />
-                        <Route path="/MyPage_resCancle" exact={true} component={MyPage_resCancle} />
-                        <Route path="/MyPage_coupon" exact={true} component={MyPage_coupon} />
-                        <Route path="/MyPage_wishMovie" exact={true} component={MyPage_wishMovie} />
-                        <Route path="/Consult" exact={true} component={Consult} />
-                        <Route path="/MyPage_myinfo" exact={true} component={MyPage_myinfo} />
-                        <Route path="/MyPage_myinfo_update" exact={true} component={MyPage_myinfo_update} />
-                        <Route path="/MyPage_consult_list" exact={true} component={MyPage_consult_list} />
-                        <Route path="/event_Home" exact={true} component={Event_Home} />
-                        <Route path="/MyPage_Event" exact={true} component={MyPage_Event} />
+                        </Route>
+                        {/* 영화관 마지막 라우터 */}
 
-                    </Route>
-            
+                        {/* 관리자 시작  */}
+                        {/* <Route>
+                            <Route path="/admin" exact={true} component={Admin_main} />
+                        </Route> */}
+                        {/* 관리자 끝  */}
 
-                    {/* sample */}
-                    <Route>
-                        <Route path="/add-sample" exact={true} component={AddSampleComponent} />
-                        <Route path="/samples" exact={true} component={ListSampleComponent} />
-                        <Route path="/edit-sample" exact={true} component={EditSampleComponent} />
-                    </Route>
+                        {/* sample */}
+                        <Route>
+                            <Route path="/add-sample" exact={true} component={AddSampleComponent} />
+                            <Route path="/samples" exact={true} component={ListSampleComponent} />
+                            <Route path="/edit-sample" exact={true} component={EditSampleComponent} />
+                        </Route>
+                    </div>
 
-                </div>
+
+                <Footer /> 
             </BrowserRouter>
-             <Footer />
         </div>
     )
 }
