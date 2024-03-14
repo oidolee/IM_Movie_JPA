@@ -46,16 +46,16 @@ class Reservation_Movie extends Component {
     return (
       <div className={`Discount ${style.Discount}`}>
         <div className="Discount_content">
-          <div className="Discount_table_div">
+          <div className="Discount_main">
             <br />
             <h4>할인안내</h4>
-            <div>
+            <div className="Discount_sub">
               <ul className="Discount_list">
               {this.state.discounts.map((discount, index) => (
                 <li key={index}>
                   <div className="Discount_img">
                     <img
-                      src={discount.dc_sub_title}
+                      src={Card}
                       alt="Discount_img"
                       className="Discount_image"
                     />
