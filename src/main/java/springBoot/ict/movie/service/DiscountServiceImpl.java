@@ -58,16 +58,16 @@ public class DiscountServiceImpl implements DiscountService {
 
 	// 수정
 	@Override
-	public int DiscountUpdate(DiscountDTO dto) 
+	public void DiscountUpdate(DiscountDTO dto) 
 			throws ServletException, IOException {
 		
 		System.out.println("DiscountServiceImpl - DiscountUpdate");
 		
 		System.out.println(dto);
 		
-		int selectCnt = dao.DiscountUpdate(dto);
+		//int selectCnt = dao.DiscountUpdate(dto);
 		
-		return selectCnt;
+		dao.save(dto);
 	}
 
 	// 삭제

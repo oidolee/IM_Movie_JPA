@@ -135,12 +135,15 @@ public class DiscountController {
 		
 		try {
 			
-			int updateCnt = service.DiscountUpdate(dto);
+			service.DiscountUpdate(dto);
 			
-			if(updateCnt == 1) {
-				resultCode = "200";
-				resultMsg = "DiscountInsert Success";
-			}			
+			resultCode = "200";
+			resultMsg = "DiscountInsert Success";			
+//			
+//			if(updateCnt == 1) {
+//				
+//				
+//			}			
 			
 		} catch(Exception e) {
 			
