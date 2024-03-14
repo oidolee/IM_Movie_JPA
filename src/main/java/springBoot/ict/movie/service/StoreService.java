@@ -14,7 +14,7 @@ public interface StoreService {
 			throws ServletException, IOException;
 	
 	// 스토어 등록
-	public int insertStore(StoreDTO dto)
+	public void insertStore(StoreDTO dto)
 			throws ServletException, IOException;	
 	
 	// 스토어 수정

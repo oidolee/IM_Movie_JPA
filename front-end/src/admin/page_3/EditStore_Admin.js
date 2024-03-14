@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { TextField, Typography, Button } from '@mui/material';
 import ApiService from '../../ApiService';
 
-class EditSampleComponent extends Component {
+class EditStore_Admin extends Component {
 
     constructor(props) {
         super(props);
@@ -40,7 +40,7 @@ class EditSampleComponent extends Component {
             console.log('loadSample() Error!!', err);
         })
     }
-
+ 
     // 2. 화면에서 수정한 값을 state 변경
     onChange = (e) => {
         this.setState({
@@ -144,4 +144,4 @@ class EditSampleComponent extends Component {
     }
 }
 
-export default EditSampleComponent;
+export default EditStore_Admin;
