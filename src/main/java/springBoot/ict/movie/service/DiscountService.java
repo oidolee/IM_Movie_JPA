@@ -26,6 +26,6 @@ public interface DiscountService {
 			throws ServletException, IOException;
 	
 	// 삭제
-	public int DiscountDelete(int dc_num)
+	public void DiscountDelete(int dc_num)
 			throws ServletException, IOException;
 }

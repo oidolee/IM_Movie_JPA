@@ -119,7 +119,45 @@ public class DiscountController {
 		return map;
 	}
 	
+	// 수정
 	
 	
-	
+	// 삭제
+	@DeleteMapping("/DiscountDelete/{dc_num}") 
+	public Map<String, Object> DiscountDelete(@PathVariable("dc_num") int dc_num) 
+			throws ServletException, IOException {
+		
+		logger.info("url - DiscountDelete");
+		
+		System.out.println(dc_num);
+		String resultCode = "";
+		String resultMsg = "";
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+			
+			service.DiscountDelete(dc_num);			
+			resultCode = "200";
+			resultMsg = "DiscountInsert Success";
+			
+//			if(deleteCnt == 1) {
+//				resultCode = "200";
+//				resultMsg = "DiscountInsert Success";
+//			}	
+		} 
+		
+		catch(Exception e) {
+			
+			resultCode = "400";
+			resultMsg = e.getMessage();
+			e.printStackTrace();
+		}
+		
+		map.put("resultCode", resultCode);
+		map.put("resultMsg", resultMsg);
+		map.put("dc_num", dc_num);
+		
+		return map;
+	}
 }
