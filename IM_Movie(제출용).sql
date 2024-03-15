@@ -4,7 +4,7 @@ CREATE TABLE IM_Reservation (
     res_id INT AUTO_INCREMENT PRIMARY KEY,
     c_email VARCHAR(50) NOT NULL,
     theater_id VARCHAR(50) NOT NULL,
-    screen_id VARCHAR(50) NOT NULL,
+    screen_id INT NOT NULL,
     movie_age VARCHAR(255) NOT NULL,
     res_movie_date DATE DEFAULT CURRENT_TIMESTAMP,
     res_movie_id VARCHAR(50) NOT NULL,

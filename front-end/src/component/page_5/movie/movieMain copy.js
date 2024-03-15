@@ -41,6 +41,7 @@ import BobMarley_OneLove from '../../../assets/page_5/BobMarley_OneLove.jpg';
 
 
 
+
 function MovieMain() {
     const swiperRef = useRef(null);
     const [isPlayActive, setIsPlayActive] = useState(true);

@@ -5,9 +5,18 @@ let url = "http://localhost:8081";
 class ApiService {
 
     // page_1
-    // --------------------------------------------Payment 시작--------------------------------------------
+    // --------------------------------------------Seat 시작--------------------------------------------
+    listSeat() {
+        console.log("listSeat 호출");
+        return axios.get(url + "/page_1/SeatList");
+    }
 
-    // --------------------------------------------Payment 끝--------------------------------------------
+    updateSeat(inputData) {
+        console.log("updateSeat 호출", inputData);
+        return axios.put(url + "/page_1/SeatUpdate" + "/" + inputData.st_num + "/" + inputData.st_row + "/" + inputData.st_column, inputData);
+    }
+    // --------------------------------------------Seat 끝--------------------------------------------
+    
 
     // --------------------------------------------Discount 시작--------------------------------------------
     // 목록
@@ -127,15 +136,37 @@ class ApiService {
         return axios.post(url + '/page_6/save', inputData); 
     }
 
-    // 1:1 문의 답변
+    // 1:1 문의 답변 리스트
     fetchConsultAnswer(one_id){
         console.log('fetchConsultAnswerById() 호출!!')
         
-        return axios.get(url + '/page_6/select'+ one_id); 
+        return axios.get(url + '/page_6/consultAnswer/'+ one_id); 
     }
 
+    // 1:1 문의 답변 등록
+    addConsultAndser(inputData) {
+        console.log('addCustomer 호출', inputData);
+        return axios.post(url + "/page_6/saveAnswer", inputData);
+    }
 
-    
+    // <page_3 주차 리스트 불러옴>
+    parkingList(){
+        console.log('parkingList() 호출!!')
+        return axios.get(url + '/page_3/ParkingList'); 
+    }
+
+    // <page_3 주차등록>
+    editPark(inputData){
+        console.log('editPark() 주차등록시작');
+        console.log(inputData);
+        return axios.put(url + '/page_3/save/'+inputData.ip_no, inputData); 
+    }
+
+         // 수정
+    // editDiscount(inputData) {
+    //     console.log("editDiscount 호출", inputData);
+    //     return axios.put(url + "/page_1/DiscountUpdate" + "/" + inputData.dc_num, inputData);
+    // }  
 
 }
 export default new ApiService();

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import springBoot.ict.movie.dto.DiscountDTO;
@@ -39,7 +38,7 @@ public class DiscountController {
 	// 목록
 	@GetMapping("/DiscountList") 
 	public List<DiscountDTO> DiscountList(Model model) 
-			throws ServletException, IOException {
+		throws ServletException, IOException {
 		
 		logger.info("url - DiscountList");
 		
@@ -52,7 +51,7 @@ public class DiscountController {
 	// 등록
 	@PostMapping("/DiscountInsert") 
 	public Map<String, Object> DiscountInsert(@RequestBody DiscountDTO dto) 
-			throws ServletException, IOException {
+		throws ServletException, IOException {
 		
 		logger.info("url - DiscountInsert");
 		
@@ -86,7 +85,7 @@ public class DiscountController {
 	// 상세페이지
 	@GetMapping("/DiscountDetailList/{dc_num}") 
 	public Map<String, Object> DiscountDetailList(@PathVariable("dc_num") int dc_num) 
-			throws ServletException, IOException {
+		throws ServletException, IOException {
 		
 		logger.info("url - DiscountDetailList");
 		
@@ -122,7 +121,7 @@ public class DiscountController {
 	// 수정
 	@PutMapping("/DiscountUpdate/{dc_num}") 
 	public Map<String, Object> DiscountUpdate(@PathVariable("dc_num") int dc_num, @RequestBody DiscountDTO dto) 
-			throws ServletException, IOException {
+		throws ServletException, IOException {
 		
 		logger.info("url - DiscountUpdate");
 		
@@ -162,7 +161,7 @@ public class DiscountController {
 	// 삭제
 	@DeleteMapping("/DiscountDelete/{dc_num}") 
 	public Map<String, Object> DiscountDelete(@PathVariable("dc_num") int dc_num) 
-			throws ServletException, IOException {
+		throws ServletException, IOException {
 		
 		logger.info("url - DiscountDelete");
 		

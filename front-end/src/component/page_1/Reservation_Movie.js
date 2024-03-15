@@ -52,7 +52,8 @@ class Reservation_Movie extends Component {
 
   handleConfirmation = () => {
     this.setState({ popupOpen: false });
-    window.location.href = "/page_1/Reservation_Seat";
+    // window.localStorage.removeItem("dc_num");
+    this.props.history.push("/page_1/Reservation_Seat");
   };
 
   handleCancellation = () => {
@@ -302,7 +303,7 @@ class Reservation_Movie extends Component {
                 <button name="n" onClick={this.handleCancellation}>
                   취소
                 </button>
-                <button name="y" onClick={this.handleConfirmation}>
+                <button name="y" onClick={() => this.handleConfirmation()}>
                   인원/좌석 선택
                 </button>
               </div>
