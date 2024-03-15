@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ApiService from '../../ApiService';
-import { TextField, Typography, Button } from '@mui/material';
+import { TextField, Typography, Button, MenuItem } from '@mui/material';
 
 
 class AddStore_Admin extends Component {
@@ -44,7 +44,7 @@ class AddStore_Admin extends Component {
                 this.setState({                    
                 })
                 console.log('input 성공 : ', res.data);  // 컨트롤러에서 전달함(resultCode, resultMsg)
-                this.props.history.push('page_3/ListStore_Admin');  // RouterComponent.js - ListSampleComponent 호출
+                this.props.history.push('ListStore_Admin');  // RouterComponent.js - ListSampleComponent 호출
             })
             .catch(err => {
                 console.log('AddStore_Admin() 에러!! : ', err);
@@ -56,17 +56,22 @@ class AddStore_Admin extends Component {
         return(
             <div align="center"><br/><br/>
                 <Typography variant="h4"> Add STORE ITEM </Typography>
-                    <TextField
+                <TextField
                         required
-                        id="stanrard-required"
+                        select
+                        id="standard-select-itemType"
                         variant="standard"
                         label="상품유형"
-                        type="text"
                         name="itemType"
                         value={this.state.itemType}
-                        placeholder='Input sample itemType'
                         onChange={this.onChange}
-                    /><br/>   
+                        style={{ width: '14%' }} 
+                    >
+                        <MenuItem value="베스트">베스트</MenuItem>
+                        <MenuItem value="관람권">관람권</MenuItem>
+                        <MenuItem value="스낵음료">스낵음료</MenuItem>
+                    </TextField>
+                    <br/>
 
                     <TextField
                         required
