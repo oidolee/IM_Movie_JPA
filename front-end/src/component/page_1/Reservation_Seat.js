@@ -87,9 +87,13 @@ const Square = ({
   canSelectSeat,
   isChecked,
   onSeatSelect,
+  quantity
 }) => {
   const handleChange = () => {
-    if (canSelectSeat) {
+    console.log("handleChange 함수 호출됨"); // 변경된 부분
+    console.log("quantity 상태:", quantity);
+    console.log("canSelectSeat 상태:", canSelectSeat);
+    if (!isChecked && quantity > 0) {
       onSeatSelect(row, column);
     } else {
       alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
@@ -138,6 +142,9 @@ const Reservation_Seat = () => {
   }, []);
 
   const handleQuantityChange = (newQuantity) => {
+    console.log("handleQuantityChange 함수 호출됨");
+    console.log("newQuantity:", newQuantity);
+
     setQuantity(newQuantity);
     setCanSelectSeat(newQuantity > 0);
   };
@@ -321,7 +328,7 @@ const Reservation_Seat = () => {
                 <SeatMap
                   rows={8}
                   columns={14}
-                  canSelectSeat={canSelectSeat}
+                  quantity={quantity}
                   seats={seats}
                   onSeatSelect={handleSeatSelect}
                 />
