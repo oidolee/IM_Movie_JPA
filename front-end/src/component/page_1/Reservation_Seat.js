@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import style from "../../styles/page_1/Reservation_Seat.css";
 import Res_movie from "../../assets/page_1/movie.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
@@ -11,8 +10,8 @@ const QuantityCounter = ({ onQuantityChange }) => {
   const handleIncrement = () => {
     if (quantity <= 7) {
       const newQuantity = quantity + 1;
-      setQuantity(newQuantity); // 변경된 값으로 수량 상태 변경
-      onQuantityChange(newQuantity); // onQuantityChange 전달
+      setQuantity(newQuantity);
+      onQuantityChange(newQuantity);
       console.log("newQuantity 값 : " + newQuantity);
     }
   };
@@ -89,20 +88,23 @@ const Square = ({
   isChecked,
   onSeatSelect,
 }) => {
+  const [checked, setChecked] = useState(isChecked);
+
   const handleChange = () => {
     console.log("handleChange 함수 호출됨");
     console.log("canSelectSeat 상태:", canSelectSeat);
-    console.log("isChecked 값:", isChecked);
 
     if (canSelectSeat) {
       onSeatSelect(row, column);
+      setChecked(!checked);
+      console.log("isChecked 값:", !checked);
     } else {
       console.log("수량 선택 필요 - 좌석 선택 불가");
       alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
     }
   };
 
-  const squareClass = isChecked ? "square checked" : "square";
+  const squareClass = checked ? "square checked" : "square";
   const backgroundColor = column === 2 || column === 11 ? "#000" : "";
   const cursor = column === 2 || column === 11 ? "auto" : "pointer";
 
@@ -118,7 +120,6 @@ const Square = ({
 };
 
 const Reservation_Seat = () => {
-  const history = useHistory();
   const [quantity, setQuantity] = useState(0);
   const [seats, setSeats] = useState([]);
   const [canSelectSeat, setCanSelectSeat] = useState(false);
@@ -131,9 +132,9 @@ const Reservation_Seat = () => {
           row: seat.row,
           column: seat.column,
           isDisabled: seat.dc_show !== "y" && seat.dc_show !== "r",
-          isChecked: false, // 추가된 부분: isChecked 상태 초기화
+          isChecked: false,
         }));
-        console.log("Fetched seats:", fetchedSeats);
+        // console.log("isChecked:", isChecked);
         setSeats(fetchedSeats);
       } catch (error) {
         console.error("Error fetching seats:", error);
@@ -158,11 +159,14 @@ const Reservation_Seat = () => {
   };
 
   const handleSeatSelect = (row, column) => {
+    console.log("handleSeatSelect 호출 성공", row, column);
     const updatedSeats = seats.map((seat) => {
       if (seat.row === row && seat.column === column) {
         return {
           ...seat,
           isChecked: !seat.isChecked,
+          st_row: row, // 좌석의 행 정보 설정
+          st_column: column, // 좌석의 열 정보 설정
         };
       }
       return seat;
@@ -171,28 +175,31 @@ const Reservation_Seat = () => {
   };
 
   const handlePayment = async () => {
-    const selectedSeats = seats.filter((seat) => seat.isChecked);
+    // isChecked가 true인 좌석들의 정보를 필터링하여 가져오기
+    const selectedSeats = seats;
+
+    // 좌석 정보가 선택되지 않은 경우
     if (selectedSeats.length === 0) {
       alert("좌석을 선택해주세요.");
       return;
     }
 
     try {
-      await Promise.all(
-        selectedSeats.map((seat) =>
-          ApiService.updateSeat({
-            st_num: seat.st_num,
-            st_row: seat.row,
-            st_column: seat.column,
-          })
-        )
-      );
+      // 좌석 정보가 있는 경우, 각 좌석 정보에 대해 API 호출
+      for (const seat of selectedSeats) {
+        const { row, column } = seat;
+        // API 호출을 통해 좌석 정보 업데이트
+        await ApiService.updateSeat({
+          st_num: seat.st_num,
+          st_row: row,
+          st_column: column,
+        });
+      }
+      alert("좌석 예약이 완료되었습니다.");
 
-      alert("좌석이 성공적으로 예약되었습니다.");
-      history.push("/page_1/Reservation_Payment");
     } catch (error) {
-      console.error("좌석 예약 중 오류 발생:", error);
-      alert("이미 예약된 좌석입니다.");
+      console.error("Error updating seats:", error);
+      alert("좌석 예약에 실패했습니다.");
     }
   };
 
@@ -336,6 +343,7 @@ const Reservation_Seat = () => {
                   columns={14}
                   quantity={quantity}
                   seats={seats}
+                  setSeats={setSeats}
                   onSeatSelect={handleSeatSelect}
                   canSelectSeat={canSelectSeat}
                 />
