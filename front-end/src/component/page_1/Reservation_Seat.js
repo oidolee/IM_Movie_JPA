@@ -6,13 +6,14 @@ import Res_img15 from "../../assets/page_1/15.jpg";
 import ApiService from "../../ApiService";
 
 const QuantityCounter = ({ onQuantityChange }) => {
-  const [quantity, setQuantity] = React.useState(0);
+  const [quantity, setQuantity] = useState(0);
 
   const handleIncrement = () => {
     if (quantity <= 7) {
       const newQuantity = quantity + 1;
-      setQuantity(newQuantity);
-      onQuantityChange(newQuantity);
+      setQuantity(newQuantity); // 변경된 값으로 수량 상태 변경
+      onQuantityChange(newQuantity); // onQuantityChange 전달
+      console.log("newQuantity 값 : " + newQuantity);
     }
   };
 
@@ -87,15 +88,16 @@ const Square = ({
   canSelectSeat,
   isChecked,
   onSeatSelect,
-  quantity,
 }) => {
   const handleChange = () => {
-    console.log("handleChange 함수 호출됨"); // 변경된 부분
-    console.log("quantity 상태:", quantity);
+    console.log("handleChange 함수 호출됨");
     console.log("canSelectSeat 상태:", canSelectSeat);
-    if (!isChecked && quantity > 0) {
+    console.log("isChecked 값:", isChecked);
+
+    if (canSelectSeat) {
       onSeatSelect(row, column);
     } else {
+      console.log("수량 선택 필요 - 좌석 선택 불가");
       alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
     }
   };
@@ -117,22 +119,22 @@ const Square = ({
 
 const Reservation_Seat = () => {
   const history = useHistory();
-  const [quantity, setQuantity] = React.useState(0);
-  const [canSelectSeat, setCanSelectSeat] = React.useState(false);
+  const [quantity, setQuantity] = useState(0);
   const [seats, setSeats] = useState([]);
+  const [canSelectSeat, setCanSelectSeat] = useState(false);
 
   useEffect(() => {
     const fetchSeats = async () => {
       try {
         const response = await ApiService.listSeat();
-        setSeats(
-          response.data.map((seat) => ({
-            row: seat.row,
-            column: seat.column,
-            isDisabled: seat.dc_show !== "y" && seat.dc_show !== "r",
-            isChecked: false,
-          }))
-        );
+        const fetchedSeats = response.data.map((seat) => ({
+          row: seat.row,
+          column: seat.column,
+          isDisabled: seat.dc_show !== "y" && seat.dc_show !== "r",
+          isChecked: false, // 추가된 부분: isChecked 상태 초기화
+        }));
+        console.log("Fetched seats:", fetchedSeats);
+        setSeats(fetchedSeats);
       } catch (error) {
         console.error("Error fetching seats:", error);
       }
@@ -143,19 +145,23 @@ const Reservation_Seat = () => {
 
   const handleQuantityChange = (newQuantity) => {
     console.log("handleQuantityChange 함수 호출됨");
-    console.log("newQuantity:", newQuantity);
-
+    console.log("수량 변경됨:", newQuantity);
     setQuantity(newQuantity);
-    setCanSelectSeat(newQuantity > 0);
+
+    if (newQuantity > 0) {
+      console.log("수량이 0보다 큼 - 좌석 선택 가능");
+      setCanSelectSeat(true);
+    } else {
+      console.log("수량이 0임 - 좌석 선택 불가");
+      setCanSelectSeat(false);
+    }
   };
 
   const handleSeatSelect = (row, column) => {
     const updatedSeats = seats.map((seat) => {
       if (seat.row === row && seat.column === column) {
         return {
-          row: seat.row,
-          column: seat.column,
-          isDisabled: seat.isDisabled,
+          ...seat,
           isChecked: !seat.isChecked,
         };
       }
@@ -176,8 +182,8 @@ const Reservation_Seat = () => {
         selectedSeats.map((seat) =>
           ApiService.updateSeat({
             st_num: seat.st_num,
-            st_row: seat.row, // 좌석의 행 정보
-            st_column: seat.column, // 좌석의 열 정보
+            st_row: seat.row,
+            st_column: seat.column,
           })
         )
       );
@@ -331,6 +337,7 @@ const Reservation_Seat = () => {
                   quantity={quantity}
                   seats={seats}
                   onSeatSelect={handleSeatSelect}
+                  canSelectSeat={canSelectSeat}
                 />
               </div>
               <div className="Res_seat2_bottom">

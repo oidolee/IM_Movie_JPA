@@ -5,16 +5,18 @@ let url = "http://localhost:8081";
 class ApiService {
 
     // page_1
-    // --------------------------------------------Payment 시작--------------------------------------------
+    // --------------------------------------------Seat 시작--------------------------------------------
     listSeat() {
         console.log("listSeat 호출");
         return axios.get(url + "/page_1/SeatList");
     }
-    // --------------------------------------------Payment 끝--------------------------------------------
+
     updateSeat(inputData) {
         console.log("updateSeat 호출", inputData);
         return axios.put(url + "/page_1/SeatUpdate" + "/" + inputData.st_num + "/" + inputData.st_row + "/" + inputData.st_column, inputData);
     }
+    // --------------------------------------------Seat 끝--------------------------------------------
+    
 
     // --------------------------------------------Discount 시작--------------------------------------------
     // 목록
