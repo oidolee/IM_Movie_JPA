@@ -87,7 +87,7 @@ const Square = ({
   canSelectSeat,
   isChecked,
   onSeatSelect,
-  quantity
+  quantity,
 }) => {
   const handleChange = () => {
     console.log("handleChange 함수 호출됨"); // 변경된 부분
@@ -129,7 +129,7 @@ const Reservation_Seat = () => {
           response.data.map((seat) => ({
             row: seat.row,
             column: seat.column,
-            isDisabled: seat.dc_show !== "y" && seat.dc_show !== "r" ,
+            isDisabled: seat.dc_show !== "y" && seat.dc_show !== "r",
             isChecked: false,
           }))
         );
