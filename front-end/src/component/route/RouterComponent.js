@@ -25,6 +25,7 @@ import Parking from '../page_2/Parking';
 //page_3
 import Page3 from '../page_3/Page3';
 import StoreDetail from '../page_3/StoreDetail';
+import StoreTiketMap from '../page_3/StoreTiketMap';
 
 
 
@@ -97,6 +98,7 @@ const AppRouter = () => {
                             <Route>
                                 <Route path="/Page3" exact={true} component={Page3} />
                                 <Route path="/page_3/EditStore_Admin/" exact={true} component={StoreDetail} />
+                                <Route path="/page_3/StoreTiketMap/" exact={true} component={StoreTiketMap} />
                             </Route>
 
                             {/* page_4 */}
