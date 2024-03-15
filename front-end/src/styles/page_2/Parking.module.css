@@ -19,6 +19,11 @@
     border: 1px solid;
     padding: 20px;
     box-sizing: border-box;
+    background-color: black;
+    margin-bottom: 20px;
+}
+.Parking .Parking_seat_box h3{
+    color: white;
 }
 
 .Parking .Parking_lot{
@@ -31,5 +36,16 @@
 }
 /* 주차라인 */
 .Parking .Parking_row>li{
-    border: 1px solid red;
+    width: 35px;
+    height: 25px;
+    background-color: white;
+    display: inline-block;
+    margin: 0 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: pointer;
+}
+
+.Park_checked{
+    background-color: red !important;
 }

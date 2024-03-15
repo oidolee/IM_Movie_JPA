@@ -135,7 +135,24 @@ class ApiService {
     }
 
 
-    
+    // <page_3 주차 리스트 불러옴>
+    parkingList(){
+        console.log('parkingList() 호출!!')
+        return axios.get(url + '/page_3/ParkingList'); 
+    }
+
+    // <page_3 주차등록>
+    editPark(inputData){
+        console.log('editPark() 주차등록시작');
+        console.log(inputData);
+        return axios.put(url + '/page_3/save/'+inputData.ip_no, inputData); 
+    }
+
+         // 수정
+    // editDiscount(inputData) {
+    //     console.log("editDiscount 호출", inputData);
+    //     return axios.put(url + "/page_1/DiscountUpdate" + "/" + inputData.dc_num, inputData);
+    // }  
 
 }
 export default new ApiService();
