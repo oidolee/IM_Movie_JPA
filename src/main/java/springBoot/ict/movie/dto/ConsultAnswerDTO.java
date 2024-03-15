@@ -24,10 +24,13 @@ public class ConsultAnswerDTO {
     
     private int one_id;
     
-    private String iba_title;
-    
     private String iba_content;
     
     private Date iba_date;
    
+    
+    public ConsultAnswerDTO() {
+        // ib_date를 현재 날짜로 설정
+        this.iba_date = new Date(System.currentTimeMillis());
+    }
 }

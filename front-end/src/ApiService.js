@@ -127,13 +127,18 @@ class ApiService {
         return axios.post(url + '/page_6/save', inputData); 
     }
 
-    // 1:1 문의 답변
+    // 1:1 문의 답변 리스트
     fetchConsultAnswer(one_id){
         console.log('fetchConsultAnswerById() 호출!!')
         
-        return axios.get(url + '/page_6/select'+ one_id); 
+        return axios.get(url + '/page_6/consultAnswer/'+ one_id); 
     }
 
+    // 1:1 문의 답변 등록
+    addConsultAndser(inputData) {
+        console.log('addCustomer 호출', inputData);
+        return axios.post(url + "/page_6/saveAnswer", inputData);
+    }
 
     
 
