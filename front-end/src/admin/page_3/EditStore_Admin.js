@@ -8,107 +8,104 @@ class EditStore_Admin extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            id: '',
-            name: '',
-            brand: '',
-            madein: '',
-            price: '',
-            message: ''
+        this.state = {  // 2. 해당 변수에 입력한 값으로 변경된 상태
+            itemCode: '',
+            itemType: '',
+            itemName: '',
+            itemDetail: '',
+            itemPrice: '',
+            itemSalePrice: '',
+            itemImage: '',
+            itemExp: ''
         }
     }
 
     componentDidMount() {
-        this.loadSample();
+        this.loadStore();
     }
 
-    // 1. 수정전에 1건 select해서 state 호출한 후 그값을 화면에 뿌린다.
-    loadSample = () => {
-        ApiService.fetchSampleByID(window.localStorage.getItem("sampleID"))
-        .then(res => {
-            let sample = res.data;
-            this.setState({
-                id: sample.id,
-                name: sample.name,
-                brand: sample.brand,
-                madein: sample.madein,
-                price: sample.price
-            })
-        })
 
-        .catch(err => {
-            console.log('loadSample() Error!!', err);
-        })
-    }
- 
-    // 2. 화면에서 수정한 값을 state 변경
-    onChange = (e) => {
+    loadStore = () => {
+        ApiService.fetchStoreByID(window.localStorage.getItem("sampleID")) //★★★★★★★이건 어떻게 사용하는 거지???????
+        .then(res => {        
+        let sotreEdit = res.data;
         this.setState({
-            [e.target.name] : e.target.value
+            itemCode: sotreEdit.itemCode,
+            itemType: sotreEdit.itemType,
+            itemName: sotreEdit.itemName,
+            itemDetail: sotreEdit.itemDetail,
+            itemPrice: sotreEdit.itemPrice,
+            itemSalePrice: sotreEdit.itemSalePrice,
+            itemImage: sotreEdit.itemImage,
+            itemExp: sotreEdit.itemExp
         })
+    })
+
+    .catch(err => {
+        console.log('loadSample() Error!!', err);
+    })
+}       
+
+    onChange = (e) => {  // 1. 입력한 값으로 변경한다.
+        this.setState({
+            [e.target.name] : e.target.value 
+        });
     }
 
-     // 3.수정처리(화면에서 입력한 값 -> onChange() -> setState() -> inputData)
-     editSample = (e) => {
+    EditStore_Admin = (e) => {
         e.preventDefault();
 
-        let inputData = {
-            id: this.state.id,
-            name: this.state.name,
-            brand: this.state.brand,
-            madein: this.state.madein,
-            price: this.state.price,
+        let inputData = {   // 3. state값을 읽어온다.
+            itemCode: this.state.itemCode,
+            itemType: this.state.itemType,
+            itemName: this.state.itemName,
+            itemDetail: this.state.itemDetail,
+            itemPrice: this.state.itemPrice,
+            itemSalePrice: this.state.itemSalePrice,
+            itemImage: this.state.itemImage,
+            itemExp: this.state.itemExp
         }
 
-        ApiService.editSample(inputData)
-            .then(res => {
-                this.setState({
 
+        // 3. 수정처리(화면에서 입력한 값 -> onChange() -> setState() -> inputData)
+        ApiService.EditStore_Admin(inputData)    // 스프링부트와의 통신기능 호출
+            .then(res => {
+                this.setState({                    
                 })
-                console.log('update 성공 : ', res.data);  // 컨트롤러에서 전달함(resultCode, resultMsg)
-                this.props.history.push('/samples');  // RouterComponent.js - ListSampleComponent 호출           
+                console.log('input 성공 : ', res.data);  // 컨트롤러에서 전달함(resultCode, resultMsg)
+                this.props.history.push('ListStore_Admin');  // RouterComponent.js - ListSampleComponent 호출
             })
             .catch(err => {
-                console.log('editSample() 에러!! : ', err);
+                console.log('EditStore_Admin() 에러!! : ', err);
             });
 
-    } 
+    }
 
     render() {
-        return (
+        return(
             <div align="center"><br/><br/>
-                <Typography variant="h4"> Edit Sample </Typography>
-                    <TextField
+                <Typography variant="h4"> Add STORE ITEM </Typography>
+                
+                     <TextField
                         required
                         id="stanrard-required"
                         variant="standard"
-                        label="id"
+                        label="상품코드"
                         type="text"
-                        name="id"
-                        value={this.state.id}
-                    /><br/>    
+                        name="itemCode"
+                        value={this.state.itemCode}
+
+                    /><br/>   
 
                     <TextField
                         required
                         id="stanrard-required"
                         variant="standard"
-                        label="name"
+                        label="상품유형"
                         type="text"
-                        name="name"
-                        value={this.state.name}
-                        placeholder='Edit sample name'
-                        onChange={this.onChange}
-                    /><br/>    
-
-                    <TextField
-                        required
-                        id="stanrard-required"
-                        variant="standard"
-                        label="brand"
-                        type="text"
-                        name="brand"
-                        value={this.state.brand}
-                        placeholder='Edit sample brand'
+                        name="itemType"
+                        value={this.state.itemType}
+                        placeholder='Input sample itemType'
                         onChange={this.onChange}
                     /><br/>   
 
@@ -116,11 +113,11 @@ class EditStore_Admin extends Component {
                         required
                         id="stanrard-required"
                         variant="standard"
-                        label="madein"
+                        label="상품명"
                         type="text"
-                        name="madein"
-                        value={this.state.madein}
-                        placeholder='Edit sample madein'
+                        name="itemName"
+                        value={this.state.itemName}
+                        placeholder='Input sample itemName'
                         onChange={this.onChange}
                     /><br/>   
 
@@ -128,18 +125,67 @@ class EditStore_Admin extends Component {
                         required
                         id="stanrard-required"
                         variant="standard"
-                        label="price"
+                        label="구성품"
                         type="text"
-                        name="price"
-                        value={this.state.price}
-                        placeholder='Edit sample price'
+                        name="itemDetail"
+                        value={this.state.itemDetail}
+                        placeholder='Input sample itemDetail'
+                        onChange={this.onChange}
+                    /><br/>   
+
+                    <TextField
+                        required
+                        id="stanrard-required"
+                        variant="standard"
+                        label="소비자 가격"
+                        type="text"
+                        name="itemPrice"
+                        value={this.state.itemPrice}
+                        placeholder='Input sample itemPrice'
+                        onChange={this.onChange}
+                    /><br/>    
+
+                    <TextField
+                        required 
+                        id="stanrard-required"
+                        variant="standard"
+                        label="할인 가격"
+                        type="text"
+                        name="itemSalePrice"
+                        value={this.state.itemSalePrice}
+                        placeholder='Input sample itemSalePrice'
+                        onChange={this.onChange}
+                    /><br/>   
+
+                    <TextField
+                        required
+                        id="stanrard-required"
+                        variant="standard"
+                        label="이미지"
+                        type="text"
+                        name="itemImage"
+                        value={this.state.itemImage}
+                        placeholder='Input sample itemImage'
+                        onChange={this.onChange}
+                    /><br/>   
+
+                    <TextField
+                        required
+                        id="stanrard-required"
+                        variant="standard"
+                        label="유효기간"
+                        type="text"
+                        name="itemExp"
+                        value={this.state.itemExp}
+                        placeholder='Input sample itemExp'
                         onChange={this.onChange}
                     /><br/><br/> 
 
-                <Button variant="contained" color="primary" onClick={this.editSample}> Edit </Button>    
+                <Button variant="contained" color="primary" onClick={this.EditStore_Admin}> Save </Button>    
             
             </div>
 
+           
         )
     }
 }

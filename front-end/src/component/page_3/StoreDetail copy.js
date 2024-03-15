@@ -7,10 +7,9 @@ import bottom1 from "../../assets/page_3/bottom1.jpg";
 import bottom2 from "../../assets/page_3/bottom2.jpg";
 import { Virtual, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import ApiService from '../../ApiService';
 
 class StoreDetail extends Component {
-
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -19,81 +18,9 @@ class StoreDetail extends Component {
       quantity: 1,
       price: 22000,
       selectedValue: 1,
-      swiperRef: null,
-      itemCode: '',
-      itemType: '',
-      itemName: '',
-      itemDetail: '',
-      itemPrice: '',
-      itemSalePrice: '',
-      itemImage: '',
-      itemExp: ''
+      swiperRef: null
     };
   }
-
-
-  componentDidMount() {
-    this.loadStore();
-}
-
-loadStore = () => {
-  ApiService.fetchStoreByID(window.localStorage.getItem("sampleID")) //★★★★★★★이건 어떻게 사용하는 거지???????
-  .then(res => {        
-  let sotreEdit = res.data;
-  this.setState({
-      itemCode: sotreEdit.itemCode,
-      itemType: sotreEdit.itemType,
-      itemName: sotreEdit.itemName,
-      itemDetail: sotreEdit.itemDetail,
-      itemPrice: sotreEdit.itemPrice,
-      itemSalePrice: sotreEdit.itemSalePrice,
-      itemImage: sotreEdit.itemImage,
-      itemExp: sotreEdit.itemExp
-  })
-})
-
-.catch(err => {
-  console.log('loadSample() Error!!', err);
-})
-}       
-
-onChange = (e) => {  // 1. 입력한 값으로 변경한다.
-  this.setState({
-      [e.target.name] : e.target.value 
-  });
-}
-
-EditStore_Admin = (e) => {
-  e.preventDefault();
-
-  let inputData = {   // 3. state값을 읽어온다.
-      itemCode: this.state.itemCode,
-      itemType: this.state.itemType,
-      itemName: this.state.itemName,
-      itemDetail: this.state.itemDetail,
-      itemPrice: this.state.itemPrice,
-      itemSalePrice: this.state.itemSalePrice,
-      itemImage: this.state.itemImage,
-      itemExp: this.state.itemExp
-  }
-
-
-  // 3. 수정처리(화면에서 입력한 값 -> onChange() -> setState() -> inputData)
-  ApiService.EditStore_Admin(inputData)    // 스프링부트와의 통신기능 호출
-      .then(res => {
-          this.setState({                    
-          })
-          console.log('input 성공 : ', res.data);  // 컨트롤러에서 전달함(resultCode, resultMsg)
-          this.props.history.push('ListStore_Admin');  // RouterComponent.js - ListSampleComponent 호출
-      })
-      .catch(err => {
-          console.log('EditStore_Admin() 에러!! : ', err);
-      });
-
-}
-
-
-
 
   openStoreGift = () => {
     this.setState({ isStoreGiftOpen: true });
@@ -218,9 +145,8 @@ EditStore_Admin = (e) => {
                 style={{ width: "100%" }}
               >
                 <tr>
-                {/* 상품명 */}
-                  <th className={`tit ${style.tit}`} colSpan="2"> 
-                     {this.state.itemName}
+                  <th className={`tit ${style.tit}`} colSpan="2">
+                    [IM과 봄] 패키지
                   </th>
                 </tr>
                 <tr>
@@ -236,7 +162,7 @@ EditStore_Admin = (e) => {
                       22,000<em>원</em>
                     </span>
                     <span className={`txt_price_ins ${style.txt_price_ins}`}>
-                      {this.state.itemPrice}
+                      26,000원
                     </span>
                   </td>
                 </tr>
@@ -250,7 +176,7 @@ EditStore_Admin = (e) => {
                 </tr>
                 <tr>
                   <th>유효기간</th>
-                  <td>{this.state.itemExp}</td>
+                  <td>온라인 관람권 6 개월</td>
                 </tr>
                 <tr>
                   <th>사용가능 영화관</th>
