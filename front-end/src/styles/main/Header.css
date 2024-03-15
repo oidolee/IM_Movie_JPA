@@ -11,6 +11,15 @@
     background: linear-gradient(to bottom, rgba(29, 29, 31, 1) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
+.special_header{
+    width: 100%;
+    position: initial;
+    left: initial;
+    transform: initial;
+    margin: 0 auto;
+    background: initial;
+}
+
 .header_section .gnb{
     max-width: 1000px;
     margin: 0 auto;
@@ -70,6 +79,11 @@
     letter-spacing: 0.1em;
     white-space: nowrap;
     font-weight: bold;
+}
+
+/* 세부 페이지 일떄 상단 메뉴바 검은색 */
+.header_section.special_header .nav>ul>li>a{
+    color: #000;
 }
 
 .header_section .nav >ul{

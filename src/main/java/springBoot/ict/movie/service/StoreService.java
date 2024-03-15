@@ -14,15 +14,15 @@ public interface StoreService {
 			throws ServletException, IOException;
 	
 	// 스토어 등록
-	public int insertStore(StoreDTO dto)
+	public void insertStore(StoreDTO dto)
 			throws ServletException, IOException;	
 	
 	// 스토어 수정
-	public int updateStore(StoreDTO dto)
+	public void updateStore(StoreDTO dto)
 			throws ServletException, IOException;		
 	
 	// 스토어 삭제
-	public int deleteStore(int item_code)
+	public void deleteStore(int item_code)
 			throws ServletException, IOException;	
 	
 	// 스토어 상세페이지

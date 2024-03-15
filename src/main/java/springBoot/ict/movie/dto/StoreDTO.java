@@ -1,7 +1,6 @@
 package springBoot.ict.movie.dto;
 
-import java.sql.Date;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,21 +16,26 @@ import lombok.Data;
 @Data
 public class StoreDTO {
 
-	 @GeneratedValue(strategy=GenerationType.IDENTITY)
-	    @Id
-	    private int item_code;
-	    @JsonProperty("item_type")
-	    private String item_type;
-	    @JsonProperty("item_name")
-	    private String item_name;
-	    @JsonProperty("item_detail")
-	    private String item_detail;
-	    @JsonProperty("item_price")
-	    private int item_price;
-	    @JsonProperty("item_sale_price")
-	    private int item_sale_price;
-	    @JsonProperty("item_image")
-	    private String item_image;
-	    @JsonProperty("item_exp")
-	    private Date item_exp;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @JsonProperty("itemCode")
+    private int item_code;
+    // setGift_num 메서드 추가
+    public void setItem_code(int item_code) {
+        this.item_code = item_code;
+    }
+    @JsonProperty("itemType")
+    private String item_type;
+    @JsonProperty("itemName")
+    private String item_name;
+    @JsonProperty("itemDetail")
+    private String item_detail;
+    @JsonProperty("itemPrice")
+    private int item_price;
+    @JsonProperty("itemSalePrice")
+    private int item_sale_price;
+    @JsonProperty("itemImage")
+    private String item_image;
+    @JsonProperty("itemExp")
+    private String item_exp;
 }

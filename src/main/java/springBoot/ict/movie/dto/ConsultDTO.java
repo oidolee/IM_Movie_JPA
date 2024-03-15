@@ -37,4 +37,13 @@ public class ConsultDTO {
     private Date ib_date;
     @JsonProperty("ib_show")
     private String ib_show;
+    
+    
+    public ConsultDTO() {
+        // ib_date를 현재 날짜로 설정
+        this.ib_date = new Date(System.currentTimeMillis());
+        // ib_show를 기본값으로 설정
+        this.ib_show = "y";
+    }
+    
 }

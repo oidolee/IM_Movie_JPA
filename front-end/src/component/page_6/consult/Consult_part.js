@@ -1,6 +1,9 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import Button from '@mui/material/Button';
 import style from '../../../styles/page_6/consult.module.css'
+import ApiService from '../../../ApiService';
+import { useHistory } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 
 function Consult_part() {
@@ -8,6 +11,65 @@ function Consult_part() {
     const showBox = () => {
         setShowDetail(!showDetail)
     }
+    const history = useHistory();
+
+    const cus_grade = 'VIP';
+    const [cookies, setCookie, removeCookie] = useCookies(['cus_name']);
+    const [cus_name, setIdCheck] = useState('');
+
+    useEffect(() => {
+        if (cookies.cus_name !== undefined) {
+            setIdCheck(cookies.cus_name);
+        }
+    }, [cookies.cus_name]);
+
+    const c_email = 'abc';
+    let a = 'abc';
+    const [consultData, setConsultData] = useState({
+        c_email: c_email,
+        cus_name: a,
+        ib_type: '',
+        ib_type_detail: '',
+        ib_title: '',
+        ib_content: ''
+    });
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setConsultData(prevState  =>({
+            ...prevState,
+            [name]: value
+        }));
+    }
+    
+    const saveConsult = (e) => {
+        e.preventDefault();
+        // 필요한 로직 수행
+        ApiService.addConsult(consultData)
+            .then(res => {
+                console.log('입력 성공:', res.data);
+                // 필요한 작업 수행
+                if (res.data.resultCode == '200') {
+                    alert("문의 등록 성공");
+                    history.push('/MyPage_consult_list'); // history.push()로 페이지를 이동합니다.
+                } else {
+                    alert("문의 등록 실패");
+                    history.push('/Consult'); // history.push()로 페이지를 이동합니다.
+                }
+            })
+            .catch(err => {
+                console.error('문의 등록 에러:', err);
+            });
+    }
+
+    const resetForm = () => {
+        setConsultData({
+            ib_type: '',
+            ib_type_detail: '',
+            ib_title: '',
+            ib_content: '',
+        });
+    }
+
 
     return (
         <div className={`Consult ${style.Consult}`}>
@@ -20,7 +82,13 @@ function Consult_part() {
                     <tr>
                         <td style={{ paddingRight: '20px' }}>분류 *</td>
                         <td>
-                            <select className={`select1 ${style.select1}`} required>
+                            <select 
+                                className={`select1 ${style.select1}`} 
+                                required 
+                                value={consultData.ib_type} 
+                                onChange={handleChange}
+                                name="ib_type"
+                            >
                                 <option value={'#'}>분류선택</option>
                                 <option value={'theater'}>영화관</option>
                                 <option value={'movie'}>영화</option>
@@ -29,7 +97,12 @@ function Consult_part() {
                                 <option value={'page'}>홈페이지</option>
                                 <option value={'myinfo'}>개인정보</option>
                             </select>
-                            <select className={`select2 ${style.select2}`}>
+                            <select 
+                                className={`select2 ${style.select2}`} 
+                                value={consultData.ib_type_detail} 
+                                onChange={handleChange}
+                                name="ib_type_detail"
+                            >
                                 <option value={'#'}>분류선택</option>
                                 <option value={'theater'}>영화관</option>
                                 <option value={'movie'}>영화</option>
@@ -43,7 +116,7 @@ function Consult_part() {
                     <tr>
                         <td>종류 *</td>
                         <td>
-                            <select className={`consultType ${style.consultType}`} required>
+                            <select className={`consultType ${style.consultType}`}>
                                 <option value={'movie2'}>영화관문의</option>
                                 <option value={'else2'}>기타문의</option>
                             </select>
@@ -51,12 +124,29 @@ function Consult_part() {
                     </tr>
                     <tr>
                         <td>제목 *</td>
-                        <td><input className={`consultTitle ${style.consultTitle}`} type="text" placeholder="제목을 입력해주세요" required style={{background: 'rgba(211, 211, 211, 0.178)'}} /></td>
+                        <td>
+                            <input 
+                                className={`consultTitle ${style.consultTitle}`} 
+                                type="text" 
+                                placeholder="제목을 입력해주세요" 
+                                required 
+                                style={{background: 'rgba(211, 211, 211, 0.178)'}} 
+                                value={consultData.ib_title}  
+                                onChange={handleChange}
+                                name="ib_title"
+                                
+                            />
+                        </td>
                     </tr>
                     <tr>
                         <td>내용 *</td>
                         <td>
-                            <textarea className={`consult_content ${style.consult_content}`}></textarea>
+                            <textarea 
+                                className={`consult_content ${style.consult_content}`} 
+                                value={consultData.ib_content} 
+                                onChange={handleChange}
+                                name="ib_content" 
+                            ></textarea>
                         </td>
                     </tr>
                 </table>
@@ -94,8 +184,11 @@ function Consult_part() {
                 </div>
             </div>
             <div>
-                <a className={`btn_cancle ${style.btn_cancle}`}>취소</a>
-                <a className={`btn_submit ${style.btn_cancle}`}>확인</a>
+                <input type="hidden" value={consultData.cus_name}  name="cus_name" onChange={handleChange}/>
+                <input type="hidden" value={consultData.ib_date}  name="ib_date" onChange={handleChange}/>
+                <input type="hidden" value={consultData.ib_show}  name="ib_show" onChange={handleChange}/>
+                <Button className={`btn_cancle ${style.btn_cancle}`} variant="contained" color="primary" onClick={saveConsult}> 확인 </Button>
+                <Button className={`btn_submit ${style.btn_submit}`} variant="contained" color="primary" onClick={resetForm}> 취소 </Button>
             </div>
         </div>
     );

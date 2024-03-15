@@ -37,4 +37,8 @@ public class CustomerDTO {
     private Date IC_regdate;
     @JsonProperty("show")
     private String IC_show;
+    
+    
+    
+    
 }
