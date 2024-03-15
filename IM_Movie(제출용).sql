@@ -87,31 +87,17 @@ SHERE St_id=1;
 
 commit;
 
+-- Discount 완료 / 수정사항 없음
 DROP TABLE IM_Discount;
 CREATE TABLE IM_Discount(
     dc_num INT AUTO_INCREMENT PRIMARY KEY,
     dc_main_title VARCHAR(50) NOT NULL,
     dc_sub_title VARCHAR(50),
+    dc_content VARCHAR(255) NOT NULL,
     dc_main_img VARCHAR(255) NOT NULL,
-    dc_sub_img VARCHAR(255) NOT NULL,
-    dc_show CHAR(1) DEFAULT 'n',
+    dc_show CHAR(1) DEFAULT 'y',
     dc_sysdate DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-
-SELECT * FROM IM_Discount;
-
-INSERT INTO IM_Discount(dc_main_title, dc_sub_title, dc_main_img, dc_sub_img, dc_show)
-VALUES ('aa', 'aa', 'aa', 'aa', 'n');
-
-UPDATE IM_Discount
-SET dc_show='y'
-WHERE dc_num=1;
-
-DELETE FROM IM_Discount
-WHERE dc_num=1;
-
-commit;
-
 -- 예진 끝
 
 

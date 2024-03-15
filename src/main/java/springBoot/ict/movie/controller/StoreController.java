@@ -26,18 +26,18 @@ import springBoot.ict.movie.service.StoreServiceImpl;
 
 @CrossOrigin(origins="**", maxAge=3600)
 @RestController
-@RequestMapping(value="/page_3")	
+@RequestMapping(value="/page_3")   
 public class StoreController {
-	
-	@Autowired
-	private StoreServiceImpl service;	
-	
-	private static final Logger logger = LoggerFactory.getLogger(StoreController.class);
-	
-	// 스토어 리스트 조회
-	@GetMapping()	// ★페이지 이름 아니고, 어떤걸 쓰는거지???
-	//@GetMapping("/")	// ★페이지 이름 아니고, 어떤걸 쓰는거지???
-	public List<StoreDTO> storeList(Model model)
+   
+   @Autowired
+   private StoreServiceImpl service;   
+   
+   private static final Logger logger = LoggerFactory.getLogger(StoreController.class);
+   
+   // 스토어 리스트 조회
+   @GetMapping()   // ★페이지 이름 아니고, 어떤걸 쓰는거지???
+   //@GetMapping("/")   // ★페이지 이름 아니고, 어떤걸 쓰는거지???
+   public List<StoreDTO> storeList(Model model)
             throws ServletException, IOException {
         logger.info("<<< url -> storeList");
         List<StoreDTO> list = service.listStore();
@@ -47,8 +47,8 @@ public class StoreController {
         
         return list;
     } 
-	
-	// 스토어 등록
+   
+   // 스토어 등록
     @PostMapping("/AddStore_Admin")
     public Map<String, Object> storeInsert(@RequestBody StoreDTO dto)
             throws ServletException, IOException {
@@ -65,7 +65,7 @@ public class StoreController {
         Map<String, Object> map = new HashMap<String, Object>();
 
         try {
-        	
+           
             service.insertStore(dto);
             resultCode = "200";
             resultMsg = "StoreInform Success";
@@ -81,6 +81,7 @@ public class StoreController {
 
         return map;
     }
+
 	
 
 	// 스토어 상세페이지
@@ -156,3 +157,5 @@ public class StoreController {
 		     }
 		
 	}
+
+

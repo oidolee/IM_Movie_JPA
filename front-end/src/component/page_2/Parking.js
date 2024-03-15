@@ -40,7 +40,7 @@ function Parking() {
             <ul className={`Parking_row ${sytle.Parking_row}`}>
               {parkingLot[lot].map(([seatNumber, status]) => (
                 <li key={`${lot}-${seatNumber}`} className={`seat_${status}`}>
-                  Seat {seatNumber}: {status === 'Y' ? 'x' : seatNumber}
+                  {status === 'Y' ? 'x' : seatNumber}
                 </li>
               ))}
             </ul>

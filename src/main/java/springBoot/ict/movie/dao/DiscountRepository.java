@@ -8,9 +8,6 @@ import springBoot.ict.movie.dto.DiscountDTO;
 
 public interface DiscountRepository extends JpaRepository<DiscountDTO, Integer> {
 
-	@Query("SELECT d FROM DiscountDTO d WHERE d.dc_num=:dc_num")
-	DiscountDTO DiscountDetailList(int dc_num);
-	
-	
-	
+    @Query("SELECT d FROM DiscountDTO d WHERE d.dc_num=:dc_num")
+    DiscountDTO DiscountDetailList(@Param("dc_num") int dc_num);
 }
