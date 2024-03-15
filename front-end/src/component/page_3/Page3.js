@@ -45,6 +45,14 @@ class Page3 extends Component{
         })
     }
 
+    // update
+    EditStore_Admin = (itemCode) =>  {
+        console.log("edit 버튼 호출");
+        window.localStorage.setItem("sampleID", itemCode);
+        ApiService.fetchStoreByID(itemCode);   
+        this.props.history.push(`/page_3/EditStore_Admin`);
+    }
+
     render(){
         return(
             <div className={`page3_store ${style.page3_store}`}>
@@ -61,7 +69,7 @@ class Page3 extends Component{
 
                     <div className={`page3_store2 ${style.page3_store2}`}>
                         <h3 className={`store_title ${style.store_title}`} id='store1'>베스트</h3>
-                        <div className={`page3_flex ${style.page3_flex}`}>
+                        {/* <div className={`page3_flex ${style.page3_flex}`}>
                             <a href="/StoreDetail?num=1" className={`store_item ${style.store_item}`}>
                                 <div className={`store_img ${style.store_img}`}>
                                     <img src={package1}></img>
@@ -120,14 +128,15 @@ class Page3 extends Component{
                                     </div>
                                 </div>
                             </a>
-                        </div>
+                        </div> */}
 
 
 <div className={`page3_flex ${style.page3_flex}`}>
     {this.state.lists.map((item, index) => (
-        // itemType이 "스낵음료"인 경우에만 해당 아이템을 출력
+        // itemType이 "베스트"인 경우에만 해당 아이템을 출력
         item.itemType === "베스트" && (
-            <a href={`/page_3/EditStore_Admin?${item.itemCode}`} className={`store_item ${style.store_item}`} key={index}>
+            <a onClick={() => this.EditStore_Admin(item.itemCode)} className={`store_item ${style.store_item}`} key={item.itemCode}>
+            {/* <a href={`/page_3/EditStore_Admin?${item.itemCode}`} className={`store_item ${style.store_item}`} key={index}> */}
                 <div className={`store_img ${style.store_img}`}>
                     <img src={item.itemImage} alt={`Item ${item.itemCode}`} />
                 </div>
@@ -151,7 +160,7 @@ class Page3 extends Component{
 
                         
                         <h3 className={`store_title ${style.store_title}`} id='store2'>관람권</h3>
-                        <div className={`page3_flex ${style.page3_flex}`}>
+                        {/* <div className={`page3_flex ${style.page3_flex}`}>
                             <a href="/StoreDetail?num=4" className={`store_item ${style.store_item}`}>
                                 <div className={`store_img ${style.store_img}`}>
                                     <img src={ticket1}></img>
@@ -190,14 +199,16 @@ class Page3 extends Component{
                                     </div>
                                 </div>
                             </a>
-                        </div>
+                        </div> */}
                       
 
-                        <div className={`page3_flex ${style.page3_flex}`}>
+ <div className={`page3_flex ${style.page3_flex}`}>
     {this.state.lists.map((item, index) => (
         // itemType이 "관람권"인 경우에만 해당 아이템을 출력
         item.itemType === "관람권" && (
-            <a href={`/StoreDetail?num=${item.itemCode}`} className={`store_item ${style.store_item}`} key={index}>
+            
+            <a onClick={() => this.EditStore_Admin(item.itemCode)} className={`store_item ${style.store_item}`} key={item.itemCode}>
+            {/* <a href={`/page_3/EditStore_Admin?${item.itemCode}`} className={`store_item ${style.store_item}`} key={index}> */}
                 <div className={`store_img ${style.store_img}`}>
                     <img src={item.itemImage} alt={`Item ${item.itemCode}`} />
                 </div>
@@ -215,13 +226,15 @@ class Page3 extends Component{
                     </div>
                 </div>
             </a>
+
         )
     ))}
 </div>
 
 
+
                         <h3 className={`store_title ${style.store_title}`} id='store3'>스낵음료</h3>
-                        <div className={`page3_flex ${style.page3_flex}`}>
+                        {/* <div className={`page3_flex ${style.page3_flex}`}>
                             <a href="/StoreDetail?num=6" className={`store_item ${style.store_item}`}>
                                 <div className={`store_img ${style.store_img}`}>
                                     <img src="https://cf.lottecinema.co.kr//Media/WebAdmin/113c4f562c6e4c9d94e973b590f594ab.jpg"></img>
@@ -280,14 +293,15 @@ class Page3 extends Component{
                                     </div>
                                 </div>
                             </a>
-                        </div>
+                        </div> */}
 
 
 <div className={`page3_flex ${style.page3_flex}`}>
     {this.state.lists.map((item, index) => (
         // itemType이 "스낵음료"인 경우에만 해당 아이템을 출력
         item.itemType === "스낵음료" && (
-            <a href={`/StoreDetail?num=${item.itemCode}`} className={`store_item ${style.store_item}`} key={index}>
+            <a onClick={() => this.EditStore_Admin(item.itemCode)} className={`store_item ${style.store_item}`} key={item.itemCode}>
+            {/* <a href={`/page_3/EditStore_Admin?${item.itemCode}`} className={`store_item ${style.store_item}`} key={index}> */}
                 <div className={`store_img ${style.store_img}`}>
                     <img src={item.itemImage} alt={`Item ${item.itemCode}`} />
                 </div>
@@ -308,6 +322,7 @@ class Page3 extends Component{
         )
     ))}
 </div>
+
 
 
                     </div>
