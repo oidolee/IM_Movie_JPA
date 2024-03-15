@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import style from '../../../styles/page_5/groupform.module.css';
 import group1 from '../../../assets/page_5_3/group1.png';
+import { useHistory } from 'react-router-dom'; 
 
 
 function Form() {
@@ -10,6 +11,16 @@ function Form() {
     const handleSubmit = (e) => {
       e.preventDefault();
     };  
+
+    const history = useHistory(); 
+
+    const handleClick = () => {
+      // 이동하고자 하는 경로를 path 변수에 넣어줍니다.
+    const path = '/re_answer_list'; // 이동하고자 하는 경로
+
+      // 페이지 이동
+      history.push(path);
+  };
   
     return (
       <div id='Form_wrappage' className={`Form_wrappage ${style.Form_wrappage}`}>
@@ -158,7 +169,7 @@ function Form() {
             <div className={`btn_0 ${style.btn_0}`}>
                 <button type="submit" className={`btn1 ${style.btn1}`}>취소</button>
                 <span className="gap"></span> {/* 간격 요소 */}
-                <button type="submit" className={`btn2 ${style.btn2}`}>확인</button>
+                <button type="submit" className={`btn2 ${style.btn2}`} onClick={handleClick}>확인</button>
             </div>
             
           </form>

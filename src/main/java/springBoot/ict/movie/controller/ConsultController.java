@@ -27,7 +27,7 @@ import springBoot.ict.movie.service.ConsultServiceImpl;
 
 @CrossOrigin(origins="**", maxAge=3600)
 @RestController
-@RequestMapping(value="/page_6")
+
 public class ConsultController {
 	@Autowired
 	private ConsultServiceImpl service;
