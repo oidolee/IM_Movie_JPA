@@ -45,7 +45,7 @@ function MyPage_consult_list_part() {
                 </thead>
                 <tbody>
                     {consult.map((consultItem, index) => (
-                            <tr> 
+                            <tr key={index}> 
                                 <input type="hidden" id='one_id_pk' value={consultItem.one_id}></input>
                                 <input type="hidden" value={consultItem.c_email}></input>
                                 <td>{consultItem.one_id}</td>
