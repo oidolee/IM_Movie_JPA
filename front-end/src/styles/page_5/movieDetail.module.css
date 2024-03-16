@@ -142,7 +142,6 @@
 .detail_box1{
   position: relative;
   width: 100%; /* 적절한 너비 설정 */
-  height: 200px; /* 적절한 높이 설정 */
   background-color: #d3d3d321; /* 적절한 배경색 설정 */
   padding: 20px; /* 적절한 안쪽 여백 설정 */
   text-align: left;
@@ -213,4 +212,70 @@
 .detail_last{
   margin-top:50px;
 }
+
+/* 관람평 등록 */
+
+.detail_movie_wrap .plz_login{
+  text-align: center;
+}
+.detail_movie_wrap h4{
+  margin-top: 30px;
+}
+
+/* 관람평 등록 버튼 */
+.detail_movie_wrap .plz_login_button{
+  width: 380px;
+    height: 50px;
+    margin-bottom: 35px;
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #414141;
+  font-size: 14px;
+  color: #ffffff !important;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #414141;
+}
+.detail_movie_wrap .star_info{
+  text-align: center;
+}
+
+.detail_movie_wrap .star_info>div>ul{
+  display: flex;
+  justify-content: center;
+}
+
+.detail_movie_wrap .star_info>div>ul>li{
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+
+.movie_review_list>ul{
+  margin-top: 30px;
+}
+.movie_review_list>ul>li{
+  padding: 20px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #eee;
+  display: flex;
+}
+
+.movie_review_list>ul>li .movie_review_content {
+  text-align: left;
+}
+.movie_review_list>ul>li img{
+  flex-shrink: 0;
+  width: 100px;
+
+}
+
+
+/* 가득별 */
+/* https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ico_star64_on.png */
+
+/* 빈별 */
+/* https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ico_star64_off.png */
+
 
