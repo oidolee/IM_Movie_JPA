@@ -19,7 +19,8 @@
 
 .layer_header_StoreTicket{
     border-radius: 30px 30px 30px 30px;
-    height: 550px; 
+    height: 780px; 
+    width: 780px;
     background-color: white;
 }
 
@@ -78,7 +79,7 @@
 
 }
 
-
+/* dddddddddddddddddddddddddddddddddddd */
 .StoreTicket_posible {
     display: flex;
     border-top: 1px solid #CCC;
@@ -168,4 +169,6 @@
     /* 원하는 스타일 추가 */
   }
 
-  
+.StoreTicket_map{
+    margin-top: 50px;
+ }
