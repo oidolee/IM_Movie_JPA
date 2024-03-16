@@ -13,7 +13,7 @@ class ApiService {
 
     updateSeat(inputData) {
         console.log("updateSeat 호출", inputData);
-        return axios.put(url + "/page_1/SeatUpdate" + "/" + inputData.st_num + "/" + inputData.st_row + "/" + inputData.st_column, inputData);
+        return axios.put(url + "/page_1/SeatUpdate" + "/" + inputData.st_num , inputData);
     }
     // --------------------------------------------Seat 끝--------------------------------------------
     
