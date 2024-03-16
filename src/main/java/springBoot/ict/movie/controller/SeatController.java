@@ -50,8 +50,8 @@ public class SeatController {
 	}
 	
 	// 좌석 선택 후 예매하기 클릭 시 상태 변경 'r'
-	@PutMapping("/SeatUpdate/{st_id}/{st_row}/{st_column}") 
-	public Map<String, Object> SeatUpdate(@PathVariable int st_id, @PathVariable String st_row, @PathVariable String st_column) 
+	@PutMapping("/SeatUpdate/{st_id}") 
+	public Map<String, Object> SeatUpdate(@PathVariable int st_id, @RequestBody SeatDTO dto) 
             throws ServletException, IOException {
         
 		logger.info("url - SeatUpdate");
@@ -63,7 +63,7 @@ public class SeatController {
         
         try {
 
-            service.SeatUpdate(st_id, "r", st_row, st_column); 
+            service.SeatUpdate(dto); 
             
             resultCode = "200";
 			resultMsg = "DiscountInsert Success";	
