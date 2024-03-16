@@ -14,7 +14,7 @@ public interface SeatService {
 		throws ServletException, IOException;
 		
 	// 좌석 선택 후 예매하기 클릭 시 상태 변경 'r'
-	public void SeatUpdate(int st_id, String st_check, String st_row, String st_column)
+	public void SeatUpdate(SeatDTO dto)
 		throws ServletException, IOException;
 	
 }

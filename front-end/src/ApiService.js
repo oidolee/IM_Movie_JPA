@@ -13,7 +13,7 @@ class ApiService {
 
     updateSeat(inputData) {
         console.log("updateSeat 호출", inputData);
-        return axios.put(url + "/page_1/SeatUpdate" + "/" + inputData.st_num + "/" + inputData.st_row + "/" + inputData.st_column, inputData);
+        return axios.put(url + "/page_1/SeatUpdate" + "/" + inputData.st_num , inputData);
     }
     // --------------------------------------------Seat 끝--------------------------------------------
     
@@ -144,10 +144,35 @@ class ApiService {
     }
 
     // 1:1 문의 답변 등록
-    addConsultAndser(inputData) {
-        console.log('addCustomer 호출', inputData);
+    addConsultAnwser(inputData) {
+        console.log('addConsultAnwser 호출', inputData);
         return axios.post(url + "/page_6/saveAnswer", inputData);
     }
+
+    // 쿠폰
+    // 쿠폰 리스트(관리자)
+    fetchCoupon(){
+        console.log('fetchCoupon() 호출!!')
+        return axios.get(url + '/page_6'); 
+    }
+    
+    // 쿠폰 상세내역(관리자)
+    // 쿠폰 등록
+    // 쿠폰 수정(관리자)
+    // 쿠폰 숨김처리(관리자)
+    // 쿠폰 삭제(관리자)
+
+    // 고객 쿠폰
+    // 고객 쿠폰 등록
+
+
+    // 고객 쿠폰 리스트
+    fetchCouponCus(){
+        console.log('fetchCouponCus() 호출!!')
+        return axios.get(url + '/page_6/coupon'); 
+    }
+    // 고객 쿠폰 삭제(숨김처리)
+    
 
     // <page_3 주차 리스트 불러옴>
     parkingList(){

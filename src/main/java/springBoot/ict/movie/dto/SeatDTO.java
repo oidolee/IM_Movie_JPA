@@ -16,11 +16,7 @@ public class SeatDTO {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private int st_id;
-	private String theater_id; // int
-	private int screen_id;
-	private String st_seat_group;
 	private String st_row;
 	private String st_column;
-	private int seat_price;
 	private String st_check;
 }

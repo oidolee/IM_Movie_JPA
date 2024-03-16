@@ -18,10 +18,11 @@ import springBoot.ict.movie.dto.CustomerDTO;
 
 @Service
 public class ConsultServiceImpl implements ConsultService {
-   
-   @Autowired
-   private ConsultRepository csdao;
-   private ConsultAnswerRepository csadao;
+	
+	@Autowired
+	private ConsultRepository csdao;
+	@Autowired
+	private ConsultAnswerRepository csadao;
 
    // 1:1문의 목록
    @Override

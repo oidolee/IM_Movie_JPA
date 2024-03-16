@@ -1,18 +1,19 @@
 package springBoot.ict.movie.dao;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import springBoot.ict.movie.dto.ConsultAnswerDTO;
+import springBoot.ict.movie.dto.ConsultDTO;
+import springBoot.ict.movie.dto.CouponDTO;
 
-public interface ConsultAnswerRepository extends JpaRepository<ConsultAnswerDTO, Integer> {
+public interface CouponRepository extends JpaRepository<CouponDTO, Integer> {
 	
-	// 1:1문의 답변 리스트
-	@Query("SELECT ca FROM ConsultAnswerDTO ca WHERE ca.one_id = :one_id")
-	List<ConsultAnswerDTO> selectConsult(@Param("one_id") int one_id);
+	// 쿠폰 상세 내역
+	@Query("SELECT cp FROM CouponDTO cp WHERE cp.ic_name = :ic_name")
+	Optional<CouponDTO> selectCouponDetail(String ic_name);
 	
 	// 고객 이메일로 고객 정보 찾아오기
 //	@Query("SELECT c FROM CustomerDTO c WHERE c.email = :email")
