@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import style from "../../../styles/page_5/movieDetail.module.css";
+import { useCookies } from 'react-cookie'; // 로그인 확인용
 
 // 이미지
 import movie1 from "../../../assets/page_5/movie1.jpg";
@@ -10,11 +11,15 @@ import trailer1 from "../../../assets/page_5_5/trailer1.png";
 import trailer2 from "../../../assets/page_5_5/trailer2.png";
 
 import BobMarley_OneLove from '../../../assets/page_5/BobMarley_OneLove.jpg';
+// import { Link } from '@mui/material';
+
+import { Link } from 'react-router-dom' // 페이지이동
 
 function MovieDetail() {
   const [showModal, setShowModal] = useState(false); // 모달 창 열림/닫힘 상태
   const [selectedValue, setSelectedValue] = useState(1); // 선택된 값
   const [selectedTrailer, setSelectedTrailer] = useState("");
+  const [cookies, setCookie, removeCookie] = useCookies(['idCheck']); // 로그인 확인용
 
   const handleTrailerClick = (trailerUrl) => {
     setSelectedTrailer(trailerUrl);
@@ -31,6 +36,15 @@ function MovieDetail() {
     setSelectedValue(value);
   };
 
+
+  const [selectedStars, setSelectedStars] = useState(5);
+
+  // 클릭한 별수에 따라 별 이미지를 조절합니다.
+  const handleStarClick = (starNumber) => {
+    setSelectedStars(starNumber);
+  };
+
+  console.log(selectedStars)
   return (
     <>
       <div className={`detail_movie_wrap ${style.detail_movie_wrap}`}>
@@ -133,10 +147,101 @@ function MovieDetail() {
               {selectedValue === 2 && (
                 <div>
                   {/* 관람평 영역 */}
+
+                  {!cookies.idCheck && (
+                    <div className={`plz_login ${style.plz_login}`}>
+                      <h4>로그인 후 관람평 등록 해주세요</h4>
+
+                      <Link to="/login">
+                        <button className={`plz_login_button ${style.plz_login_button}`}>
+                          로그인
+                        </button>
+                      </Link>
+                    </div>
+                  )}
+                  {cookies.idCheck && (
+                    <div className={`star_info ${style.star_info}`}>
+                      <div class="star_rate type5">
+                        <ul>
+                          {[1, 2, 3, 4, 5].map((starNumber) => (
+                            <li key={starNumber} className={`star_box${starNumber}`} onClick={() => handleStarClick(starNumber)}>
+                              <img
+                                className={`star_on${starNumber} ${selectedStars >= starNumber ? `${style.star_on}${starNumber}` : ''}`}
+                                src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ico_star64_on.png"
+                                alt={`Star ${starNumber}`}
+                                style={{ display: selectedStars >= starNumber ? 'inline' : 'none' }}
+                              />
+                              <img
+                                className={`star_off ${style.star_off}`}
+                                src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ico_star64_off.png"
+                                alt={`Empty Star ${starNumber}`}
+                                style={{ display: selectedStars < starNumber ? 'inline' : 'none' }}
+                              />
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+
+                      <div className={`star_img_box ${style.star_img_box}`}>
+                         <img src={`https://www.lottecinema.co.kr/NLCHS/Content/images/icon/icon_reviewcharacterbig_${selectedStars}.svg`} alt={`star${selectedStars}`} />
+                      </div>
+                    </div>
+                  )}
+
+                  {/*  등록부분 */}
+                  <div className="container mt-5">
+                    <div className="row">
+                      <div className="col-md-6 offset-md-3 d-flex">
+                        <textarea className="form-control mr-2" rows="3" placeholder="내용을 입력하세요"></textarea>
+                        <button className="btn btn-primary" style={{ minWidth: '80px' }}>전송</button>
+
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
+              
               )}
             </div>
           </div>
+
+          {selectedValue === 2 && (
+            <div className={`movie_review_list ${style.movie_review_list}`}>
+                <ul>
+                <li style={{ display: 'flex', alignItems: 'center' }}>
+                  <img src="https://www.lottecinema.co.kr/NLCHS/Content/images/temp/temp_reviewcharacter_03.jpg" alt="image_by_rate" style={{ marginRight: '10px', width: '50px', height: '50px' }} />
+                  <div className={`movie_review_content ${style.movie_review_content}`}>
+                    <p>작성자</p>
+                    <p>2024.03.16 09:11</p>
+                    <p>내용 적는 부분 입니다.</p>
+                  </div>
+                  <div style={{ marginLeft: 'auto' }}>
+                    <img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ic_review_good.png" alt="image_by_rate" style={{ marginRight: '5px', width: '20px', height: '20px' }} />
+
+                    85
+                  </div>
+                </li>
+
+                <li style={{ display: 'flex', alignItems: 'center' }}>
+                  <img src="https://www.lottecinema.co.kr/NLCHS/Content/images/temp/temp_reviewcharacter_03.jpg" alt="image_by_rate" style={{ marginRight: '10px', width: '50px', height: '50px' }} />
+                  <div className={`movie_review_content ${style.movie_review_content}`}>
+                    <p>작성자</p>
+                    <p>2024.03.16 09:11</p>
+                    <p>내용 적는 부분 입니다.</p>
+                  </div>
+                  <div style={{ marginLeft: 'auto' }}>
+                    <img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ic_review_good.png" alt="image_by_rate" style={{ marginRight: '5px', width: '20px', height: '20px' }} />
+
+                    85
+                  </div>
+                </li>
+
+                </ul>
+            </div>
+
+          )}
+          
         </div>
 
         <div className={`detail_down3 ${style.detail_down3}`}>
@@ -148,8 +253,8 @@ function MovieDetail() {
         >
           <img src={trailer1} alt="트레일러1" />
         </button>
-        <button 
-          className={`detail_trailer2 ${style.detail_trailer2}`} 
+        <button
+          className={`detail_trailer2 ${style.detail_trailer2}`}
           onClick={() => handleTrailerClick("https://cf.lottecinema.co.kr//Media/MovieFile/MovieMedia/202402/20808_301_2.mp4")}
         >
           <img src={trailer2} alt="트레일러2" />
@@ -171,12 +276,12 @@ function MovieDetail() {
           </div>
         </div>
       )}
-      
-      
+
+
       <div className={`detail_last ${style.detail_last}`}>
-          <ul>
-            <li><a href='#'><img src={BobMarley_OneLove} alt="detail.img" /></a></li>
-          </ul>
+        <ul>
+          <li><a href='#'><img src={BobMarley_OneLove} alt="detail.img" /></a></li>
+        </ul>
       </div>
 
     </>
