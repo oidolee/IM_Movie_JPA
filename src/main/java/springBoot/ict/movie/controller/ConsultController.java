@@ -27,7 +27,7 @@ import springBoot.ict.movie.service.ConsultServiceImpl;
 
 @CrossOrigin(origins="**", maxAge=3600)
 @RestController
-
+@RequestMapping(value="/page_6")
 public class ConsultController {
 	@Autowired
 	private ConsultServiceImpl service;
@@ -165,10 +165,11 @@ public class ConsultController {
     @GetMapping("/consultAnswer/{one_id}")
     public List<ConsultAnswerDTO> consultAnswerList(@PathVariable(name="one_id") int one_id, Model model)
             throws ServletException, IOException {
-        logger.info("<<< url -> consultList");
+        logger.info("<<< url -> consultAnswerList");
+        System.out.println("one_id :" + one_id);
         List<ConsultAnswerDTO> list= service.selectConsultAnswer(one_id);
         model.addAttribute("list", list);
-        System.out.println(list);
+        System.out.println("controller:" + list);
         
         return list;
 

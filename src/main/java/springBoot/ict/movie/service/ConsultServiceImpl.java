@@ -21,6 +21,7 @@ public class ConsultServiceImpl implements ConsultService {
 	
 	@Autowired
 	private ConsultRepository csdao;
+	@Autowired
 	private ConsultAnswerRepository csadao;
 
 	// 1:1문의 목록
