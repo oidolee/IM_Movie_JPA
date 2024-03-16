@@ -44,32 +44,7 @@ public class ParkingController {
 		return list;
 	}
 	
-	
-	// 등록
-	@PostMapping("/save") 
-	public Map<String, Object> savePark(@RequestBody ParkingDTO dto) 
-			throws ServletException, IOException {
-		logger.info("url - savePark");
-		System.out.println(dto);
-		String resultCode = "";
-		String resultMsg = "";
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		try {
-			service.savePark(dto);
-			resultCode = "200";
-			resultMsg = "savePark Success";
-		} catch(Exception e) {
-			resultCode = "400";
-			resultMsg = e.getMessage();
-			e.printStackTrace();
-		}
-		map.put("resultCode", resultCode);
-		map.put("resultMsg", resultMsg);
-		map.put("dto", dto);
-		return map;
-	}
-	
+
 	
 	// 수정
 	@PutMapping("/save/{ip_no}") 

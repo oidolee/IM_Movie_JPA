@@ -51,7 +51,6 @@ function Parking() {
       ip_no : ip_no,
       ip_inoutcheck : 'Y'
     };
-
     
     console.log(" 주차등록 값 : ");
     console.log(inputData);
