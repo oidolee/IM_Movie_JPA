@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @CrossOrigin(origins="**", maxAge=3600)
 @RestController
-@RequestMapping(value="/page_3")
+@RequestMapping(value="/page_2")
 public class ParkingController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ParkingController.class);
@@ -38,14 +38,13 @@ public class ParkingController {
 	@GetMapping("/ParkingList")
 	public List<ParkingDTO> ParkingList(Model model) 
 			throws ServletException, IOException {
-		System.out.println("page3_start");
+		System.out.println("page2_start");
 		List<ParkingDTO> list = service.ParkingList();
 		model.addAttribute("list", list);
 		return list;
 	}
 	
 
-	
 	// 수정
 	@PutMapping("/save/{ip_no}") 
 	public Map<String, Object> editPark(@PathVariable("ip_no") int ip_no, @RequestBody ParkingDTO dto) 

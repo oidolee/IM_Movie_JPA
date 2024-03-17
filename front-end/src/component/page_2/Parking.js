@@ -55,14 +55,14 @@ function Parking() {
     console.log(" 주차등록 값 : ");
     console.log(inputData);
 
-
     ApiService.editPark(inputData)
       .then((res) => {
         // 변수 초기화
         setIpCarNumber('');
         setIpClient('');
         setTotalPlot('');
-        history.push('/page_3/parking');
+        alert('주차등록 완료 하였습니다.')
+        window.location.reload();
       })
       .catch((error) => {
         alert('주차 등록 중 오류가 발생했습니다.');
