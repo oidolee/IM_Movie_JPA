@@ -115,7 +115,8 @@ EditStore_Admin = (e) => {
 
 
   openStoreGift = () => {
-    this.setState({ isStoreGiftOpen: true });
+    const { quantity, price } = this.state; // 총 구매 수량과 총 상품금액
+    this.setState({ isStoreGiftOpen: true, totalQuantity: quantity, totalPrice: price });
     document.body.style.overflow = "hidden";
   };
 

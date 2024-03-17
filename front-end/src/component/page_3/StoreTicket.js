@@ -151,7 +151,7 @@ class StoreTicket extends Component {
                 </li>
               </ul>
             </div>
-            {selectedValue === 1 && (
+            {/* {selectedValue === 1 && (
               <div className={`StoreTicket_area_detail ${style.StoreTicket_area_detail}`}>
                 <ul>
                   {this.state.lists && this.state.lists.map((item, index) => (
@@ -165,7 +165,83 @@ class StoreTicket extends Component {
                   ))}
                 </ul>
               </div>
-            )}
+              
+            )} */}
+            {selectedValue === 1 && (
+                <div className={`StoreTicket_area_detail ${style.StoreTicket_area_detail}`}>
+                  <ul>
+                    {this.state.lists && this.state.lists.map((item, index) => (
+                      item.ticketmap_address.includes('서울') && ( // 서울이라는 단어가 포함된 주소를 가진 항목만 출력
+                        <li key={index}>
+                          <a onClick={() => this.EditStore_Map(item.ticketmap_no)}>
+                            <span>{item.ticketmap_name}</span>
+                          </a>
+                        </li>
+                      )
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {selectedValue === 2 && (
+                <div className={`StoreTicket_area_detail ${style.StoreTicket_area_detail}`}>
+                  <ul>
+                    {this.state.lists && this.state.lists.map((item, index) => (
+                      item.ticketmap_address.includes('경기') && ( // 서울이라는 단어가 포함된 주소를 가진 항목만 출력
+                        <li key={index}>
+                          <a onClick={() => this.EditStore_Map(item.ticketmap_no)}>
+                            <span>{item.ticketmap_name}</span>
+                          </a>
+                        </li>
+                      )
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {selectedValue === 3 && (
+                <div className={`StoreTicket_area_detail ${style.StoreTicket_area_detail}`}>
+                  <ul>
+                    {this.state.lists && this.state.lists.map((item, index) => (
+                      item.ticketmap_address.includes('인천') && ( // 서울이라는 단어가 포함된 주소를 가진 항목만 출력
+                        <li key={index}>
+                          <a onClick={() => this.EditStore_Map(item.ticketmap_no)}>
+                            <span>{item.ticketmap_name}</span>
+                          </a>
+                        </li>
+                      )
+                    ))}
+                  </ul>
+                </div>
+              )}
+               {selectedValue === 4 && (
+                <div className={`StoreTicket_area_detail ${style.StoreTicket_area_detail}`}>
+                  <ul>
+                    {this.state.lists && this.state.lists.map((item, index) => (
+                      item.ticketmap_address.includes('충남') && ( // 서울이라는 단어가 포함된 주소를 가진 항목만 출력
+                        <li key={index}>
+                          <a onClick={() => this.EditStore_Map(item.ticketmap_no)}>
+                            <span>{item.ticketmap_name}</span>
+                          </a>
+                        </li>
+                      )
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {selectedValue === 5 && (
+                <div className={`StoreTicket_area_detail ${style.StoreTicket_area_detail}`}>
+                  <ul>
+                    {this.state.lists && this.state.lists.map((item, index) => (
+                      item.ticketmap_address.includes('강원') && ( // 서울이라는 단어가 포함된 주소를 가진 항목만 출력
+                        <li key={index}>
+                          <a onClick={() => this.EditStore_Map(item.ticketmap_no)}>
+                            <span>{item.ticketmap_name}</span>
+                          </a>
+                        </li>
+                      )
+                    ))}
+                  </ul>
+                </div>
+              )}
             <div>
               <div id="map" className={`StoreTicket_map ${style.StoreTicket_map}`} style={{ width: '530px', height: '530px' }}>Test</div>
             </div>
