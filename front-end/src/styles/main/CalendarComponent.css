@@ -1,0 +1,14 @@
+/* 날짜 기본값 */
+.page_2_weekday_cell a,
+.fc-col-header-cell a{
+    color: #000;
+}
+
+.page_2_sunday_cell a,
+.fc-day-sun a{
+    color: red;
+}
+
+.fc-day-sat a{
+    color: blue;
+}

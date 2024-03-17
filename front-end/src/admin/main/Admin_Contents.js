@@ -52,8 +52,7 @@ const Admin_Contents = () => {
           <div class="col-xl-6">
             <div class="card mb-4">
               <div class="card-header">
-                <i class="fas fa-chart-area me-1"></i>
-                Area Chart Example
+                현재 상영작 일정
               </div>
               <div class="card-body">
                 <CalendarComponent />
