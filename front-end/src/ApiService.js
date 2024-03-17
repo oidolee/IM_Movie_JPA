@@ -194,13 +194,44 @@ class ApiService {
         return axios.get(url + '/index'); 
     }
 
+    // page_5
+    //영화 목록 리스트
+    fetchMovie(){
+        return axios.get(url + '/page_5'); 
+    }
+
+    // 관리자
+    // 목록
+    listUpdate() {
+        console.log("listUpdate 호출");
+        return axios.get(url + "/page_5/UpdateList");
+    }
+
+    //영화 추가
+    addUpdate(inputData) {
+        console.log("addUpdate 호출", inputData);
+        return axios.post(url + "/page_5/UpdateInsert", inputData);
+    }
+
+    // 1건조회
+    selectUpdate(up_num) {
+        console.log("selectUpdate 호출", up_num);
+        return axios.get(url + "/page_5/UpdateDetailList" + "/" + up_num);
+    }
+
+    // 영화수정
+    editUpdate(inputData) {
+        console.log("editUpdate 호출", inputData);
+        return axios.put(url + "/page_5/UpdateUpdate" + "/" + inputData.up_num, inputData);
+    }  
+
+    // 영화삭제
+    deleteUpdate(up_num) {
+        console.log("deleteUpdate 호출", up_num);
+        return axios.delete(url + "/page_5/UpdateDelete" + "/" + up_num);
+    }
     
 
-         // 수정
-    // editDiscount(inputData) {
-    //     console.log("editDiscount 호출", inputData);
-    //     return axios.put(url + "/page_1/DiscountUpdate" + "/" + inputData.dc_num, inputData);
-    // }  
 
 }
 export default new ApiService();

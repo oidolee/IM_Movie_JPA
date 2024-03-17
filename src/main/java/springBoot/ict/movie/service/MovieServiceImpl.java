@@ -16,11 +16,11 @@ public class MovieServiceImpl implements MovieService {
 
 	@Autowired
 	private MovieRepository dao;
+		
 	// 영화목록
-	
-	
 	@Override
-	public List<MovieDTO> listMovie() throws ServletException, IOException {
+	public List<MovieDTO> listMovie() 
+			throws ServletException, IOException {
 		System.out.println("서비스 - listMovie");
 		
 		return dao.findAll();
@@ -28,8 +28,11 @@ public class MovieServiceImpl implements MovieService {
 
 	// 영화 추가 
 	@Override
-	public void insertMovie(MovieDTO dto) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	public MovieDTO insertMovie(MovieDTO dto) 
+			throws ServletException, IOException {
+		System.out.println("서비스 - insertMovie");
+		
+	  return dao.save(dto);
 		
 	}
 

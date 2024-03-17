@@ -74,6 +74,7 @@ function Header() {
                                             <a class="nav-link" href="/admin/page_1/Admin_Discount_List">Discount</a>
                                             <a class="nav-link" href="/admin/page_2/test_2">page_2 / Test_2</a>
                                             <a class="nav-link" href="/admin/page_3/ListStore_Admin">page_3 / ListStore_Admin</a>
+                                            <a class="nav-link" href="/admin/page_5/Admin_Update_List">Update</a>
                                         </nav>
                                     </div>
                                    
