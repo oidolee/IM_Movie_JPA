@@ -1,5 +1,6 @@
 import React from 'react';
 import CalendarComponent from './CalendarComponent';
+import ChartComponent from './ChartComponent';
 const Admin_Contents = () => {
   // 여기에 관리자 메인 화면의 상태나 로직을 추가할 수 있습니다.
 
@@ -48,7 +49,18 @@ const Admin_Contents = () => {
             </div>
           </div>
         </div>
+                
         <div class="row">
+          <div class="col-xl-6">
+            <div class="card mb-4">
+              <div class="card-header">
+                회원 등록 현황
+              </div>
+              <div class="card-body">
+              <ChartComponent />
+              </div>
+            </div>
+          </div>
           <div class="col-xl-6">
             <div class="card mb-4">
               <div class="card-header">
@@ -59,15 +71,7 @@ const Admin_Contents = () => {
               </div>
             </div>
           </div>
-          <div class="col-xl-6">
-            <div class="card mb-4">
-              <div class="card-header">
-                <i class="fas fa-chart-bar me-1"></i>
-                Bar Chart Example
-              </div>
-              <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-            </div>
-          </div>
+
         </div>
         <div class="card mb-4">
           <div class="card-header">
