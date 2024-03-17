@@ -272,49 +272,36 @@
 }
 
 .Res_seat .single_square1 {
-  width: 17px;
-  height: 13px;
   background-color: #FF243E;
-  margin-right: 5px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
 }
 
 .Res_seat .single_square2 {
-  width: 17px;
-  height: 13px;
   background-color: #FFF;
-  margin-right: 5px;
-  margin-left: 10px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
 }
 
 .Res_seat .single_square3 {
-  width: 17px;
-  height: 13px;
   background-color: #666;
-  margin-right: 5px;
+}
+
+.Res_seat .square_with_label {
+  display: flex;
+  align-items: center;
+}
+
+.Res_seat .square_with_label .single_square1,
+.Res_seat .square_with_label .single_square2,
+.Res_seat .square_with_label .single_square3 {
+  width: 16px;
+  height: 12px;
+  margin-right: 10px;
   margin-left: 10px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
-.Res_seat .single_square4 {
-  width: 17px;
-  height: 13px;
-  background-color: #666;
-  margin-right: 5px;
-  margin-left: 10px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+.Res_seat .square_with_label span {
+  font-size: 10px; /* 이름의 폰트 크기를 조절할 수 있습니다. */
 }
-
-.single_square4::after {
-  content: "X";
-  color: black;
-}
-
 .Res_seat .seat_payment {
   color: #fff;
   background-color: #6E6E6E;
@@ -370,4 +357,9 @@
 
 .Res_seat .square.selected {
   background-color: #FF243E;
+}
+
+.Res_seat .square.reserved,
+.Res_seat .square.unavailable {
+  background-color: #666;
 }
