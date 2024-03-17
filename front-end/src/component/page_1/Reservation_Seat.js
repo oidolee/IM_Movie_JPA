@@ -42,6 +42,7 @@ const Reservation_Seat = () => {
   const isChecked = false;
   const [checked, setChecked] = useState(isChecked);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [totalQuantity, setTotalQuantity] = useState(0); // 총 수량
 
   useEffect(() => {
     listSeat();
@@ -74,9 +75,15 @@ const Reservation_Seat = () => {
   const handleQuantityChange = (newQuantity) => {
     console.log("handleQuantityChange 함수 호출됨");
     console.log("수량 변경됨:", newQuantity);
+
+    // 각 인원 유형별 수량 변경
     setQuantity(newQuantity);
 
-    if (newQuantity > 0) {
+    // 모든 인원 유형의 수량 합산
+    const total = newQuantity * 4; // 성인, 청소년, 경로, 장애인 4가지 유형이므로 4를 곱함
+    setTotalQuantity(total);
+
+    if (total > 0) {
       console.log("수량이 0보다 큼 - 좌석 선택 가능");
       setCanSelectSeat(true);
     } else {
@@ -111,24 +118,29 @@ const Reservation_Seat = () => {
     );
   };
 
-  const handleSeatSelect = (ip_no, lot, seatNumber, isChecked) => {
+  const handleSeatSelect = (ip_no, lot, seatNumber) => {
     if (!canSelectSeat) {
       console.log("수량 선택 필요 - 좌석 선택 불가");
       alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
       return;
     }
-
+  
     const newSelectedSeat = `${lot}-${seatNumber}-${ip_no}`;
     const isSeatSelected = selectedSeats.includes(newSelectedSeat);
-
+    const selectedSeatsCount = selectedSeats.length;
+  
     if (isSeatSelected) {
       setSelectedSeats(
         selectedSeats.filter((seat) => seat !== newSelectedSeat)
       );
-    } else {
+    } else if (selectedSeatsCount < quantity) {
       setSelectedSeats([...selectedSeats, newSelectedSeat]);
+    } else {
+      console.log("선택된 좌석 수량 초과");
+      alert("선택된 좌석 수량을 초과하였습니다.");
+      return;
     }
-
+  
     console.log("선택한 좌석 정보 행-열-번호 : ", lot, seatNumber, ip_no);
   };
 
