@@ -1,65 +1,92 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Chart from 'chart.js/auto';
+import ApiService from '../../ApiService';
 
 const ChartComponent = () => {
+  const [customerList, setCustomerList] = useState([]);
+
   useEffect(() => {
-    // 차트를 그럴 영역을 dom요소로 가져온다.
-    var chartArea = document.getElementById('myChart').getContext('2d');
-    // 차트를 생성한다. 
-    var myChart = new Chart(chartArea, {
-      // ①차트의 종류(String)
+    fetchCustomerData();
+  }, []);
+
+  const fetchCustomerData = () => {
+    ApiService.customerList()
+      .then((res) => {
+        setCustomerList(res.data);
+        renderChart(res.data);
+      })
+      .catch((err) => {
+        console.log('Error fetching customer data:', err);
+      });
+  };
+
+  const renderChart = (data) => {
+    const labels = generateLabels(); // x축에 들어갈 날짜 데이터 생성
+    const memberCountByDate = calculateMemberCountByDate(data, labels); // 각 날짜별 회원 수 계산
+
+    const chartArea = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(chartArea, {
       type: 'bar',
-      // ②차트의 데이터(Object)
       data: {
-        // ③x축에 들어갈 이름들(Array)
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        // ④실제 차트에 표시할 데이터들(Array), dataset객체들을 담고 있다.
+        labels: labels, // x축에 들어갈 날짜 데이터
         datasets: [{
-          // ⑤dataset의 이름(String)
-          label: '# of Votes',
-          // ⑥dataset값(Array)
-          data: [5, 19, 3, 5, 2, 3],
-          // ⑦dataset의 배경색(rgba값을 String으로 표현)
+          label: '회원 수',
+          data: memberCountByDate, // y축에 해당하는 회원 수 데이터
           backgroundColor: 'rgba(28, 92, 80, 0.2)',
-          // ⑧dataset의 선 색(rgba값을 String으로 표현)
           borderColor: 'rgba(28, 92, 80, 0.2)',
-          // ⑨dataset의 선 두께(Number)
           borderWidth: 1
         }]
       },
-      // ⑩차트의 설정(Object)
       options: {
-        //가로 세로 값 자동 조정
-        responsive: true, // 반응형으로 설정
-        // ⑪축에 관한 설정(Object)
+        responsive: true,
         scales: {
           x: {
-            beginAtZero: true,
             title: {
               display: true,
-              text: 'Colors' // x축 레이블
+              text: '날짜'
             }
           },
           y: {
             beginAtZero: true,
             title: {
               display: true,
-              text: 'Votes' // y축 레이블
+              text: '회원 수'
             }
           }
         }
       }
     });
 
-    // 컴포넌트가 unmount될 때 차트 객체 파기
-    return () => {
-      myChart.destroy();
-    };
-  }, []); // useEffect를 빈 의존성 배열로 설정하여 한 번만 실행되도록 합니다.
+    return myChart;
+  };
+
+  const generateLabels = () => {
+    const labels = [];
+    const today = new Date();
+
+    //5일간에 데이터 
+    for (let i = 4; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - i);
+      labels.push(date.toISOString().slice(0, 10));
+    }
+
+    return labels;
+  };
+
+  const calculateMemberCountByDate = (data, labels) => {
+    const memberCountByDate = [];
+
+    labels.forEach((label) => {
+      const count = data.filter((item) => item.regdate.slice(0, 10) === label).length;
+      memberCountByDate.push(count);
+    });
+
+    return memberCountByDate;
+  };
 
   return (
     <div className="chartCon">
-      {/* 차트를 그릴 영역으로 canvas태그를 사용한다. */}
       <canvas id="myChart"></canvas>
     </div>
   );

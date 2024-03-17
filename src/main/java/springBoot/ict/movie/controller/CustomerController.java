@@ -131,7 +131,7 @@ public class CustomerController {
     }
 	
 	
- // 비밀번호찾기 
+    // 비밀번호찾기 
     @PostMapping("/searchPWD")
     public Map<String, Object> findPWD(@RequestBody CustomerDTO dto) 
     		throws ServletException, IOException {
@@ -164,5 +164,5 @@ public class CustomerController {
         return map;
     }
 		
-
+    
 }

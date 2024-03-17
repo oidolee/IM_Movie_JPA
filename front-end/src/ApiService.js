@@ -13,7 +13,7 @@ class ApiService {
 
     updateSeat(inputData) {
         console.log("updateSeat 호출", inputData);
-        return axios.put(url + "/page_1/SeatUpdate" + "/" + inputData.st_num , inputData);
+        return axios.put(url + "/page_1/SeatUpdate" + "/" + inputData.st_id, inputData);
     }
     // --------------------------------------------Seat 끝--------------------------------------------
     
@@ -153,38 +153,78 @@ class ApiService {
     // 쿠폰 리스트(관리자)
     fetchCoupon(){
         console.log('fetchCoupon() 호출!!')
-        return axios.get(url + '/page_6'); 
+        return axios.get(url + '/page_6/coupon'); 
     }
     
     // 쿠폰 상세내역(관리자)
+    couponList(ic_name){
+        console.log('couponList() 호출!!')
+        return axios.get(url + '/page_6/coupon/' + ic_name); 
+    }
     // 쿠폰 등록
+    addCoupon(inputData){
+        console.log('addCoupon() 호출!!')
+        return axios.post(url + '/page_6/coupon/saveCoupon', inputData); 
+    }
+
     // 쿠폰 수정(관리자)
+    updateCoupon(inputData){
+        console.log('updateCoupon() 호출!!')
+        return axios.post(url + '/page_6/coupon/updateCoupon', inputData); 
+    }
     // 쿠폰 숨김처리(관리자)
+
+
     // 쿠폰 삭제(관리자)
+    deleteCoupon(ic_name){
+        console.log('updateCoupon() 호출!!')
+        return axios.delete(url + '/page_6/coupon/deleteCoupon/' + ic_name); 
+    }
 
     // 고객 쿠폰
     // 고객 쿠폰 등록
-
+    addCusCoupon(inputData){
+        console.log('addCusCoupon() 호출!!')
+        return axios.post(url + '/page_6/coupon/saveCusCoupon', inputData);
+    }
 
     // 고객 쿠폰 리스트
-    fetchCouponCus(){
+    fetchCusCouponCus(c_email){
         console.log('fetchCouponCus() 호출!!')
-        return axios.get(url + '/page_6/coupon'); 
+        return axios.get(url + '/page_6/coupon/couponCusList/' + c_email); 
     }
+
     // 고객 쿠폰 삭제(숨김처리)
+    deleteCusCoupon(ic_num){
+        console.log('deleteCusCoupon() 호출!!')
+        return axios.put(url + '/page_6/coupon/deleteCusCoupon' + ic_num);
+    }
+
+    // 고객 쿠폰 갯수
+    countCusCoupon(c_email){
+        console.log('countCusCoupon() 호출!!')
+        return axios.get(url + '/page_6/coupon/couponCusCount/' + c_email);
+    }
     
 
-    // <page_3 주차 리스트 불러옴>
+    // <page_2 주차 리스트 불러옴>
     parkingList(){
         console.log('parkingList() 호출!!')
-        return axios.get(url + '/page_3/ParkingList'); 
+        return axios.get(url + '/page_2/ParkingList'); 
     }
 
-    // <page_3 주차등록>
+    // <page_2 주차등록>
     editPark(inputData){
         console.log('editPark() 주차등록시작');
         console.log(inputData);
-        return axios.put(url + '/page_3/save/'+inputData.ip_no, inputData); 
+        return axios.put(url + '/page_2/save/'+inputData.ip_no, inputData); 
+    }
+
+
+      // <page_2 관리자에서 멤버리스트 차트용 >
+    customerList(){
+        console.log('customerList() 호출!!')
+        return axios.get(url + '/index'); 
     }
 
     // page_5
