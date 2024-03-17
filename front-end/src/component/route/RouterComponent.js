@@ -45,7 +45,6 @@ import movieDetail from '../page_5/movie/movieDetail';
 import movieUpdate from '../../admin/page_5/Admin_Update_Add';
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
-import arte from '../page_5/movie/arte';
 import moviePlace from '../page_5/theater/moviePlace';
 import FAQ from '../page_5/board/FAQ';
 import NOTICE from '../page_5/board/NOTICE';
@@ -127,6 +126,7 @@ const AppRouter = () => {
                                 <Route path="/NOTICE" exact={true} component={NOTICE} />
                                 <Route path="/NOTICE2" exact={true} component={NOTICE2} />
                                 <Route path="/groupform" exact={true} component={groupform} />
+                                
                             
                             </Route>
 

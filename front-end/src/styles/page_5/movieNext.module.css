@@ -53,10 +53,37 @@ body {
 .next_movie_list1{
   margin-right:450px;
   margin-top:20px;
+  align-items: left;
+}
+
+.next_movie_list2{
+  margin-top:20px;
+  margin-right: 50px;
+  font-size:15px;
 }
 
 .mv_lastIMG2{
   margin-top:30px;
+}
+
+.card_hover_content {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(50%);
+}
+
+.primary_button3 {
+  background-color:white;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  font-size: 10px;
 }
 
 
