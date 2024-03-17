@@ -127,6 +127,7 @@ EditStore_Admin = (e) => {
   openStoreTicket = () => {
     this.setState({ isStoreTicketOpen: true });
     document.body.style.overflow = "hidden";
+    //this.props.history.push('/page_3/StoreTicket'); // 페이지 이동
   };
 
   closeStoreTicket = () => {
