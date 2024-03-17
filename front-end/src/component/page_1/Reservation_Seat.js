@@ -75,21 +75,16 @@ const Reservation_Seat = () => {
   const handleQuantityChange = (newQuantity) => {
     console.log("handleQuantityChange 함수 호출됨");
     console.log("수량 변경됨:", newQuantity);
-
-    // 각 인원 유형별 수량 변경
     setQuantity(newQuantity);
 
-    // 모든 인원 유형의 수량 합산
-    const total = newQuantity * 4; // 성인, 청소년, 경로, 장애인 4가지 유형이므로 4를 곱함
-    setTotalQuantity(total);
-
-    if (total > 0) {
+    if (newQuantity > 0) {
       console.log("수량이 0보다 큼 - 좌석 선택 가능");
       setCanSelectSeat(true);
     } else {
       console.log("수량이 0임 - 좌석 선택 불가");
       setCanSelectSeat(false);
       alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
+      setSelectedSeats([]); // 수량이 0이 되면 선택된 좌석 초기화
     }
   };
 
@@ -145,15 +140,16 @@ const Reservation_Seat = () => {
   };
 
   const handlePayment = (ip_no) => {
-    if (selectedSeats.length === 0) {
-      console.log("선택된 좌석이 없습니다.");
+    if (selectedSeats.length === 0 && quantity === 0) {
+      console.log("선택된 좌석 없음")
+      alert("선택된 좌석이 없습니다.");
       return;
     }
 
     const inputData = selectedSeats.map((seat) => {
       const [lot, seatNumber, ip_no] = seat.split("-");
       return {
-        st_id: seatNumber,
+        st_id: ip_no,
         st_row: lot,
         st_column: seatNumber,
         st_check: "r",
