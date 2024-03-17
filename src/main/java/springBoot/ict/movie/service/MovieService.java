@@ -14,7 +14,7 @@ public interface MovieService {
 				throws ServletException, IOException;
 		
 	// 영화 추가 
-	public void insertMovie(MovieDTO dto)
+	public MovieDTO insertMovie(MovieDTO dto)
 			throws ServletException, IOException;
 
 		

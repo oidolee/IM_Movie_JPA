@@ -15,6 +15,10 @@ public interface CouponRepository extends JpaRepository<CouponDTO, Integer> {
 	@Query("SELECT cp FROM CouponDTO cp WHERE cp.ic_name = :ic_name")
 	Optional<CouponDTO> selectCouponDetail(String ic_name);
 	
+	// 쿠폰 삭제
+	@Query("DELETE FROM CouponDTO cp WHERE cp.ic_name = :ic_name")
+	int deleteCoupon(String ic_name);
+	
 	// 고객 이메일로 고객 정보 찾아오기
 //	@Query("SELECT c FROM CustomerDTO c WHERE c.email = :email")
 //	CustomerDTO selectCustomerById(String email);

@@ -13,17 +13,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Entity
-@Table(name="IM_COUPON")
+@Table(name="IM_CUS_COUPON")
 @Data
 public class CouponCusDTO {
     
     
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
-    private String c_email;
     private int ic_num;			
+    private String c_email;
     private int ic_code;
     private String ic_name;
+    private int ic_category;
     private int ic_point;
     private Date ic_useDate;
     private Date ic_regDate;
