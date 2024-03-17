@@ -41,7 +41,7 @@ import resultFindPWD from '../page_4/resultFindPWD';
 //page_5
 import movieMain from '../page_5/movie/movieMain';
 import movieDetail from '../page_5/movie/movieDetail';
-import movieUpdate from '../page_5/movieUpdate/movieUpdate';
+import movieUpdate from '../../admin/page_5/Admin_Update_Add';
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
 import arte from '../page_5/movie/arte';
@@ -117,6 +117,7 @@ const AppRouter = () => {
                             <Route>
                                 <Route path="/movieMain" exact={true} component={movieMain} />
                                 <Route path="/movieDetail" exact={true} component={movieDetail} />
+                                <Route path="/movieUpdate" exact={true} component={movieUpdate} />
                                 <Route path="/movieNow" exact={true} component={movieNow} />
                                 <Route path="/movieNext" exact={true} component={movieNext} />
                                 <Route path="/moviePlace" exact={true} component={moviePlace} />
@@ -128,53 +129,7 @@ const AppRouter = () => {
                             </Route>
                             
 
-<<<<<<< HEAD
-                    {/* page_4 */}
-                    <Route>
-                        <Route path="/login" exact={true} component={loginComponent} />
-                        <Route path="/sign-up" exact={true} component={singupComponent} />
-                        <Route path="/signCheck" exact={true} component={signupCheck} />
-                        <Route path="/customerlist" exact={true} component={listCustomer} />
-                        <Route path="/searchID" exact={true} component={searchID} />
-                        <Route path="/findID" exact={true} component={resultFindID} />
-                        <Route path="/searchPWD" exact={true} component={searchPWD} />
-                        <Route path="/findPWD" exact={true} component={resultFindPWD} />
-                    </Route>
-                   
-                    {/* page_5 */}
-                    <Route>
-                        <Route path="/movieMain" exact={true} component={movieMain} />
-                        <Route path="/movieDetail" exact={true} component={movieDetail} />
-                        <Route path="/movieUpdate" exact={true} component={movieUpdate} />
-                        <Route path="/movieNow" exact={true} component={movieNow} />
-                        <Route path="/movieNext" exact={true} component={movieNext} />
-                        <Route path="/arte" exact={true} component={arte} />
-                        <Route path="/moviePlace" exact={true} component={moviePlace} />
-                        <Route path="/FAQ" exact={true} component={FAQ} />
-                        <Route path="/NOTICE" exact={true} component={NOTICE} />
-                        <Route path="/NOTICE2" exact={true} component={NOTICE2} />
-                        <Route path="/groupform" exact={true} component={groupform} />
-                        <Route path="/re_answer_list" exact={true} component={re_answer_list} />
-                       
-                    </Route>
                     
-=======
-                            {/* page_6 */}
-                            <Route>
-                                <Route path="/MyPage" exact={true} component={MyPage} />
-                                <Route path="/MyPage_res" exact={true} component={MyPage_res} />
-                                <Route path="/MyPage_resCancle" exact={true} component={MyPage_resCancle} />
-                                <Route path="/MyPage_coupon" exact={true} component={MyPage_coupon} />
-                                <Route path="/MyPage_wishMovie" exact={true} component={MyPage_wishMovie} />
-                                <Route path="/Consult" exact={true} component={Consult} />
-                                <Route path="/MyPage_myinfo" exact={true} component={MyPage_myinfo} />
-                                <Route path="/MyPage_myinfo_update" exact={true} component={MyPage_myinfo_update} />
-                                <Route path="/MyPage_consult_list" exact={true} component={MyPage_consult_list} />
-                                <Route path="/event_Home" exact={true} component={Event_Home} />
-                                <Route path="/MyPage_Event" exact={true} component={MyPage_Event} />
-                                <Route path="/MyPage_consult_answer/:one_id" exact={true} component={MyapgeConsultDetail} />
-                            </Route>
->>>>>>> e74a8427f7eeec2b2b54eb0b9555cecfdb9a5b67
 
                         </Route>
                         {/* 영화관 마지막 라우터 */}
