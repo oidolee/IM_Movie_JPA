@@ -45,8 +45,44 @@ const Reservation_Seat = () => {
   const [totalQuantity, setTotalQuantity] = useState(0); // 총 수량
 
   useEffect(() => {
+    // 좌석 정보 가져오기
     listSeat();
-  }, []);
+  
+    // 예약 상태 자동 변경 타이머 설정
+    const timer = setTimeout(() => {
+      // 예약된 좌석의 예약 상태를 자동으로 변경하는 함수 호출
+      autoChangeReservationStatus();
+    }, 600000); // 10분에 해당하는 밀리초 (10 * 60 * 1000)
+  
+    // 컴포넌트가 언마운트될 때 타이머 해제
+    return () => clearTimeout(timer);
+  }, [selectedSeats]); // selectedSeats 상태가 변경될 때마다 타이머 재설정
+  
+  const autoChangeReservationStatus = () => {
+    const updateSeatPromises = selectedSeats.map((seat) => {
+      const [lot, seatNumber, ip_no] = seat.split("-");
+      const inputData = {
+        st_id: ip_no,
+        st_row: lot,
+        st_column: seatNumber,
+        st_check: "n", // "r"에서 "n"으로 상태 변경
+      };
+  
+      console.log("시간초과 : ", inputData);
+  
+      return ApiService.updateSeat(inputData);
+    });
+  
+    Promise.all(updateSeatPromises)
+      .then((res) => {
+        console.log("예약된 좌석의 상태를 자동으로 변경했습니다.");
+        // 변경 완료 후 선택된 좌석 목록 초기화
+        setSelectedSeats([]);
+      })
+      .catch((err) => {
+        console.log("예약된 좌석의 상태 변경 중 오류가 발생했습니다. : ", err);
+      });
+  };
 
   const listSeat = () => {
     ApiService.listSeat()
@@ -113,17 +149,29 @@ const Reservation_Seat = () => {
     );
   };
 
-  const handleSeatSelect = (ip_no, lot, seatNumber) => {
+  const handleSeatSelect = (ip_no, lot, seatNumber, status) => {
     if (!canSelectSeat) {
       console.log("수량 선택 필요 - 좌석 선택 불가");
       alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
       return;
     }
-  
+
+    if (status === "r") {
+      console.log("예약된 좌석");
+      alert("예매중인 좌석입니다.");
+      return;
+    }
+
+    if (status === "y") {
+      console.log("결제 완료된 좌석");
+      alert("예매완료 된 좌석입니다.");
+      return;
+    }
+
     const newSelectedSeat = `${lot}-${seatNumber}-${ip_no}`;
     const isSeatSelected = selectedSeats.includes(newSelectedSeat);
     const selectedSeatsCount = selectedSeats.length;
-  
+
     if (isSeatSelected) {
       setSelectedSeats(
         selectedSeats.filter((seat) => seat !== newSelectedSeat)
@@ -135,36 +183,38 @@ const Reservation_Seat = () => {
       alert("선택된 좌석 수량을 초과하였습니다.");
       return;
     }
-  
+
     console.log("선택한 좌석 정보 행-열-번호 : ", lot, seatNumber, ip_no);
   };
 
-  const handlePayment = (ip_no) => {
+  const handlePayment = () => {
     if (selectedSeats.length === 0 && quantity === 0) {
-      console.log("선택된 좌석 없음")
+      console.log("선택된 좌석 없음");
       alert("선택된 좌석이 없습니다.");
       return;
     }
 
-    const inputData = selectedSeats.map((seat) => {
+    const updateSeatPromises = selectedSeats.map((seat) => {
       const [lot, seatNumber, ip_no] = seat.split("-");
-      return {
+      const inputData = {
         st_id: ip_no,
         st_row: lot,
         st_column: seatNumber,
         st_check: "r",
       };
+
+      console.log("inputData : ", inputData);
+
+      return ApiService.updateSeat(inputData);
     });
 
-    console.log("inputData : ", inputData);
-
-    ApiService.updateSeat(inputData)
+    Promise.all(updateSeatPromises) // inputData 배열이기 때문에
       .then((res) => {
-        console.log("updateSeat 성공 : ", res.data);
+        console.log("모든 좌석 업데이트 성공");
         history.push("/page_1/Reservation_Payment");
       })
       .catch((err) => {
-        console.log("updateSeat 오류 : ", err);
+        console.log("좌석 업데이트 오류 : ", err);
       });
   };
 
@@ -308,7 +358,7 @@ const Reservation_Seat = () => {
                     <span>{lot}</span>
                     {parkingLot[lot].map(([seatNumber, status, ip_no]) => (
                       <span
-                        key={`${lot}-${seatNumber}`} // 고유한 키 생성
+                        key={`${lot}-${seatNumber}`}
                         style={{
                           marginRight:
                             seatNumber == 2 || seatNumber == 12 ? "30px" : "",
@@ -319,11 +369,15 @@ const Reservation_Seat = () => {
                             selectedSeats.includes(
                               `${lot}-${seatNumber}-${ip_no}`
                             )
-                              ? "selected"
+                              ? "selected" // 선택한 좌석
+                              : status === "r"
+                              ? "reserved" // 예약된 좌석
+                              : status === "y"
+                              ? "unavailable" // 결제된 좌석
                               : ""
                           }`}
                           onClick={() =>
-                            handleSeatSelect(ip_no, lot, seatNumber)
+                            handleSeatSelect(ip_no, lot, seatNumber, status)
                           }
                           style={{ position: "relative" }}
                         >
@@ -335,10 +389,18 @@ const Reservation_Seat = () => {
                 ))}
               </div>
               <div className="Res_seat2_bottom">
-                <div className="single_square1">선택좌석</div>
-                <div className="single_square2">선택가능</div>
-                <div className="single_square3">예매완료</div>
-                <div className="single_square4">선택불가</div>
+                <div className="square_with_label">
+                  <div className="single_square1"></div>
+                  <span>선택좌석</span>
+                </div>
+                <div className="square_with_label">
+                  <div className="single_square2"></div>
+                  <span>선택가능</span>
+                </div>
+                <div className="square_with_label">
+                  <div className="single_square3"></div>
+                  <span>예매완료</span>
+                </div>
               </div>
             </div>
             <div className="seat_payment">

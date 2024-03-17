@@ -15,6 +15,7 @@ class ApiService {
         console.log("updateSeat 호출", inputData);
         return axios.put(url + "/page_1/SeatUpdate" + "/" + inputData.st_id, inputData);
     }
+    
     // --------------------------------------------Seat 끝--------------------------------------------
     
 
