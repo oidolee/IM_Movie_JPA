@@ -174,17 +174,24 @@ class ApiService {
     // 고객 쿠폰 삭제(숨김처리)
     
 
-    // <page_3 주차 리스트 불러옴>
+    // <page_2 주차 리스트 불러옴>
     parkingList(){
         console.log('parkingList() 호출!!')
-        return axios.get(url + '/page_3/ParkingList'); 
+        return axios.get(url + '/page_2/ParkingList'); 
     }
 
-    // <page_3 주차등록>
+    // <page_2 주차등록>
     editPark(inputData){
         console.log('editPark() 주차등록시작');
         console.log(inputData);
-        return axios.put(url + '/page_3/save/'+inputData.ip_no, inputData); 
+        return axios.put(url + '/page_2/save/'+inputData.ip_no, inputData); 
+    }
+
+
+      // <page_2 관리자에서 멤버리스트 차트용 >
+    customerList(){
+        console.log('customerList() 호출!!')
+        return axios.get(url + '/index'); 
     }
 
     

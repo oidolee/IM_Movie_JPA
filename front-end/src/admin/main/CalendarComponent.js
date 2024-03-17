@@ -50,7 +50,7 @@ const CalendarComponent = () => {
         {
           id: '1',
           title: '수동 일정 1',
-          start: '2024-03-18',
+          start: '2024-03-15',
           end: '2024-03-20',
           backgroundColor: 'blue',
           textColor: 'white'
@@ -77,7 +77,6 @@ const CalendarComponent = () => {
 //     ApiService.parkingList()
 //       .then((res) => {
 //         setParkingData(res.data);
-//         setLists(res.data);
 //       })
 //       .catch((err) => {
 //         console.log('parkingList Error', err);
