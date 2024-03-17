@@ -1,0 +1,38 @@
+.Admin_Update_List .updateList {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.Admin_Update_List .Add_btn {
+    background-color: black;
+    padding: 10px 20px;
+}
+
+.Admin_Update_List .Add_btn:hover {
+    background-color: #FF243E;
+}
+
+.Admin_Update_List .Update_List_Content {
+    width: 100%;
+    height: 100%;
+}
+
+.Admin_Update_List  .css-1ygcj2i-MuiTableCell-root {
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    border-bottom: 1px solid #ccc;
+}
+
+.Admin_Update_List .css-1ex1afd-MuiTableCell-root {
+    font-size: 13px;
+    text-align: center;
+}
+
+.Admin_Update_List .selectBtn,
+.Admin_Update_List .deleteBtn {
+    cursor: pointer;
+}

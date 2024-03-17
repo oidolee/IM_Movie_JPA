@@ -30,13 +30,38 @@ public class CouponServiceImpl implements CouponService {
 
 		return cpdao.save(cpdto);
 	}
+	
+	// 쿠폰 수정
+	@Override
+	public CouponDTO updateCoupon(CouponDTO cpdto)
+			throws ServletException, IOException{
+		
+		return cpdao.save(cpdto);
+	}
+	
+	// 쿠폰 삭제
+	@Override
+	public int deleteCoupon(String ic_name)
+			throws ServletException, IOException{
+		
+		return cpdao.deleteCoupon(ic_name);
+	}
 
 	// 고객 쿠폰 등록 
 	@Override
 	public CouponCusDTO insertCusCoupon(CouponCusDTO cpcusdto) 
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+
 		return cpcusdao.save(cpcusdto);
+	}
+	
+	// 고객 쿠폰 삭제
+	@Override
+	public int deleteCusCoupon(int ic_num)
+			throws ServletException, IOException{
+		
+		return cpcusdao.deleteCusCoupon(ic_num);
 	}
 
 	// 쿠폰 리스트
@@ -51,8 +76,15 @@ public class CouponServiceImpl implements CouponService {
 	@Override
 	public List<CouponCusDTO> cusCouponList(String c_email) 
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		return cpcusdao.findAll();
+	}
+	
+	// 고객 쿠폰 갯수
+	public int countCusCoupon(String c_email)
+			throws ServletException, IOException{
+		
+		return cpcusdao.countCusCoupon(c_email);
 	}
 
 	// 쿠폰 상세내역(관리자)
