@@ -187,6 +187,8 @@ class ApiService {
         return axios.put(url + '/page_3/save/'+inputData.ip_no, inputData); 
     }
 
+    
+
          // 수정
     // editDiscount(inputData) {
     //     console.log("editDiscount 호출", inputData);
