@@ -271,25 +271,7 @@
   margin: 100px 0 42px 50px;
 }
 
-.Res_seat .square {
-  width: 35px;
-  height: 25px;
-  display: inline-block;
-  margin: 0 3px;
-  padding-top: 20px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
-.Res_seat .square.checked {
-  background-color: #FF243E;
-}
-
-.Res_seat .square:not(.checked) {
-  background-color: #FFF;
-}
-
-.Res_seat .single-square1 {
+.Res_seat .single_square1 {
   width: 17px;
   height: 13px;
   background-color: #FF243E;
@@ -298,7 +280,7 @@
   border-top-right-radius: 5px;
 }
 
-.Res_seat .single-square2 {
+.Res_seat .single_square2 {
   width: 17px;
   height: 13px;
   background-color: #FFF;
@@ -308,7 +290,7 @@
   border-top-right-radius: 5px;
 }
 
-.Res_seat .single-square3 {
+.Res_seat .single_square3 {
   width: 17px;
   height: 13px;
   background-color: #666;
@@ -318,7 +300,7 @@
   border-top-right-radius: 5px;
 }
 
-.Res_seat .single-square4 {
+.Res_seat .single_square4 {
   width: 17px;
   height: 13px;
   background-color: #666;
@@ -328,7 +310,7 @@
   border-top-right-radius: 5px;
 }
 
-.single-square4::after {
+.single_square4::after {
   content: "X";
   color: black;
 }
@@ -371,4 +353,21 @@
 
 .Res_seat .seatOutput {
   margin-top: 150px;
+}
+
+.Res_seat .square {
+  background-color: #fff;
+  align-items: center;
+  width: 37px;
+  height: 25px;
+  display: inline-block;
+  margin: 5px;
+  padding-top: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  cursor: pointer;
+}
+
+.Res_seat .square.selected {
+  background-color: #FF243E;
 }
