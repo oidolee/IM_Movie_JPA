@@ -1,5 +1,6 @@
 package springBoot.ict.movie.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +12,23 @@ import springBoot.ict.movie.dto.CouponCusDTO;
 
 public interface CouponCusRepository extends JpaRepository<CouponCusDTO, Integer> {
 	
-	// 1:1 목록 및 답변 1건 찾아오기
+	// 고객 쿠폰 리스트
+	@Query("SELECT cpcusdto " + 
+	        "FROM CouponCusDTO cpcusdto " + 
+	        "WHERE cpcusdto.ic_status = 'y' " + 
+	        "ORDER BY cpcusdto.ic_num DESC")
+	List<CouponCusDTO> selectCusCoupon();
+	
+	// 고객 쿠폰 갯수
+	@Query("SELECT COUNT(*) FROM CouponCusDTO cpcusdto WHERE cpcusdto.c_email = :c_email ")
+	int countCusCoupon(String c_email);
+	
+	
+	// 고객 쿠폰 삭제
+	@Query("UPDATE CouponCusDTO SET ic_status = 'n' WHERE ic_num = :ic_num")
+	int deleteCusCoupon(int ic_num);
+	
+	// 고객 쿠폰 상세내역
 	@Query("SELECT cpcus FROM CouponCusDTO cpcus WHERE cpcus.ic_name = :ic_name")
 	Optional<CouponCusDTO> selectCusCouponDetail(String ic_name);
 	

@@ -17,17 +17,33 @@ public interface CouponService {
 	// 쿠폰 등록 
 	public CouponDTO insertCoupon(CouponDTO cpdto)
 			throws ServletException, IOException;
+	
+	// 쿠폰 수정
+	public CouponDTO updateCoupon(CouponDTO cpdto)
+			throws ServletException, IOException;
+	
+	// 쿠폰 삭제
+	public int deleteCoupon(String ic_name)
+			throws ServletException, IOException;
 
 	// 고객 쿠폰 등록 
 	public CouponCusDTO insertCusCoupon(CouponCusDTO cpcusdto)
 			throws ServletException, IOException;
-		
+	
+	// 고객쿠폰 삭제
+	public int deleteCusCoupon(int ic_num)
+			throws ServletException, IOException;
+	
 	// 쿠폰 리스트
 	public List<CouponDTO> couponList()
 			throws ServletException, IOException;
 	
 	// 고객 쿠폰 리스트
 	public List<CouponCusDTO> cusCouponList(String c_email)
+			throws ServletException, IOException;
+	
+	// 고객 쿠폰 갯수
+	public int countCusCoupon(String c_email)
 			throws ServletException, IOException;
 
 	// 쿠폰 상세내역
