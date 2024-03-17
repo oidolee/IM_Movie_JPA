@@ -75,7 +75,7 @@ const Reservation_Seat = () => {
         const isChecked = seat ? true : false;
         rowContent.push(
           <Square
-            key={`${i}-${j}`}
+            key={`${i}-${seatNumber}`}
             row={i}
             column={j}
             canSelectSeat={canSelectSeat && !isDisabled}
@@ -116,8 +116,6 @@ const Reservation_Seat = () => {
   };
 
   const Square = ({
-    row,
-    column,
     count,
     canSelectSeat,
     isChecked,
@@ -130,9 +128,9 @@ const Reservation_Seat = () => {
       console.log("canSelectSeat 상태:", canSelectSeat);
 
       if (canSelectSeat) {
-        onSeatSelect(row, column, !isChecked);
-        setChecked(!isChecked);
-        console.log("isChecked 값:", !isChecked);
+        onSeatSelect(!checked);
+        setChecked(!checked);
+        console.log("isChecked 값:", !checked);
       } else {
         console.log("수량 선택 필요 - 좌석 선택 불가");
         alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
@@ -145,7 +143,7 @@ const Reservation_Seat = () => {
       <div
         className={squareClass}
         onClick={handleChange}
-        style={{ position: "relative"}}
+        style={{ position: "relative" }}
       >
         <span className="checked_square">{count}</span>
       </div>
@@ -153,20 +151,18 @@ const Reservation_Seat = () => {
   };
 
   const handleSeatSelect = (row, column, isChecked) => {
-    console.log("handlePayment 호출 성공 : ", row, column, isChecked);
+    console.log("handleSeatSelect 호출 성공 : ", isChecked);
     const updatedSeats = seats.map((seat) => {
       if (seat.row === row && seat.column === column) {
         return {
           ...seat,
-          isChecked: isChecked,
-          st_row: row,
-          st_column: column,
+          isChecked: isChecked
         };
       }
       return seat;
     });
     setSeats(updatedSeats);
-    setSelectedSeat({ row, column, isChecked });
+    setSelectedSeat({isChecked});
   };
 
   const handlePayment = () => {
@@ -179,7 +175,7 @@ const Reservation_Seat = () => {
 
     let inputData = {
       st_id: seats.st_id,
-      st_row: st_row,
+      st_row: seats.st_row,
       st_column: selectedSeat.column,
       st_check: "r",
     };
@@ -209,7 +205,7 @@ const Reservation_Seat = () => {
     ]);
   }
 
-  console.log(parkingLot);
+  // console.log(parkingLot);
 
   return (
     <div className={`Res_seat ${style.Res_seat}`}>
@@ -351,19 +347,21 @@ const Reservation_Seat = () => {
                     <span>{lot}</span>
                     {parkingLot[lot].map(([seatNumber]) => (
                       <span
+                        key={`${lot}-${seatNumber}`} // 고유한 키 생성
                         style={{
                           marginRight:
                             seatNumber == 2 || seatNumber == 12 ? "30px" : "",
                         }}
                       >
                         <Square
+                          key={`${lot}-${seatNumber}`} // 고유한 키 생성
                           count={seatNumber}
                           quantity={quantity}
                           seats={seats}
                           setSeats={setSeats}
                           onSeatSelect={handleSeatSelect}
                           canSelectSeat={canSelectSeat}
-                        ></Square>
+                        />
                       </span>
                     ))}
                   </div>
