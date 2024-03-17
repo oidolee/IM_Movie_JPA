@@ -25,6 +25,7 @@ import Parking from '../page_2/Parking';
 //page_3
 import Page3 from '../page_3/Page3';
 import StoreDetail from '../page_3/StoreDetail';
+import StoreTiketMap from '../page_3/StoreTiketMap';
 
 
 
@@ -99,6 +100,7 @@ const AppRouter = () => {
                             <Route>
                                 <Route path="/Page3" exact={true} component={Page3} />
                                 <Route path="/page_3/EditStore_Admin/" exact={true} component={StoreDetail} />
+                                <Route path="/page_3/StoreTiketMap/" exact={true} component={StoreTiketMap} />
                             </Route>
 
                             {/* page_4 */}
@@ -127,9 +129,25 @@ const AppRouter = () => {
                                 <Route path="/groupform" exact={true} component={groupform} />
                             
                             </Route>
-                            
 
                     
+                             {/* page_6 */}
+                             <Route>
+                                <Route path="/MyPage" exact={true} component={MyPage} />
+                                <Route path="/MyPage_res" exact={true} component={MyPage_res} />
+                                <Route path="/MyPage_resCancle" exact={true} component={MyPage_resCancle} />
+                                <Route path="/MyPage_coupon" exact={true} component={MyPage_coupon} />
+                                <Route path="/MyPage_wishMovie" exact={true} component={MyPage_wishMovie} />
+                                <Route path="/Consult" exact={true} component={Consult} />
+                                <Route path="/MyPage_myinfo" exact={true} component={MyPage_myinfo} />
+                                <Route path="/MyPage_myinfo_update" exact={true} component={MyPage_myinfo_update} />
+                                <Route path="/MyPage_consult_list" exact={true} component={MyPage_consult_list} />
+                                <Route path="/event_Home" exact={true} component={Event_Home} />
+                                <Route path="/MyPage_Event" exact={true} component={MyPage_Event} />
+                                <Route path="/MyPage_consult_answer/:one_id" exact={true} component={MyapgeConsultDetail} />
+                            </Route>
+                            
+
 
                         </Route>
                         {/* 영화관 마지막 라우터 */}

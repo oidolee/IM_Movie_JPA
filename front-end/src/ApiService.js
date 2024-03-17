@@ -5,9 +5,18 @@ let url = "http://localhost:8081";
 class ApiService {
 
     // page_1
-    // --------------------------------------------Payment 시작--------------------------------------------
+    // --------------------------------------------Seat 시작--------------------------------------------
+    listSeat() {
+        console.log("listSeat 호출");
+        return axios.get(url + "/page_1/SeatList");
+    }
 
-    // --------------------------------------------Payment 끝--------------------------------------------
+    updateSeat(inputData) {
+        console.log("updateSeat 호출", inputData);
+        return axios.put(url + "/page_1/SeatUpdate" + "/" + inputData.st_num , inputData);
+    }
+    // --------------------------------------------Seat 끝--------------------------------------------
+    
 
     // --------------------------------------------Discount 시작--------------------------------------------
     // 목록
@@ -127,13 +136,56 @@ class ApiService {
         return axios.post(url + '/page_6/save', inputData); 
     }
 
-    // 1:1 문의 답변
+    // 1:1 문의 답변 리스트
     fetchConsultAnswer(one_id){
         console.log('fetchConsultAnswerById() 호출!!')
         
-        return axios.get(url + '/page_6/select'+ one_id); 
+        return axios.get(url + '/page_6/consultAnswer/'+ one_id); 
     }
 
+    // 1:1 문의 답변 등록
+    addConsultAnwser(inputData) {
+        console.log('addConsultAnwser 호출', inputData);
+        return axios.post(url + "/page_6/saveAnswer", inputData);
+    }
+
+    // 쿠폰
+    // 쿠폰 리스트(관리자)
+    fetchCoupon(){
+        console.log('fetchCoupon() 호출!!')
+        return axios.get(url + '/page_6'); 
+    }
+    
+    // 쿠폰 상세내역(관리자)
+    // 쿠폰 등록
+    // 쿠폰 수정(관리자)
+    // 쿠폰 숨김처리(관리자)
+    // 쿠폰 삭제(관리자)
+
+    // 고객 쿠폰
+    // 고객 쿠폰 등록
+
+
+    // 고객 쿠폰 리스트
+    fetchCouponCus(){
+        console.log('fetchCouponCus() 호출!!')
+        return axios.get(url + '/page_6/coupon'); 
+    }
+    // 고객 쿠폰 삭제(숨김처리)
+    
+
+    // <page_3 주차 리스트 불러옴>
+    parkingList(){
+        console.log('parkingList() 호출!!')
+        return axios.get(url + '/page_3/ParkingList'); 
+    }
+
+    // <page_3 주차등록>
+    editPark(inputData){
+        console.log('editPark() 주차등록시작');
+        console.log(inputData);
+        return axios.put(url + '/page_3/save/'+inputData.ip_no, inputData); 
+    }
 
     // page_5
     //영화 목록 리스트

@@ -20,24 +20,23 @@ class StoreDetail extends Component {
       price: 22000,
       selectedValue: 1,
       swiperRef: null,
-      itemCode: '',
+      itemCode: '', // 상세페이지
       itemType: '',
       itemName: '',
       itemDetail: '',
       itemPrice: '',
       itemSalePrice: '',
       itemImage: '',
-      itemExp: ''
+      itemExp: '',
+      lists: [],    // 5. 리스트 데이터
+      message: null  // 5. 리스트 데이터
     };
   }
 
 
-  componentDidMount() {
-    this.loadStore();
-}
-
+// 상세페이지
 loadStore = () => {
-  ApiService.fetchStoreByID(window.localStorage.getItem("sampleID")) //★★★★★★★이건 어떻게 사용하는 거지???????
+  ApiService.fetchStoreByID(window.localStorage.getItem("sampleID")) 
   .then(res => {        
   let sotreEdit = res.data;
   this.setState({
@@ -56,6 +55,26 @@ loadStore = () => {
   console.log('loadSample() Error!!', err);
 })
 }       
+
+
+    componentDidMount() {
+        this.storeList();  //1. 리스트목록
+        this.loadStore();  //1. 상세페이지
+    }
+
+    // 리스트목록
+    storeList = () => {
+        ApiService.ListStore_Admin() // 2. 스프링부트와 통신기능 호출 >  3. ApiService.js 스프링부트의 데이터를 가지고 온다.
+        .then(res => {              // 4.
+            this.setState({
+                lists: res.data // res 에 결과 데이타를 담아라
+            })
+        })
+        .catch(err => {
+            console.log('ListStore_Admin() Error!!', err);
+        })
+    }
+
 
 onChange = (e) => {  // 1. 입력한 값으로 변경한다.
   this.setState({
@@ -153,7 +172,7 @@ EditStore_Admin = (e) => {
       <div className={`StoreDetail_store_d ${style.StoreDetail_store_d}`}>
         <div className={`store_detail ${style.store_detail}`}>
           <div className={`main_img ${style.main_img}`}>
-            <img src={package1} alt="[IM과 봄] 패키지" />
+            <img src={this.state.itemImage} alt="[IM과 봄] 패키지" />
 
             <div style={{ width: "450px" }}>
               <Swiper
@@ -174,17 +193,15 @@ EditStore_Admin = (e) => {
                     style={{ width: "150px", left: "0" }}
                   />
                 </SwiperSlide>
+
                 <SwiperSlide>
-                  <img
-                    src={package1}
-                    style={{ width: "150px", left: "0" }}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img
-                    src={package1}
-                    style={{ width: "150px", left: "0" }}
-                  />
+                <div style={{ display: "flex" }}>
+                {this.state.lists.map((item, index) => (
+                    item.itemType === "베스트" && (
+                    <img src={item.itemImage} alt={`Item ${item.itemCode}`} style={{ width: "150px" }}/>
+                    )
+                ))}
+                </div>
                 </SwiperSlide>
                 {/* {slides.map((slideContent, index) => (
                       <SwiperSlide key={slideContent} virtualIndex={index}>
@@ -228,12 +245,12 @@ EditStore_Admin = (e) => {
                     <span
                       className={`StoreDetail_txt_sale ${style.StoreDetail_txt_sale}`}
                     >
-                      15%
+                       {Math.floor(((this.state.itemPrice - this.state.itemSalePrice) / this.state.itemPrice) * 100)}%
                     </span>
                   </td>
                   <td>
                     <span className={`txt_price ${style.txt_price}`}>
-                      22,000<em>원</em>
+                      {this.state.itemSalePrice}<em>원</em>
                     </span>
                     <span className={`txt_price_ins ${style.txt_price_ins}`}>
                       {this.state.itemPrice}
@@ -242,7 +259,7 @@ EditStore_Admin = (e) => {
                 </tr>
                 <tr>
                   <th>구성품</th>
-                  <td>2D일반관람권 2매</td>
+                  <td>{this.state.itemDetail}</td>
                 </tr>
                 <tr>
                   <th>구매제한</th>

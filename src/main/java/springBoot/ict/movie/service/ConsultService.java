@@ -26,12 +26,13 @@ public interface ConsultService {
 			throws ServletException, IOException;
 	
 	// 1:1문의 답변 등록
-	public void insertConsultAnswer(ConsultAnswerDTO csadto)
+	public ConsultAnswerDTO insertConsultAnswer(ConsultAnswerDTO csadto)
 			throws ServletException, IOException;
 	
-	// 1:1문의 답변 1건 찾기
-	public ConsultAnswerDTO selectConsultAnswer(int one_id)
+	// 1:1문의 답변 리스트
+	public List<ConsultAnswerDTO> selectConsultAnswer(int one_id) 
 			throws ServletException, IOException;
+			
 	
 //	// 회원정보 1건 select
 //	public CustomerDTO selectCustomer(String email) 

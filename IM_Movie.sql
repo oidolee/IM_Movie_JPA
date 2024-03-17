@@ -78,13 +78,13 @@
 
     DROP TABLE mvc_Seat_tbl CASCADE CONSTRAINTS;
     CREATE TABLE mvc_Seat_tbl(
-    St_id            NUMBER          PRIMARY KEY,
-    THEATER_ID       VARCHAR2(50)    NOT NULL,
-    SCREEN_ID        VARCHAR2(50)    NOT NULL,
-    St_seatGroup     VARCHAR2(50)    NOT NULL,
-    St_num           VARCHAR2(50)    NOT NULL,
-    St_lineNum       VARCHAR2(50)    NOT NULL,
-    St_check         CHAR(1)         DEFAULT 'n'
+        St_id            NUMBER          PRIMARY KEY,
+        THEATER_ID       VARCHAR2(50)    NOT NULL,
+        SCREEN_ID        VARCHAR2(50)    NOT NULL,
+        St_seatGroup     VARCHAR2(50)    NOT NULL,
+        St_num           VARCHAR2(50)    NOT NULL,
+        St_lineNum       VARCHAR2(50)    NOT NULL,
+        St_check         CHAR(1)         DEFAULT 'n'
     );
 
     select * from mvc_Seat_tbl;

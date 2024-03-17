@@ -27,10 +27,11 @@ import springBoot.ict.movie.service.ConsultServiceImpl;
 
 @CrossOrigin(origins="**", maxAge=3600)
 @RestController
-
+@RequestMapping(value="/page_6")
 public class ConsultController {
 	@Autowired
 	private ConsultServiceImpl service;
+	
 	
 	private static final Logger logger = LoggerFactory.getLogger(ConsultController.class);
 	
@@ -126,6 +127,54 @@ public class ConsultController {
 
     }
     
+	// 1:1문의 답변 등록
+    @PostMapping("/saveAnswer")
+    public Map<String, Object> consultAnswerInsert(@RequestBody ConsultAnswerDTO csadto)
+            throws ServletException, IOException {
+        logger.info("<<< url - consultAnswerInsert >>>");
+        
+        System.out.println("<<< url - consultAnswerInsert >>>");
+      
+        System.out.println(csadto);
+        
+        
+        String resultCode = "";
+        String resultMsg = "";
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        
+        try {
+        	
+            service.insertConsultAnswer(csadto);
+            resultCode = "200";
+            resultMsg = "ConsultInsert Success";
+        } catch(Exception e) {
+            resultCode = "400";
+            resultMsg = e.getMessage();
+            e.printStackTrace();
+        }
+        map.put("resultCode", resultCode);
+        map.put("resultMsg", resultMsg);
+        map.put("csadto", csadto);
+
+
+        return map;
+    }
+    
+    // 1:1문의 답변 리스트
+    @GetMapping("/consultAnswer/{one_id}")
+    public List<ConsultAnswerDTO> consultAnswerList(@PathVariable(name="one_id") int one_id, Model model)
+            throws ServletException, IOException {
+        logger.info("<<< url -> consultAnswerList");
+        System.out.println("one_id :" + one_id);
+        List<ConsultAnswerDTO> list= service.selectConsultAnswer(one_id);
+        model.addAttribute("list", list);
+        System.out.println("controller:" + list);
+        
+        return list;
+
+    }
+    
 //    // 회원정보 1건 찾기
 //    @GetMapping("/select/{email}")
 //    public Map<String, Object> selectCustomer(@PathVariable(name="email") String email, Model model) 
@@ -157,88 +206,3 @@ public class ConsultController {
 //
 //    }
 }
-		
-	
-//	// 로그인
-//    @PostMapping("/login")
-//    public Map<String, Object> login(@RequestBody CustomerDTO dto) 
-//    		throws ServletException, IOException {
-//    	
-//        CustomerDTO customer = service.loginCustomer(dto);
-//        Map<String, Object> response = new HashMap<>();
-//        if (customer != null) {
-//            response.put("resultCode", "200");
-//            response.put("resultMsg", "로그인 성공!");
-//            response.put("customer", customer);
-//        } else {
-//            response.put("resultCode", "400");
-//            response.put("resultMsg", "로그인 실패!");
-//        }
-//        return response;
-//    }
-//	
-//	// 아이디 찾기
-//    @PostMapping("/findID")
-//    public Map<String, Object> findID(@RequestBody CustomerDTO dto) 
-//    		throws ServletException, IOException {
-//        logger.info("<<< url -> findID start");
-//        System.out.println("dto" + dto.toString());
-//
-//        String resultCode = "";
-//        String resultMsg = "";
-//
-//        Map<String, Object> map = new HashMap<String, Object>();
-//
-//        try {
-//            String foundEmail = service.findID(dto.getIC_name(), dto.getIC_hp());
-//            if (foundEmail != null) {
-//                resultCode = "200";
-//                resultMsg = "ID found";
-//                map.put("foundEmail", foundEmail);
-//            } else {
-//                resultCode = "404";
-//                resultMsg = "ID not found";
-//            }
-//        } catch (Exception e) {
-//            resultCode = "400";
-//            resultMsg = e.getMessage();
-//            e.printStackTrace();
-//        }
-//        map.put("resultCode", resultCode);
-//        map.put("resultMsg", resultMsg);
-//
-//        return map;
-//    }
-//	
-//	
-// // 비밀번호찾기 
-//    @PostMapping("/searchPWD")
-//    public Map<String, Object> findPWD(@RequestBody CustomerDTO dto) 
-//    		throws ServletException, IOException {
-//        logger.info("<<< url -> searchPWD start");
-//        System.out.println("dto" + dto.toString());
-//
-//        String resultCode = "";
-//        String resultMsg = "";
-//
-//        Map<String, Object> map = new HashMap<String, Object>();
-//
-//        try {
-//            String foundPWD = service.findPWD(dto.getIC_email(), dto.getIC_hp());
-//            if (foundPWD != null) {
-//                resultCode = "200";
-//                resultMsg = "PWD found";
-//                map.put("foundPWD", foundPWD);
-//            } else {
-//                resultCode = "404";
-//                resultMsg = "PWD not found";
-//            }
-//        } catch (Exception e) {
-//            resultCode = "400";
-//            resultMsg = e.getMessage();
-//            e.printStackTrace();
-//        }
-//        map.put("resultCode", resultCode);
-//        map.put("resultMsg", resultMsg);
-//
-//        return map;

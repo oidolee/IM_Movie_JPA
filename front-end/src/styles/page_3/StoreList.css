@@ -4,7 +4,7 @@
 .page3_contents{    
     max-width: 1000px;
     margin: 0 auto;
-    height: 2100px;
+    /* height: 2100px; */
     /* border: 1px solid; */
     padding-top: 30px;
 }
