@@ -49,83 +49,88 @@ const Reservation_Seat = () => {
   const [disabledQuantity, setDisabledQuantity] = useState(0);
   const [lastActivityTime, setLastActivityTime] = useState(Date.now())
 
+  // useEffect(() => {
+  //   // 좌석 정보 가져오기
+  //   listSeat();
+  
+  //   // 페이지 진입 시간 설정
+  //   setLastActivityTime(Date.now());
+  
+  //   const activityListener = () => {
+  //     // 사용자의 활동 감지 시마다 시간 갱신
+  //     setLastActivityTime(Date.now());
+  //   };
+  
+  //   // 마우스 이벤트, 키보드 입력 등의 사용자 활동 감지
+  //   window.addEventListener("mousemove", activityListener);
+  //   window.addEventListener("keydown", activityListener);
+  //   window.addEventListener("click", activityListener);
+  
+  //   // 10분마다 활동이 있는지 확인하고 없으면 메인 화면으로 이동
+  //   const checkActivityInterval = setInterval(() => {
+  //     const currentTime = Date.now();
+  //     // 10분(600000 밀리초) 동안 아무런 활동이 없다면 메인 화면으로 이동
+  //     if (currentTime - lastActivityTime >= 1200000) {
+  //       clearInterval(checkActivityInterval);
+  //       history.push("/page_1/Reservation_Movie");
+  //     }
+  //   }, 1200000);
+  
+  //   // 예약 상태 자동 변경 타이머 설정
+  //   const timer = setTimeout(() => {
+  //     // 예약된 좌석의 예약 상태를 자동으로 변경하는 함수 호출
+  //     const updateSeatPromises = selectedSeats
+  //       .filter((seat) => {
+  //         const [lot, seatNumber, ip_no] = seat.split("-");
+  //         const seatStatus = seats.find((seat) => seat.st_row === lot && seat.st_column === seatNumber)?.st_check;
+  //         return seatStatus === "r";
+  //       })
+  //       .map((seat) => {
+  //         const [lot, seatNumber, ip_no] = seat.split("-");
+  //         const inputData = {
+  //           st_id: ip_no,
+  //           st_row: lot,
+  //           st_column: seatNumber,
+  //           st_check: "n", // "r"에서 "n"으로 상태 변경
+  //         };
+  
+  //         console.log("시간초과 : ", inputData);
+  
+  //         return ApiService.updateSeat(inputData);
+  //       });
+  
+  //     Promise.all(updateSeatPromises)
+  //       .then((res) => {
+  //         console.log("예약된 좌석의 상태를 자동으로 변경했습니다.");
+  //         // 변경 완료 후 선택된 좌석 목록 초기화
+  //         setSelectedSeats([]);
+  //         // 시간 초과 알림창
+  //         alert("좌석 예약 시간이 초과되어 예약이 취소되었습니다.");
+  //         // 일정시간 후에 페이지 이동
+  //         setTimeout(() => {
+  //           history.push("/page_1/Reservation_Main");
+  //         }, 3000); // 3초 후에 페이지 이동 (3000 밀리초)
+  //       })
+  //       .catch((err) => {
+  //         console.log("예약된 좌석의 상태 변경 중 오류가 발생했습니다. : ", err);
+  //       });
+  //   }, 600000); // 10분에 해당하는 밀리초 (10 * 60 * 1000)
+  
+  //   // 컴포넌트가 언마운트될 때 타이머 해제 및 이벤트 리스너 제거
+  //   return () => {
+  //     clearTimeout(timer);
+  //     clearInterval(checkActivityInterval);
+  //     window.removeEventListener("mousemove", activityListener);
+  //     window.removeEventListener("keydown", activityListener);
+  //     window.removeEventListener("click", activityListener);
+  //   };
+  // }, [selectedSeats, lastActivityTime, history, seats]);
+
   useEffect(() => {
     // 좌석 정보 가져오기
     listSeat();
+  }, []);
   
-    // 페이지 진입 시간 설정
-    setLastActivityTime(Date.now());
-  
-    const activityListener = () => {
-      // 사용자의 활동 감지 시마다 시간 갱신
-      setLastActivityTime(Date.now());
-    };
-  
-    // 마우스 이벤트, 키보드 입력 등의 사용자 활동 감지
-    window.addEventListener("mousemove", activityListener);
-    window.addEventListener("keydown", activityListener);
-    window.addEventListener("click", activityListener);
-  
-    // 10분마다 활동이 있는지 확인하고 없으면 메인 화면으로 이동
-    const checkActivityInterval = setInterval(() => {
-      const currentTime = Date.now();
-      // 10분(600000 밀리초) 동안 아무런 활동이 없다면 메인 화면으로 이동
-      if (currentTime - lastActivityTime >= 1200000) {
-        clearInterval(checkActivityInterval);
-        history.push("/page_1/Reservation_Movie");
-      }
-    }, 1200000);
-  
-    // 예약 상태 자동 변경 타이머 설정
-    const timer = setTimeout(() => {
-      // 예약된 좌석의 예약 상태를 자동으로 변경하는 함수 호출
-      const updateSeatPromises = selectedSeats
-        .filter((seat) => {
-          const [lot, seatNumber, ip_no] = seat.split("-");
-          const seatStatus = seats.find((seat) => seat.st_row === lot && seat.st_column === seatNumber)?.st_check;
-          return seatStatus === "r";
-        })
-        .map((seat) => {
-          const [lot, seatNumber, ip_no] = seat.split("-");
-          const inputData = {
-            st_id: ip_no,
-            st_row: lot,
-            st_column: seatNumber,
-            st_check: "n", // "r"에서 "n"으로 상태 변경
-          };
-  
-          console.log("시간초과 : ", inputData);
-  
-          return ApiService.updateSeat(inputData);
-        });
-  
-      Promise.all(updateSeatPromises)
-        .then((res) => {
-          console.log("예약된 좌석의 상태를 자동으로 변경했습니다.");
-          // 변경 완료 후 선택된 좌석 목록 초기화
-          setSelectedSeats([]);
-          // 시간 초과 알림창
-          alert("좌석 예약 시간이 초과되어 예약이 취소되었습니다.");
-          // 일정시간 후에 페이지 이동
-          setTimeout(() => {
-            history.push("/page_1/Reservation_Main");
-          }, 3000); // 3초 후에 페이지 이동 (3000 밀리초)
-        })
-        .catch((err) => {
-          console.log("예약된 좌석의 상태 변경 중 오류가 발생했습니다. : ", err);
-        });
-    }, 600000); // 10분에 해당하는 밀리초 (10 * 60 * 1000)
-  
-    // 컴포넌트가 언마운트될 때 타이머 해제 및 이벤트 리스너 제거
-    return () => {
-      clearTimeout(timer);
-      clearInterval(checkActivityInterval);
-      window.removeEventListener("mousemove", activityListener);
-      window.removeEventListener("keydown", activityListener);
-      window.removeEventListener("click", activityListener);
-    };
-  }, [selectedSeats, lastActivityTime, history, seats]);
-
   const listSeat = () => {
     ApiService.listSeat()
       .then((res) => {
