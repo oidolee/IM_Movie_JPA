@@ -19,6 +19,18 @@ class ActionProvider {
 
     // set1 end
 
+    //Quiz
+    handleJavascriptQuiz = () => {
+        const message = this.createChatBotMessage(
+          "Fantastic. Here is your quiz. Good luck!",
+          {
+            widget: "javascriptQuiz",
+          }
+        );
+    
+        this.addMessageToState(message);
+    };
+
 
 
     // 기존 기본 테스트 
