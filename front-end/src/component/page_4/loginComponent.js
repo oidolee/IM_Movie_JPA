@@ -13,6 +13,7 @@ function Login() {
     const [message, setMessage] = useState('');
     const history = useHistory();
     const [cookies, setCookie] = useCookies(['idCheck']); // 쿠키 훅 
+    const [cookies_email, setCookie_email] = useCookies(['c_email']); // 쿠키 훅 
 
     const handleLogin = () => {
         let inputData = {
@@ -27,7 +28,9 @@ function Login() {
                 console.log(res.data);
                 if(res.data.resultCode == 200){
                     let name = res.data.customer.name;
+                    let c_email = res.data.customer.email;
                     setCookie('idCheck', name)
+                    setCookie_email('c_email', c_email)
                     alert("로그인 성공.")
                     history.push('/');
                 } else {

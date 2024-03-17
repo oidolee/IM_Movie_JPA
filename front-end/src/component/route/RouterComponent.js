@@ -42,7 +42,7 @@ import resultFindPWD from '../page_4/resultFindPWD';
 //page_5
 import movieMain from '../page_5/movie/movieMain';
 import movieDetail from '../page_5/movie/movieDetail';
-import movieUpdate from '../page_5/movieUpdate/movieUpdate';
+import movieUpdate from '../../admin/page_5/Admin_Update_Add';
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
 import arte from '../page_5/movie/arte';
@@ -119,6 +119,7 @@ const AppRouter = () => {
                             <Route>
                                 <Route path="/movieMain" exact={true} component={movieMain} />
                                 <Route path="/movieDetail" exact={true} component={movieDetail} />
+                                <Route path="/movieUpdate" exact={true} component={movieUpdate} />
                                 <Route path="/movieNow" exact={true} component={movieNow} />
                                 <Route path="/movieNext" exact={true} component={movieNext} />
                                 <Route path="/moviePlace" exact={true} component={moviePlace} />
@@ -129,6 +130,7 @@ const AppRouter = () => {
                             
                             </Route>
 
+                    
                              {/* page_6 */}
                              <Route>
                                 <Route path="/MyPage" exact={true} component={MyPage} />

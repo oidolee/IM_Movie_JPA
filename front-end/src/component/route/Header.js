@@ -63,13 +63,22 @@ function Header() {
                         )}                                                  
                           <li><Link to="/customerlist">멤버쉽</Link></li>   
                           <li><Link to="/FAQ">고객센터</Link></li>   
-                          <li><Link to="/parking">주차등록</Link></li>   
+
+                          {cookies.idCheck &&(
+                                <>
+                                    <li><Link to="/parking">주차등록</Link></li>   
+                                </>
+                            )}
                           <li><Link to="/groupform">단체관람/대관문의</Link></li>   
                     </ul>
                     <ul className='header-member-box'>                      
                         <li>
-                            <i class="bi bi-person" className='bi-person'></i>
-                            <Link to="/signCheck">회원가입</Link>
+                            {!cookies.idCheck &&(
+                                <>
+                                    <i class="bi bi-person" className='bi-person'></i>
+                                    <Link to="/signCheck">회원가입</Link>
+                                </>
+                            )}
                         </li>
                         
                         <li>
