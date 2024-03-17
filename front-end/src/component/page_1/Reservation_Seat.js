@@ -34,12 +34,12 @@ const QuantityCounter = ({ onQuantityChange }) => {
 };
 
 const Reservation_Seat = () => {
-  const [seatData, setSeatData] = useState([]);
   const [seats, setSeats] = useState([]);
   const [canSelectSeat, setCanSelectSeat] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const history = useHistory();
   const [selectedSeat, setSelectedSeat] = useState(null);
+  const [selectedSeatInfo, setSelectedSeatInfo] = useState(null);
 
   useEffect(() => {
     listSeat();
@@ -48,43 +48,57 @@ const Reservation_Seat = () => {
   const listSeat = () => {
     ApiService.listSeat()
       .then((res) => {
-        const seat = res.data;
-
-        setSeatData({
-          st_id: seat.st_id,
-          st_row: seat.st_row,
-          st_column: seat.st_column,
-          st_check: seat.st_check,
-        });
-
         setSeats(res.data);
+        console.log("listSeat 성공 : ", res.data);
       })
       .catch((err) => {
         console.log("listSeat 오류 : ", err);
       });
   };
 
+  let parkingLot = {};
+
+  for (let entry of seats) {
+    if (!parkingLot.hasOwnProperty(entry.st_row)) {
+      parkingLot[entry.st_row] = [];
+    }
+    parkingLot[entry.st_row].push([
+      entry.st_column,
+      entry.st_check,
+      entry.st_id,
+    ]);
+  }
+
+  const toggleSeatColor = (lot, seatNumber, ip_no) => {
+    setSelectedSeat(selectedSeat === `${lot}-${seatNumber}` ? null : `${lot}-${seatNumber}`);
+    setTotalPlot(selectedSeat === `${lot}-${seatNumber}` ? '' : `${lot}-${seatNumber}`);   
+    setIp_no(ip_no);
+  };
+
   const SeatMap = ({ rows, columns, canSelectSeat, seats, onSeatSelect }) => {
     const seatElements = [];
-
+  
     for (let i = 0; i < rows; i++) {
       const rowContent = [];
       for (let j = 0; j < columns; j++) {
-        const seat = seats.find((seat) => seat.row === i && seat.column === j);
+        const seat = seats.find((seat) => seat.st_row === i && seat.st_column === j);
         const isDisabled = seat ? true : false;
         const isChecked = seat ? true : false;
         rowContent.push(
           <Square
-            key={`${i}-${seatNumber}`}
+            key={`${i}-${j}`}
             row={i}
             column={j}
             canSelectSeat={canSelectSeat && !isDisabled}
+            count={seat ? seat.st_number : null}
             isChecked={isChecked}
             onSeatSelect={onSeatSelect}
           />
+          
         );
       }
-
+      
+  
       seatElements.push(
         <div className="seat_row" key={`row-${i}`}>
           {rowContent}
@@ -92,7 +106,7 @@ const Reservation_Seat = () => {
       );
       seatElements.push(<br key={`br-${i}`} />);
     }
-
+  
     return <div className="MovieSeats">{seatElements}</div>;
   };
 
@@ -116,72 +130,92 @@ const Reservation_Seat = () => {
   };
 
   const Square = ({
-    count,
-    canSelectSeat,
-    isChecked,
-    onSeatSelect,
-  }) => {
-    const [checked, setChecked] = useState(isChecked);
+  row,
+  column,
+  count,
+  canSelectSeat,
+  isChecked,
+  onSeatSelect,
+}) => {
+  const [checked, setChecked] = useState(isChecked);
 
-    const handleChange = () => {
-      console.log("handleChange 함수 호출됨");
-      console.log("canSelectSeat 상태:", canSelectSeat);
+  const handleChange = () => {
+    console.log("handleChange 함수 호출됨");
+    console.log("canSelectSeat 상태:", canSelectSeat);
+    console.log("row 값:", row);
+    console.log("column 값:", column);
+    console.log("count 값:", count);
+    console.log("isChecked 값:", isChecked);
 
-      if (canSelectSeat) {
-        onSeatSelect(!checked);
-        setChecked(!checked);
-        console.log("isChecked 값:", !checked);
-      } else {
-        console.log("수량 선택 필요 - 좌석 선택 불가");
-        alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
-      }
-    };
-
-    const squareClass = checked ? "square checked" : "square";
-
-    return (
-      <div
-        className={squareClass}
-        onClick={handleChange}
-        style={{ position: "relative" }}
-      >
-        <span className="checked_square">{count}</span>
-      </div>
-    );
+    if (canSelectSeat) {
+      onSeatSelect(row, column, isChecked); // 좌석 번호와 isChecked 값을 함께 전달
+      setChecked(!isChecked);
+    } else {
+      console.log("수량 선택 필요 - 좌석 선택 불가");
+      alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
+    }
   };
+
+  const squareClass = checked ? "square checked" : "square";
+
+  return (
+    <div
+      className={squareClass}
+      onClick={handleChange}
+      style={{ position: "relative" }}
+    >
+      <span className="checked_square">{count}</span>
+    </div>
+  );
+};
 
   const handleSeatSelect = (row, column, isChecked) => {
-    console.log("handleSeatSelect 호출 성공 : ", isChecked);
-    const updatedSeats = seats.map((seat) => {
-      if (seat.row === row && seat.column === column) {
-        return {
-          ...seat,
-          isChecked: isChecked
-        };
-      }
-      return seat;
-    });
-    setSeats(updatedSeats);
-    setSelectedSeat({isChecked});
+    const selectedSeatData = seats.find(seat => seat.st_row === row && seat.st_column === column && seat.st_checked === "r" && seat.st_checked === "y");
+    if (!selectedSeatData) {
+      console.log("이미 선점된 좌석입니다.");
+      return;
+    }
+    
+    setSelectedSeat(selectedSeatData);
+    setSelectedSeatInfo({ row, column, isChecked });
+    console.log("handleSeatSelect 호출 성공", row, column, isChecked);
+  
+    console.log(parkingLot);
+
+    const seatId = selectedSeatData.st_id;
+    const seatRow = selectedSeatData.st_row;
+    const seatColumn = selectedSeatData.st_column;
+  
+    // 좌석 정보 가져오기
+    ApiService.getSeatInfo(seatId)
+      .then((res) => {
+        console.log("좌석 정보:", res.data);
+        console.log("getSeatInfo 성공 : ", res.data)
+  
+        // 가져온 좌석 정보를 상태에 저장하거나 원하는 처리를 수행할 수 있습니다.
+      })
+      .catch((err) => {
+        console.log("좌석 정보 가져오기 오류:", err);
+      });
   };
-
+  
   const handlePayment = () => {
-    console.log("handlePayment 호출 성공");
-
-    if (!selectedSeat || !selectedSeat.isChecked) {
+    if (!selectedSeat || !selectedSeatInfo || !selectedSeatInfo.isChecked) {
       console.log("선택된 좌석이 없습니다.");
       return;
     }
-
+  
+    const seatNumber = selectedSeat.st_number;
+  
     let inputData = {
-      st_id: seats.st_id,
-      st_row: seats.st_row,
-      st_column: selectedSeat.column,
+      st_id: seatNumber,
+      st_row: selectedSeat.st_row,
+      st_column: selectedSeat.st_column,
       st_check: "r",
     };
-
+  
     console.log("inputData : ", inputData);
-
+  
     ApiService.updateSeat(inputData)
       .then((res) => {
         console.log("updateSeat 성공 : ", res.data);
@@ -191,21 +225,6 @@ const Reservation_Seat = () => {
         console.log("updateSeat 오류 : ", err);
       });
   };
-
-  let parkingLot = {};
-
-  for (let entry of seats) {
-    if (!parkingLot.hasOwnProperty(entry.st_row)) {
-      parkingLot[entry.st_row] = [];
-    }
-    parkingLot[entry.st_row].push([
-      entry.st_column,
-      entry.st_check,
-      entry.st_id,
-    ]);
-  }
-
-  // console.log(parkingLot);
 
   return (
     <div className={`Res_seat ${style.Res_seat}`}>
@@ -345,7 +364,7 @@ const Reservation_Seat = () => {
                 {Object.keys(parkingLot).map((lot) => (
                   <div key={lot}>
                     <span>{lot}</span>
-                    {parkingLot[lot].map(([seatNumber]) => (
+                    {parkingLot[lot].map(([seatNumber, status, ip_no]) => (
                       <span
                         key={`${lot}-${seatNumber}`} // 고유한 키 생성
                         style={{
@@ -361,6 +380,7 @@ const Reservation_Seat = () => {
                           setSeats={setSeats}
                           onSeatSelect={handleSeatSelect}
                           canSelectSeat={canSelectSeat}
+                          onClick={() => toggleSeatColor(lot, seatNumber, ip_no)}
                         />
                       </span>
                     ))}
