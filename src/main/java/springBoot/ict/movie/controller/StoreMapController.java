@@ -26,7 +26,7 @@ import springBoot.ict.movie.service.StoreMapServiceImpl;
 
 @CrossOrigin(origins="**", maxAge=3600)
 @RestController
-@RequestMapping(value="/page_3")   
+@RequestMapping(value="/page_3/EditStore_Admin")   
 public class StoreMapController {
    
    @Autowired
@@ -35,22 +35,20 @@ public class StoreMapController {
    private static final Logger logger = LoggerFactory.getLogger(StoreMapController.class);
    
    // 스토어 리스트 조회
-   @GetMapping()   // ★페이지 이름 아니고, 어떤걸 쓰는거지???
-   //@GetMapping("/")   // ★페이지 이름 아니고, 어떤걸 쓰는거지???
-   public List<StoreMapDTO> storeList(Model model)
+   @GetMapping("/ListStore_Map")
+   public List<StoreMapDTO> storeListMap(Model model)
             throws ServletException, IOException {
         logger.info("<<< url -> storeList");
         List<StoreMapDTO> list = service.listStoreMap();
         System.out.println("list : " + list);
         model.addAttribute("list", list); //★listStoreMap_Map list 설정
         
-        
         return list;
     } 
    
    // 스토어 등록
-    @PostMapping("/AddStoreMap_Map")
-    public Map<String, Object> storeInsert(@RequestBody StoreMapDTO dto)
+    @PostMapping("/AddStore_Map")
+    public Map<String, Object> storeInsertMap(@RequestBody StoreMapDTO dto)
             throws ServletException, IOException {
         logger.info("<<< url - insertstart >>>");
         
@@ -85,19 +83,19 @@ public class StoreMapController {
 	
 
 	// 스토어 상세페이지
-	@GetMapping("/EditStoreMap_Map/{itemCode}")
-	public StoreMapDTO fetchStoreMapByID(@PathVariable int itemCode)
+	@GetMapping("/EditStore_Map/{ticketmap_no}")
+	public StoreMapDTO fetchStoreMapByID(@PathVariable int ticketmap_no)
 			throws ServletException, IOException {
-		logger.info("<<< url 스토어 디데일 - fetchSampleByID >>>");
-		System.out.println("itemCode : " + itemCode);
+		logger.info("<<< url 스토어 디데일 - fetchStoreMapByID >>>");
+		System.out.println("ticketmap_no : " + ticketmap_no);
 		
 		
-		return service.findByIdMap(itemCode);
+		return service.findByIdMap(ticketmap_no);
 	}
 	
 	// 스토어 수정
-	@PutMapping("/EditStoreMap_Map/{itemCode}") // @RequestBody 누락시 부적합한 열 유형 뜸  //★gift_num???????
-	   public Map<String, Object> storeUpdate(@PathVariable int itemCode, @RequestBody StoreMapDTO dto) 
+	@PutMapping("/EditStore_Map/{ticketmap_no}") // @RequestBody 누락시 부적합한 열 유형 뜸  //★gift_num???????
+	   public Map<String, Object> storeUpdateMap(@PathVariable int ticketmap_no, @RequestBody StoreMapDTO dto) 
 	         throws ServletException, IOException{
 	      logger.info("<<< url - storeUpdate >>>");
 	      
@@ -107,7 +105,7 @@ public class StoreMapController {
 	      Map<String, Object> map  = new HashMap<String, Object>();
 	      
 	      try {
-	    	 dto.setItem_code(itemCode);
+	    	 dto.setItem_code(ticketmap_no);
 	         service.updateStoreMap(dto);
 	            resultCode = "200";
 	            resultMsg = "storeUpdate success";
@@ -127,8 +125,8 @@ public class StoreMapController {
     
     
 	// 스토어 삭제
-	@DeleteMapping("/DeleteStoreMap_Map/{itemCode}") 
-	   public Map<String, Object> sampleDelete(@PathVariable int itemCode) 
+	@DeleteMapping("/DeleteStore_Map/{ticketmap_no}") 
+	   public Map<String, Object> sampleDeleteMap(@PathVariable int ticketmap_no) 
 		         throws ServletException, IOException{
 		      logger.info("<<< url - sampleUpdate >>>");
 		      
@@ -138,7 +136,7 @@ public class StoreMapController {
 		      Map<String, Object> map  = new HashMap<String, Object>();
 		      
 		      try {
-		          service.deleteStoreMap(itemCode);
+		          service.deleteStoreMap(ticketmap_no);
 
 		            resultCode = "200";
 		            resultMsg = "sampleDelete success";

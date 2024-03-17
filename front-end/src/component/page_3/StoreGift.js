@@ -11,6 +11,8 @@ class StoreGift extends Component {
       koreanLength: 0,
       englishLength: 0,
       recipientNumber: "", //선물 받는 분 번호 상태 값
+      isSenderEmpty: false, // 선물 하는 분 입력 여부 상태 값
+      isMessageEmpty: false, // 메세지 입력 여부 상태 값
     };
   }
 
@@ -63,7 +65,9 @@ class StoreGift extends Component {
   };
 
   render() {
+    
     return (
+      
       <div id="layerCouponGift" className="layer_coupon_gift">
         <strong className={`hidden ${style.hidden}`}>레이어 팝업 시작</strong>
 

@@ -24,7 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import springBoot.ict.movie.dto.ConsultDTO;
 import springBoot.ict.movie.dto.MovieDTO;
+import springBoot.ict.movie.dto.NextMovieDTO;
+import springBoot.ict.movie.dto.NowMovieDTO;
 import springBoot.ict.movie.service.MovieServiceImpl;
+import springBoot.ict.movie.service.NextMovieServiceImpl;
+import springBoot.ict.movie.service.NowMovieServiceImpl;
 
 
 @CrossOrigin(origins="**", maxAge=3600)
@@ -34,22 +38,52 @@ public class MovieController {
 	@Autowired
 	private MovieServiceImpl service;
 	
+	@Autowired
+	private NowMovieServiceImpl service1;
+	
+	@Autowired
+	private NextMovieServiceImpl service2;
+	
 	private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
 	
-	// 영화 list
-    @GetMapping()
-    public List<MovieDTO> MovieList(HttpServletRequest req,HttpServletResponse res,Model model)
-            throws ServletException, IOException {
-        logger.info("<<< url -> MovieList");
-        List<MovieDTO> list = service.listMovie();
-        model.addAttribute("MovieList", list);
-        System.out.println("MovieList : " + list);
-        
-        return list;
-    } 
+	// 영화 홈 list
+	@GetMapping("/movieList")
+	public List<MovieDTO> MovieList(HttpServletRequest req,HttpServletResponse res,Model model)
+	        throws ServletException, IOException {
+	    logger.info("<<< url -> MovieList");
+	    List<MovieDTO> list = service.listMovie();
+	    model.addAttribute("MovieList", list);
+	    System.out.println("MovieList : " + list);
+	    
+	    return list;
+	} 
+
+	// 영화 현재 list
+	@GetMapping("/nowMovieList")
+	public List<NowMovieDTO> NowMovieList(HttpServletRequest req,HttpServletResponse res,Model model)
+	        throws ServletException, IOException {
+	    logger.info("<<< url -> NowMovieList");
+	    List<NowMovieDTO> list = service1.listMovie();
+	    model.addAttribute("NowMovieList", list);
+	    System.out.println("NowMovieList : " + list);
+	    
+	    return list;
+	} 
+	
+	// 영화 현재 list
+		@GetMapping("/nextMovieList")
+		public List<NextMovieDTO> nextMovieList(HttpServletRequest req,HttpServletResponse res,Model model)
+	        throws ServletException, IOException {
+	    logger.info("<<< url -> NextMovieList");
+	    List<NextMovieDTO> list = service2.listMovie();
+	    model.addAttribute("NextMovieList", list);
+	    System.out.println("NextMovieList : " + list);
+	    
+	    return list;
+	} 
 	
  // 영화 추가
-    @PostMapping("/save")
+    @PostMapping("/saveMovie")
     public Map<String, Object> MovieInsert(@RequestBody MovieDTO dto)
             throws ServletException, IOException {
         logger.info("<<< url - MovieInsert >>>");
