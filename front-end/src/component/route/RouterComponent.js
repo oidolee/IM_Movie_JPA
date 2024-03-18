@@ -25,8 +25,7 @@ import Parking from '../page_2/Parking';
 //page_3
 import Page3 from '../page_3/Page3';
 import StoreDetail from '../page_3/StoreDetail';
-import StoreTiketMap from '../page_3/StoreTiketMap';
-
+import StoreTicket from '../page_3/StoreTicket';
 
 
 //page_4
@@ -45,7 +44,6 @@ import movieDetail from '../page_5/movie/movieDetail';
 import movieUpdate from '../../admin/page_5/Admin_Update_Add';
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
-import arte from '../page_5/movie/arte';
 import moviePlace from '../page_5/theater/moviePlace';
 import FAQ from '../page_5/board/FAQ';
 import NOTICE from '../page_5/board/NOTICE';
@@ -100,7 +98,7 @@ const AppRouter = () => {
                             <Route>
                                 <Route path="/Page3" exact={true} component={Page3} />
                                 <Route path="/page_3/EditStore_Admin/" exact={true} component={StoreDetail} />
-                                <Route path="/page_3/StoreTiketMap/" exact={true} component={StoreTiketMap} />
+                                <Route path="/page_3/StoreTicket/" exact={true} component={StoreTicket} />
                             </Route>
 
                             {/* page_4 */}
@@ -127,6 +125,7 @@ const AppRouter = () => {
                                 <Route path="/NOTICE" exact={true} component={NOTICE} />
                                 <Route path="/NOTICE2" exact={true} component={NOTICE2} />
                                 <Route path="/groupform" exact={true} component={groupform} />
+                                
                             
                             </Route>
 

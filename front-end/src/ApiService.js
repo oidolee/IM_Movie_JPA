@@ -15,6 +15,7 @@ class ApiService {
         console.log("updateSeat 호출", inputData);
         return axios.put(url + "/page_1/SeatUpdate" + "/" + inputData.st_id, inputData);
     }
+    
     // --------------------------------------------Seat 끝--------------------------------------------
     
 
@@ -50,6 +51,8 @@ class ApiService {
     }
     // --------------------------------------------Discount 끝--------------------------------------------
 
+
+    // --------------------------------------------Store 시작----------------------------------------------
     // page3 list
     ListStore_Admin() {
          console.log('storeList 호출');
@@ -79,6 +82,22 @@ class ApiService {
         console.log('DeleteStore_Admin 호출!!', sampleID);
         return axios.delete(url + "/page_3/DeleteStore_Admin/" + sampleID);
     }
+
+    // Store Map 시작
+    // Store Map list
+    ListStore_Map() {
+        console.log('storeList 호출');
+        return axios.get(url + "/page_3/EditStore_Admin/ListStore_Map");
+   }
+
+       // page3 1건 select
+    fetchStoreMapByID(sampleID) {
+        console.log('page3 fetchSampleByID 호출!!', sampleID);
+        return axios.get(url + "/page_3/EditStore_Admin" + "/EditStore_Map/" +  sampleID ); // 주의 : "/"+ 
+    }
+
+    // Store Map 끝
+    // --------------------------------------------Store 끝----------------------------------------------
 
     // page_4
     
@@ -228,9 +247,24 @@ class ApiService {
     }
 
     // page_5
-    //영화 목록 리스트
+    //영화 홈 목록 리스트
     fetchMovie(){
-        return axios.get(url + '/page_5'); 
+        console.log('movieList() 호출!!')
+        return axios.get(url + '/page_5/movieList'); 
+    }
+
+     // page_5
+    //영화 현재목록 리스트
+    fetchMovie1(){
+        console.log('nowMovieList() 호출!!')
+        return axios.get(url + '/page_5/nowMovieList'); 
+    }
+
+    // page_5
+    //영화 현재목록 리스트
+    fetchMovie2(){
+        console.log('nextMovieList() 호출!!')
+        return axios.get(url + '/page_5/nextMovieList'); 
     }
 
     // 관리자
