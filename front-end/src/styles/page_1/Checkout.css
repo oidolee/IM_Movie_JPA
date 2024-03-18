@@ -1,29 +1,47 @@
-.paymentMethod {
+.Checkout {
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -1000px;
+  margin-left: 97px;
+}
+
+.Checkout .Checkout_content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  max-width: 500px; /* Checkout 컴포넌트의 최대 너비 */
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  border: 1px solid #bbb;
+}
+
+.Checkout .paymentMethod_Main {
+  background-color: white;
+}
+
+.Checkout .paymentMethod {
   width: 150px;
   height: 50px;
   background-color: white;
   border: 1px solid #bbb;
-  margin-top: 10px;
   font-size: 13px;
-  margin-left: 300px;
-  margin-bottom: 10px;
+  margin: 10px 5px 30px 5px;
 }
 
-.paymentMethod:hover {
+.Checkout .paymentMethod:hover {
   background-color: #FF243E;
   color: white;
   border: 1px solid #FF243E;
 }
 
-.paymentMethod_Main {
-  background-color: white;
-}
-
-.paymentMethod_Main input[type="checkbox"] {
+.Checkout .paymentMethod_Main input[type="checkbox"] {
   margin-left: 20px;
 }
 
-.paymentDiscount {
+.Checkout .paymentDiscount {
   margin-left: 10px;
   font-size: 14px;
 }
