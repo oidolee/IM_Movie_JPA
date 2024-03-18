@@ -46,9 +46,9 @@ function MovieMain() {
     },
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (id) => {
     // 버튼을 클릭하면 '/detail' 경로로 이동합니다.
-    history.push("/movieDetail");
+    history.push("/movieDetail/"+id);
   };
 
   const [movies, setMovies] = useState([]);
@@ -73,7 +73,7 @@ function MovieMain() {
     2: [],
     3: [],
   };
-
+  console.log(categoryMap)
   movies.forEach((movie) => {
     categoryMap[movie.mov_category]?.push(movie);
   });
@@ -143,7 +143,7 @@ function MovieMain() {
                 <Card.Body>
                   <Card.Title>{movie.mov_title}</Card.Title>
                   <Card.Text>{movie.mov_time}분</Card.Text>
-                  <Button className={`primary_button ${style.primary_button}`} onClick={handleButtonClick}>상세정보</Button>
+                  <Button className={`primary_button ${style.primary_button}`} onClick={()=>handleButtonClick(movie.mov_id)}>상세정보</Button>
                 </Card.Body>
               </Card>
             ))}
@@ -168,7 +168,7 @@ function MovieMain() {
                 <Card.Body>
                   <Card.Title>{movie.mov_title}</Card.Title>
                   <Card.Text>{movie.mov_time}분</Card.Text>
-                  <Button className={`primary_button ${style.primary_button}`} onClick={handleButtonClick}>상세정보</Button>
+                  <Button className={`primary_button ${style.primary_button}`} onClick={()=>handleButtonClick(movie.mov_id)}>상세정보</Button>
                 </Card.Body>
               </Card>
             ))}
@@ -193,7 +193,7 @@ function MovieMain() {
                 <Card.Body>
                   <Card.Title>{movie.mov_title}</Card.Title>
                   <Card.Text>{movie.mov_time}분</Card.Text>
-                  <Button className={`primary_button ${style.primary_button}`} onClick={handleButtonClick}>상세정보</Button>
+                  <Button className={`primary_button ${style.primary_button}`} onClick={()=>handleButtonClick(movie.mov_id)}>상세정보</Button>
                 </Card.Body>
               </Card>
             ))}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import style from "../../../styles/page_5/movieDetail.module.css";
 import { useCookies } from 'react-cookie'; // 로그인 확인용
+import { useParams } from 'react-router-dom';
 
 // 이미지
 import movie1 from "../../../assets/page_5/movie1.jpg";
@@ -20,6 +21,15 @@ function MovieDetail() {
   const [selectedValue, setSelectedValue] = useState(1); // 선택된 값
   const [selectedTrailer, setSelectedTrailer] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(['idCheck']); // 로그인 확인용
+  const [selectedStars, setSelectedStars] = useState(5); //관람평 별값
+  const { movie_id } = useParams(); // useParams 훅을 사용하여 URL의 id 값을 가져옴
+
+  //관람평 등록 값
+  const [reviewContents, setReviewContents] = useState('');
+
+
+  // id 값 사용 예시
+  console.log("Movie ID:", movie_id);
 
   const handleTrailerClick = (trailerUrl) => {
     setSelectedTrailer(trailerUrl);
@@ -37,14 +47,29 @@ function MovieDetail() {
   };
 
 
-  const [selectedStars, setSelectedStars] = useState(5);
-
   // 클릭한 별수에 따라 별 이미지를 조절합니다.
   const handleStarClick = (starNumber) => {
     setSelectedStars(starNumber);
   };
 
-  console.log(selectedStars)
+  const handleSubmit = () => {
+    if (!reviewContents.trim()) {
+      // 후기 내용이 비어 있을 때 처리할 내용을 여기에 작성합니다.
+      alert('후기 내용을 입력해주세요.');
+      return;
+    }
+    
+    let inputData = {
+      movie_id: movie_id,
+      review_contents: reviewContents,
+      review_star: selectedStars
+    }
+    console.log(inputData)
+    console.log("관람평 등록")
+    // alert("관람평 등록")
+  }
+
+
   return (
     <>
       <div className={`detail_movie_wrap ${style.detail_movie_wrap}`}>
@@ -184,7 +209,7 @@ function MovieDetail() {
 
 
                       <div className={`star_img_box ${style.star_img_box}`}>
-                         <img src={`https://www.lottecinema.co.kr/NLCHS/Content/images/icon/icon_reviewcharacterbig_${selectedStars}.svg`} alt={`star${selectedStars}`} />
+                        <img src={`https://www.lottecinema.co.kr/NLCHS/Content/images/icon/icon_reviewcharacterbig_${selectedStars}.svg`} alt={`star${selectedStars}`} />
                       </div>
                     </div>
                   )}
@@ -193,22 +218,29 @@ function MovieDetail() {
                   <div className="container mt-5">
                     <div className="row">
                       <div className="col-md-6 offset-md-3 d-flex">
-                        <textarea className="form-control mr-2" rows="3" placeholder="내용을 입력하세요"></textarea>
-                        <button className="btn btn-primary" style={{ minWidth: '80px' }}>전송</button>
+                        <textarea
+                          name="review_contents"
+                          className="form-control mr-2"
+                          rows="3"
+                          placeholder="내용을 입력하세요"
+                          value={reviewContents}
+                          onChange={(e) => setReviewContents(e.target.value)}
+                        ></textarea>
+                        <button className="btn btn-primary" style={{ minWidth: '80px' }} onClick={() => handleSubmit()}>등록</button>
 
                       </div>
                     </div>
                   </div>
 
                 </div>
-              
+
               )}
             </div>
           </div>
-
+          {/* 관람평 출력 부분 */}
           {selectedValue === 2 && (
             <div className={`movie_review_list ${style.movie_review_list}`}>
-                <ul>
+              <ul>
                 <li style={{ display: 'flex', alignItems: 'center' }}>
                   <img src="https://www.lottecinema.co.kr/NLCHS/Content/images/temp/temp_reviewcharacter_03.jpg" alt="image_by_rate" style={{ marginRight: '10px', width: '50px', height: '50px' }} />
                   <div className={`movie_review_content ${style.movie_review_content}`}>
@@ -237,11 +269,11 @@ function MovieDetail() {
                   </div>
                 </li>
 
-                </ul>
+              </ul>
             </div>
 
           )}
-          
+
         </div>
 
         <div className={`detail_down3 ${style.detail_down3}`}>
