@@ -4,6 +4,16 @@ class ActionProvider {
         this.createChatBotMessage = createChatBotMessage;
         this.setState = setStateFunc;
     }
+
+
+    showTikeckPage = () => {
+        const message = this.createChatBotMessage("영화예매는 여기 있습니다.");
+        this.addMessageTostate(message);
+    }
+
+
+
+
     // set1 start
     greet = () =>{
         const message = this.createChatBotMessage("Hello friend");
@@ -19,17 +29,6 @@ class ActionProvider {
 
     // set1 end
 
-    //Quiz
-    handleJavascriptQuiz = () => {
-        const message = this.createChatBotMessage(
-          "Fantastic. Here is your quiz. Good luck!",
-          {
-            widget: "javascriptQuiz",
-          }
-        );
-    
-        this.addMessageToState(message);
-    };
 
 
 
@@ -52,27 +51,59 @@ class ActionProvider {
         this.setChatbotMessage(message);
     }
 
+    recommandMovies = () => {
+        const message = this.createChatBotMessage("추천영화 알려줍니다.")
+        this.setChatbotMessage(message);
+    }
+
 
     setChatbotMessage = (message) =>{
         this.setState(state => ({ ...state, messages:[...state.messages, message]}))
     }
+
+
         
+    // }
+
+    //클릭시 나오게 
+    tickect_1_answer = () => {
+        const message = this.createChatBotMessage(
+            "영화 파묘를 추천해 드립니다!",
+            {
+                widget: "tickect_1_2_Q", // 위젯 설정
+            }
+        );
+    
+        this.addMessageToState(message);
+    };
+    
+    addMessageToState = (message) => {
+        this.setState((prevState) => ({
+            ...prevState,
+            messages: [...prevState.messages, message],
+        }));
+    };
+    
 
 
-//     constructor(
-//      createChatBotMessage,
-//      setStateFunc,
-//      createClientMessage,
-//      stateRef,
-//      createCustomMessage,
-//      ...rest
-//    ) {
-//      this.createChatBotMessage = createChatBotMessage;
-//      this.setState = setStateFunc;
-//      this.createClientMessage = createClientMessage;
-//      this.stateRef = stateRef;
-//      this.createCustomMessage = createCustomMessage;
-//    }
+    //클릭시 나오게 
+    handlechooseTickeck = () => {
+        const message = this.createChatBotMessage(
+            "어떤 장를 좋아하세요?",
+            {
+                widget: "chooseTickeck",
+            }
+        );
+
+        this.addMessageToState(message);
+        };
+
+        addMessageToState = (message) => {
+        this.setState((prevState) => ({
+            ...prevState,
+            messages: [...prevState.messages, message],
+        }));
+    };
  }
  
  export default ActionProvider;

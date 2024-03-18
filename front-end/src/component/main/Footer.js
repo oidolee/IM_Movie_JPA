@@ -1,10 +1,49 @@
 import React, {Component} from 'react';
 import style from  '../../styles/main/Footer.css'
 import logo from '../../assets/main/IM_Logo.png'
+import styled from 'styled-components';
 class Footer extends Component{
     render(){
+        
+    // StyledBoxAndImage 컴포넌트를 정의합니다.
+    const StyledBoxAndImage = styled.div`
+        /* StyledBoxAndImage 컴포넌트의 스타일을 정의합니다. */
+        width: 50px;
+        height: 50px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        padding: 10px 20px;
+        border-radius: 50%;
+        cursor: pointer;
+        position: fixed;
+        bottom: 10px; /* 화면 제일 아래에 고정합니다. */
+        right: 20px; /* 화면 오른쪽에 고정합니다. */
+        color: red; /* 글자색을 빨간색으로 설정합니다. */
+        font-size: 20px; /* 글자 크기를 20px로 설정합니다. */
+        z-index:999
+    `;
+
+    const [isOn, setIsOn] = useState(false);
+
+ 
+        const togleChatBot = () => {
+            alert("1");
+            const chatContainer = document.querySelector('.react-chatbot-kit-chat-container');
+            if (chatContainer) {
+                chatContainer.style.right = '20px';
+            }
+        }
+    
+
         return(
             <div className={`footer_con ${style.footer_con}`}>
+                {/* StyledBoxAndImage 컴포넌트를 사용하여 박스와 이미지 스타일을 적용합니다. */}
+                <StyledBoxAndImage
+                className={isOn ? 'chat_toggle_on' : ''}
+                onClick={toggleClass}
+                >
+                    <div >?</div>
+                </StyledBoxAndImage>
                 <div className='footer_box'>
                     <div className='footer_son footer_son1'>
                         <div className={`Footer_logo ${style.Footer_logo}`}>

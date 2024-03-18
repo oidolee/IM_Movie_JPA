@@ -14,9 +14,12 @@ class MessageParser {
         this.actionProvider.greet();
       }
 
-      if (lowercase.includes("오늘의 영화는?")) {
-        console.log("안녕 입력!");
+      if (lowercase.includes("영화")) {
         this.actionProvider.todayMovies();
+      }
+
+      if (lowercase.includes("추천")) {
+        this.actionProvider.recommandMovies();
       }
 
      //   actionProvider 답변 컨트롤 가능
@@ -29,9 +32,9 @@ class MessageParser {
         this.actionProvider.todosHandler();
       }
 
-    //   if (lowercase.includes("javascrpit") || lowercase.includes("js")) {
-    //     this.actionProvider.handleJavascriptQuiz();
-    //   }
+      if (lowercase.includes("javascript") || lowercase.includes("js")) {
+        this.actionProvider.handlechooseTickeck();
+      }
       
     }
   }

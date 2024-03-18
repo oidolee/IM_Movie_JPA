@@ -35,7 +35,6 @@ import StoreDetail from '../page_3/StoreDetail';
 import StoreTicket from '../page_3/StoreTicket';
 import Reservation_Payment_Store from '../page_3/Reservation_Payment_Store';
 
-
 //page_4
 import listCustomer from '../page_4/listCustomer';
 import singupComponent from '../page_4/singupComponent';
@@ -86,6 +85,7 @@ const AppRouter = () => {
                     <div style={style}>
                         <Route>
                         <Chatbot
+                            style={{ width: '500px' }}
                             config={config}
                             messageParser={MessageParser}
                             actionProvider={ActionProvider}
