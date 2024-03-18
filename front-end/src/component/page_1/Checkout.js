@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { loadPaymentWidget } from "@tosspayments/payment-widget-sdk";
 import { nanoid } from "nanoid";
 
-import "../styles/page_1/Checkout.css";
+import "../../styles/page_1/Checkout.css";
 
 const clientKey = "test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq";
 const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
