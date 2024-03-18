@@ -10,5 +10,5 @@ public interface NowMovieRepository extends JpaRepository<NowMovieDTO, Integer> 
 
 
 	@Query("SELECT u FROM NowMovieDTO u WHERE u.now_id=:now_id")
-	NowMovieDTO MovieDetailList(@Param("now_id") int now_id);
+	NowMovieDTO NowDetailList(@Param("now_id") int now_id);
 }
