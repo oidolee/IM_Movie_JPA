@@ -7,11 +7,11 @@ import { CookiesProvider } from 'react-cookie'; //로그인쿠키
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  //<React.StrictMode> // 렌더링 두번 방지
     <CookiesProvider>
       <App />
     </CookiesProvider>
-  </React.StrictMode>
+  //</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
