@@ -15,6 +15,7 @@ class ApiService {
         console.log("updateSeat 호출", inputData);
         return axios.put(url + "/page_1/SeatUpdate" + "/" + inputData.st_id, inputData);
     }
+    
     // --------------------------------------------Seat 끝--------------------------------------------
     
 
@@ -246,9 +247,24 @@ class ApiService {
     }
 
     // page_5
-    //영화 목록 리스트
+    //영화 홈 목록 리스트
     fetchMovie(){
-        return axios.get(url + '/page_5'); 
+        console.log('movieList() 호출!!')
+        return axios.get(url + '/page_5/movieList'); 
+    }
+
+     // page_5
+    //영화 현재목록 리스트
+    fetchMovie1(){
+        console.log('nowMovieList() 호출!!')
+        return axios.get(url + '/page_5/nowMovieList'); 
+    }
+
+    // page_5
+    //영화 현재목록 리스트
+    fetchMovie2(){
+        console.log('nextMovieList() 호출!!')
+        return axios.get(url + '/page_5/nextMovieList'); 
     }
 
     // 관리자
