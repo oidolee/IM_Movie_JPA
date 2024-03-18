@@ -116,7 +116,7 @@ public class MovieController {
 		return list;
 	}
 
-	 // 영화 추가
+	 // 영화 홈  추가
     @PostMapping("/UpdateInsert")
     public Map<String, Object> UpdateInsert(@RequestBody MovieDTO dto)
             throws ServletException, IOException {
@@ -244,12 +244,7 @@ public class MovieController {
 				service.UpdateDelete(mov_id);			
 				resultCode = "200";
 				resultMsg = "UpdateInsert Success";
-				
-//				if(deleteCnt == 1) {
-//					resultCode = "200";
-//					resultMsg = "DiscountInsert Success";
-//				}
-			} 
+			}
 			
 			catch(Exception e) {
 				
@@ -264,6 +259,161 @@ public class MovieController {
 			
 			return map;
 		}
+		
+		
+		// 현재목록
+		@GetMapping("/NowList") 
+		public List<NowMovieDTO> NowList(Model model) 
+			throws ServletException, IOException {
+			
+			logger.info("url - UpdateList");
+			
+			List<NowMovieDTO> list = service1.NowList();
+			model.addAttribute("list", list);
+			
+			return list;
+		}
+
+		 // 현재영화 추가
+	    @PostMapping("/NowInsert")
+	    public Map<String, Object> NowInsert(@RequestBody NowMovieDTO dto)
+	            throws ServletException, IOException {
+	        logger.info("<<< url - NowInsert >>>");
+	        
+	        System.out.println("<<< url - NowInsert >>>");
+	      
+	        System.out.println(dto);
+	        
+	        
+	        String resultCode = "";
+	        String resultMsg = "";
+
+	        Map<String, Object> map = new HashMap<String, Object>();
+
+	        try {
+	        	
+	            service1.NowInsert(dto);
+	            resultCode = "200";
+	            resultMsg = "NowInsert Success";
+	        } catch(Exception e) {
+	            resultCode = "400";
+	            resultMsg = e.getMessage();
+	            e.printStackTrace();
+	        }
+	        map.put("resultCode", resultCode);
+	        map.put("resultMsg", resultMsg);
+	        map.put("dto", dto);
+
+
+	        return map;
+	    }
+		  
+		 // 현재영화 상세페이지
+		    @GetMapping("/NowDetailList/{now_id}") 
+		    public Map<String, Object> NowDetailList(@PathVariable("now_id") int now_id) 
+		            throws ServletException, IOException {
+		                
+		        logger.info("url - NowDetailList");
+		        
+		        System.out.println(now_id);
+		        String resultCode = "";
+		        String resultMsg = "";
+		        NowMovieDTO dto = null;
+		        
+		        Map<String, Object> map = new HashMap<String, Object>();
+		        
+		        try {
+		            
+		            dto = service1.getNowDetail(now_id);
+		            resultCode = "200";
+		            resultMsg = "Success";
+		        } 
+		        
+		        catch(Exception e) {
+		            
+		            resultCode = "400";
+		            resultMsg = e.getMessage();
+		            e.printStackTrace();
+		        }
+		        
+		        map.put("resultCode", resultCode);
+		        map.put("resultMsg", resultMsg);
+		        map.put("mov_id", now_id);
+		        map.put("dto", dto);
+		        
+		        return map;
+		    }
+		    
+		 // 현재수정
+			@PutMapping("/NowUpdate/{now_id}") 
+			public Map<String, Object> NowUpdate(@PathVariable("now_id") int now_id, @RequestBody NowMovieDTO dto) 
+				throws ServletException, IOException {
+				
+				logger.info("url - NowUpdate");
+				
+				System.out.println(dto);
+				
+				String resultCode = "";
+				String resultMsg = "";
+				
+				Map<String, Object> map = new HashMap<String, Object>();
+				
+				try {
+					
+					service1.NowUpdate(dto);
+					
+					resultCode = "200";
+					resultMsg = "NowInsert Success";			
+
+					
+				} catch(Exception e) {
+					
+					resultCode = "400";
+					resultMsg = e.getMessage();
+					e.printStackTrace();
+				}
+				
+				map.put("resultCode", resultCode);
+				map.put("resultMsg", resultMsg);
+				map.put("dto", dto);
+				
+				return map;
+			}
+			
+			// 현재삭제
+			@DeleteMapping("/NowDelete/{now_id}") 
+			public Map<String, Object> NowDelete(@PathVariable("now_id") int now_id) 
+				throws ServletException, IOException {
+				
+				logger.info("url - NowDelete");
+				
+				System.out.println(now_id);
+				String resultCode = "";
+				String resultMsg = "";
+				
+				Map<String, Object> map = new HashMap<String, Object>();
+				
+				try {
+					
+					service1.NowDelete(now_id);			
+					resultCode = "200";
+					resultMsg = "NowInsert Success";
+					
+				} 
+				
+				catch(Exception e) {
+					
+					resultCode = "400";
+					resultMsg = e.getMessage();
+					e.printStackTrace();
+				}
+				
+				map.put("resultCode", resultCode);
+				map.put("resultMsg", resultMsg);
+				map.put("now_id", now_id);
+				
+				return map;
+			}
 		
 	 		
         

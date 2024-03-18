@@ -5,15 +5,15 @@ import Res_img15 from "../../assets/page_1/15.jpg";
 import ApiService from "../../ApiService";
 import { useHistory } from "react-router-dom";
 
-const QuantityCounter = ({ onQuantityChange }) => {
+const QuantityCounter = ({ onQuantityChange, totalQuantity }) => {
   const [quantity, setQuantity] = useState(0);
 
   const handleIncrement = () => {
-    if (quantity <= 7) {
+    if (quantity < 9) {
       const newQuantity = quantity + 1;
       setQuantity(newQuantity);
       onQuantityChange(newQuantity);
-    }
+    } 
   };
 
   const handleDecrement = () => {
@@ -21,8 +21,16 @@ const QuantityCounter = ({ onQuantityChange }) => {
       const newQuantity = quantity - 1;
       setQuantity(newQuantity);
       onQuantityChange(newQuantity);
+    } else {
+      setQuantity(0);
     }
   };
+
+  useEffect(() => {
+    if (totalQuantity > 8 || quantity > 8) {
+      setQuantity(0);
+    } 
+  }, [totalQuantity]);
 
   return (
     <div>
@@ -71,20 +79,20 @@ const Reservation_Seat = () => {
       });
   };
 
-  // 각 수량을 추적하기 위한 state 추가
-useEffect(() => {
-  // 수량이 변경될 때마다 총 수량을 업데이트
-  const newTotalQuantity =
-    adultQuantity + teenQuantity + childQuantity + disabledQuantity;
-  
-  if (newTotalQuantity <= 8) {
-    setTotalQuantity(newTotalQuantity);
-  } else {
-    // 총 수량이 8을 초과할 경우, 알림 메시지 출력 및 각 수량 상태 초기화
-    alert("인원은 최대 8명까지 가능합니다.");
-    quantity(0);
-  }
-}, [adultQuantity, teenQuantity, childQuantity, disabledQuantity]);
+  useEffect(() => {
+    const newTotalQuantity =
+      adultQuantity + teenQuantity + childQuantity + disabledQuantity;
+
+    if (newTotalQuantity <= 8) {
+      setTotalQuantity(newTotalQuantity);
+    } else {
+      alert("인원은 최대 8명까지 가능합니다.");
+      setAdultQuantity(0);
+      setTeenQuantity(0);
+      setChildQuantity(0);
+      setDisabledQuantity(0);
+    }
+  }, [adultQuantity, teenQuantity, childQuantity, disabledQuantity]);
 
   let parkingLot = {};
 
@@ -115,20 +123,24 @@ useEffect(() => {
     }
   };
 
-  const handleChange = (canSelectSeat, isChecked, seatNumber) => {
-    if (canSelectSeat) {
+  const handleChange = (e) => {
+    const { canSelectSeat } = e.target.dataset;
+    const isChecked = checked;
+    const seatNumber = e.target.innerText;
+  
+    if (canSelectSeat === "true") {
       setChecked(!isChecked);
     } else {
       console.log("수량 선택 필요 - 좌석 선택 불가");
       alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
     }
-  
+
     const squareClass = canSelectSeat
       ? isChecked
         ? "square checked"
         : "square"
       : "square disabled";
-  
+
     return (
       <div
         className={squareClass}
@@ -211,13 +223,20 @@ useEffect(() => {
       });
   };
 
+  const handleMovie = () => {
+    const confirmResult = window.confirm("지금까지 입력된 정보가 모두 사라집니다.");
+    if (confirmResult) {
+      history.push("/page_1/Reservation_Movie");
+    }
+  }
+
   return (
     <div className={`Res_seat ${style.Res_seat}`}>
       <div className="Res_seat_content">
         <div className="Res_seat1">
           <ul>
-            <li className="step" id="step2">
-              <a href="#Res_step01">
+            <li className="step" id="step2" onClick={handleMovie}>
+              <a href="#">
                 <strong>
                   <span>
                     01
@@ -240,7 +259,7 @@ useEffect(() => {
               </a>
             </li>
             <li className="step" id="step1">
-              <a href="#Res_step02">
+              <a href="#">
                 <strong>
                   <span>
                     02
@@ -251,18 +270,19 @@ useEffect(() => {
                 <div className="step_content">
                   <dl>
                     <dt>인원</dt>
-                    <dd style={{ textAlign: "left", marginLeft: "15px" }}>
-                      성인: {adultQuantity}명<br />
+                    <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                      성인: {adultQuantity}명, 
                       청소년: {teenQuantity}명<br />
-                      경로: {childQuantity}명<br />
-                      장애인: {disabledQuantity}명
+                      경로: {childQuantity}명, 
+                      장애인: {disabledQuantity}명<br />
+                      총: {totalQuantity}명
                     </dd>
                     <dt>좌석</dt>
-                    <dd style={{ textAlign: "left", marginLeft: "15px" }}>
+                    <dd style={{ textAlign: "left", marginLeft: "12px" }}>
                       {selectedSeats.map((seat, index) => (
                         <span key={index}>
                           {seat}
-                          <br />
+                          {index % 2 === 1 ? <br /> : ", "}
                         </span>
                       ))}
                     </dd>
@@ -271,7 +291,7 @@ useEffect(() => {
               </a>
             </li>
             <li className="step">
-              <a href="#Res_step03">
+              <a href="#">
                 <strong>
                   <span>
                     03
@@ -292,7 +312,7 @@ useEffect(() => {
               </a>
             </li>
             <li className="step">
-              <a href="#Res_step04">
+              <a href="#">
                 <strong>
                   <span>
                     04
@@ -330,7 +350,11 @@ useEffect(() => {
                           <QuantityCounter
                             onQuantityChange={(newQuantity) => {
                               setAdultQuantity(newQuantity);
+                              setTotalQuantity(
+                                newQuantity + teenQuantity + childQuantity + disabledQuantity
+                              ); // 총 수량 업데이트
                             }}
+                            totalQuantity={totalQuantity}
                           />
                         </li>
                         <li>
@@ -338,7 +362,11 @@ useEffect(() => {
                           <QuantityCounter
                             onQuantityChange={(newQuantity) => {
                               setTeenQuantity(newQuantity);
+                              setTotalQuantity(
+                                adultQuantity + newQuantity + childQuantity + disabledQuantity
+                              ); // 총 수량 업데이트
                             }}
+                            totalQuantity={totalQuantity}
                           />
                         </li>
                         <li>
@@ -346,7 +374,11 @@ useEffect(() => {
                           <QuantityCounter
                             onQuantityChange={(newQuantity) => {
                               setChildQuantity(newQuantity);
+                              setTotalQuantity(
+                                adultQuantity + teenQuantity + newQuantity + disabledQuantity
+                              ); // 총 수량 업데이트
                             }}
+                            totalQuantity={totalQuantity}
                           />
                         </li>
                         <li>
@@ -354,11 +386,15 @@ useEffect(() => {
                           <QuantityCounter
                             onQuantityChange={(newQuantity) => {
                               setDisabledQuantity(newQuantity);
+                              setTotalQuantity(
+                                adultQuantity + teenQuantity + childQuantity + newQuantity
+                              ); // 총 수량 업데이트
                             }}
+                            totalQuantity={totalQuantity}
                           />
                         </li>
                         <li>
-                          <span>총 합계 : {totalQuantity}명</span>
+                          <span>{totalQuantity}명</span>
                         </li>
                       </ul>
                     </div>

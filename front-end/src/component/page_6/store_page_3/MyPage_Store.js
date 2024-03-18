@@ -1,8 +1,8 @@
 
 import React, {Component} from 'react';
 import style from '../../../styles/page_6/Mypage.module.css'
-import Mypage_mid_nav from '../Mypage_mid_nav'
-import MyPage_top from '../MyPage_top'
+import Mypage_mid_nav from '../Mypage_mid_nav.js'
+import MyPage_top from '../MyPage_top.js'
 import MyPage_Store_part from './MyPage_Store_part.js'
 class MyPage_Store extends Component{
     render(){
