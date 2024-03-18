@@ -69,9 +69,9 @@ function MovieMain() {
   };
 
   const categoryMap = {
-    0: [],
     1: [],
     2: [],
+    3: [],
   };
 
   movies.forEach((movie) => {
@@ -137,13 +137,9 @@ function MovieMain() {
           style={{ display: "flex", justifyContent: "center" }}
         >
          
-         {categoryMap[0].slice(0, 5).map((movie, index) => (
+         {categoryMap[1].slice(0, 5).map((movie, index) => (
               <Card key={index} style={{ width: "202px", margin: "0 10px" }}>
-                <Card.Img
-                  variant="top"
-                  src={movie.mov_image}
-                  style={{ width: "200px", height: "auto" }}
-                />
+                <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.mov_image}`} style={{ width: '200px', height: 'auto' }} />
                 <Card.Body>
                   <Card.Title>{movie.mov_title}</Card.Title>
                   <Card.Text>{movie.mov_time}분</Card.Text>
@@ -166,13 +162,9 @@ function MovieMain() {
             className={`now_movie_list ${style.now_movie_list}`}
             style={{ display: "flex", justifyContent: "center" }}
           >
-            {categoryMap[1].slice(0, 5).map((movie, index) => (
+            {categoryMap[2].slice(0, 5).map((movie, index) => (
               <Card key={index} style={{ width: "202px", margin: "0 10px" }}>
-                <Card.Img
-                  variant="top"
-                  src={movie.mov_image}
-                  style={{ width: "200px", height: "auto" }}
-                />
+                 <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.mov_image}`} style={{ width: '200px', height: 'auto' }} />
                 <Card.Body>
                   <Card.Title>{movie.mov_title}</Card.Title>
                   <Card.Text>{movie.mov_time}분</Card.Text>
@@ -195,13 +187,9 @@ function MovieMain() {
           style={{ display: "flex", justifyContent: "center" }}
         >
          
-         {categoryMap[2].slice(0, 5).map((movie, index) => (
+         {categoryMap[3].slice(0, 5).map((movie, index) => (
               <Card key={index} style={{ width: "202px", margin: "0 10px" }}>
-                <Card.Img
-                  variant="top"
-                  src={movie.mov_image}
-                  style={{ width: "200px", height: "auto" }}
-                />
+                 <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.mov_image}`} style={{ width: '200px', height: 'auto' }} />
                 <Card.Body>
                   <Card.Title>{movie.mov_title}</Card.Title>
                   <Card.Text>{movie.mov_time}분</Card.Text>

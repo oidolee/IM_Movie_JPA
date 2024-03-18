@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import ApiService from "../../ApiService";
-import { Typography, TextField, Button, Select, MenuItem } from "@mui/material";
+import { Typography, TextField, Button } from "@mui/material";
 import style from "../../styles/admin/page_5/Admin_Update_Edit.css";
 
-const Admin_Discount_Edit = ({ history }) => {
-  const [discountInfo, setDiscountInfo] = useState({
-    up_Num: "",
-    up_Movie_Img: "",
-    up_Movie_Title: "",
-    up_Movie_Date: "",
-    up_Movie_Time: "",
-    up_Movie_Age: "",
-    up_Movie_Visitor: "",
-    up_Movie_Contents: "",
-    up_Movie_Con: "",
-    up_Movie_Trailer: "",
+const Admin_Update_Edit = ({ history }) => {
+  const [updateInfo, setUpdateInfo] = useState({
+    mov_id: "",
+    mov_image: "",
+    mov_title: "",
+    mov_date: "",
+    mov_time: "",
+    mov_age: "",
+    mov_visitor: "",
+    mov_contents: "",
+    mov_con: "",
+    mov_trailer: "",
+    mov_category: "",
   });
 
   useEffect(() => {
@@ -22,75 +23,76 @@ const Admin_Discount_Edit = ({ history }) => {
   }, []);
 
   const selectLoad = () => {
-    ApiService.selectUpdate(window.localStorage.getItem("up_Num"))
+    ApiService.selectUpdate(window.localStorage.getItem("mov_id"))
       .then((res) => {
         let list = res.data;
 
-        setDiscountInfo({
-          up_Num: list.dto.dc_num,
-          dc_main_title: list.dto.dc_main_title,
-          dc_sub_title: list.dto.dc_sub_title,
-          dc_content: list.dto.dc_content,
-          dc_main_img: list.dto.dc_main_img,
-          dc_show: list.dto.dc_show,
-          dc_sysdate: list.dto.dc_sysdate,
+        setUpdateInfo({
+          mov_id: list.dto.mov_id,
+          mov_image: list.dto.mov_image,
+          mov_title: list.dto.mov_title,
+          mov_date: list.dto.mov_date,
+          mov_time: list.dto.mov_time,
+          mov_age: list.dto.mov_age,
+          mov_visitor: list.dto.mov_visitor,
+          mov_contents: list.dto.mov_contents,
+          mov_con: list.dto.mov_con,
+          mov_trailer: list.dto.mov_trailer,
+          mov_category: list.dto.mov_category,
         });
-        console.log("selectByIdDiscount 성공 : ", res.data);
+        console.log("selectByIdUpdate 성공 : ", res.data);
       })
       .catch((err) => {
-        console.log("selectByIdDiscount 실패 : ", err);
+        console.log("selectByIdUpdate 실패 : ", err);
       });
   };
 
   const onChange = (e) => {
-    setDiscountInfo({
-      ...discountInfo,
+    setUpdateInfo({
+      ...updateInfo,
       [e.target.name]: e.target.value,
     });
   };
 
-  const editDiscount = (e) => {
+  const editUpdate = (e) => {
     e.preventDefault();
 
-    ApiService.editDiscount(discountInfo)
+    ApiService.editUpdate(updateInfo)
       .then((res) => {
-        console.log("editDiscount 성공 : ", res.data);
-        history.push("/admin/page_1/Admin_Discount_List");
+        console.log("editUpdate 성공 : ", res.data);
+        history.push("/admin/page_5/Admin_Update_List");
       })
       .catch((err) => {
-        console.log("editDiscount 실패 : ", err);
+        console.log("editUpdate 실패 : ", err);
       });
   };
 
   return (
-    <div className={`Admin_Discount_Edit ${style.Admin_Discount_Edit}`}>
+    <div className={`Admin_Update_Edit ${style.Admin_Update_Edit}`}>
       <br />
       <br />
-      <Typography variant="h5" className="discountEdit">
-        Discount_Edit
+      <Typography variant="h5" className="updateEdit">
+        Update_Edit
       </Typography>
       <TextField
         required
         id="standard-required"
         variant="standard"
-        label="Dc_Num"
+        label="Movie_Id"
         type="text"
-        name="dc_num"
-        value={discountInfo.dc_num}
-        InputProps={{
-          readOnly: true,
-        }}
-      />
+        name="mov_id"
+        value={updateInfo.mov_id}
+        />
       <br />
 
       <TextField
         required
         id="standard-required"
         variant="standard"
-        label="Main_Title"
+        label="Movie_Img"
         type="text"
-        name="dc_main_title"
-        value={discountInfo.dc_main_title}
+        name="mov_image"
+        value={updateInfo.mov_image}
         onChange={onChange}
       />
       <br />
@@ -99,10 +101,10 @@ const Admin_Discount_Edit = ({ history }) => {
         required
         id="standard-required"
         variant="standard"
-        label="Sub_Title"
+        label="Movie_Title"
         type="text"
-        name="dc_sub_title"
-        value={discountInfo.dc_sub_title}
+        name="mov_title"
+        value={updateInfo.mov_title}
         onChange={onChange}
       />
       <br />
@@ -111,10 +113,10 @@ const Admin_Discount_Edit = ({ history }) => {
         required
         id="standard-required"
         variant="standard"
-        label="Content"
+        label="Movie_Date"
         type="text"
-        name="dc_content"
-        value={discountInfo.dc_content}
+        name="mov_date"
+        value={updateInfo.mov_date}
         onChange={onChange}
       />
       <br />
@@ -123,39 +125,83 @@ const Admin_Discount_Edit = ({ history }) => {
         required
         id="standard-required"
         variant="standard"
-        label="Main_Img"
+        label="Movie_Time"
         type="text"
-        name="dc_main_img"
-        value={discountInfo.dc_main_img}
+        name="mov_time"
+        value={updateInfo.mov_time}
         onChange={onChange}
       />
-      <br />
-
-      <Select
-        required
-        id="standard-required"
-        variant="standard"
-        label="Dc_Show"
-        name="dc_show"
-        value={discountInfo.dc_show}
-        onChange={onChange}
-      >
-        <MenuItem value="n">n</MenuItem>
-        <MenuItem value="y">y</MenuItem>
-      </Select>
       <br />
 
       <TextField
         required
         id="standard-required"
         variant="standard"
-        label="Dc_Sysdate"
+        label="Movie_age"
         type="text"
-        name="dc_sysdate"
-        value={discountInfo.dc_sysdate}
-        InputProps={{
-          readOnly: true,
-        }}
+        name="mov_age"
+        value={updateInfo.mov_age}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Visitor"
+        type="text"
+        name="mov_visitor"
+        value={updateInfo.mov_visitor}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Contents"
+        type="text"
+        name="mov_contents"
+        value={updateInfo.mov_contents}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Con"
+        type="text"
+        name="mov_con"
+        value={updateInfo.mov_con}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Trailer"
+        type="text"
+        name=" mov_trailer"
+        value={updateInfo.mov_trailer}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Category"
+        type="text"
+        name="mov_category"
+        value={updateInfo.mov_category}
+        onChange={onChange}
       />
       <br />
       <br />
@@ -164,12 +210,12 @@ const Admin_Discount_Edit = ({ history }) => {
         className="editBtn"
         variant="contained"
         color="primary"
-        onClick={editDiscount}
+        onClick={editUpdate}
       >
-        edit_Discount
+        edit_Update
       </Button>
     </div>
   );
 };
 
-export default Admin_Discount_Edit;
+export default Admin_Update_Edit;

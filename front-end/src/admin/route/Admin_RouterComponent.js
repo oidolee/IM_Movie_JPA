@@ -20,6 +20,9 @@ import EditStore_Admin from '../page_3/EditStore_Admin';
 import Admin_Update_Add from '../page_5/Admin_Update_Add';
 import Admin_Update_Edit from '../page_5/Admin_Update_Edit';
 import Admin_Update_List from '../page_5/Admin_Update_List';
+import Admin_Now_Add from '../page_5/Admin_Now_Add';
+import Admin_Now_Edit from '../page_5/Admin_Now_Edit';
+import Admin_Now_List from '../page_5/Admin_Now_List';
 
 const Admin_RouterComponent = () => {
 
@@ -56,6 +59,9 @@ const Admin_RouterComponent = () => {
                     <Route path="/admin/page_5/Admin_Update_Add" exact={true} component={Admin_Update_Add} /> 
                     <Route path="/admin/page_5/Admin_Update_Edit" exact={true} component={Admin_Update_Edit} />
                     <Route path="/admin/page_5/Admin_Update_List" exact={true} component={Admin_Update_List} />
+                    <Route path="/admin/page_5/Admin_Now_Add" exact={true} component={Admin_Now_Add} />
+                    <Route path="/admin/page_5/Admin_Now_Edit" exact={true} component={Admin_Now_Edit} />
+                    <Route path="/admin/page_5/Admin_Now_List" exact={true} component={Admin_Now_List} />
                 </Route>
 
 
