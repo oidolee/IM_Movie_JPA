@@ -50,7 +50,7 @@ export default function Main_Swiper() {
        centeredSlides={true}
        loop={true} // 무한 스크롤 옵션
        autoplay={{
-         delay: 3500,
+         delay: 5500,
          disableOnInteraction: false,
        }}
        pagination={pagination}
@@ -70,7 +70,7 @@ export default function Main_Swiper() {
           <img src={slide_3} alt='slide_3'></img>
         </SwiperSlide>
         
-        <div className='Main_Swiper_control_box'>
+        <div className='page_2 Main_Swiper_control_box'>
           <i className={`bi bi-play-fill ${isPlayActive ? 'moveActive' : ''}`} onClick={startSlide}></i>
           <i className={`bi bi-stop-fill ${!isPlayActive ? 'moveActive' : ''}`} onClick={stopSlide}></i>
         </div>

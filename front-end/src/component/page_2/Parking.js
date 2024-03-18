@@ -16,7 +16,7 @@ function Parking() {
   const [ip_carnumber, setIpCarNumber] = useState('');
   const [ip_client, setIpClient] = useState('');
   const [total_plot, setTotalPlot] = useState('');
-  const [ip_no, setIp_no]= useState('');
+  const [ip_no, setIp_no] = useState('');
 
   const history = useHistory();
 
@@ -31,15 +31,15 @@ function Parking() {
       alert('모든 필드를 입력하세요.');
       return;
     }
-    
-    if(ip_carnumber.length < 8){
+
+    if (ip_carnumber.length < 8) {
       alert("차량번호 자리수를 확인 바랍니다.")
       return false;
     }
     let block = '';
     let number = '';
-     // total_plot을 "_"로 분리하여 ip_block과 ip_number에 할당
-     if (total_plot !== "") {
+    // total_plot을 "_"로 분리하여 ip_block과 ip_number에 할당
+    if (total_plot !== "") {
       // total_plot이 비어있지 않으면 "_"로 분리하여 ip_block과 ip_number에 할당
       [block, number] = total_plot.split('-');
     }
@@ -48,10 +48,10 @@ function Parking() {
       ip_client: ip_client,
       ip_block: block,
       ip_number: number,
-      ip_no : ip_no,
-      ip_inoutcheck : 'Y'
+      ip_no: ip_no,
+      ip_inoutcheck: 'Y'
     };
-    
+
     console.log(" 주차등록 값 : ");
     console.log(inputData);
 
@@ -83,7 +83,7 @@ function Parking() {
 
   const toggleSeatColor = (lot, seatNumber, ip_no) => { // ip_no 파라미터 추가
     setSelectedSeat(selectedSeat === `${lot}-${seatNumber}` ? null : `${lot}-${seatNumber}`);
-    setTotalPlot(selectedSeat === `${lot}-${seatNumber}` ? '' : `${lot}-${seatNumber}`);   
+    setTotalPlot(selectedSeat === `${lot}-${seatNumber}` ? '' : `${lot}-${seatNumber}`);
     setIp_no(ip_no); // 클릭할 때 해당 ip_no 값을 설정
   };
 
@@ -108,14 +108,24 @@ function Parking() {
                 {parkingLot[lot].map(([seatNumber, status, ip_no]) => (
                   <li
                     key={`${lot}-${seatNumber}`}
-                    onClick={() => status !== 'Y' && toggleSeatColor(lot, seatNumber, ip_no)} // ip_no 전달
-                    className={`seat_${status} ${selectedSeat === `${lot}-${seatNumber}` ? sytle.Park_checked : ''}`}
+                    onClick={() => {
+                      if (status !== 'Y') {
+                        toggleSeatColor(lot, seatNumber, ip_no); // ip_no 전달
+                        if (selectedSeat === `${lot}-${seatNumber}`) {
+                          setSelectedSeat(null); // Assuming you have a state variable setSelectedSeat to toggle selection
+                        } else {
+                          setSelectedSeat(`${lot}-${seatNumber}`);
+                        }
+                      }
+                    }}
+                    className={`seat_${status} ${status === 'Y' || selectedSeat === `${lot}-${seatNumber}` ? sytle.Park_checked : ''}`}
                     data-ip_no={ip_no}
-
                   >
                     {status === 'Y' ? 'x' : seatNumber}
                   </li>
                 ))}
+
+
               </ul>
             </div>
           ))}
@@ -124,7 +134,7 @@ function Parking() {
         <Form>
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
             <Col sm>
-              <Form.Control type="text" placeholder="차량번호" name="ip_carnumber" value={ip_carnumber} 
+              <Form.Control type="text" placeholder="차량번호" name="ip_carnumber" value={ip_carnumber}
                 onChange={(e) => {
                   // 입력값이 15자를 초과하는지 확인
                   if (e.target.value.length <= 15) {
@@ -134,8 +144,8 @@ function Parking() {
                     // 15자를 초과하면 경고 메시지 표시
                     alert('차량번호는 15자를 초과할 수 없습니다.');
                   }
-                }} 
-             />
+                }}
+              />
             </Col>
           </Form.Group>
 
@@ -153,7 +163,7 @@ function Parking() {
 
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
             <Col sm>
-              <Form.Control type="text" placeholder="ip_no" name="ip_no" value={ip_no} onChange={(e) => setIp_no(e.target.value)} />
+              <Form.Control type="hidden" placeholder="ip_no" name="ip_no" value={ip_no} onChange={(e) => setIp_no(e.target.value)} />
             </Col>
           </Form.Group>
 

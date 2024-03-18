@@ -100,7 +100,7 @@
 }
 /* 호버 효과 */
 .header_section .nav >ul>li:hover {
-    border-bottom: 3px solid red;
+    border-bottom: 5px solid red;
   }
 
 /* 하단 내역 */
