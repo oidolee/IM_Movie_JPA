@@ -49,6 +49,8 @@ const Reservation_Seat = () => {
   const [disabledQuantity, setDisabledQuantity] = useState(0);
   const [lastActivityTime, setLastActivityTime] = useState(Date.now())
 
+  // 로그인 상태 확인
+
   // useEffect(() => {
   //   // 좌석 정보 가져오기
   //   listSeat();
