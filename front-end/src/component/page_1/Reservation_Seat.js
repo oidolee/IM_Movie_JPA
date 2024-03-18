@@ -79,9 +79,7 @@ const Reservation_Seat = () => {
       });
   };
 
-  // 각 수량을 추적하기 위한 state 추가
   useEffect(() => {
-    // 수량이 변경될 때마다 총 수량을 업데이트
     const newTotalQuantity =
       adultQuantity + teenQuantity + childQuantity + disabledQuantity;
 
@@ -231,7 +229,7 @@ const Reservation_Seat = () => {
         <div className="Res_seat1">
           <ul>
             <li className="step" id="step2">
-              <a href="#Res_step01">
+              <a href="/page_1/Reservation_Movie">
                 <strong>
                   <span>
                     01
@@ -254,7 +252,7 @@ const Reservation_Seat = () => {
               </a>
             </li>
             <li className="step" id="step1">
-              <a href="#Res_step02">
+              <a href="#">
                 <strong>
                   <span>
                     02
@@ -265,18 +263,19 @@ const Reservation_Seat = () => {
                 <div className="step_content">
                   <dl>
                     <dt>인원</dt>
-                    <dd style={{ textAlign: "left", marginLeft: "15px" }}>
-                      성인: {adultQuantity}명<br />
+                    <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                      성인: {adultQuantity}명, 
                       청소년: {teenQuantity}명<br />
-                      경로: {childQuantity}명<br />
-                      장애인: {disabledQuantity}명
+                      경로: {childQuantity}명, 
+                      장애인: {disabledQuantity}명<br />
+                      총: {totalQuantity}명
                     </dd>
                     <dt>좌석</dt>
-                    <dd style={{ textAlign: "left", marginLeft: "15px" }}>
+                    <dd style={{ textAlign: "left", marginLeft: "12px" }}>
                       {selectedSeats.map((seat, index) => (
                         <span key={index}>
                           {seat}
-                          <br />
+                          {index % 2 === 1 ? <br /> : ", "}
                         </span>
                       ))}
                     </dd>
@@ -285,7 +284,7 @@ const Reservation_Seat = () => {
               </a>
             </li>
             <li className="step">
-              <a href="#Res_step03">
+              <a href="#">
                 <strong>
                   <span>
                     03
@@ -306,7 +305,7 @@ const Reservation_Seat = () => {
               </a>
             </li>
             <li className="step">
-              <a href="#Res_step04">
+              <a href="#">
                 <strong>
                   <span>
                     04
@@ -388,7 +387,7 @@ const Reservation_Seat = () => {
                           />
                         </li>
                         <li>
-                          <span>총 합계 : {totalQuantity}명</span>
+                          <span>{totalQuantity}명</span>
                         </li>
                       </ul>
                     </div>
