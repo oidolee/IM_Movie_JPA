@@ -76,6 +76,7 @@ function Header() {
                                             <a class="nav-link" href="/admin/page_3/ListStore_Admin">page_3 / ListStore_Admin</a>
                                             <a class="nav-link" href="/admin/page_5/Admin_Update_List">HOME_UPDATE</a>
                                             <a class="nav-link" href="/admin/page_5/Admin_Now_List">NOW_UPDATE</a>
+                                            <a class="nav-link" href="/admin/page_5/Admin_Next_List">NEXT_UPDATE</a>
                                         </nav>
                                     </div>
                                    

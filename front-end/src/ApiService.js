@@ -261,14 +261,14 @@ class ApiService {
     }
 
     // page_5
-    //영화 현재목록 리스트
+    //영화 새목록 리스트
     fetchMovie2(){
         console.log('nextMovieList() 호출!!')
         return axios.get(url + '/page_5/nextMovieList'); 
     }
 
     // page_5
-    //영화 현재목록 리스트
+    //영화 아르떼목록 리스트
     fetchMovie3(){
         console.log('arteMovieList() 호출!!')
         return axios.get(url + '/page_5/arteMovieList'); 
@@ -287,8 +287,6 @@ class ApiService {
         return axios.post(url + "/page_5/UpdateInsert", inputData);
     }
 
-    
-
     // 1건조회
     selectUpdate(mov_id) {
         console.log("selectUpdate 호출", mov_id);
@@ -306,7 +304,67 @@ class ApiService {
         console.log("deleteUpdate 호출", mov_id);
         return axios.delete(url + "/page_5/UpdateDelete" + "/" + mov_id);
     }
+
     
+    // 현재목록
+    listNow() {
+        console.log("listNow 호출");
+        return axios.get(url + "/page_5/NowList");
+    }
+
+    //영화 현재 추가
+    addNow(inputData) {
+        console.log("addNow 호출", inputData);
+        return axios.post(url + "/page_5/NowInsert", inputData);
+    }
+
+    // 현재1건조회
+    selectNow(now_id) {
+        console.log("selectNow 호출", now_id);
+        return axios.get(url + "/page_5/NowDetailList" + "/" + now_id);
+    }
+
+    // 영화 현재수정
+    editNow(inputData) {
+        console.log("editNow 호출", inputData);
+        return axios.put(url + "/page_5/NowUpdate" + "/" + inputData.now_id, inputData);
+    }  
+
+    // 영화 현재 삭제
+    deleteNext(now_id) {
+        console.log("deleteNext 호출", now_id);
+        return axios.delete(url + "/page_5/NextDelete" + "/" + now_id);
+    }
+    
+    // 새목록
+    listNext() {
+        console.log("listNext 호출");
+        return axios.get(url + "/page_5/NextList");
+    }
+
+    //영화 새 추가
+    addNext(inputData) {
+        console.log("addNext 호출", inputData);
+        return axios.post(url + "/page_5/NextInsert", inputData);
+    }
+
+    // 새1건조회
+    selectNext(next_id) {
+        console.log("selectNext 호출", next_id);
+        return axios.get(url + "/page_5/NextDetailList" + "/" + next_id);
+    }
+
+    // 영화 새수정
+    editNext(inputData) {
+        console.log("editNext 호출", inputData);
+        return axios.put(url + "/page_5/NextUpdate" + "/" + inputData.next_id, inputData);
+    }  
+
+    // 영화 새 삭제
+    deleteNext(next_id) {
+        console.log("deleteNext 호출", next_id);
+        return axios.delete(url + "/page_5/NextDelete" + "/" + next_id);
+    }
 
 
 }

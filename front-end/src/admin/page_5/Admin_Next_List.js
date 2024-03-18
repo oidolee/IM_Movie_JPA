@@ -8,20 +8,20 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import style from "../../styles/admin/page_5/Admin_Now_List.css";
+import style from "../../styles/admin/page_5/Admin_Next_List.css";
 import ApiService from "../../ApiService";
 import { Create, Delete } from "@mui/icons-material";
 
-function Admin_Now_List ({ history }) {
+function Admin_Next_List ({ history }) {
   const [lists, setLists] = useState([]);
   
   useEffect(() => {
-    NowList();
+    NextList();
   }, []);
 
   // 목록
-  const NowList = () => {
-    ApiService.listNow()
+  const NextList = () => {
+    ApiService.listNext()
       .then((res) => {
         setLists(res.data);
       })
@@ -31,35 +31,35 @@ function Admin_Now_List ({ history }) {
   };
 
   // 등록
-  const NowAdd = () => {
-    window.localStorage.removeItem("now_id");
-    history.push("/admin/page_5/Admin_Now_Add");
+  const NextAdd = () => {
+    window.localStorage.removeItem("next_id");
+    history.push("/admin/page_5/Admin_Next_Add");
   };
 
   // 수정
-  const selectNow = (now_id) => {
-    window.localStorage.setItem("now_id", now_id);
-    history.push("/admin/page_5/Admin_Now_Edit");
+  const selectNext = (next_id) => {
+    window.localStorage.setItem("next_id", next_id);
+    history.push("/admin/page_5/Admin_Next_Edit");
   };
 
   // 삭제
-  const deleteNow = (now_id) => {
-    ApiService.deleteNow(now_id)
+  const deleteNext = (next_id) => {
+    ApiService.deleteNext(next_id)
       .then((res) => {
-        setLists(lists.filter((list) => list.now_id !== now_id));
-        console.log("deleteNow 성공 : ", res.data);
+        setLists(lists.filter((list) => list.next_id !== next_id));
+        console.log("deleteNext 성공 : ", res.data);
       })
       .catch((err) => {
-        console.log("deleteNow 실패 : ", err);
+        console.log("deleteNext 실패 : ", err);
       });
   };
 
   return (
-    <div className={`Admin_Now_List ${style.Admin_Now_List}`}>
+    <div className={`Admin_Next_List ${style.Admin_Next_List}`}>
       <br />
       <br />
-      <Typography variant="h5" className="NowList">
-      Now_List
+      <Typography variant="h5" className="NextList">
+      Next_List
       </Typography>
       <br />
       <br />
@@ -67,13 +67,13 @@ function Admin_Now_List ({ history }) {
         variant="contained"
         color="primary"
         className="Add_btn"
-        onClick={NowAdd}
+        onClick={NextAdd}
       >
-        Now_Add
+        Next_Add
       </Button>
       <br />
       <br />
-      <Table className="Now_List_Content">
+      <Table className="Next_List_Content">
         <TableHead>
           <TableRow>
             <TableCell>Movie_ID</TableCell>
@@ -94,29 +94,29 @@ function Admin_Now_List ({ history }) {
         </TableHead>
         <TableBody>
           {lists.map((list) => (
-            <TableRow key={list.now_id}>
+            <TableRow key={list.next_id}>
               <TableCell component="th" scope="list">
-                {list.now_id}
+                {list.next_id}
               </TableCell>
-              <TableCell>{list.now_image}</TableCell>
-              <TableCell>{list.now_title}</TableCell>
-              <TableCell>{list.now_date}</TableCell>
-              <TableCell>{list.now_time}</TableCell>
-              <TableCell>{list.now_age}</TableCell>
-              <TableCell>{list.now_visitor}</TableCell>
-              <TableCell>{list.now_contents}</TableCell>
-              <TableCell>{list.now_con}</TableCell>
-              <TableCell>{list.now_trailer}</TableCell>
-              <TableCell>{list.now_category}</TableCell>
+              <TableCell>{list.next_image}</TableCell>
+              <TableCell>{list.next_title}</TableCell>
+              <TableCell>{list.next_date}</TableCell>
+              <TableCell>{list.next_time}</TableCell>
+              <TableCell>{list.next_age}</TableCell>
+              <TableCell>{list.next_visitor}</TableCell>
+              <TableCell>{list.next_contents}</TableCell>
+              <TableCell>{list.next_con}</TableCell>
+              <TableCell>{list.next_trailer}</TableCell>
+              <TableCell>{list.next_category}</TableCell>
               <TableCell
                 className="selectBtn"
-                onClick={() => selectNow(list.now_id)}
+                onClick={() => selectNext(list.next_id)}
               >
                 <Create />
               </TableCell>
               <TableCell
                 className="deleteBtn"
-                onClick={() => deleteNow(list.now_id)}
+                onClick={() => deleteNext(list.next_id)}
               >
                 <Delete />
               </TableCell>
@@ -128,4 +128,4 @@ function Admin_Now_List ({ history }) {
   );
 };
 
-export default Admin_Now_List;
+export default Admin_Next_List;
