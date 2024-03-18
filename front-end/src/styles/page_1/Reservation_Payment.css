@@ -234,6 +234,7 @@
     border: 1px solid #ccc;
     margin-top: 20px;
     font-size: 13px;
+    cursor: pointer;
 }
 
 .Res_Payment .point_seat_main {
@@ -277,33 +278,6 @@
     border: 1px solid #FF243E;
 }
 
-.Payment {
-    transform: translate(120%, -160%);
-    width: 30%;
-    height: 50%;
-    align-items: center;
-    position: relative;
-    background-color: white;
-    border: 1px solid #666;
-}
-
-.Payment .Payment_close {
-    width: 150px;
-    height: 50px;
-    background-color: white;
-    border: 1px solid #bbb;
-    margin-top: 10px;
-    font-size: 13px;
-    margin-left: 300px;
-    margin-bottom: 10px;
-}
-
-.Payment .Payment_close:hover {
-    background-color: #FF243E;
-    color: white;
-    border: 1px solid #FF243E;
-
-}
 
 .Res_Payment .paymentBtn,
 .Res_Payment .paymentBtn_total {
@@ -326,3 +300,22 @@
     text-align: center;
     font-weight: 600;
 }
+
+.Res_Payment .Modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px; /* 모달의 너비 */
+    height: 300px; /* 모달의 높이 */
+  
+  }
+  
+.Res_Payment .ModalContent {
+    width: 100%; /* 모달 내의 컨텐츠의 너비를 100%로 설정 */
+    height: 100%; /* 모달 내의 컨텐츠의 높이를 100%로 설정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
