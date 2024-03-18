@@ -223,13 +223,20 @@ const Reservation_Seat = () => {
       });
   };
 
+  const handleMovie = () => {
+    const confirmResult = window.confirm("지금까지 입력된 정보가 모두 사라집니다.");
+    if (confirmResult) {
+      history.push("/page_1/Reservation_Movie");
+    }
+  }
+
   return (
     <div className={`Res_seat ${style.Res_seat}`}>
       <div className="Res_seat_content">
         <div className="Res_seat1">
           <ul>
-            <li className="step" id="step2">
-              <a href="/page_1/Reservation_Movie">
+            <li className="step" id="step2" onClick={handleMovie}>
+              <a href="#">
                 <strong>
                   <span>
                     01
