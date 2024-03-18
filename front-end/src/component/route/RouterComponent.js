@@ -26,6 +26,7 @@ import Parking from '../page_2/Parking';
 import Page3 from '../page_3/Page3';
 import StoreDetail from '../page_3/StoreDetail';
 import StoreTicket from '../page_3/StoreTicket';
+import Reservation_Payment_Store from '../page_3/Reservation_Payment_Store';
 
 
 //page_4
@@ -99,6 +100,7 @@ const AppRouter = () => {
                                 <Route path="/Page3" exact={true} component={Page3} />
                                 <Route path="/page_3/EditStore_Admin/" exact={true} component={StoreDetail} />
                                 <Route path="/page_3/StoreTicket/" exact={true} component={StoreTicket} />
+                                <Route path="/page_3/Reservation_Payment_Store/" exact={true} component={Reservation_Payment_Store} />
                             </Route>
 
                             {/* page_4 */}
