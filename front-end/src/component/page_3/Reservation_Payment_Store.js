@@ -4,7 +4,7 @@ import style from "../../styles/page_1/Reservation_Payment.css";
 import Res_event from "../../assets/page_1/event.png";
 import Res_movie from "../../assets/page_1/movie.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
-import Checkout from "../../pages/Checkout";
+//import Checkout from "../../pages/Checkout";
 import Modal from "react-modal";
 
 class Reservation_Payment_Store extends Component {
