@@ -1,16 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { loadPaymentWidget } from "@tosspayments/payment-widget-sdk";
 import { nanoid } from "nanoid";
-
-import "../styles/page_1/Checkout.css";
+import style from "../../styles/page_1/Checkout.css";
 
 const clientKey = "test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq";
 const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
 
-export default function App() {
+const App = ({ handleCloseModal }) => {
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
-  const [price, setPrice] = useState(50000);
+  const [price, setPrice] = useState(100);
 
   useEffect(() => {
     const fetchPaymentWidget = async () => {
@@ -51,7 +50,7 @@ export default function App() {
         customerName: "김토스",
         customerEmail: "customer123@gmail.com",
         successUrl: `${window.location.origin}/success`,
-        failUrl: `${window.location.origin}/fail`,
+        failUrl: `${window.location.origin}/fail`
       });
     } catch (err) {
       console.log(err);
@@ -59,20 +58,21 @@ export default function App() {
   };
 
   return (
-    <div>
-      <div id="payment-widget"></div>
-      <div className="paymentMethod_Main">
-        <div>
-        <input
-          type="checkbox"
-          onChange={(event) => {
-            setPrice(event.target.checked ? price - 5000 : price + 5000);
-          }}
-        />
-        <label className="paymentDiscount">5,000원 할인 쿠폰 적용</label>
-      </div>
-      <button className="paymentMethod" onClick={handlePayment}>결제하기</button>
+    <div className={`Checkout ${style.Checkout}`}>
+      <div className="Checkout_content">
+        <h3 className="payment_tit">결제 정보</h3>
+        <div id="payment-widget" />
+        <div className="paymentMethod_Main">
+          <button className="paymentMethod" onClick={handlePayment}>
+            결제하기
+          </button>
+          <button className="paymentMethod" onClick={handleCloseModal}>
+            취소
+          </button>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default App;

@@ -9,6 +9,7 @@ import { Virtual, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ApiService from '../../ApiService';
 
+
 class StoreDetail extends Component {
 
   constructor(props) {
@@ -114,9 +115,15 @@ EditStore_Admin = (e) => {
 
 
 
+  // openStoreGift = () => {
+  //   const { quantity, price } = this.state; // 총 구매 수량과 총 상품금액
+  //   this.setState({ isStoreGiftOpen: true, totalQuantity: quantity, totalPrice: price });
+  //   document.body.style.overflow = "hidden";
+  // };
+
   openStoreGift = () => {
-    const { quantity, price } = this.state; // 총 구매 수량과 총 상품금액
-    this.setState({ isStoreGiftOpen: true, totalQuantity: quantity, totalPrice: price });
+    const { quantity, price } = this.state;
+    this.setState({ isStoreGiftOpen: true });
     document.body.style.overflow = "hidden";
   };
 
@@ -317,7 +324,8 @@ EditStore_Admin = (e) => {
             </div>
 
             {/* 선물하기 모달/팝업 조건부 렌더링 */}
-            {isStoreGiftOpen && <StoreGift onClose={this.closeStoreGift} />}
+            {/* {isStoreGiftOpen && <StoreGift onClose={this.closeStoreGift} />} */}
+            {isStoreGiftOpen && <StoreGift onClose={this.closeStoreGift} totalQuantity={quantity} totalPrice={price} />}
             {/* 선물하기 모달/팝업 조건부 렌더링 */}
             {isStoreTicketOpen && <StoreTicket onClose={this.closeStoreTicket} />}
           </div>
