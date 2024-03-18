@@ -82,7 +82,10 @@ useEffect(() => {
   } else {
     // 총 수량이 8을 초과할 경우, 알림 메시지 출력 및 각 수량 상태 초기화
     alert("인원은 최대 8명까지 가능합니다.");
-    quantity(0);
+    // setAdultQuantity(0);
+    // setTeenQuantity(0);
+    // setChildQuantity(0);
+    // setDisabledQuantity(0);
   }
 }, [adultQuantity, teenQuantity, childQuantity, disabledQuantity]);
 
