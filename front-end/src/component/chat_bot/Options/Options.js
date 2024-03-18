@@ -12,7 +12,10 @@ const Options = (props) => {
       handler: props.actionProvider.handlechooseTickeck,
       // id: 1,
     },
-    { text: "영화소식", handler: () => {}, id: 2 },
+    { text: "영화소식", 
+    handler: props.actionProvider.movieNews,
+      id: 2 
+    },
     { text: "스토어", handler: () => {}, id: 3 },
   ];
 

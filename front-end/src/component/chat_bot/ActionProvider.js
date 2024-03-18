@@ -11,9 +11,6 @@ class ActionProvider {
         this.addMessageTostate(message);
     }
 
-
-
-
     // set1 start
     greet = () =>{
         const message = this.createChatBotMessage("Hello friend");
@@ -35,7 +32,7 @@ class ActionProvider {
     // 기존 기본 테스트 
 
     helloWolrdHandler = () => {
-        const message = this.createChatBotMessage("hihi createChatBotMessage!")
+        const message = this.createChatBotMessage("안녕하세요? \n저는 IM 챗봇입니다.")
         this.setChatbotMessage(message);
     }
 
@@ -62,8 +59,16 @@ class ActionProvider {
     }
 
 
-        
-    // }
+    // 영화소개     
+    movieNews = () => {
+        const message = this.createChatBotMessage(
+            "영화 소개를 해드릴게요!",
+            {
+                widget: "goMovieHome", // 위젯 설정
+            }
+        );
+        this.addMessageToState(message);
+    }
 
     //클릭시 나오게 
     tickect_1_answer = () => {

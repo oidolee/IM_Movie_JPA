@@ -23,8 +23,7 @@ class MessageParser {
       }
 
      //   actionProvider 답변 컨트롤 가능
-      if (lowercase.includes("안녕") || lowercase.includes("안녕2")) {
-        // console.log(this.state.movieTitles[1]);
+      if (lowercase.includes("안녕") || lowercase.includes("반가워") || lowercase.includes("hi")) {
         this.actionProvider.helloWolrdHandler();
       }
 

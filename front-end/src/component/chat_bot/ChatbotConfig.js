@@ -16,6 +16,8 @@ import ChatMessage from "./Style/ChatMessage.js";
 import Ticket_1 from '../chat_bot/Ticket/Ticket_1.js';
 import Tickect_1_2_Qe from '../chat_bot/Ticket/Tickect_1_2_Qe.js';
 
+import GoMovieHome from '../chat_bot/Options/GoMovieHome.js';
+
 const ChatbotConfig = {
     //ActionProvider > MessageParser
     // 메시지 입력 >  결과값 작성 
@@ -72,6 +74,10 @@ const ChatbotConfig = {
         widgetFunc: (props) => <Tickect_1_2_Qe {...props} />,
       },
 
+      {
+        widgetName: "goMovieHome",
+        widgetFunc: (props) => <GoMovieHome {...props} />,
+      },
 
    
       

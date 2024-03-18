@@ -15,20 +15,25 @@ const HeaderContainer = styled.div`
   padding: 1.4rem;
 
   .ri-close-line,
-  .ri-arrow-left-s-line {
+  .ri-arrow-right-s-line {
     font-size: 1.5rem;
     color: #ffffff;
   }
+
+  p {
+    font-size: 1.6rem; /* 원하는 폰트 사이즈로 설정합니다. */
+    font-weight: bold; /* 원하는 폰트 굵기로 설정합니다. */
+    color: #ffffff; /* 원하는 폰트 색상으로 설정합니다. */
+    margin: 0; /* 기본 마진을 제거합니다. */
+  }
 `;
-const closeModal  = () => {
-  alert("1")
-}
+
+
+
 function ChatHeader() {
   return (
     <HeaderContainer>
-      <i className="ri-arrow-left-s-line" />
-      <i className="ri-close-line" onClick={() => closeModal()} />
-
+      <p>IM_Movie</p>
     </HeaderContainer>
   );
 }

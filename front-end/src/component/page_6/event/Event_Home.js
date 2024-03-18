@@ -14,7 +14,10 @@ class Event_Home extends Component{
                     </ul>
                </div>
                <div className={`event_section event_section1  ${style.event_section1}`}>
-                    <h5>쿠폰</h5>
+                    <div style={{display:"flex", justifyContent:"space-between", marginBottom:"20px"}}>
+                        <h5>쿠폰</h5>
+                        <a>더보기</a>
+                    </div>
                     <ul>
                         <li>
                             <a href="#">
