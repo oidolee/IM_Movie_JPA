@@ -22,13 +22,19 @@ import Discount from '../page_1/Discount';
 import Page2 from '../page_2/Page2';
 import Parking from '../page_2/Parking';
 
+//chat_bot
+import Chatbot from 'react-chatbot-kit'
+import 'react-chatbot-kit/build/main.css'
+import config from "../chat_bot/ChatbotConfig"; // chat_bot 시작은 여기서 부터
+import MessageParser from "../chat_bot/MessageParser";
+import ActionProvider from "../chat_bot/ActionProvider";
+
 //page_3
 import Page3 from '../page_3/Page3';
 import StoreDetail from '../page_3/StoreDetail';
 import StoreTicket from '../page_3/StoreTicket';
 import Reservation_Payment_Store from '../page_3/Reservation_Payment_Store';
 import MyPage_Store from '../page_6/store_page_3/MyPage_Store';
-
 
 //page_4
 import listCustomer from '../page_4/listCustomer';
@@ -80,6 +86,12 @@ const AppRouter = () => {
             <BrowserRouter>
                     <div style={style}>
                         <Route>
+                        <Chatbot
+                            style={{ width: '500px' }}
+                            config={config}
+                            messageParser={MessageParser}
+                            actionProvider={ActionProvider}
+                        />
                             <Header />  
                             <Route path="/" exact={true} component={MainBody} />
                             {/* page_1 */}

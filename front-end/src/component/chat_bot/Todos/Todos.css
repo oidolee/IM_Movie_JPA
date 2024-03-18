@@ -1,0 +1,14 @@
+/* .todos-widget{
+    background-color: red;
+} */
+
+.todo-widget-list{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.todo-widget-list-item{
+    font-size: 12px;
+    text-align: left;
+    margin-bottom: 10px;
+}
