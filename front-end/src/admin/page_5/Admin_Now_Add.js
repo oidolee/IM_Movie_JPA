@@ -53,7 +53,7 @@ function Admin_Now_Add ({ history }) {
         label="Movie_Image"
         type="text"
         name=" now_image"
-        value={nowInfo.mov_image}
+        value={nowInfo.now_image}
         onChange={onChange}
       />
       <br />
@@ -64,7 +64,7 @@ function Admin_Now_Add ({ history }) {
         label="Movie_Title"
         type="text"
         name="now_title"
-        value={nowInfo.mov_title}
+        value={nowInfo.now_title}
         onChange={onChange}
       />
       <br />
@@ -75,7 +75,7 @@ function Admin_Now_Add ({ history }) {
         label="Movie_Date"
         type="text"
         name="now_date"
-        value={nowInfo.mov_date}
+        value={nowInfo.now_date}
         onChange={onChange}
       />
       <br />
@@ -85,8 +85,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Time"
         type="text"
-        name="mov_time"
-        value={nowInfo.mov_time}
+        name=" now_time"
+        value={nowInfo.now_time}
         onChange={onChange}
       />
       <br />
@@ -96,8 +96,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Age"
         type="text"
-        name="mov_age"
-        value={nowInfo.mov_age}
+        name="now_age"
+        value={nowInfo.now_age}
         onChange={onChange}
       />
       <br />
@@ -107,8 +107,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Visitor"
         type="text"
-        name="mov_visitor"
-        value={nowInfo.mov_visitor}
+        name="now_visitor"
+        value={nowInfo.now_visitor}
         onChange={onChange}
       />
       <br />
@@ -118,8 +118,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Contents"
         type="text"
-        name="mov_contents"
-        value={nowInfo.mov_contents}
+        name="now_contents"
+        value={nowInfo.now_contents}
         onChange={onChange}
       />
       <br />
@@ -129,8 +129,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Con"
         type="text"
-        name="mov_con"
-        value={nowInfo.mov_con}
+        name="now_con"
+        value={nowInfo.now_con}
         onChange={onChange}
       />
       <br />
@@ -140,8 +140,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Trailer"
         type="text"
-        name="mov_trailer"
-        value={nowInfo.mov_trailer}
+        name="now_trailer"
+        value={nowInfo.now_trailer}
         onChange={onChange}
       />
       <br />
@@ -152,8 +152,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Category"
         type="text"
-        name="mov_category"
-        value={nowInfo.mov_category}
+        name="now_category"
+        value={nowInfo.now_category}
         onChange={onChange}
       />
       <br />
