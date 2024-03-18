@@ -123,6 +123,7 @@ function Header() {
                                     <li><Link to="/movieMain">홈</Link></li>
                                     <li><Link to="/movieNow">현재상영작</Link></li>
                                     <li><Link to="/movieNext">상영예정작</Link></li>
+                                    <li><Link to="/arte">아르떼</Link></li>
                                 </ul>
                             </div>
                         )}

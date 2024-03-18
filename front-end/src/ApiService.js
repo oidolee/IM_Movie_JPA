@@ -267,6 +267,13 @@ class ApiService {
         return axios.get(url + '/page_5/nextMovieList'); 
     }
 
+    // page_5
+    //영화 현재목록 리스트
+    fetchMovie3(){
+        console.log('arteMovieList() 호출!!')
+        return axios.get(url + '/page_5/arteMovieList'); 
+    }
+
     // 관리자
     // 목록
     listUpdate() {
@@ -280,22 +287,24 @@ class ApiService {
         return axios.post(url + "/page_5/UpdateInsert", inputData);
     }
 
+    
+
     // 1건조회
-    selectUpdate(up_num) {
-        console.log("selectUpdate 호출", up_num);
-        return axios.get(url + "/page_5/UpdateDetailList" + "/" + up_num);
+    selectUpdate(mov_id) {
+        console.log("selectUpdate 호출", mov_id);
+        return axios.get(url + "/page_5/MovieDetailList" + "/" + mov_id);
     }
 
     // 영화수정
     editUpdate(inputData) {
         console.log("editUpdate 호출", inputData);
-        return axios.put(url + "/page_5/UpdateUpdate" + "/" + inputData.up_num, inputData);
+        return axios.put(url + "/page_5/UpdateUpdate" + "/" + inputData.mov_id, inputData);
     }  
 
     // 영화삭제
-    deleteUpdate(up_num) {
-        console.log("deleteUpdate 호출", up_num);
-        return axios.delete(url + "/page_5/UpdateDelete" + "/" + up_num);
+    deleteUpdate(mov_id) {
+        console.log("deleteUpdate 호출", mov_id);
+        return axios.delete(url + "/page_5/UpdateDelete" + "/" + mov_id);
     }
     
 
