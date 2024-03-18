@@ -26,4 +26,59 @@ public class NowMovieServiceImpl implements NowMovieService {
 			return dao.findAll();
 		}
 
+		// 목록
+		@Override
+		public List<NowMovieDTO> NowList() 
+				throws ServletException, IOException {
+			System.out.println("서비스 - NowList");
+			System.out.println(dao.findAll());
+			
+			return dao.findAll();
+		}
+
+		// 영화 추가
+		@Override
+		public NowMovieDTO NowInsert(NowMovieDTO dto) 
+				throws ServletException, IOException {
+			System.out.println("서비스 - NowInsert");
+			
+			return dao.save(dto);
+		}
+
+		// 영화 상세페이지
+		@Override
+		public NowMovieDTO getNowDetail(int now_id) 
+				throws ServletException, IOException {
+			System.out.println("서비스 - getNowDetail");
+			
+			NowMovieDTO dto = dao.findById(now_id).orElse(null);
+			
+			System.out.println(now_id);	
+			System.out.println(dto);
+			
+			return dto;
+		}
+
+		//영화 수정
+		@Override
+		public void NowUpdate(NowMovieDTO dto) 
+				throws ServletException, IOException {
+			System.out.println("서비스 - NowUpdate");
+			System.out.println(dto);
+			
+			dao.save(dto);
+			
+		}
+
+		// 삭제
+		@Override
+		public void NowDelete(int now_id) throws ServletException, IOException {
+			System.out.println("서비스 - NowDelete");
+			
+			System.out.println(now_id);
+			
+			dao.deleteById(now_id);
+			
+		}
+
 	}

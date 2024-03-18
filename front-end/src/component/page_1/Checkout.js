@@ -61,6 +61,13 @@ const App = ({ handleCloseModal }) => {
     <div className={`Checkout ${style.Checkout}`}>
       <div className="Checkout_content">
         <h3 className="payment_tit">결제 정보</h3>
+        <ul>
+          <li>영화: </li>
+          <li>일시: </li>
+          <li>상영관: </li>
+          <li>인원: </li>
+          <li>좌석: </li>
+        </ul>
         <div id="payment-widget" />
         <div className="paymentMethod_Main">
           <button className="paymentMethod" onClick={handlePayment}>
