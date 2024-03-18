@@ -4,18 +4,19 @@
   justify-content: center;
   align-items: center;
   margin-top: -1000px;
-  margin-left: 97px;
+  margin-left: 97px; 
 }
 
 .Checkout .Checkout_content {
   display: flex;
   flex-direction: column;
   text-align: center;
-  max-width: 500px; /* Checkout 컴포넌트의 최대 너비 */
+  max-width: 500px;
   margin: 0 auto;
   padding: 0;
   width: 100%;
   border: 1px solid #bbb;
+  background-color: #fff;
 }
 
 .Checkout .paymentMethod_Main {

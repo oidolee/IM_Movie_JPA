@@ -47,7 +47,7 @@ const Reservation_Seat = () => {
   const [teenQuantity, setTeenQuantity] = useState(0);
   const [childQuantity, setChildQuantity] = useState(0);
   const [disabledQuantity, setDisabledQuantity] = useState(0);
-  const [lastActivityTime, setLastActivityTime] = useState(Date.now())
+  const [lastActivityTime, setLastActivityTime] = useState(Date.now());
 
   // 로그인 상태 확인
 
@@ -56,10 +56,10 @@ const Reservation_Seat = () => {
   // 중복 예매, 결제 방지
 
   // 좌석 정보 가져오기
-  useEffect(() => {  
+  useEffect(() => {
     listSeat();
   }, []);
-  
+
   const listSeat = () => {
     ApiService.listSeat()
       .then((res) => {
@@ -88,6 +88,28 @@ const Reservation_Seat = () => {
     console.log("handleQuantityChange 함수 호출됨");
     console.log("수량 변경됨:", newQuantity);
     setQuantity(newQuantity);
+
+    switch (newQuantity) {
+      case "adult":
+        setAdultQuantity(newQuantity);
+        break;
+      case "teen":
+        setTeenQuantity(newQuantity);
+        break;
+      case "child":
+        setChildQuantity(newQuantity);
+        break;
+      case "disabled":
+        setDisabledQuantity(newQuantity);
+        break;
+      default:
+        break;
+    }
+
+    // 총 수량 업데이트
+    setTotalQuantity(
+      adultQuantity + teenQuantity + childQuantity + disabledQuantity
+    );
 
     if (newQuantity > 0) {
       console.log("수량이 0보다 큼 - 좌석 선택 가능");
@@ -164,19 +186,26 @@ const Reservation_Seat = () => {
   };
 
   const handlePayment = () => {
+
+    if (selectedSeats.length !== totalQuantity) {
+      console.log("인원/좌석 수량 불일치");
+      alert("인원/좌석 수량 불일치합니다.");
+      return;
+    }
+
     if (selectedSeats.length === 0 && quantity === 0) {
       console.log("선택된 좌석 없음");
       alert("선택된 좌석이 없습니다.");
       return;
     }
-  
+
     // 좌석 수량과 카운터 수량 일치 여부 확인
     if (selectedSeats.length !== quantity) {
       console.log("좌석 수량과 카운터 수량이 일치하지 않음");
       alert("인원/수량 불일치합니다. 수량을 확인해주세요.");
       return;
     }
-  
+
     const updateSeatPromises = selectedSeats.map((seat) => {
       const [lot, seatNumber, ip_no] = seat.split("-");
       const inputData = {
@@ -185,12 +214,12 @@ const Reservation_Seat = () => {
         st_column: seatNumber,
         st_check: "r",
       };
-  
+
       console.log("inputData : ", inputData);
-  
+
       return ApiService.updateSeat(inputData);
     });
-  
+
     Promise.all(updateSeatPromises)
       .then((res) => {
         console.log("모든 좌석 업데이트 성공");
@@ -241,16 +270,19 @@ const Reservation_Seat = () => {
                 <div className="step_content">
                   <dl>
                     <dt>인원</dt>
-                    <dd style={{textAlign: 'left', marginLeft: '15px'}}>
+                    <dd style={{ textAlign: "left", marginLeft: "15px" }}>
                       성인: {adultQuantity}명<br />
                       청소년: {teenQuantity}명<br />
                       경로: {childQuantity}명<br />
                       장애인: {disabledQuantity}명
                     </dd>
                     <dt>좌석</dt>
-                    <dd style={{textAlign: 'left', marginLeft: '15px'}}>
+                    <dd style={{ textAlign: "left", marginLeft: "15px" }}>
                       {selectedSeats.map((seat, index) => (
-                        <span key={index}>{seat}<br /></span>
+                        <span key={index}>
+                          {seat}
+                          <br />
+                        </span>
                       ))}
                     </dd>
                   </dl>

@@ -9,7 +9,7 @@ const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
 const App = ({ handleCloseModal }) => {
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState(100);
 
   useEffect(() => {
     const fetchPaymentWidget = async () => {
@@ -50,7 +50,7 @@ const App = ({ handleCloseModal }) => {
         customerName: "김토스",
         customerEmail: "customer123@gmail.com",
         successUrl: `${window.location.origin}/success`,
-        failUrl: `${window.location.origin}/fail`,
+        failUrl: `${window.location.origin}/fail`
       });
     } catch (err) {
       console.log(err);
@@ -60,7 +60,8 @@ const App = ({ handleCloseModal }) => {
   return (
     <div className={`Checkout ${style.Checkout}`}>
       <div className="Checkout_content">
-        <div id="payment-widget"></div>
+        <h3 className="payment_tit">결제 정보</h3>
+        <div id="payment-widget" />
         <div className="paymentMethod_Main">
           <button className="paymentMethod" onClick={handlePayment}>
             결제하기
