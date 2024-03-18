@@ -8,19 +8,19 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import style from "../../styles/admin/page_5/Admin_Update_List.css";
+import style from "../../styles/admin/page_5/Admin_Now_List.css";
 import ApiService from "../../ApiService";
 import { Create, Delete } from "@mui/icons-material";
 
-function Admin_Update_List ({ history }) {
+function Admin_Now_List ({ history }) {
   const [lists, setLists] = useState([]);
   
   useEffect(() => {
-    UpdateList();
+    NowList();
   }, []);
 
   // 목록
-  const UpdateList = () => {
+  const NowList = () => {
     ApiService.listUpdate()
       .then((res) => {
         setLists(res.data);
@@ -31,35 +31,35 @@ function Admin_Update_List ({ history }) {
   };
 
   // 등록
-  const UpdateAdd = () => {
-    window.localStorage.removeItem("mov_id");
+  const NowAdd = () => {
+    window.localStorage.removeItem("now_id");
     history.push("/admin/page_5/Admin_Update_Add");
   };
 
   // 수정
-  const selectUpdate = (mov_id) => {
-    window.localStorage.setItem("mov_id", mov_id);
-    history.push("/admin/page_5/Admin_Update_Edit");
+  const selectNow = (now_id) => {
+    window.localStorage.setItem("now_id", now_id);
+    history.push("/admin/page_5/Admin_Now_Edit");
   };
 
   // 삭제
-  const deleteUpdate = (mov_id) => {
-    ApiService.deleteUpdate(mov_id)
+  const deleteNow = (now_id) => {
+    ApiService.deleteNow(now_id)
       .then((res) => {
-        setLists(lists.filter((list) => list.mov_id !== mov_id));
-        console.log("deleteUpdate 성공 : ", res.data);
+        setLists(lists.filter((list) => list.now_id !== now_id));
+        console.log("deleteNow 성공 : ", res.data);
       })
       .catch((err) => {
-        console.log("deleteUpdate 실패 : ", err);
+        console.log("deleteNow 실패 : ", err);
       });
   };
 
   return (
-    <div className={`Admin_Update_List ${style.Admin_Update_List}`}>
+    <div className={`Admin_Now_List ${style.Admin_Now_List}`}>
       <br />
       <br />
-      <Typography variant="h5" className="UpdateList">
-       Update_List
+      <Typography variant="h5" className="NowList">
+      Now_List
       </Typography>
       <br />
       <br />
@@ -67,16 +67,16 @@ function Admin_Update_List ({ history }) {
         variant="contained"
         color="primary"
         className="Add_btn"
-        onClick={UpdateAdd}
+        onClick={NowAdd}
       >
-        Update_Add
+        Now_Add
       </Button>
       <br />
       <br />
-      <Table className="Update_List_Content">
+      <Table className="Now_List_Content">
         <TableHead>
           <TableRow>
-            <TableCell>Mov_ID</TableCell>
+            <TableCell>Movie_ID</TableCell>
             <TableCell>Movie_Image</TableCell>
             <TableCell>Movie_Title</TableCell>
             <TableCell>Movie_Date</TableCell>
@@ -86,7 +86,7 @@ function Admin_Update_List ({ history }) {
             <TableCell>Movie_Contents</TableCell>
             <TableCell>Movie_Con</TableCell>
             <TableCell>Movie_Trailer</TableCell>
-            <TableCell>Mov_Category</TableCell>
+            <TableCell>Movie_Category</TableCell>
             
             <TableCell>Edit</TableCell>
             <TableCell>Delete</TableCell>
@@ -94,29 +94,29 @@ function Admin_Update_List ({ history }) {
         </TableHead>
         <TableBody>
           {lists.map((list) => (
-            <TableRow key={list.mov_id}>
+            <TableRow key={list.now_id}>
               <TableCell component="th" scope="list">
-                {list.mov_id}
+                {list.now_id}
               </TableCell>
-              <TableCell>{list.mov_image}</TableCell>
-              <TableCell>{list.mov_title}</TableCell>
-              <TableCell>{list.mov_date}</TableCell>
-              <TableCell>{list.mov_time}</TableCell>
-              <TableCell>{list.mov_age}</TableCell>
-              <TableCell>{list.mov_visitor}</TableCell>
-              <TableCell>{list.mov_contents}</TableCell>
-              <TableCell>{list.mov_con}</TableCell>
-              <TableCell>{list.mov_trailer}</TableCell>
-              <TableCell>{list.mov_category}</TableCell>
+              <TableCell>{list.now_image}</TableCell>
+              <TableCell>{list.now_title}</TableCell>
+              <TableCell>{list.now_date}</TableCell>
+              <TableCell>{list.now_time}</TableCell>
+              <TableCell>{list.now_age}</TableCell>
+              <TableCell>{list.now_visitor}</TableCell>
+              <TableCell>{list.now_contents}</TableCell>
+              <TableCell>{list.now_con}</TableCell>
+              <TableCell>{list.now_trailer}</TableCell>
+              <TableCell>{list.now_category}</TableCell>
               <TableCell
                 className="selectBtn"
-                onClick={() => selectUpdate(list.mov_id)}
+                onClick={() => selectNow(list.now_id)}
               >
                 <Create />
               </TableCell>
               <TableCell
                 className="deleteBtn"
-                onClick={() => deleteUpdate(list.mov_id)}
+                onClick={() => deleteNow(list.now_id)}
               >
                 <Delete />
               </TableCell>
@@ -128,4 +128,4 @@ function Admin_Update_List ({ history }) {
   );
 };
 
-export default Admin_Update_List;
+export default Admin_Now_List;

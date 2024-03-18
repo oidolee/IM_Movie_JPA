@@ -17,7 +17,7 @@ public class MovieDTO {
 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
-    private int movie_id;
+    private int mov_id;
     private String mov_image;
     private String mov_title;
     private Date   mov_date;

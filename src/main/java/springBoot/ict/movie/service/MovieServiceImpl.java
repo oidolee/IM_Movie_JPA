@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import springBoot.ict.movie.dao.MovieRepository;
+import springBoot.ict.movie.dto.DiscountDTO;
 import springBoot.ict.movie.dto.MovieDTO;
+import springBoot.ict.movie.dto.StoreDTO;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -25,15 +27,63 @@ public class MovieServiceImpl implements MovieService {
 		
 		return dao.findAll();
 	}
+	
+	// 목록
+	@Override
+	public List<MovieDTO> UpdateList() throws ServletException, IOException {
+		
+		System.out.println("서비스 - listMovie");
+		System.out.println(dao.findAll());
+		
+		return dao.findAll();
+	}
 
 	// 영화 추가 
 	@Override
-	public MovieDTO insertMovie(MovieDTO dto) 
+	public MovieDTO UpdateInsert(MovieDTO dto) 
 			throws ServletException, IOException {
-		System.out.println("서비스 - insertMovie");
+		System.out.println("서비스 - UpdateInsert");
 		
 	  return dao.save(dto);
-		
+	  
 	}
+
+	// 영화 상세페이지
+	@Override
+	public MovieDTO getMovieDetail(int mov_id) 
+	        throws ServletException, IOException {
+	    System.out.println("서비스 - getMovieDetail");
+	    
+	    MovieDTO dto = dao.findById(mov_id).orElse(null);
+	    
+	    System.out.println(mov_id);	
+		System.out.println(dto);
+	    
+	    return dto;
+	}
+
+	//영화 수정
+	@Override
+	public void UpdateUpdate(MovieDTO dto) 
+			throws ServletException, IOException {
+		System.out.println("서비스 - UpdateUpdate");
+		System.out.println(dto);
+		
+		dao.save(dto);
+	}
+	
+	// 삭제
+	@Override
+	public void UpdateDelete(int mov_id) 
+			throws ServletException, IOException {
+		
+		System.out.println("DiscountServiceImpl - UpdateDelete");
+		
+		System.out.println(mov_id);
+		
+		dao.deleteById(mov_id);
+	}
+
+	
 
 }

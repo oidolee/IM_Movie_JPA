@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
+import springBoot.ict.movie.dto.DiscountDTO;
 import springBoot.ict.movie.dto.MovieDTO;
+
 
 public interface MovieService {
 
@@ -13,8 +15,25 @@ public interface MovieService {
 		public List<MovieDTO> listMovie()
 				throws ServletException, IOException;
 		
+	// 목록
+	public List<MovieDTO> UpdateList()
+		throws ServletException, IOException;
+		
+		
 	// 영화 추가 
-	public MovieDTO insertMovie(MovieDTO dto)
+	public MovieDTO UpdateInsert(MovieDTO dto)
+			throws ServletException, IOException;
+	
+	//영화 상세페이지
+	 MovieDTO getMovieDetail(int mov_id)
+				throws ServletException, IOException;	
+	 
+	// 영화 수정
+		public void UpdateUpdate(MovieDTO dto)
+				throws ServletException, IOException;
+		
+	// 삭제
+	public void UpdateDelete(int mov_id)
 			throws ServletException, IOException;
 
 		
