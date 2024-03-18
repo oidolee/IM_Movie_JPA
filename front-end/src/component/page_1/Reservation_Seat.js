@@ -53,6 +53,7 @@ const Reservation_Seat = () => {
 
   // 사용자 움직임 감지
 
+  // 중복 예매, 결제 방지
 
   // 좌석 정보 가져오기
   useEffect(() => {  
