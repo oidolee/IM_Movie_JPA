@@ -47,19 +47,19 @@ const Reservation_Seat = () => {
   const [teenQuantity, setTeenQuantity] = useState(0);
   const [childQuantity, setChildQuantity] = useState(0);
   const [disabledQuantity, setDisabledQuantity] = useState(0);
-  const [lastActivityTime, setLastActivityTime] = useState(Date.now())
+  const [lastActivityTime, setLastActivityTime] = useState(Date.now());
 
   // 로그인 상태 확인
 
   // 사용자 움직임 감지
 
-  // 중복 예매, 결제
+  // 중복 예매 방지
 
   // 좌석 정보 가져오기
-  useEffect(() => {  
+  useEffect(() => {
     listSeat();
   }, []);
-  
+
   const listSeat = () => {
     ApiService.listSeat()
       .then((res) => {
@@ -70,6 +70,21 @@ const Reservation_Seat = () => {
         console.log("listSeat 오류 : ", err);
       });
   };
+
+  // 각 수량을 추적하기 위한 state 추가
+useEffect(() => {
+  // 수량이 변경될 때마다 총 수량을 업데이트
+  const newTotalQuantity =
+    adultQuantity + teenQuantity + childQuantity + disabledQuantity;
+  
+  if (newTotalQuantity <= 8) {
+    setTotalQuantity(newTotalQuantity);
+  } else {
+    // 총 수량이 8을 초과할 경우, 알림 메시지 출력 및 각 수량 상태 초기화
+    alert("인원은 최대 8명까지 가능합니다.");
+    quantity(0);
+  }
+}, [adultQuantity, teenQuantity, childQuantity, disabledQuantity]);
 
   let parkingLot = {};
 
@@ -100,20 +115,20 @@ const Reservation_Seat = () => {
     }
   };
 
-  const handleChange = () => {
+  const handleChange = (canSelectSeat, isChecked, seatNumber) => {
     if (canSelectSeat) {
       setChecked(!isChecked);
     } else {
       console.log("수량 선택 필요 - 좌석 선택 불가");
       alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
     }
-
+  
     const squareClass = canSelectSeat
       ? isChecked
         ? "square checked"
         : "square"
       : "square disabled";
-
+  
     return (
       <div
         className={squareClass}
@@ -126,20 +141,17 @@ const Reservation_Seat = () => {
   };
 
   const handleSeatSelect = (ip_no, lot, seatNumber, status) => {
-    if (!canSelectSeat) {
-      console.log("수량 선택 필요 - 좌석 선택 불가");
+    if (canSelectSeat) {
       alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
       return;
     }
 
     if (status === "r") {
-      console.log("예약된 좌석");
       alert("예매중인 좌석입니다.");
       return;
     }
 
     if (status === "y") {
-      console.log("결제 완료된 좌석");
       alert("예매완료 된 좌석입니다.");
       return;
     }
@@ -152,15 +164,13 @@ const Reservation_Seat = () => {
       setSelectedSeats(
         selectedSeats.filter((seat) => seat !== newSelectedSeat)
       );
-    } else if (selectedSeatsCount < quantity) {
+    } else if (selectedSeatsCount < totalQuantity) {
+      console.log("totalQuantity", totalQuantity);
       setSelectedSeats([...selectedSeats, newSelectedSeat]);
     } else {
-      console.log("선택된 좌석 수량 초과");
       alert("선택된 좌석 수량을 초과하였습니다.");
       return;
     }
-
-    console.log("선택한 좌석 정보 행-열-번호 : ", lot, seatNumber, ip_no);
   };
 
   const handlePayment = () => {
@@ -169,14 +179,14 @@ const Reservation_Seat = () => {
       alert("선택된 좌석이 없습니다.");
       return;
     }
-  
+
     // 좌석 수량과 카운터 수량 일치 여부 확인
-    if (selectedSeats.length !== quantity) {
+    if (selectedSeats.length !== totalQuantity) {
       console.log("좌석 수량과 카운터 수량이 일치하지 않음");
       alert("인원/수량 불일치합니다. 수량을 확인해주세요.");
       return;
     }
-  
+
     const updateSeatPromises = selectedSeats.map((seat) => {
       const [lot, seatNumber, ip_no] = seat.split("-");
       const inputData = {
@@ -185,12 +195,12 @@ const Reservation_Seat = () => {
         st_column: seatNumber,
         st_check: "r",
       };
-  
+
       console.log("inputData : ", inputData);
-  
+
       return ApiService.updateSeat(inputData);
     });
-  
+
     Promise.all(updateSeatPromises)
       .then((res) => {
         console.log("모든 좌석 업데이트 성공");
@@ -241,16 +251,19 @@ const Reservation_Seat = () => {
                 <div className="step_content">
                   <dl>
                     <dt>인원</dt>
-                    <dd style={{textAlign: 'left', marginLeft: '15px'}}>
+                    <dd style={{ textAlign: "left", marginLeft: "15px" }}>
                       성인: {adultQuantity}명<br />
                       청소년: {teenQuantity}명<br />
                       경로: {childQuantity}명<br />
                       장애인: {disabledQuantity}명
                     </dd>
                     <dt>좌석</dt>
-                    <dd style={{textAlign: 'left', marginLeft: '15px'}}>
+                    <dd style={{ textAlign: "left", marginLeft: "15px" }}>
                       {selectedSeats.map((seat, index) => (
-                        <span key={index}>{seat}<br /></span>
+                        <span key={index}>
+                          {seat}
+                          <br />
+                        </span>
                       ))}
                     </dd>
                   </dl>
@@ -315,26 +328,37 @@ const Reservation_Seat = () => {
                         <li>
                           성인
                           <QuantityCounter
-                            onQuantityChange={handleQuantityChange}
+                            onQuantityChange={(newQuantity) => {
+                              setAdultQuantity(newQuantity);
+                            }}
                           />
                         </li>
                         <li>
                           청소년
                           <QuantityCounter
-                            onQuantityChange={handleQuantityChange}
+                            onQuantityChange={(newQuantity) => {
+                              setTeenQuantity(newQuantity);
+                            }}
                           />
                         </li>
                         <li>
                           경로
                           <QuantityCounter
-                            onQuantityChange={handleQuantityChange}
+                            onQuantityChange={(newQuantity) => {
+                              setChildQuantity(newQuantity);
+                            }}
                           />
                         </li>
                         <li>
                           장애인
                           <QuantityCounter
-                            onQuantityChange={handleQuantityChange}
+                            onQuantityChange={(newQuantity) => {
+                              setDisabledQuantity(newQuantity);
+                            }}
                           />
+                        </li>
+                        <li>
+                          <span>총 합계 : {totalQuantity}명</span>
                         </li>
                       </ul>
                     </div>
