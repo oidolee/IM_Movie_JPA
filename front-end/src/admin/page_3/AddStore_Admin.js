@@ -21,7 +21,7 @@ class AddStore_Admin extends Component {
 
     onChange = (e) => {  // 1. 입력한 값으로 변경한다.
         this.setState({
-            [e.target.name] : e.target.value  // ★★★★★★★이건 어떻게 사용하는 거지???????
+            [e.target.name] : e.target.value  
         });
     }
 
