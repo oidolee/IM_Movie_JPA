@@ -5,7 +5,7 @@ import Res_img15 from "../../assets/page_1/15.jpg";
 import ApiService from "../../ApiService";
 import { useHistory } from "react-router-dom";
 
-const QuantityCounter = ({ onQuantityChange }) => {
+const QuantityCounter = ({ onQuantityChange, totalQuantity  }) => {
   const [quantity, setQuantity] = useState(0);
 
   const handleIncrement = () => {
@@ -23,6 +23,14 @@ const QuantityCounter = ({ onQuantityChange }) => {
       onQuantityChange(newQuantity);
     }
   };
+
+  
+  useEffect(() => {
+    // 만약 수량이 8을 초과할 경우 각 수량을 0으로 초기화
+    if (totalQuantity > 8) {
+      setQuantity(0);
+    }
+  }, [totalQuantity]);
 
   return (
     <div>
@@ -80,13 +88,13 @@ useEffect(() => {
   if (newTotalQuantity <= 8) {
     setTotalQuantity(newTotalQuantity);
   } else {
-    // 총 수량이 8을 초과할 경우, 알림 메시지 출력 및 각 수량 상태 초기화
     alert("인원은 최대 8명까지 가능합니다.");
-    // setAdultQuantity(0);
-    // setTeenQuantity(0);
-    // setChildQuantity(0);
-    // setDisabledQuantity(0);
+    setAdultQuantity(0);
+    setTeenQuantity(0);
+    setChildQuantity(0);
+    setDisabledQuantity(0);
   }
+
 }, [adultQuantity, teenQuantity, childQuantity, disabledQuantity]);
 
   let parkingLot = {};
@@ -333,7 +341,11 @@ useEffect(() => {
                           <QuantityCounter
                             onQuantityChange={(newQuantity) => {
                               setAdultQuantity(newQuantity);
+                              setTotalQuantity(
+                                newQuantity + teenQuantity + childQuantity + disabledQuantity
+                              );
                             }}
+                            totalQuantity={totalQuantity}
                           />
                         </li>
                         <li>
@@ -341,7 +353,11 @@ useEffect(() => {
                           <QuantityCounter
                             onQuantityChange={(newQuantity) => {
                               setTeenQuantity(newQuantity);
+                              setTotalQuantity(
+                                newQuantity + teenQuantity + childQuantity + disabledQuantity
+                              );
                             }}
+                            totalQuantity={totalQuantity}
                           />
                         </li>
                         <li>
@@ -349,7 +365,11 @@ useEffect(() => {
                           <QuantityCounter
                             onQuantityChange={(newQuantity) => {
                               setChildQuantity(newQuantity);
+                              setTotalQuantity(
+                                newQuantity + teenQuantity + childQuantity + disabledQuantity
+                              );
                             }}
+                            totalQuantity={totalQuantity}
                           />
                         </li>
                         <li>
@@ -357,7 +377,11 @@ useEffect(() => {
                           <QuantityCounter
                             onQuantityChange={(newQuantity) => {
                               setDisabledQuantity(newQuantity);
+                              setTotalQuantity(
+                                newQuantity + teenQuantity + childQuantity + disabledQuantity
+                              );
                             }}
+                            totalQuantity={totalQuantity}
                           />
                         </li>
                         <li>
