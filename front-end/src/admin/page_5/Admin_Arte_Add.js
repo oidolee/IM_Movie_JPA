@@ -1,50 +1,50 @@
 import React, { useState } from "react";
 import ApiService from "../../ApiService";
 import { Typography, TextField, Button } from "@mui/material";
-import style from "../../styles/admin/page_5/Admin_Next_Add.css";
+import style from "../../styles/admin/page_5/Admin_Arte_Add.css";
 
-function Admin_Next_Add ({ history }) {
-  const [nextInfo, setNextInfo] = useState({
-    next_id: "",
-    next_image: "",
-    next_title: "",
-    next_date: "",
-    next_time: "",
-    next_age: "",
-    next_visitor: "",
-    next_contents: "",
-    next_con: "",
-    next_trailer: "",
-    next_category: "",
+function Admin_Arte_Add ({ history }) {
+  const [arteInfo, setArteInfo] = useState({
+    arte_id: "",
+    arte_image: "",
+    arte_title: "",
+    arte_date: "",
+    arte_time: "",
+    arte_age: "",
+    arte_visitor: "",
+    arte_contents: "",
+    arte_con: "",
+    arte_trailer: "",
+    arte_category: "",
   });
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    setNextInfo({
-      ...nextInfo,
+    setArteInfo({
+      ...arteInfo,
       [name]: value,
     });
   };
 
-  const saveNext = (e) => {
+  const saveArte = (e) => {
     e.preventDefault();
 
-    ApiService.addNext(nextInfo)
+    ApiService.addArte(arteInfo)
       .then((res) => {
-        console.log("NextInsert 성공 : ", res.data);
-        history.push("/admin/page_5/Admin_Next_List");
+        console.log("ArteInsert 성공 : ", res.data);
+        history.push("/admin/page_5/Admin_Arte_List");
       })
       .catch((err) => {
-        console.log("NextInsert 실패 : ", err);
+        console.log("ArteInsert 실패 : ", err);
       });
   };
 
   return (
-    <div className={`Admin_Next_Add ${style.Admin_Next_Add}`}>
+    <div className={`Admin_Arte_Add ${style.Admin_Arte_Add}`}>
       <br />
       <br />
-      <Typography variant="h5" className="NextAdd">
-      Next_Add
+      <Typography variant="h5" className="ArteAdd">
+      Arte_Add
       </Typography>
       <TextField
         required
@@ -52,8 +52,8 @@ function Admin_Next_Add ({ history }) {
         variant="standard"
         label="Movie_Image"
         type="text"
-        name="next_image"
-        value={nextInfo.next_image}
+        name="arte_image"
+        value={arteInfo.arte_image}
         onChange={onChange}
       />
       <br />
@@ -63,8 +63,8 @@ function Admin_Next_Add ({ history }) {
         variant="standard"
         label="Movie_Title"
         type="text"
-        name="next_title"
-        value={nextInfo.next_title}
+        name="arte_title"
+        value={arteInfo.arte_title}
         onChange={onChange}
       />
       <br />
@@ -74,8 +74,8 @@ function Admin_Next_Add ({ history }) {
         variant="standard"
         label="Movie_Date"
         type="text"
-        name="next_date"
-        value={nextInfo.next_date}
+        name="arte_date"
+        value={arteInfo.arte_date}
         onChange={onChange}
       />
       <br />
@@ -85,8 +85,8 @@ function Admin_Next_Add ({ history }) {
         variant="standard"
         label="Movie_Time"
         type="text"
-        name="next_time"
-        value={nextInfo.next_time}
+        name="arte_time"
+        value={arteInfo.arte_time}
         onChange={onChange}
       />
       <br />
@@ -96,8 +96,8 @@ function Admin_Next_Add ({ history }) {
         variant="standard"
         label="Movie_Age"
         type="text"
-        name="next_age"
-        value={nextInfo.next_age}
+        name="arte_age"
+        value={arteInfo.arte_age}
         onChange={onChange}
       />
       <br />
@@ -107,8 +107,8 @@ function Admin_Next_Add ({ history }) {
         variant="standard"
         label="Movie_Visitor"
         type="text"
-        name="next_visitor"
-        value={nextInfo.next_visitor}
+        name="arte_visitor"
+        value={arteInfo.arte_visitor}
         onChange={onChange}
       />
       <br />
@@ -118,8 +118,8 @@ function Admin_Next_Add ({ history }) {
         variant="standard"
         label="Movie_Contents"
         type="text"
-        name="next_contents"
-        value={nextInfo.next_contents}
+        name="arte_contents"
+        value={arteInfo.arte_contents}
         onChange={onChange}
       />
       <br />
@@ -129,8 +129,8 @@ function Admin_Next_Add ({ history }) {
         variant="standard"
         label="Movie_Con"
         type="text"
-        name="next_con"
-        value={nextInfo.next_con}
+        name="arte_con"
+        value={arteInfo.arte_con}
         onChange={onChange}
       />
       <br />
@@ -140,8 +140,8 @@ function Admin_Next_Add ({ history }) {
         variant="standard"
         label="Movie_Trailer"
         type="text"
-        name="next_trailer"
-        value={nextInfo.next_trailer}
+        name="arte_trailer"
+        value={arteInfo.arte_trailer}
         onChange={onChange}
       />
       <br />
@@ -152,8 +152,8 @@ function Admin_Next_Add ({ history }) {
         variant="standard"
         label="Movie_Category"
         type="text"
-        name="next_category"
-        value={nextInfo.next_category}
+        name="arte_category"
+        value={arteInfo.arte_category}
         onChange={onChange}
       />
       <br />
@@ -162,12 +162,12 @@ function Admin_Next_Add ({ history }) {
         className="saveBtn"
         variant="contained"
         color="primary"
-        onClick={saveNext}
+        onClick={saveArte}
       >
-        save_Next
+        save_Arte
       </Button>
     </div>
   );
 };
 
-export default Admin_Next_Add;
+export default Admin_Arte_Add;

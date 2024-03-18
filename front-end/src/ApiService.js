@@ -367,6 +367,37 @@ class ApiService {
     }
 
 
+    // 아르떼목록
+    listArte() {
+        console.log("listArte 호출");
+        return axios.get(url + "/page_5/ArteList");
+    }
+
+    //영화 아르떼 추가
+    addArte(inputData) {
+        console.log("addArte 호출", inputData);
+        return axios.post(url + "/page_5/ArteInsert", inputData);
+    }
+
+    // 아르떼1건조회
+    selectArte(arte_id) {
+        console.log("selectArte 호출", arte_id);
+        return axios.get(url + "/page_5/ArteDetailList" + "/" + arte_id);
+    }
+
+    // 영화 아르떼수정
+    editArte(inputData) {
+        console.log("editArte 호출", inputData);
+        return axios.put(url + "/page_5/ArteUpdate" + "/" + inputData.arte_id, inputData);
+    }  
+
+    // 영화 아르떼 삭제
+    deleteArte(arte_id) {
+        console.log("deleteNext 호출", arte_id);
+        return axios.delete(url + "/page_5/ArteDelete" + "/" + arte_id);
+    }
+
+
 }
 export default new ApiService();
 

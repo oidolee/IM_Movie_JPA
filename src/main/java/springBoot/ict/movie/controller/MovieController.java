@@ -414,6 +414,315 @@ public class MovieController {
 				
 				return map;
 			}
+			
+			// 새목록
+			@GetMapping("/NextList") 
+			public List<NextMovieDTO> NextList(Model model) 
+				throws ServletException, IOException {
+				
+				logger.info("url - UpdateList");
+				
+				List<NextMovieDTO> list = service2.NextList();
+				model.addAttribute("list", list);
+				
+				return list;
+			}
+
+			 // 새영화 추가
+		    @PostMapping("/NextInsert")
+		    public Map<String, Object> NextInsert(@RequestBody NextMovieDTO dto)
+		            throws ServletException, IOException {
+		        logger.info("<<< url - NextInsert >>>");
+		        
+		        System.out.println("<<< url - NextInsert >>>");
+		      
+		        System.out.println(dto);
+		        
+		        
+		        String resultCode = "";
+		        String resultMsg = "";
+
+		        Map<String, Object> map = new HashMap<String, Object>();
+
+		        try {
+		        	
+		            service2.NextInsert(dto);
+		            resultCode = "200";
+		            resultMsg = "NextInsert Success";
+		        } catch(Exception e) {
+		            resultCode = "400";
+		            resultMsg = e.getMessage();
+		            e.printStackTrace();
+		        }
+		        map.put("resultCode", resultCode);
+		        map.put("resultMsg", resultMsg);
+		        map.put("dto", dto);
+
+
+		        return map;
+		    }
+			  
+			 // 새영화 상세페이지
+			    @GetMapping("/NextDetailList/{next_id}") 
+			    public Map<String, Object> NextDetailList(@PathVariable("next_id") int next_id) 
+			            throws ServletException, IOException {
+			                
+			        logger.info("url - NextDetailList");
+			        
+			        System.out.println(next_id);
+			        String resultCode = "";
+			        String resultMsg = "";
+			        NextMovieDTO dto = null;
+			        
+			        Map<String, Object> map = new HashMap<String, Object>();
+			        
+			        try {
+			            
+			            dto = service2.getNextDetail(next_id);
+			            resultCode = "200";
+			            resultMsg = "Success";
+			        } 
+			        
+			        catch(Exception e) {
+			            
+			            resultCode = "400";
+			            resultMsg = e.getMessage();
+			            e.printStackTrace();
+			        }
+			        
+			        map.put("resultCode", resultCode);
+			        map.put("resultMsg", resultMsg);
+			        map.put("mov_id", next_id);
+			        map.put("dto", dto);
+			        
+			        return map;
+			    }
+			    
+			 // 새수정
+				@PutMapping("/NextUpdate/{next_id}") 
+				public Map<String, Object> NextUpdate(@PathVariable("next_id") int next_id, @RequestBody NextMovieDTO dto) 
+					throws ServletException, IOException {
+					
+					logger.info("url - NextUpdate");
+					
+					System.out.println(dto);
+					
+					String resultCode = "";
+					String resultMsg = "";
+					
+					Map<String, Object> map = new HashMap<String, Object>();
+					
+					try {
+						
+						service2.NextUpdate(dto);
+						
+						resultCode = "200";
+						resultMsg = "NextInsert Success";			
+
+						
+					} catch(Exception e) {
+						
+						resultCode = "400";
+						resultMsg = e.getMessage();
+						e.printStackTrace();
+					}
+					
+					map.put("resultCode", resultCode);
+					map.put("resultMsg", resultMsg);
+					map.put("dto", dto);
+					
+					return map;
+				}
+				
+				// 새삭제
+				@DeleteMapping("/NextDelete/{next_id}") 
+				public Map<String, Object> NextDelete(@PathVariable("next_id") int next_id) 
+					throws ServletException, IOException {
+					
+					logger.info("url - NextDelete");
+					
+					System.out.println(next_id);
+					String resultCode = "";
+					String resultMsg = "";
+					
+					Map<String, Object> map = new HashMap<String, Object>();
+					
+					try {
+						
+						service2.NextDelete(next_id);			
+						resultCode = "200";
+						resultMsg = "NextInsert Success";
+						
+					} 
+					
+					catch(Exception e) {
+						
+						resultCode = "400";
+						resultMsg = e.getMessage();
+						e.printStackTrace();
+					}
+					
+					map.put("resultCode", resultCode);
+					map.put("resultMsg", resultMsg);
+					map.put("now_id", next_id);
+					
+					return map;
+				}
+				
+				// 아르떼목록
+				@GetMapping("/ArteList") 
+				public List<ArteMovieDTO> ArteList(Model model) 
+					throws ServletException, IOException {
+					
+					logger.info("url - UpdateList");
+					
+					List<ArteMovieDTO> list = service3.ArteList();
+					model.addAttribute("list", list);
+					
+					return list;
+				}
+
+				 // 아르떼영화 추가
+			    @PostMapping("/ArteInsert")
+			    public Map<String, Object> ArteInsert(@RequestBody ArteMovieDTO dto)
+			            throws ServletException, IOException {
+			        logger.info("<<< url - ArteInsert >>>");
+			        
+			        System.out.println("<<< url - ArteInsert >>>");
+			      
+			        System.out.println(dto);
+			        
+			        
+			        String resultCode = "";
+			        String resultMsg = "";
+
+			        Map<String, Object> map = new HashMap<String, Object>();
+
+			        try {
+			        	
+			            service3.ArteInsert(dto);
+			            resultCode = "200";
+			            resultMsg = "ArteInsert Success";
+			        } catch(Exception e) {
+			            resultCode = "400";
+			            resultMsg = e.getMessage();
+			            e.printStackTrace();
+			        }
+			        map.put("resultCode", resultCode);
+			        map.put("resultMsg", resultMsg);
+			        map.put("dto", dto);
+
+
+			        return map;
+			    }
+				  
+				 // 아르떼영화 상세페이지
+				    @GetMapping("/ArteDetailList/{arte_id}") 
+				    public Map<String, Object> ArteDetailList(@PathVariable("ArteDetailList") int arte_id) 
+				            throws ServletException, IOException {
+				                
+				        logger.info("url - ArteDetailList");
+				        
+				        System.out.println(arte_id);
+				        String resultCode = "";
+				        String resultMsg = "";
+				        ArteMovieDTO dto = null;
+				        
+				        Map<String, Object> map = new HashMap<String, Object>();
+				        
+				        try {
+				            
+				            dto = service3.getArteDetail(arte_id);
+				            resultCode = "200";
+				            resultMsg = "Success";
+				        } 
+				        
+				        catch(Exception e) {
+				            
+				            resultCode = "400";
+				            resultMsg = e.getMessage();
+				            e.printStackTrace();
+				        }
+				        
+				        map.put("resultCode", resultCode);
+				        map.put("resultMsg", resultMsg);
+				        map.put("arte_id", arte_id);
+				        map.put("dto", dto);
+				        
+				        return map;
+				    }
+				    
+				 // 아르떼수정
+					@PutMapping("/ArteUpdate/{arte_id}") 
+					public Map<String, Object> NextUpdate(@PathVariable("arte_id") int arte_id, @RequestBody ArteMovieDTO dto) 
+						throws ServletException, IOException {
+						
+						logger.info("url - ArteUpdate");
+						
+						System.out.println(dto);
+						
+						String resultCode = "";
+						String resultMsg = "";
+						
+						Map<String, Object> map = new HashMap<String, Object>();
+						
+						try {
+							
+							service3.ArteUpdate(dto);
+							
+							resultCode = "200";
+							resultMsg = "ArteInsert Success";			
+
+							
+						} catch(Exception e) {
+							
+							resultCode = "400";
+							resultMsg = e.getMessage();
+							e.printStackTrace();
+						}
+						
+						map.put("resultCode", resultCode);
+						map.put("resultMsg", resultMsg);
+						map.put("dto", dto);
+						
+						return map;
+					}
+					
+					// 아르떼삭제
+					@DeleteMapping("/ArteDelete/{arte_id}") 
+					public Map<String, Object> ArteDelete(@PathVariable("arte_id") int arte_id) 
+						throws ServletException, IOException {
+						
+						logger.info("url - ArteDelete");
+						
+						System.out.println(arte_id);
+						String resultCode = "";
+						String resultMsg = "";
+						
+						Map<String, Object> map = new HashMap<String, Object>();
+						
+						try {
+							
+							service3.ArteDelete(arte_id);			
+							resultCode = "200";
+							resultMsg = "ArteInsert Success";
+							
+						} 
+						
+						catch(Exception e) {
+							
+							resultCode = "400";
+							resultMsg = e.getMessage();
+							e.printStackTrace();
+						}
+						
+						map.put("resultCode", resultCode);
+						map.put("resultMsg", resultMsg);
+						map.put("arte_id", arte_id);
+						
+						return map;
+					}
+			
 		
 	 		
         
