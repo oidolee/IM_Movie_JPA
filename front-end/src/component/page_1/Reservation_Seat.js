@@ -51,8 +51,11 @@ const Reservation_Seat = () => {
 
   // 로그인 상태 확인
 
-  useEffect(() => {
-    // 좌석 정보 가져오기
+  // 사용자 움직임 감지
+
+
+  // 좌석 정보 가져오기
+  useEffect(() => {  
     listSeat();
   }, []);
   
@@ -66,50 +69,6 @@ const Reservation_Seat = () => {
         console.log("listSeat 오류 : ", err);
       });
   };
-
-  useEffect(() => {
-    // "r" 상태이며 선택된 좌석이 있는지 확인
-    if (selectedSeats.length > 0) {
-      const timer = setTimeout(() => {
-        // 10분 이상 경과한 경우 예약 취소 로직 실행
-        const currentTime = Date.now();
-        const timeDiff = currentTime - lastActivityTime;
-        const minutesPassed = Math.floor(timeDiff / (1000 * 60)); // 밀리초를 분으로 변환
-  
-        if (minutesPassed >= 10) {
-          // 10분이 지나고 선택된 좌석이 있는 경우
-          alert("시간 초과로 예약이 취소되었습니다.");
-          setSelectedSeats([]); // 선택된 좌석 초기화
-          // 좌석 상태를 "n"으로 업데이트하여 예약 취소
-          selectedSeats.forEach((seat) => {
-            const [lot, seatNumber, ip_no] = seat.split("-");
-            const updatedSeat = {
-              st_id: ip_no,
-              st_row: lot,
-              st_column: seatNumber,
-              st_check: "n", // 취소된 예약으로 상태 설정
-            };
-            ApiService.updateSeat(updatedSeat)
-              .then((res) => {
-                console.log("좌석 예약이 취소되었습니다:", seat);
-              })
-              .catch((err) => {
-                console.log("좌석 예약 취소 오류:", err);
-              });
-          });
-          history.push("/page_1/Reservation_Movie"); 
-        }
-      }, 600000); // 10분
-  
-      return () => clearTimeout(timer); // 컴포넌트가 언마운트되거나 다시 렌더링될 때 타이머 정리
-    }
-  }, [lastActivityTime, selectedSeats, history]);
-
-  // 페이지가 언마운트될 때 로컬 스토리지에 상태 저장
-  useEffect(() => {
-    localStorage.setItem("lastActivityTime", lastActivityTime);
-    localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
-  }, [lastActivityTime, selectedSeats]);
 
   let parkingLot = {};
 
