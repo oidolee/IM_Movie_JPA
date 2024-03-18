@@ -54,7 +54,7 @@ const Reservation_Payment = () => {
               </a>
             </li>
             <li className="step" id="step2">
-              <a href="#Res_step02">
+              <a href="/page_1/Reservation_Seat">
                 <strong>
                   <span>
                     02
