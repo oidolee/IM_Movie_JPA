@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import ApiService from "../../ApiService";
 import { Typography, TextField, Button } from "@mui/material";
-import style from "../../styles/admin/page_5/Admin_Now_Edit.css";
+import style from "../../styles/admin/page_5/Admin_Next_Edit.css";
 
-const Admin_Now_Edit = ({ history }) => {
-    const [nowInfo, setNowInfo] = useState({
-    now_id: "",
-    now_image: "",
-    now_title: "",
-    now_date: "",
-    now_time: "",
-    now_age: "",
-    now_visitor: "",
-    now_contents: "",
-    now_con: "",
-    now_trailer: "",
-    now_category: "",
+const Admin_Next_Edit = ({ history }) => {
+    const [nextInfo, setNextInfo] = useState({
+    next_id: "",
+    next_image: "",
+    next_title: "",
+    next_date: "",
+    next_time: "",
+    next_age: "",
+    next_visitor: "",
+    next_contents: "",
+    next_con: "",
+    next_trailer: "",
+    next_category: "",
   });
 
   useEffect(() => {
@@ -23,22 +23,22 @@ const Admin_Now_Edit = ({ history }) => {
   }, []);
 
   const selectLoad = () => {
-    ApiService.selectNow(window.localStorage.getItem("now_id"))
+    ApiService.selectNext(window.localStorage.getItem("next_id"))
       .then((res) => {
         let list = res.data;
 
-        setNowInfo({
-          now_id: list.dto.now_id,
-          now_image: list.dto.now_image,
-          now_title: list.dto.now_title,
-          now_date: list.dto.now_date,
-          now_time: list.dto.now_time,
-          now_age: list.dto.now_age,
-          now_visitor: list.dto.now_visitor,
-          now_contents: list.dto.now_contents,
-          now_con: list.dto.now_con,
-          now_trailer: list.dto.now_trailer,
-          now_category: list.dto.now_category,
+        setNextInfo({
+          next_id: list.dto.next_id,
+          next_image: list.dto.next_image,
+          next_title: list.dto.next_title,
+          next_date: list.dto.next_date,
+          next_time: list.dto.next_time,
+          next_age: list.dto.next_age,
+          next_visitor: list.dto.next_visitor,
+          next_contents: list.dto.next_contents,
+          next_con: list.dto.next_con,
+          next_trailer: list.dto.next_trailer,
+          next_category: list.dto.next_category,
         });
         console.log("selectByIdUpdate 성공 : ", res.data);
       })
@@ -48,31 +48,31 @@ const Admin_Now_Edit = ({ history }) => {
   };
 
   const onChange = (e) => {
-    setNowInfo({
-      ...nowInfo,
+    setNextInfo({
+      ...nextInfo,
       [e.target.name]: e.target.value,
     });
   };
 
-  const editNow = (e) => {
+  const editNext = (e) => {
     e.preventDefault();
 
-    ApiService.editNow(nowInfo)
+    ApiService.editNext(nextInfo)
       .then((res) => {
-        console.log("editNow 성공 : ", res.data);
-        history.push("/admin/page_5/Admin_Now_List");
+        console.log("editNext 성공 : ", res.data);
+        history.push("/admin/page_5/Admin_Next_List");
       })
       .catch((err) => {
-        console.log("editNow 실패 : ", err);
+        console.log("editNext 실패 : ", err);
       });
   };
 
   return (
-    <div className={`Admin_Now_Edit ${style.Admin_Now_Edit}`}>
+    <div className={`Admin_Next_Edit ${style.Admin_Next_Edit}`}>
       <br />
       <br />
-      <Typography variant="h5" className="nowEdit">
-        Now_Edit
+      <Typography variant="h5" className="nextEdit">
+      Next_Edit
       </Typography>
       <TextField
         required
@@ -80,8 +80,8 @@ const Admin_Now_Edit = ({ history }) => {
         variant="standard"
         label="Movie_Id"
         type="text"
-        name="now_id"
-        value={nowInfo.now_id}
+        name="next_id"
+        value={nextInfo.next_id}
         />
       <br />
 
@@ -91,8 +91,8 @@ const Admin_Now_Edit = ({ history }) => {
         variant="standard"
         label="Movie_Img"
         type="text"
-        name="now_image"
-        value={nowInfo.now_image}
+        name="next_image"
+        value={nextInfo.next_image}
         onChange={onChange}
       />
       <br />
@@ -103,8 +103,8 @@ const Admin_Now_Edit = ({ history }) => {
         variant="standard"
         label="Movie_Title"
         type="text"
-        name="now_title"
-        value={nowInfo.now_title}
+        name="next_title"
+        value={nextInfo.next_title}
         onChange={onChange}
       />
       <br />
@@ -115,8 +115,8 @@ const Admin_Now_Edit = ({ history }) => {
         variant="standard"
         label="Movie_Date"
         type="text"
-        name="now_date"
-        value={nowInfo.now_date}
+        name="next_date"
+        value={nextInfo.next_date}
         onChange={onChange}
       />
       <br />
@@ -127,8 +127,8 @@ const Admin_Now_Edit = ({ history }) => {
         variant="standard"
         label="Movie_Time"
         type="text"
-        name="now_time"
-        value={nowInfo.now_time}
+        name="next_time"
+        value={nextInfo.next_time}
         onChange={onChange}
       />
       <br />
@@ -139,8 +139,8 @@ const Admin_Now_Edit = ({ history }) => {
         variant="standard"
         label="Movie_age"
         type="text"
-        name=" now_age"
-        value={nowInfo.now_age}
+        name="next_age"
+        value={nextInfo.next_age}
         onChange={onChange}
       />
       <br />
@@ -151,8 +151,8 @@ const Admin_Now_Edit = ({ history }) => {
         variant="standard"
         label="Movie_Visitor"
         type="text"
-        name="now_visitor"
-        value={nowInfo.now_visitor}
+        name="next_visitor"
+        value={nextInfo.next_visitor}
         onChange={onChange}
       />
       <br />
@@ -163,8 +163,8 @@ const Admin_Now_Edit = ({ history }) => {
         variant="standard"
         label="Movie_Contents"
         type="text"
-        name="now_contents:"
-        value={nowInfo.now_contents}
+        name="next_contents:"
+        value={nextInfo.next_contents}
         onChange={onChange}
       />
       <br />
@@ -175,8 +175,8 @@ const Admin_Now_Edit = ({ history }) => {
         variant="standard"
         label="Movie_Con"
         type="text"
-        name=" now_con"
-        value={nowInfo.now_con}
+        name="next_con"
+        value={nextInfo.next_con}
         onChange={onChange}
       />
       <br />
@@ -187,8 +187,8 @@ const Admin_Now_Edit = ({ history }) => {
         variant="standard"
         label="Movie_Trailer"
         type="text"
-        name=" now_trailer"
-        value={nowInfo.now_trailer}
+        name="next_trailer"
+        value={nextInfo.next_trailer}
         onChange={onChange}
       />
       <br />
@@ -199,8 +199,8 @@ const Admin_Now_Edit = ({ history }) => {
         variant="standard"
         label="Movie_Category"
         type="text"
-        name="now_category"
-        value={nowInfo.now_category}
+        name="next_category"
+        value={nextInfo.next_category}
         onChange={onChange}
       />
       <br />
@@ -210,12 +210,12 @@ const Admin_Now_Edit = ({ history }) => {
         className="editBtn"
         variant="contained"
         color="primary"
-        onClick={editNow}
+        onClick={editNext}
       >
-        edit_Now
+        edit_Next
       </Button>
     </div>
   );
 };
 
-export default Admin_Now_Edit;
+export default Admin_Next_Edit;

@@ -23,6 +23,9 @@ import Admin_Update_List from '../page_5/Admin_Update_List';
 import Admin_Now_Add from '../page_5/Admin_Now_Add';
 import Admin_Now_Edit from '../page_5/Admin_Now_Edit';
 import Admin_Now_List from '../page_5/Admin_Now_List';
+import Admin_Next_Add from '../page_5/Admin_Next_Add';
+import Admin_Next_Edit from '../page_5/Admin_Next_Edit';
+import Admin_Next_List from '../page_5/Admin_Next_List';
 
 const Admin_RouterComponent = () => {
 
@@ -62,6 +65,9 @@ const Admin_RouterComponent = () => {
                     <Route path="/admin/page_5/Admin_Now_Add" exact={true} component={Admin_Now_Add} />
                     <Route path="/admin/page_5/Admin_Now_Edit" exact={true} component={Admin_Now_Edit} />
                     <Route path="/admin/page_5/Admin_Now_List" exact={true} component={Admin_Now_List} />
+                    <Route path="/admin/page_5/Admin_Next_Add" exact={true} component={Admin_Next_Add} />
+                    <Route path="/admin/page_5/Admin_Next_Edit" exact={true} component={Admin_Next_Edit} />
+                    <Route path="/admin/page_5/Admin_Next_List" exact={true} component={Admin_Next_List} />
                 </Route>
 
 

@@ -1,50 +1,50 @@
 import React, { useState } from "react";
 import ApiService from "../../ApiService";
 import { Typography, TextField, Button } from "@mui/material";
-import style from "../../styles/admin/page_5/Admin_Now_Add.css";
+import style from "../../styles/admin/page_5/Admin_Next_Add.css";
 
-function Admin_Now_Add ({ history }) {
-  const [nowInfo, setNowInfo] = useState({
-    now_id: "",
-    now_image: "",
-    now_title: "",
-    now_date: "",
-    now_time: "",
-    now_age: "",
-    now_visitor: "",
-    now_contents: "",
-    now_con: "",
-    now_trailer: "",
-    now_category: "",
+function Admin_Next_Add ({ history }) {
+  const [nextInfo, setNextInfo] = useState({
+    next_id: "",
+    next_image: "",
+    next_title: "",
+    next_date: "",
+    next_time: "",
+    next_age: "",
+    next_visitor: "",
+    next_contents: "",
+    next_con: "",
+    next_trailer: "",
+    next_category: "",
   });
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    setNowInfo({
-      ...nowInfo,
+    setNextInfo({
+      ...nextInfo,
       [name]: value,
     });
   };
 
-  const saveNow = (e) => {
+  const saveNext = (e) => {
     e.preventDefault();
 
-    ApiService.addNow(nowInfo)
+    ApiService.addNext(nextInfo)
       .then((res) => {
-        console.log("NowInsert 성공 : ", res.data);
-        history.push("/admin/page_5/Admin_Now_List");
+        console.log("NextInsert 성공 : ", res.data);
+        history.push("/admin/page_5/Admin_Next_List");
       })
       .catch((err) => {
-        console.log("NowInsert 실패 : ", err);
+        console.log("NextInsert 실패 : ", err);
       });
   };
 
   return (
-    <div className={`Admin_Now_Add ${style.Admin_Now_Add}`}>
+    <div className={`Admin_Next_Add ${style.Admin_Next_Add}`}>
       <br />
       <br />
-      <Typography variant="h5" className="NowAdd">
-        Now_Add
+      <Typography variant="h5" className="NextAdd">
+      Next_Add
       </Typography>
       <TextField
         required
@@ -52,8 +52,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Image"
         type="text"
-        name="now_image"
-        value={nowInfo.now_image}
+        name="next_image"
+        value={nextInfo.next_image}
         onChange={onChange}
       />
       <br />
@@ -63,8 +63,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Title"
         type="text"
-        name="now_title"
-        value={nowInfo.now_title}
+        name="next_title"
+        value={nextInfo.next_title}
         onChange={onChange}
       />
       <br />
@@ -74,8 +74,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Date"
         type="text"
-        name="now_date"
-        value={nowInfo.now_date}
+        name="next_date"
+        value={nextInfo.next_date}
         onChange={onChange}
       />
       <br />
@@ -85,8 +85,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Time"
         type="text"
-        name=" now_time"
-        value={nowInfo.now_time}
+        name=" next_time"
+        value={nextInfo.next_time}
         onChange={onChange}
       />
       <br />
@@ -96,8 +96,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Age"
         type="text"
-        name="now_age"
-        value={nowInfo.now_age}
+        name="next_age"
+        value={nextInfo.next_age}
         onChange={onChange}
       />
       <br />
@@ -107,8 +107,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Visitor"
         type="text"
-        name="now_visitor"
-        value={nowInfo.now_visitor}
+        name="next_visitor"
+        value={nextInfo.next_visitor}
         onChange={onChange}
       />
       <br />
@@ -118,8 +118,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Contents"
         type="text"
-        name="now_contents"
-        value={nowInfo.now_contents}
+        name="next_contents"
+        value={nextInfo.next_contents}
         onChange={onChange}
       />
       <br />
@@ -129,8 +129,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Con"
         type="text"
-        name="now_con"
-        value={nowInfo.now_con}
+        name="next_con"
+        value={nextInfo.next_con}
         onChange={onChange}
       />
       <br />
@@ -140,8 +140,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Trailer"
         type="text"
-        name="now_trailer"
-        value={nowInfo.now_trailer}
+        name="next_trailer"
+        value={nextInfo.next_trailer}
         onChange={onChange}
       />
       <br />
@@ -152,8 +152,8 @@ function Admin_Now_Add ({ history }) {
         variant="standard"
         label="Movie_Category"
         type="text"
-        name="now_category"
-        value={nowInfo.now_category}
+        name="next_category"
+        value={nextInfo.next_category}
         onChange={onChange}
       />
       <br />
@@ -162,12 +162,12 @@ function Admin_Now_Add ({ history }) {
         className="saveBtn"
         variant="contained"
         color="primary"
-        onClick={saveNow}
+        onClick={saveNext}
       >
-        save_Now
+        save_Next
       </Button>
     </div>
   );
 };
 
-export default Admin_Now_Add;
+export default Admin_Next_Add;
