@@ -25,30 +25,31 @@ class StoreTicket extends Component {
   }
 
   createMap = () => {
-    const { kakao } = window;
-    const container = document.getElementById('map');
-    const options = {
-      center: new kakao.maps.LatLng(this.state.ticketmap_latitude, this.state.ticketmap_longitude),
-      level: 3
-    };
+  const { kakao } = window;
+  const container = document.getElementById('map');
+  console.log(kakao)
+  const options = {
+    center: new kakao.maps.LatLng(this.state.ticketmap_latitude, this.state.ticketmap_longitude),
+    level: 3
+  };
 
-    const map = new kakao.maps.Map(container, options);
+  const map = new kakao.maps.Map(container, options);
 
-    // 마커 위치 설정
-    const markerPosition = new kakao.maps.LatLng(this.state.ticketmap_latitude, this.state.ticketmap_longitude);
-    // 마커 생성
-    const marker = new kakao.maps.Marker({
-      map: map,
-      position: markerPosition
-    });
+  // 마커 위치 설정
+  const markerPosition = new kakao.maps.LatLng(this.state.ticketmap_latitude, this.state.ticketmap_longitude);
+  const marker = new kakao.maps.Marker({
+    map: map,
+    position: markerPosition
+  });
 
-    // 커스텀 오버레이를 사용하여 마커 아래에 회사 이름 표시
-    const customOverlay = new kakao.maps.CustomOverlay({
-      map: map,
-      position: markerPosition,
-      yAnchor: -0.5 // 마커 아래에 표시되도록 설정
-    });
-  }
+  // 커스텀 오버레이를 사용하여 마커 아래에 회사 이름 표시
+  const customOverlay = new kakao.maps.CustomOverlay({
+    map: map,
+    position: markerPosition,
+    yAnchor: -0.5 // 마커 아래에 표시되도록 설정
+  });
+}
+
 
   componentDidMount() {
     this.storeListMap(); // 리스트목록을 가져옵니다.
