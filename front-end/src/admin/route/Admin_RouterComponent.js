@@ -26,6 +26,10 @@ import Admin_Now_List from '../page_5/Admin_Now_List';
 import Admin_Next_Add from '../page_5/Admin_Next_Add';
 import Admin_Next_Edit from '../page_5/Admin_Next_Edit';
 import Admin_Next_List from '../page_5/Admin_Next_List';
+import Admin_Arte_List from '../page_5/Admin_Arte_List';
+import Admin_Arte_Add from '../page_5/Admin_Arte_Add';
+import Admin_Arte_Edit from '../page_5/Admin_Arte_Edit';
+
 
 const Admin_RouterComponent = () => {
 
@@ -68,6 +72,9 @@ const Admin_RouterComponent = () => {
                     <Route path="/admin/page_5/Admin_Next_Add" exact={true} component={Admin_Next_Add} />
                     <Route path="/admin/page_5/Admin_Next_Edit" exact={true} component={Admin_Next_Edit} />
                     <Route path="/admin/page_5/Admin_Next_List" exact={true} component={Admin_Next_List} />
+                    <Route path="/admin/page_5/Admin_Arte_List" exact={true} component={Admin_Arte_List} />
+                    <Route path="/admin/page_5/Admin_Arte_Add" exact={true} component={Admin_Arte_Add} />
+                    <Route path="/admin/page_5/Admin_Arte_Edit" exact={true} component={Admin_Arte_Edit} />
                 </Route>
 
 
