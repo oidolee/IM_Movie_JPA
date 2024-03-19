@@ -226,7 +226,7 @@ class StoreGift extends Component {
                     <input
                       type="hidden"
                       name="itemCode"
-                      value={this.props.itemCode} // props로 전달된 itemCode 사용
+                      value={this.props.itemCode} // props로 전달된 itemCode 사용  
                     />
                     <input
                       type="hidden"
