@@ -98,26 +98,24 @@ const Reservation_Movie = ({ history }) => {
   };
 
   /// API를 호출하여 잔여 좌석 수를 가져오는 함수
-  const fetchRemainingSeatsCount = () => {
-    ApiService.listSeat()
-      .then((res) => {
-        // 받아온 좌석 정보에서 st_check가 "r" 또는 "y"가 아닌 좌석들의 수를 구합니다.
-        const remainingSeats = res.data.filter(
-          (seat) => seat.st_check !== "r" && seat.st_check !== "y"
-        ).length;
-        console.log("잔여 좌석 수:", remainingSeats);
-        // 상태로 관리하여 컴포넌트에서 사용할 수 있도록 업데이트합니다.
-        setRemainingSeatsCount(remainingSeats);
-      })
-      .catch((err) => {
-        console.log("API 호출 오류:", err);
-      });
-  };
+const fetchRemainingSeatsCount = () => {
+  ApiService.listSeat()
+    .then((res) => {
+      // 받아온 좌석 정보에서 st_check가 "r" 또는 "y"가 아닌 좌석들의 수를 구합니다.
+      const remainingSeats = res.data.filter(seat => seat.st_check !== "r" && seat.st_check !== "y").length;
+      console.log("잔여 좌석 수:", remainingSeats);
+      // 상태로 관리하여 컴포넌트에서 사용할 수 있도록 업데이트합니다.
+      setRemainingSeatsCount(remainingSeats);
+    })
+    .catch((err) => {
+      console.log("API 호출 오류:", err);
+    });
+};
 
-  // 컴포넌트가 마운트될 때 한 번만 API를 호출하여 잔여 좌석 수를 가져옵니다.
-  useEffect(() => {
-    fetchRemainingSeatsCount();
-  }, []);
+// 컴포넌트가 마운트될 때 한 번만 API를 호출하여 잔여 좌석 수를 가져옵니다.
+useEffect(() => {
+  fetchRemainingSeatsCount();
+}, []);
 
   const handleConfirmation = () => {
     setPopupOpen(false);
@@ -246,7 +244,10 @@ const Reservation_Movie = ({ history }) => {
                         <li className="subRegions" key={subRegion}>
                           <a
                             href="#"
-                            onClick={() => handleTheaterSelection(subRegion)}
+                            onClick={(event) => {
+                              event.preventDefault();
+                              handleTheaterSelection(subRegion)
+                            }}
                           >
                             {subRegion}
                           </a>
@@ -315,8 +316,8 @@ const Reservation_Movie = ({ history }) => {
                                 "HH:mm:ss"
                               ).format("HH:mm")}
                               <br />
-                              {remainingSeatsCount}/112{" "}
-                              {selectedMovie.theater_id}
+                              
+                              {remainingSeatsCount}/112 {selectedMovie.theater_id}
                             </span>
                           </a>
                         </li>
@@ -339,9 +340,9 @@ const Reservation_Movie = ({ history }) => {
                 ({selectedMovie.theater_id})
               </strong>
               {remainingSeatsCount !== null && (
-                <p>
-                  잔여좌석 <strong>{remainingSeatsCount}</strong>/112
-                </p>
+              <p>
+                잔여좌석 <strong>{remainingSeatsCount}</strong>/112
+              </p>
               )}
               <img className="Res_screen" src={Res_screen} />
               <p>
