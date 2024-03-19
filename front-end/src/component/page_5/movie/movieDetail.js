@@ -46,17 +46,10 @@ function StarRating({ maxStars, selectedStars, onStarClick }) {
 }
 
 
-
-
-
 function MovieDetail() {
   const [showModal, setShowModal] = useState(false); // 모달 창 열림/닫힘 상태
   const [selectedValue, setSelectedValue] = useState(1); // 선택된 값
   const [selectedTrailer, setSelectedTrailer] = useState("");
-<<<<<<< HEAD
-  const [cookies, setCookie, removeCookie] = useCookies(['idCheck']); // 로그인 확인용
-  const history = useHistory();
-=======
   const [cookies, setCookie, removeCookie] = useCookies(['idName']); // 로그인 확인용
 
   const { movie_id } = useParams(); // useParams 훅을 사용하여 URL의 id 값을 가져옴
@@ -68,7 +61,6 @@ function MovieDetail() {
 
   // id 값 사용 예시
   console.log("Movie ID:", movie_id);
->>>>>>> 91a6ada658f5502755e6f6f2cc53131e93cc5258
 
   const handleTrailerClick = (trailerUrl) => {
     setSelectedTrailer(trailerUrl);

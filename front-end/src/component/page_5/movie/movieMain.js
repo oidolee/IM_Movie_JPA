@@ -64,7 +64,7 @@ function MovieMain() {
         setMovies(res.data);
       })
       .catch((err) => {
-        console.log("reloadConsultList() Error!!", err);
+        console.log("reloadMovieList() Error!!", err);
       });
   };
 

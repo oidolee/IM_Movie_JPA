@@ -58,18 +58,24 @@ class StoreTicket extends Component {
   // 리스트목록을 가져오는 함수
   storeListMap = () => {
     ApiService.ListStore_Map()
-      .then(res => {
-        this.setState({
-          lists: res.data
-        }, () => {
-          // 리스트 목록을 가져온 후에 createMap 함수를 호출하여 지도를 생성합니다.
-          this.createMap();
+        .then(res => {
+            this.setState({
+                lists: res.data
+            }, () => {
+                // 리스트 목록을 가져온 후에 createMap 함수를 호출하여 지도를 생성합니다.
+                this.createMap();
+
+                // 서울 영화관 목록의 첫 번째 항목의 ticketmap_no를 가져와서 EditStore_Map 함수 호출
+                const seoulStores = this.state.lists.filter(item => item.ticketmap_address.includes('서울'));
+                if (seoulStores.length > 0) {
+                    this.EditStore_Map(seoulStores[0].ticketmap_no);
+                }
+            });
+        })
+        .catch(err => {
+            console.log('Error fetching store list:', err);
         });
-      })
-      .catch(err => {
-        console.log('Error fetching store list:', err);
-      });
-  }
+}
 
   // edit 버튼 클릭 시 실행되는 함수
   EditStore_Map = (ticketmap_no) => {

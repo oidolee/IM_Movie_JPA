@@ -259,24 +259,64 @@ font-size: 13px;
   border:1px solid black;
 }
 
-.timeb1{
-  align-items: left;
+.pamu1 {
+  display: flex; /* 하위 요소들을 가로로 정렬합니다. */
+  flex-wrap: wrap; /* 필요시 요소들을 여러 줄로 나눕니다. */
+}
+
+.dune1{
+  display: flex; /* 하위 요소들을 가로로 정렬합니다. */
+  flex-wrap: wrap;
+}
+
+.bab1{
+  display: flex; /* 하위 요소들을 가로로 정렬합니다. */
+  flex-wrap: wrap;
+}
+
+.oneandonly1{
+  display: flex; /* 하위 요소들을 가로로 정렬합니다. */
+  flex-wrap: wrap;
+}
+
+.wingka1{
+  display: flex; /* 하위 요소들을 가로로 정렬합니다. */
+  flex-wrap: wrap;
+}
+
+.maydecember1{
+  display: flex; /* 하위 요소들을 가로로 정렬합니다. */
+  flex-wrap: wrap;
 }
 
 .squareButton{
-  width:80px;
-  height:38px;
+  width:88px;
+  height:40px;
   background-color: #cccccc23;
   border:1px solid rgba(128, 128, 128, 0.322);
   border-radius: 3px;
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
-.cost_list{
+.timeInfo {
+  font-size: 12px; /* 원하는 크기로 조정 */
+  
+}
 
+.timeb1 {
+  display: flex;
+  flex-wrap: wrap; /* 필요시 버튼이 한 줄을 벗어날 경우 여러 줄로 나열하도록 설정 */
+}
+
+/* 또는 직접 클래스에 스타일을 적용할 수도 있습니다 */
+.timeb1 button {
+  font-size: 13px; /* 원하는 크기로 조정 */
+  font-weight:bold;
+  margin-right: 10px; /* 버튼 사이의 간격 조절 */
+  margin-bottom: 10px;
 }
 
 .mv_lastIMG1{
   position: relative;
-  top: -150px; /* 원하는 만큼 위로 이동 */
+  top: -450px; /* 원하는 만큼 위로 이동 */
 }

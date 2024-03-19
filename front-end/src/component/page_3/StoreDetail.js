@@ -8,6 +8,7 @@ import bottom2 from "../../assets/page_3/bottom2.jpg";
 import { Virtual, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ApiService from '../../ApiService';
+import { withRouter } from 'react-router-dom';
 
 
 class StoreDetail extends Component {
@@ -167,6 +168,28 @@ EditStore_Admin = (e) => {
     this.setState({ swiperRef: swiper });
   };
 
+  Payment_Store = () => {
+    const { totalQuantity, totalPrice } = this.props;
+
+  // 로컬 스토리지에서 sampleID 제거
+  window.localStorage.removeItem("sampleID");
+
+  // 로컬 스토리지에 새로운 데이터 저장
+  window.localStorage.setItem(
+    "sampleID",
+    JSON.stringify({
+      totalQuantity,
+      totalPrice
+    })
+  );
+
+
+
+    this.props.history.push("/page_3/Reservation_Payment_Store");
+    //window.location.href = "/page_3/Reservation_Payment_Store";
+    //window.location.href = "/page_3/Store_Payment_Finish";
+  };
+
   render() {
     const {
       isStoreGiftOpen,
@@ -320,12 +343,12 @@ EditStore_Admin = (e) => {
               <button className="btn_col2 ty7" onClick={this.openStoreGift}>
                 선물하기
               </button>
-              <button className="btn_col1 ty7">구매하기</button>
+              <button className="btn_col1 ty7" onClick={this.Payment_Store}>구매하기</button>
             </div>
 
             {/* 선물하기 모달/팝업 조건부 렌더링 */}
             {/* {isStoreGiftOpen && <StoreGift onClose={this.closeStoreGift} />} */}
-            {isStoreGiftOpen && <StoreGift onClose={this.closeStoreGift} totalQuantity={quantity} totalPrice={price} />}
+            {isStoreGiftOpen && <StoreGift onClose={this.closeStoreGift} totalQuantity={quantity} totalPrice={price} itemCode={this.state.itemCode}/>}
             {/* 선물하기 모달/팝업 조건부 렌더링 */}
             {isStoreTicketOpen && <StoreTicket onClose={this.closeStoreTicket} />}
           </div>
@@ -415,4 +438,4 @@ EditStore_Admin = (e) => {
   }
 }
 
-export default StoreDetail;
+export default withRouter(StoreDetail);

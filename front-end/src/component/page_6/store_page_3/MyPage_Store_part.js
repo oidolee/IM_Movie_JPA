@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import style from '../../../styles/page_6/MyPage_res.module.css'
+import style from '../../../styles/page_6/MyPage_res_module.css'
 
 
 class MyPage_Store_part extends Component {
@@ -10,30 +10,21 @@ class MyPage_Store_part extends Component {
                     {/* 반복문 써서 날짜 정보 나오게끔 */}
                     <table>
                         <tr>
-                            <td>0000.00.00</td>
+                            <td>2024.03.18(월)</td>
                             {/* 나중에 포이치문 쓸거여 */}
-                        </tr>
-                        <tr>
-                            <td>날짜</td>
-                        </tr>
-                        <tr>
-                            <td>날짜</td>
-                        </tr>
-                        <tr>
-                            <td>날짜</td>
                         </tr>
                     </table>
                 </div>
                 <div className={`MyPage_res_MovieInfo ${style.MyPage_res_MovieInfo}`}>
                     <div className={`MyPage_res_MovieInfo_small ${style.MyPage_res_MovieInfo_small}`}>
                         <div className={`movie_Name ${style.movie_Name}`}>
-                            <strong>영화 이름</strong>
+                            <strong>콜라M</strong>
                         </div>
                         <div className={`movie_Name ${style.movie_Name}`}>
-                            <strong>가격</strong>
+                            <strong>3000원</strong>
                         </div>
                         <div className={`res_code ${style.res_code}`}>
-                            예매번호 0000000
+                            구매번호 109512132514023
                         </div>
                         <div className={`cancle_accept ${style.cancle_accept}`}>
                             {/* 영화 시작 30분 전에는 취소 불가능 */}
@@ -48,22 +39,14 @@ class MyPage_Store_part extends Component {
                             <div className={`movie_info_detail ${style.movie_info_detail}`}>
                                 <table>
                                     <tr>
-                                        <th>상영일시</th>
-                                        <td>0000.00.00</td>
-                                        <td>1234</td>
+                                        <th>상품구성</th>
+                                        <td>콜라M</td>
                                     </tr>
                                     <tr>
-                                        <th>상영관</th>
-                                        <td colSpan={2}>1234</td>
+                                        <th>유효기간</th>
+                                        <td colSpan={2}>온라인 상품권 2024-03-18 ~ 2026-03-20</td>
                                     </tr>
-                                    <tr>
-                                        <th>관람인원</th>
-                                        <td colSpan={2}>0명</td>
-                                    </tr>
-                                    <tr>
-                                        <th>좌석</th>
-                                        <td colSpan={2}>h1 h2 석</td>
-                                    </tr>
+                                   
                                     <tr>
                                         <td colSpan={3}>
                                             <button className={`cancle_res ${style.cancle_res}`}>결제취소</button>
