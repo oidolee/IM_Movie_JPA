@@ -19,14 +19,19 @@ public class ReservationDTO {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private int res_id;
-    private String c_email;
+    private int movie_id;
+    private String place_code;
+    private int st_id;
     private String theater_id;
     private int screen_id;
+    private String time_date;
+    private String c_email;    
     private String movie_age;
     private String res_movie_id;
     private String res_movie_name;
     private String res_movie_time;
-    private int st_id;
+    private Date start_time;
+    private Date end_time;
     private int res_count;
     private int res_ticket_price;
     private Date res_sysdate;

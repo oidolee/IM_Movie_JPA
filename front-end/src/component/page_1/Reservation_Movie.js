@@ -13,6 +13,7 @@ const Reservation_Movie = ({ history }) => {
   const [reservation, setReservation] = useState([]);
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState(null); // 선택한 영화 상태
   const [subRegions, setSubRegions] = useState({
     서울: [
       "가산디지털",
@@ -61,6 +62,20 @@ const Reservation_Movie = ({ history }) => {
       .catch((err) => {
         console.log("listReservation 오류 : ", err);
       });
+  };
+
+  // 연령에 대한 이미지
+  const getMovieImage = (age) => {
+    if (age === "All ages") {
+      return <img src={Res_imgAll} />;
+    } else if (age === "15") {
+      return <img src={Res_img15} />;
+    }
+  };
+
+  // 영화 선택 핸들러
+  const handleMovieSelection = (reservations) => {
+    setSelectedMovie(reservations);
   };
 
   const handleConfirmation = () => {
@@ -205,54 +220,22 @@ const Reservation_Movie = ({ history }) => {
             <li>
               <div className="menu3">
                 <ul className="menu3_left">
-                  <li>
-                    <a href="#none">
-                      <img src={Res_img15} />
-                      파묘
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#none">
-                      <img src={Res_img12} />
-                      듄:파트2
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#none">
-                      <img src={Res_img12} />
-                      건국전쟁
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#none">
-                      <img src={Res_imgAll} />
-                      윙카
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#none">
-                      <img src={Res_img12} />
-                      소풍
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#none">
-                      <img src={Res_imgAll} />
-                      로봇 드림
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#none">
-                      <img src={Res_img12} />
-                      패스트 라이브즈
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#none">
-                      <img src={Res_imgAll} />
-                      엘리멘탈
-                    </a>
-                  </li>
+                  {reservation.map((reservations) => (
+                    <React.Fragment key={reservations.res_id}>
+                      <li>
+                        <a
+                          href="#"
+                          onClick={(event) => {
+                            event.preventDefault();
+                            handleMovieSelection(reservations);
+                          }}
+                        >
+                          {getMovieImage(reservations.movie_age)}
+                          {reservations.res_movie_name}
+                        </a>
+                      </li>
+                    </React.Fragment>
+                  ))}
                 </ul>
               </div>
             </li>
@@ -269,25 +252,29 @@ const Reservation_Movie = ({ history }) => {
                   <li>
                     <Reservation_Swiper />
                   </li>
-                  <div className="menu4_main">
-                    <a href="#none">
-                      <img src={Res_img15} />
-                      파묘
-                    </a>
-                  </div>
+                  {selectedMovie && (
+                    <div className="menu4_main">
+                      <a href="#none">
+                        {getMovieImage(selectedMovie.movie_age)}
+                        {selectedMovie.res_movie_name}
+                      </a>
+                    </div>
+                  )}
+                   {selectedMovie && (
                   <div className="menu4_sub">
                     <ul>
                       <li>
                         <a href="#none" onClick={() => setPopupOpen(true)}>
                           <span>
-                            13:40
+                            {selectedMovie.start_time}
                             <br />
-                            82/100 3관
+                            82/100 {selectedMovie.theater_id}관
                           </span>
                         </a>
                       </li>
                     </ul>
                   </div>
+                   )}
                 </ul>
               </div>
             </li>
