@@ -30,17 +30,17 @@ public class StoreGiftController {
         this.messageService = NurigoApp.INSTANCE.initialize("NCSQXJSURZ58SQNB", "VP543DROHSBAWEFB489JZXJTMPAL7MDW", "https://api.coolsms.co.kr");
     }
 
-    @PostMapping("/page_3/EditStoreGift_Admin/send-gift-message")
+    @PostMapping("/page_3/Reservation_Payment_Store")
     //@PostMapping("/page_3/EditStoreGift_Admin/send-gift-message")
     public SingleMessageSentResponse sendGiftMessage(@RequestBody StoreGiftDTO dto) throws ServletException, IOException {
         // 선물 정보를 저장합니다.
-        //service.insertStoreGift(dto);
+        service.insertStoreGift(dto);
 
         // 선물 정보를 문자 메시지로 발송합니다.
         Message message = new Message();
-//        message.setFrom(dto.getGift_recipient()); // 발신번호
-//        message.setTo(dto.getGift_name()); // 수신번호
-//        message.setText(dto.getGift_content()); // 메시지 내용
+        message.setFrom(dto.getGift_recipient()); // 발신번호
+        message.setTo(dto.getGift_name()); // 수신번호
+        message.setText(dto.getGift_content()); // 메시지 내용
 
         message.setFrom("01063395120"); // 발신번호
         message.setTo("01063395120"); // 수신번호

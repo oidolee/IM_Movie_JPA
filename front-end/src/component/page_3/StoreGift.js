@@ -3,6 +3,7 @@ import style from "../../styles/page_3/StoreGift.css";
 import package1 from "../../assets/page_3/package1.jpg";
 import cancel from "../../assets/page_3/cancel.png";
 import { withRouter } from 'react-router-dom';
+import ApiService from "../../ApiService";
 
 
 class StoreGift extends Component {
@@ -59,7 +60,7 @@ class StoreGift extends Component {
   handlePayment = () => {
   // 결제하기 버튼 클릭 시 실행되는 로직
   const { recipientNumber, sender, message } = this.state;
-  const { totalQuantity, totalPrice, itemCode } = this.props;
+  const { totalQuantity, totalPrice, itemCode, itemName } = this.props;
 
   const storedData = localStorage.getItem("sampleID");
   if (storedData) {
@@ -88,6 +89,7 @@ class StoreGift extends Component {
       totalQuantity,
       totalPrice,
       itemCode,
+      itemName,
     })
   );
 
@@ -225,6 +227,11 @@ class StoreGift extends Component {
                       type="hidden"
                       name="itemCode"
                       value={this.props.itemCode} // props로 전달된 itemCode 사용
+                    />
+                    <input
+                      type="hidden"
+                      name="itemName"
+                      value={this.props.itemName} // props로 전달된 itemName 사용
                     />
                   </div>
                 </td>

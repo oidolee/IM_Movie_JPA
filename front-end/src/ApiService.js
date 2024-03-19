@@ -96,6 +96,14 @@ class ApiService {
         return axios.get(url + "/page_3/EditStore_Admin" + "/EditStore_Map/" +  sampleID ); // 주의 : "/"+ 
     }
 
+    sendGiftMessage(storedData) {
+        console.log('sendGiftMessage 호출!!', storedData);
+        return axios.post(url + "/page_3/Reservation_Payment_Store", storedData)
+    }
+
+
+
+
     // Store Map 끝
     // --------------------------------------------Store 끝----------------------------------------------
 
