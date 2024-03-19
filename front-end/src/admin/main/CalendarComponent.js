@@ -49,20 +49,28 @@ const CalendarComponent = () => {
       const manualEvents = [
         {
           id: '1',
-          title: '수동 일정 1',
-          start: '2024-03-15',
+          title: '랜드 오브 밴드',
+          start: '2024-03-04',
+          end: '2024-03-14',
+          backgroundColor: 'green',
+          textColor: 'white'
+        },
+        {
+          id: '2',
+          title: '밥말리 원러브',
+          start: '2024-03-13',
           end: '2024-03-20',
           backgroundColor: 'blue',
           textColor: 'white'
         },
         {
-            id: '12',
-            title: '수동 일정 12',
-            start: '2024-03-19',
-            end: '2024-03-21',
-            backgroundColor: 'red',
-            textColor: 'white'
-          }
+          id: '3',
+          title: '용감한 돌고래 벨루',
+          start: '2024-03-19',
+          end: '2024-03-30',
+          backgroundColor: 'red',
+          textColor: 'white'
+        }
       ];
   
       // 캘린더에 이벤트를 추가하기 전에 먼저 모든 이벤트를 제거합니다.
