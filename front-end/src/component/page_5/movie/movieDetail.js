@@ -13,13 +13,14 @@ import trailer2 from "../../../assets/page_5_5/trailer2.png";
 import BobMarley_OneLove from '../../../assets/page_5/BobMarley_OneLove.jpg';
 // import { Link } from '@mui/material';
 
-import { Link } from 'react-router-dom' // 페이지이동
+import { Link, useHistory } from 'react-router-dom'; // 페이지이동
 
 function MovieDetail() {
   const [showModal, setShowModal] = useState(false); // 모달 창 열림/닫힘 상태
   const [selectedValue, setSelectedValue] = useState(1); // 선택된 값
   const [selectedTrailer, setSelectedTrailer] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(['idCheck']); // 로그인 확인용
+  const history = useHistory();
 
   const handleTrailerClick = (trailerUrl) => {
     setSelectedTrailer(trailerUrl);
@@ -45,6 +46,9 @@ function MovieDetail() {
   };
 
   console.log(selectedStars)
+
+  
+
   return (
     <>
       <div className={`detail_movie_wrap ${style.detail_movie_wrap}`}>
