@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import style from '../../../styles/page_6/MyPage_wishMovie.module.css'
+import style from '../../../styles/page_6/MyPage_wishMovie_module.css'
 
 
 function MyPage_wishMovie_part() {

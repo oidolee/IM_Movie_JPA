@@ -48,12 +48,8 @@ import resultFindPWD from '../page_4/resultFindPWD';
 
 //page_5
 import movieMain from '../page_5/movie/movieMain';
-<<<<<<< HEAD
-import movieDetail from '../page_5/movie/movieDetail';
-=======
 import MovieDetail from '../page_5/movie/movieDetail';
 import movieUpdate from '../../admin/page_5/Admin_Update_Add';
->>>>>>> 91a6ada658f5502755e6f6f2cc53131e93cc5258
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
 import arte from '../page_5/movie/arte';
@@ -78,6 +74,7 @@ import MyPage_consult_list from '../page_6/myinfo/MyPage_consult_list';
 import MyPage_Event from '../page_6/event/MyPage_Event';
 import Event_Home from '../page_6/event/Event_Home';
 import MyapgeConsultDetail from '../page_6/myinfo/MyPage_consult_answer';
+
 
 
 // import Admin_main from '../../admin/main/Admin_main'
@@ -138,14 +135,10 @@ const AppRouter = () => {
                             {/* page_5 */}
                             <Route>
                                 <Route path="/movieMain" exact={true} component={movieMain} />
-<<<<<<< HEAD
-                                <Route path="/movieDetail" exact={true} component={movieDetail} />
-=======
                                 {/* <Route path="/movieDetail" exact={true} component={MovieDetail} /> */}
                                 <Route path="/movieDetail/:movie_id" exact={true} component={MovieDetail} />
 
                                 <Route path="/movieUpdate" exact={true} component={movieUpdate} />
->>>>>>> 91a6ada658f5502755e6f6f2cc53131e93cc5258
                                 <Route path="/movieNow" exact={true} component={movieNow} />
                                 <Route path="/movieNext" exact={true} component={movieNext} />
                                 <Route path="/arte" exact={true} component={arte} />
@@ -173,6 +166,7 @@ const AppRouter = () => {
                                 <Route path="/event_Home" exact={true} component={Event_Home} />
                                 <Route path="/MyPage_Event" exact={true} component={MyPage_Event} />
                                 <Route path="/MyPage_consult_answer/:one_id" exact={true} component={MyapgeConsultDetail} />
+                                
                             </Route>
                             
 
