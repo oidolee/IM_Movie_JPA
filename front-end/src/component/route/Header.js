@@ -12,7 +12,7 @@ function Header() {
     const [path, setPath] = useState('/');
     const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
     const [currentMenuValue, setCurrentMenuValue] = useState(null);
-    const [cookies, setCookie, removeCookie] = useCookies(['idCheck']);
+    const [cookies, setCookie, removeCookie] = useCookies(['idName']);
 
 
     // 페이지 로딩 시 경로 설정 (실제로는 해당 경로를 얻는 방법에 따라 다를 수 있음)
@@ -35,7 +35,7 @@ function Header() {
 
     const handleLogout = () => {
         // 쿠키 제거
-        removeCookie('idCheck');
+        removeCookie('idName');
         alert('로그아웃 되었습니다.')
     };
     //헤더 동적 처리         
@@ -54,8 +54,8 @@ function Header() {
                 <div className='right-gnb'>
                     <ul>
                         
-                        {(cookies.idCheck == undefined) &&(<li><Link to="/login">로그인</Link></li>)}
-                        {cookies.idCheck &&(
+                        {(cookies.idName == undefined) &&(<li><Link to="/login">로그인</Link></li>)}
+                        {cookies.idName &&(
                             <>                              
                                 <li><a href="/admin">관리자</a></li>
                                 {/* <li><Link to="/admin">관리자</Link></li> */}
@@ -66,7 +66,7 @@ function Header() {
                           <li><Link to="/customerlist">멤버쉽</Link></li>   
                           <li><Link to="/FAQ">고객센터</Link></li>   
 
-                          {cookies.idCheck &&(
+                          {cookies.idName &&(
                                 <>
                                     <li><Link to="/parking">주차등록</Link></li>   
                                 </>
@@ -75,7 +75,7 @@ function Header() {
                     </ul>
                     <ul className='header-member-box'>                      
                         <li>
-                            {!cookies.idCheck &&(
+                            {!cookies.idName &&(
                                 <>
                                     <i class="bi bi-person" className='bi-person'></i>
                                     <Link to="/signCheck">회원가입</Link>
@@ -91,8 +91,8 @@ function Header() {
                         </li>
                         <li><i class="bi bi-list" className='bi-list'></i></li>
                     </ul>
-                    {cookies.idCheck && (
-                        <p className="Header_user_name">{cookies.idCheck}님 환영합니다.</p>
+                    {cookies.idName && (
+                        <p className="Header_user_name">{cookies.idName}님 환영합니다.</p>
                     )}
 
                 </div>

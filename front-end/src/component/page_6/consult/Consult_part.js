@@ -15,11 +15,11 @@ function Consult_part() {
 
     const cus_grade = 'VIP';
     const [cookies, setCookie, removeCookie] = useCookies(['cus_name']);
-    const [cus_name, setIdCheck] = useState('');
+    const [cus_name, setidName] = useState('');
 
     useEffect(() => {
         if (cookies.cus_name !== undefined) {
-            setIdCheck(cookies.cus_name);
+            setidName(cookies.cus_name);
         }
     }, [cookies.cus_name]);
 

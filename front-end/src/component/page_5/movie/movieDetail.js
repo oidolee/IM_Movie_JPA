@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from "../../../styles/page_5/movieDetail.module.css";
 import { useCookies } from 'react-cookie'; // 로그인 확인용
+import { useParams } from 'react-router-dom';
+import ApiService from '../../../ApiService';
 
 // 이미지
 import movie1 from "../../../assets/page_5/movie1.jpg";
@@ -15,11 +17,53 @@ import BobMarley_OneLove from '../../../assets/page_5/BobMarley_OneLove.jpg';
 
 import { Link } from 'react-router-dom' // 페이지이동
 
+
+
+
+
+
+function StarRating({ maxStars, selectedStars, onStarClick }) {
+  return (
+    <ul>
+      {[...Array(maxStars).keys()].map((index) => (
+        <li key={index + 1} className={`star_box${index + 1}`} onClick={() => onStarClick(index + 1)}>
+          <img
+            className={`star_on${index + 1} ${selectedStars >= index + 1 ? `${style.star_on}${index + 1}` : ''}`}
+            src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ico_star64_on.png"
+            alt={`Star ${index + 1}`}
+            style={{ display: selectedStars >= index + 1 ? 'inline' : 'none' }}
+          />
+          <img
+            className={`star_off ${style.star_off}`}
+            src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ico_star64_off.png"
+            alt={`Empty Star ${index + 1}`}
+            style={{ display: selectedStars < index + 1 ? 'inline' : 'none' }}
+          />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+
+
+
+
 function MovieDetail() {
   const [showModal, setShowModal] = useState(false); // 모달 창 열림/닫힘 상태
   const [selectedValue, setSelectedValue] = useState(1); // 선택된 값
   const [selectedTrailer, setSelectedTrailer] = useState("");
-  const [cookies, setCookie, removeCookie] = useCookies(['idCheck']); // 로그인 확인용
+  const [cookies, setCookie, removeCookie] = useCookies(['idName']); // 로그인 확인용
+
+  const { movie_id } = useParams(); // useParams 훅을 사용하여 URL의 id 값을 가져옴
+
+  //관람평 등록 값
+  const [selectedStars, setSelectedStars] = useState(5); //관람평 별값
+  const [reviewContents, setReviewContents] = useState('');
+
+
+  // id 값 사용 예시
+  console.log("Movie ID:", movie_id);
 
   const handleTrailerClick = (trailerUrl) => {
     setSelectedTrailer(trailerUrl);
@@ -37,14 +81,65 @@ function MovieDetail() {
   };
 
 
-  const [selectedStars, setSelectedStars] = useState(5);
-
   // 클릭한 별수에 따라 별 이미지를 조절합니다.
   const handleStarClick = (starNumber) => {
     setSelectedStars(starNumber);
   };
 
-  console.log(selectedStars)
+  const handleSubmit = () => {
+    if (!reviewContents.trim()) {
+      // 후기 내용이 비어 있을 때 처리할 내용을 여기에 작성합니다.
+      alert('후기 내용을 입력해주세요.');
+      return;
+    }
+    let inputData = {
+      movie_id: movie_id,
+      cus_id: cookies.cus_id,
+      review_star: selectedStars,
+      review_contents: reviewContents,
+    }
+    console.log(inputData)
+    console.log("관람평 등록")
+
+    ApiService.addReview(inputData)
+      .then((res) => {
+        // 변수 초기화
+        setSelectedStars('5');
+        setReviewContents('');
+        alert("관람평 등록 완료 ")
+        // window.location.reload();
+        // history.push("/movieDetail/" + movie_id);
+        reviewList(movie_id);
+        setSelectedValue(2);
+      })
+      .catch((error) => {
+        alert('관람평 등록 중 오류가 발생했습니다.');
+        console.error('관람평 등록 오류:', error);
+      });
+  }
+
+  useEffect(() => {
+    reviewList(movie_id);
+  }, []);
+
+  const [getReviewlists, setGetReviewlists] = useState([]);
+
+  const reviewList = (movie_id) => {
+    console.log("reviewList start")
+    ApiService.reviewList(movie_id)
+      .then((res) => {
+        console.log(res.data)
+        setGetReviewlists(res.data)
+        // setParkingData(res.data);
+        // setLists(res.data);
+      })
+      .catch((err) => {
+        console.log('parkingList Error', err);
+      });
+  }
+  console.log(getReviewlists)
+
+
   return (
     <>
       <div className={`detail_movie_wrap ${style.detail_movie_wrap}`}>
@@ -148,7 +243,7 @@ function MovieDetail() {
                 <div>
                   {/* 관람평 영역 */}
 
-                  {!cookies.idCheck && (
+                  {!cookies.idName && (
                     <div className={`plz_login ${style.plz_login}`}>
                       <h4>로그인 후 관람평 등록 해주세요</h4>
 
@@ -159,9 +254,9 @@ function MovieDetail() {
                       </Link>
                     </div>
                   )}
-                  {cookies.idCheck && (
+                  {cookies.idName && (
                     <div className={`star_info ${style.star_info}`}>
-                      <div class="star_rate type5">
+                      {/* <div class="star_rate type5">
                         <ul>
                           {[1, 2, 3, 4, 5].map((starNumber) => (
                             <li key={starNumber} className={`star_box${starNumber}`} onClick={() => handleStarClick(starNumber)}>
@@ -180,11 +275,14 @@ function MovieDetail() {
                             </li>
                           ))}
                         </ul>
+                      </div> */}
+                      <div className="star_rate type5">
+                        <StarRating maxStars={5} selectedStars={selectedStars} onStarClick={handleStarClick} />
                       </div>
 
 
                       <div className={`star_img_box ${style.star_img_box}`}>
-                         <img src={`https://www.lottecinema.co.kr/NLCHS/Content/images/icon/icon_reviewcharacterbig_${selectedStars}.svg`} alt={`star${selectedStars}`} />
+                        <img src={`https://www.lottecinema.co.kr/NLCHS/Content/images/icon/icon_reviewcharacterbig_${selectedStars}.svg`} alt={`star${selectedStars}`} />
                       </div>
                     </div>
                   )}
@@ -193,55 +291,66 @@ function MovieDetail() {
                   <div className="container mt-5">
                     <div className="row">
                       <div className="col-md-6 offset-md-3 d-flex">
-                        <textarea className="form-control mr-2" rows="3" placeholder="내용을 입력하세요"></textarea>
-                        <button className="btn btn-primary" style={{ minWidth: '80px' }}>전송</button>
+                        <textarea
+                          name="review_contents"
+                          className="form-control mr-2"
+                          rows="3"
+                          placeholder="내용을 입력하세요"
+                          value={reviewContents}
+                          onChange={(e) => setReviewContents(e.target.value)}
+                        ></textarea>
+                        <button className="btn btn-primary" style={{ minWidth: '80px' }} onClick={() => handleSubmit()}>등록</button>
 
                       </div>
                     </div>
                   </div>
 
                 </div>
-              
+
               )}
             </div>
           </div>
-
+          {/* 관람평 출력 부분 */}
           {selectedValue === 2 && (
             <div className={`movie_review_list ${style.movie_review_list}`}>
-                <ul>
-                <li style={{ display: 'flex', alignItems: 'center' }}>
-                  <img src="https://www.lottecinema.co.kr/NLCHS/Content/images/temp/temp_reviewcharacter_03.jpg" alt="image_by_rate" style={{ marginRight: '10px', width: '50px', height: '50px' }} />
-                  <div className={`movie_review_content ${style.movie_review_content}`}>
-                    <p>작성자</p>
-                    <p>2024.03.16 09:11</p>
-                    <p>영화 최고에요!.</p>
-                  </div>
-                  <div style={{ marginLeft: 'auto' }}>
-                    <img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ic_review_good.png" alt="image_by_rate" style={{ marginRight: '5px', width: '20px', height: '20px' }} />
+              <ul>
+                {getReviewlists.map((review, index) => {
+                  // review_date를 JavaScript의 Date 객체로 변환
+                  const reviewDate = new Date(review.review_date);
+                  // 날짜를 원하는 형식으로 포맷팅 (예: "YYYY-MM-DD hh:mm")
+                  const formattedDate = reviewDate.toLocaleString('ko-KR', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  }).replace(/\./g, '-');
 
-                    85
-                  </div>
-                </li>
+                  return (
+                    <li key={index} style={{ display: 'flex', alignItems: 'center' }}>
+                      {/* 이미지 파일 경로를 동적으로 설정 */}
+                      <img src={`https://www.lottecinema.co.kr/NLCHS/Content/images/temp/temp_reviewcharacter_0${6 - review.review_star}.jpg`} alt="image_by_rate" style={{ marginRight: '10px', width: '50px', height: '50px' }} />
 
-                <li style={{ display: 'flex', alignItems: 'center' }}>
-                  <img src="https://www.lottecinema.co.kr/NLCHS/Content/images/temp/temp_reviewcharacter_03.jpg" alt="image_by_rate" style={{ marginRight: '10px', width: '50px', height: '50px' }} />
-                  <div className={`movie_review_content ${style.movie_review_content}`}>
-                    <p>작성자</p>
-                    <p>2024.03.16 09:11</p>
-                    <p>너무 재미있었어요~!.</p>
-                  </div>
-                  <div style={{ marginLeft: 'auto' }}>
-                    <img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ic_review_good.png" alt="image_by_rate" style={{ marginRight: '5px', width: '20px', height: '20px' }} />
+                      <div className={`movie_review_content ${style.movie_review_content}`}>
+                        <p>작성자</p>
+                        <p>작성일: {formattedDate}</p>
+                        <p>{review.review_contents}</p>
+                      </div>
+                      <div style={{ marginLeft: 'auto' }}>
+                        <img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ic_review_good.png" alt="image_by_rate" style={{ marginRight: '5px', width: '20px', height: '20px' }} />
+                        {/* 실제 별점은 review.review_star 값 그대로 사용 */}
+                        {review.review_star}
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
 
-                    77
-                  </div>
-                </li>
 
-                </ul>
             </div>
 
           )}
-          
+
         </div>
 
         <div className={`detail_down3 ${style.detail_down3}`}>
