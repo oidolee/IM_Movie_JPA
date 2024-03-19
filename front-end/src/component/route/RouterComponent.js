@@ -77,6 +77,7 @@ import Event_Home from '../page_6/event/Event_Home';
 import MyapgeConsultDetail from '../page_6/myinfo/MyPage_consult_answer';
 
 
+
 // import Admin_main from '../../admin/main/Admin_main'
 
 
@@ -167,6 +168,7 @@ const AppRouter = () => {
                                 <Route path="/event_Home" exact={true} component={Event_Home} />
                                 <Route path="/MyPage_Event" exact={true} component={MyPage_Event} />
                                 <Route path="/MyPage_consult_answer/:one_id" exact={true} component={MyapgeConsultDetail} />
+                                
                             </Route>
                             
 

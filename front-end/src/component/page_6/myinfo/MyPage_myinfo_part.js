@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import style from '../../../styles/page_6/MyPage_myinfo_part.module.css'
+import style from '../../../styles/page_6/MyPage_myinfo_part_module.css'
 import MyPage_myinfo_update from './MyPage_myinfo_update'
 
 function MyPage_myifo_part() {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import style from '../../../styles/page_6/MyPage_res.module.css'
+import style from '../../../styles/page_6/MyPage_res_module.css'
 
 
 class MyPage_Store_part extends Component {
