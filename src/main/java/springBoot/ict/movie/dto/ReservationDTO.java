@@ -24,6 +24,7 @@ public class ReservationDTO {
     private int st_id;
     private String theater_id;
     private int screen_id;
+    private String place_name;
     private String time_date;
     private String c_email;    
     private String movie_age;

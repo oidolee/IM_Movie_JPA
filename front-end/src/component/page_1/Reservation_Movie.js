@@ -13,7 +13,11 @@ const Reservation_Movie = ({ history }) => {
   const [reservation, setReservation] = useState([]);
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState(null);
+  const [selectedTheater, setSelectedTheater] = useState(null); // 선택한 영화관 상태
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택한 영화 상태
+  const [movies, setMovies] = useState([]); // 선택한 영화관에 대한 영화 목록 상태
+  const [remainingSeatsCount, setRemainingSeatsCount] = useState(null);
+
   const [subRegions, setSubRegions] = useState({
     서울: [
       "가산디지털",
@@ -66,7 +70,7 @@ const Reservation_Movie = ({ history }) => {
 
   // 연령에 대한 이미지
   const getMovieImage = (age) => {
-    if (age === "All ages") {
+    if (age === "All") {
       return <img src={Res_imgAll} />;
     } else if (age === "15") {
       return <img src={Res_img15} />;
@@ -77,6 +81,43 @@ const Reservation_Movie = ({ history }) => {
   const handleMovieSelection = (reservations) => {
     setSelectedMovie(reservations);
   };
+
+  // 영화관 선택 핸들러
+  const handleTheaterSelection = (subRegion) => {
+    // 선택한 영화관을 상태에 저장합니다.
+    setSelectedTheater(subRegion);
+
+    // 서버에 선택한 영화관 정보를 전송하여 해당 영화관에 예약된 영화 목록을 받아옵니다.
+    ApiService.listReservation(subRegion)
+      .then((res) => {
+        setMovies(res.data); // 받아온 예약 목록을 상태에 저장합니다.
+      })
+      .catch((err) => {
+        console.log("Error fetching reservations:", err);
+      });
+  };
+
+  /// API를 호출하여 잔여 좌석 수를 가져오는 함수
+  const fetchRemainingSeatsCount = () => {
+    ApiService.listSeat()
+      .then((res) => {
+        // 받아온 좌석 정보에서 st_check가 "r" 또는 "y"가 아닌 좌석들의 수를 구합니다.
+        const remainingSeats = res.data.filter(
+          (seat) => seat.st_check !== "r" && seat.st_check !== "y"
+        ).length;
+        console.log("잔여 좌석 수:", remainingSeats);
+        // 상태로 관리하여 컴포넌트에서 사용할 수 있도록 업데이트합니다.
+        setRemainingSeatsCount(remainingSeats);
+      })
+      .catch((err) => {
+        console.log("API 호출 오류:", err);
+      });
+  };
+
+  // 컴포넌트가 마운트될 때 한 번만 API를 호출하여 잔여 좌석 수를 가져옵니다.
+  useEffect(() => {
+    fetchRemainingSeatsCount();
+  }, []);
 
   const handleConfirmation = () => {
     setPopupOpen(false);
@@ -202,8 +243,13 @@ const Reservation_Movie = ({ history }) => {
                   <ul>
                     {selectedRegion &&
                       subRegions[selectedRegion].map((subRegion, index) => (
-                        <li className="subRegions" key={index}>
-                          <a href="#">{subRegion}</a>
+                        <li className="subRegions" key={subRegion}>
+                          <a
+                            href="#"
+                            onClick={() => handleTheaterSelection(subRegion)}
+                          >
+                            {subRegion}
+                          </a>
                         </li>
                       ))}
                   </ul>
@@ -220,21 +266,19 @@ const Reservation_Movie = ({ history }) => {
             <li>
               <div className="menu3">
                 <ul className="menu3_left">
-                  {reservation.map((reservations) => (
-                    <React.Fragment key={reservations.res_id}>
-                      <li>
-                        <a
-                          href="#"
-                          onClick={(event) => {
-                            event.preventDefault();
-                            handleMovieSelection(reservations);
-                          }}
-                        >
-                          {getMovieImage(reservations.movie_age)}
-                          {reservations.res_movie_name}
-                        </a>
-                      </li>
-                    </React.Fragment>
+                  {movies.map((movie) => (
+                    <li key={movie.movie_id}>
+                      <a
+                        href="#"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          handleMovieSelection(movie);
+                        }}
+                      >
+                        {getMovieImage(movie.movie_age)}
+                        {movie.res_movie_name}
+                      </a>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -260,37 +304,49 @@ const Reservation_Movie = ({ history }) => {
                       </a>
                     </div>
                   )}
-                   {selectedMovie && (
-                  <div className="menu4_sub">
-                    <ul>
-                      <li>
-                        <a href="#none" onClick={() => setPopupOpen(true)}>
-                          <span>
-                            {selectedMovie.start_time}
-                            <br />
-                            82/100 {selectedMovie.theater_id}관
-                          </span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                   )}
+                  {selectedMovie && remainingSeatsCount !== null && (
+                    <div className="menu4_sub">
+                      <ul>
+                        <li>
+                          <a href="#none" onClick={() => setPopupOpen(true)}>
+                            <span>
+                              {moment(
+                                selectedMovie.res_movie_time,
+                                "HH:mm:ss"
+                              ).format("HH:mm")}
+                              <br />
+                              {remainingSeatsCount}/112{" "}
+                              {selectedMovie.theater_id}
+                            </span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </ul>
               </div>
             </li>
           </ul>
         </div>
-        {popupOpen && (
+        {popupOpen && selectedMovie && (
           <div className="popup">
             <div className="popup_content">
-              <strong>파묘/13:40(3관)</strong>
-              <p>
-                잔여좌석 <strong>82</strong>/100
-              </p>
-
+              <strong>
+                {selectedMovie.res_movie_name}/{" "}
+                {moment(selectedMovie.res_movie_time, "HH:mm:ss").format(
+                  "HH:mm"
+                )}
+                ({selectedMovie.theater_id})
+              </strong>
+              {remainingSeatsCount !== null && (
+                <p>
+                  잔여좌석 <strong>{remainingSeatsCount}</strong>/112
+                </p>
+              )}
               <img className="Res_screen" src={Res_screen} />
               <p>
-                <img src={Res_img15} />본 영화는 만 15세 이상 관람가 영화입니다.
+                본 영화는 만 <img src={Res_img15} className="Res_screen_img" />
+                세 이상 관람가 영화입니다.
               </p>
               <button name="n" onClick={handleCancellation}>
                 취소
