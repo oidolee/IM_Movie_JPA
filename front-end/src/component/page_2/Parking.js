@@ -59,7 +59,7 @@ function Parking() {
       .then((res) => {
         // 변수 초기화
         setIpCarNumber('');
-        setIpClient('');
+        setIpClient('');s
         setTotalPlot('');
         alert('주차등록 완료 하였습니다.')
         window.location.reload();

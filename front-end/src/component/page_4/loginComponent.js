@@ -12,8 +12,9 @@ function Login() {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const history = useHistory();
-    const [cookies, setCookie] = useCookies(['idCheck']); // 쿠키 훅 
+    const [cookies, setCookie] = useCookies(['idName']); // 쿠키 훅 
     const [cookies_email, setCookie_email] = useCookies(['c_email']); // 쿠키 훅 
+    const [cookies_cus_id, setCookies_cus_id] = useCookies(['cus_id']); // 쿠키 훅 
 
     const handleLogin = () => {
         let inputData = {
@@ -29,8 +30,10 @@ function Login() {
                 if(res.data.resultCode == 200){
                     let name = res.data.customer.name;
                     let c_email = res.data.customer.email;
-                    setCookie('idCheck', name)
+                    let ic_No = res.data.customer.ic_No;
+                    setCookie('idName', name)
                     setCookie_email('c_email', c_email)
+                    setCookies_cus_id('cus_id', ic_No)
                     alert("로그인 성공.")
                     history.push('/');
                 } else {
