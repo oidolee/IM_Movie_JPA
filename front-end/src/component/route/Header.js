@@ -3,6 +3,9 @@ import logo from '../../assets/main/IM_Logo.png'
 import { useCookies } from 'react-cookie'; // 로그인 확인용
 import { Link, useLocation } from 'react-router-dom';
 import '../../styles/main/Header.css'; 
+import styled from 'styled-components';
+
+
 
 
 function Header() {
@@ -41,7 +44,6 @@ function Header() {
 
     return (
         <div className={`header_section ${isHomePage ? '' : 'special_header'}`}>
-
             <div className='gnb'>
                 <div className='logo'>
                     <Link to="/">

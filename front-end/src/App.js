@@ -10,6 +10,7 @@ import Test from '../src/component/main/Test';
 function App() {
   return (
     <div className="App">
+      {/* <Test /> */}
       {/* <Header /> */}
       <Router>
         <Switch>
