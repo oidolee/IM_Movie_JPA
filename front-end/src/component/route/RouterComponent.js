@@ -139,7 +139,6 @@ const AppRouter = () => {
                                 <Route path="/movieMain" exact={true} component={movieMain} />
                                 {/* <Route path="/movieDetail" exact={true} component={MovieDetail} /> */}
                                 <Route path="/movieDetail/:movie_id" exact={true} component={MovieDetail} />
-
                                 <Route path="/movieUpdate" exact={true} component={movieUpdate} />
                                 <Route path="/movieNow" exact={true} component={movieNow} />
                                 <Route path="/movieNext" exact={true} component={movieNext} />

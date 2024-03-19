@@ -46,9 +46,6 @@ function StarRating({ maxStars, selectedStars, onStarClick }) {
 }
 
 
-
-
-
 function MovieDetail() {
   const [showModal, setShowModal] = useState(false); // 모달 창 열림/닫힘 상태
   const [selectedValue, setSelectedValue] = useState(1); // 선택된 값

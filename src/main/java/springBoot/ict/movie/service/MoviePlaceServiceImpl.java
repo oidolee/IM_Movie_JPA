@@ -6,10 +6,12 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import springBoot.ict.movie.dao.MoviePlaceRepository;
 import springBoot.ict.movie.dto.MoviePlaceDTO;
 
+@Service
 public class MoviePlaceServiceImpl implements MoviePlaceService {
 
 	@Autowired
