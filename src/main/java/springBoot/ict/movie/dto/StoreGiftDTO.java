@@ -29,7 +29,7 @@ public class StoreGiftDTO {
     @JsonProperty("giftName")
     private String gift_name;
     @JsonProperty("giftContent")
-    private int gift_content;
+    private String gift_content;
     @JsonProperty("giftCount")
     private int gift_count;
 }

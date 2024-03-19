@@ -6,6 +6,7 @@ import Res_movie from "../../assets/page_1/movie.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
 // import Checkout from "../../pages/Checkout";
 import Modal from "react-modal";
+import { withRouter } from 'react-router-dom';
 
 class Reservation_Payment_Store extends Component {
   state = {
@@ -27,6 +28,10 @@ class Reservation_Payment_Store extends Component {
     }));
   };
 
+  
+  handlePayment = () => {
+    this.props.history.push("/page_3/Store_Payment_Finish");
+};
   render() {
     const sysdate = moment().format("YYYY-MM-DD");
 
@@ -164,7 +169,7 @@ class Reservation_Payment_Store extends Component {
                         handleCloseModal={this.handleCloseModal}
                       >
                         <div className={`Payment ${style.Payment}`}>
-                          <Checkout />
+                          {/* <Checkout /> */}
                           <button
                             className="Payment_close"
                             onClick={this.handleCloseModal}
@@ -230,7 +235,7 @@ class Reservation_Payment_Store extends Component {
                     <li className="paymentBtn">할인금액</li>
                     <li className="paymentBtn">결제금액</li>
                     <li>
-                      <button className="paymentBtn_total">결제하기</button>
+                      <button className="paymentBtn_total" onClick={this.handlePayment}>결제하기</button>
                     </li>
                   </ul>
                 </div>
@@ -243,4 +248,4 @@ class Reservation_Payment_Store extends Component {
   }
 }
 
-export default Reservation_Payment_Store;
+export default withRouter(Reservation_Payment_Store);

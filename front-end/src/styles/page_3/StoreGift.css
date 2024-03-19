@@ -215,3 +215,10 @@
     height: 90px;
 }
 
+.layer_header_StoreTicket {
+    right: 350px;
+}
+
+.page3_flex {
+    display: flex;
+}
