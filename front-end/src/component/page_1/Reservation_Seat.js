@@ -153,7 +153,7 @@ const Reservation_Seat = () => {
   };
 
   const handleSeatSelect = (ip_no, lot, seatNumber, status) => {
-    if (canSelectSeat) {
+    if (!canSelectSeat) {
       alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
       return;
     }
