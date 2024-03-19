@@ -33,6 +33,8 @@ function Header() {
 
     };
 
+    
+
     const handleLogout = () => {
         // 쿠키 제거
         removeCookie('idName');
@@ -41,6 +43,8 @@ function Header() {
     //헤더 동적 처리         
     const location = useLocation();
     const isHomePage = location.pathname === '/';
+
+    
 
     return (
         <div className={`header_section ${isHomePage ? '' : 'special_header'}`}>
@@ -136,14 +140,16 @@ function Header() {
                         {isSubMenuVisible && currentMenuValue === 3 && (
                             <div>
                                 <ul>
-                                    <li><a href="/movieUpdate">스페셜관</a></li>
-                                    <li><a href="/moviePlace">서울</a></li>
-                                    <li><a href="#">경기/인천</a></li>
+                                    <li><a href="/theater/gasan">스페셜관</a></li>
+                                    <li><a href="/moviePlace" >서울</a></li>
+                                    <li><a href="/Calender1">경기/인천</a></li>
                                     <li><a href="#">전라/광주</a></li>
                                 </ul>
                             </div>
                         )}
                     </li>
+
+                    
                     <li onMouseOver={() => handleMouseOver(4)} onMouseOut={handleMouseOut}>
                         <a href="#" onMouseEnter={() => handleMouseOver(4)} onMouseOut={handleMouseOut}>이벤트</a>
                         {isSubMenuVisible && currentMenuValue === 4 && (

@@ -48,12 +48,16 @@ import resultFindPWD from '../page_4/resultFindPWD';
 
 //page_5
 import movieMain from '../page_5/movie/movieMain';
+<<<<<<< HEAD
+import movieDetail from '../page_5/movie/movieDetail';
+=======
 import MovieDetail from '../page_5/movie/movieDetail';
 import movieUpdate from '../../admin/page_5/Admin_Update_Add';
+>>>>>>> 91a6ada658f5502755e6f6f2cc53131e93cc5258
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
 import arte from '../page_5/movie/arte';
-import moviePlace from '../page_5/theater/moviePlace';
+import gasan from '../page_5/theater/gasan';
 import FAQ from '../page_5/board/FAQ';
 import NOTICE from '../page_5/board/NOTICE';
 import NOTICE2 from '../page_5/board/NOTICE2';
@@ -134,14 +138,18 @@ const AppRouter = () => {
                             {/* page_5 */}
                             <Route>
                                 <Route path="/movieMain" exact={true} component={movieMain} />
+<<<<<<< HEAD
+                                <Route path="/movieDetail" exact={true} component={movieDetail} />
+=======
                                 {/* <Route path="/movieDetail" exact={true} component={MovieDetail} /> */}
                                 <Route path="/movieDetail/:movie_id" exact={true} component={MovieDetail} />
 
                                 <Route path="/movieUpdate" exact={true} component={movieUpdate} />
+>>>>>>> 91a6ada658f5502755e6f6f2cc53131e93cc5258
                                 <Route path="/movieNow" exact={true} component={movieNow} />
                                 <Route path="/movieNext" exact={true} component={movieNext} />
                                 <Route path="/arte" exact={true} component={arte} />
-                                <Route path="/moviePlace" exact={true} component={moviePlace} />
+                                <Route path="/theater/gasan" exact={true} component={gasan} />
                                 <Route path="/FAQ" exact={true} component={FAQ} />
                                 <Route path="/NOTICE" exact={true} component={NOTICE} />
                                 <Route path="/NOTICE2" exact={true} component={NOTICE2} />
