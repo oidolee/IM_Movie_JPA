@@ -13,6 +13,8 @@ import greeting_2 from '../../assets/main/greeting_2.jpg';
 import greeting_3 from '../../assets/main/greeting_3.jpg';
 import Hyundaicard from '../../assets/main/Hyundaicard_296511.jpg';
 import noitce_img_1 from '../../assets/main/noitce_img_1.jpg';
+import ScrollReveal from 'scrollreveal';
+
 
 import Main_Swiper from "./Main_Swiper";
 

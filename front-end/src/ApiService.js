@@ -397,6 +397,20 @@ class ApiService {
         return axios.delete(url + "/page_5/ArteDelete" + "/" + arte_id);
     }
 
+    addReview(inputData){
+        console.log('addReview() review등록시작');
+        console.log(inputData);
+        return axios.post(url + '/page_5/review/addReview', inputData); 
+    }
+
+    reviewList(movie_id){
+        console.log('reviewList() 시작');
+        console.log(movie_id);
+        return axios.get(url + '/page_5/review/reviewList'); 
+    }
+      
+  
+
 
 }
 export default new ApiService();

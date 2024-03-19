@@ -6,14 +6,14 @@ import point from '../../assets/page_6/txt_lpoint_20210407.png'
 
 function MyPage_top() {
     const cus_grade = 'VIP';
-    const [cookies, setCookie, removeCookie] = useCookies(['idCheck']);
-    const [idCheck, setIdCheck] = useState('');
+    const [cookies, setCookie, removeCookie] = useCookies(['idName']);
+    const [idName, setidName] = useState('');
 
     useEffect(() => {
-        if (cookies.idCheck !== undefined) {
-            setIdCheck(cookies.idCheck);
+        if (cookies.idName !== undefined) {
+            setidName(cookies.idName);
         }
-    }, [cookies.idCheck]);
+    }, [cookies.idName]);
 
     return (
         <div style={{display: 'flex'}}>
@@ -30,7 +30,7 @@ function MyPage_top() {
                     <div className={`name_place${style.name_place}`}>
                         <div className={`name${style.name}`}>
                             <p style={{ textAlign: 'left', paddingLeft: '15px' }}>
-                                <strong>{idCheck} 님 </strong>
+                                <strong>{idName} 님 </strong>
                                  반가워요!
                             </p>
                         </div>

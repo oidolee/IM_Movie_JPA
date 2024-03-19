@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import style from '../../../styles/page_6/Event_moudle.css'; 
+import ScrollReveal from 'scrollreveal';
+
 const EventHome = () => {
     useEffect(() => {
         // ScrollReveal 시작 코드 추가
