@@ -25,7 +25,7 @@ import Parking from '../page_2/Parking';
 //chat_bot
 import Chatbot from 'react-chatbot-kit'
 import 'react-chatbot-kit/build/main.css'
-import config from "../chat_bot/ChatbotConfig"; // chat_bot 시작은 여기서 부터
+import Config from "../chat_bot/ChatbotConfig"; // chat_bot 시작은 여기서 부터
 import MessageParser from "../chat_bot/MessageParser";
 import ActionProvider from "../chat_bot/ActionProvider";
 
@@ -48,7 +48,7 @@ import resultFindPWD from '../page_4/resultFindPWD';
 
 //page_5
 import movieMain from '../page_5/movie/movieMain';
-import movieDetail from '../page_5/movie/movieDetail';
+import MovieDetail from '../page_5/movie/movieDetail';
 import movieUpdate from '../../admin/page_5/Admin_Update_Add';
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
@@ -88,7 +88,7 @@ const AppRouter = () => {
                         <Route>
                         <Chatbot
                             style={{ width: '500px' }}
-                            config={config}
+                            config={Config}
                             messageParser={MessageParser}
                             actionProvider={ActionProvider}
                         />
@@ -134,7 +134,9 @@ const AppRouter = () => {
                             {/* page_5 */}
                             <Route>
                                 <Route path="/movieMain" exact={true} component={movieMain} />
-                                <Route path="/movieDetail" exact={true} component={movieDetail} />
+                                {/* <Route path="/movieDetail" exact={true} component={MovieDetail} /> */}
+                                <Route path="/movieDetail/:movie_id" exact={true} component={MovieDetail} />
+
                                 <Route path="/movieUpdate" exact={true} component={movieUpdate} />
                                 <Route path="/movieNow" exact={true} component={movieNow} />
                                 <Route path="/movieNext" exact={true} component={movieNext} />

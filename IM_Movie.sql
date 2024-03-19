@@ -379,15 +379,16 @@ WHERE IC_birthday = '2024-02-29';
 
 --관람평 테이블
 
-DROP TABLE IM_REVIEW CASCADE CONSTRAINTS;
-CREATE TABLE IM_REVIEW(  
-    REVIEW_NUM      NUMBER          PRIMARY KEY,       -- 후기코드(PK)
-    MOVIE_ID        VARCHAR2(50)    NOT NULL,          -- 영화코드(FK)
-    CUS_ID          VARCHAR2(50)    NOT NULL,          -- 회원ID(FK)
-    REVIEW_STAR     NUMBER          NOT NULL,          -- 후기별점
-    REVIEW_CONTENTS CLOB            NOT NULL,          -- 후기내용
-    REVIEW_DATE     DATE            NOT NULL           -- 작성일
+DROP TABLE IM_REVIEW ;
+CREATE TABLE im_review(
+    review_num      NUMBER          PRIMARY KEY,       -- 후기코드(PK)
+    movie_id        VARCHAR2(50)    NOT NULL,          -- 영화코드(FK)
+    cus_id          VARCHAR2(50)    NOT NULL,          -- 회원ID(FK)
+    review_star     NUMBER          NOT NULL,          -- 후기별점
+    review_contents CLOB            NOT NULL,          -- 후기내용
+    review_date     DATE            NOT NULL           -- 작성일
 );
+
 
 --------------------------------------------------------------------------------
 
