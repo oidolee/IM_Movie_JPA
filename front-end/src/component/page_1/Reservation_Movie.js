@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import style from "../../styles/page_1/Reservation_Movie.css";
 import Reservation_Swiper from "./Reservation_Swiper.js";
@@ -6,11 +6,14 @@ import Res_img15 from "../../assets/page_1/15.jpg";
 import Res_img12 from "../../assets/page_1/12.jpg";
 import Res_imgAll from "../../assets/page_1/all.jpg";
 import Res_screen from "../../assets/page_1/screen.png";
+import ApiService from "../../ApiService";
+import { useHistory } from "react-router-dom";
 
 const Reservation_Movie = ({ history }) => {
+  const [reservation, setReservation] = useState([]);
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState(null);
-  const [subRegions] = useState({
+  const [subRegions, setSubRegions] = useState({
     서울: [
       "가산디지털",
       "가양",
@@ -44,6 +47,21 @@ const Reservation_Movie = ({ history }) => {
     강원: ["남원주", "동해", "원주무실", "춘천"],
     제주: ["서귀포", "제주연동"],
   });
+
+  useEffect(() => {
+    listReservation();
+  }, []);
+
+  const listReservation = () => {
+    ApiService.listReservation()
+      .then((res) => {
+        setReservation(res.data);
+        console.log("listReservation 성공", res.data);
+      })
+      .catch((err) => {
+        console.log("listReservation 오류 : ", err);
+      });
+  };
 
   const handleConfirmation = () => {
     setPopupOpen(false);
@@ -157,7 +175,7 @@ const Reservation_Movie = ({ history }) => {
                       key={region}
                       onClick={(event) => {
                         event.preventDefault(); // 기본 동작 막기
-                        this.handleRegionClick(region);
+                        handleRegionClick(region);
                       }}
                     >
                       <a href="#">{region}</a>
@@ -260,10 +278,7 @@ const Reservation_Movie = ({ history }) => {
                   <div className="menu4_sub">
                     <ul>
                       <li>
-                        <a
-                          href="#none"
-                          onClick={() => this.setState({ popupOpen: true })}
-                        >
+                        <a href="#none" onClick={() => setPopupOpen(true)}>
                           <span>
                             13:40
                             <br />
@@ -278,7 +293,7 @@ const Reservation_Movie = ({ history }) => {
             </li>
           </ul>
         </div>
-        {this.state.popupOpen && (
+        {popupOpen && (
           <div className="popup">
             <div className="popup_content">
               <strong>파묘/13:40(3관)</strong>
@@ -290,10 +305,10 @@ const Reservation_Movie = ({ history }) => {
               <p>
                 <img src={Res_img15} />본 영화는 만 15세 이상 관람가 영화입니다.
               </p>
-              <button name="n" onClick={this.handleCancellation}>
+              <button name="n" onClick={handleCancellation}>
                 취소
               </button>
-              <button name="y" onClick={() => this.handleConfirmation()}>
+              <button name="y" onClick={handleConfirmation}>
                 인원/좌석 선택
               </button>
             </div>
