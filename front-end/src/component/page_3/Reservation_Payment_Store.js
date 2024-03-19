@@ -164,7 +164,7 @@ class Reservation_Payment_Store extends Component {
                         handleCloseModal={this.handleCloseModal}
                       >
                         <div className={`Payment ${style.Payment}`}>
-                          <Checkout />
+                          {/* <Checkout /> */}
                           <button
                             className="Payment_close"
                             onClick={this.handleCloseModal}
