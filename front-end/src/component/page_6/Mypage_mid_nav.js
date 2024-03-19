@@ -12,6 +12,7 @@ function Mypage_mid_nav() {
           <Nav className="me-auto">
             <NavDropdown title="결제내역" href="/MyPage_res">
               <Nav.Link href="/MyPage_res">예매내역</Nav.Link>
+              <Nav.Link href="/MyPage_Store">스토어내역</Nav.Link>
               <Nav.Link href="/MyPage_resCancle">취소내역</Nav.Link>
             </NavDropdown>
             <Nav.Link href="/MyPage_coupon">쿠폰함</Nav.Link>

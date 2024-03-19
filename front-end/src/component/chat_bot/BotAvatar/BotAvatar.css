@@ -1,0 +1,7 @@
+.chat-avatar{
+   height: 45px;
+   white-space: pre-wrap;
+}
+.chat-avatar img{
+   width: 70px;
+}

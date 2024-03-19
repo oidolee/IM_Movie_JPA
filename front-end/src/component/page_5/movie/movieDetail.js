@@ -218,7 +218,7 @@ function MovieDetail() {
                   <div className={`movie_review_content ${style.movie_review_content}`}>
                     <p>작성자</p>
                     <p>2024.03.16 09:11</p>
-                    <p>내용 적는 부분 입니다.</p>
+                    <p>영화 최고에요!.</p>
                   </div>
                   <div style={{ marginLeft: 'auto' }}>
                     <img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ic_review_good.png" alt="image_by_rate" style={{ marginRight: '5px', width: '20px', height: '20px' }} />
@@ -232,12 +232,12 @@ function MovieDetail() {
                   <div className={`movie_review_content ${style.movie_review_content}`}>
                     <p>작성자</p>
                     <p>2024.03.16 09:11</p>
-                    <p>내용 적는 부분 입니다.</p>
+                    <p>너무 재미있었어요~!.</p>
                   </div>
                   <div style={{ marginLeft: 'auto' }}>
                     <img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ic_review_good.png" alt="image_by_rate" style={{ marginRight: '5px', width: '20px', height: '20px' }} />
 
-                    85
+                    77
                   </div>
                 </li>
 

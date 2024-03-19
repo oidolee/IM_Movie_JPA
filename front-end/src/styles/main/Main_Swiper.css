@@ -65,18 +65,19 @@ body {
 }
 
 
-.Main_Swiper_control_box{
-  z-index: 1;
+.page_2.Main_Swiper_control_box{
+  z-index: 100;
   position: absolute;
   bottom: 0;
   right: 100px;
 }
-.Main_Swiper_control_box > i{
+.page_2.Main_Swiper_control_box > i{
   color: #fff;
   font-size: 30px;
+  cursor: pointer;
 }
 
-.Main_Swiper_control_box .moveActive{
+.page_2.Main_Swiper_control_box .moveActive{
   border: 1px solid #fff;
 }
 

@@ -22,11 +22,19 @@ import Discount from '../page_1/Discount';
 import Page2 from '../page_2/Page2';
 import Parking from '../page_2/Parking';
 
+//chat_bot
+import Chatbot from 'react-chatbot-kit'
+import 'react-chatbot-kit/build/main.css'
+import config from "../chat_bot/ChatbotConfig"; // chat_bot 시작은 여기서 부터
+import MessageParser from "../chat_bot/MessageParser";
+import ActionProvider from "../chat_bot/ActionProvider";
+
 //page_3
 import Page3 from '../page_3/Page3';
 import StoreDetail from '../page_3/StoreDetail';
 import StoreTicket from '../page_3/StoreTicket';
-
+import Reservation_Payment_Store from '../page_3/Reservation_Payment_Store';
+import MyPage_Store from '../page_6/store_page_3/MyPage_Store';
 
 //page_4
 import listCustomer from '../page_4/listCustomer';
@@ -67,6 +75,7 @@ import MyPage_Event from '../page_6/event/MyPage_Event';
 import Event_Home from '../page_6/event/Event_Home';
 import MyapgeConsultDetail from '../page_6/myinfo/MyPage_consult_answer';
 
+
 // import Admin_main from '../../admin/main/Admin_main'
 
 
@@ -77,6 +86,12 @@ const AppRouter = () => {
             <BrowserRouter>
                     <div style={style}>
                         <Route>
+                        <Chatbot
+                            style={{ width: '500px' }}
+                            config={config}
+                            messageParser={MessageParser}
+                            actionProvider={ActionProvider}
+                        />
                             <Header />  
                             <Route path="/" exact={true} component={MainBody} />
                             {/* page_1 */}
@@ -100,6 +115,8 @@ const AppRouter = () => {
                                 <Route path="/Page3" exact={true} component={Page3} />
                                 <Route path="/page_3/EditStore_Admin/" exact={true} component={StoreDetail} />
                                 <Route path="/page_3/StoreTicket/" exact={true} component={StoreTicket} />
+                                <Route path="/page_3/Reservation_Payment_Store/" exact={true} component={Reservation_Payment_Store} />
+                                <Route path="/MyPage_Store" exact={true} component={MyPage_Store} />
                             </Route>
 
                             {/* page_4 */}

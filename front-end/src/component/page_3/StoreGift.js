@@ -3,6 +3,7 @@ import style from "../../styles/page_3/StoreGift.css";
 import package1 from "../../assets/page_3/package1.jpg";
 import cancel from "../../assets/page_3/cancel.png";
 
+
 class StoreGift extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +14,8 @@ class StoreGift extends Component {
       recipientNumber: "", //선물 받는 분 번호 상태 값
       isSenderEmpty: false, // 선물 하는 분 입력 여부 상태 값
       isMessageEmpty: false, // 메세지 입력 여부 상태 값
+      sender: "",
+      message: ""
     };
   }
 
@@ -33,6 +36,13 @@ class StoreGift extends Component {
     });
   };
 
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
   handleRecipientInput = (e) => {
     const recipientNumber = e.target.value;
 
@@ -46,8 +56,19 @@ class StoreGift extends Component {
 
   handlePayment = () => {
     // 결제하기 버튼 클릭 시 실행되는 로직
-    const { recipientNumber } = this.state;
+    // const { recipientNumber } = this.state;
+    // const { isValidNumber, isSenderEmpty, isMessageEmpty } = this.state;
+    const { recipientNumber, sender, message } = this.state;
     const { isValidNumber, isSenderEmpty, isMessageEmpty } = this.state;
+    const { totalQuantity, totalPrice } = this.props;
+
+    const storedData = localStorage.getItem("sampleID");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      console.log(parsedData);
+    } else {
+      console.log("저장된 데이터가 없습니다.");
+}
 
     // 선물 받는 분 번호가 12자 이상이면 알림창 띄우기
     if (recipientNumber.length >= 12 || recipientNumber.length < 10) {
@@ -56,21 +77,43 @@ class StoreGift extends Component {
     }
 
     // 선물 받는 분 번호가 유효하지 않거나 선물하는 분 또는 메세지가 비어있는 경우 알림창 띄우기
-    if (!isValidNumber || isSenderEmpty || isMessageEmpty) {
-      alert("입력 내용을 확인해주세요.");
-      return; // 결제 로직 중단
-    }
+    // if (!isValidNumber || isSenderEmpty || isMessageEmpty) {
+    //   alert("입력 내용을 확인해주세요.");
+    //   return; // 결제 로직 중단
+    // }
+
+    // 로컬 스토리지에서 sampleID 제거
+    window.localStorage.removeItem("sampleID");
+
+    // 로컬 스토리지에 새로운 데이터 저장
+    window.localStorage.setItem(
+      "sampleID",
+      JSON.stringify({
+        recipientNumber,
+        sender,
+        message,
+        totalQuantity,
+        totalPrice
+      })
+    );
+
+    // 상태 초기화
+    this.setState({
+      recipientNumber: "",
+      sender: "",
+      message: ""
+    });
 
     // TODO: 결제 로직 구현
   };
 
   render() {
-    
     return (
       
       <div id="layerCouponGift" className="layer_coupon_gift">
+        
         <strong className={`hidden ${style.hidden}`}>레이어 팝업 시작</strong>
-
+        
         <div className={`layer_header ${style.layer_header}`}>
           <div>
             <h4 className={`StoreGift_tit ${style.StoreGift_tit}`}>선물하기</h4>
@@ -93,6 +136,25 @@ class StoreGift extends Component {
           <div className={`bx_tit ${style.bx_tit}`}>
             <div>
               <h5><strong>[롯시와 봄] 패키지</strong></h5>
+              <div>
+                <strong><span>총 수량 {this.props.totalQuantity}개</span></strong>
+              </div>
+            </div>
+          </div>
+          <div className={`bx_cnt ${style.bx_cnt}`}>
+            <dt>총 합계</dt>
+            <dd>
+              <strong>{this.props.totalPrice.toLocaleString()}원</strong>
+            </dd>
+          </div>
+        </div>
+        {/* <div className={`coupon_gift_top ${style.coupon_gift_top}`}>
+          <div className="StoreGift_bx_thm">
+            <img src={package1} alt="[롯시와 봄] 패키지" width={200} />
+          </div>
+          <div className={`bx_tit ${style.bx_tit}`}>
+            <div>
+              <h5><strong>[롯시와 봄] 패키지</strong></h5>
             <div>
 
             </div>
@@ -105,7 +167,7 @@ class StoreGift extends Component {
                 <strong>0</strong>원
               </dd>
           </div>
-        </div>
+        </div> */}
 
 
           <div className="gift_input">
@@ -114,13 +176,14 @@ class StoreGift extends Component {
                 <th> 선물 받는 분 </th>
                 <td>
                   <input
-                    type="recipient"
+                    type="text"
                     className={`g_input ${style.g_input}`}
                     name="recipient"
+                    value={this.state.recipient}
                     size="20"
                     placeholder="휴대폰 번호 입력(-없이)"
                     required
-                    autofocus
+                    autoFocus
                     onChange={this.handleRecipientInput}
                   />
                 </td>
@@ -129,11 +192,13 @@ class StoreGift extends Component {
                 <th> 선물 하는 분 </th>
                 <td>
                   <input
-                    type="sender"
+                    type="text"
                     className={`g_input ${style.g_input}`}
                     name="sender"
+                    value={this.state.sender}
                     size="20"
                     placeholder="선물 하는 분 입력"
+                    onChange={this.handleChange}
                     required
                   />
                 </td>
@@ -143,12 +208,14 @@ class StoreGift extends Component {
                 <td>
                   <div>
                     <input
-                      type="message"
+                      type="text"
                       id="StoreGift_message"
                       className={`g_input ${style.g_input}`}
                       name="message"
+                      value={this.state.message}
                       size="20"
                       placeholder="마음을 표현하는 메세지를 입력해주세요."
+                      onChange={this.handleChange}
                       required
                       maxLength={100} // 최대 글자 수 제한
                       onInput={(e) => this.handleMessageInput(e)}

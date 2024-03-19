@@ -10,3 +10,4 @@ public class ImMovie1Application {
 		SpringApplication.run(ImMovie1Application.class, args);
 	}
 }
+ 
