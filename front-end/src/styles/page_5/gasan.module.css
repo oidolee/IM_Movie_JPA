@@ -1,0 +1,282 @@
+#app {
+  height: 100%;
+}
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+.place_wrap1{
+  width: 950px;
+  margin: 0 auto; /* 가운데 정렬을 위한 방법 */
+  text-align: center; /* 내부 요소의 가운데 정렬을 위한 방법 */
+  margin-bottom: 90px;  
+}
+
+body {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.mySwiper {
+  width: 100%;
+  height: 100%;
+  margin-top: 30px;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.place_title{
+  margin-top: 50px;
+  margin-right:50%;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.ddgroup_btn{
+  border:none;
+  background-color: white;
+  margin-left: 10px;
+}
+
+.place_con{
+  margin-left:100px;
+  margin-top: 20px;
+  text-align: left;
+  line-height: 30px;
+  font-weight: bold;
+  
+}
+
+.btn_wrap{
+  margin-top: 30px;
+  margin-right: 360px;
+}
+
+.place_btn{
+  border:none;
+}
+
+.place_down{
+  margin-bottom:100px;
+  width: 950px;
+  margin: 0 auto; /* 가운데 정렬을 위한 방법 */
+  text-align: center; /* 내부 요소의 가운데 정렬을 위한 방법 */
+  margin-bottom: 100px;
+}
+
+.place_down2{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.con_1{
+  margin-right: 400px;
+  border:none;
+  background-color:white;
+  font-weight: bold;
+}
+
+.con_2{
+  border:none;
+  background-color:white;
+  font-weight: bold;
+}
+
+.place_box1{
+  position: relative;
+  width: 100%; /* 적절한 너비 설정 */
+  background-color: white; /* 적절한 배경색 설정 */
+  padding: 20px; /* 적절한 안쪽 여백 설정 */
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+  
+}
+
+.place_down >.tit {
+  border: none;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.tit {
+  border-bottom: 1px solid #CCC;
+  font-size: 15px;
+  color: #7F7F7F;
+  text-decoration: none; /* 파란색 밑줄 제거 */
+  background-color: white;
+}
+
+.place_down3{
+  text-align: left;
+  font-size:30px;
+  font-weight: bold;
+ 
+}
+
+/* Calender1.css */
+.calendarwrap{
+  width: 950px;
+  margin: 0 auto; /* 가운데 정렬을 위한 방법 */
+  text-align: center; /* 내부 요소의 가운데 정렬을 위한 방법 */
+  margin-bottom: 100px;
+}
+
+.calendarContainer {
+  width: 100%;
+  padding: 10px;
+  margin: 0 auto;
+
+}
+
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calendarHeader h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.calendarHeader button {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.calendarWeekdays {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  
+}
+
+.calendarWeekdays div {
+  font-weight: bold;
+}
+
+
+.calendarDay {
+  text-align: center;
+  padding: 5px;
+ 
+}
+
+.calendarDays {
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+
+.calendarToday {
+  background-color: #f0f0f0;
+}
+
+.selectedDate {
+  background-color: lightblue;
+  color: white;
+}
+
+.place_box2{
+  position: relative;
+  top: -98px; /* 원하는 만큼 위로 이동 */
+  width: 104%; /* 적절한 너비 설정 */
+  height:30px;
+  background-color: white; /* 적절한 배경색 설정 */
+  padding: 25px; /* 적절한 안쪽 여백 설정 */
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #cccccc25;
+}
+
+.age_level{
+text-align: right;
+font-size: 13px;
+}
+
+.age_level label {
+  margin-left:20px; /* 각 라벨 아래에 5픽셀의 마진 추가 */
+}
+
+.re_container{
+  position: relative;
+  top: -98px; /* 원하는 만큼 위로 이동 */
+  width: 104%; /* 적절한 너비 설정 */
+  height:900px;
+  background-color: white; /* 적절한 배경색 설정 */
+  padding: 25px; /* 적절한 안쪽 여백 설정 */
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.re_container .dune1,
+.re_container .bab1,
+.re_container .oneandonly1,
+.re_container .wingka1,
+.re_container .maydecember1 {
+  margin-top: 40px; /* 각 항목의 위쪽 간격 조정 */
+}
+
+.movtime_con{
+  width: 10%; /* 적절한 너비 설정 */
+  height:10px;
+  background-color: white; /* 적절한 배경색 설정 */
+  padding: 25px; /* 적절한 안쪽 여백 설정 */
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+  border:1px solid black;
+}
+
+.timeb1{
+  align-items: left;
+}
+
+.squareButton{
+  width:80px;
+  height:38px;
+  background-color: #cccccc23;
+  border:1px solid rgba(128, 128, 128, 0.322);
+  border-radius: 3px;
+  margin-left: 15px;
+}
+
+.cost_list{
+
+}
+
+.mv_lastIMG1{
+  position: relative;
+  top: -150px; /* 원하는 만큼 위로 이동 */
+}
