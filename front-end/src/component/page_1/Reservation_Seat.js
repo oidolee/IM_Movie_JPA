@@ -153,7 +153,7 @@ const Reservation_Seat = () => {
   };
 
   const handleSeatSelect = (ip_no, lot, seatNumber, status) => {
-    if (!canSelectSeat) {
+    if (totalQuantity === 0) {
       alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
       return;
     }
@@ -182,7 +182,7 @@ const Reservation_Seat = () => {
     } else {
       alert("선택된 좌석 수량을 초과하였습니다.");
       return;
-    }
+      }
   };
 
   const handlePayment = () => {
