@@ -23,14 +23,12 @@ public class ReservationDTO {
     private String theater_id;
     private int screen_id;
     private String movie_age;
-    private Date res_movie_date;
     private String res_movie_id;
     private String res_movie_name;
     private String res_movie_time;
-    private String st_id;
+    private int st_id;
     private int res_count;
     private int res_ticket_price;
     private Date res_sysdate;
-    private String res_check;
-       
+    private String res_check;    
 }

@@ -6,7 +6,6 @@ CREATE TABLE IM_Reservation (
     theater_id VARCHAR(50) NOT NULL,
     screen_id INT NOT NULL,
     movie_age VARCHAR(255) NOT NULL,
-    res_movie_date DATE DEFAULT CURRENT_TIMESTAMP,
     res_movie_id VARCHAR(50) NOT NULL,
     res_movie_name VARCHAR(100) NOT NULL,
     res_movie_time VARCHAR(100) NOT NULL,
