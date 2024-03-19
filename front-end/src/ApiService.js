@@ -408,6 +408,17 @@ class ApiService {
         console.log(movie_id);
         return axios.get(url + '/page_5/review/reviewList'); 
     }
+
+    //상영시간표 리스트
+    fetchtime1(){
+        console.log('timeList() 호출!!')
+        return axios.get(url + '/page_5/timeList'); 
+    }
+
+    fetchTitles(){
+        console.log('timeList() 호출!!')
+        return axios.get(url + '/page_5/timeList'); 
+    }
       
   
 
