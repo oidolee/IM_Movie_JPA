@@ -380,13 +380,13 @@ WHERE IC_birthday = '2024-02-29';
 --관람평 테이블
 
 DROP TABLE IM_REVIEW ;
-CREATE TABLE im_review(
-    review_num      NUMBER          PRIMARY KEY,       -- 후기코드(PK)
-    movie_id        VARCHAR2(50)    NOT NULL,          -- 영화코드(FK)
-    cus_id          VARCHAR2(50)    NOT NULL,          -- 회원ID(FK)
-    review_star     NUMBER          NOT NULL,          -- 후기별점
-    review_contents CLOB            NOT NULL,          -- 후기내용
-    review_date     DATE            NOT NULL           -- 작성일
+CREATE TABLE im_review (
+    review_num      INT             PRIMARY KEY AUTO_INCREMENT, -- 후기코드(PK)
+    movie_id        VARCHAR(50)     NOT NULL,                   -- 영화코드(FK)
+    cus_id          VARCHAR(50)     NOT NULL,                   -- 회원ID(FK)
+    review_star     INT             NOT NULL,                   -- 후기별점
+    review_contents TEXT            NOT NULL,                   -- 후기내용
+    review_date     DATETIME        DEFAULT CURRENT_TIMESTAMP  -- 작성일
 );
 
 

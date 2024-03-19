@@ -8,7 +8,7 @@ function MyPage_coupon_part() {
     const [showDetail, setShowDetail] = useState(false);
     const [cusCouponData, setcusCouponData] = useState([]);
     const [cusCouponCount, setCusCouponCount] = useState('');
-    const [cookies, setCookie] = useCookies(['idCheck']); // 쿠키 훅 
+    const [cookies, setCookie] = useCookies(['idName']); // 쿠키 훅 
     const [cookies_email, setCookie_email] = useCookies(['cookies_email']); // 쿠키 훅 
     
 
