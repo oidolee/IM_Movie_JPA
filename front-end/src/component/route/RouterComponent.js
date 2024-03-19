@@ -34,6 +34,7 @@ import Page3 from '../page_3/Page3';
 import StoreDetail from '../page_3/StoreDetail';
 import StoreTicket from '../page_3/StoreTicket';
 import Reservation_Payment_Store from '../page_3/Reservation_Payment_Store';
+import Store_Payment_Finish from '../page_3/Store_Payment_Finish';
 import MyPage_Store from '../page_6/store_page_3/MyPage_Store';
 
 //page_4
@@ -48,12 +49,8 @@ import resultFindPWD from '../page_4/resultFindPWD';
 
 //page_5
 import movieMain from '../page_5/movie/movieMain';
-<<<<<<< HEAD
-import movieDetail from '../page_5/movie/movieDetail';
-=======
 import MovieDetail from '../page_5/movie/movieDetail';
 import movieUpdate from '../../admin/page_5/Admin_Update_Add';
->>>>>>> 91a6ada658f5502755e6f6f2cc53131e93cc5258
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
 import arte from '../page_5/movie/arte';
@@ -120,6 +117,7 @@ const AppRouter = () => {
                                 <Route path="/page_3/EditStore_Admin/" exact={true} component={StoreDetail} />
                                 <Route path="/page_3/StoreTicket/" exact={true} component={StoreTicket} />
                                 <Route path="/page_3/Reservation_Payment_Store/" exact={true} component={Reservation_Payment_Store} />
+                                <Route path="/page_3/Store_Payment_Finish/" exact={true} component={Store_Payment_Finish} />                          
                                 <Route path="/MyPage_Store" exact={true} component={MyPage_Store} />
                             </Route>
 
@@ -138,14 +136,10 @@ const AppRouter = () => {
                             {/* page_5 */}
                             <Route>
                                 <Route path="/movieMain" exact={true} component={movieMain} />
-<<<<<<< HEAD
-                                <Route path="/movieDetail" exact={true} component={movieDetail} />
-=======
                                 {/* <Route path="/movieDetail" exact={true} component={MovieDetail} /> */}
                                 <Route path="/movieDetail/:movie_id" exact={true} component={MovieDetail} />
 
                                 <Route path="/movieUpdate" exact={true} component={movieUpdate} />
->>>>>>> 91a6ada658f5502755e6f6f2cc53131e93cc5258
                                 <Route path="/movieNow" exact={true} component={movieNow} />
                                 <Route path="/movieNext" exact={true} component={movieNext} />
                                 <Route path="/arte" exact={true} component={arte} />

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import style from "../../styles/page_3/StoreGift.css";
 import package1 from "../../assets/page_3/package1.jpg";
 import cancel from "../../assets/page_3/cancel.png";
+import { withRouter } from 'react-router-dom';
+import ApiService from "../../ApiService";
 
 
 class StoreGift extends Component {
@@ -51,61 +53,62 @@ class StoreGift extends Component {
 
     this.setState({
       recipientNumber,
+      isValidNumber,
     });
   };
 
   handlePayment = () => {
-    // 결제하기 버튼 클릭 시 실행되는 로직
-    // const { recipientNumber } = this.state;
-    // const { isValidNumber, isSenderEmpty, isMessageEmpty } = this.state;
-    const { recipientNumber, sender, message } = this.state;
-    const { isValidNumber, isSenderEmpty, isMessageEmpty } = this.state;
-    const { totalQuantity, totalPrice } = this.props;
+  // 결제하기 버튼 클릭 시 실행되는 로직
+  const { recipientNumber, sender, message } = this.state;
+  const { totalQuantity, totalPrice, itemCode, itemName } = this.props;
 
-    const storedData = localStorage.getItem("sampleID");
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      console.log(parsedData);
-    } else {
-      console.log("저장된 데이터가 없습니다.");
-}
+  const storedData = localStorage.getItem("sampleID");
+  if (storedData) {
+    const parsedData = JSON.parse(storedData);
+    console.log(parsedData);
+  } else {
+    console.log("저장된 데이터가 없습니다.");
+  }
 
-    // 선물 받는 분 번호가 12자 이상이면 알림창 띄우기
-    if (recipientNumber.length >= 12 || recipientNumber.length < 10) {
-      alert("잘못된 형식입니다.");
-      return; // 결제 로직 중단
-    }
+  // 선물 받는 분 번호가 12자 이상이면 알림창 띄우기
+  if (recipientNumber.length >= 12 || recipientNumber.length < 10) {
+    alert("잘못된 형식입니다.");
+    return; // 결제 로직 중단
+  }
 
-    // 선물 받는 분 번호가 유효하지 않거나 선물하는 분 또는 메세지가 비어있는 경우 알림창 띄우기
-    // if (!isValidNumber || isSenderEmpty || isMessageEmpty) {
-    //   alert("입력 내용을 확인해주세요.");
-    //   return; // 결제 로직 중단
-    // }
+  // 로컬 스토리지에서 sampleID 제거
+  window.localStorage.removeItem("sampleID");
 
-    // 로컬 스토리지에서 sampleID 제거
-    window.localStorage.removeItem("sampleID");
+  // 로컬 스토리지에 새로운 데이터 저장
+  window.localStorage.setItem(
+    "sampleID",
+    JSON.stringify({
+      recipientNumber,
+      sender,
+      message,
+      totalQuantity,
+      totalPrice,
+      itemCode,
+      itemName,
+    })
+  );
 
-    // 로컬 스토리지에 새로운 데이터 저장
-    window.localStorage.setItem(
-      "sampleID",
-      JSON.stringify({
-        recipientNumber,
-        sender,
-        message,
-        totalQuantity,
-        totalPrice
-      })
-    );
 
-    // 상태 초기화
-    this.setState({
-      recipientNumber: "",
-      sender: "",
-      message: ""
-    });
 
-    // TODO: 결제 로직 구현
-  };
+  // 상태 초기화
+  this.setState({
+    recipientNumber: "",
+    sender: "",
+    message: ""
+  });
+
+  // TODO: 결제 로직 구현
+    // 페이지 이동
+    this.props.history.push("/page_3/Reservation_Payment_Store");
+    //window.location.href = "/page_3/Reservation_Payment_Store";
+    //window.location.href = "/page_3/Store_Payment_Finish";
+};
+
 
   render() {
     return (
@@ -220,12 +223,21 @@ class StoreGift extends Component {
                       maxLength={100} // 최대 글자 수 제한
                       onInput={(e) => this.handleMessageInput(e)}
                     />
-
+                    <input
+                      type="hidden"
+                      name="itemCode"
+                      value={this.props.itemCode} // props로 전달된 itemCode 사용  
+                    />
+                    <input
+                      type="hidden"
+                      name="itemName"
+                      value={this.props.itemName} // props로 전달된 itemName 사용
+                    />
                   </div>
                 </td>
               </tr>
               <tr>
-                <td colspan="2" >
+                <td colSpan="2" >
                   <div className={`characterCount ${style.characterCount}`}>
                           {this.state.messageLength}/100 (한글 {this.state.koreanLength}자 / 영문 {this.state.englishLength}자)
                   </div>
@@ -233,7 +245,7 @@ class StoreGift extends Component {
 
               </tr>
               <tr>
-                <td colspan="2" style={{ borderBottom: "none" }}>
+                <td colSpan="2" style={{ borderBottom: "none" }}>
                   <div>
                     <input
                       className={`StoreGift_inputButton ${style.StoreGift_inputButton}`}
@@ -253,4 +265,4 @@ class StoreGift extends Component {
   }
 }
 
-export default StoreGift;
+export default withRouter(StoreGift);

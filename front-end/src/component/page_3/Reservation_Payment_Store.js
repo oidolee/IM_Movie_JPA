@@ -6,6 +6,7 @@ import Res_movie from "../../assets/page_1/movie.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
 // import Checkout from "../../pages/Checkout";
 import Modal from "react-modal";
+import { withRouter } from 'react-router-dom';
 
 class Reservation_Payment_Store extends Component {
   state = {
@@ -26,6 +27,49 @@ class Reservation_Payment_Store extends Component {
       isPointClicked: !prevState.isPointClicked,
     }));
   };
+
+  
+  handlePayment = () => {
+    // localStorage에서 저장된 데이터 가져오기
+    const storedData = window.localStorage.getItem("sampleID");
+    if (storedData) {
+      const {
+        recipientNumber,
+        sender,
+        message,
+        totalQuantity,
+        totalPrice,
+        itemCode,
+        itemName,
+      } = JSON.parse(storedData);
+
+      // 서버로 데이터 전송
+      ApiService.sendGiftMessage({
+        recipientNumber,
+        sender,
+        message,
+        totalQuantity,
+        totalPrice,
+        itemCode,
+        itemName,
+      })
+        .then((response) => {
+          console.log("데이터 전송 성공:", response.data);
+          // 데이터 전송 후 필요한 작업을 수행합니다.
+          // 예를 들어 페이지 이동 등...
+        })
+        .catch((error) => {
+          console.error("데이터 전송 실패:", error);
+          // 실패 시 적절한 에러 처리를 수행합니다.
+        });
+    } else {
+      console.error("저장된 데이터가 없습니다.");
+      // 저장된 데이터가 없는 경우 처리할 작업을 수행합니다.
+    }
+
+    this.props.history.push("/page_3/Store_Payment_Finish");
+  };
+
 
   render() {
     const sysdate = moment().format("YYYY-MM-DD");
@@ -230,7 +274,7 @@ class Reservation_Payment_Store extends Component {
                     <li className="paymentBtn">할인금액</li>
                     <li className="paymentBtn">결제금액</li>
                     <li>
-                      <button className="paymentBtn_total">결제하기</button>
+                      <button className="paymentBtn_total" onClick={this.handlePayment}>결제하기</button>
                     </li>
                   </ul>
                 </div>
@@ -243,4 +287,4 @@ class Reservation_Payment_Store extends Component {
   }
 }
 
-export default Reservation_Payment_Store;
+export default withRouter(Reservation_Payment_Store);
