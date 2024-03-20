@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -26,5 +28,15 @@ public class ReservationDTO {
     private int res_count;
     private int res_ticket_price;
     private Date res_sysdate;
-    private String res_check;    
+    private String res_check;
+    
+    // 추가한 매핑
+    @ManyToOne
+    @JoinColumn(name="im_movie")
+    private MovieDTO im_movie;
+    
+    // 추가한 매핑
+    @ManyToOne
+    @JoinColumn(name="im_place")
+    private MovieDTO im_place;
 }

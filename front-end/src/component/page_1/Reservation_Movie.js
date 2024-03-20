@@ -51,7 +51,7 @@ const Reservation_Movie = ({ history }) => {
     }
   };
 
-  // 등록된 상영관 목록 호출
+  // 등록된 상영관 목록 호출_바뀔예정
   const fetchtime1 = () => {
     ApiService.fetchtime1()
       .then((res) => {
@@ -318,19 +318,19 @@ const Reservation_Movie = ({ history }) => {
                       </a>
                     </div>
                   )}
-                  {selectedMovie && remainingSeatsCount !== null && (
+                  {selectedMovie && remainingSeatsCount !== null && selectedPlace && (
                     <div className="menu4_sub">
                       <ul>
                         <li>
                           <a href="#none" onClick={() => setPopupOpen(true)}>
                             <span>
                               {moment(
-                                selectedMovie.res_movie_time,
+                                selectedPlace.start_time,
                                 "HH:mm:ss"
                               ).format("HH:mm")}
                               <br />
                               {remainingSeatsCount}/112{" "}
-                              {selectedMovie.theater_id}
+                              {selectedPlace.theater_id}
                             </span>
                           </a>
                         </li>
