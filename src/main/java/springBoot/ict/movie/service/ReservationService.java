@@ -9,7 +9,7 @@ import springBoot.ict.movie.dto.ReservationDTO;
 
 public interface ReservationService {
 
-	// 목록
+	// 지역에 해당하는 영화 목록
 	public List<ReservationDTO> ReservationList()
 		throws ServletException, IOException;
 }

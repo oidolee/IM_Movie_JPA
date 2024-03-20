@@ -18,14 +18,15 @@ public class ReservationServiceImpl implements ReservationService {
 	private ReservationRepository dao;
 	
 	@Override
+	// 지역에 해당하는 영화 목록
 	public List<ReservationDTO> ReservationList() 
 		throws ServletException, IOException {
 		
 		System.out.println("ReservationServiceImpl - ReservationList");
 		
-		System.out.println(dao.findAll());
+		System.out.println(dao.ReservationList());
 		
-		return dao.findAll();
+		return dao.ReservationList();
 	}
 
 }

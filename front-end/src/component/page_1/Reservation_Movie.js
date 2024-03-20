@@ -91,28 +91,28 @@ const Reservation_Movie = ({ history }) => {
     setSelectedMovie(reservations);
   };
 
- // 영화관 선택 핸들러
-const handleTheaterSelection = (subRegion) => {
-  // 선택한 영화관을 상태에 저장합니다.
-  setSelectedTheater(subRegion);
+  // 영화관 선택 핸들러
+  const handleTheaterSelection = (subRegion) => {
+    // 선택한 영화관을 상태에 저장합니다.
+    setSelectedTheater(subRegion);
 
-  // 서버에 선택한 영화관 정보를 전송하여 해당 영화관에 예약된 영화 목록을 받아옵니다.
-  ApiService.listReservation(subRegion)
-    .then((res) => {
-      setMovies(res.data); // 받아온 예약 목록을 상태에 저장합니다.
-    })
-    .catch((err) => {
-      console.log("Error fetching reservations:", err);
-    });
+    // 서버에 선택한 영화관 정보를 전송하여 해당 영화관에 예약된 영화 목록을 받아옵니다.
+    ApiService.listReservation(subRegion)
+      .then((res) => {
+        setMovies(res.data); // 받아온 예약 목록을 상태에 저장합니다.
+      })
+      .catch((err) => {
+        console.log("Error fetching reservations:", err);
+      });
 
-  // 선택한 지역을 설정합니다.
-  setSelectedPlace(subRegion);
-};
+    // 선택한 지역을 설정합니다.
+    setSelectedPlace(subRegion);
+  };
 
-// 지역 선택 핸들러
-const handleRegionClick = (region) => {
-  setSelectedRegion(region);
-};
+  // 지역 선택 핸들러
+  const handleRegionClick = (region) => {
+    setSelectedRegion(region);
+  };
 
   /// API를 호출하여 잔여 좌석 수를 가져오는 함수
   const fetchRemainingSeatsCount = () => {
@@ -250,7 +250,6 @@ const handleRegionClick = (region) => {
                     </li>
                   ))}
                 </ul>
-
                 <div className="menu2_right">
                   <ul>
                     {selectedPlace &&
