@@ -148,44 +148,44 @@ public class MovieController {
     }
 	  
 	 // 영화 상세페이지
-	    @GetMapping("/MovieDetailList/{mov_id}") 
-	    public Map<String, Object> MovieDetailList(@PathVariable("mov_id") int mov_id) 
-	            throws ServletException, IOException {
-	                
-	        logger.info("url - MovieDetailList");
-	        
-	        System.out.println(mov_id);
-	        String resultCode = "";
-	        String resultMsg = "";
-	        MovieDTO dto = null;
-	        
-	        Map<String, Object> map = new HashMap<String, Object>();
-	        
-	        try {
-	            
-	            dto = service.getMovieDetail(mov_id);
-	            resultCode = "200";
-	            resultMsg = "Success";
-	        } 
-	        
-	        catch(Exception e) {
-	            
-	            resultCode = "400";
-	            resultMsg = e.getMessage();
-	            e.printStackTrace();
-	        }
-	        
-	        map.put("resultCode", resultCode);
-	        map.put("resultMsg", resultMsg);
-	        map.put("mov_id", mov_id);
-	        map.put("dto", dto);
-	        
-	        return map;
-	    }
+    @GetMapping("/MovieDetailList/{movie_id}") 
+    public Map<String, Object> MovieDetailList(@PathVariable("movie_id") int movie_id) 
+            throws ServletException, IOException {
+                
+        logger.info("url - MovieDetailList");
+        
+        System.out.println(movie_id);
+        String resultCode = "";
+        String resultMsg = "";
+        MovieDTO dto = null;
+        
+        Map<String, Object> map = new HashMap<String, Object>();
+        
+        try {
+            
+            dto = service.getMovieDetail(movie_id);
+            resultCode = "200";
+            resultMsg = "Success";
+        } 
+        
+        catch(Exception e) {
+            
+            resultCode = "400";
+            resultMsg = e.getMessage();
+            e.printStackTrace();
+        }
+        
+        map.put("resultCode", resultCode);
+        map.put("resultMsg", resultMsg);
+        map.put("movie_id", movie_id);
+        map.put("dto", dto);
+        
+        return map;
+    }
 	    
 	 // 수정
-		@PutMapping("/UpdateUpdate/{mov_id}") 
-		public Map<String, Object> UpdateUpdate(@PathVariable("mov_id") int mov_id, @RequestBody MovieDTO dto) 
+		@PutMapping("/UpdateUpdate/{movie_id}") 
+		public Map<String, Object> UpdateUpdate(@PathVariable("movie_id") int movie_id, @RequestBody MovieDTO dto) 
 			throws ServletException, IOException {
 			
 			logger.info("url - UpdateUpdate");
@@ -224,13 +224,13 @@ public class MovieController {
 		}
 		
 		// 삭제
-		@DeleteMapping("/UpdateDelete/{mov_id}") 
-		public Map<String, Object> UpdateDelete(@PathVariable("mov_id") int mov_id) 
+		@DeleteMapping("/UpdateDelete/{movie_id}") 
+		public Map<String, Object> UpdateDelete(@PathVariable("movie_id") int movie_id) 
 			throws ServletException, IOException {
 			
 			logger.info("url - UpdateDelete");
 			
-			System.out.println(mov_id);
+			System.out.println(movie_id);
 			String resultCode = "";
 			String resultMsg = "";
 			
@@ -238,7 +238,7 @@ public class MovieController {
 			
 			try {
 				
-				service.UpdateDelete(mov_id);			
+				service.UpdateDelete(movie_id);			
 				resultCode = "200";
 				resultMsg = "UpdateInsert Success";
 			}
@@ -252,7 +252,7 @@ public class MovieController {
 			
 			map.put("resultCode", resultCode);
 			map.put("resultMsg", resultMsg);
-			map.put("mov_id", mov_id);
+			map.put("mov_id", movie_id);
 			
 			return map;
 		}

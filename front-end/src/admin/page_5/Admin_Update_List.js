@@ -11,6 +11,7 @@ import {
 import style from "../../styles/admin/page_5/Admin_Update_List.css";
 import ApiService from "../../ApiService";
 import { Create, Delete } from "@mui/icons-material";
+import { useParams } from 'react-router-dom';
 
 function Admin_Update_List ({ history }) {
   const [lists, setLists] = useState([]);
@@ -32,21 +33,27 @@ function Admin_Update_List ({ history }) {
 
   // 등록
   const UpdateAdd = () => {
-    window.localStorage.removeItem("mov_id");
+    window.localStorage.removeItem("movie_id");
     history.push("/admin/page_5/Admin_Update_Add");
   };
 
   // 수정
-  const selectUpdate = (mov_id) => {
-    window.localStorage.setItem("mov_id", mov_id);
-    history.push("/admin/page_5/Admin_Update_Edit");
+  const selectUpdate = (movie_id) => {
+    ApiService.selectUpdate(movie_id) 
+    .then((res) => {
+      console.log("selectUpdate 성공 : ", res.data);
+      history.push(`/admin/page_5/Admin_Update_Edit/${movie_id}`)
+    })
+    .catch((err) => {
+      console.log("selectUpdate 실패 : ", err);
+    });
   };
 
   // 삭제
-  const deleteUpdate = (mov_id) => {
-    ApiService.deleteUpdate(mov_id)
+  const deleteUpdate = (movie_id) => {
+    ApiService.deleteUpdate(movie_id)
       .then((res) => {
-        setLists(lists.filter((list) => list.mov_id !== mov_id));
+        setLists(lists.filter((list) => list.movie_id !== movie_id));
         console.log("deleteUpdate 성공 : ", res.data);
       })
       .catch((err) => {
@@ -83,9 +90,12 @@ function Admin_Update_List ({ history }) {
             <TableCell>Movie_Time</TableCell>
             <TableCell>Movie_Age</TableCell>
             <TableCell>Movie_Visitor</TableCell>
-            <TableCell>Movie_Contents</TableCell>
+            
             <TableCell>Movie_Con</TableCell>
-            <TableCell>Movie_Trailer</TableCell>
+            <TableCell>Movie_Pd</TableCell>
+            <TableCell>Movie_Cast</TableCell>
+            <TableCell>Movie_Trailer1</TableCell>
+            <TableCell>Movie_Trailer2</TableCell>
             <TableCell>Mov_Category</TableCell>
             
             <TableCell>Edit</TableCell>
@@ -94,9 +104,9 @@ function Admin_Update_List ({ history }) {
         </TableHead>
         <TableBody>
           {lists.map((list) => (
-            <TableRow key={list.mov_id}>
+            <TableRow key={list.movie_id}>
               <TableCell component="th" scope="list">
-                {list.mov_id}
+                {list.movie_id}
               </TableCell>
               <TableCell>{list.mov_image}</TableCell>
               <TableCell>{list.mov_title}</TableCell>
@@ -104,19 +114,22 @@ function Admin_Update_List ({ history }) {
               <TableCell>{list.mov_time}</TableCell>
               <TableCell>{list.mov_age}</TableCell>
               <TableCell>{list.mov_visitor}</TableCell>
-              <TableCell>{list.mov_contents}</TableCell>
+              
               <TableCell>{list.mov_con}</TableCell>
-              <TableCell>{list.mov_trailer}</TableCell>
+              <TableCell>{list.mov_pd}</TableCell>
+              <TableCell>{list.mov_cast}</TableCell>
+              <TableCell>{list.mov_trailer1}</TableCell>
+              <TableCell>{list.mov_trailer2}</TableCell>
               <TableCell>{list.mov_category}</TableCell>
               <TableCell
                 className="selectBtn"
-                onClick={() => selectUpdate(list.mov_id)}
+                onClick={() => selectUpdate(list.movie_id)}
               >
                 <Create />
               </TableCell>
               <TableCell
                 className="deleteBtn"
-                onClick={() => deleteUpdate(list.mov_id)}
+                onClick={() => deleteUpdate(list.movie_id)}
               >
                 <Delete />
               </TableCell>

@@ -21,7 +21,7 @@ import { Link, useHistory } from 'react-router-dom'; // 페이지이동
 
 
 
-
+// 관람평
 function StarRating({ maxStars, selectedStars, onStarClick }) {
   return (
     <ul>
@@ -45,7 +45,7 @@ function StarRating({ maxStars, selectedStars, onStarClick }) {
   );
 }
 
-
+//상세페이지
 function MovieDetail() {
   const [showModal, setShowModal] = useState(false); // 모달 창 열림/닫힘 상태
   const [selectedValue, setSelectedValue] = useState(1); // 선택된 값
@@ -60,7 +60,7 @@ function MovieDetail() {
 
 
   // id 값 사용 예시
-  console.log("Movie ID:", movie_id);
+  console.log("movie_id:", movie_id);
 
   const handleTrailerClick = (trailerUrl) => {
     setSelectedTrailer(trailerUrl);
@@ -117,10 +117,12 @@ function MovieDetail() {
 
   useEffect(() => {
     reviewList(movie_id);
+    selectLoad();
   }, []);
 
   const [getReviewlists, setGetReviewlists] = useState([]);
 
+  // 관람평
   const reviewList = (movie_id) => {
     console.log("reviewList start")
     ApiService.reviewList(movie_id)
@@ -136,34 +138,83 @@ function MovieDetail() {
   }
   console.log(getReviewlists)
 
+  // 영화상세
+  const [detailInfo, setDetailInfo] = useState({
+    movie_id: "",
+    mov_image: "",
+    mov_title: "",
+    mov_date: "",
+    mov_time: "",
+    mov_age: "",
+    mov_visitor: "",
+    mov_contents: "",
+    mov_con: "",
+    mov_pd: "",
+    mov_cast: "",
+    mov_image2: "",
+    mov_image3: "",
+    mov_trailer1: "",
+    mov_trailer2: "",
+    mov_category: "",
+  });
+
+  const selectLoad = () => {
+    ApiService.selectUpdate(movie_id)
+      .then((res) => {
+        let list = res.data;
+        console.log('res.data : ' + res.data)
+        setDetailInfo({
+          movie_id: list.dto.movie_id,
+          mov_image: list.dto.mov_image,
+          mov_title: list.dto.mov_title,
+          mov_date: list.dto.mov_date,
+          mov_time: list.dto.mov_time,
+          mov_age: list.dto.mov_age,
+          mov_visitor: list.dto.mov_visitor,
+          mov_contents: list.dto.mov_contents,
+          mov_con: list.dto.mov_con,
+          mov_pd: list.dto.mov_pd,
+          mov_cast: list.dto.mov_cast,
+          mov_image2: list.dto.mov_image2,
+          mov_image3: list.dto.mov_image3,
+          mov_trailer1: list.dto.mov_trailer1,
+          mov_trailer2: list.dto.mov_trailer2,
+          mov_category: list.dto.mov_category,
+        });
+        console.log("selectByIdUpdate 성공 : ", res.data);
+      })
+      .catch((err) => {
+        console.log("selectByIdUpdate 실패 : ", err);
+      });
+  };
 
   return (
     <>
       <div className={`detail_movie_wrap ${style.detail_movie_wrap}`}>
         <div className={`detail_info ${style.detail_info}`}>
           <div className={`detail_img_box ${style.detail_img_box}`}>
-            <img src={movie1} alt="파묘상세" style={{ width: "250px" }} />
+            <img src={`${process.env.PUBLIC_URL}/page_5/${detailInfo.mov_image}`} alt="파묘상세" style={{ width: "250px" }} />
           </div>
 
           <div className={`detail_text ${style.detail_text}`}>
             <div className={`detail_title ${style.detail_title}`}>
-              <label htmlFor="pp_name">파묘</label>
+              <label htmlFor="pp_name">{detailInfo.mov_title}</label>
             </div>
 
             <div className={`detail_con ${style.detail_con}`}>
               <div className={`detail_con1 ${style.detail_con1}`}>
-                <label htmlFor="de_date">2024.02.22 개봉</label>
-                <label htmlFor="de_time">| 134분 |</label>
+                <label htmlFor="de_date">{detailInfo.mov_date} 개봉</label>
+                <label htmlFor="de_time">| {detailInfo.mov_time}분 |</label>
                 <label htmlFor="de_age">
                   {" "}
-                  <span style={{ color: "orange" }}>15세이상관람가</span>
+                  <span style={{ color: "orange" }}>{detailInfo.mov_age}</span>
                 </label>
-                <label htmlFor="de_num">| 804.1만명</label>
+                <label htmlFor="de_num">| {detailInfo.mov_visitor}</label>
               </div>
             </div>
 
             <div className={`btn_wrap1 ${style.btn_wrap1}`}>
-              <button className={`detail_btn1 ${style.detail_btn1}`} id="10" onClick={() => handleTrailerClick("https://cf.lottecinema.co.kr//Media/MovieFile/MovieMedia/202402/20808_301_1.mp4")}>
+              <button className={`detail_btn1 ${style.detail_btn1}`} id="10" onClick={() => handleTrailerClick(detailInfo.mov_trailer1)}>
                 &#9658;예고편 재생{" "}
               </button>
               <button className={`detail_btn2 ${style.detail_btn2}`} id="11">
@@ -177,19 +228,7 @@ function MovieDetail() {
 
             <div id="section4" className={`detail_box ${style.detail_box}`}>
               <p className={`detail_con2 ${style.detail_con2}`}>
-                미국 LA, 거액의 의뢰를 받은 무당 ‘화림’(김고은)과
-                ‘봉길’(이도현)은<br></br>
-                기이한 병이 대물림되는 집안의 장손을 만난다.<br></br>
-                조상의 묫자리가 화근임을 알아챈 ‘화림’은 이장을 권하고,<br></br>
-                돈 냄새를 맡은 최고의 풍수사 ‘상덕’(최민식)과 장의사
-                ‘영근’(유해진)이 합류한다.<br></br>
-                <p />
-                “전부 잘 알 거야… 묘 하나 잘못 건들면 어떻게 되는지”<br></br>
-                절대 사람이 묻힐 수 없는 악지에 자리한 기이한 묘.<br></br>
-                ‘상덕’은 불길한 기운을 느끼고 제안을 거절하지만,<br></br>
-                ‘화림’의 설득으로 결국 파묘가 시작되고…<br></br>
-                <p />
-                나와서는 안될 것이 나왔다.
+              {detailInfo.mov_contents}
               </p>
             </div>
 
@@ -224,14 +263,14 @@ function MovieDetail() {
                 <div>
                   <p>영화정보</p>
                   <p>
-                    <span style={{ color: "gray" }}>.장르</span> 미스터리/한국
+                    <span style={{ color: "gray" }}>.장르</span> {detailInfo.mov_con}
                   </p>
                   <p>
-                    <span style={{ color: "gray" }}>.감독</span> 장재현
+                    <span style={{ color: "gray" }}>.감독</span> {detailInfo.mov_pd}
                   </p>
                   <p>
                     <span style={{ color: "gray" }}>.출연</span>{" "}
-                    최민식,김고은,유해진,이도현
+                    {detailInfo.mov_cast}
                   </p>
                 </div>
               )}
@@ -326,7 +365,7 @@ function MovieDetail() {
                   return (
                     <li key={index} style={{ display: 'flex', alignItems: 'center' }}>
                       {/* 이미지 파일 경로를 동적으로 설정 */}
-                      <img src={`https://www.lottecinema.co.kr/NLCHS/Content/images/temp/temp_reviewcharacter_0${6 - review.review_star}.jpg`} alt="image_by_rate" style={{ marginRight: '10px', width: '50px', height: '50px' }} />
+                      <img src={`https://www.lottecinema.co.kr/NLewcharacter_0${6 - review.review_star}.jpg`} alt="image_by_rate" style={{ marginRight: '10px', width: '50px', height: '50px' }} />
 
                       <div className={`movie_review_content ${style.movie_review_content}`}>
                         <p>작성자</p>
@@ -355,15 +394,15 @@ function MovieDetail() {
         </div>
         <button
           className={`detail_trailer1 ${style.detail_trailer1}`}
-          onClick={() => handleTrailerClick("https://cf.lottecinema.co.kr//Media/MovieFile/MovieMedia/202402/20808_301_1.mp4")}
+          onClick={() => handleTrailerClick(detailInfo.mov_trailer1)}
         >
-          <img src={trailer1} alt="트레일러1" />
+          <img src={`${process.env.PUBLIC_URL}/page_5_1/${detailInfo.mov_image2}`} alt="트레일러1" />
         </button>
         <button
-          className={`detail_trailer2 ${style.detail_trailer2}`}
-          onClick={() => handleTrailerClick("https://cf.lottecinema.co.kr//Media/MovieFile/MovieMedia/202402/20808_301_2.mp4")}
+          className={`detail_trailer1 ${style.detail_trailer2}`}
+          onClick={() => handleTrailerClick(detailInfo.mov_trailer2)}
         >
-          <img src={trailer2} alt="트레일러2" />
+          <img src={`${process.env.PUBLIC_URL}/page_5_1/${detailInfo.mov_image3}`} alt="트레일러2" />
         </button>
       </div>
 

@@ -302,21 +302,21 @@ class ApiService {
     }
 
     // 1건조회
-    selectUpdate(mov_id) {
-        console.log("selectUpdate 호출", mov_id);
-        return axios.get(url + "/page_5/MovieDetailList" + "/" + mov_id);
+    selectUpdate(movie_id) {
+        console.log("selectUpdate 호출", movie_id);
+        return axios.get(url + "/page_5/MovieDetailList/" + movie_id);
     }
 
     // 영화수정
     editUpdate(inputData) {
         console.log("editUpdate 호출", inputData);
-        return axios.put(url + "/page_5/UpdateUpdate" + "/" + inputData.mov_id, inputData);
+        return axios.put(url + "/page_5/UpdateUpdate" + "/" + inputData.movie_id, inputData);
     }  
 
     // 영화삭제
-    deleteUpdate(mov_id) {
-        console.log("deleteUpdate 호출", mov_id);
-        return axios.delete(url + "/page_5/UpdateDelete" + "/" + mov_id);
+    deleteUpdate(movie_id) {
+        console.log("deleteUpdate 호출", movie_id);
+        return axios.delete(url + "/page_5/UpdateDelete" + "/" + movie_id);
     }
 
     

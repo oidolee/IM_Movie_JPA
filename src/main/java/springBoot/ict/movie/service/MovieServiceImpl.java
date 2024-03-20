@@ -50,13 +50,13 @@ public class MovieServiceImpl implements MovieService {
 
 	// 영화 상세페이지
 	@Override
-	public MovieDTO getMovieDetail(int mov_id) 
+	public MovieDTO getMovieDetail(int movie_id) 
 	        throws ServletException, IOException {
 	    System.out.println("서비스 - getMovieDetail");
 	    
-	    MovieDTO dto = dao.findById(mov_id).orElse(null);
+	    MovieDTO dto = dao.findById(movie_id).orElse(null);
 	    
-	    System.out.println(mov_id);	
+	    System.out.println(movie_id);	
 		System.out.println(dto);
 	    
 	    return dto;
@@ -74,14 +74,14 @@ public class MovieServiceImpl implements MovieService {
 	
 	// 삭제
 	@Override
-	public void UpdateDelete(int mov_id) 
+	public void UpdateDelete(int movie_id) 
 			throws ServletException, IOException {
 		
 		System.out.println("DiscountServiceImpl - UpdateDelete");
 		
-		System.out.println(mov_id);
+		System.out.println(movie_id);
 		
-		dao.deleteById(mov_id);
+		dao.deleteById(movie_id);
 	}
 
 	

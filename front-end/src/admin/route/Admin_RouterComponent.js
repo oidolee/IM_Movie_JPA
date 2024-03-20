@@ -64,7 +64,7 @@ const Admin_RouterComponent = () => {
                     {/* page_5 */}
                     <Route>
                     <Route path="/admin/page_5/Admin_Update_Add" exact={true} component={Admin_Update_Add} /> 
-                    <Route path="/admin/page_5/Admin_Update_Edit" exact={true} component={Admin_Update_Edit} />
+                    <Route path="/admin/page_5/Admin_Update_Edit/:movie_id" exact={true} component={Admin_Update_Edit} />
                     <Route path="/admin/page_5/Admin_Update_List" exact={true} component={Admin_Update_List} />
                     <Route path="/admin/page_5/Admin_Now_Add" exact={true} component={Admin_Now_Add} />
                     <Route path="/admin/page_5/Admin_Now_Edit" exact={true} component={Admin_Now_Edit} />
