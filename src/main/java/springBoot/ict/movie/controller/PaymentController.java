@@ -27,16 +27,16 @@ public class PaymentController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
 	
-	// 목록
-	@GetMapping("/PaymentList") 
-	public List<PaymentDTO> PaymentList(Model model) 
-		throws ServletException, IOException {
-		
-		logger.info("url - PaymentList");
-		
-		List<PaymentDTO> list = service.PaymentList();
-		model.addAttribute("list", list);
-		
-		return list;
-	}
+//	// 목록
+//	@GetMapping("/PaymentList") 
+//	public List<PaymentDTO> PaymentList(Model model) 
+//		throws ServletException, IOException {
+//		
+//		logger.info("url - PaymentList");
+//		
+//		List<PaymentDTO> list = service.PaymentList();
+//		model.addAttribute("list", list);
+//		
+//		return list;
+//	}
 }

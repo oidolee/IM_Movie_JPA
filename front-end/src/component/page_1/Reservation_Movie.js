@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import style from "../../styles/page_1/Reservation_Movie.css";
 import Reservation_Swiper from "./Reservation_Swiper.js";
+import Res_img18 from "../../assets/page_1/18.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
 import Res_img12 from "../../assets/page_1/12.jpg";
 import Res_imgAll from "../../assets/page_1/all.jpg";
@@ -12,68 +13,61 @@ import { useHistory } from "react-router-dom";
 const Reservation_Movie = ({ history }) => {
   const [reservation, setReservation] = useState([]);
   const [popupOpen, setPopupOpen] = useState(false);
-  const [selectedRegion, setSelectedRegion] = useState(null);
+  const [selectedPlace, setSelectedPlace] = useState(null); // 선택한 지역
   const [selectedTheater, setSelectedTheater] = useState(null); // 선택한 영화관 상태
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택한 영화 상태
-  const [movies, setMovies] = useState([]); // 선택한 영화관에 대한 영화 목록 상태
+  const [movies, setMovies] = useState([]); // 영화 목록
+  const [places, setPlaces] = useState([]); // 지역 목록
   const [remainingSeatsCount, setRemainingSeatsCount] = useState(null);
 
-  const [subRegions, setSubRegions] = useState({
-    서울: [
-      "가산디지털",
-      "가양",
-      "강동",
-      "건대입구",
-      "김포공항",
-      "노원",
-      "도곡",
-      "독산",
-      "브로드웨이(신사)",
-      "서울대이북",
-      "수락산",
-    ],
-    "경기/인천": [
-      "광교아울렛",
-      "광명(광명사거리)",
-      "광명아울렛",
-      "광주터미널",
-      "구리아울렛",
-      "동탄",
-      "라페스타",
-      "마석",
-      "별내",
-      "병점",
-      "부천(신중동역)",
-    ],
-    "충청/대전": ["당진", "대전(백화점)"],
-    "전라/광주": ["광주(백화점)", "광주광산", "군산나운"],
-    "경북/대구": ["경주", "경주황성"],
-    "경남/부산/울산": ["거창", "광복", "김해부원", "김해아울렛(장유)"],
-    강원: ["남원주", "동해", "원주무실", "춘천"],
-    제주: ["서귀포", "제주연동"],
-  });
-
   useEffect(() => {
-    listReservation();
+    fetchMovie();
+    fetchtime1();
   }, []);
 
-  const listReservation = () => {
-    ApiService.listReservation()
+  // 등록된 영화 목록 호출
+  const fetchMovie = () => {
+    ApiService.fetchMovie()
       .then((res) => {
-        setReservation(res.data);
-        console.log("listReservation 성공", res.data);
+        setMovies(res.data);
+        console.log("fetchMovie 성공", res.data);
       })
       .catch((err) => {
-        console.log("listReservation 오류 : ", err);
+        console.log("fetchMovie 오류 : ", err);
+      });
+  };
+
+  // 등록된 상영관 목록 호출
+  const fetchtime1 = () => {
+    ApiService.fetchtime1()
+      .then((res) => {
+        setPlaces(res.data);
+        console.log("fetchtime1 성공", res.data);
+      })
+      .catch((err) => {
+        console.log("fetchMovie 오류 : ", err);
       });
   };
 
   // 연령에 대한 이미지
-  const getMovieImage = (age) => {
-    if (age === "All") {
+  const getMovieImage = (mov_age) => {
+    if (mov_age === "전체관람가") {
       return <img src={Res_imgAll} />;
-    } else if (age === "15") {
+    } else if (mov_age === "15세이상관람가") {
       return <img src={Res_img15} />;
+    } else if (mov_age === "12세이상관람가") {
+      return <img src={Res_img12} />;
+    } else if (mov_age === "18세이상관람가") {
+      return <img src={Res_img18} />;
+    }
+  };
+
+  // 지역
+  const getPlaceNum = (place_num) => {
+    if (place_num == 1) {
+      return "서울";
+      
+
     }
   };
 
@@ -223,25 +217,16 @@ const Reservation_Movie = ({ history }) => {
             <li>
               <div className="menu2">
                 <ul className="menu2_left">
-                  {Object.keys(subRegions).map((region) => (
-                    <li
-                      className={`subRegions ${
-                        selectedRegion === region ? "active" : ""
-                      }`}
-                      key={region}
-                      onClick={(event) => {
-                        event.preventDefault(); // 기본 동작 막기
-                        handleRegionClick(region);
-                      }}
-                    >
-                      <a href="#">{region}</a>
+                  {places.map((place) => (
+                    <li>
+                      <a href="#">{getPlaceNum(place.place_num)}</a>
                     </li>
                   ))}
                 </ul>
 
                 <div className="menu2_right">
-                  <ul>
-                    {selectedRegion &&
+                  {/* <ul>
+                    {selectedPlace &&
                       subRegions[selectedRegion].map((subRegion, index) => (
                         <li className="subRegions" key={subRegion}>
                           <a
@@ -255,7 +240,7 @@ const Reservation_Movie = ({ history }) => {
                           </a>
                         </li>
                       ))}
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
             </li>
@@ -270,7 +255,7 @@ const Reservation_Movie = ({ history }) => {
               <div className="menu3">
                 <ul className="menu3_left">
                   {movies.map((movie) => (
-                    <li key={movie.movie_id}>
+                    <li key={movie.mov_id}>
                       <a
                         href="#"
                         onClick={(event) => {
@@ -278,8 +263,8 @@ const Reservation_Movie = ({ history }) => {
                           handleMovieSelection(movie);
                         }}
                       >
-                        {getMovieImage(movie.movie_age)}
-                        {movie.res_movie_name}
+                        {getMovieImage(movie.mov_age)}
+                        {movie.mov_title}
                       </a>
                     </li>
                   ))}
@@ -302,8 +287,8 @@ const Reservation_Movie = ({ history }) => {
                   {selectedMovie && (
                     <div className="menu4_main">
                       <a href="#none">
-                        {getMovieImage(selectedMovie.movie_age)}
-                        {selectedMovie.res_movie_name}
+                        {getMovieImage(selectedMovie.mov_age)}
+                        {selectedMovie.mov_title}
                       </a>
                     </div>
                   )}

@@ -16,16 +16,16 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	private PaymentRepository dao;
 	
-	// 목록
-	@Override
-	public List<PaymentDTO> PaymentList() 
-		throws ServletException, IOException {
-		
-		System.out.println("DiscountServiceImpl - PaymentList");
-		
-		System.out.println(dao.findAll());
-		
-		return dao.findAll();
-	}
+//	// 목록
+//	@Override
+//	public List<PaymentDTO> PaymentList() 
+//		throws ServletException, IOException {
+//		
+//		System.out.println("DiscountServiceImpl - PaymentList");
+//		
+//		System.out.println(dao.findAll());
+//		
+//		return dao.findAll();
+//	}
 
 }

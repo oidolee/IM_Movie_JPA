@@ -9,7 +9,7 @@ import springBoot.ict.movie.dto.PaymentDTO;
 
 public interface PaymentService {
 
-	// 목록
-	public List<PaymentDTO> PaymentList()
-		throws ServletException, IOException;
+//	// 목록
+//	public List<PaymentDTO> PaymentList()
+//		throws ServletException, IOException;
 }
