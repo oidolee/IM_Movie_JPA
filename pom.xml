@@ -11,7 +11,7 @@
     </parent>
     <groupId>springBoot.ict.movie</groupId>
     <artifactId>springBoot.ict.movie</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>    
     <name>IM_Movie_1</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -70,6 +70,12 @@
             <artifactId>sdk</artifactId>
             <version>4.3.0</version>
         </dependency>
+        
+        <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-tomcat</artifactId>
+		    <scope>provided</scope>
+		</dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
