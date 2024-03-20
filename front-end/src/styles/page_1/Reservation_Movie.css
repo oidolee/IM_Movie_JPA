@@ -190,6 +190,13 @@
     margin-right: 10px;
 }
 
+.Res_Movie .Res_screen_img {
+    margin: 0;
+    height: 18px;
+    width: 18px;
+    
+}
+
 .Res_Movie .menu4_sub li {
     height: 50px;
     width: 150px;

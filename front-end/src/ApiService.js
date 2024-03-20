@@ -17,8 +17,14 @@ class ApiService {
     }
     
     // --------------------------------------------Seat 끝--------------------------------------------
-    
+    // --------------------------------------------Reservation 시작--------------------------------------------
+    listReservation() {
+        console.log("listReservation 호출");
+        return axios.get(url + "/page_1/ReservationList");
+    }
 
+
+    // --------------------------------------------Reservation 끝--------------------------------------------
     // --------------------------------------------Discount 시작--------------------------------------------
     // 목록
     listDiscount() {
@@ -95,6 +101,14 @@ class ApiService {
         console.log('page3 fetchSampleByID 호출!!', sampleID);
         return axios.get(url + "/page_3/EditStore_Admin" + "/EditStore_Map/" +  sampleID ); // 주의 : "/"+ 
     }
+
+    sendGiftMessage(storedData) {
+        console.log('sendGiftMessage 호출!!', storedData);
+        return axios.post(url + "/page_3/Reservation_Payment_Store", storedData)
+    }
+
+
+
 
     // Store Map 끝
     // --------------------------------------------Store 끝----------------------------------------------
@@ -178,7 +192,7 @@ class ApiService {
     // 쿠폰 상세내역(관리자)
     couponList(ic_name){
         console.log('couponList() 호출!!')
-        return axios.get(url + '/page_6/coupon/' + ic_name); 
+        return axios.get(url + '/page_6/coupon/selectCoupon/' + ic_name); 
     }
     // 쿠폰 등록
     addCoupon(inputData){

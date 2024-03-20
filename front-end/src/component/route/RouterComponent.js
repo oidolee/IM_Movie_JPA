@@ -34,6 +34,7 @@ import Page3 from '../page_3/Page3';
 import StoreDetail from '../page_3/StoreDetail';
 import StoreTicket from '../page_3/StoreTicket';
 import Reservation_Payment_Store from '../page_3/Reservation_Payment_Store';
+import Store_Payment_Finish from '../page_3/Store_Payment_Finish';
 import MyPage_Store from '../page_6/store_page_3/MyPage_Store';
 
 //page_4
@@ -76,6 +77,7 @@ import Event_Home from '../page_6/event/Event_Home';
 import MyapgeConsultDetail from '../page_6/myinfo/MyPage_consult_answer';
 
 
+
 // import Admin_main from '../../admin/main/Admin_main'
 
 
@@ -116,6 +118,7 @@ const AppRouter = () => {
                                 <Route path="/page_3/EditStore_Admin/" exact={true} component={StoreDetail} />
                                 <Route path="/page_3/StoreTicket/" exact={true} component={StoreTicket} />
                                 <Route path="/page_3/Reservation_Payment_Store/" exact={true} component={Reservation_Payment_Store} />
+                                <Route path="/page_3/Store_Payment_Finish/" exact={true} component={Store_Payment_Finish} />                          
                                 <Route path="/MyPage_Store" exact={true} component={MyPage_Store} />
                             </Route>
 
@@ -164,6 +167,7 @@ const AppRouter = () => {
                                 <Route path="/event_Home" exact={true} component={Event_Home} />
                                 <Route path="/MyPage_Event" exact={true} component={MyPage_Event} />
                                 <Route path="/MyPage_consult_answer/:one_id" exact={true} component={MyapgeConsultDetail} />
+                                
                             </Route>
                             
 

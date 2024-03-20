@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import React from "react";
-import style from '../../../styles/page_6/MyPage_consult_list_part.modul.css';
+import style from '../../../styles/page_6/MyPage_consult_list_part_module.css';
 import ApiService from '../../../ApiService';
 import {Link} from 'react-router-dom';
 function MyPage_consult_list_part() {

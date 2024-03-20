@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import React from "react";
-import style from '../../../styles/page_6/Mypage_Event_part.module.css';
+import style from '../../../styles/page_6/Mypage_Event_part_module.css';
 
 function Mypage_Event_part() {
     const [showDetail, setShowDetail] = useState(false);
