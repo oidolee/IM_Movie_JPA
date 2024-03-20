@@ -12,21 +12,22 @@ function Consult_part() {
         setShowDetail(!showDetail)
     }
     const history = useHistory();
-    const [cookies_email, setCookie_email] = useCookies(['cookies_email']); // 쿠키 훅 
+    //const [cookies_email, setCookie_email] = useCookies(['cookies_email']); // 쿠키 훅 
     const [emailCheck, setEmailCheck] = useState('');
 
     const cus_grade = 'VIP';
-    const [cookies, setCookie, removeCookie] = useCookies(['cus_name']);
+    const [cookies, setCookie] = useCookies(['idName','c_email']);
     const [cus_name, setCus_Name] = useState('');
 
     useEffect(() => {
-        if (cookies_email.c_email !== undefined) {
-            setEmailCheck(cookies_email.c_email);
+        if (cookies.c_email !== undefined) {
+            setEmailCheck(cookies.c_email);
         }
-        if(cookies.name){
-            setCus_Name(cookies.name);
+
+        if(cookies.idName !== undefined){
+            setCus_Name(cookies.idName);
         }
-    }, [cookies_email]);
+    }, [cookies]);
 
     
     const [consultData, setConsultData] = useState({
@@ -41,6 +42,8 @@ function Consult_part() {
         const { name, value } = e.target;
         setConsultData(prevState  =>({
             ...prevState,
+            c_email: emailCheck,
+            cus_name: cus_name,
             [name]: value
         }));
     }
@@ -164,7 +167,7 @@ function Consult_part() {
                     <table className={`myinfo_table ${style.myinfo_table}`}>
                         <tr>
                             <td>성명</td>
-                            <td><input className={`myname ${style.myname}`} type="text" style={{ padding: '0px 18px' , width: '150px',backgroundColor:'rgba(211, 211, 211, 0.199)'}}></input></td>
+                            <td><input className={`myname ${style.myname}`} type="text" style={{ padding: '0px 18px', width: '150px',backgroundColor:'rgba(211, 211, 211, 0.199)'}} value={cus_name}></input></td>
                         </tr>
                         <tr>
                             <td>연락처</td>
@@ -179,14 +182,13 @@ function Consult_part() {
                         <tr>
                             <td>이메일</td>
                             <td>
-                                <input className={`email1 ${style.email1}`} type="text" style={{ marginRight: '10px', padding: '0px 18px',backgroundColor:'rgba(211, 211, 211, 0.199)'}} value={emailCheck} onChange={handleChange}></input>
+                                <input className={`email1 ${style.email1}`} type="text" style={{ marginRight: '10px', padding: '0px 18px',backgroundColor:'rgba(211, 211, 211, 0.199)'}} value={emailCheck}></input>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
             <div>
-                <input type="hidden" value={cus_name}  name="cus_name" onChange={handleChange}/>
                 <input type="hidden" value={consultData.ib_date}  name="ib_date" onChange={handleChange}/>
                 <input type="hidden" value={consultData.ib_show}  name="ib_show" onChange={handleChange}/>
                 <Button className={`btn_cancle ${style.btn_cancle}`} variant="contained" color="primary" onClick={saveConsult}> 확인 </Button>

@@ -36,7 +36,7 @@ public class CouponController {
 	private static final Logger logger = LoggerFactory.getLogger(CouponController.class);
 
 	// 쿠폰 리스트 (관리자)
-	@GetMapping("/coupon")
+	@GetMapping("/couponList")
 	public List<CouponDTO> couponList(Model model) throws ServletException, IOException {
 		logger.info("<<< url -> couponList");
 

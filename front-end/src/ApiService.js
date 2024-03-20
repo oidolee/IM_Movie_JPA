@@ -157,7 +157,7 @@ class ApiService {
         return axios.get(url + '/page_6'); 
     }
 
-    // 관리자
+    // 고객
     // 1:1 문의 리스트
     fetchConsultCusList(c_email){
         console.log('fetchConsultCusList() 호출!!')
@@ -190,12 +190,18 @@ class ApiService {
         return axios.post(url + "/page_6/saveAnswer", inputData);
     }
 
+    // 1:1 문의 답변 후 상태 업데이트
+    updateConsultData(one_id){
+        console.log('updateConsultData 호출');
+        return axios.put(url + "/page_6/completeAnswer/" + one_id);
+    }
+
     
     // 쿠폰
     // 쿠폰 리스트(관리자)
     fetchCoupon(){
         console.log('fetchCoupon() 호출!!')
-        return axios.get(url + '/page_6/coupon'); 
+        return axios.get(url + '/page_6/coupon/couponList'); 
     }
     
     // 쿠폰 상세내역(관리자)

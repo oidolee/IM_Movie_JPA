@@ -3,7 +3,9 @@ package springBoot.ict.movie.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import springBoot.ict.movie.dto.ConsultAnswerDTO;
 import springBoot.ict.movie.dto.ConsultDTO;
@@ -14,9 +16,10 @@ public interface ConsultRepository extends JpaRepository<ConsultDTO, Integer> {
 	@Query("SELECT c FROM ConsultDTO c WHERE c.c_email = :c_email")
 	List<ConsultDTO> ConsultList(String c_email);
 	
-	// 1:1문의 등록
-	@Query("SELECT c FROM ConsultAnswerDTO c WHERE c.one_id = :one_id")
-	ConsultAnswerDTO ConsultInsert(int one_id);
+	// 1:1 답변 등록 후 상태업데이트
+	@Modifying
+    @Query("UPDATE ConsultDTO c SET c.ib_show = 'n' WHERE c.one_id = :one_id")
+    int updateConsultState(@Param("one_id") int one_id);
 	
 //	INSERT INTO DR_ticket_reservation (ticket_no, ticket_seat, cust_Id, game_date, purchase_date, ticket_price)
 //	VALUES((SELECT NVL(MAX(ticket_no) + 1, TO_NUMBER(TO_CHAR(SYSDATE, 'YYMMDD') || '001')) FROM DR_ticket_reservation), '다크건디석', 'hong123', '2024-02-09 18:00:00', sysdate, 57000); 

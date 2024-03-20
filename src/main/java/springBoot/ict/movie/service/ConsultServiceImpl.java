@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import springBoot.ict.movie.dao.ConsultAnswerRepository;
 import springBoot.ict.movie.dao.ConsultRepository;
@@ -85,7 +86,13 @@ public class ConsultServiceImpl implements ConsultService {
       return list;
    }
 
-   // 1:1답변 리스트
+   // 1:1답변 등록 후 상태 업데이트
+   @Override
+   @Transactional
+   public void updateCusConsultstate(int one_id) throws ServletException, IOException {
+	    System.out.println("ConsultServiceImpl - updateCusConsultstate");
+	    csdao.updateConsultState(one_id);
+	}
    
    
    // 회원 정보 한건 찾기

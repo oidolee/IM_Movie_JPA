@@ -7,14 +7,14 @@ import { useCookies } from 'react-cookie'; // useCookies import
 function MyPage_consult_list_part() {
     const [showDetailIndex, setShowDetailIndex] = useState(-1); // 상세 정보를 표시할 항목의 인덱스를 저장할 상태 추가
     const [consult, setConsult] = useState([]);
-    const [cookies_email, setCookie_email] = useCookies(['cookies_email']);
+    const [cookies, setCookie] = useCookies(['c_email', 'idName']);
     const [emailCheck, setEmailCheck] = useState('');
 
     useEffect(() => {
-        reloadConsultList(cookies_email.c_email);
+        reloadConsultList(cookies.c_email);
         
-        if (cookies_email.c_email !== undefined) {
-            setEmailCheck(cookies_email.c_email);
+        if (cookies.c_email !== undefined) {
+            setEmailCheck(cookies.c_email);
         }
     }, []);
 
@@ -65,7 +65,7 @@ function MyPage_consult_list_part() {
                                 <td>{consultItem.ib_date}</td>
                                 <td>
                                     <div className={`consult_status ${style.consult_status}`}>
-                                    {consultItem.ib_show === 'y' ? '답변완료' : '답변대기 중'}
+                                        {consultItem.ib_show === 'y' ? '답변대기 중' : '답변 완료'}
                                     </div>
                                 </td>
                             </tr>

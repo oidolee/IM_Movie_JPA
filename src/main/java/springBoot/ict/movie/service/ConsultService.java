@@ -37,6 +37,8 @@ public interface ConsultService {
 	public List<ConsultAnswerDTO> selectConsultAnswer(int one_id) 
 			throws ServletException, IOException;
 			
+	// 1:1답변 등록 후 상태 업데이트
+	 public void updateCusConsultstate(int one_id) throws ServletException, IOException;
 	
 //	// 회원정보 1건 select
 //	public CustomerDTO selectCustomer(String email) 
