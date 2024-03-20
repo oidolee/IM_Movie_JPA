@@ -7,6 +7,7 @@ import Res_img15 from "../../assets/page_1/15.jpg";
 // import Checkout from "../../pages/Checkout";
 import Modal from "react-modal";
 import { withRouter } from 'react-router-dom';
+import ApiService from '../../ApiService';
 
 class Reservation_Payment_Store extends Component {
   state = {
