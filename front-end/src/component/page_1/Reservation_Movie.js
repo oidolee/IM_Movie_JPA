@@ -318,19 +318,19 @@ const Reservation_Movie = ({ history }) => {
                       </a>
                     </div>
                   )}
-                  {selectedMovie && remainingSeatsCount !== null && selectedPlace && (
+                  {remainingSeatsCount !== null && (
                     <div className="menu4_sub">
                       <ul>
                         <li>
                           <a href="#none" onClick={() => setPopupOpen(true)}>
                             <span>
-                              {moment(
+                              {/* {moment(
                                 selectedPlace.start_time,
                                 "HH:mm:ss"
                               ).format("HH:mm")}
                               <br />
                               {remainingSeatsCount}/112{" "}
-                              {selectedPlace.theater_id}
+                              {selectedPlace.theater_id} */}
                             </span>
                           </a>
                         </li>
