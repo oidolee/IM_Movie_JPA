@@ -91,6 +91,7 @@ const Reservation_Seat = () => {
       setTeenQuantity(0);
       setChildQuantity(0);
       setDisabledQuantity(0);
+      setSelectedSeats([]);
     }
   }, [adultQuantity, teenQuantity, childQuantity, disabledQuantity]);
 
@@ -153,7 +154,7 @@ const Reservation_Seat = () => {
   };
 
   const handleSeatSelect = (ip_no, lot, seatNumber, status) => {
-    if (canSelectSeat) {
+    if (totalQuantity === 0) {
       alert("수량을 선택해야 좌석을 선택할 수 있습니다.");
       return;
     }
@@ -182,7 +183,7 @@ const Reservation_Seat = () => {
     } else {
       alert("선택된 좌석 수량을 초과하였습니다.");
       return;
-    }
+      }
   };
 
   const handlePayment = () => {
@@ -192,11 +193,15 @@ const Reservation_Seat = () => {
       return;
     }
 
-    // 좌석 수량과 카운터 수량 일치 여부 확인
+    // 좌석 수와 인원 수 불일치
     if (selectedSeats.length !== totalQuantity) {
       console.log("좌석 수량과 카운터 수량이 일치하지 않음");
       alert("인원/수량 불일치합니다. 수량을 확인해주세요.");
       return;
+    } 
+    // 좌석 수랑 인원 수 일치
+    else if(selectedSeats.length === totalQuantity) {
+      
     }
 
     const updateSeatPromises = selectedSeats.map((seat) => {
@@ -224,7 +229,7 @@ const Reservation_Seat = () => {
   };
 
   const handleMovie = () => {
-    const confirmResult = window.confirm("지금까지 입력된 정보가 모두 사라집니다.");
+    const confirmResult = window.confirm("입력된 정보가 모두 사라집니다.");
     if (confirmResult) {
       history.push("/page_1/Reservation_Movie");
     }
