@@ -20,11 +20,9 @@ public class PaymentDTO {
     private int pay_id;
 	private int res_id;
 	private String c_email;
-	private String c_grade;
 	private String pay_method;
-	private String pay_company;
-	private String pay_card_num;
-	private String pay_tel;
 	private Date pay_sysdate;
 	private String pay_check;
+	private String successUrl; // 성공
+	private String failUrl; // 실패 
 }

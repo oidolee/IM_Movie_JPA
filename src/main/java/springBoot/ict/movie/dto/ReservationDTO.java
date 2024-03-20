@@ -22,7 +22,7 @@ public class ReservationDTO {
     @Id
     private int res_id;
     private int mov_id;
-    private int place_num;
+    private int ip_num;
     private int st_id;
     private String c_email;    
     private int res_count;
@@ -30,13 +30,13 @@ public class ReservationDTO {
     private Date res_sysdate;
     private String res_check;
     
-    // 추가한 매핑
-    @ManyToOne
-    @JoinColumn(name="im_movie")
-    private MovieDTO im_movie;
-    
-    // 추가한 매핑
-    @ManyToOne
-    @JoinColumn(name="im_place")
-    private MovieDTO im_place;
+//    // 추가한 매핑
+//    @ManyToOne
+//    @JoinColumn(name="mov_id")
+//    private MovieDTO im_movie;
+//    
+//    // 추가한 매핑
+//    @ManyToOne
+//    @JoinColumn(name="ip_num")
+//    private MovieDTO im_place;
 }

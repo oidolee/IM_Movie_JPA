@@ -6,6 +6,9 @@ import style from "../../styles/page_1/Checkout.css";
 const clientKey = "test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq";
 const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
 
+// 클라이언트 키 test_ck_P9BRQmyarYxDGWlq5RNZVJ07KzLN
+// 시크릿 키 test_sk_ex6BJGQOVDxv2GKPJdBnVW4w2zNb
+
 const App = ({ handleCloseModal }) => {
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
