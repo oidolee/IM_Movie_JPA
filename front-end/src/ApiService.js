@@ -429,12 +429,17 @@ class ApiService {
         return axios.get(url + '/page_5/timeList'); 
     }
 
-    fetchTitles(){
-        console.log('timeList() 호출!!')
-        return axios.get(url + '/page_5/timeList'); 
+    reloadTimeList(place_num){
+        console.log('reloadTimeList() 호출!!',place_num)
+        return axios.get(url + '/page_5/timeList/' +place_num ); 
+    }
+
+    getLocation(place_num){
+        console.log('getLocation() 호출!!',place_num)
+        return axios.get(url + '/page_5/getLocation/' +place_num ); 
     }
       
-  
+    
 
 
 }

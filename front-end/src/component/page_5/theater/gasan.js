@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import style from "../../../styles/page_5/gasan.module.css";
 import ApiService from "../../../ApiService";
+import { useParams } from "react-router-dom";
 
 // Import Swiper React components
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
@@ -43,6 +44,10 @@ function Review() {
 function Place() {
   const swiperRef = useRef(null);
   const [isPlayActive, setIsPlayActive] = useState(true);
+  const [checkMoviTitle, setCheckMoviTitle] = useState({});
+  const { place_num } = useParams(); // 영화 지점 번호 
+  const [movieLocation, setMovieLocation] = useState();
+
 
   const startSlide = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
@@ -127,13 +132,31 @@ function Place() {
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
+    //영화관 상세페이지
+    getLocation();
     reloadTimeList();
   }, []);
+  console.log("place_num")
+  console.log(place_num)
+  
+  const getLocation = () => {
+    ApiService.fetchStoreMapByID(place_num)
+      .then((res) => {
+        
+        console.log("fetchStoreMapByID");
+        setMovieLocation(res.data)
+       
+
+      })
+      .catch((err) => {
+        console.log("reloadTimeList() Error!!", err);
+      });
+  };
 
   const reloadTimeList = () => {
-    ApiService.fetchtime1()
+    ApiService.reloadTimeList(place_num)
       .then((res) => {
-        console.log("test" + res);
+        console.log("places");
         setPlaces(res.data);
       })
       .catch((err) => {
@@ -152,16 +175,23 @@ function Place() {
 
   const movieMap = {};
 
-  console.log(categoryMap5)
-    places.forEach((place) => {
-if (!movieMap[place.movie_id]) {
-    movieMap[place.movie_id] = []; // 해당 영화가 없는 경우 빈 배열을 만듭니다.
-  }
+  // let checkMVObj = [];
+  let checkMVObj = {};
+  console.log("places" , places)
+  // console.log(categoryMap5)
+   places.forEach((place) => {
+      if (!movieMap[place.movie_id]) {
+        // console.log(place)
+        checkMVObj[place.movie_id]=place.movie_title
+        movieMap[place.movie_id] = []; // 해당 영화가 없는 경우 빈 배열을 만듭니다.
+      }
 
-    categoryMap5[place.movie_id]?.push(place);
-  });
+     categoryMap5[place.movie_id]?.push(place);
+   });
   
-
+   console.log("checkMVObj")
+   console.log(checkMVObj)
+   console.log(movieLocation);
   
   return (
     <>
@@ -210,7 +240,9 @@ if (!movieMap[place.movie_id]) {
 
       <div className={`place_wrap1 ${style.place_wrap1}`}>
         <div className={`place_title ${style.place_title}`}>
-          <label for="pp_name">가산디지털</label>
+        <label for="pp_name">{movieLocation && movieLocation.ticketmap_name ? movieLocation.ticketmap_name : ""}점</label>
+
+
           <a
             href="/groupform"
             className={`ddgroup_btn ${style.ddgroup_btn}`}
@@ -330,7 +362,7 @@ if (!movieMap[place.movie_id]) {
 
             <div className={`re_container ${style.re_container}`}>
             <div className={`pamu1 ${style.pamu1}`}>
-              <li>파묘</li>
+              <li>{checkMVObj[1]}</li>
               <li>2D</li>
               {categoryMap5[1].slice(0, 5).map((place, index) => (
                 <div key={index} className={`timeb1 ${style.timeb1}`}>
@@ -348,7 +380,7 @@ if (!movieMap[place.movie_id]) {
            
 
               <div className={`dune1 ${style.dune1}`}>
-                <li>듄:파트2</li>
+                <li>{checkMVObj[2]}</li>
                 <li>2D</li>
                 {categoryMap5[2].slice(0, 5).map((place, index) => (
                 <div key={index} className={`timeb1 ${style.timeb1}`}>
@@ -365,7 +397,7 @@ if (!movieMap[place.movie_id]) {
               </div>
 
                 <div className={`bab1 ${style.bab1}`}>
-                  <li>밥 말리:원 러브</li>
+                  <li>{checkMVObj[3]}</li>
                   <li>2D</li>
                   {categoryMap5[3].slice(0, 5).map((place, index) => (
                 <div key={index} className={`timeb1 ${style.timeb1}`}>
@@ -382,7 +414,7 @@ if (!movieMap[place.movie_id]) {
               </div>
 
                 <div className={`oneandonly1 ${style.oneandonly1}`}>
-                  <li>원 앤 온리</li>
+                  <li>{checkMVObj[4]}</li>
                   <li>2D</li>
                   {categoryMap5[4].slice(0, 5).map((place, index) => (
                 <div key={index} className={`timeb1 ${style.timeb1}`}>
@@ -399,7 +431,7 @@ if (!movieMap[place.movie_id]) {
               </div>
 
                 <div className={`wingka1 ${style.wingka1}`}>
-                  <li>윙카</li>
+                  <li>{checkMVObj[5]}</li>
                   <li>2D</li>
                   {categoryMap5[5].slice(0, 5).map((place, index) => (
                 <div key={index} className={`timeb1 ${style.timeb1}`}>
@@ -416,7 +448,7 @@ if (!movieMap[place.movie_id]) {
               </div>
 
                 <div className={`maydecember1 ${style.maydecember1}`}>
-                  <span>메이 디셈버</span>
+                  <span>{checkMVObj[6]}</span>
                   <span>2D</span>
                   {categoryMap5[6].slice(0, 5).map((place, index) => (
                 <div key={index} className={`timeb1 ${style.timeb1}`}>
