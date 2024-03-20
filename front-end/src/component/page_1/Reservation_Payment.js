@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import style from "../../styles/page_1/Reservation_Payment.css";
 import Res_event from "../../assets/page_1/event.png";
@@ -6,11 +6,18 @@ import Res_movie from "../../assets/page_1/movie.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
 import Checkout from "./Checkout";
 import Modal from "react-modal";
+import ApiService from "../../ApiService";
+import { useLocation } from "react-router-dom";
 
 const Reservation_Payment = () => {
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [totalQuantity, setTotalQuantity] = useState(0);
   const [isPointClicked, setIsPointClicked] = useState(false);
   const [showModal, setShowModal] = useState(false);
-
+  
+  const selectedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
+  console.log("선택된 좌석 번호 : ", selectedSeat);
+  
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -24,6 +31,7 @@ const Reservation_Payment = () => {
   };
 
   const sysdate = moment().format("YYYY-MM-DD");
+
 
   return (
     <div className={`Res_Payment ${style.Res_Payment}`}>
