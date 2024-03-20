@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,12 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import springBoot.ict.movie.dto.ArteMovieDTO;
-import springBoot.ict.movie.dto.ConsultDTO;
-import springBoot.ict.movie.dto.DiscountDTO;
 import springBoot.ict.movie.dto.MovieDTO;
 import springBoot.ict.movie.dto.NextMovieDTO;
 import springBoot.ict.movie.dto.NowMovieDTO;
-import springBoot.ict.movie.dto.StoreDTO;
 import springBoot.ict.movie.service.ArteMovieServiceImpl;
 import springBoot.ict.movie.service.MovieServiceImpl;
 import springBoot.ict.movie.service.NextMovieServiceImpl;
