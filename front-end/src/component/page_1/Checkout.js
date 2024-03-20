@@ -8,6 +8,7 @@ const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
 
 // 클라이언트 키 test_ck_P9BRQmyarYxDGWlq5RNZVJ07KzLN
 // 시크릿 키 test_sk_ex6BJGQOVDxv2GKPJdBnVW4w2zNb
+// http://localhost:3000/success?paymentType=NORMAL&orderId=xygn4_PUn0O91OCQt1QNf&paymentKey=jvX2KBP9QADpexMgkW36obk1elyyXJVGbR5ozO06yLYlaEJ7&amount=100
 
 const App = ({ handleCloseModal }) => {
   const paymentWidgetRef = useRef(null);
