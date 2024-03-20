@@ -1,5 +1,7 @@
 package springBoot.ict.movie.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -8,10 +10,16 @@ import springBoot.ict.movie.dto.ConsultDTO;
 
 public interface ConsultRepository extends JpaRepository<ConsultDTO, Integer> {
 	
-	// 1:1 목록 및 답변 1건 찾아오기
-	@Query("SELECT c FROM ConsultAnswerDTO c WHERE c.one_id = :one_id")
-	ConsultAnswerDTO ConsultAnswer(int one_id);
+	// 아이디별 1:1 목록 및 답변 1건 찾아오기
+	@Query("SELECT c FROM ConsultDTO c WHERE c.c_email = :c_email")
+	List<ConsultDTO> ConsultList(String c_email);
 	
+	// 1:1문의 등록
+	@Query("SELECT c FROM ConsultAnswerDTO c WHERE c.one_id = :one_id")
+	ConsultAnswerDTO ConsultInsert(int one_id);
+	
+//	INSERT INTO DR_ticket_reservation (ticket_no, ticket_seat, cust_Id, game_date, purchase_date, ticket_price)
+//	VALUES((SELECT NVL(MAX(ticket_no) + 1, TO_NUMBER(TO_CHAR(SYSDATE, 'YYMMDD') || '001')) FROM DR_ticket_reservation), '다크건디석', 'hong123', '2024-02-09 18:00:00', sysdate, 57000); 
 	// 고객 이메일로 고객 정보 찾아오기
 //	@Query("SELECT c FROM CustomerDTO c WHERE c.email = :email")
 //	CustomerDTO selectCustomerById(String email);

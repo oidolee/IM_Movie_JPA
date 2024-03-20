@@ -12,22 +12,26 @@ function Consult_part() {
         setShowDetail(!showDetail)
     }
     const history = useHistory();
+    const [cookies_email, setCookie_email] = useCookies(['cookies_email']); // 쿠키 훅 
+    const [emailCheck, setEmailCheck] = useState('');
 
     const cus_grade = 'VIP';
     const [cookies, setCookie, removeCookie] = useCookies(['cus_name']);
-    const [cus_name, setidName] = useState('');
+    const [cus_name, setCus_Name] = useState('');
 
     useEffect(() => {
-        if (cookies.cus_name !== undefined) {
-            setidName(cookies.cus_name);
+        if (cookies_email.c_email !== undefined) {
+            setEmailCheck(cookies_email.c_email);
         }
-    }, [cookies.cus_name]);
+        if(cookies.name){
+            setCus_Name(cookies.name);
+        }
+    }, [cookies_email]);
 
-    const c_email = 'abc';
-    let a = 'abc';
+    
     const [consultData, setConsultData] = useState({
-        c_email: c_email,
-        cus_name: a,
+        c_email: emailCheck,
+        cus_name: cus_name,
         ib_type: '',
         ib_type_detail: '',
         ib_title: '',
@@ -90,12 +94,12 @@ function Consult_part() {
                                 name="ib_type"
                             >
                                 <option value={'#'}>분류선택</option>
-                                <option value={'theater'}>영화관</option>
-                                <option value={'movie'}>영화</option>
-                                <option value={'membership'}>멤버쉽</option>
-                                <option value={'coupon'}>쿠폰</option>
-                                <option value={'page'}>홈페이지</option>
-                                <option value={'myinfo'}>개인정보</option>
+                                <option value={'영화관'}>영화관</option>
+                                <option value={'영화'}>영화</option>
+                                <option value={'멤버쉽'}>멤버쉽</option>
+                                <option value={'쿠폰'}>쿠폰</option>
+                                <option value={'홈페이지'}>홈페이지</option>
+                                <option value={'개인정보'}>개인정보</option>
                             </select>
                             <select 
                                 className={`select2 ${style.select2}`} 
@@ -175,16 +179,14 @@ function Consult_part() {
                         <tr>
                             <td>이메일</td>
                             <td>
-                                <input className={`email1 ${style.email1}`} type="text" style={{ marginRight: '10px', padding: '0px 18px',backgroundColor:'rgba(211, 211, 211, 0.199)'}}></input>
-                                @
-                                <input className={`email2 ${style.email2}`} type="text" style={{ padding: '0px 18px', marginLeft: '10px',backgroundColor:'rgba(211, 211, 211, 0.199)' }}></input>
+                                <input className={`email1 ${style.email1}`} type="text" style={{ marginRight: '10px', padding: '0px 18px',backgroundColor:'rgba(211, 211, 211, 0.199)'}} value={emailCheck} onChange={handleChange}></input>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
             <div>
-                <input type="hidden" value={consultData.cus_name}  name="cus_name" onChange={handleChange}/>
+                <input type="hidden" value={cus_name}  name="cus_name" onChange={handleChange}/>
                 <input type="hidden" value={consultData.ib_date}  name="ib_date" onChange={handleChange}/>
                 <input type="hidden" value={consultData.ib_show}  name="ib_show" onChange={handleChange}/>
                 <Button className={`btn_cancle ${style.btn_cancle}`} variant="contained" color="primary" onClick={saveConsult}> 확인 </Button>

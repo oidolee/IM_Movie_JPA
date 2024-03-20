@@ -30,46 +30,46 @@ class Reservation_Payment_Store extends Component {
   };
 
   
-  handlePayment = () => {
-    // localStorage에서 저장된 데이터 가져오기
-    const storedData = window.localStorage.getItem("sampleID");
-    if (storedData) {
-      const {
-        recipientNumber,
-        sender,
-        message,
-        totalQuantity,
-        totalPrice,
-        itemCode,
-        itemName,
-      } = JSON.parse(storedData);
+  // handlePayment = () => {
+  //   // localStorage에서 저장된 데이터 가져오기
+  //   const storedData = window.localStorage.getItem("sampleID");
+  //   if (storedData) {
+  //     const {
+  //       recipientNumber,
+  //       sender,
+  //       message,
+  //       totalQuantity,
+  //       totalPrice,
+  //       itemCode,
+  //       itemName,
+  //     } = JSON.parse(storedData);
 
-      // 서버로 데이터 전송
-      ApiService.sendGiftMessage({
-        recipientNumber,
-        sender,
-        message,
-        totalQuantity,
-        totalPrice,
-        itemCode,
-        itemName,
-      })
-        .then((response) => {
-          console.log("데이터 전송 성공:", response.data);
-          // 데이터 전송 후 필요한 작업을 수행합니다.
-          // 예를 들어 페이지 이동 등...
-        })
-        .catch((error) => {
-          console.error("데이터 전송 실패:", error);
-          // 실패 시 적절한 에러 처리를 수행합니다.
-        });
-    } else {
-      console.error("저장된 데이터가 없습니다.");
-      // 저장된 데이터가 없는 경우 처리할 작업을 수행합니다.
-    }
+  //     // 서버로 데이터 전송
+  //     ApiService.sendGiftMessage({
+  //       recipientNumber,
+  //       sender,
+  //       message,
+  //       totalQuantity,
+  //       totalPrice,
+  //       itemCode,
+  //       itemName,
+  //     })
+  //       .then((response) => {
+  //         console.log("데이터 전송 성공:", response.data);
+  //         // 데이터 전송 후 필요한 작업을 수행합니다.
+  //         // 예를 들어 페이지 이동 등...
+  //       })
+  //       .catch((error) => {
+  //         console.error("데이터 전송 실패:", error);
+  //         // 실패 시 적절한 에러 처리를 수행합니다.
+  //       });
+  //   } else {
+  //     console.error("저장된 데이터가 없습니다.");
+  //     // 저장된 데이터가 없는 경우 처리할 작업을 수행합니다.
+  //   }
 
-    this.props.history.push("/page_3/Store_Payment_Finish");
-  };
+  //   this.props.history.push("/page_3/Store_Payment_Finish");
+  // };
 
 
   render() {

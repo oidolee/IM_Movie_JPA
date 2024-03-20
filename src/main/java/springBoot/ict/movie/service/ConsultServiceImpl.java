@@ -24,7 +24,7 @@ public class ConsultServiceImpl implements ConsultService {
 	@Autowired
 	private ConsultAnswerRepository csadao;
 
-   // 1:1문의 목록
+   // 1:1문의 목록(관리자)
    @Override
    public List<ConsultDTO> ConsultList() 
          throws ServletException, IOException {
@@ -32,8 +32,19 @@ public class ConsultServiceImpl implements ConsultService {
       
       return csdao.findAll();
    }
+   
+   
+   // 1:1 문의 목록(고객)
+   @Override
+   public List<ConsultDTO> ConsultCusList(String c_email) 
+	         throws ServletException, IOException {
+	      System.out.println("ConsultServiceImpl - ConsultCusList");
+	      List<ConsultDTO> list = csdao.ConsultList(c_email);
+	      return list;
+	   }
+   
 
-   // 1:1문의 등록
+   // 1:1문의 등록(고객)
    @Override
    public ConsultDTO insertConsult(ConsultDTO csdto) 
          throws ServletException, IOException {

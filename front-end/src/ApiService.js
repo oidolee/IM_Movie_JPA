@@ -144,10 +144,18 @@ class ApiService {
 
     // page_6
 
+    // 관리자
     // 1:1 문의 리스트
     fetchConsult(){
         console.log('fetchConsult() 호출!!')
         return axios.get(url + '/page_6'); 
+    }
+
+    // 관리자
+    // 1:1 문의 리스트
+    fetchConsultCusList(c_email){
+        console.log('fetchConsultCusList() 호출!!')
+        return axios.get(url + '/page_6/cusConsultList/' + c_email); 
     }
 
     // 1:1 문의 상세
@@ -176,6 +184,7 @@ class ApiService {
         return axios.post(url + "/page_6/saveAnswer", inputData);
     }
 
+    
     // 쿠폰
     // 쿠폰 리스트(관리자)
     fetchCoupon(){

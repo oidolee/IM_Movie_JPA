@@ -83,18 +83,18 @@ public class ConsultController {
 
     }
     
-//    // 1:1문의 목록
-//    @GetMapping("/select/{one_id}")
-//    public ConsultDTO consultDetail(Model model)
-//            throws ServletException, IOException {
-//        logger.info("<<< url -> consultList");
-//        ConsultDTO csdto= service.ConsultList();
-//        model.addAttribute("list", list);
-//        System.out.println(list);
-//        
-//        return list;
-//
-//    }
+    // 1:1문의 목록(고객)
+    @GetMapping("/cusConsultList/{c_email}")
+    public List<ConsultDTO> consultDetail(@PathVariable(name="c_email") String c_email, Model model)
+            throws ServletException, IOException {
+        logger.info("<<< url -> consultList");
+        List<ConsultDTO> list = service.ConsultCusList(c_email);
+        model.addAttribute("list", list);
+        System.out.println(list);
+        
+        return list;
+
+    }
     
     // 1:1문의 상세
     @GetMapping("/select/{one_id}")

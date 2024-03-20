@@ -12,11 +12,15 @@ import springBoot.ict.movie.dto.CustomerDTO;
 
 public interface ConsultService {
 	
-	// 1:1문의 목록
+	// 1:1문의 목록(관리자)
 	public List<ConsultDTO> ConsultList()
 			throws ServletException, IOException;
 	
-	// 1:1문의 등록 
+	// 1:1 문의 목록(고객)
+	   public List<ConsultDTO> ConsultCusList(String c_email) 
+	         throws ServletException, IOException;
+	
+	// 1:1문의 등록 (고객)
 	public ConsultDTO insertConsult(ConsultDTO csdto)
 			throws ServletException, IOException;
 	

@@ -3,16 +3,23 @@ import React from "react";
 import style from '../../../styles/page_6/MyPage_consult_list_part_module.css';
 import ApiService from '../../../ApiService';
 import {Link} from 'react-router-dom';
+import { useCookies } from 'react-cookie'; // useCookies import
 function MyPage_consult_list_part() {
     const [showDetailIndex, setShowDetailIndex] = useState(-1); // 상세 정보를 표시할 항목의 인덱스를 저장할 상태 추가
     const [consult, setConsult] = useState([]);
+    const [cookies_email, setCookie_email] = useCookies(['cookies_email']);
+    const [emailCheck, setEmailCheck] = useState('');
 
     useEffect(() => {
-        reloadConsultList();
+        reloadConsultList(cookies_email.c_email);
+        
+        if (cookies_email.c_email !== undefined) {
+            setEmailCheck(cookies_email.c_email);
+        }
     }, []);
 
-    const reloadConsultList = () => {
-        ApiService.fetchConsult()
+    const reloadConsultList = (emailCheck) => {
+        ApiService.fetchConsultCusList(emailCheck)
         .then(res => {
             console.log("test" + res);
             setConsult(res.data);
