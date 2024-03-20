@@ -69,6 +69,7 @@
     ]
   },
   "devDependencies": {
-    "@jridgewell/sourcemap-codec": "^1.4.15"
+    "@jridgewell/sourcemap-codec": "^1.4.15",
+    "@babel/plugin-proposal-private-property-in-object": "^7.16.7"
   }
 }
