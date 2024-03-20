@@ -8,24 +8,29 @@ import javax.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import springBoot.ict.movie.dao.PaymentRepository;
+import springBoot.ict.movie.dao.JpaPaymentRepository;
+import springBoot.ict.movie.dto.Member;
+import springBoot.ict.movie.dto.Payment;
 import springBoot.ict.movie.dto.PaymentDTO;
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
-	@Autowired
-	private PaymentRepository dao;
-	
-//	// 목록
+//	 @Autowired
+//    private JpaPaymentRepository paymentRepository;
+//
+//    @Autowired
+//    private Member memberService;
+//	    
 //	@Override
-//	public List<PaymentDTO> PaymentList() 
-//		throws ServletException, IOException {
+//	public Payment requestTossPayment(Payment payment, String userEmail) {
 //		
-//		System.out.println("DiscountServiceImpl - PaymentList");
-//		
-//		System.out.println(dao.findAll());
-//		
-//		return dao.findAll();
+//	 Member member = memberService.findMember(userEmail);
+//        if (payment.getAmount() < 1000) {
+//            throw new CustomLogicException(ExceptionCode.INVALID_PAYMENT_AMOUNT);
+//        }
+//        payment.setCustomer(member);
+//        return paymentRepository.save(payment);
+//
 //	}
 
 }

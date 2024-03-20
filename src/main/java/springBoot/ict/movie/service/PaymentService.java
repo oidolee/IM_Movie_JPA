@@ -5,11 +5,10 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
+import springBoot.ict.movie.dto.Payment;
 import springBoot.ict.movie.dto.PaymentDTO;
 
 public interface PaymentService {
 
-//	// 목록
-//	public List<PaymentDTO> PaymentList()
-//		throws ServletException, IOException;
+//	public Payment requestTossPayment(Payment payment, String userEmail);
 }

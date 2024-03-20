@@ -1,28 +1,35 @@
 package springBoot.ict.movie.dto;
 
-import java.sql.Date;
+import java.util.UUID;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.*;
 
-import lombok.Data;
-
-@Entity
-@Table(name="IM_PayMent")
-@Data
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class PaymentDTO {
 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Id
-    private int pay_id;
-	private int res_id;
-	private String c_email;
-	private String pay_method;
-	private Date pay_sysdate;
-	private String pay_check;
-	private String successUrl; // 성공
-	private String failUrl; // 실패 
+    @NonNull
+    private PayType payType; // 결제 타입
+
+    @NonNull
+    private Long amount; // 가격 정보
+
+    @NonNull
+    private String orderName; // 주문명
+
+    private String yourSuccessUrl; // 성공
+    private String yourFailUrl; // 실패
+
+    public Payment toEntity() {
+        return Payment.builder()
+                .payType(this.payType)
+                .amount(this.amount)
+                .orderName(this.orderName)
+                .orderId(UUID.randomUUID().toString())
+                .paySuccessYN(false)
+                .build();
+    }
 }
