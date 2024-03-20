@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import style from '../../styles/page_6/Mypage.module.css';
+import style from '../../styles/page_6/Mypage_module.css';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { useCookies } from 'react-cookie';
 import point from '../../assets/page_6/txt_lpoint_20210407.png'
@@ -7,13 +7,14 @@ import point from '../../assets/page_6/txt_lpoint_20210407.png'
 function MyPage_top() {
     const cus_grade = 'VIP';
     const [cookies, setCookie, removeCookie] = useCookies(['idCheck']);
-    const [idCheck, setIdCheck] = useState('');
+    const [c_email, setC_email] = useState('');
+    const [cookies_email, setCookie_email, removeCookie_email] = useCookies(['c_email']);
 
     useEffect(() => {
-        if (cookies.idCheck !== undefined) {
-            setIdCheck(cookies.idCheck);
+        if (cookies_email.c_email !== undefined) {
+            setC_email(cookies_email.c_email);
         }
-    }, [cookies.idCheck]);
+    }, [cookies_email.c_email]);
 
     return (
         <div style={{display: 'flex'}}>
@@ -30,7 +31,7 @@ function MyPage_top() {
                     <div className={`name_place${style.name_place}`}>
                         <div className={`name${style.name}`}>
                             <p style={{ textAlign: 'left', paddingLeft: '15px' }}>
-                                <strong>{idCheck} 님 </strong>
+                                <strong>{c_email} 님 </strong>
                                  반가워요!
                             </p>
                         </div>

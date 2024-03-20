@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
-import style from '../../../styles/page_6/consult.module.css'
+import style from '../../../styles/page_6/consult_module.css'
 import ApiService from '../../../ApiService';
 import { useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -15,11 +15,11 @@ function Consult_part() {
 
     const cus_grade = 'VIP';
     const [cookies, setCookie, removeCookie] = useCookies(['cus_name']);
-    const [cus_name, setIdCheck] = useState('');
+    const [cus_name, setidName] = useState('');
 
     useEffect(() => {
         if (cookies.cus_name !== undefined) {
-            setIdCheck(cookies.cus_name);
+            setidName(cookies.cus_name);
         }
     }, [cookies.cus_name]);
 

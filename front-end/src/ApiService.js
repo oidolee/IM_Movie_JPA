@@ -102,6 +102,14 @@ class ApiService {
         return axios.get(url + "/page_3/EditStore_Admin" + "/EditStore_Map/" +  sampleID ); // 주의 : "/"+ 
     }
 
+    sendGiftMessage(storedData) {
+        console.log('sendGiftMessage 호출!!', storedData);
+        return axios.post(url + "/page_3/Reservation_Payment_Store", storedData)
+    }
+
+
+
+
     // Store Map 끝
     // --------------------------------------------Store 끝----------------------------------------------
 
@@ -184,7 +192,7 @@ class ApiService {
     // 쿠폰 상세내역(관리자)
     couponList(ic_name){
         console.log('couponList() 호출!!')
-        return axios.get(url + '/page_6/coupon/' + ic_name); 
+        return axios.get(url + '/page_6/coupon/selectCoupon/' + ic_name); 
     }
     // 쿠폰 등록
     addCoupon(inputData){
@@ -402,6 +410,31 @@ class ApiService {
         console.log("deleteNext 호출", arte_id);
         return axios.delete(url + "/page_5/ArteDelete" + "/" + arte_id);
     }
+
+    addReview(inputData){
+        console.log('addReview() review등록시작');
+        console.log(inputData);
+        return axios.post(url + '/page_5/review/addReview', inputData); 
+    }
+
+    reviewList(movie_id){
+        console.log('reviewList() 시작');
+        console.log(movie_id);
+        return axios.get(url + '/page_5/review/reviewList'); 
+    }
+
+    //상영시간표 리스트
+    fetchtime1(){
+        console.log('timeList() 호출!!')
+        return axios.get(url + '/page_5/timeList'); 
+    }
+
+    fetchTitles(){
+        console.log('timeList() 호출!!')
+        return axios.get(url + '/page_5/timeList'); 
+    }
+      
+  
 
 
 }

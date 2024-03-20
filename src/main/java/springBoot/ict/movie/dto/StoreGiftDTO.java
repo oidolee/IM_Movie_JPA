@@ -24,12 +24,17 @@ public class StoreGiftDTO {
     public void setItem_code(int gift_num) {
         this.gift_num = gift_num;
     }
-    @JsonProperty("giftRecipient")
+    
+    @JsonProperty("itemCode")
+    private String item_code;   
+    @JsonProperty("itemName")
+    private String item_name;      
+    @JsonProperty("recipient")
     private String gift_recipient;
-    @JsonProperty("giftName")
+    @JsonProperty("sender")
     private String gift_name;
-    @JsonProperty("giftContent")
-    private int gift_content;
-    @JsonProperty("giftCount")
+    @JsonProperty("message")
+    private String gift_content;
+    @JsonProperty("totalQuantity")
     private int gift_count;
 }

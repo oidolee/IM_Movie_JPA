@@ -25,7 +25,7 @@ import Parking from '../page_2/Parking';
 //chat_bot
 import Chatbot from 'react-chatbot-kit'
 import 'react-chatbot-kit/build/main.css'
-import config from "../chat_bot/ChatbotConfig"; // chat_bot 시작은 여기서 부터
+import Config from "../chat_bot/ChatbotConfig"; // chat_bot 시작은 여기서 부터
 import MessageParser from "../chat_bot/MessageParser";
 import ActionProvider from "../chat_bot/ActionProvider";
 
@@ -34,6 +34,7 @@ import Page3 from '../page_3/Page3';
 import StoreDetail from '../page_3/StoreDetail';
 import StoreTicket from '../page_3/StoreTicket';
 import Reservation_Payment_Store from '../page_3/Reservation_Payment_Store';
+import Store_Payment_Finish from '../page_3/Store_Payment_Finish';
 import MyPage_Store from '../page_6/store_page_3/MyPage_Store';
 
 //page_4
@@ -48,12 +49,12 @@ import resultFindPWD from '../page_4/resultFindPWD';
 
 //page_5
 import movieMain from '../page_5/movie/movieMain';
-import movieDetail from '../page_5/movie/movieDetail';
+import MovieDetail from '../page_5/movie/movieDetail';
 import movieUpdate from '../../admin/page_5/Admin_Update_Add';
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
 import arte from '../page_5/movie/arte';
-import moviePlace from '../page_5/theater/moviePlace';
+import gasan from '../page_5/theater/gasan';
 import FAQ from '../page_5/board/FAQ';
 import NOTICE from '../page_5/board/NOTICE';
 import NOTICE2 from '../page_5/board/NOTICE2';
@@ -76,6 +77,7 @@ import Event_Home from '../page_6/event/Event_Home';
 import MyapgeConsultDetail from '../page_6/myinfo/MyPage_consult_answer';
 
 
+
 // import Admin_main from '../../admin/main/Admin_main'
 
 
@@ -88,7 +90,7 @@ const AppRouter = () => {
                         <Route>
                         <Chatbot
                             style={{ width: '500px' }}
-                            config={config}
+                            config={Config}
                             messageParser={MessageParser}
                             actionProvider={ActionProvider}
                         />
@@ -116,6 +118,7 @@ const AppRouter = () => {
                                 <Route path="/page_3/EditStore_Admin/" exact={true} component={StoreDetail} />
                                 <Route path="/page_3/StoreTicket/" exact={true} component={StoreTicket} />
                                 <Route path="/page_3/Reservation_Payment_Store/" exact={true} component={Reservation_Payment_Store} />
+                                <Route path="/page_3/Store_Payment_Finish/" exact={true} component={Store_Payment_Finish} />                          
                                 <Route path="/MyPage_Store" exact={true} component={MyPage_Store} />
                             </Route>
 
@@ -134,12 +137,13 @@ const AppRouter = () => {
                             {/* page_5 */}
                             <Route>
                                 <Route path="/movieMain" exact={true} component={movieMain} />
-                                <Route path="/movieDetail" exact={true} component={movieDetail} />
+                                {/* <Route path="/movieDetail" exact={true} component={MovieDetail} /> */}
+                                <Route path="/movieDetail/:movie_id" exact={true} component={MovieDetail} />
                                 <Route path="/movieUpdate" exact={true} component={movieUpdate} />
                                 <Route path="/movieNow" exact={true} component={movieNow} />
                                 <Route path="/movieNext" exact={true} component={movieNext} />
                                 <Route path="/arte" exact={true} component={arte} />
-                                <Route path="/moviePlace" exact={true} component={moviePlace} />
+                                <Route path="/theater/gasan" exact={true} component={gasan} />
                                 <Route path="/FAQ" exact={true} component={FAQ} />
                                 <Route path="/NOTICE" exact={true} component={NOTICE} />
                                 <Route path="/NOTICE2" exact={true} component={NOTICE2} />
@@ -163,6 +167,7 @@ const AppRouter = () => {
                                 <Route path="/event_Home" exact={true} component={Event_Home} />
                                 <Route path="/MyPage_Event" exact={true} component={MyPage_Event} />
                                 <Route path="/MyPage_consult_answer/:one_id" exact={true} component={MyapgeConsultDetail} />
+                                
                             </Route>
                             
 

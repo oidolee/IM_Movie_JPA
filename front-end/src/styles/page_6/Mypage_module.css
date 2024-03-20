@@ -1,12 +1,12 @@
 /* header 공통 부분 */
-.header_section{
+/* .header_section{
     width: 100%;
     position: initial;
     left: initial;
     transform: initial;
     margin: 0 auto;
     background: initial;
-}
+} */
 
 .mypage_area_movingbar {
     width: 980px;

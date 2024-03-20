@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import style from '../../../styles/page_6/MyPage_consult_list_part.modul.css';
+import style from '../../../styles/page_6/MyPage_consult_list_part_module.css';
 import ApiService from '../../../ApiService';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';

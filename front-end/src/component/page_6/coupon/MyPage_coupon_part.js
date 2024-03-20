@@ -1,43 +1,70 @@
 import React, { useState, useEffect } from "react";
 import ApiService from '../../../ApiService';
-import style from '../../../styles/page_6/MyPage_coupon.module.css'
-import { RadioButtonUnchecked } from "@mui/icons-material";
+import style from '../../../styles/page_6/MyPage_coupon_module.css'
+
 import { useCookies } from 'react-cookie'; // useCookies import
+
 
 function MyPage_coupon_part() {
     const [showDetail, setShowDetail] = useState(false);
     const [cusCouponData, setcusCouponData] = useState([]);
     const [cusCouponCount, setCusCouponCount] = useState('');
-    const [cookies, setCookie] = useCookies(['idCheck']); // 쿠키 훅 
+
     const [cookies_email, setCookie_email] = useCookies(['cookies_email']); // 쿠키 훅 
+    const [emailCheck, setEmailCheck] = useState('');
+    const [ic_name, setIc_name] = useState('');
+
+    // 상세내역
+    const [ic_code, setIc_code] = useState('');
+    const [ic_point, setIc_point] = useState('');
+    const [ic_regDate, setIc_regDate] = useState('');
     
 
-    
-    // let usesable_count = 0;
-    // const ic_name = '새학기 3000원 할인';
-    // const coupon_num = '240306001';
-    // const coupon_discount_price = '240306001';
-    // const coupon_regDate = '240306001';
-    const showBox = () => {
+
+   
+    const showBox = (ic_name) => {
         setShowDetail(!showDetail)
+        ApiService.couponList(ic_name)
+            .then(res => {
+                console.log('ic_name : ' + ic_name);
+                console.log('res.data', res.data);
+                let coupon = res.data;
+                setIc_code(coupon.cpdto.ic_code);
+                setIc_point(coupon.cpdto.ic_point);
+                setIc_regDate(coupon.cpdto.ic_regDate);
+            })
     }
 
+
     useEffect(() => {
-        reloadCusCouponList(cookies_email);
-        reloadCusCouponCount(cookies_email);
+        reloadCusCouponList(cookies_email.c_email);
+        reloadCusCouponCount(cookies_email.c_email);
+        if (cookies_email.idCheck !== undefined) {
+            setEmailCheck(cookies_email.c_email);
+        }
+        reloadCusCouponList()
     }, [cookies_email]);
 
-    const reloadCusCouponList = (cookies_email) => {
-        ApiService.fetchCusCouponCus(cookies_email)
+
+
+    // 쿠폰 리스트
+    const reloadCusCouponList = (emailCheck) => {
+        ApiService.fetchCusCouponCus(emailCheck)
             .then(res => {
-                console.log("test" + res);
+                console.log("test" + res.data);
+                console.log("cookies_email : " + cookies_email.c_email);
+
                 setcusCouponData(res.data);
+
+
             })
             .catch(err => {
                 console.log('reloadConsultList() Error!!', err);
+
             });
     }
 
+    // 사용가능한 쿠폰갯수
     const reloadCusCouponCount = (cookies_email) => {
         ApiService.countCusCoupon(cookies_email)
             .then(res => {
@@ -81,11 +108,8 @@ function MyPage_coupon_part() {
                     <colgroup>
                         <col style={{ width: '5%' }} />
                         <col style={{ width: '10%' }} />
-                        <col style={{ width: '10%' }} />
                         <col />
-                        <col style={{ width: '10%' }} />
-                        <col style={{ width: '8%' }} />
-                        <col style={{ width: '8%' }} />
+                        <col style={{ width: '15%' }} />
                         <col style={{ width: '6%' }} />
                     </colgroup>
                     <tr>
@@ -100,42 +124,51 @@ function MyPage_coupon_part() {
                             <td><input type="checkbox" id="ic_num" value={cusCouponDataItem.ic_num}></input></td>
                             <td>{cusCouponDataItem.ic_category}</td>
 
-                            <td style={{ textAlign: "left" }} onClick={showBox}>{cusCouponDataItem.ic_name}</td>
-
+                            <td style={{ textAlign: "center" }} onClick={() => showBox(cusCouponDataItem.ic_name)}>
+                                {cusCouponDataItem.ic_name}
+                            </td>
                             <td>{cusCouponDataItem.ic_useDate} 까지</td>
 
                             <td>
                                 {cusCouponDataItem.ic_status === 'y' ? '사용가능' :
-                                cusCouponDataItem.ic_status === 'n' ? '사용완료' :
-                                cusCouponDataItem.ic_status === 'e' ? '기간만료' : '알 수 없음'}
+                                    cusCouponDataItem.ic_status === 'n' ? '사용완료' :
+                                        cusCouponDataItem.ic_status === 'e' ? '기간만료' : '알 수 없음'}
                             </td>
-
                         </tr>
-                        ))}
-                        { showDetail  && (
-
-                            <tr className={`coupon_detail_detail ${style.coupon_detail_detail}`}>
-                                <td colSpan={6} className={`coupon_detail_detail_detail ${style.coupon_detail_detail_detail}`}>
-                                    <table className={`innerTable ${style.innerTable}`}>
-                                        <tr>
-                                            <td>할인권 번호</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>할인금액</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>발급 일자</td>
-                                            <td></td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        )}
-                    
-
+                    ))}
                 </table>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                {showDetail && (
+
+                    <div className={`MyPage_coupon ${style.MyPage_coupon}`}>
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                            <table>
+                                <tr>
+                                    <th>쿠폰 상세내역</th>
+                                </tr>
+                                <tr className={`coupon_detail_detail ${style.coupon_detail_detail}`}>
+                                    <td colSpan={6} className={`coupon_detail_detail_detail ${style.coupon_detail_detail_detail}`}>
+                                        <table className={`innerTable ${style.innerTable}`}>
+                                            <tr>
+                                                <td>할인권 번호</td>
+                                                <td>{ic_code}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>할인금액</td>
+                                                <td>{ic_point}원</td>
+                                            </tr>
+                                            <tr>
+                                                <td>발급 일자</td>
+                                                <td>{ic_regDate}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
