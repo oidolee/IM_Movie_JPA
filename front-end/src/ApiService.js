@@ -335,7 +335,7 @@ class ApiService {
     // 현재1건조회
     selectNow(now_id) {
         console.log("selectNow 호출", now_id);
-        return axios.get(url + "/page_5/NowDetailList" + "/" + now_id);
+        return axios.get(url + "/page_5/NowDetailList/"+ now_id);
     }
 
     // 영화 현재수정

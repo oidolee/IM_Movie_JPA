@@ -90,7 +90,6 @@ function Admin_Update_List ({ history }) {
             <TableCell>Movie_Time</TableCell>
             <TableCell>Movie_Age</TableCell>
             <TableCell>Movie_Visitor</TableCell>
-            
             <TableCell>Movie_Con</TableCell>
             <TableCell>Movie_Pd</TableCell>
             <TableCell>Movie_Cast</TableCell>
@@ -114,7 +113,6 @@ function Admin_Update_List ({ history }) {
               <TableCell>{list.mov_time}</TableCell>
               <TableCell>{list.mov_age}</TableCell>
               <TableCell>{list.mov_visitor}</TableCell>
-              
               <TableCell>{list.mov_con}</TableCell>
               <TableCell>{list.mov_pd}</TableCell>
               <TableCell>{list.mov_cast}</TableCell>

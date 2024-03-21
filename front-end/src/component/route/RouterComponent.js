@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom' // npm install react-router-dom@5
+
 //sample
 import AddSampleComponent from "../sample/AddSampleComponent";
 import ListSampleComponent from "../sample/ListSampleComponent";
@@ -50,6 +51,7 @@ import resultFindPWD from '../page_4/resultFindPWD';
 //page_5
 import movieMain from '../page_5/movie/movieMain';
 import movieDetail from '../page_5/movie/movieDetail';
+import movieDetail2 from '../page_5/movie/movieDetail2';
 import movieUpdate from '../../admin/page_5/Admin_Update_Add';
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
@@ -139,6 +141,7 @@ const AppRouter = () => {
                                 <Route path="/movieMain" exact={true} component={movieMain} />
                                 {/* <Route path="/movieDetail" exact={true} component={MovieDetail} /> */}
                                 <Route path="/movieDetail/:movie_id" exact={true} component={movieDetail} />
+                                <Route path="/movieDetail2/:now_id" exact={true} component={movieDetail2} />
                                 <Route path="/movieUpdate" exact={true} component={movieUpdate} />
                                 <Route path="/movieNow" exact={true} component={movieNow} />
                                 <Route path="/movieNext" exact={true} component={movieNext} />

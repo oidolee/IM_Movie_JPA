@@ -335,7 +335,7 @@ public class MovieController {
 		        
 		        map.put("resultCode", resultCode);
 		        map.put("resultMsg", resultMsg);
-		        map.put("mov_id", now_id);
+		        map.put("now_id", now_id);
 		        map.put("dto", dto);
 		        
 		        return map;
