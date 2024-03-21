@@ -52,9 +52,10 @@ function MovieNow() {
     }
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (now_id) => {
     // 버튼을 클릭하면 '/detail' 경로로 이동합니다.
-    history.push("/movieDetail");
+    console.log("now_id = " + now_id);
+    history.push("/movieDetail2/"+now_id);
   };
 
   const [movienow, setMovienow] = useState([]);
@@ -74,7 +75,6 @@ function MovieNow() {
   };
 
   const categoryMap1 = {
-    0: [],
     1: [],
     2: [],
     3: [],
@@ -83,6 +83,7 @@ function MovieNow() {
     6: [],
   };
 
+  console.log(categoryMap1)
   movienow.forEach((movie) => {
     categoryMap1[movie.now_category]?.push(movie);
   });
@@ -132,13 +133,13 @@ function MovieNow() {
         <label htmlFor="ml_title3">현재상영작</label>
       </div>  
       <div className={`now_movie_list3 ${style.now_movie_list3}`} style={{ display: 'flex', justifyContent: 'center' }}>
-      {categoryMap1[0].slice(0, 5).map((movie, index) => (
+      {categoryMap1[1].slice(0, 5).map((movie, index) => (
           <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
              <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.now_image}`} style={{ width: '200px', height: 'auto' }} />
             <Card.Body>
               <Card.Title>{movie.now_title}</Card.Title>
               <Card.Text>{movie.now_time}분</Card.Text>
-              <Button className={`primary_button2 ${style.primary_button2}`}  onClick={handleButtonClick} >상세정보</Button>
+              <Button className={`primary_button2 ${style.primary_button2}`}   onClick={() => handleButtonClick(movie.now_id)} >상세정보</Button>
             </Card.Body>
           </Card>
         ))}
@@ -149,26 +150,13 @@ function MovieNow() {
       </div>
 
       <div className={`now_movie_list1 ${style.now_movie_list1}`} style={{ display: 'flex', justifyContent: 'center' }}>
-      {categoryMap1[1].slice(0, 5).map((movie, index) => (
+      {categoryMap1[2].slice(0, 5).map((movie, index) => (
           <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
             <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.now_image}`} style={{ width: '200px', height: 'auto' }} />
             <Card.Body>
               <Card.Title>{movie.now_title}</Card.Title>
               <Card.Text>{movie.now_time}분</Card.Text>
-              <Button className={`primary_button2 ${style.primary_button2}`}  onClick={handleButtonClick}>상세정보</Button>
-            </Card.Body>
-          </Card>
-        ))}
-        </div>
-
-        <div className={`now_movie_list1 ${style.now_movie_list1}`} style={{ display: 'flex', justifyContent: 'center' }}>
-        {categoryMap1[2].slice(0, 5).map((movie, index) => (
-          <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
-            <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.now_image}`} style={{ width: '200px', height: 'auto' }} />
-            <Card.Body>
-              <Card.Title>{movie.now_title}</Card.Title>
-              <Card.Text>{movie.now_time}분</Card.Text>
-              <Button className={`primary_button2 ${style.primary_button2}`}  onClick={handleButtonClick}>상세정보</Button>
+              <Button className={`primary_button2 ${style.primary_button2}`}  onClick={() => handleButtonClick(movie.now_id)}>상세정보</Button>
             </Card.Body>
           </Card>
         ))}
@@ -181,7 +169,7 @@ function MovieNow() {
             <Card.Body>
               <Card.Title>{movie.now_title}</Card.Title>
               <Card.Text>{movie.now_time}분</Card.Text>
-              <Button className={`primary_button2 ${style.primary_button2}`}  onClick={handleButtonClick}>상세정보</Button>
+              <Button className={`primary_button2 ${style.primary_button2}`}  onClick={() => handleButtonClick(movie.now_id)}>상세정보</Button>
             </Card.Body>
           </Card>
         ))}
@@ -194,20 +182,33 @@ function MovieNow() {
             <Card.Body>
               <Card.Title>{movie.now_title}</Card.Title>
               <Card.Text>{movie.now_time}분</Card.Text>
-              <Button className={`primary_button2 ${style.primary_button2}`}  onClick={handleButtonClick}>상세정보</Button>
+              <Button className={`primary_button2 ${style.primary_button2}`}  onClick={() => handleButtonClick(movie.now_id)}>상세정보</Button>
             </Card.Body>
           </Card>
         ))}
         </div>
 
-        <div className={`now_movie_list2 ${style.now_movie_list2}`} style={{ display: 'flex', justifyContent: 'center' }}>
+        <div className={`now_movie_list1 ${style.now_movie_list1}`} style={{ display: 'flex', justifyContent: 'center' }}>
         {categoryMap1[5].slice(0, 5).map((movie, index) => (
           <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
             <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.now_image}`} style={{ width: '200px', height: 'auto' }} />
             <Card.Body>
               <Card.Title>{movie.now_title}</Card.Title>
               <Card.Text>{movie.now_time}분</Card.Text>
-              <Button className={`primary_button2 ${style.primary_button2}`}  onClick={handleButtonClick}>상세정보</Button>
+              <Button className={`primary_button2 ${style.primary_button2}`}   onClick={() => handleButtonClick(movie.now_id)}>상세정보</Button>
+            </Card.Body>
+          </Card>
+        ))}
+        </div>
+
+        <div className={`now_movie_list2 ${style.now_movie_list2}`} style={{ display: 'flex', justifyContent: 'center' }}>
+        {categoryMap1[6].slice(0, 5).map((movie, index) => (
+          <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
+            <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.now_image}`} style={{ width: '200px', height: 'auto' }} />
+            <Card.Body>
+              <Card.Title>{movie.now_title}</Card.Title>
+              <Card.Text>{movie.now_time}분</Card.Text>
+              <Button className={`primary_button2 ${style.primary_button2}`}   onClick={() => handleButtonClick(movie.now_id)}>상세정보</Button>
             </Card.Body>
           </Card>
         ))}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import style from "../../styles/page_1/Reservation_Movie.css";
 import Reservation_Swiper from "./Reservation_Swiper.js";
+import Res_img18 from "../../assets/page_1/18.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
 import Res_img12 from "../../assets/page_1/12.jpg";
 import Res_imgAll from "../../assets/page_1/all.jpg";
@@ -12,68 +13,76 @@ import { useHistory } from "react-router-dom";
 const Reservation_Movie = ({ history }) => {
   const [reservation, setReservation] = useState([]);
   const [popupOpen, setPopupOpen] = useState(false);
-  const [selectedRegion, setSelectedRegion] = useState(null);
+  const [selectedPlace, setSelectedPlace] = useState(null); // 선택한 지역
   const [selectedTheater, setSelectedTheater] = useState(null); // 선택한 영화관 상태
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택한 영화 상태
-  const [movies, setMovies] = useState([]); // 선택한 영화관에 대한 영화 목록 상태
+  const [movies, setMovies] = useState([]); // 영화 목록
+  const [places, setPlaces] = useState([]); // 지역 목록
   const [remainingSeatsCount, setRemainingSeatsCount] = useState(null);
-
-  const [subRegions, setSubRegions] = useState({
-    서울: [
-      "가산디지털",
-      "가양",
-      "강동",
-      "건대입구",
-      "김포공항",
-      "노원",
-      "도곡",
-      "독산",
-      "브로드웨이(신사)",
-      "서울대이북",
-      "수락산",
-    ],
-    "경기/인천": [
-      "광교아울렛",
-      "광명(광명사거리)",
-      "광명아울렛",
-      "광주터미널",
-      "구리아울렛",
-      "동탄",
-      "라페스타",
-      "마석",
-      "별내",
-      "병점",
-      "부천(신중동역)",
-    ],
-    "충청/대전": ["당진", "대전(백화점)"],
-    "전라/광주": ["광주(백화점)", "광주광산", "군산나운"],
-    "경북/대구": ["경주", "경주황성"],
-    "경남/부산/울산": ["거창", "광복", "김해부원", "김해아울렛(장유)"],
-    강원: ["남원주", "동해", "원주무실", "춘천"],
-    제주: ["서귀포", "제주연동"],
-  });
+  const [selectedRegion, setSelectedRegion] = useState(null); // 지역 클릭
 
   useEffect(() => {
-    listReservation();
+    fetchMovie();
+    fetchtime1();
   }, []);
 
-  const listReservation = () => {
-    ApiService.listReservation()
+  // 영화 목록
+  const fetchMovie = () => {
+    ApiService.fetchMovie()
       .then((res) => {
-        setReservation(res.data);
-        console.log("listReservation 성공", res.data);
+        setMovies(res.data);
+        console.log("fetchMovie 성공", res.data);
       })
       .catch((err) => {
-        console.log("listReservation 오류 : ", err);
+        console.log("fetchMovie 오류 : ", err);
       });
   };
 
   // 연령에 대한 이미지
-  const getMovieImage = (age) => {
-    if (age === "All") {
+  const getMovieImage = (mov_age) => {
+    if (mov_age === "전체관람가") {
       return <img src={Res_imgAll} />;
-    } else if (age === "15") {
+    } else if (mov_age === "15세이상관람가") {
       return <img src={Res_img15} />;
+    } else if (mov_age === "12세이상관람가") {
+      return <img src={Res_img12} />;
+    } else if (mov_age === "18세이상관람가") {
+      return <img src={Res_img18} />;
+    }
+  };
+
+  // 상영관-지역 목록
+  const fetchtime1 = () => {
+    ApiService.fetchtime1()
+      .then((res) => {
+        // 받은 데이터 그룹화
+        const groupedData = groupByPlaceNum(res.data);
+        setPlaces(groupedData);
+        console.log("fetchtime1 성공", groupedData);
+      })
+      .catch((err) => {
+        console.log("fetchMovie 오류 : ", err);
+      });
+  };
+
+  // 그룹화
+  const groupByPlaceNum = (data) => {
+    return data.reduce((groups, item) => {
+      const group = groups[item.place_num] || [];
+      group.push(item);
+      groups[item.place_num] = group;
+      return groups;
+    }, {});
+  };
+
+  // 지역
+  const getPlaceNum = (place_num) => {
+    if (place_num == 1) {
+      return "서울";
+    } else if (place_num == 2) {
+      return "경기/인천";
+    } else if (place_num == 3) {
+      return "충청/대전";
     }
   };
 
@@ -95,27 +104,36 @@ const Reservation_Movie = ({ history }) => {
       .catch((err) => {
         console.log("Error fetching reservations:", err);
       });
+
+    // 선택한 지역을 설정합니다.
+    setSelectedPlace(subRegion);
   };
 
-  /// API를 호출하여 잔여 좌석 수를 가져오는 함수
-const fetchRemainingSeatsCount = () => {
-  ApiService.listSeat()
-    .then((res) => {
-      // 받아온 좌석 정보에서 st_check가 "r" 또는 "y"가 아닌 좌석들의 수를 구합니다.
-      const remainingSeats = res.data.filter(seat => seat.st_check !== "r" && seat.st_check !== "y").length;
-      console.log("잔여 좌석 수:", remainingSeats);
-      // 상태로 관리하여 컴포넌트에서 사용할 수 있도록 업데이트합니다.
-      setRemainingSeatsCount(remainingSeats);
-    })
-    .catch((err) => {
-      console.log("API 호출 오류:", err);
-    });
-};
+  // 지역 선택 핸들러
+  const handleRegionClick = (region) => {
+    setSelectedRegion(region);
+  };
 
-// 컴포넌트가 마운트될 때 한 번만 API를 호출하여 잔여 좌석 수를 가져옵니다.
-useEffect(() => {
-  fetchRemainingSeatsCount();
-}, []);
+  // 잔여 좌석 수 호출
+  const fetchRemainingSeatsCount = () => {
+    ApiService.listSeat()
+      .then((res) => {
+        // st_check가 "r" 또는 "y"가 아닌 좌석들의 수
+        const remainingSeats = res.data.filter(
+          (seat) => seat.st_check !== "r" && seat.st_check !== "y"
+        ).length;
+        console.log("잔여 좌석 수:", remainingSeats);
+        setRemainingSeatsCount(remainingSeats);
+      })
+      .catch((err) => {
+        console.log("API 호출 오류:", err);
+      });
+  };
+
+  // 컴포넌트가 마운트될 때 한 번만 API를 호출하여 잔여 좌석 수를 가져옴
+  useEffect(() => {
+    fetchRemainingSeatsCount();
+  }, []);
 
   const handleConfirmation = () => {
     setPopupOpen(false);
@@ -124,10 +142,6 @@ useEffect(() => {
 
   const handleCancellation = () => {
     setPopupOpen(false);
-  };
-
-  const handleRegionClick = (region) => {
-    setSelectedRegion(region);
   };
 
   const sysdate = moment().format("YYYY-MM-DD");
@@ -221,35 +235,33 @@ useEffect(() => {
             <li>
               <div className="menu2">
                 <ul className="menu2_left">
-                  {Object.keys(subRegions).map((region) => (
-                    <li
-                      className={`subRegions ${
-                        selectedRegion === region ? "active" : ""
-                      }`}
-                      key={region}
-                      onClick={(event) => {
-                        event.preventDefault(); // 기본 동작 막기
-                        handleRegionClick(region);
-                      }}
-                    >
-                      <a href="#">{region}</a>
+                  {Object.keys(places).map((placeNum) => (
+                    <li key={placeNum}>
+                      <a
+                        href="#"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          handleTheaterSelection(placeNum);
+                        }}
+                      >
+                        {getPlaceNum(placeNum)}
+                      </a>
                     </li>
                   ))}
                 </ul>
-
                 <div className="menu2_right">
                   <ul>
-                    {selectedRegion &&
-                      subRegions[selectedRegion].map((subRegion, index) => (
-                        <li className="subRegions" key={subRegion}>
+                    {selectedPlace &&
+                      places[selectedPlace].map((place, index) => (
+                        <li className="subRegions" key={place.ip_num}>
                           <a
                             href="#"
                             onClick={(event) => {
                               event.preventDefault();
-                              handleTheaterSelection(subRegion)
+                              handleTheaterSelection(place.place_title);
                             }}
                           >
-                            {subRegion}
+                            {place.place_title}
                           </a>
                         </li>
                       ))}
@@ -268,7 +280,7 @@ useEffect(() => {
               <div className="menu3">
                 <ul className="menu3_left">
                   {movies.map((movie) => (
-                    <li key={movie.movie_id}>
+                    <li key={movie.mov_id}>
                       <a
                         href="#"
                         onClick={(event) => {
@@ -276,8 +288,8 @@ useEffect(() => {
                           handleMovieSelection(movie);
                         }}
                       >
-                        {getMovieImage(movie.movie_age)}
-                        {movie.res_movie_name}
+                        {getMovieImage(movie.mov_age)}
+                        {movie.mov_title}
                       </a>
                     </li>
                   ))}
@@ -300,24 +312,24 @@ useEffect(() => {
                   {selectedMovie && (
                     <div className="menu4_main">
                       <a href="#none">
-                        {getMovieImage(selectedMovie.movie_age)}
-                        {selectedMovie.res_movie_name}
+                        {getMovieImage(selectedMovie.mov_age)}
+                        {selectedMovie.mov_title}
                       </a>
                     </div>
                   )}
-                  {selectedMovie && remainingSeatsCount !== null && (
+                  {remainingSeatsCount !== null && (
                     <div className="menu4_sub">
                       <ul>
                         <li>
                           <a href="#none" onClick={() => setPopupOpen(true)}>
                             <span>
-                              {moment(
-                                selectedMovie.res_movie_time,
+                              {/* {moment(
+                                selectedPlace.start_time,
                                 "HH:mm:ss"
                               ).format("HH:mm")}
                               <br />
-                              
-                              {remainingSeatsCount}/112 {selectedMovie.theater_id}
+                              {remainingSeatsCount}/112{" "}
+                              {selectedPlace.theater_id} */}
                             </span>
                           </a>
                         </li>
@@ -340,9 +352,9 @@ useEffect(() => {
                 ({selectedMovie.theater_id})
               </strong>
               {remainingSeatsCount !== null && (
-              <p>
-                잔여좌석 <strong>{remainingSeatsCount}</strong>/112
-              </p>
+                <p>
+                  잔여좌석 <strong>{remainingSeatsCount}</strong>/112
+                </p>
               )}
               <img className="Res_screen" src={Res_screen} />
               <p>

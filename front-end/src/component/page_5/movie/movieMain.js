@@ -46,9 +46,10 @@ function MovieMain() {
     },
   };
 
-  const handleButtonClick = (id) => {
+  const handleButtonClick = (movie_id) => {
     // 버튼을 클릭하면 '/detail' 경로로 이동합니다.
-    history.push("/movieDetail/"+id);
+    console.log("movie_id = " + movie_id);
+    history.push("/movieDetail/"+movie_id);
   };
 
   const [movies, setMovies] = useState([]);
@@ -143,7 +144,7 @@ function MovieMain() {
                 <Card.Body>
                   <Card.Title>{movie.mov_title}</Card.Title>
                   <Card.Text>{movie.mov_time}분</Card.Text>
-                  <Button className={`primary_button ${style.primary_button}`} onClick={()=>handleButtonClick(movie.mov_id)}>상세정보</Button>
+                  <Button className={`primary_button ${style.primary_button}`} onClick={()=>handleButtonClick(movie.movie_id)}>상세정보</Button>
                 </Card.Body>
               </Card>
             ))}
@@ -168,7 +169,7 @@ function MovieMain() {
                 <Card.Body>
                   <Card.Title>{movie.mov_title}</Card.Title>
                   <Card.Text>{movie.mov_time}분</Card.Text>
-                  <Button className={`primary_button ${style.primary_button}`} onClick={()=>handleButtonClick(movie.mov_id)}>상세정보</Button>
+                  <Button className={`primary_button ${style.primary_button}`} onClick={()=>handleButtonClick(movie.movie_id)}>상세정보</Button>
                 </Card.Body>
               </Card>
             ))}
@@ -193,7 +194,7 @@ function MovieMain() {
                 <Card.Body>
                   <Card.Title>{movie.mov_title}</Card.Title>
                   <Card.Text>{movie.mov_time}분</Card.Text>
-                  <Button className={`primary_button ${style.primary_button}`} onClick={()=>handleButtonClick(movie.mov_id)}>상세정보</Button>
+                  <Button className={`primary_button ${style.primary_button}`} onClick={()=>handleButtonClick(movie.movie_id)}>상세정보</Button>
                 </Card.Body>
               </Card>
             ))}

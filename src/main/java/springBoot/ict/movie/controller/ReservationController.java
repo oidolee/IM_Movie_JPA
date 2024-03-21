@@ -30,18 +30,18 @@ public class ReservationController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
 		
-	// 목록
-    @GetMapping("/ReservationList")
-    public List<ReservationDTO> ReservationList(Model model)
-            throws ServletException, IOException {
-    	
-        logger.info("url - ReservationList");
-        
-        List<ReservationDTO> list = service.ReservationList();
-        model.addAttribute("list", list);
-        
-        return list;
-    }
+//	// 목록
+//    @GetMapping("/ReservationList")
+//    public List<ReservationDTO> ReservationList(Model model)
+//            throws ServletException, IOException {
+//    	
+//        logger.info("url - ReservationList");
+//        
+//        List<ReservationDTO> list = service.ReservationList();
+//        model.addAttribute("list", list);
+//        
+//        return list;
+//    }
 
 
 }

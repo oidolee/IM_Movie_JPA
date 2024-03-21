@@ -3,16 +3,23 @@ import React from "react";
 import style from '../../../styles/page_6/MyPage_consult_list_part_module.css';
 import ApiService from '../../../ApiService';
 import {Link} from 'react-router-dom';
+import { useCookies } from 'react-cookie'; // useCookies import
 function MyPage_consult_list_part() {
     const [showDetailIndex, setShowDetailIndex] = useState(-1); // 상세 정보를 표시할 항목의 인덱스를 저장할 상태 추가
     const [consult, setConsult] = useState([]);
+    const [cookies, setCookie] = useCookies(['c_email', 'idName']);
+    const [emailCheck, setEmailCheck] = useState('');
 
     useEffect(() => {
-        reloadConsultList();
+        reloadConsultList(cookies.c_email);
+        
+        if (cookies.c_email !== undefined) {
+            setEmailCheck(cookies.c_email);
+        }
     }, []);
 
-    const reloadConsultList = () => {
-        ApiService.fetchConsult()
+    const reloadConsultList = (emailCheck) => {
+        ApiService.fetchConsultCusList(emailCheck)
         .then(res => {
             console.log("test" + res);
             setConsult(res.data);
@@ -58,7 +65,7 @@ function MyPage_consult_list_part() {
                                 <td>{consultItem.ib_date}</td>
                                 <td>
                                     <div className={`consult_status ${style.consult_status}`}>
-                                    {consultItem.ib_show === 'y' ? '답변완료' : '답변대기 중'}
+                                        {consultItem.ib_show === 'y' ? '답변대기 중' : '답변 완료'}
                                     </div>
                                 </td>
                             </tr>

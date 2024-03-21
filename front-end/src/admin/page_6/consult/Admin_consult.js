@@ -1,110 +1,82 @@
-import React, { Component } from "react";
-import ApiService from "../../ApiService";
-// npm install -f @mui/material
-// npm install @emotion/react
-// npm install @emotion/styled
-// npm install -f @mui/icons-material@^5.11.16
-import { Table, TableHead, TableRow, TableCell, TableBody, Button, Typography} from '@mui/material'
-import { Create, Delete } from '@mui/icons-material'; 
+import { useState, useEffect } from 'react';
+import React from "react";
+import style from '../../../styles/page_6/MyPage_consult_list_part_module.css';
+import ApiService from '../../../ApiService';
+import {Link} from 'react-router-dom';
+import { useCookies } from 'react-cookie'; // useCookies import
+function MyPage_consult_list_part() {
+    const [showDetailIndex, setShowDetailIndex] = useState(-1); // 상세 정보를 표시할 항목의 인덱스를 저장할 상태 추가
+    const [consult, setConsult] = useState([]);
+    const [cookies, setCookie] = useCookies(['c_email', 'idName']);
+    const [emailCheck, setEmailCheck] = useState('');
 
-class ListSampleComponent extends Component {
-
-    constructor(props){
-        super(props);
-
-        this.state={
-            samples: [],    // 5. 리스트 데이터
-            message: null
+    useEffect(() => {
+        reloadConsultList(cookies.c_email);
+        
+        if (cookies.c_email !== undefined) {
+            setEmailCheck(cookies.c_email);
         }
-    }
+    }, []);
 
-    // 라이프 사이클 중 컴포넌트가 생성된 후 사용자에게 보여지기 전까지의 전체 과정을 렌더링(데이터 로딩)
-    componentDidMount(){ 
-        this.reloadSampleList();    // 1.
-    }
-
-    // List
-    reloadSampleList = () =>{
-        ApiService.fetchSamples() // 2. 스프링 부트와의 통신기능 호출
-        .then(res => {            // 4.
-            this.setState({
-                samples: res.data
-            })
+    const reloadConsultList = () => {
+        ApiService.fetchConsult()
+        .then(res => {
+            console.log("test" + res);
+            setConsult(res.data);
         })
         .catch(err => {
-            console.log('reloadSampleList() Error!!', err);
-        })
+            console.log('reloadConsultList() Error!!', err);
+        });
     }
 
-    // insert
-    addSample = () => {
-        window.localStorage.removeItem("sampleID")  // SQL 에서 max + 1 자동증가 처리하므로
-        // RouterConponent.js 의  <Route path="/add-sample" exact={true} component={AddSampleComponent} /> 호출
-        this.props.history.push("/add-sample");
-    }
+    
 
-    // update
-    editSample = (ID) => {
-        window.localStorage.setItem("sampleID", ID); // EditSampleComponent.js에서 getItem(),update 문에서 where절에 사용
-        // RouterConponent.js 의  <Route path="/add-sample" exact={true} component={EditSampleComponent} /> 호출
-        this.props.history.push("/edit-sample");
-    }
-
-    // delete
-    deleteSample = (sampleID) =>{
-        ApiService.deleteSample(sampleID)
-            .then(res =>{
-               this.setState({
-                    samples: this.state.samples.filter(sample => sample.id !== sampleID)
-
-               });
-               console.log('delete 성공 : ', res.data); // 컨트롤러에서 전달함(resultCode, resultMsg)
-            })
-            .catch(err => {
-                console.log('deleteSample() Error!!', err);
-            })
-        this.props.history.push("/samples");
-    }
-    render(){
-        return(
-            <div><br/><br/>
-                <Typography variant="h4" style={style}>Sample List</Typography><br/><br/>
-                <Button variant="contained" color="primary" onClick={this.addSample}>Add Sample</Button>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell> 아이디 </TableCell>
-                            <TableCell> 제목 </TableCell>
-                            <TableCell> 등록일 </TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.state.samples.map(sample => 
-                            <TableRow key={sample.id}>
-                                <TableCell component="th" scope="sample">
-                                    {sample.id}
-                                </TableCell>
-                                <TableCell>{sample.name}</TableCell>
-                                <TableCell>{sample.brand}</TableCell>
-                                
-                                <TableCell onClick={() => this.editSample(sample.id)}>
-                                    <Create />
-                                </TableCell>
-                                <TableCell onClick={() => this.deleteSample(sample.id)}>
-                                    <Delete />
-                                </TableCell>    
-                            </TableRow>
-                            
-                            )}
-                    </TableBody>
-                </Table>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <table className={`consult_list ${style.consult_list}`}>
+                <colgroup>
+                    <col style={{ width: '8%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: 'auto' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '8%' }} />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th> 번호 </th>
+                        <th> 분류 </th>
+                        <th> 아이디 </th>
+                        <th> 제목 </th>
+                        <th> 작성일 </th>
+                        <th> 상태 </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {consult.map((consultItem, index) => (
+                            <tr key={index}> 
+                                <input type="hidden" id='one_id_pk' value={consultItem.one_id}></input>
+                                <input type="hidden" value={consultItem.c_email}></input>
+                                <td>{consultItem.one_id}</td>
+                                <td>{consultItem.ib_type}</td>
+                                <td>{consultItem.c_email}</td>
+                                <td>
+                                    <Link to={`/Admin_consult_detail_answer/${consultItem.one_id}`} style={{ color: "black" }}>
+                                        {consultItem.ib_title}
+                                    </Link>
+                                </td>
+                                <td>{consultItem.ib_date}</td>
+                                <td>
+                                    <div className={`consult_status ${style.consult_status}`}>
+                                        {consultItem.ib_show === 'y' ? '답변대기 중' : '답변 완료'}
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                </tbody>
+            </table>
+        </div>
+    )
 }
 
-const style={
-    display: 'flex',
-    justifyContent: 'center'
-}
-export default ListSampleComponent;
+export default MyPage_consult_list_part;

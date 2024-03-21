@@ -14,7 +14,12 @@ function Admin_Now_Add ({ history }) {
     now_visitor: "",
     now_contents: "",
     now_con: "",
-    now_trailer: "",
+    now_pd: "",
+    now_cast: "",
+    now_image2: "",
+    now_image3: "",
+    now_trailer1: "",
+    now_trailer2: "",
     now_category: "",
   });
 
@@ -138,10 +143,65 @@ function Admin_Now_Add ({ history }) {
         required
         id="standard-required"
         variant="standard"
-        label="Movie_Trailer"
+        label="Movie_Pd"
         type="text"
-        name="now_trailer"
-        value={nowInfo.now_trailer}
+        name="now_pd"
+        value={nowInfo.now_pd}
+        onChange={onChange}
+      />
+      <br />
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Cast"
+        type="text"
+        name="now_cast"
+        value={nowInfo.now_cast}
+        onChange={onChange}
+      />
+      <br />
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Image2"
+        type="text"
+        name="now_image2"
+        value={nowInfo.now_image2}
+        onChange={onChange}
+      />
+      <br />
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Image3"
+        type="text"
+        name="now_image3"
+        value={nowInfo.now_image3}
+        onChange={onChange}
+      />
+      <br />
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Trailer1"
+        type="text"
+        name="now_trailer1"
+        value={nowInfo.now_trailer1}
+        onChange={onChange}
+      />
+      <br />
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Trailer2"
+        type="text"
+        name="now_trailer2"
+        value={nowInfo.now_trailer2}
         onChange={onChange}
       />
       <br />

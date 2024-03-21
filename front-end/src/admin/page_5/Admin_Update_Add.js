@@ -14,7 +14,10 @@ function Admin_Update_Add ({ history }) {
     mov_visitor: "",
     mov_contents: "",
     mov_con: "",
-    mov_trailer: "",
+    mov_pd: "",
+    mov_cast: "",
+    mov_trailer1: "",
+    mov_trailer2: "",
     mov_category: "",
   });
 
@@ -138,10 +141,44 @@ function Admin_Update_Add ({ history }) {
         required
         id="standard-required"
         variant="standard"
-        label="Movie_Trailer"
+        label="Movie_Pd"
         type="text"
-        name="mov_trailer"
-        value={updateInfo.mov_trailer}
+        name="mov_pd"
+        value={updateInfo.mov_pd}
+        onChange={onChange}
+      />
+      <br />
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Cast"
+        type="text"
+        name="mov_cast"
+        value={updateInfo.mov_cast}
+        onChange={onChange}
+      />
+      <br />
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Trailer1"
+        type="text"
+        name="mov_trailer1"
+        value={updateInfo.mov_trailer1}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Trailer2"
+        type="text"
+        name="mov_trailer2"
+        value={updateInfo.mov_trailer2}
         onChange={onChange}
       />
       <br />
