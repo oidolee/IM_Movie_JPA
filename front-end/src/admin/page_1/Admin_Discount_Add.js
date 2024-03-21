@@ -26,7 +26,7 @@ class Admin_Discount_Add extends Component {
   saveDiscount = (e) => {
     e.preventDefault();
 
-    let iputDate = {
+    let inputData = {
       dc_main_title: this.state.dc_main_title,
       dc_sub_title: this.state.dc_sub_title,
       dc_content: this.state.dc_content,
@@ -35,7 +35,7 @@ class Admin_Discount_Add extends Component {
       dc_sysdate: this.state.dc_sysdate,
     };
 
-    ApiService.addDiscount(iputDate)
+    ApiService.addDiscount(inputData)
       .then((res) => {
         this.setState({});
         console.log("DiscountInsert 성공 : ", res.data);
