@@ -53,10 +53,10 @@ const App = ({ handleCloseModal }) => {
 
     try {
       await paymentWidget?.requestPayment({
-        pay_id: nanoid(),
-        pay_name: "티켓",
-        c_name: cookies['idName'],
-        c_email: cookies['c_email'],
+        orderId: nanoid(),
+        orderName: "티켓",
+        customerName: cookies['idName'],
+        customerEmail: cookies['c_email'],
         successUrl: `${window.location.origin}/success`,
         failUrl: `${window.location.origin}/fail`
       });
@@ -68,14 +68,6 @@ const App = ({ handleCloseModal }) => {
   return (
     <div className={`Checkout ${style.Checkout}`}>
       <div className="Checkout_content">
-        <h3 className="payment_tit">결제 정보</h3>
-        <ul>
-          <li>영화: </li>
-          <li>일시: </li>
-          <li>상영관: </li>
-          <li>인원: </li>
-          <li>좌석: </li>
-        </ul>
         <div id="payment-widget" />
         <div className="paymentMethod_Main">
           <button className="paymentMethod" onClick={handlePayment}>

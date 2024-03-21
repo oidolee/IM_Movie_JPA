@@ -19,8 +19,8 @@ public class PaymentDTO {
     @Id
     private int pay_id;
 	private int res_id;
-	private String c_email;
-	private String c_name;
+	private int IC_No;	
+	private String IC_Email;
 	private String pay_method;
 	private String pay_name;
 	private int pay_amount;

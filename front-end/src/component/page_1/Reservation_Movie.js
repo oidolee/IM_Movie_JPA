@@ -26,7 +26,7 @@ const Reservation_Movie = ({ history }) => {
     fetchtime1();
   }, []);
 
-  // 등록된 영화 목록 호출
+  // 영화 목록
   const fetchMovie = () => {
     ApiService.fetchMovie()
       .then((res) => {
@@ -51,7 +51,7 @@ const Reservation_Movie = ({ history }) => {
     }
   };
 
-  // 등록된 상영관 목록 호출_바뀔예정
+  // 상영관-지역 목록
   const fetchtime1 = () => {
     ApiService.fetchtime1()
       .then((res) => {
@@ -65,7 +65,7 @@ const Reservation_Movie = ({ history }) => {
       });
   };
 
-  // 그룹화하는 함수
+  // 그룹화
   const groupByPlaceNum = (data) => {
     return data.reduce((groups, item) => {
       const group = groups[item.place_num] || [];
@@ -114,16 +114,15 @@ const Reservation_Movie = ({ history }) => {
     setSelectedRegion(region);
   };
 
-  /// API를 호출하여 잔여 좌석 수를 가져오는 함수
+  // 잔여 좌석 수 호출
   const fetchRemainingSeatsCount = () => {
     ApiService.listSeat()
       .then((res) => {
-        // 받아온 좌석 정보에서 st_check가 "r" 또는 "y"가 아닌 좌석들의 수
+        // st_check가 "r" 또는 "y"가 아닌 좌석들의 수
         const remainingSeats = res.data.filter(
           (seat) => seat.st_check !== "r" && seat.st_check !== "y"
         ).length;
         console.log("잔여 좌석 수:", remainingSeats);
-        // 상태로 관리하여 컴포넌트에서 사용할 수 있도록 업데이트합니다.
         setRemainingSeatsCount(remainingSeats);
       })
       .catch((err) => {
