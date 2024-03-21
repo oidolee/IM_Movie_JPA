@@ -11,6 +11,7 @@ import {
 import style from "../../styles/admin/page_5/Admin_Now_List.css";
 import ApiService from "../../ApiService";
 import { Create, Delete } from "@mui/icons-material";
+import { useParams } from 'react-router-dom';
 
 function Admin_Now_List ({ history }) {
   const [lists, setLists] = useState([]);
@@ -38,9 +39,15 @@ function Admin_Now_List ({ history }) {
 
   // 수정
   const selectNow = (now_id) => {
-    window.localStorage.setItem("now_id", now_id);
-    history.push("/admin/page_5/Admin_Now_Edit");
-  };
+    ApiService.selectNow(now_id) 
+    .then((res) => {
+    console.log("selectNow 성공 : ", res.data);
+    history.push(`/admin/page_5/Admin_Now_Edit/${now_id}`);
+  })
+  .catch((err) => {
+    console.log("selectNow 실패 : ", err);
+  });
+};
 
   // 삭제
   const deleteNow = (now_id) => {
@@ -83,9 +90,11 @@ function Admin_Now_List ({ history }) {
             <TableCell>Movie_Time</TableCell>
             <TableCell>Movie_Age</TableCell>
             <TableCell>Movie_Visitor</TableCell>
-            <TableCell>Movie_Contents</TableCell>
             <TableCell>Movie_Con</TableCell>
-            <TableCell>Movie_Trailer</TableCell>
+            <TableCell>Movie_Pd</TableCell>
+            <TableCell>Movie_Cast</TableCell>
+            <TableCell>Movie_Trailer1</TableCell>
+            <TableCell>Movie_Trailer2</TableCell>
             <TableCell>Movie_Category</TableCell>
             
             <TableCell>Edit</TableCell>
@@ -104,9 +113,11 @@ function Admin_Now_List ({ history }) {
               <TableCell>{list.now_time}</TableCell>
               <TableCell>{list.now_age}</TableCell>
               <TableCell>{list.now_visitor}</TableCell>
-              <TableCell>{list.now_contents}</TableCell>
               <TableCell>{list.now_con}</TableCell>
-              <TableCell>{list.now_trailer}</TableCell>
+              <TableCell>{list.now_pd}</TableCell>
+              <TableCell>{list.now_cast}</TableCell>
+              <TableCell>{list.now_trailer1}</TableCell>
+              <TableCell>{list.now_trailer2}</TableCell>
               <TableCell>{list.now_category}</TableCell>
               <TableCell
                 className="selectBtn"
