@@ -1,4 +1,4 @@
-package springBoot.ict.movie.dto;
+package springBoot.ict.movie.toss;
 
 import java.util.UUID;
 

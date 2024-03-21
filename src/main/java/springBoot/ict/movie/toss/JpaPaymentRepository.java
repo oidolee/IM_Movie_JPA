@@ -1,12 +1,10 @@
-package springBoot.ict.movie.dao;
+package springBoot.ict.movie.toss;
 
 import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import springBoot.ict.movie.dto.Payment;
 
 public interface JpaPaymentRepository extends JpaRepository<Payment, Long> {
    

@@ -1,4 +1,4 @@
-package springBoot.ict.movie.dto;
+package springBoot.ict.movie.toss;
 
 public enum PayType {
     CARD("카드"),

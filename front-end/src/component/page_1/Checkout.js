@@ -14,6 +14,7 @@ const App = ({ handleCloseModal }) => {
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
   const [price, setPrice] = useState(100);
+  const [customers, setCustomers] = useState();
 
   useEffect(() => {
     const fetchPaymentWidget = async () => {
@@ -40,7 +41,6 @@ const App = ({ handleCloseModal }) => {
 
     paymentMethodsWidget.updateAmount(
       price,
-      paymentMethodsWidget.UPDATE_REASON.COUPON
     );
   }, [price]);
 

@@ -1,4 +1,4 @@
-package springBoot.ict.movie.configuration;
+package springBoot.ict.movie.toss;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

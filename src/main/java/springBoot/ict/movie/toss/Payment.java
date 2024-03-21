@@ -1,4 +1,4 @@
-package springBoot.ict.movie.dto;
+package springBoot.ict.movie.toss;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 
 import lombok.*;
+import springBoot.ict.movie.dto.Auditable;
+import springBoot.ict.movie.dto.Member;
 
 
 @Table(indexes = {
