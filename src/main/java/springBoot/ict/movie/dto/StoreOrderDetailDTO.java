@@ -24,14 +24,14 @@ public class StoreOrderDetailDTO {
     public void setItem_code(int detail_code) {
         this.detail_code = detail_code;
     }
-    @JsonProperty("orderCode")
-    private String order_code;
+//    @JsonProperty("orderCode")
+//    private String order_code;
     @JsonProperty("itemName")
     private String item_name;
-    @JsonProperty("detailPrice")
+    @JsonProperty("totalPrice")
     private String detail_price;
-    @JsonProperty("detailQty")
+    @JsonProperty("totalQuantity")
     private int detail_qty;
-    @JsonProperty("detailRegDate")
-    private int detail_regDate;
+//    @JsonProperty("detailRegDate")
+//    private int detail_regDate;
 }
