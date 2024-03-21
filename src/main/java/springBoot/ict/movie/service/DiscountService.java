@@ -15,17 +15,17 @@ public interface DiscountService {
 	
 	// 등록
 	public void DiscountInsert(DiscountDTO dto)
-			throws ServletException, IOException;
+		throws ServletException, IOException;
 	
 	// 상세페이지
 	public DiscountDTO DiscountDetailList(int dc_num)
-			throws ServletException, IOException;
+		throws ServletException, IOException;
 	
 	// 수정
 	public void DiscountUpdate(DiscountDTO dto)
-			throws ServletException, IOException;
+		throws ServletException, IOException;
 	
 	// 삭제
 	public void DiscountDelete(int dc_num)
-			throws ServletException, IOException;
+		throws ServletException, IOException;
 }

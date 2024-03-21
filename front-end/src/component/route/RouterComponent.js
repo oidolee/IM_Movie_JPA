@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom' // npm install react-router-dom@5
+
 //sample
 import AddSampleComponent from "../sample/AddSampleComponent";
 import ListSampleComponent from "../sample/ListSampleComponent";
@@ -17,6 +18,7 @@ import Reservation_Seat from '../page_1/Reservation_Seat';
 import Reservation_Payment from '../page_1/Reservation_Payment';
 import Reservation_Movie_screen from '../page_1/Reservation_Movie_screen';
 import Discount from '../page_1/Discount';
+import success from '../page_1/success';
 
 //page_2
 import Page2 from '../page_2/Page2';
@@ -49,7 +51,8 @@ import resultFindPWD from '../page_4/resultFindPWD';
 
 //page_5
 import movieMain from '../page_5/movie/movieMain';
-import MovieDetail from '../page_5/movie/movieDetail';
+import movieDetail from '../page_5/movie/movieDetail';
+import movieDetail2 from '../page_5/movie/movieDetail2';
 import movieUpdate from '../../admin/page_5/Admin_Update_Add';
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
@@ -103,6 +106,7 @@ const AppRouter = () => {
                                 <Route path="/page_1/Reservation_Payment" exact={true} component={Reservation_Payment} />
                                 <Route path="/page_1/Reservation_Movie_screen" exact={true} component={Reservation_Movie_screen} />
                                 <Route path="/page_1/Discount" exact={true} component={Discount} />                       
+                                <Route path="/success" exact={true} component={success} />
                             </Route>
 
                             {/* page_2 */}
@@ -138,7 +142,8 @@ const AppRouter = () => {
                             <Route>
                                 <Route path="/movieMain" exact={true} component={movieMain} />
                                 {/* <Route path="/movieDetail" exact={true} component={MovieDetail} /> */}
-                                <Route path="/movieDetail/:movie_id" exact={true} component={MovieDetail} />
+                                <Route path="/movieDetail/:movie_id" exact={true} component={movieDetail} />
+                                <Route path="/movieDetail2/:now_id" exact={true} component={movieDetail2} />
                                 <Route path="/movieUpdate" exact={true} component={movieUpdate} />
                                 <Route path="/movieNow" exact={true} component={movieNow} />
                                 <Route path="/movieNext" exact={true} component={movieNext} />

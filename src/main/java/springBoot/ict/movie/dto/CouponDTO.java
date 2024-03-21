@@ -24,6 +24,7 @@ public class CouponDTO {
     private int ic_code;
     private String ic_name;
     private int ic_point;
+    private String ic_category;
     private Date ic_useDate;
     private Date ic_regDate;
     private String ic_status;

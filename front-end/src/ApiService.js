@@ -18,6 +18,7 @@ class ApiService {
     
     // --------------------------------------------Seat 끝--------------------------------------------
     // --------------------------------------------Reservation 시작--------------------------------------------
+    // 목록
     listReservation() {
         console.log("listReservation 호출");
         return axios.get(url + "/page_1/ReservationList");
@@ -25,6 +26,15 @@ class ApiService {
 
 
     // --------------------------------------------Reservation 끝--------------------------------------------
+    // --------------------------------------------Payment 시작--------------------------------------------
+    // 결제 정보 저장
+    insertPayment(inputData) {
+        console.log("insertPayment 호출", inputData);
+        return axios.post(url + "/page_1/PaymentInsert", inputData);
+    }
+
+    
+    // --------------------------------------------Payment 끝--------------------------------------------
     // --------------------------------------------Discount 시작--------------------------------------------
     // 목록
     listDiscount() {
@@ -150,10 +160,18 @@ class ApiService {
 
     // page_6
 
+    // 관리자
     // 1:1 문의 리스트
     fetchConsult(){
         console.log('fetchConsult() 호출!!')
         return axios.get(url + '/page_6'); 
+    }
+
+    // 고객
+    // 1:1 문의 리스트
+    fetchConsultCusList(c_email){
+        console.log('fetchConsultCusList() 호출!!')
+        return axios.get(url + '/page_6/cusConsultList/' + c_email); 
     }
 
     // 1:1 문의 상세
@@ -182,11 +200,18 @@ class ApiService {
         return axios.post(url + "/page_6/saveAnswer", inputData);
     }
 
+    // 1:1 문의 답변 후 상태 업데이트
+    updateConsultData(one_id){
+        console.log('updateConsultData 호출');
+        return axios.put(url + "/page_6/completeAnswer/" + one_id);
+    }
+
+    
     // 쿠폰
     // 쿠폰 리스트(관리자)
     fetchCoupon(){
         console.log('fetchCoupon() 호출!!')
-        return axios.get(url + '/page_6/coupon'); 
+        return axios.get(url + '/page_6/coupon/couponList'); 
     }
     
     // 쿠폰 상세내역(관리자)
@@ -203,15 +228,15 @@ class ApiService {
     // 쿠폰 수정(관리자)
     updateCoupon(inputData){
         console.log('updateCoupon() 호출!!')
-        return axios.post(url + '/page_6/coupon/updateCoupon', inputData); 
+        return axios.put(url + '/page_6/coupon/updateCoupon', inputData); 
     }
     // 쿠폰 숨김처리(관리자)
 
 
     // 쿠폰 삭제(관리자)
-    deleteCoupon(ic_name){
+    deleteCoupon(ic_num){
         console.log('updateCoupon() 호출!!')
-        return axios.delete(url + '/page_6/coupon/deleteCoupon/' + ic_name); 
+        return axios.delete(url + '/page_6/coupon/deleteCoupon/' + ic_num); 
     }
 
     // 고객 쿠폰
@@ -302,21 +327,21 @@ class ApiService {
     }
 
     // 1건조회
-    selectUpdate(mov_id) {
-        console.log("selectUpdate 호출", mov_id);
-        return axios.get(url + "/page_5/MovieDetailList" + "/" + mov_id);
+    selectUpdate(movie_id) {
+        console.log("selectUpdate 호출", movie_id);
+        return axios.get(url + "/page_5/MovieDetailList/" + movie_id);
     }
 
     // 영화수정
     editUpdate(inputData) {
         console.log("editUpdate 호출", inputData);
-        return axios.put(url + "/page_5/UpdateUpdate" + "/" + inputData.mov_id, inputData);
+        return axios.put(url + "/page_5/UpdateUpdate" + "/" + inputData.movie_id, inputData);
     }  
 
     // 영화삭제
-    deleteUpdate(mov_id) {
-        console.log("deleteUpdate 호출", mov_id);
-        return axios.delete(url + "/page_5/UpdateDelete" + "/" + mov_id);
+    deleteUpdate(movie_id) {
+        console.log("deleteUpdate 호출", movie_id);
+        return axios.delete(url + "/page_5/UpdateDelete" + "/" + movie_id);
     }
 
     
@@ -335,7 +360,7 @@ class ApiService {
     // 현재1건조회
     selectNow(now_id) {
         console.log("selectNow 호출", now_id);
-        return axios.get(url + "/page_5/NowDetailList" + "/" + now_id);
+        return axios.get(url + "/page_5/NowDetailList/"+ now_id);
     }
 
     // 영화 현재수정

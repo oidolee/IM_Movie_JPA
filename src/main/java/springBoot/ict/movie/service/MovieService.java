@@ -25,7 +25,7 @@ public interface MovieService {
 			throws ServletException, IOException;
 	
 	//영화 상세페이지
-	 MovieDTO getMovieDetail(int mov_id)
+	 MovieDTO getMovieDetail(int movie_id)
 				throws ServletException, IOException;	
 	 
 	// 영화 수정
@@ -33,7 +33,7 @@ public interface MovieService {
 				throws ServletException, IOException;
 		
 	// 삭제
-	public void UpdateDelete(int mov_id)
+	public void UpdateDelete(int movie_id)
 			throws ServletException, IOException;
 
 		

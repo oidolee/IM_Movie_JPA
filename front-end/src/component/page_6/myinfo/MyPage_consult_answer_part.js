@@ -21,6 +21,7 @@ function MyPage_consult_answer_part() {
     const [ib_title, setIb_title] = useState('');
     const [ib_content, setIb_content] = useState('');
     const [ib_date, setIb_date] = useState('');
+    const [ib_show, setIb_show] = useState('');
 
     const history = useHistory();
 
@@ -28,10 +29,18 @@ function MyPage_consult_answer_part() {
         iba_content: '',
         one_id: ''
     });
+    const [consultData, setConsultData] = useState({
+        ib_show: 'n'
+    });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setConsultAnswerData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+
+        setConsultData(prevState => ({
             ...prevState,
             [name]: value
         }));
@@ -45,11 +54,12 @@ function MyPage_consult_answer_part() {
 
     const saveConsultAnswer = (e) => {
         e.preventDefault();
-        
+
         // 필요한 로직 수행
         const requestBody = {
             iba_content: consultAnswerData.iba_content,
-            one_id: one_id
+            one_id: one_id,
+            ib_show: 'n'
         };
         ApiService.addConsultAnwser(requestBody)
             .then(res => {
@@ -57,7 +67,15 @@ function MyPage_consult_answer_part() {
                 // 필요한 작업 수행
                 if (res.data.resultCode == '200') {
                     alert("답변 등록 성공");
-                    window.location.reload(); // history.push()로 페이지를 이동합니다.
+                    ApiService.updateConsultData(one_id)
+                    .then(res => {
+                        console.log('상태 업데이트 성공:', res.data);
+                        // 필요한 작업 수행
+                        window.location.reload(); 
+                    })
+                    .catch(err => {
+                        console.error('상태 업데이트 에러:', err);
+                    });
                 } else {
                     alert("답변 등록 실패");
                     window.location.reload(); // history.push()로 페이지를 이동합니다.
@@ -73,6 +91,7 @@ function MyPage_consult_answer_part() {
     useEffect(() => {
         reloadConsultDetail(one_id);
         reloadConsultAnswerList(one_id);
+
     }, [one_id]);
 
     const reloadConsultDetail = (one_id) => {
@@ -86,6 +105,7 @@ function MyPage_consult_answer_part() {
                 setIb_title(consult.csdto.ib_title)
                 setIb_content(consult.csdto.ib_content)
                 setIb_date(consult.csdto.ib_date)
+                setIb_show(consult.csdto.ib_show)
                 console.log("consult : " + consult);
             })
             .catch(err => {
@@ -98,12 +118,14 @@ function MyPage_consult_answer_part() {
             .then(res => {
                 console.log("answer", res.data);
                 setConsultAnswerList(res.data);
-    
+
             })
             .catch(err => {
                 console.log('reloadConsultAnswerList() Error!!', err);
             });
     }
+
+
 
     return (
         <div>
@@ -125,7 +147,7 @@ function MyPage_consult_answer_part() {
                             </dl>
                             <div style={{ display: 'inline', justifyContent: 'right' }}>
                                 <div style={{ fontSize: '10px' }}>{ib_date}</div>
-                                <div className={`consult_status ${style.consult_status}`}>답변완료</div>
+                                <div className={`consult_status ${style.consult_status}`}>{ib_show === 'y' ? '답변대기 중' : '답변 완료'}</div>
                             </div>
                         </td>
                     </tr>
