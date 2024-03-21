@@ -71,7 +71,7 @@ function MyPage_consult_answer_part() {
                     .then(res => {
                         console.log('상태 업데이트 성공:', res.data);
                         // 필요한 작업 수행
-                        window.location.reload(); // history.push()로 페이지를 이동합니다.
+                        window.location.reload(); 
                     })
                     .catch(err => {
                         console.error('상태 업데이트 에러:', err);

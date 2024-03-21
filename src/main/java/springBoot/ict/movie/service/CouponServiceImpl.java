@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import springBoot.ict.movie.dao.CouponCusRepository;
 import springBoot.ict.movie.dao.CouponRepository;
@@ -40,11 +41,12 @@ public class CouponServiceImpl implements CouponService {
 	}
 	
 	// 쿠폰 삭제
+	
 	@Override
-	public int deleteCoupon(String ic_name)
+	public void deleteCoupon(int ic_num)
 			throws ServletException, IOException{
 		
-		return cpdao.deleteCoupon(ic_name);
+		cpdao.deleteById(ic_num);
 	}
 
 	// 고객 쿠폰 등록 

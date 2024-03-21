@@ -57,10 +57,10 @@ function Consult_part() {
                 // 필요한 작업 수행
                 if (res.data.resultCode == '200') {
                     alert("문의 등록 성공");
-                    history.push('/MyPage_consult_list'); // history.push()로 페이지를 이동합니다.
+                    history.push('/MyPage_consult_list'); 
                 } else {
                     alert("문의 등록 실패");
-                    history.push('/Consult'); // history.push()로 페이지를 이동합니다.
+                    history.push('/Consult'); 
                 }
             })
             .catch(err => {

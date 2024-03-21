@@ -32,19 +32,18 @@ function Admin_coupon_List({ history }) {
 
   // 등록
   const ArteAdd = () => {
-    window.localStorage.removeItem("arte_id");
-    history.push("/admin/page_5/Admin_Arte_Add");
+    
+    history.push("/admin/page_6/coupon/Admin_coupon_Add");
   };
 
   // 수정
-  const selectCoupon = (ic_num) => {
-    window.localStorage.setItem("ic_num", ic_num);
-    history.push("/admin/page_6/coupon/Admin_coupon_Edit");
+  const selectCoupon = (ic_name) => {
+    history.push(`/admin/page_6/coupon/Admin_coupon_Edit/${ic_name}`);
   };
 
   // 삭제
   const deleteCoupon = (ic_num) => {
-    ApiService.deleteArte(ic_num)
+    ApiService.deleteCoupon(ic_num)
       .then((res) => {
         setLists(lists.filter((list) => list.ic_num !== ic_num));
         console.log("deleteArte 성공 : ", res.data);
@@ -102,7 +101,7 @@ function Admin_coupon_List({ history }) {
               <TableCell>{list.ic_regDate}</TableCell>
               <TableCell
                 className="selectBtn"
-                onClick={() => selectCoupon(list.ic_num)}
+                onClick={() => selectCoupon(list.ic_name)}
               >
                 <Create />
               </TableCell>

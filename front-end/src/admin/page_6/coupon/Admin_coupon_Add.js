@@ -28,11 +28,11 @@ function Admin_coupon_Add ({history}) {
 
     ApiService.addCoupon(couponInfo)
       .then((res) => {
-        console.log("ArteInsert 성공 : ", res.data);
+        console.log("addCoupon 성공 : ", res.data);
         history.push("/admin/page_6/coupon/Admin_Coupon_List");
       })
       .catch((err) => {
-        console.log("ArteInsert 실패 : ", err);
+        console.log("addCoupon 실패 : ", err);
       });
   };
 

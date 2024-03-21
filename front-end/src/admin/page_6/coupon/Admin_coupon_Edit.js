@@ -1,69 +1,66 @@
 import React, { useState, useEffect } from "react";
-import ApiService from "../../ApiService";
 import { Typography, TextField, Button } from "@mui/material";
-import style from "../../styles/admin/page_5/Admin_Update_Edit.css";
+import { useHistory } from 'react-router-dom';
+import style from "../../../styles/admin/page_5/Admin_Update_Edit.css";
+import ApiService from "../../../ApiService";
+import { useParams } from 'react-router-dom';
 
-const Admin_Update_Edit = ({ history }) => {
+function Admin_Update_Edit() {
+  const history = useHistory();
+  const { ic_name } = useParams();
   const [updateInfo, setUpdateInfo] = useState({
-    mov_id: "",
-    mov_image: "",
-    mov_title: "",
-    mov_date: "",
-    mov_time: "",
-    mov_age: "",
-    mov_visitor: "",
-    mov_contents: "",
-    mov_con: "",
-    mov_trailer: "",
-    mov_category: "",
+    ic_num: "",
+    ic_code: "",
+    ic_name: ic_name,
+    ic_category: "",
+    ic_point: "",
+    ic_useDate: "",
   });
 
   useEffect(() => {
-    selectLoad();
-  }, []);
+    selectLoad(ic_name);
+  }, [ic_name]);
 
-  const selectLoad = () => {
-    ApiService.selectUpdate(window.localStorage.getItem("mov_id"))
-      .then((res) => {
+  // 한건조회
+  const selectLoad = (ic_name) => {
+    ApiService.couponList(ic_name)
+      .then(res => {
         let list = res.data;
-
+        console.log('ic_name : ' + ic_name)
+        console.log('data,', res.data);
         setUpdateInfo({
-          mov_id: list.dto.mov_id,
-          mov_image: list.dto.mov_image,
-          mov_title: list.dto.mov_title,
-          mov_date: list.dto.mov_date,
-          mov_time: list.dto.mov_time,
-          mov_age: list.dto.mov_age,
-          mov_visitor: list.dto.mov_visitor,
-          mov_contents: list.dto.mov_contents,
-          mov_con: list.dto.mov_con,
-          mov_trailer: list.dto.mov_trailer,
-          mov_category: list.dto.mov_category,
+          ic_num: list.cpdto.ic_num,
+          ic_code: list.cpdto.ic_code,
+          ic_name: list.cpdto.ic_name,
+          ic_category: list.cpdto.ic_category,
+          ic_point: list.cpdto.ic_point,
+          ic_useDate: list.cpdto.ic_useDate,
         });
-        console.log("selectByIdUpdate 성공 : ", res.data);
+        console.log("updateCoupon 성공 : ", res.data);
       })
       .catch((err) => {
-        console.log("selectByIdUpdate 실패 : ", err);
+        console.log("updateCoupon 실패 : ", err);
       });
   };
 
   const onChange = (e) => {
-    setUpdateInfo({
-      ...updateInfo,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setUpdateInfo(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
   const editUpdate = (e) => {
     e.preventDefault();
 
-    ApiService.editUpdate(updateInfo)
+    ApiService.updateCoupon(updateInfo)
       .then((res) => {
-        console.log("editUpdate 성공 : ", res.data);
-        history.push("/admin/page_5/Admin_Update_List");
+        console.log("updateCoupon 성공 : ", res.data);
+        history.push("/admin/page_6/coupon/Admin_coupon_List");
       })
       .catch((err) => {
-        console.log("editUpdate 실패 : ", err);
+        console.log("updateCoupon 실패 : ", err);
       });
   };
 
@@ -72,27 +69,27 @@ const Admin_Update_Edit = ({ history }) => {
       <br />
       <br />
       <Typography variant="h5" className="updateEdit">
-        Update_Edit
+        쿠폰 수정
       </Typography>
       <TextField
         required
         id="standard-required"
         variant="standard"
-        label="Movie_Id"
+        label="ic_num"
         type="text"
-        name="mov_id"
-        value={updateInfo.mov_id}
-        />
+        name="ic_num"
+        value={updateInfo.ic_num}
+      />
       <br />
 
       <TextField
         required
         id="standard-required"
         variant="standard"
-        label="Movie_Img"
+        label="ic_code"
         type="text"
-        name="mov_image"
-        value={updateInfo.mov_image}
+        name="ic_code"
+        value={updateInfo.ic_code}
         onChange={onChange}
       />
       <br />
@@ -101,10 +98,10 @@ const Admin_Update_Edit = ({ history }) => {
         required
         id="standard-required"
         variant="standard"
-        label="Movie_Title"
+        label="ic_name"
         type="text"
-        name="mov_title"
-        value={updateInfo.mov_title}
+        name="ic_name"
+        value={updateInfo.ic_name}
         onChange={onChange}
       />
       <br />
@@ -113,10 +110,10 @@ const Admin_Update_Edit = ({ history }) => {
         required
         id="standard-required"
         variant="standard"
-        label="Movie_Date"
+        label="ic_category"
         type="text"
-        name="mov_date"
-        value={updateInfo.mov_date}
+        name="ic_category"
+        value={updateInfo.ic_category}
         onChange={onChange}
       />
       <br />
@@ -125,10 +122,10 @@ const Admin_Update_Edit = ({ history }) => {
         required
         id="standard-required"
         variant="standard"
-        label="Movie_Time"
+        label="ic_point"
         type="text"
-        name="mov_time"
-        value={updateInfo.mov_time}
+        name="ic_point"
+        value={updateInfo.ic_point}
         onChange={onChange}
       />
       <br />
@@ -137,70 +134,10 @@ const Admin_Update_Edit = ({ history }) => {
         required
         id="standard-required"
         variant="standard"
-        label="Movie_age"
+        label="ic_useDate"
         type="text"
-        name="mov_age"
-        value={updateInfo.mov_age}
-        onChange={onChange}
-      />
-      <br />
-
-      <TextField
-        required
-        id="standard-required"
-        variant="standard"
-        label="Movie_Visitor"
-        type="text"
-        name="mov_visitor"
-        value={updateInfo.mov_visitor}
-        onChange={onChange}
-      />
-      <br />
-
-      <TextField
-        required
-        id="standard-required"
-        variant="standard"
-        label="Movie_Contents"
-        type="text"
-        name="mov_contents"
-        value={updateInfo.mov_contents}
-        onChange={onChange}
-      />
-      <br />
-
-      <TextField
-        required
-        id="standard-required"
-        variant="standard"
-        label="Movie_Con"
-        type="text"
-        name="mov_con"
-        value={updateInfo.mov_con}
-        onChange={onChange}
-      />
-      <br />
-
-      <TextField
-        required
-        id="standard-required"
-        variant="standard"
-        label="Movie_Trailer"
-        type="text"
-        name=" mov_trailer"
-        value={updateInfo.mov_trailer}
-        onChange={onChange}
-      />
-      <br />
-
-      <TextField
-        required
-        id="standard-required"
-        variant="standard"
-        label="Movie_Category"
-        type="text"
-        name="mov_category"
-        value={updateInfo.mov_category}
+        name="ic_useDate"
+        value={updateInfo.ic_useDate}
         onChange={onChange}
       />
       <br />
@@ -212,10 +149,10 @@ const Admin_Update_Edit = ({ history }) => {
         color="primary"
         onClick={editUpdate}
       >
-        edit_Update
+        쿠폰 수정하기
       </Button>
     </div>
   );
-};
 
+}
 export default Admin_Update_Edit;

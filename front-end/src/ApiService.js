@@ -218,15 +218,15 @@ class ApiService {
     // 쿠폰 수정(관리자)
     updateCoupon(inputData){
         console.log('updateCoupon() 호출!!')
-        return axios.post(url + '/page_6/coupon/updateCoupon', inputData); 
+        return axios.put(url + '/page_6/coupon/updateCoupon', inputData); 
     }
     // 쿠폰 숨김처리(관리자)
 
 
     // 쿠폰 삭제(관리자)
-    deleteCoupon(ic_name){
+    deleteCoupon(ic_num){
         console.log('updateCoupon() 호출!!')
-        return axios.delete(url + '/page_6/coupon/deleteCoupon/' + ic_name); 
+        return axios.delete(url + '/page_6/coupon/deleteCoupon/' + ic_num); 
     }
 
     // 고객 쿠폰
