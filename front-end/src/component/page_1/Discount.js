@@ -55,7 +55,7 @@ class Reservation_Movie extends Component {
                 <li key={index}>
                   <div className="Discount_img">
                     <img
-                      src={discount.dc_sub_title}
+                      src="http://cf.lottecinema.co.kr//Media/WebAdmin/37d3662be10842099ec113e57dd6c1d5.png"
                       alt="Discount_img"
                       className="Discount_image"
                     />

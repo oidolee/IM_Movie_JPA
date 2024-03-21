@@ -213,12 +213,12 @@ const Reservation_Payment = () => {
             </div>
             <li>
               <div className="menu4">
-                <ul className="menu4_top">
+                {/* <ul className="menu4_top">
                   <li>예약정보</li>
                   <li>카드</li>
                   <li>금액</li>
                   <li>등등</li>
-                </ul>
+                </ul> */}
                 <ul className="menu4_bottom">
                   <li className="paymentBtn">
                     <span>상품금액</span>

@@ -18,7 +18,7 @@ const Success = () => {
     // API에 전송할 데이터 구성
     const inputData = {
       pay_id,
-      pay_name, 
+      pay_name,
       c_name,
       c_email,
       pay_method: "카드", // 예시로 고정된 값 사용
@@ -29,27 +29,30 @@ const Success = () => {
       pay_sysdate: new Date().toISOString(),
     };
 
-    // 결제 정보를 백엔드로 전송
+    // 결제 정보 저장
     try {
       ApiService.insertPayment(inputData)
-        .then(response => {
+        .then((response) => {
           console.log("결제 정보 저장 성공", response.data);
-          // 여기에 추가적인 처리를 할 수 있습니다.
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("결제 정보 저장 실패", error);
         });
     } catch (error) {
       console.error("결제 정보 저장 중 오류 발생", error);
     }
+    // 결제 성공 후 페이지 이동
+    const confirmation = window.confirm(
+      "결제가 성공적으로 이루어졌습니다. 확인하시겠습니까?"
+    );
+    if (confirmation) {
+      window.location.assign("/MyPage_res");
+    } else {
+      window.location.assign("");
+    }
   }, [location]);
 
-  return (
-    <div>
-      <h1>결제가 성공적으로 이루어졌습니다.</h1>
-      {/* 성공 페이지의 내용을 추가할 수 있습니다. */}
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Success;

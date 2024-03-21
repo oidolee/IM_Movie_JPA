@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { loadPaymentWidget } from "@tosspayments/payment-widget-sdk";
 import { nanoid } from "nanoid";
 import style from "../../styles/page_1/Checkout.css";
-import { useCookies } from 'react-cookie'; // react-cookie에서 useCookies 가져오기
+import { useCookies } from 'react-cookie';
 
 const clientKey = "test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq";
 const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
