@@ -3,6 +3,7 @@ package springBoot.ict.movie.dao;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import springBoot.ict.movie.dto.ConsultAnswerDTO;
@@ -16,6 +17,7 @@ public interface CouponRepository extends JpaRepository<CouponDTO, Integer> {
 	Optional<CouponDTO> selectCouponDetail(String ic_name);
 	
 	// 쿠폰 삭제
+	@Modifying
 	@Query("DELETE FROM CouponDTO cp WHERE cp.ic_name = :ic_name")
 	int deleteCoupon(String ic_name);
 	

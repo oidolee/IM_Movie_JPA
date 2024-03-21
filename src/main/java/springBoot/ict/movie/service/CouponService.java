@@ -23,7 +23,7 @@ public interface CouponService {
 			throws ServletException, IOException;
 	
 	// 쿠폰 삭제
-	public int deleteCoupon(String ic_name)
+	public void deleteCoupon(int ic_num)
 			throws ServletException, IOException;
 
 	// 고객 쿠폰 등록 
