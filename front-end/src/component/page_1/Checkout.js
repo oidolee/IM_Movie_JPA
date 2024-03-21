@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { loadPaymentWidget } from "@tosspayments/payment-widget-sdk";
 import { nanoid } from "nanoid";
 import style from "../../styles/page_1/Checkout.css";
+import { useCookies } from 'react-cookie'; // react-cookie에서 useCookies 가져오기
 
 const clientKey = "test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq";
 const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
@@ -14,7 +15,7 @@ const App = ({ handleCloseModal }) => {
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
   const [price, setPrice] = useState(100);
-  const [customers, setCustomers] = useState();
+  const [cookies] = useCookies(['c_email', 'idName']); // 쿠키 가져오기
 
   useEffect(() => {
     const fetchPaymentWidget = async () => {
@@ -41,18 +42,21 @@ const App = ({ handleCloseModal }) => {
 
     paymentMethodsWidget.updateAmount(
       price,
+      paymentMethodsWidget.UPDATE_REASON.COUPON
     );
   }, [price]);
 
   const handlePayment = async () => {
     const paymentWidget = paymentWidgetRef.current;
 
+    console.log("이름: " ,cookies['idName'], "이메일: ", cookies['c_email']);
+
     try {
       await paymentWidget?.requestPayment({
-        orderId: nanoid(),
-        orderName: "토스 티셔츠 외 2건",
-        customerName: "김토스",
-        customerEmail: "customer123@gmail.com",
+        pay_id: nanoid(),
+        pay_name: "티켓",
+        c_name: cookies['idName'],
+        c_email: cookies['c_email'],
         successUrl: `${window.location.origin}/success`,
         failUrl: `${window.location.origin}/fail`
       });

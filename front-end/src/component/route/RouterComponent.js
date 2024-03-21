@@ -17,6 +17,7 @@ import Reservation_Seat from '../page_1/Reservation_Seat';
 import Reservation_Payment from '../page_1/Reservation_Payment';
 import Reservation_Movie_screen from '../page_1/Reservation_Movie_screen';
 import Discount from '../page_1/Discount';
+import success from '../page_1/success';
 
 //page_2
 import Page2 from '../page_2/Page2';
@@ -103,6 +104,7 @@ const AppRouter = () => {
                                 <Route path="/page_1/Reservation_Payment" exact={true} component={Reservation_Payment} />
                                 <Route path="/page_1/Reservation_Movie_screen" exact={true} component={Reservation_Movie_screen} />
                                 <Route path="/page_1/Discount" exact={true} component={Discount} />                       
+                                <Route path="/success" exact={true} component={success} />
                             </Route>
 
                             {/* page_2 */}

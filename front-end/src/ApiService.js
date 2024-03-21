@@ -27,11 +27,11 @@ class ApiService {
 
     // --------------------------------------------Reservation 끝--------------------------------------------
     // --------------------------------------------Payment 시작--------------------------------------------
-    // 목록
-    // listPayment() {
-    //     console.log("listPayment 호출");
-    //     return axios.get(url + "/page_1/PaymentList");
-    // }
+    // 결제 정보 저장
+    insertPayment(inputData) {
+        console.log("insertPayment 호출", inputData);
+        return axios.post(url + "/page_1/PaymentInsert", inputData);
+    }
 
     
     // --------------------------------------------Payment 끝--------------------------------------------
