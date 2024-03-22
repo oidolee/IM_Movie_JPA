@@ -2,6 +2,7 @@ package springBoot.ict.movie.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.ServletException;
 
@@ -26,6 +27,14 @@ public interface CustomerService {
 			throws ServletException, IOException; 
 	
 	// 비밀번호 찾기
-		public String findPWD(String email, String hp)
-				throws ServletException, IOException;
+	public String findPWD(String email, String hp)
+			throws ServletException, IOException;
+
+	// 회원정보 찾기
+	public CustomerDTO searchCustomer(String email)
+			throws ServletException, IOException;
+	
+	// 회원정보 수정
+	public void editCustomer(CustomerDTO dto) 
+			throws ServletException, IOException;
 }

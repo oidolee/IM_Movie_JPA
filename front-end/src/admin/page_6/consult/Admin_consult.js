@@ -61,7 +61,7 @@ function MyPage_consult_list_part() {
                                 <td>{consultItem.ib_type}</td>
                                 <td>{consultItem.c_email}</td>
                                 <td>
-                                    <Link to={`/Admin_consult_detail_answer/${consultItem.one_id}`} style={{ color: "black" }}>
+                                    <Link to={`/admin/page_6/consult/Admin_counsult_detail_answer/${consultItem.one_id}`} style={{ color: "black" }}>
                                         {consultItem.ib_title}
                                     </Link>
                                 </td>

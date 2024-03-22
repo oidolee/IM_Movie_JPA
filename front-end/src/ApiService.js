@@ -134,18 +134,18 @@ class ApiService {
 
     addStoreOrderDetail(storedData) {
             console.log('addStoreOrderDetail 호출!!', storedData);
-            return axios.post(url + "/MyPage_Store", storedData)
+            return axios.post(serverUrl + "/MyPage_Store", storedData)
         }
 
     addStoreOrder(orderData) {
         console.log('addStoreOrder 호출!!', orderData);
-        return axios.post(url + "/MyPage_Store_Order", orderData)
+        return axios.post(serverUrl + "/MyPage_Store_Order", orderData)
     }
 
     // Store Map list
     ListStore_MyPage() {
         console.log('storeList 호출');
-        return axios.get(url + "/MyPage_Store");
+        return axios.get(serverUrl + "/MyPage_Store");
     }
 
 
@@ -188,6 +188,18 @@ class ApiService {
     }
 
     // page_6
+    // 회원정보 조회
+    searchCutomer(c_email){
+        console.log("searchCutomer 호출")
+        console.log("c_email : " + c_email)
+        return axios.get(serverUrl + "/index/searchCustomer/" + c_email);
+    }
+
+    // 회원정보 수정
+    editCustomer(inputdata){
+        console.log("editCustomer 호출")
+        return axios.put(serverUrl + "/index/editCustomer" , inputdata);
+    }
 
     // 관리자
     // 1:1 문의 리스트

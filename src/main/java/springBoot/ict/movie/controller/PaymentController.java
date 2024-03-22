@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import springBoot.ict.movie.dao.PaymentDTO;
+import springBoot.ict.movie.dto.PaymentDTO;
 import springBoot.ict.movie.service.PaymentServiceImpl;
 
 @CrossOrigin(origins="**", maxAge=3600)

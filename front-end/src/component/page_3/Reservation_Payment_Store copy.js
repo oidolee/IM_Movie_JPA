@@ -6,38 +6,36 @@ import Res_movie from "../../assets/page_1/movie.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
 import Checkout from "../page_1/Checkout";
 import Modal from "react-modal";
-import { withRouter } from 'react-router-dom';
-import ApiService from '../../ApiService';
-import { Cookies, useCookies } from 'react-cookie';
+import { withRouter } from "react-router-dom";
+import ApiService from "../../ApiService";
+import { Cookies, useCookies } from "react-cookie";
 import StoreGift from "./StoreGift";
 
 class Reservation_Payment_Store extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      c_email: '',
-      name: '',
+      c_email: "",
+      name: "",
       itemName: "",
       itemImage: "",
       totalQuantity: "",
-      totalPrice: "",
     };
   }
-
   
+
+
   componentDidMount() {
     const cookies = new Cookies();
-    const c_email = cookies.get('c_email'); // 쿠키에서 이메일 정보 가져오기
+    const c_email = cookies.get("c_email"); // 쿠키에서 이메일 정보 가져오기
     if (c_email) {
       this.setState({ c_email });
     }
 
-    const name = cookies.get('idName'); // 쿠키에서 이메일 정보 가져오기
+    const name = cookies.get("idName"); // 쿠키에서 이메일 정보 가져오기
     if (name) {
       this.setState({ name });
     }
-    console.log('name', name);
 
 
 
@@ -57,28 +55,16 @@ class Reservation_Payment_Store extends Component {
       console.log(itemImage);
   
       this.setState({ itemImage: itemImage }); // 최초 한 번만 setState() 호출
-      this.setState({ itemName: itemName }); 
-      this.setState({ totalQuantity: totalQuantity }); 
-      this.setState({ totalPrice: totalPrice }); 
     } else {
       console.error("저장된 데이터가 없습니다.");
       // 저장된 데이터가 없는 경우 처리할 작업을 수행합니다.
     }
-
-
-
-
-
-
-
   }
 
-  
   state = {
     isPointClicked: false,
     showModal: false,
   };
-
 
   handlePaymentClick = () => {
     this.setState({ showModal: true });
@@ -94,99 +80,34 @@ class Reservation_Payment_Store extends Component {
     }));
   };
 
-  
   handlePayment = () => {
     const { c_email } = this.state;
 
     // ApiService에 쿠키로부터 가져온 이메일 정보 전달
     ApiService.addStoreOrder({ c_email })
-        .then(response => {
-            console.log('결제 데이터 전송 성공:', response.data);
-            // 데이터 전송 후 필요한 작업을 수행합니다.
-            // 예를 들어 페이지 이동 등...
-            this.props.history.push("/page_3/Store_Payment_Finish");
-        })
-        .catch(error => {
-            console.error('결제 데이터 전송 실패:', error);
-            // 실패 시 적절한 에러 처리를 수행합니다.
-        });
-
-
-
-    // localStorage에서 저장된 데이터 가져오기
-    const storedData = localStorage.getItem("sampleID");
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      console.log("R p store==============" + parsedData);
-    } else {
-      console.log("저장된 데이터가 없습니다.");
-    }
-    
-    if (storedData) {
-      const {
-        recipientNumber,
-        sender,
-        message,
-        totalQuantity,
-        totalPrice,
-        itemCode,
-        itemName,
-        name,
-      } = JSON.parse(storedData);
-
-
-      ApiService.addStoreOrderDetail({
-        totalQuantity,
-        totalPrice,
-        itemCode,
-        itemName,
+      .then((response) => {
+        console.log("결제 데이터 전송 성공:", response.data);
+        // 데이터 전송 후 필요한 작업을 수행합니다.
+        // 예를 들어 페이지 이동 등...
+        this.props.history.push("/page_3/Store_Payment_Finish");
       })
-        .then((response) => {
-          console.log("데이터 전송 성공:", response.data);
+      .catch((error) => {
+        console.error("결제 데이터 전송 실패:", error);
+        // 실패 시 적절한 에러 처리를 수행합니다.
+      });
 
-        })
-        .catch((error) => {
-          console.error("데이터 전송 실패:", error);
-        });
-
-
-      // 서버로 데이터 전송
-      ApiService.sendGiftMessage({
-        recipientNumber,
-        name,
-        sender,
-        message,
-        totalQuantity,
-        totalPrice,
-        itemCode,
-        itemName,
-      })
-        .then((response) => {
-          console.log("데이터 전송 성공:", response.data);
-          // 데이터 전송 후 필요한 작업을 수행합니다.
-          // 예를 들어 페이지 이동 등...
-        })
-        .catch((error) => {
-          console.error("데이터 전송 실패:", error);
-          // 실패 시 적절한 에러 처리를 수행합니다.
-        });
-    } else {
-      console.error("저장된 데이터가 없습니다.");
-      // 저장된 데이터가 없는 경우 처리할 작업을 수행합니다.
-    }
-
-
-
+  
 
     this.props.history.push("/page_3/Store_Payment_Finish");
   };
 
+  
 
   render() {
-    const sysdate = moment().format("YYYY-MM-DD");
-    const { totalQuantity, totalPrice, itemCode, itemName, itemImage } = this.props;
 
-    
+    const sysdate = moment().format("YYYY-MM-DD");
+
+
     return (
       <div className={`Res_Payment ${style.Res_Payment}`}>
         <div className="Res_payment_content">
@@ -221,14 +142,14 @@ class Reservation_Payment_Store extends Component {
                     <span>
                       02
                       <br />
-
+                      인원/좌석
                     </span>
                   </strong>
                   <div className="step_content2">
                     <dl>
-                      <dt></dt>
+                      <dt>인원</dt>
                       <dd></dd>
-                      <dt></dt>
+                      <dt>좌석</dt>
                       <dd></dd>
                     </dl>
                   </div>
@@ -238,18 +159,18 @@ class Reservation_Payment_Store extends Component {
                 <a href="#Res_step03">
                   <strong>
                     <span>
-                      
+                      03
                       <br />
-                      
+                      결제
                     </span>
                   </strong>
                   <div className="step_content">
                     <dl>
-                      <dt></dt>
+                      <dt>티켓금액</dt>
                       <dd></dd>
-                      <dt></dt>
+                      <dt>할인금액</dt>
                       <dd></dd>
-                      <dt></dt>
+                      <dt>총합계</dt>
                       <dd></dd>
                     </dl>
                   </div>
@@ -259,9 +180,9 @@ class Reservation_Payment_Store extends Component {
                 <a href="#Res_step04">
                   <strong>
                     <span>
-
+                      04
                       <br />
-
+                      결제완료
                     </span>
                   </strong>
                 </a>
@@ -271,7 +192,7 @@ class Reservation_Payment_Store extends Component {
           <div className="Res_menu2">
             <ul>
               <div className="Res_tit">
-                <li>영화선택</li>
+                <li>스토어</li>
               </div>
               <div className="menu2">
                 <ul>
@@ -281,11 +202,11 @@ class Reservation_Payment_Store extends Component {
                   <div className="menu2_sub">
                     <ul>
                       <li>
-                        <strong>{this.state.itemName}</strong>
+                        <strong>{this.props.itemName}</strong>
                       </li>
                       <li>온라인 관람권 2개</li>
                       <li>수량</li>
-                      <li>{this.state.totalQuantity}</li>
+                      <li>{this.props.totalQuantity}</li>
                     </ul>
                   </div>
                   <a href="/page3">
@@ -319,7 +240,7 @@ class Reservation_Payment_Store extends Component {
                         handleCloseModal={this.handleCloseModal}
                       >
                         <div className={`Payment ${style.Payment}`}>
-                          <Checkout /> 
+                          <Checkout />
                           <button
                             className="Payment_close"
                             onClick={this.handleCloseModal}
@@ -379,9 +300,18 @@ class Reservation_Payment_Store extends Component {
                     <li>등등</li>
                   </ul>
                   <ul className="menu4_bottom">
-                    <li className="paymentBtn">결제금액  {this.state.totalPrice}</li>
+                    <li className="paymentBtn">
+                      <span>상품금액</span>
+                    </li>
+                    <li className="paymentBtn">할인금액</li>
+                    <li className="paymentBtn">결제금액</li>
                     <li>
-                      <button className="paymentBtn_total" onClick={this.handlePayment}>결제하기</button>
+                      <button
+                        className="paymentBtn_total"
+                        onClick={this.handlePayment}
+                      >
+                        결제하기
+                      </button>
                     </li>
                   </ul>
                 </div>
@@ -395,4 +325,3 @@ class Reservation_Payment_Store extends Component {
 }
 
 export default withRouter(Reservation_Payment_Store);
-

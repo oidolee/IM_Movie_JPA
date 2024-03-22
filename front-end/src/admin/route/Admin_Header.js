@@ -80,10 +80,9 @@ function Admin_Header() {
                                             <a class="nav-link" href="/admin/page_5/Admin_Now_List">NOW_UPDATE</a>
                                             <a class="nav-link" href="/admin/page_5/Admin_Next_List">NEXT_UPDATE</a>
                                             <a class="nav-link" href="/admin/page_5/Admin_Arte_List">Arte_UPDATE</a>
-                                            <a class="nav-link" href="/admin/page_6/consult/Admin_consult">page_6 / consult</a>
-                                            <a class="nav-link" href="/admin/page_6/coupon/Admin_coupon_List">page_6 / coupon</a>
+                                            <a class="nav-link" href="/admin/page_6/consult/Admin_consult">page_6 / 1:1문의</a>
+                                            <a class="nav-link" href="/admin/page_6/coupon/Admin_coupon_List">page_6 / 쿠폰</a>
                                             <a class="nav-link" href="/admin/page_2/parking">주차 관리</a>
-                                        </nav>
                                     </div>
                                    
                                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
