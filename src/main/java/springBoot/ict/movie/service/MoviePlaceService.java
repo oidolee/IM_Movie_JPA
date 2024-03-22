@@ -10,10 +10,12 @@ import springBoot.ict.movie.dto.StoreMapDTO;
 
 public interface MoviePlaceService {
 
-	// 상영시간표목록
+	// 상세상영시간표목록
 	public List<MoviePlaceDTO> listTime(int place_num)
 			throws ServletException, IOException;
 	
-	
+	//리스트
+	public List<MoviePlaceDTO> getlistTime() 
+			throws ServletException, IOException;
 	
 }
