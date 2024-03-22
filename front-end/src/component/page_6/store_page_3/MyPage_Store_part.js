@@ -34,8 +34,10 @@ class MyPage_Store_part extends Component {
 
     render() {
         return (
-            <div className={`MyPage_resMoive ${style.MyPage_resMoive}`} style={{display: 'block'}}>
-                {this.state.lists.map((item, index) => (
+            <div>
+              {this.state.lists.map((item, index) => (
+            <div className={`MyPage_resMoive ${style.MyPage_resMoive}`}>
+
                     <div key={index}>
                         <div className={`MyPage_res_date_List ${style.MyPage_res_date_List}`}>
                             {/* 반복문 써서 날짜 정보 나오게끔 */}
@@ -106,7 +108,9 @@ class MyPage_Store_part extends Component {
                             </div>
                         </div>
                     </div>
-                ))}
+
+            </div>
+            ))}
             </div>
         )
     }
