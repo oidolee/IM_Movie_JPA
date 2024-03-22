@@ -1,4 +1,4 @@
-package springBoot.ict.movie.dao;
+package springBoot.ict.movie.dto;
 
 import java.sql.Date;
 

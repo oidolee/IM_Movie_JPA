@@ -251,20 +251,20 @@ const Reservation_Movie = ({ history }) => {
                 </ul>
                 <div className="menu2_right">
                   <ul>
-                    {selectedPlace &&
-                      places[selectedPlace].map((place, index) => (
-                        <li className="subRegions" key={place.ip_num}>
-                          <a
-                            href="#"
-                            onClick={(event) => {
-                              event.preventDefault();
-                              handleTheaterSelection(place.place_title);
-                            }}
-                          >
-                            {place.place_title}
-                          </a>
-                        </li>
-                      ))}
+                  {selectedPlace &&
+  places[selectedPlace].map((place, index) => (
+    <li className="subRegions" key={place.id}>
+      <a
+        href="#"
+        onClick={(event) => {
+          event.preventDefault();
+          handleTheaterSelection(place.place_title);
+        }}
+      >
+        {place.place_title}
+      </a>
+    </li>
+  ))}
                   </ul>
                 </div>
               </div>
@@ -316,26 +316,28 @@ const Reservation_Movie = ({ history }) => {
                         {selectedMovie.mov_title}
                       </a>
                     </div>
-                  )}                
-                    <div className="menu4_sub">
-                      <ul>
-                        <li>
-                        {remainingSeatsCount !== null && selectedPlace && selectedMovie && (
-                          <a href="#none" onClick={() => setPopupOpen(true)}>                         
-                            <span>
-                               {moment(
-                                selectedPlace.start_time,
-                                "HH:mm:ss"
-                              ).format("HH:mm")}
-                              <br />
-                              {remainingSeatsCount}/112{" "}
-                              {selectedPlace.theater_id}                            
-                            </span>                            
-                          </a>
+                  )}
+                  <div className="menu4_sub">
+                    <ul>
+                      <li>
+                        {remainingSeatsCount !== null &&
+                          selectedPlace &&
+                          selectedMovie && (
+                            <a href="#none" onClick={() => setPopupOpen(true)}>
+                              <span>
+                                {moment(
+                                  selectedPlace.start_time,
+                                  "HH:mm:ss"
+                                ).format("HH:mm")}
+                                <br />
+                                {remainingSeatsCount}/112{" "}
+                                {selectedPlace.theater_id}
+                              </span>
+                            </a>
                           )}
-                        </li>
-                      </ul>
-                    </div>                
+                      </li>
+                    </ul>
+                  </div>
                 </ul>
               </div>
             </li>

@@ -29,14 +29,5 @@ public class ReservationDTO {
     private int res_ticket_price;
     private Date res_sysdate;
     private String res_check;
-    
-//    // 추가한 매핑
-//    @ManyToOne
-//    @JoinColumn(name="mov_id")
-//    private MovieDTO im_movie;
-//    
-//    // 추가한 매핑
-//    @ManyToOne
-//    @JoinColumn(name="ip_num")
-//    private MovieDTO im_place;
+
 }
