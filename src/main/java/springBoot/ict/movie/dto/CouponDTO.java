@@ -21,7 +21,7 @@ public class CouponDTO {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private int ic_num;			
-    private int ic_code;
+    private String ic_code;
     private String ic_name;
     private int ic_point;
     private String ic_category;

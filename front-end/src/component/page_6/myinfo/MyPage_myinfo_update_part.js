@@ -3,12 +3,14 @@ import ApiService from '../../../ApiService';
 import { TextField, Button, Modal } from '@mui/material';
 import DaumPostcode from 'react-daum-postcode';
 import style from '../../../styles/page_4/signup.module.css';
+import { withCookies } from 'react-cookie';
 
 class MyPage_myinfo_update_part extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            cookies: props.cookies,
             email: '',
             name: '',
             password: '',
@@ -26,7 +28,43 @@ class MyPage_myinfo_update_part extends Component {
             passwordMatched: true // 비밀번호 확인과 일치하는지 여부를 나타내는 상태 변수를 추가합니다.
         };
     }
+    componentDidMount() {
+        const { cookies } = this.props;
+        const email = cookies.get('c_email');
+        
+        if (email !== undefined) {
+            // setState를 사용하여 이메일 상태를 업데이트합니다.
+            this.setState({ 
+                email: email,
+             });
+            this.reloadUserInfo(email);
+        }
+    }
 
+    reloadUserInfo = (email) => {
+        if (!email) return;
+        ApiService.searchCutomer(email)
+            .then(res => {
+                console.log("res.data.dto", res.data.dto);
+                this.setState(prevState => ({
+                    
+                    name: res.data.dto.name,
+                    hp: res.data.dto.hp,
+                    birthday: res.data.dto.birthday,
+                    userInfo: {
+                        ...prevState.userInfo,
+                        isModalOpen: false,
+                        emailValid: true,
+                        passwordValid: true,
+                        phoneValid: true,
+                        passwordMatched: true
+                    }
+                }));
+            })
+            .catch(err => {
+                console.log('searchCutomer() Error!!', err);
+            });
+    }
     // 모달 열기
     handleDaumPostcode = () => {
         this.setState({ isModalOpen: true });
@@ -130,6 +168,13 @@ class MyPage_myinfo_update_part extends Component {
             return;
         }
 
+        // IC_regdate를 현재 날짜로 설정
+        const regdate = new Date();
+
+        // IC_show를 기본값으로 설정
+        const show = 'y';
+
+
         const address = `${this.state.addr1} ${this.state.addr2}`;
         const inputData = {
             email: this.state.email,
@@ -137,27 +182,29 @@ class MyPage_myinfo_update_part extends Component {
             password: this.state.password,
             hp: this.state.hp,
             birthday: this.state.birthday,
-            address: address
+            address: address,
+            regdate: regdate,
+            
         };
 
         console.log(inputData);
 
-        // 등록처리 
-        ApiService.addCustomer(inputData)
+        // 수정처리 
+        ApiService.editCustomer(inputData)
             .then(res => {
                 this.setState({});
                 console.log('input 성공 : ', res.data);
 
                 if (res.data.resultCode == 200) {
-                    alert("회원가입 성공");
+                    alert("회원정보 수정 성공");
                     this.props.history.push('/login');
                 } else {
-                    alert("회원가입 실패");
+                    alert("회원정보 수정 실패");
                     this.props.history.push('/signCheck');
                 }
             })
             .catch(err => {
-                console.log('addCustomer() 에러 ', err);
+                console.log('editCustomer() 에러 ', err);
             });
     };
 
@@ -165,7 +212,6 @@ class MyPage_myinfo_update_part extends Component {
         return (
             <div id='Page' className={`singupComponent ${style.singupComponent}`} >
                 <div className={`singupComponent_box ${style.singupComponent_box}`}>
-                    <div style={{textAlign: 'center', fontSize: '60px', marginBottom: '20px'}}>회원정보수정</div>
                     <h6>이메일</h6>
                     {/* 이메일 주소 입력 필드에 유효성을 검사하는 상태에 따라 스타일을 조절합니다. */}
                     <TextField
@@ -179,7 +225,6 @@ class MyPage_myinfo_update_part extends Component {
                         onChange={this.onChange}
                         error={!this.state.emailValid}
                         helperText={!this.state.emailValid ? "올바른 이메일 주소를 입력하세요." : null} // 유효성 검사 실패 시 에러 메시지를 표시합니다.
-                        InputProps={{ readOnly: true }}
                     />
                     <Button variant="contained" color="primary" onClick={this.CheckEmail}> 인증요청 </Button>
                     <br /><br />
@@ -288,11 +333,11 @@ class MyPage_myinfo_update_part extends Component {
                     <br /> <br />
 
                     {/* 회원가입 버튼 */}
-                    <Button id="btn" className={`singupComponent_btn ${style.singupComponent_btn}`} variant="contained" color="primary" onClick={this.saveCustomer}>수정</Button>
+                    <Button id="btn" className={`singupComponent_btn ${style.singupComponent_btn}`} variant="contained" color="primary" onClick={this.saveCustomer}>회원정보 수정</Button>
                 </div>
             </div>
         )
     }
 }
 
-export default MyPage_myinfo_update_part;
+export default withCookies(MyPage_myinfo_update_part);

@@ -2,6 +2,7 @@ package springBoot.ict.movie.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.ServletException;
 
@@ -76,4 +77,25 @@ public class CustomerServiceImpl implements CustomerService {
         
         return findPWD;
 	}
+
+	// 회원정보 조회
+	@Override
+	public CustomerDTO searchCustomer(String email) throws ServletException, IOException {
+		System.out.println("CustomerServiceImpl - searchCustomer");
+		
+		CustomerDTO dto = dao.searchCustomer(email);
+		return dto;
+	}
+
+	// 회원정보 수정
+	@Override
+	public void editCustomer(CustomerDTO dto) throws ServletException, IOException{
+		System.out.println("CustomerServiceImpl - editCustomer");
+		
+		System.out.println("dto : "  + dto);
+		
+		dao.save(dto);
+	}
+	
+	
 }

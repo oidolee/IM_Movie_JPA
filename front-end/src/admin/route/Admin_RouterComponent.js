@@ -32,6 +32,7 @@ import Admin_Arte_Edit from '../page_5/Admin_Arte_Edit';
 
 // page_6
 import Admin_consult from '../page_6/consult/Admin_consult';
+import Admin_counsult_detail_answer from '../page_6/consult/Admin_counsult_detail_answer';
 import Admin_coupon_Add from '../page_6/coupon/Admin_coupon_Add';
 import Admin_coupon_List from '../page_6/coupon/Admin_coupon_List';
 import Admin_coupon_Edit from '../page_6/coupon/Admin_coupon_Edit';
@@ -88,6 +89,7 @@ const Admin_RouterComponent = () => {
                     <Route>
                         <Route path="/admin/page_6/Admin_coupon" exact={true} component={Admin_coupon} />
                         <Route path="/admin/page_6/consult/Admin_consult" exact={true} component={Admin_consult} />
+                        <Route path="/admin/page_6/consult/Admin_counsult_detail_answer/:one_id" exact={true} component={Admin_counsult_detail_answer} />
                         <Route path="/admin/page_6/coupon/Admin_coupon_Add" exact={true} component={Admin_coupon_Add} />
                         <Route path="/admin/page_6/coupon/Admin_coupon_List" exact={true} component={Admin_coupon_List} />
                         <Route path="/admin/page_6/coupon/Admin_coupon_Edit/:ic_name" exact={true} component={Admin_coupon_Edit} />

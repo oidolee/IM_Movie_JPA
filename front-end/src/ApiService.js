@@ -188,6 +188,18 @@ class ApiService {
     }
 
     // page_6
+    // 회원정보 조회
+    searchCutomer(c_email){
+        console.log("searchCutomer 호출")
+        console.log("c_email : " + c_email)
+        return axios.get(serverUrl + "/index/searchCustomer/" + c_email);
+    }
+
+    // 회원정보 수정
+    editCustomer(inputdata){
+        console.log("editCustomer 호출")
+        return axios.put(serverUrl + "/index/editCustomer" , inputdata);
+    }
 
     // 관리자
     // 1:1 문의 리스트
