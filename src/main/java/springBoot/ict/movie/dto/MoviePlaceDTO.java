@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="im_place")
+@Table(name="IM_PLACE")
 @Data
 public class MoviePlaceDTO {
 

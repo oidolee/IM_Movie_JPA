@@ -22,8 +22,8 @@ const Reservation_Movie = ({ history }) => {
   const [selectedRegion, setSelectedRegion] = useState(null); // 지역 클릭
 
   useEffect(() => {
-    fetchMovie();
-    fetchtime1();
+    fetchMovie(); // 영화 목록
+    fetchtime1(); // 상영 시간표
   }, []);
 
   // 영화 목록
@@ -316,26 +316,26 @@ const Reservation_Movie = ({ history }) => {
                         {selectedMovie.mov_title}
                       </a>
                     </div>
-                  )}
-                  {remainingSeatsCount !== null && (
+                  )}                
                     <div className="menu4_sub">
                       <ul>
                         <li>
-                          <a href="#none" onClick={() => setPopupOpen(true)}>
+                        {remainingSeatsCount !== null && selectedPlace && selectedMovie && (
+                          <a href="#none" onClick={() => setPopupOpen(true)}>                         
                             <span>
-                              {/* {moment(
+                               {moment(
                                 selectedPlace.start_time,
                                 "HH:mm:ss"
                               ).format("HH:mm")}
                               <br />
                               {remainingSeatsCount}/112{" "}
-                              {selectedPlace.theater_id} */}
-                            </span>
+                              {selectedPlace.theater_id}                            
+                            </span>                            
                           </a>
+                          )}
                         </li>
                       </ul>
-                    </div>
-                  )}
+                    </div>                
                 </ul>
               </div>
             </li>
