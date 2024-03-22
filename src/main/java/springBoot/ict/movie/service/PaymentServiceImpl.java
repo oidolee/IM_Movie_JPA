@@ -7,8 +7,8 @@ import javax.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import springBoot.ict.movie.dao.PaymentDTO;
 import springBoot.ict.movie.dao.PaymentRepository;
+import springBoot.ict.movie.dto.PaymentDTO;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {

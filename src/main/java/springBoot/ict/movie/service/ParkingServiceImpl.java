@@ -39,8 +39,13 @@ public class ParkingServiceImpl implements ParkingService{
 		
 		dao.save(dto);
 	}
-	
-	
+
+	//삭제(주차 행 내용 초기화)
+	public void parkDelete(ParkingDTO dto) 
+			throws ServletException, IOException{
+		System.out.println("parkDelete ");
+		dao.save(dto);
+	}
 	
 
 	//등록

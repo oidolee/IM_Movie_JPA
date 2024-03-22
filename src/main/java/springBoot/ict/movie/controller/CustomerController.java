@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -163,6 +165,73 @@ public class CustomerController {
 
         return map;
     }
-		
+    
+    // 회원정보 조회
+    @GetMapping("/searchCustomer/{IC_email}")
+    public Map<String, Object> searchCustomer(@PathVariable(name="IC_email") String email, Model model) 
+    		throws ServletException, IOException {
+        logger.info("<<< url -> searchCustomer");
+        
+
+        String resultCode = "";
+        String resultMsg = "";
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        CustomerDTO dto = null;
+
+        try {
+        	dto = service.searchCustomer(email);
+            if (dto != null) {
+                resultCode = "200";
+                resultMsg = "dto found";
+                map.put("dto", dto);
+            } else {
+                resultCode = "404";
+                resultMsg = "dto not found";
+            }
+        } catch (Exception e) {
+            resultCode = "400";
+            resultMsg = e.getMessage();
+            e.printStackTrace();
+        }
+        map.put("resultCode", resultCode);
+        map.put("resultMsg", resultMsg);
+
+        return map;
+    }
+    
+    // 회원정보 수정
+    @PutMapping("/editCustomer")
+    public Map<String, Object> searchCustomer(@RequestBody CustomerDTO dto, Model model) 
+    		throws ServletException, IOException {
+        logger.info("<<< url -> searchCustomer");
+        
+
+        String resultCode = "";
+        String resultMsg = "";
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        
+
+        try {
+        	service.editCustomer(dto);
+            if (dto != null) {
+                resultCode = "200";
+                resultMsg = "dto found";
+                map.put("dto", dto);
+            } else {
+                resultCode = "404";
+                resultMsg = "dto not found";
+            }
+        } catch (Exception e) {
+            resultCode = "400";
+            resultMsg = e.getMessage();
+            e.printStackTrace();
+        }
+        map.put("resultCode", resultCode);
+        map.put("resultMsg", resultMsg);
+
+        return map;
+    }
     
 }

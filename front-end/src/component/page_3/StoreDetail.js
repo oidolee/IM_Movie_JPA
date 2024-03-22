@@ -326,7 +326,7 @@ EditStore_Admin = (e) => {
                       title="레이어팝업 열기"
                       onClick={this.openStoreTicket}
                     >
-                      온라인 관람권
+                      온라인 사용권
                     </button>
                     &nbsp;
                   </td>
@@ -364,10 +364,9 @@ EditStore_Admin = (e) => {
             </div>
 
             {/* 선물하기 모달/팝업 조건부 렌더링 */}
-            {/* {isStoreGiftOpen && <StoreGift onClose={this.closeStoreGift} />} */}
             {isStoreGiftOpen && 
             <StoreGift onClose={this.closeStoreGift} totalQuantity={quantity} totalPrice={this.state.itemSalePrice * quantity} itemCode={this.state.itemCode} itemName={this.state.itemName}  itemImage={this.state.itemImage}/>}
-            {/* 선물하기 모달/팝업 조건부 렌더링 */}
+            {/* 온라인 사용권 모달/팝업 조건부 렌더링 */}
             {isStoreTicketOpen && <StoreTicket onClose={this.closeStoreTicket} />}
           </div>
         </div>

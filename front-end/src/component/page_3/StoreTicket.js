@@ -17,8 +17,7 @@ class StoreTicket extends Component {
   }
 
   // 상세지도
-
-  onChange = (e) => {  // 1. 입력한 값으로 변경한다.
+  onChange = (e) => { 
     this.setState({
       [e.target.name]: e.target.value
     });

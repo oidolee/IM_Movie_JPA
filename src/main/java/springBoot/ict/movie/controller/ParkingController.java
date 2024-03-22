@@ -40,7 +40,7 @@ public class ParkingController {
 			throws ServletException, IOException {
 		System.out.println("page2_start");
 		List<ParkingDTO> list = service.ParkingList();
-		model.addAttribute("list", list);
+		System.out.println(list);
 		return list;
 	}
 	
@@ -70,5 +70,30 @@ public class ParkingController {
 		map.put("resultMsg", resultMsg);
 		map.put("dto", dto);
 		return map;
+	}
+	
+	//삭제
+	@PutMapping("/delete/{ip_no}") 
+	public Map<String, Object> parkDelete(@PathVariable("ip_no") int ip_no, @RequestBody ParkingDTO dto){
+		Map<String, Object> map = new HashMap<String, Object>();
+		logger.info("url - delete");
+		String resultCode = "";
+		String resultMsg = "";
+		try {
+			service.parkDelete(dto);
+			resultCode = "200";
+			resultMsg = "editPark Success";			
+		} catch(Exception e) {
+			
+			resultCode = "400";
+			resultMsg = e.getMessage();
+			e.printStackTrace();
+		}
+		map.put("resultCode", resultCode);
+		map.put("resultMsg", resultMsg);
+		
+		
+		return map;
+		
 	}
 }

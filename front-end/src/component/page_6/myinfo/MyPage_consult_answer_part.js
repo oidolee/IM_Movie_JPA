@@ -174,43 +174,6 @@ function MyPage_consult_answer_part() {
 
                 </tbody>
             </table>
-
-
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <table style={{ width: '100%', height: '300px' }}>
-                    <tbody>
-                        <tr>
-                            <td><strong>답변</strong></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <textarea
-                                    value={consultAnswerData.iba_content}
-                                    onChange={handleChange}
-                                    name='iba_content'
-                                    style={{ width: '80%', height: '100%' }}
-                                ></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input
-                                    type='hidden'
-                                    value={one_id}
-                                    onChange={handleChange}
-                                    name='one_id'
-                                    className={`consultTitle ${style.consultTitle}`}
-                                    placeholder="제목을 입력해주세요"
-                                    required
-                                    style={{ background: 'rgba(211, 211, 211, 0.178)' }}
-                                />
-                                <Button style={{ marginRight: '20px' }} onClick={saveConsultAnswer}>등록</Button>
-                                <Button onClick={resetForm}>취소</Button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div >
     )
 }
