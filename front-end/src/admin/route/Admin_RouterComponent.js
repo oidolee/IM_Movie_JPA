@@ -11,6 +11,9 @@ import Admin_Discount_Add from '../page_1/Admin_Discount_Add'
 import Admin_coupon from '../page_6/coupon/Admin_coupon_Add'
 import Admin_Discount_Edit from '../page_1/Admin_Discount_Edit'
 
+//page_2
+import Admin_Parking from '../page_2/Admin_Parking';
+
 // page_3
 import ListStore_Admin from '../page_3/ListStore_Admin';
 import AddStore_Admin from '../page_3/AddStore_Admin';
@@ -55,7 +58,7 @@ const Admin_RouterComponent = () => {
 
                     {/* page_2 */}
                     <Route>
-                        <Route path="/admin/page_2/test_1" exact={true} component={Test_1} />
+                        <Route path="/admin/page_2/parking" exact={true} component={Admin_Parking} />
                     </Route>
 
 

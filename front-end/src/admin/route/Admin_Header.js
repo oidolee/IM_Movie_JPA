@@ -73,7 +73,6 @@ function Admin_Header() {
                                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                         <nav class="sb_sidenav_menu-nested nav">
 
-                                            <Link to="/admin/page_1/Admin_Discount_List">할인 go</Link>
                                             <a class="nav-link" href="/admin/page_1/Admin_Discount_List">할인</a>
                                             <a class="nav-link" href="/admin/page_2/test_2">page_2 / Test_2</a>
                                             <a class="nav-link" href="/admin/page_3/ListStore_Admin">page_3 / ListStore_Admin</a>
@@ -83,6 +82,7 @@ function Admin_Header() {
                                             <a class="nav-link" href="/admin/page_5/Admin_Arte_List">Arte_UPDATE</a>
                                             <a class="nav-link" href="/admin/page_6/consult/Admin_consult">page_6 / consult</a>
                                             <a class="nav-link" href="/admin/page_6/coupon/Admin_coupon_List">page_6 / coupon</a>
+                                            <a class="nav-link" href="/admin/page_2/parking">주차 관리</a>
                                         </nav>
                                     </div>
                                    
