@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Admin_RouterComponent from '../route/Admin_RouterComponent';
+import { Link } from 'react-router-dom';
 //import Admin_Contents from '../main/Admin_Contents'
 //  import  '../../styles/admin/admin.css';
 // import  '../../styles/admin/admin.module.css';
@@ -7,7 +8,7 @@ import Admin_RouterComponent from '../route/Admin_RouterComponent';
 
 import StyledHeader from './Admin_StyledHeader';
 
-function Header() {
+function Admin_Header() {
     const [sidebarToggled, setSidebarToggled] = useState(false);
 
     useEffect(() => {
@@ -71,7 +72,9 @@ function Header() {
                                     {/* 페이지 설정 */}
                                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                         <nav class="sb_sidenav_menu-nested nav">
-                                            <a class="nav-link" href="/admin/page_1/Admin_Discount_List">Discount</a>
+
+                                            <Link to="/admin/page_1/Admin_Discount_List">할인 go</Link>
+                                            <a class="nav-link" href="/admin/page_1/Admin_Discount_List">할인</a>
                                             <a class="nav-link" href="/admin/page_2/test_2">page_2 / Test_2</a>
                                             <a class="nav-link" href="/admin/page_3/ListStore_Admin">page_3 / ListStore_Admin</a>
                                             <a class="nav-link" href="/admin/page_5/Admin_Update_List">HOME_UPDATE</a>
@@ -217,7 +220,7 @@ function Header() {
     );
 }
 
-export default Header;
+export default Admin_Header;
 
 
 
