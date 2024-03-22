@@ -4,6 +4,7 @@ import package1 from "../../assets/page_3/package1.jpg";
 import cancel from "../../assets/page_3/cancel.png";
 import { withRouter } from 'react-router-dom';
 import ApiService from "../../ApiService";
+import { Cookies, useCookies } from 'react-cookie';
 
 
 class StoreGift extends Component {
@@ -17,10 +18,19 @@ class StoreGift extends Component {
       isSenderEmpty: false,
       isMessageEmpty: false, 
       sender: "",
-      message: ""
+      message: "",
+      name: '',
     };
   }
 
+  componentDidMount () {
+    const cookies = new Cookies();
+    const name = cookies.get('idName'); // 쿠키에서 이메일 정보 가져오기
+    if (name) {
+      this.setState({ name });
+    }
+    console.log('name', name);
+  }
   closeStoreGift = () => {
     const { onClose } = this.props;
     onClose(); 
@@ -58,7 +68,7 @@ class StoreGift extends Component {
   };
 
   handlePayment = () => {
-  const { recipientNumber, sender, message } = this.state;
+  const { recipientNumber, sender, message, name } = this.state;
   const { totalQuantity, totalPrice, itemCode, itemName, itemImage } = this.props;
 
 
@@ -81,6 +91,7 @@ class StoreGift extends Component {
       itemCode,
       itemName,
       itemImage,
+      name,
     })
   );
 
@@ -158,7 +169,7 @@ class StoreGift extends Component {
                     type="text"
                     className={`g_input ${style.g_input}`}
                     name="sender"
-                    value={this.state.sender}
+                    value={this.state.name}
                     size="20"
                     placeholder="선물 하는 분 입력"
                     onChange={this.handleChange}

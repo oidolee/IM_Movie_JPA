@@ -37,7 +37,7 @@ public class StoreOrderDetailController {
    // 스토어 리스트 조회
    @GetMapping() 
    //@GetMapping("/")  
-   public List<StoreOrderDetailDTO> storeOrderDetailList(Model model)
+   public List<StoreOrderDetailDTO> ListStore_MyPage(Model model)
             throws ServletException, IOException {
         logger.info("<<< url -> storeOrderDetailList");
         List<StoreOrderDetailDTO> list = service.listStoreOrderDetail();
@@ -46,6 +46,17 @@ public class StoreOrderDetailController {
         
         return list;
     } 
+   
+//   //@GetMapping("/")  
+//   public List<StoreOrderDetailDTO> ListStore_MyPage(Model model)
+//            throws ServletException, IOException {
+//        logger.info("<<< url -> storeOrderDetailList");
+//        List<StoreOrderDetailDTO> list = service.listStoreOrderDetail();
+//        System.out.println("list : " + list);
+//        model.addAttribute("list", list); 
+//        
+//        return list;
+//    } 
    
    // 스토어 등록
     @PostMapping()

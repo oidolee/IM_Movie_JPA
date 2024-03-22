@@ -14,6 +14,7 @@ import bottom2 from '../../assets/page_3/bottom2.jpg'
 import style from '../../styles/page_3/StoreList.css';
 import ApiService from '../../ApiService';
 import { TableBody } from '@mui/material'
+import { Link } from 'react-scroll';
 
 class Page3 extends Component {
   constructor(props) {
@@ -59,21 +60,26 @@ class Page3 extends Component {
         </div>
 
         <div className={`page3_contents ${style.page3_contents}`}>
-          <div className={`second_menu ${style.second_menu}`}>
-            <li style={{ width: "33%", left: "0" }}>
-              <a href="#store1">베스트</a>
+        <div className={`second_menu ${style.second_menu}`}>
+            <li style={{ width: '33%', left: '0' }}>
+              <Link to="store1"   className={`page3_link ${style.page3_link}`}>
+                베스트
+              </Link>
             </li>
-            <li style={{ width: "33%", left: "0" }}>
-              <a href="#store2">관람권</a>
+            <li style={{ width: '33%', left: '0' }}>
+              <Link to="store2" className={`page3_link ${style.page3_link}`}>
+                관람권
+              </Link>
             </li>
-            <li style={{ width: "33%", left: "0" }}>
-              <a href="#store3">스낵음료</a>
+            <li style={{ width: '33%', left: '0' }}>
+              <Link to="store3" className={`page3_link ${style.page3_link}`}>
+                스낵음료
+              </Link>
             </li>
           </div>
 
           <div className={`page3_store2 ${style.page3_store2}`}>
             <h3 className={`store_title ${style.store_title}`} id="store1">
-              베스트
             </h3>
 
             <div className={`page3_flex ${style.page3_flex}`}>

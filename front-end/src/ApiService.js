@@ -134,18 +134,18 @@ class ApiService {
 
     addStoreOrderDetail(storedData) {
             console.log('addStoreOrderDetail 호출!!', storedData);
-            return axios.post(url + "/MyPage_Store", storedData)
+            return axios.post(serverUrl + "/MyPage_Store", storedData)
         }
 
     addStoreOrder(orderData) {
         console.log('addStoreOrder 호출!!', orderData);
-        return axios.post(url + "/MyPage_Store_Order", orderData)
+        return axios.post(serverUrl + "/MyPage_Store_Order", orderData)
     }
 
     // Store Map list
     ListStore_MyPage() {
         console.log('storeList 호출');
-        return axios.get(url + "/MyPage_Store");
+        return axios.get(serverUrl + "/MyPage_Store");
     }
 
 

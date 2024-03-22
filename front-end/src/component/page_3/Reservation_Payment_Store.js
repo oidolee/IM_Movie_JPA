@@ -17,7 +17,11 @@ class Reservation_Payment_Store extends Component {
     super(props);
     this.state = {
       c_email: '',
-      name: ''
+      name: '',
+      itemName: "",
+      itemImage: "",
+      totalQuantity: "",
+      totalPrice: "",
     };
   }
 
@@ -34,6 +38,39 @@ class Reservation_Payment_Store extends Component {
       this.setState({ name });
     }
     console.log('name', name);
+
+
+
+    console.log("name", name);
+    const storedData = localStorage.getItem("sampleID");
+    
+    if (storedData) {
+      const {
+        totalQuantity,
+        totalPrice,
+        itemCode,
+        itemName,
+        itemImage // 이미 추출된 itemImage 변수를 사용
+      } = JSON.parse(storedData);
+  
+      console.log("itemImage1");
+      console.log(itemImage);
+  
+      this.setState({ itemImage: itemImage }); // 최초 한 번만 setState() 호출
+      this.setState({ itemName: itemName }); 
+      this.setState({ totalQuantity: totalQuantity }); 
+      this.setState({ totalPrice: totalPrice }); 
+    } else {
+      console.error("저장된 데이터가 없습니다.");
+      // 저장된 데이터가 없는 경우 처리할 작업을 수행합니다.
+    }
+
+
+
+
+
+
+
   }
 
   
@@ -94,6 +131,7 @@ class Reservation_Payment_Store extends Component {
         totalPrice,
         itemCode,
         itemName,
+        name,
       } = JSON.parse(storedData);
 
 
@@ -115,6 +153,7 @@ class Reservation_Payment_Store extends Component {
       // 서버로 데이터 전송
       ApiService.sendGiftMessage({
         recipientNumber,
+        name,
         sender,
         message,
         totalQuantity,
@@ -182,14 +221,14 @@ class Reservation_Payment_Store extends Component {
                     <span>
                       02
                       <br />
-                      인원/좌석
+
                     </span>
                   </strong>
                   <div className="step_content2">
                     <dl>
-                      <dt>인원</dt>
+                      <dt></dt>
                       <dd></dd>
-                      <dt>좌석</dt>
+                      <dt></dt>
                       <dd></dd>
                     </dl>
                   </div>
@@ -199,18 +238,18 @@ class Reservation_Payment_Store extends Component {
                 <a href="#Res_step03">
                   <strong>
                     <span>
-                      03
+                      
                       <br />
-                      결제
+                      
                     </span>
                   </strong>
                   <div className="step_content">
                     <dl>
-                      <dt>티켓금액</dt>
+                      <dt></dt>
                       <dd></dd>
-                      <dt>할인금액</dt>
+                      <dt></dt>
                       <dd></dd>
-                      <dt>총합계</dt>
+                      <dt></dt>
                       <dd></dd>
                     </dl>
                   </div>
@@ -220,9 +259,9 @@ class Reservation_Payment_Store extends Component {
                 <a href="#Res_step04">
                   <strong>
                     <span>
-                      04
+
                       <br />
-                      결제완료
+
                     </span>
                   </strong>
                 </a>
@@ -237,16 +276,16 @@ class Reservation_Payment_Store extends Component {
               <div className="menu2">
                 <ul>
                   <li className="menu2_main">
-                    <img src={this.props.itemImage} className="movie_img" />
+                    <img src={this.state.itemImage} className="movie_img" />
                   </li>
                   <div className="menu2_sub">
                     <ul>
                       <li>
-                        <strong>{this.props.itemName}</strong>
+                        <strong>{this.state.itemName}</strong>
                       </li>
                       <li>온라인 관람권 2개</li>
                       <li>수량</li>
-                      <li>{this.props.totalQuantity}</li>
+                      <li>{this.state.totalQuantity}</li>
                     </ul>
                   </div>
                   <a href="/page3">
@@ -340,11 +379,7 @@ class Reservation_Payment_Store extends Component {
                     <li>등등</li>
                   </ul>
                   <ul className="menu4_bottom">
-                    <li className="paymentBtn">
-                      <span>상품금액</span>
-                    </li>
-                    <li className="paymentBtn">할인금액</li>
-                    <li className="paymentBtn">결제금액</li>
+                    <li className="paymentBtn">결제금액  {this.state.totalPrice}</li>
                     <li>
                       <button className="paymentBtn_total" onClick={this.handlePayment}>결제하기</button>
                     </li>
