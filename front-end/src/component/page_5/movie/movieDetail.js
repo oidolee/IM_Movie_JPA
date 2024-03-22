@@ -374,7 +374,7 @@ function MovieDetail() {
                       </div>
                       <div style={{ marginLeft: 'auto' }}>
                         <img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ic_review_good.png" alt="image_by_rate" style={{ marginRight: '5px', width: '20px', height: '20px' }} />
-                        {/* 실제 별점은 review.review_star 값 그대로 사용 */}
+                        {/* 좋아요 카운트 */}
                         {review.review_star}
                       </div>
                     </li>
