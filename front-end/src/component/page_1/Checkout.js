@@ -14,7 +14,7 @@ const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
 const App = ({ handleCloseModal }) => {
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
-  const [price, setPrice] = useState(100);
+  const [price, setPrice] = useState(10000);
   const [cookies] = useCookies(['c_email', 'idName']); // 쿠키 가져오기
 
   useEffect(() => {
