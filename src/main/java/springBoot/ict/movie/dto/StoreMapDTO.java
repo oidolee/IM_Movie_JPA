@@ -32,4 +32,7 @@ public class StoreMapDTO {
     private double ticketmap_latitude;
     @JsonProperty("ticketmap_longitude")
     private double ticketmap_longitude;
+    @JsonProperty("ticketmap_category")
+    private int ticketmap_category;
+    
 }
