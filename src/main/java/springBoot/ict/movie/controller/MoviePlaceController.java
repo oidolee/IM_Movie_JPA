@@ -43,6 +43,18 @@ public class MoviePlaceController {
 	    return list;
 	} 
 	
+	//list
+	@GetMapping("/timeList")
+	public List<MoviePlaceDTO> getTimeList()
+	        throws ServletException, IOException {
+		logger.info("<<< url -> timeList start");
+	    List<MoviePlaceDTO> list = service.getlistTime();
+	    System.out.println("TimeList : " + list);
+	    
+	    return list;
+	} 
+	
+	
 
 
 }
