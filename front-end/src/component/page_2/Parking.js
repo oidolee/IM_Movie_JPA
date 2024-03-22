@@ -124,8 +124,6 @@ function Parking() {
                     {status === 'Y' ? 'x' : seatNumber}
                   </li>
                 ))}
-
-
               </ul>
             </div>
           ))}
