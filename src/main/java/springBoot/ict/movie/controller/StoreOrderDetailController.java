@@ -21,25 +21,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import springBoot.ict.movie.dto.StoreDTO;
-import springBoot.ict.movie.service.StoreServiceImpl;
+import springBoot.ict.movie.dto.StoreOrderDetailDTO;
+import springBoot.ict.movie.service.StoreOrderDetailServiceImpl;
 
 @CrossOrigin(origins="**", maxAge=3600)
 @RestController
-@RequestMapping(value="/page_3")   
-public class StoreController {
+@RequestMapping(value="/MyPage_Store")   
+public class StoreOrderDetailController {
    
    @Autowired
-   private StoreServiceImpl service;   
+   private StoreOrderDetailServiceImpl service;   
    
-   private static final Logger logger = LoggerFactory.getLogger(StoreController.class);
+   private static final Logger logger = LoggerFactory.getLogger(StoreOrderDetailController.class);
    
    // 스토어 리스트 조회
    @GetMapping() 
-   public List<StoreDTO> storeList(Model model)
+   //@GetMapping("/")  
+   public List<StoreOrderDetailDTO> storeOrderDetailList(Model model)
             throws ServletException, IOException {
-        logger.info("<<< url -> storeList");
-        List<StoreDTO> list = service.listStore();
+        logger.info("<<< url -> storeOrderDetailList");
+        List<StoreOrderDetailDTO> list = service.listStoreOrderDetail();
         System.out.println("list : " + list);
         model.addAttribute("list", list); 
         
@@ -47,8 +48,8 @@ public class StoreController {
     } 
    
    // 스토어 등록
-    @PostMapping("/AddStore_Admin")
-    public Map<String, Object> storeInsert(@RequestBody StoreDTO dto)
+    @PostMapping()
+    public Map<String, Object> storeOrderDetailInsert(@RequestBody StoreOrderDetailDTO dto)
             throws ServletException, IOException {
         logger.info("<<< url - insertstart >>>");
         
@@ -64,9 +65,9 @@ public class StoreController {
 
         try {
            
-            service.insertStore(dto);
+            service.insertStoreOrderDetail(dto);
             resultCode = "200";
-            resultMsg = "StoreInform Success";
+            resultMsg = "StoreOrderDetailInform Success";
         } catch(Exception e) {
             resultCode = "400";
             resultMsg = e.getMessage();
@@ -83,21 +84,21 @@ public class StoreController {
 	
 
 	// 스토어 상세페이지
-	@GetMapping("/EditStore_Admin/{itemCode}")
-	public StoreDTO fetchStoreByID(@PathVariable int itemCode)
-			throws ServletException, IOException {
-		logger.info("<<< url 스토어 디데일 - fetchSampleByID >>>");
-		System.out.println("itemCode : " + itemCode);
-		
-		
-		return service.findById(itemCode);
-	}
+//	@GetMapping("/EditStoreOrderDetail/{itemCode}")
+//	public StoreOrderDetailDTO fetchStoreOrderDetailByID(@PathVariable int itemCode)
+//			throws ServletException, IOException {
+//		logger.info("<<< url 스토어 디데일 - fetchSampleByID >>>");
+//		System.out.println("itemCode : " + itemCode);
+//		
+//		
+//		return service.findById(itemCode);
+//	}
 	
 	// 스토어 수정
-	@PutMapping("/EditStore_Admin/{itemCode}") // @RequestBody 누락시 부적합한 열 유형 뜸  //★gift_num???????
-	   public Map<String, Object> storeUpdate(@PathVariable int itemCode, @RequestBody StoreDTO dto) 
+	@PutMapping("/EditStoreOrderDetail/{itemCode}") // @RequestBody 누락시 부적합한 열 유형 뜸  //★gift_num???????
+	   public Map<String, Object> storeOrderDetailUpdate(@PathVariable int itemCode, @RequestBody StoreOrderDetailDTO dto) 
 	         throws ServletException, IOException{
-	      logger.info("<<< url - storeUpdate >>>");
+	      logger.info("<<< url - storeOrderDetailUpdate >>>");
 	      
 	      String resultCode = "";
 	      String resultMsg = "";
@@ -106,9 +107,9 @@ public class StoreController {
 	      
 	      try {
 	    	 dto.setItem_code(itemCode);
-	         service.updateStore(dto);
+	         service.updateStoreOrderDetail(dto);
 	            resultCode = "200";
-	            resultMsg = "storeUpdate success";
+	            resultMsg = "storeOrderDetailUpdate success";
 	         } catch(Exception e) {
 	             resultCode = "400";
 	             resultMsg = e.getMessage();
@@ -125,7 +126,7 @@ public class StoreController {
     
     
 	// 스토어 삭제
-	@DeleteMapping("/DeleteStore_Admin/{itemCode}") 
+	@DeleteMapping("/DeleteStoreOrderDetail/{itemCode}") 
 	   public Map<String, Object> sampleDelete(@PathVariable int itemCode) 
 		         throws ServletException, IOException{
 		      logger.info("<<< url - sampleUpdate >>>");
@@ -136,7 +137,7 @@ public class StoreController {
 		      Map<String, Object> map  = new HashMap<String, Object>();
 		      
 		      try {
-		          service.deleteStore(itemCode);
+		          service.deleteStoreOrderDetail(itemCode);
 
 		            resultCode = "200";
 		            resultMsg = "sampleDelete success";
