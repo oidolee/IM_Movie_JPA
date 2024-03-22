@@ -73,6 +73,8 @@ function Place() {
 
   // 탭 선택 핸들러
   const handleSelect = (value) => {
+    console.log("handleSelect start")
+    console.log(value)
     setSelectedValue(value);
   };
 
@@ -361,108 +363,121 @@ function Place() {
             </div>
 
             <div className={`re_container ${style.re_container}`}>
-            <div className={`pamu1 ${style.pamu1}`}>
-              <li>{checkMVObj[1]}</li>
-              <li>2D</li>
-              {categoryMap5[1].slice(0, 5).map((place, index) => (
-                <div key={index} className={`timeb1 ${style.timeb1}`}>
-                  <button
-                    className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
-                    onClick={handleClick}
-                  >
-                    {place.movie_time}
-                    <br></br>
-                    {place.theater_id} 
-                  </button>
-                </div>
-              ))}
-            </div>
-           
 
-              <div className={`dune1 ${style.dune1}`}>
-                <li>{checkMVObj[2]}</li>
-                <li>2D</li>
-                {categoryMap5[2].slice(0, 5).map((place, index) => (
-                <div key={index} className={`timeb1 ${style.timeb1}`}>
-                  <button
-                    className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
-                    onClick={handleClick}
-                  >
-                    {place.movie_time}
-                    <br></br>
-                    {place.theater_id} 
-                  </button>
-                </div>
-                ))}
-              </div>
+              {checkMVObj[1] && (
 
+                <div className={`pamu1 ${style.pamu1}`}>
+                  <li>{checkMVObj[1]}</li>
+                  <li>2D</li>
+                  {categoryMap5[1].slice(0, 5).map((place, index) => (
+                    <div key={index} className={`timeb1 ${style.timeb1}`}>
+                      <button
+                        className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
+                        onClick={handleClick}
+                      >
+                        {place.movie_time}
+                        <br></br>
+                        {place.theater_id} 
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            
+              {checkMVObj[2] && (
+                  <div className={`dune1 ${style.dune1}`}>
+                    <li>{checkMVObj[2]}</li>
+                    <li>2D</li>
+                    {categoryMap5[2].slice(0, 5).map((place, index) => (
+                    <div key={index} className={`timeb1 ${style.timeb1}`}>
+                      <button
+                        className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
+                        onClick={handleClick}
+                      >
+                        {place.movie_time}
+                        <br></br>
+                        {place.theater_id} 
+                      </button>
+                    </div>
+                    ))}
+                  </div>
+              )}
+
+              {checkMVObj[3] && (
                 <div className={`bab1 ${style.bab1}`}>
-                  <li>{checkMVObj[3]}</li>
-                  <li>2D</li>
-                  {categoryMap5[3].slice(0, 5).map((place, index) => (
-                <div key={index} className={`timeb1 ${style.timeb1}`}>
-                  <button
-                    className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
-                    onClick={handleClick}
-                  >
-                    {place.movie_time}
-                    <br></br>
-                    {place.theater_id} 
-                  </button>
+                    <li>{checkMVObj[3]}</li>
+                    <li>2D</li>
+                    {categoryMap5[3].slice(0, 5).map((place, index) => (
+                  <div key={index} className={`timeb1 ${style.timeb1}`}>
+                    <button
+                      className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
+                      onClick={handleClick}
+                    >
+                      {place.movie_time}
+                      <br></br>
+                      {place.theater_id} 
+                    </button>
+                  </div>
+                  ))}
                 </div>
-                ))}
-              </div>
+              )}
 
+              {checkMVObj[4] && (
                 <div className={`oneandonly1 ${style.oneandonly1}`}>
-                  <li>{checkMVObj[4]}</li>
-                  <li>2D</li>
-                  {categoryMap5[4].slice(0, 5).map((place, index) => (
-                <div key={index} className={`timeb1 ${style.timeb1}`}>
-                  <button
-                    className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
-                    onClick={handleClick}
-                  >
-                    {place.movie_time}
-                    <br></br>
-                    {place.theater_id} 
-                  </button>
+                    <li>{checkMVObj[4]}</li>
+                    <li>2D</li>
+                    {categoryMap5[4].slice(0, 5).map((place, index) => (
+                  <div key={index} className={`timeb1 ${style.timeb1}`}>
+                    <button
+                      className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
+                      onClick={handleClick}
+                    >
+                      {place.movie_time}
+                      <br></br>
+                      {place.theater_id} 
+                    </button>
+                  </div>
+                  ))}
                 </div>
-                ))}
-              </div>
+              )}
 
+              {checkMVObj[5] && (
                 <div className={`wingka1 ${style.wingka1}`}>
-                  <li>{checkMVObj[5]}</li>
-                  <li>2D</li>
-                  {categoryMap5[5].slice(0, 5).map((place, index) => (
-                <div key={index} className={`timeb1 ${style.timeb1}`}>
-                  <button
-                    className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
-                    onClick={handleClick}
-                  >
-                    {place.movie_time}
-                    <br></br>
-                    {place.theater_id} 
-                  </button>
+                    <li>{checkMVObj[5]}</li>
+                    <li>2D</li>
+                    {categoryMap5[5].slice(0, 5).map((place, index) => (
+                  <div key={index} className={`timeb1 ${style.timeb1}`}>
+                    <button
+                      className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
+                      onClick={handleClick}
+                    >
+                      {place.movie_time}
+                      <br></br>
+                      {place.theater_id} 
+                    </button>
+                  </div>
+                  ))}
                 </div>
-                ))}
-              </div>
+              )}
 
+              {checkMVObj[6] && (
                 <div className={`maydecember1 ${style.maydecember1}`}>
-                  <span>{checkMVObj[6]}</span>
-                  <span>2D</span>
-                  {categoryMap5[6].slice(0, 5).map((place, index) => (
-                <div key={index} className={`timeb1 ${style.timeb1}`}>
-                  <button
-                    className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
-                    onClick={handleClick}
-                  >
-                    {place.movie_time}
-                    <br></br>
-                    {place.theater_id} 
-                  </button>
+                    <span>{checkMVObj[6]}</span>
+                    <span>2D</span>
+                    {categoryMap5[6].slice(0, 5).map((place, index) => (
+                  <div key={index} className={`timeb1 ${style.timeb1}`}>
+                    <button
+                      className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
+                      onClick={handleClick}
+                    >
+                      {place.movie_time}
+                      <br></br>
+                      {place.theater_id} 
+                    </button>
+                  </div>
+                  ))}
                 </div>
-                ))}
-              </div>
+              )}
                 </div>
               </div>
             </div>
