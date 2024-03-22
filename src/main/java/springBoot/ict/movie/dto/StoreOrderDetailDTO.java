@@ -34,6 +34,6 @@ public class StoreOrderDetailDTO {
     private String detail_price;
     @JsonProperty("totalQuantity")
     private int detail_qty;
-    @JsonProperty("detailRegDate")
-    private Date detail_regDate;
+//    @JsonProperty("detailRegDate")
+//    private Date detail_regDate;
 }

@@ -4,6 +4,7 @@ import package1 from "../../assets/page_3/package1.jpg";
 import cancel from "../../assets/page_3/cancel.png";
 import { withRouter } from 'react-router-dom';
 import ApiService from "../../ApiService";
+import { Cookies, useCookies } from 'react-cookie';
 
 
 class StoreGift extends Component {
@@ -13,23 +14,32 @@ class StoreGift extends Component {
       messageLength: 0,
       koreanLength: 0,
       englishLength: 0,
-      recipientNumber: "", //선물 받는 분 번호 상태 값
-      isSenderEmpty: false, // 선물 하는 분 입력 여부 상태 값
-      isMessageEmpty: false, // 메세지 입력 여부 상태 값
+      recipientNumber: "",
+      isSenderEmpty: false,
+      isMessageEmpty: false, 
       sender: "",
-      message: ""
+      message: "",
+      name: '',
     };
   }
 
+  componentDidMount () {
+    const cookies = new Cookies();
+    const name = cookies.get('idName'); // 쿠키에서 이메일 정보 가져오기
+    if (name) {
+      this.setState({ name });
+    }
+    console.log('name', name);
+  }
   closeStoreGift = () => {
     const { onClose } = this.props;
-    onClose(); // 부모 컴포넌트에게 모달 닫기 이벤트 전달
+    onClose(); 
   };
 
   handleMessageInput = (e) => {
     const message = e.target.value;
-    const koreanLength = (message.match(/[\u3131-\uD79D]/g) || []).length; // 한글 글자 수 계산
-    const englishLength = message.length - koreanLength; // 영문 글자 수 계산
+    const koreanLength = (message.match(/[\u3131-\uD79D]/g) || []).length; 
+    const englishLength = message.length - koreanLength; 
 
     this.setState({
       messageLength: message.length,
@@ -58,8 +68,7 @@ class StoreGift extends Component {
   };
 
   handlePayment = () => {
-  // 결제하기 버튼 클릭 시 실행되는 로직
-  const { recipientNumber, sender, message } = this.state;
+  const { recipientNumber, sender, message, name } = this.state;
   const { totalQuantity, totalPrice, itemCode, itemName, itemImage } = this.props;
 
 
@@ -70,11 +79,7 @@ class StoreGift extends Component {
     return; // 결제 로직 중단
   }
 
-  // 로컬 스토리지에서 sampleID 제거
   window.localStorage.removeItem("sampleID");
-
-  // 로컬 스토리지에 새로운 데이터 저장
-
   window.localStorage.setItem(
     "sampleID",
     JSON.stringify({
@@ -86,10 +91,9 @@ class StoreGift extends Component {
       itemCode,
       itemName,
       itemImage,
+      name,
     })
   );
-
-
 
   // 상태 초기화
   this.setState({
@@ -98,22 +102,14 @@ class StoreGift extends Component {
     message: ""
   });
 
-  // TODO: 결제 로직 구현
-    // 페이지 이동
     this.props.history.push("/page_3/Reservation_Payment_Store");
-    //window.location.href = "/page_3/Reservation_Payment_Store";
-    //window.location.href = "/page_3/Store_Payment_Finish";
 };
 
 
   render() {
     return (
-      
-
       <div id="layerCouponGift" className="layer_coupon_gift">
-        
         <strong className={`hidden ${style.hidden}`}>레이어 팝업 시작</strong>
-        
         <div className={`layer_header ${style.layer_header}`}>
           <div>
             <h4 className={`StoreGift_tit ${style.StoreGift_tit}`}>선물하기</h4>
@@ -131,7 +127,7 @@ class StoreGift extends Component {
 
         <div className={`coupon_gift_top ${style.coupon_gift_top}`}>
           <div className="StoreGift_bx_thm">
-            <img src={this.props.itemImage} alt="[롯시와 봄] 패키지" width={200} />
+            <img src={this.props.itemImage} width={200} />
           </div>
           <div className={`bx_tit ${style.bx_tit}`}>
             <div>
@@ -148,28 +144,6 @@ class StoreGift extends Component {
             </dd>
           </div>
         </div>
-        {/* <div className={`coupon_gift_top ${style.coupon_gift_top}`}>
-          <div className="StoreGift_bx_thm">
-            <img src={package1} alt="[롯시와 봄] 패키지" width={200} />
-          </div>
-          <div className={`bx_tit ${style.bx_tit}`}>
-            <div>
-              <h5><strong>[롯시와 봄] 패키지</strong></h5>
-            <div>
-
-            </div>
-              <span>총 수량 0개</span>
-            </div>
-          </div>
-          <div className={`bx_cnt ${style.bx_cnt}`}>
-              <dt>총 합계</dt>
-              <dd>
-                <strong>0</strong>원
-              </dd>
-          </div>
-        </div> */}
-
-
           <div className="gift_input">
             <table className="StoreGift_input">
               <tr>
@@ -195,7 +169,7 @@ class StoreGift extends Component {
                     type="text"
                     className={`g_input ${style.g_input}`}
                     name="sender"
-                    value={this.state.sender}
+                    value={this.state.name}
                     size="20"
                     placeholder="선물 하는 분 입력"
                     onChange={this.handleChange}

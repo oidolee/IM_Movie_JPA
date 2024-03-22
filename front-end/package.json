@@ -38,6 +38,7 @@
     "react-modal": "^3.16.1",
     "react-router-dom": "^5.3.4",
     "react-scripts": "^5.0.1",
+    "react-scroll": "^1.9.0",
     "remixicon": "^4.2.0",
     "scrollreveal": "^4.0.9",
     "styled-components": "^6.1.8",
@@ -69,7 +70,7 @@
     ]
   },
   "devDependencies": {
-    "@jridgewell/sourcemap-codec": "^1.4.15",
-    "@babel/plugin-proposal-private-property-in-object": "^7.16.7"
+    "@babel/plugin-proposal-private-property-in-object": "^7.16.7",
+    "@jridgewell/sourcemap-codec": "^1.4.15"
   }
 }
