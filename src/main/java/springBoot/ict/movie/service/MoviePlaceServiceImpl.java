@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import springBoot.ict.movie.dao.MoviePlaceRepository;
 import springBoot.ict.movie.dto.MoviePlaceDTO;
+import springBoot.ict.movie.dto.StoreMapDTO;
 
 @Service
 public class MoviePlaceServiceImpl implements MoviePlaceService {
@@ -19,12 +20,14 @@ public class MoviePlaceServiceImpl implements MoviePlaceService {
 	
 	// 상영시간표목록
 	@Override
-	public List<MoviePlaceDTO> listTime() 
+	public List<MoviePlaceDTO> listTime(int place_num) 
 			throws ServletException, IOException {
-		System.out.println("서비스 - listTime");
+		System.out.println("서비스 - listTime place_num: " + place_num);
 		
-		return dao.findAll();
+		return dao.findAllByPlaceNum(place_num);
 	}
+
+
 	
 	
 

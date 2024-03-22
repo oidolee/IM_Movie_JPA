@@ -365,7 +365,7 @@ function MovieDetail() {
                   return (
                     <li key={index} style={{ display: 'flex', alignItems: 'center' }}>
                       {/* 이미지 파일 경로를 동적으로 설정 */}
-                      <img src={`https://www.lottecinema.co.kr/NLewcharacter_0${6 - review.review_star}.jpg`} alt="image_by_rate" style={{ marginRight: '10px', width: '50px', height: '50px' }} />
+                      <img src={`https://www.lottecinema.co.kr/NLCHS/Content/images/temp/temp_reviewcharacter_0${6 - review.review_star}.jpg`} alt="image_by_rate" style={{ marginRight: '10px', width: '50px', height: '50px' }} />
 
                       <div className={`movie_review_content ${style.movie_review_content}`}>
                         <p>작성자</p>
@@ -374,7 +374,7 @@ function MovieDetail() {
                       </div>
                       <div style={{ marginLeft: 'auto' }}>
                         <img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/ic_review_good.png" alt="image_by_rate" style={{ marginRight: '5px', width: '20px', height: '20px' }} />
-                        {/* 실제 별점은 review.review_star 값 그대로 사용 */}
+                        {/* 좋아요 카운트 */}
                         {review.review_star}
                       </div>
                     </li>

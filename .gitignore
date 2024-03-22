@@ -4,7 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-application.properties
+# application.properties
 
 # test
 
@@ -29,7 +29,7 @@ application.properties
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
+#build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 

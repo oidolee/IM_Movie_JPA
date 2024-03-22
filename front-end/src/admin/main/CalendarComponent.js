@@ -35,16 +35,7 @@ const CalendarComponent = () => {
 
   useEffect(() => {
       if (calendarRef.current) {
-    //   parkingList();
       console.log(parkingData)
-    //   const manualEvents = parkingData.map(data => ({
-    //     id: data.ip_no.toString(),
-    //     title: `주차장 ${data.ip_block}-${data.ip_number}`,
-    //     start: '2024-03-18', // 예시로 고정된 날짜를 사용하였습니다.
-    //     end: '2024-03-20', // 예시로 고정된 날짜를 사용하였습니다.
-    //     backgroundColor: data.ip_carnumber ? 'red' : 'blue', // 주차 여부에 따라 색상을 지정합니다.
-    //     textColor: 'white'
-    //   }));
       
       const manualEvents = [
         {
