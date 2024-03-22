@@ -150,6 +150,11 @@
     width: 100%;
     height: 100%;
   }
+
+  .swiper-button-prev, .swiper-button-next {
+    color: black; /* 화살표 색상 */
+    /* 필요한 경우 다른 스타일을 추가하세요 */
+  }
   
   .swiper-slide {
     text-align: center;

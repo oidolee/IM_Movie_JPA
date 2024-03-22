@@ -13,10 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import springBoot.ict.movie.dto.DiscountDTO;
 import springBoot.ict.movie.dto.MoviePlaceDTO;
+import springBoot.ict.movie.dto.StoreMapDTO;
 import springBoot.ict.movie.service.MoviePlaceServiceImpl;
 
 @CrossOrigin(origins="**", maxAge=3600)
@@ -29,15 +33,16 @@ public class MoviePlaceController {
 	private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
 	
 	//상영시간표리스트
-	@GetMapping("/timeList")
-	public List<MoviePlaceDTO> TimeList(HttpServletRequest req,HttpServletResponse res,Model model)
+	@GetMapping("/timeList/{place_num}")
+	public List<MoviePlaceDTO> TimeList(@PathVariable("place_num") int place_num)
 	        throws ServletException, IOException {
-		logger.info("<<< url -> MovieList");
-	    List<MoviePlaceDTO> list = service.listTime();
-	    model.addAttribute("TimeList", list);
+		logger.info("<<< url -> timeList start");
+	    List<MoviePlaceDTO> list = service.listTime(place_num);
 	    System.out.println("TimeList : " + list);
 	    
 	    return list;
 	} 
+	
+
 
 }

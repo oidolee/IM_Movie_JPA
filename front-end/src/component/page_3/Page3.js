@@ -147,9 +147,9 @@ class Page3 extends Component{
                     </div>
                     <div className={`txt_price_wrap ${style.txt_price_wrap}`}>
                         <span className={`txt_sale ${style.txt_sale}`}>{Math.floor((1 - (item.itemSalePrice / item.itemPrice)) * 100)}%&nbsp;</span>
-                        <span className={`txt_price ${style.txt_price}`}>{item.itemPrice}<em>원</em></span>
+                        <span className={`txt_price ${style.txt_price}`}>{item.itemSalePrice}<em>원</em></span>
                         &nbsp;
-                        <span className={`txt_price_ins ${style.txt_price_ins}`}>{item.itemSalePrice}원</span>
+                        <span className={`txt_price_ins ${style.txt_price_ins}`}>{item.itemPrice}원</span>
                         &nbsp;
                     </div>
                 </div>
@@ -218,10 +218,14 @@ class Page3 extends Component{
                         <p>{item.itemDetail}</p>
                     </div>
                     <div className={`txt_price_wrap ${style.txt_price_wrap}`}>
-                        <span className={`txt_sale ${style.txt_sale}`}>{Math.floor((1 - (item.itemSalePrice / item.itemPrice)) * 100)}%&nbsp;</span>
-                        <span className={`txt_price ${style.txt_price}`}>{item.itemPrice}<em>원</em></span>
+                        {item.itemPrice !== item.itemSalePrice && (
+                            <span className={`txt_sale ${style.txt_sale}`}>{Math.floor((1 - (item.itemSalePrice / item.itemPrice)) * 100)}%&nbsp;</span>
+                        )}
+                        <span className={`txt_price ${style.txt_price}`}>{item.itemSalePrice}<em>원</em></span>
                         &nbsp;
-                        <span className={`txt_price_ins ${style.txt_price_ins}`}>{item.itemSalePrice}원</span>
+                        {item.itemPrice !== item.itemSalePrice && (
+                            <span className={`txt_price_ins ${style.txt_price_ins}`}>{item.itemPrice}원</span>
+                        )}
                         &nbsp;
                     </div>
                 </div>
@@ -311,10 +315,14 @@ class Page3 extends Component{
                         <p>{item.itemDetail}</p>
                     </div>
                     <div className={`txt_price_wrap ${style.txt_price_wrap}`}>
-                        <span className={`txt_sale ${style.txt_sale}`}>{Math.floor((1 - (item.itemSalePrice / item.itemPrice)) * 100)}%&nbsp;</span>
-                        <span className={`txt_price ${style.txt_price}`}>{item.itemPrice}<em>원</em></span>
+                        {item.itemPrice !== item.itemSalePrice && (
+                            <span className={`txt_sale ${style.txt_sale}`}>{Math.floor((1 - (item.itemSalePrice / item.itemPrice)) * 100)}%&nbsp;</span>
+                        )}
+                        <span className={`txt_price ${style.txt_price}`}>{item.itemSalePrice}<em>원</em></span>
                         &nbsp;
-                        <span className={`txt_price_ins ${style.txt_price_ins}`}>{item.itemSalePrice}원</span>
+                        {item.itemPrice !== item.itemSalePrice && (
+                            <span className={`txt_price_ins ${style.txt_price_ins}`}>{item.itemPrice}원</span>
+                        )}
                         &nbsp;
                     </div>
                 </div>
