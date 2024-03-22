@@ -2,33 +2,42 @@ import React, { useState, useEffect } from "react";
 import ApiService from "../../ApiService";
 import { Typography, TextField, Button } from "@mui/material";
 import style from "../../styles/admin/page_5/Admin_Update_Edit.css";
+import { useParams } from 'react-router-dom';
 
 const Admin_Update_Edit = ({ history }) => {
+  
+  const { movie_id } = useParams();
   const [updateInfo, setUpdateInfo] = useState({
-    mov_id: "",
-    mov_image: "",
-    mov_title: "",
+    movie_id:"",
+    mov_image:"",
+    mov_title:"",
     mov_date: "",
-    mov_time: "",
-    mov_age: "",
-    mov_visitor: "",
-    mov_contents: "",
-    mov_con: "",
-    mov_trailer: "",
-    mov_category: "",
+    mov_time:"",
+    mov_age:"",
+    mov_visitor:"",
+    mov_contents:"",
+    mov_con:"",
+    mov_pd:"",
+    mov_cast:"",
+    mov_image2:"",
+    mov_image3:"",
+    mov_trailer1:"",
+    mov_trailer2:"",
+    mov_category:"",
   });
 
-  useEffect(() => {
-    selectLoad();
-  }, []);
 
-  const selectLoad = () => {
-    ApiService.selectUpdate(window.localStorage.getItem("mov_id"))
+  useEffect(() => {
+    selectLoad(movie_id);
+  }, [movie_id]);
+
+  const selectLoad = (movie_id) => {
+    ApiService.selectUpdate(movie_id)
       .then((res) => {
         let list = res.data;
-
+        console.log('res.data : ' + res.data)
         setUpdateInfo({
-          mov_id: list.dto.mov_id,
+          movie_id: list.dto.movie_id,
           mov_image: list.dto.mov_image,
           mov_title: list.dto.mov_title,
           mov_date: list.dto.mov_date,
@@ -37,7 +46,12 @@ const Admin_Update_Edit = ({ history }) => {
           mov_visitor: list.dto.mov_visitor,
           mov_contents: list.dto.mov_contents,
           mov_con: list.dto.mov_con,
-          mov_trailer: list.dto.mov_trailer,
+          mov_pd: list.dto.mov_pd,
+          mov_cast: list.dto.mov_cast,
+          mov_image2: list.dto.mov_image2,
+          mov_image3: list.dto.mov_image3,
+          mov_trailer1: list.dto.mov_trailer1,
+          mov_trailer2: list.dto.mov_trailer2,
           mov_category: list.dto.mov_category,
         });
         console.log("selectByIdUpdate 성공 : ", res.data);
@@ -80,8 +94,8 @@ const Admin_Update_Edit = ({ history }) => {
         variant="standard"
         label="Movie_Id"
         type="text"
-        name="mov_id"
-        value={updateInfo.mov_id}
+        name="movie_id"
+        value={updateInfo.movie_id}
         />
       <br />
 
@@ -185,10 +199,70 @@ const Admin_Update_Edit = ({ history }) => {
         required
         id="standard-required"
         variant="standard"
-        label="Movie_Trailer"
+        label="Movie_Pd"
         type="text"
-        name=" mov_trailer"
-        value={updateInfo.mov_trailer}
+        name="mov_pd"
+        value={updateInfo.mov_pd}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Con"
+        type="text"
+        name="mov_cast"
+        value={updateInfo.mov_cast}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Image2"
+        type="text"
+        name="mov_image2"
+        value={updateInfo.mov_image2}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Image3"
+        type="text"
+        name="mov_image3"
+        value={updateInfo.mov_image3}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Trailer1"
+        type="text"
+        name="mov_trailer1"
+        value={updateInfo.mov_trailer1}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Trailer2"
+        type="text"
+        name="mov_trailer2"
+        value={updateInfo.mov_trailer2}
         onChange={onChange}
       />
       <br />

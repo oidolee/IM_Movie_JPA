@@ -215,12 +215,17 @@ const Reservation_Seat = () => {
 
       console.log("inputData : ", inputData);
 
-      return ApiService.updateSeat(inputData);
+      return ApiService.updateSeat(inputData)
     });
 
     Promise.all(updateSeatPromises)
       .then((res) => {
         console.log("모든 좌석 업데이트 성공");
+        // const firstSeat = selectedSeats[0].split('-')[2];
+        // history.push(`/page_1/Reservation_Payment/${firstSeat}`); // url로 데이터 보내기 > customer 번호 보낼예정
+        const selectedSeat = selectedSeats.map(seat => seat.split('-')[2]);
+        localStorage.setItem('selectedSeat', JSON.stringify(selectedSeat));
+
         history.push("/page_1/Reservation_Payment");
       })
       .catch((err) => {

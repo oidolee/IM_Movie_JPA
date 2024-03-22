@@ -34,7 +34,7 @@ class MyPage_Store_part extends Component {
 
     render() {
         return (
-            <div className={`MyPage_resMoive ${style.MyPage_resMoive}`}>
+            <div className={`MyPage_resMoive ${style.MyPage_resMoive}`} style={{display: 'block'}}>
                 {this.state.lists.map((item, index) => (
                     <div key={index}>
                         <div className={`MyPage_res_date_List ${style.MyPage_res_date_List}`}>

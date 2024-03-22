@@ -42,7 +42,7 @@ public class StoreOrderDetailController {
         logger.info("<<< url -> storeOrderDetailList");
         List<StoreOrderDetailDTO> list = service.listStoreOrderDetail();
         System.out.println("list : " + list);
-        model.addAttribute("list", list); //★listStoreOrderDetail_Admin list 설정
+        model.addAttribute("list", list); 
         
         return list;
     } 

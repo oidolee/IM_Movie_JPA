@@ -36,7 +36,7 @@ public class CouponController {
 	private static final Logger logger = LoggerFactory.getLogger(CouponController.class);
 
 	// 쿠폰 리스트 (관리자)
-	@GetMapping("/coupon")
+	@GetMapping("/couponList")
 	public List<CouponDTO> couponList(Model model) throws ServletException, IOException {
 		logger.info("<<< url -> couponList");
 
@@ -138,12 +138,41 @@ public class CouponController {
 	}
 
 	// 쿠폰 삭제
-	@DeleteMapping("/deleteCoupon/{ic_name}")
-	public int deleteCoupon(@PathVariable(name = "ic_name") String ic_name, Model model)
+	@DeleteMapping("/deleteCoupon/{ic_num}")
+	public Map<String, Object> deleteCoupon(@PathVariable(name = "ic_num") int ic_num, Model model)
 			throws ServletException, IOException {
 		logger.info("<<< url - deleteCoupon >>>");
-
-		return service.deleteCoupon(ic_name);
+		
+		System.out.println(ic_num);
+		String resultCode = "";
+		String resultMsg = "";
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+			
+			service.deleteCoupon(ic_num);		
+			resultCode = "200";
+			resultMsg = "DiscountInsert Success";
+			
+//			if(deleteCnt == 1) {
+//				resultCode = "200";
+//				resultMsg = "DiscountInsert Success";
+//			}
+		} 
+		
+		catch(Exception e) {
+			
+			resultCode = "400";
+			resultMsg = e.getMessage();
+			e.printStackTrace();
+		}
+		
+		map.put("resultCode", resultCode);
+		map.put("resultMsg", resultMsg);
+		map.put("ic_num", ic_num);
+		
+		return map; 
 	}
 
 	// 고객 쿠폰

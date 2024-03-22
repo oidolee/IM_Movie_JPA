@@ -36,13 +36,12 @@ public class StoreController {
    
    // 스토어 리스트 조회
    @GetMapping() 
-   //@GetMapping("/")  
    public List<StoreDTO> storeList(Model model)
             throws ServletException, IOException {
         logger.info("<<< url -> storeList");
         List<StoreDTO> list = service.listStore();
         System.out.println("list : " + list);
-        model.addAttribute("list", list); //★listStore_Admin list 설정
+        model.addAttribute("list", list); 
         
         return list;
     } 

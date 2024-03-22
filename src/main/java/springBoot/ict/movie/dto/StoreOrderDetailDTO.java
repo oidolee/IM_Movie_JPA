@@ -1,5 +1,7 @@
 package springBoot.ict.movie.dto;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +34,6 @@ public class StoreOrderDetailDTO {
     private String detail_price;
     @JsonProperty("totalQuantity")
     private int detail_qty;
-//    @JsonProperty("detailRegDate")
-//    private int detail_regDate;
+    @JsonProperty("detailRegDate")
+    private Date detail_regDate;
 }
