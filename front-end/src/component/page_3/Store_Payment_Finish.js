@@ -19,7 +19,7 @@ handleHome = () => {
 
 
     return (
-      <div className={`StoreDetail_store_d ${style.StoreDetail_store_d}`}>
+      <div className={`Store_Payment_Finish ${style.Store_Payment_Finish}`}>
             <br></br>
             <br></br>
             <br></br>
@@ -28,7 +28,7 @@ handleHome = () => {
             <br></br>
             <br></br>
             <h3>홍길동 회원님, 결제가 성공적으로 완료되었습니다.</h3>
-            <div className={`btn_wrap ${style.btn_wrap}`}>
+            <div className={`Store_Payment_Finish_btn_wrap ${style.Store_Payment_Finish_btn_wrap}`}>
               <button className="Store_Payment_Finish_btn_col1" onClick={this.handlePayment}>결제내역</button>
               <button className="Store_Payment_Finish_btn_col2" onClick={this.handleStore}>스토어 바로가기</button>
               <button className="Store_Payment_Finish_btn_col3" onClick={this.handleHome}>홈으로 바로가기</button>

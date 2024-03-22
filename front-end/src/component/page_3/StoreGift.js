@@ -60,15 +60,9 @@ class StoreGift extends Component {
   handlePayment = () => {
   // 결제하기 버튼 클릭 시 실행되는 로직
   const { recipientNumber, sender, message } = this.state;
-  const { totalQuantity, totalPrice, itemCode, itemName } = this.props;
+  const { totalQuantity, totalPrice, itemCode, itemName, itemImage } = this.props;
 
-  const storedData = localStorage.getItem("sampleID");
-  if (storedData) {
-    const parsedData = JSON.parse(storedData);
-    console.log(parsedData);
-  } else {
-    console.log("저장된 데이터가 없습니다.");
-  }
+
 
   // 선물 받는 분 번호가 12자 이상이면 알림창 띄우기
   if (recipientNumber.length >= 12 || recipientNumber.length < 10) {
@@ -80,6 +74,7 @@ class StoreGift extends Component {
   window.localStorage.removeItem("sampleID");
 
   // 로컬 스토리지에 새로운 데이터 저장
+
   window.localStorage.setItem(
     "sampleID",
     JSON.stringify({
@@ -90,6 +85,7 @@ class StoreGift extends Component {
       totalPrice,
       itemCode,
       itemName,
+      itemImage,
     })
   );
 
@@ -113,6 +109,7 @@ class StoreGift extends Component {
   render() {
     return (
       
+
       <div id="layerCouponGift" className="layer_coupon_gift">
         
         <strong className={`hidden ${style.hidden}`}>레이어 팝업 시작</strong>
@@ -134,11 +131,11 @@ class StoreGift extends Component {
 
         <div className={`coupon_gift_top ${style.coupon_gift_top}`}>
           <div className="StoreGift_bx_thm">
-            <img src={package1} alt="[롯시와 봄] 패키지" width={200} />
+            <img src={this.props.itemImage} alt="[롯시와 봄] 패키지" width={200} />
           </div>
           <div className={`bx_tit ${style.bx_tit}`}>
             <div>
-              <h5><strong>[롯시와 봄] 패키지</strong></h5>
+              <h5><strong>{this.props.itemName}</strong></h5>
               <div>
                 <strong><span>총 수량 {this.props.totalQuantity}개</span></strong>
               </div>
@@ -147,7 +144,7 @@ class StoreGift extends Component {
           <div className={`bx_cnt ${style.bx_cnt}`}>
             <dt>총 합계</dt>
             <dd>
-              <strong>{this.props.totalPrice.toLocaleString()}원</strong>
+              <strong>{this.props.totalPrice}원</strong>
             </dd>
           </div>
         </div>
@@ -181,8 +178,8 @@ class StoreGift extends Component {
                   <input
                     type="text"
                     className={`g_input ${style.g_input}`}
-                    name="recipient"
-                    value={this.state.recipient}
+                    name="recipientNumber"
+                    value={this.state.recipientNumber}
                     size="20"
                     placeholder="휴대폰 번호 입력(-없이)"
                     required

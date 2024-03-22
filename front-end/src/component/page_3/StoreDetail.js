@@ -169,7 +169,7 @@ EditStore_Admin = (e) => {
   };
 
   Payment_Store = () => {
-    const { totalQuantity, totalPrice } = this.props;
+    const { totalQuantity, totalPrice, itemName, itemCode, itemImage  } = this.props;
 
   // 로컬 스토리지에서 sampleID 제거
   window.localStorage.removeItem("sampleID");
@@ -179,7 +179,10 @@ EditStore_Admin = (e) => {
     "sampleID",
     JSON.stringify({
       totalQuantity,
-      totalPrice
+      totalPrice,
+      itemName,
+      itemCode,
+      itemImage,
     })
   );
 
@@ -189,6 +192,22 @@ EditStore_Admin = (e) => {
     //window.location.href = "/page_3/Reservation_Payment_Store";
     //window.location.href = "/page_3/Store_Payment_Finish";
   };
+
+  handleItemClick = (itemCode) => {
+    console.log("handleItemClick 함수 호출됨");
+    // 상세 페이지로 이동하는 로직
+    // 예시: this.props.history.push(`/store/${itemCode}`);
+    window.localStorage.setItem("sampleID", itemCode);
+    console.log('fetchStoreByID 함수 호출됨', itemCode); // 수정
+    ApiService.fetchStoreByID(itemCode)
+      .then(() => {
+        // fetchStoreByID 함수가 완료된 후에 페이지 이동
+        this.props.history.push(`/page_3/EditStore_Admin`);
+      })
+      .catch(error => {
+        console.error("상품 상세 정보를 가져오는 중 오류 발생:", error); // 수정
+      });
+};
 
   render() {
     const {
@@ -201,7 +220,10 @@ EditStore_Admin = (e) => {
     } = this.state;
 
     return (
+      
       <div className={`StoreDetail_store_d ${style.StoreDetail_store_d}`}>
+
+
         <div className={`store_detail ${style.store_detail}`}>
           <div className={`main_img ${style.main_img}`}>
             <img src={this.state.itemImage} alt="[IM과 봄] 패키지" />
@@ -219,22 +241,17 @@ EditStore_Admin = (e) => {
                 navigation={true}
                 virtual
               >
-                <SwiperSlide>
-                  <img
-                    src={package1}
-                    style={{ width: "150px", left: "0" }}
-                  />
-                </SwiperSlide>
 
-                <SwiperSlide>
                 <div style={{ display: "flex" }}>
                 {this.state.lists.map((item, index) => (
-                    item.itemType === "베스트" && (
-                    <img src={item.itemImage} alt={`Item ${item.itemCode}`} style={{ width: "150px" }}/>
-                    )
+
+                      <SwiperSlide  item={item} key={index}>
+                    <img src={item.itemImage} alt={`Item ${item.itemCode}`} style={{ width: "150px" }} onClick={() => this.handleItemClick(item.itemCode)}/>
+                    </SwiperSlide>
+
                 ))}
                 </div>
-                </SwiperSlide>
+
                 {/* {slides.map((slideContent, index) => (
                       <SwiperSlide key={slideContent} virtualIndex={index}>
                           {slideContent}
@@ -335,7 +352,7 @@ EditStore_Admin = (e) => {
               총 상품금액
               <strong className={`txt_price_str ${style.txt_price_str}`}>
                 {" "}
-                {price.toLocaleString()}
+                {this.state.itemSalePrice * this.state.quantity}
                 <em>원</em>
               </strong>
             </div>
@@ -348,7 +365,8 @@ EditStore_Admin = (e) => {
 
             {/* 선물하기 모달/팝업 조건부 렌더링 */}
             {/* {isStoreGiftOpen && <StoreGift onClose={this.closeStoreGift} />} */}
-            {isStoreGiftOpen && <StoreGift onClose={this.closeStoreGift} totalQuantity={quantity} totalPrice={price} itemCode={this.state.itemCode}/>}
+            {isStoreGiftOpen && 
+            <StoreGift onClose={this.closeStoreGift} totalQuantity={quantity} totalPrice={this.state.itemSalePrice * quantity} itemCode={this.state.itemCode} itemName={this.state.itemName}  itemImage={this.state.itemImage}/>}
             {/* 선물하기 모달/팝업 조건부 렌더링 */}
             {isStoreTicketOpen && <StoreTicket onClose={this.closeStoreTicket} />}
           </div>

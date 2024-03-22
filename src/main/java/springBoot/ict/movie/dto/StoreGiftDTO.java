@@ -19,17 +19,22 @@ public class StoreGiftDTO {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     @JsonProperty("giftNum")
-    private int gift_num;
+//    private String gift_num;
+//  public void setGift_num(String gift_num) {
+//  this.gift_num = gift_num;
+//}
+    
     // setGift_num 메서드 추가
+    private int gift_num;
     public void setItem_code(int gift_num) {
         this.gift_num = gift_num;
     }
     
-    @JsonProperty("itemCode")
-    private String item_code;   
+//    @JsonProperty("itemCode")
+//    private int item_code;   
     @JsonProperty("itemName")
     private String item_name;      
-    @JsonProperty("recipient")
+    @JsonProperty("recipientNumber")
     private String gift_recipient;
     @JsonProperty("sender")
     private String gift_name;

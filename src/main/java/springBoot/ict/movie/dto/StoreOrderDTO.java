@@ -24,6 +24,6 @@ public class StoreOrderDTO {
     public void setItem_code(int order_code) {
         this.order_code = order_code;
     }
-    @JsonProperty("cEmail") // 이메일 코드 맞는지 확인!!!!
+    @JsonProperty("c_email") // 이메일 코드 맞는지 확인!!!!
     private String c_email;
 }
