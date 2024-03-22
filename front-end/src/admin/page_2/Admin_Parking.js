@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import sytle from '../../styles/page_2/Parking.module.css';
 import ApiService from '../../ApiService';
 import { useHistory } from 'react-router-dom';
@@ -9,7 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
-function Parking() {
+function Admin_Parking() {
   const [lists, setLists] = useState([]);
   const [parkingData, setParkingData] = useState([]);
   const [selectedSeat, setSelectedSeat] = useState(null);
@@ -17,6 +17,7 @@ function Parking() {
   const [ip_client, setIpClient] = useState('');
   const [total_plot, setTotalPlot] = useState('');
   const [ip_no, setIp_no] = useState('');
+  const [mode, setMode] = useState(1);
 
   const history = useHistory();
 
@@ -25,9 +26,9 @@ function Parking() {
   }, []);
 
 
-
   const handleSubmit = () => {
     if (!ip_carnumber || !ip_client || !total_plot) {
+      setMode(1)
       alert('모든 필드를 입력하세요.');
       return;
     }
@@ -100,10 +101,38 @@ function Parking() {
     parkingLot[entry.ip_block].push([entry.ip_number, entry.ip_reservation, entry.ip_no]);
   }
 
+  const deleteMode = () => {
+ 
+    setMode(2);
+  }
+
+  const deleteActiion = (ip_no) => {
+    let inputData = {
+      ip_no: ip_no,
+      ip_carnumber: "",
+      ip_reservation: 'N',
+      ip_client: "",
+      ip_regdate: null,
+      in_date: null,
+      out_date: null,
+      reservation_id: ""
+    };
+    console.log(inputData)
+    ApiService.parkDelete(inputData)
+    .then((res) => {
+      alert("주차 삭제 완료.")      
+      window.location.reload()
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
   return (
     <div className={`Parking ${sytle.Parking}`}>
       <Container className={`Parking_panel ${sytle.Parking_panel}`}>
-        <h1>주차등록</h1>
+        <h1>{(mode === 1) ? '주차등록' : (mode === 2) ? '삭제모드' : '수정모드'}</h1>
+
         <div className={`Parking_seat_box ${sytle.Parking_seat_box}`}>
           {Object.keys(parkingLot).map((lot) => (
             <div key={lot} className={`Parking_lot ${sytle.Parking_lot}`}>
@@ -113,12 +142,16 @@ function Parking() {
                   <li
                     key={`${lot}-${seatNumber}`}
                     onClick={() => {
-                      if (status !== 'Y') {
-                        toggleSeatColor(lot, seatNumber, ip_no); // ip_no 전달
-                        if (selectedSeat === `${lot}-${seatNumber}`) {
-                          setSelectedSeat(null); // Assuming you have a state variable setSelectedSeat to toggle selection
-                        } else {
-                          setSelectedSeat(`${lot}-${seatNumber}`);
+                      if (mode === 2) {
+                        deleteActiion(ip_no); // 오타 수정: deleteAction -> deleteActiion
+                      } else {
+                        if (status !== 'Y') {
+                          toggleSeatColor(lot, seatNumber, ip_no); // ip_no 전달
+                          if (selectedSeat === `${lot}-${seatNumber}`) {
+                            setSelectedSeat(null); // Assuming you have a state variable setSelectedSeat to toggle selection
+                          } else {
+                            setSelectedSeat(`${lot}-${seatNumber}`);
+                          }
                         }
                       }
                     }}
@@ -176,10 +209,16 @@ function Parking() {
               주차등록
             </Button>
           </div>
+          <div className="d-grid gap-1">
+            <Button variant="danger" type="button" onClick={deleteMode}>
+              삭제모드
+            </Button>
+          </div>
+
         </Form>
       </Container>
     </div>
   );
 }
 
-export default Parking;
+export default Admin_Parking;

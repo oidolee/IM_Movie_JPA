@@ -319,6 +319,11 @@ class ApiService {
         return axios.put(serverUrl + '/page_2/save/'+inputData.ip_no, inputData); 
     }
 
+    //주차 삭제
+    parkDelete(inputData){
+        console.log('parkDelete() 호출!!')
+        return axios.put(serverUrl + '/page_2/delete/'+inputData.ip_no, inputData); 
+    }
 
       // <page_2 관리자에서 멤버리스트 차트용 >
     customerList(){
