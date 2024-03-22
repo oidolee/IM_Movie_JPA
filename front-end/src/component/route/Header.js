@@ -141,11 +141,11 @@ function Header() {
                             <div>
                                 <ul>
                                     <li><a href="/theater/1">서울</a>
-                                        <ul>
+                                        {/* <ul>
                                             <li><a href="/theater/1">홍대입구</a></li>
                                             <li><a href="/theater/2">용산</a></li>
                                             <li><a href="/Calender2">신촌</a></li>
-                                        </ul>
+                                        </ul> */}
                                     </li>
                                     <li><a href="/theater/2">경기</a></li>
                                     <li><a href="/Calender2">인천</a></li>
