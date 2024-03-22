@@ -52,12 +52,13 @@ const App = ({ handleCloseModal }) => {
     console.log("이름: " ,cookies['idName'], "이메일: ", cookies['c_email']);
 
     try {
+      const orderId = nanoid(); // orderId 변수 선언
       await paymentWidget?.requestPayment({
-        orderId: nanoid(),
+        orderId: orderId, // orderId 변수 사용
         orderName: "티켓",
         customerName: cookies['idName'],
         customerEmail: cookies['c_email'],
-        successUrl: `${window.location.origin}/success`,
+        successUrl: `${window.location.origin}/success?orderId=${orderId}&orderName=티켓&customerEmail=${cookies['c_email']}&amount=${price}`,
         failUrl: `${window.location.origin}/fail`
       });
     } catch (err) {

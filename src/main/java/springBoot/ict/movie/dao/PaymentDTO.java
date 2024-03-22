@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 @Entity
@@ -16,20 +18,15 @@ import lombok.Data;
 public class PaymentDTO {
 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Id
+	@Id
     private int pay_id;
-	private int res_id;
-	private int IC_No;	
-	private String IC_Email;
-	private String pay_method;
 	private String pay_name;
-	private int pay_amount;
-	private String pay_company;
-	private String pay_card_num;
-	private String pay_tel;
-	private String pay_fail_reason;
-	private String pay_cancel_reason;
-	private String pay_check;
-	private String pay_cancel;
-	private Date pay_sysdate;
+	private String pay_order_name;
+    // private int res_id;
+    @JsonProperty("ic_email")
+    private String IC_Email;
+    private long pay_amount;
+    private String pay_company;
+    private String pay_check;
+    private Date pay_sysdate;
 }
