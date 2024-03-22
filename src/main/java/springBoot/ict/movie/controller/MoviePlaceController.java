@@ -43,6 +43,16 @@ public class MoviePlaceController {
 	    return list;
 	} 
 	
+		//상영시간표리스트
+		@GetMapping("/timeList")
+		public List<MoviePlaceDTO> TimeList()
+				throws ServletException, IOException {
+			logger.info("<<< url -> timeList start");
+			List<MoviePlaceDTO> list = service.listAllTime();
+			System.out.println("TimeList : " + list);
+			
+			return list;
+		} 
 
 
 }

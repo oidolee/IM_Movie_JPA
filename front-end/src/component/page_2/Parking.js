@@ -24,16 +24,14 @@ function Parking() {
     parkingList();
   }, []);
 
-
-
   const handleSubmit = () => {
     if (!ip_carnumber || !ip_client || !total_plot) {
       alert('모든 필드를 입력하세요.');
       return;
     }
 
-    if (ip_carnumber.length < 8) {
-      alert("차량번호 자리수를 확인 바랍니다.")
+    if (ip_carnumber.length !== 4) {
+      alert("차량번호 자리수를 확인 바랍니다. \n(4자리 입력 바랍니다)")
       return false;
     }
     let block = '';
@@ -132,18 +130,32 @@ function Parking() {
         <Form>
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
             <Col sm>
-              <Form.Control type="text" placeholder="차량번호" name="ip_carnumber" value={ip_carnumber}
+              <Form.Control
+                type="text"
+                placeholder="차량번호"
+                name="ip_carnumber"
+                value={ip_carnumber}
                 onChange={(e) => {
-                  // 입력값이 15자를 초과하는지 확인
-                  if (e.target.value.length <= 15) {
-                    // 15자 이하면 입력값 업데이트
-                    setIpCarNumber(e.target.value.trim());
+                  let inputValue = e.target.value.trim();
+                  const regex = /^[0-9]*$/;
+                  if (regex.test(inputValue)) {
+                    // 입력값이 숫자로만 구성된 경우
+                    // 4자리 이상이면 초과하는 부분을 자르고 최대 4자리까지만 남깁니다.
+                    if (inputValue.length > 4) {
+                      inputValue = inputValue.slice(0, 4);
+                    }
+                    // 상태를 업데이트합니다.
+                    setIpCarNumber(inputValue);
                   } else {
-                    // 15자를 초과하면 경고 메시지 표시
-                    alert('차량번호는 15자를 초과할 수 없습니다.');
+                    // 문자가 입력된 경우, 문자를 제거하여 상태를 업데이트합니다.
+                    const trimmedValue = inputValue.slice(0, -1);
+                    setIpCarNumber(trimmedValue);
+                    alert("숫자만 입력해주세요");
                   }
                 }}
               />
+
+
             </Col>
           </Form.Group>
 

@@ -27,6 +27,12 @@ public class MoviePlaceServiceImpl implements MoviePlaceService {
 		return dao.findAllByPlaceNum(place_num);
 	}
 
+	public List<MoviePlaceDTO> listAllTime() 
+			throws ServletException, IOException{
+		System.out.println("서비스 - listAllTime");
+		return dao.findAll();
+	}
+
 
 	
 	
