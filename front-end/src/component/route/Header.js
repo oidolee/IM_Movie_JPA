@@ -151,8 +151,8 @@ function Header() {
 
                     <li onMouseOver={() => handleMouseOver(3)} onMouseOut={handleMouseOut}>
                         <a href="#" onMouseEnter={() => handleMouseOver(3)} onMouseOut={handleMouseOut}>영화관</a>
-                        {/* {isSubMenuVisible && currentMenuValue === 3 && ( */}
-                        {true && (
+                        {isSubMenuVisible && currentMenuValue === 3 && (
+                        // {true && (
                             <div>
                                 <ul>
                                     <li onMouseOver={() => SonhandleMouseOver(1)} ><a href="/theater/1">서울</a></li>
