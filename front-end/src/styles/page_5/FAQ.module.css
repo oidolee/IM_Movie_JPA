@@ -126,6 +126,7 @@
     padding: 15px; /* 내부 여백 */
     border: 1px solid #dee2e6; /* 바디 테두리 */
     border-top: none; /* 바디 상단 테두리 없음 */
+   
   }
   
   /* 바디에 있는 링크 스타일 */
@@ -141,6 +142,7 @@
   /* 바디에 있는 줄 바꿈 스타일 */
   .Accordion.Body br {
     margin-bottom: 10px; /* 줄 바꿈 아래 여백 */
+    
   }
 
   .FAQ_page {

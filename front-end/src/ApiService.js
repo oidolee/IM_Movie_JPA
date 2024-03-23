@@ -134,18 +134,18 @@ class ApiService {
 
     addStoreOrderDetail(storedData) {
             console.log('addStoreOrderDetail 호출!!', storedData);
-            return axios.post(url + "/MyPage_Store", storedData)
+            return axios.post(serverUrl + "/MyPage_Store", storedData)
         }
 
     addStoreOrder(orderData) {
         console.log('addStoreOrder 호출!!', orderData);
-        return axios.post(url + "/MyPage_Store_Order", orderData)
+        return axios.post(serverUrl + "/MyPage_Store_Order", orderData)
     }
 
     // Store Map list
     ListStore_MyPage() {
         console.log('storeList 호출');
-        return axios.get(url + "/MyPage_Store");
+        return axios.get(serverUrl + "/MyPage_Store");
     }
 
 
@@ -492,6 +492,42 @@ class ApiService {
         console.log('getLocation() 호출!!',place_num)
         return axios.get(serverUrl + '/page_5/getLocation/' +place_num ); 
     }
+
+    //공지사항 리스트
+    noticeList(){
+        console.log('noticeList() 호출!!')
+        return axios.get(serverUrl + '/page_5/NoticeList'); 
+    }
+
+    addNotice(inputData){
+        console.log('addNotice() 호출!!',inputData)
+        return axios.post(serverUrl + '/page_5/NoticeInsert',inputData); 
+    }
+
+    
+     selectNotice(notice_num) {
+        console.log("selectUpdate 호출", notice_num);
+        return axios.get(serverUrl + "/page_5/getNoticeDetail/" + notice_num);
+    }
+
+    
+    editNotice(inputData) {
+        console.log("editNotice 호출", inputData);
+        return axios.put(serverUrl + "/page_5/NoticeUpdate" + "/" + inputData.notice_num, inputData);
+    }  
+
+    // 영화삭제
+    noticeDelete(notice_num) {
+        console.log("noticeDelete 호출", notice_num);
+        return axios.delete(serverUrl + "/page_5/NoticeDelete" + "/" + notice_num);
+    }
+
+    
+
+
+
+
+    
       
     
 
