@@ -1,22 +1,23 @@
 import React from 'react';
 import CalendarComponent from './CalendarComponent';
 import ChartComponent from './ChartComponent';
+import { Link } from 'react-router-dom';
 const Admin_Contents = () => {
   // 여기에 관리자 메인 화면의 상태나 로직을 추가할 수 있습니다.
 
   return (
 
       <div class="container-fluid px-4">
-        <h1 class="mt-4">Dashboard</h1>
+        <h1 class="mt-4">관리자 메인</h1>
         <ol class="breadcrumb mb-4">
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item active">바로가기</li>
         </ol>
         <div class="row">
           <div class="col-xl-3 col-md-6">
             <div class="card bg-primary text-white mb-4">
-              <div class="card-body">Primary Card</div>
+              <div class="card-body">할인</div>
               <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="#">View Details</a>
+                <a class="small text-white stretched-link" href="/admin/page_1/Admin_Discount_List">할인 바로가기</a>
                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
               </div>
             </div>

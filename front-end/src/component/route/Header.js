@@ -10,8 +10,13 @@ import styled from 'styled-components';
 
 function Header() {
     const [path, setPath] = useState('/');
+    //상단 메뉴바 호버
     const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
     const [currentMenuValue, setCurrentMenuValue] = useState(null);
+
+    //자손 호버
+    const [sonisSubMenuVisible, setSonIsSubMenuVisible] = useState(false);
+    const [soncurrentMenuValue, setSonCurrentMenuValue] = useState(null);
     const [cookies, setCookie, removeCookie] = useCookies(['idName']);
 
 
@@ -22,6 +27,7 @@ function Header() {
         setPath(currentPath);
     }, []);
 
+    //상단 메뉴바 호버
     const handleMouseOver = (value) => {
         setIsSubMenuVisible(true);
         setCurrentMenuValue(value);
@@ -30,10 +36,18 @@ function Header() {
     const handleMouseOut = () => {
         setIsSubMenuVisible(false);
         setCurrentMenuValue(null);
-
     };
 
-    
+    //자손 호버
+    const SonhandleMouseOver = (value) => {
+        setSonIsSubMenuVisible(true);
+        setSonCurrentMenuValue(value);
+    };
+
+    const SonhandleMouseOut = () => {
+        setSonIsSubMenuVisible(false);
+        setSonCurrentMenuValue(null);
+    };
 
     const handleLogout = () => {
         // 쿠키 제거
@@ -138,21 +152,14 @@ function Header() {
                     <li onMouseOver={() => handleMouseOver(3)} onMouseOut={handleMouseOut}>
                         <a href="#" onMouseEnter={() => handleMouseOver(3)} onMouseOut={handleMouseOut}>영화관</a>
                         {isSubMenuVisible && currentMenuValue === 3 && (
+                        // {true && (
                             <div>
                                 <ul>
-                                    <li><a href="/theater/1">서울</a>
-                                        {/* <ul>
-                                            <li><a href="/theater/1">홍대입구</a></li>
-                                            <li><a href="/theater/2">용산</a></li>
-                                            <li><a href="/Calender2">신촌</a></li>
-                                        </ul> */}
-                                    </li>
-                                    <li><a href="/theater/2">경기</a></li>
-                                    <li><a href="/Calender2">인천</a></li>
+                                    <li onMouseOver={() => SonhandleMouseOver(1)} ><a href="/theater/1">서울</a></li>
+                                    <li onMouseOver={() => SonhandleMouseOver(2)} ><a href="/theater/2">경기</a></li>
+                                    <li onMouseOver={() => SonhandleMouseOver(3)} ><a href="/theater/3">인천</a></li>
                                 </ul>
-                             
                             </div>
-
                             
                         )}
                     </li>
@@ -189,6 +196,39 @@ function Header() {
                 </ul>
 
             </div>
+            {/* {isSubMenuVisible && currentMenuValue === 3 && ( */}
+            {sonisSubMenuVisible && (
+            <div className='header_nav_son' >
+             {soncurrentMenuValue == 1 && (
+                <ul>
+                    
+
+                    <li onMouseOver={SonhandleMouseOver} onMouseOut={SonhandleMouseOut}><a href="/theater/1">홍대입구</a></li>
+                    <li onMouseOver={SonhandleMouseOver} onMouseOut={SonhandleMouseOut}><a href="/theater/2">용산</a></li>
+                    <li onMouseOver={SonhandleMouseOver} onMouseOut={SonhandleMouseOut}><a href="/Calender2">서울3</a></li>
+                </ul>
+            )}
+            {soncurrentMenuValue == 2 && (
+                <ul>
+                    <li onMouseOver={SonhandleMouseOver} onMouseOut={SonhandleMouseOut}><a href="/theater/1">경기1</a></li>
+                    <li onMouseOver={SonhandleMouseOver} onMouseOut={SonhandleMouseOut}><a href="/theater/2">경기2</a></li>
+                    <li onMouseOver={SonhandleMouseOver} onMouseOut={SonhandleMouseOut}><a href="/Calender2">경기3</a></li>
+                </ul>
+            )}
+            {soncurrentMenuValue == 3 && (
+                <ul>
+                    <li onMouseOver={SonhandleMouseOver} onMouseOut={SonhandleMouseOut}><a href="/theater/1">인천1</a></li>
+                    <li onMouseOver={SonhandleMouseOver} onMouseOut={SonhandleMouseOut}><a href="/theater/2">인천2</a></li>
+                    <li onMouseOver={SonhandleMouseOver} onMouseOut={SonhandleMouseOut}><a href="/Calender2">인천3</a></li>
+                </ul>
+            )}
+
+
+                </div>
+      
+            
+            )}
+
 
 
             {/* <Navbar expand="lg" className="bg-body-tertiary">

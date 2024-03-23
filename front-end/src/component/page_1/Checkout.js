@@ -14,7 +14,7 @@ const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
 const App = ({ handleCloseModal }) => {
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
-  const [price, setPrice] = useState(100);
+  const [price, setPrice] = useState(10000);
   const [cookies] = useCookies(['c_email', 'idName']); // 쿠키 가져오기
 
   useEffect(() => {
@@ -52,12 +52,13 @@ const App = ({ handleCloseModal }) => {
     console.log("이름: " ,cookies['idName'], "이메일: ", cookies['c_email']);
 
     try {
+      const orderId = nanoid(); // orderId 변수 선언
       await paymentWidget?.requestPayment({
-        orderId: nanoid(),
+        orderId: orderId, // orderId 변수 사용
         orderName: "티켓",
         customerName: cookies['idName'],
         customerEmail: cookies['c_email'],
-        successUrl: `${window.location.origin}/success`,
+        successUrl: `${window.location.origin}/success?orderId=${orderId}&orderName=티켓&customerEmail=${cookies['c_email']}&amount=${price}`,
         failUrl: `${window.location.origin}/fail`
       });
     } catch (err) {

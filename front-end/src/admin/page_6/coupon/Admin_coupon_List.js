@@ -31,7 +31,7 @@ function Admin_coupon_List({ history }) {
   };
 
   // 등록
-  const ArteAdd = () => {
+  const CouponAdd = () => {
     
     history.push("/admin/page_6/coupon/Admin_coupon_Add");
   };
@@ -46,10 +46,10 @@ function Admin_coupon_List({ history }) {
     ApiService.deleteCoupon(ic_num)
       .then((res) => {
         setLists(lists.filter((list) => list.ic_num !== ic_num));
-        console.log("deleteArte 성공 : ", res.data);
+        console.log("deleteCoupon 성공 : ", res.data);
       })
       .catch((err) => {
-        console.log("deleteArte 실패 : ", err);
+        console.log("deleteCoupon 실패 : ", err);
       });
   };
 
@@ -66,13 +66,13 @@ function Admin_coupon_List({ history }) {
         variant="contained"
         color="primary"
         className="Add_btn"
-        onClick={ArteAdd}
+        onClick={CouponAdd}
       >
         쿠폰 추가
       </Button>
       <br />
       <br />
-      <Table className="Arte_List_Content">
+      <Table className="Coupon_List_Content">
         <TableHead>
           <TableRow>
             <TableCell>번호</TableCell>
