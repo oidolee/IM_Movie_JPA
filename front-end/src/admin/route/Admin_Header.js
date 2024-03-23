@@ -76,10 +76,12 @@ function Admin_Header() {
                                             <a class="nav-link" href="/admin/page_1/Admin_Discount_List">할인</a>
                                             <a class="nav-link" href="/admin/page_2/test_2">page_2 / Test_2</a>
                                             <a class="nav-link" href="/admin/page_3/ListStore_Admin">page_3 / ListStore_Admin</a>
-                                            <a class="nav-link" href="/admin/page_5/Admin_Update_List">HOME_UPDATE</a>
-                                            <a class="nav-link" href="/admin/page_5/Admin_Now_List">NOW_UPDATE</a>
-                                            <a class="nav-link" href="/admin/page_5/Admin_Next_List">NEXT_UPDATE</a>
-                                            <a class="nav-link" href="/admin/page_5/Admin_Arte_List">Arte_UPDATE</a>
+                                            <a class="nav-link" href="/admin/page_5/Admin_Update_List">영화 홈</a>
+                                            <a class="nav-link" href="/admin/page_5/Admin_Now_List">현재상영 영화</a>
+                                            <a class="nav-link" href="/admin/page_5/Admin_Next_List">상영예정 영화</a>
+                                            <a class="nav-link" href="/admin/page_5/Admin_Arte_List">아르떼 영화</a>
+                                            <a class="nav-link" href="/admin/page_5/Admin_Notice_List">공지사항</a>
+                                            <a class="nav-link" href="/admin/page_5/Admin_GroupForm_List">단체대관문의</a>
                                             <a class="nav-link" href="/admin/page_6/consult/Admin_consult">page_6 / 1:1문의</a>
                                             <a class="nav-link" href="/admin/page_6/coupon/Admin_coupon_List">page_6 / 쿠폰</a>
                                             <a class="nav-link" href="/admin/page_2/parking">주차 관리</a>

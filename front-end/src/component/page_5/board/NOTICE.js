@@ -1,8 +1,11 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import ApiService from "../../../ApiService";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { useState } from "react";
 import style from "../../../styles/page_5/NOTICE.module.css";
+import { Link } from "@mui/material";
+
 
 function SearchBox() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -57,12 +60,12 @@ function SearchBox() {
 
 function NOTICE() {
   
-  const currentPage = 1; // 예시로 현재 페이지를 1로 설정
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
   const totalPages = 10; // 예시로 총 페이지 수를 7로 설정
 
   // 페이지 변경 시 처리할 함수
   const onPageChange = (pageNumber) => {
-    // 페이지 변경 처리 로직 구현
+    setCurrentPage(pageNumber);
     console.log('페이지 변경:', pageNumber);
   };
 
@@ -71,6 +74,24 @@ function NOTICE() {
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
+
+  const history = useHistory();
+  const [notice, setNotice] = useState([]);
+
+  useEffect(() => {
+    reloadNoticeList();
+  }, []);
+
+  const reloadNoticeList = () => {
+    ApiService.noticeList()
+      .then((res) => {
+        console.log("test" + res);
+        setNotice(res.data);
+      })
+      .catch((err) => {
+        console.log("reloadNoticeList() Error!!", err);
+      });
+  };
 
 
   return (
@@ -111,135 +132,52 @@ function NOTICE() {
         <hr></hr>
         
         
-        <div className={`notice_show ${style.notice_show}`}>
-            <div>
-              <label className={`notice_1 ${style.notice_1}`}>전체</label>
-            </div>
-            <div>
-              <label className={`notice_2 ${style.notice_2}`}>회사 사칭 피싱 사기 주의</label>
-            </div>
-            <div>
-              <label className={`notice_3 ${style.notice_3}`}>2024-02-05</label>
-            </div>
+        {notice.map((item, index) => (
+        <div key={index} className={`notice_show ${style.notice_show}`}>
+          <div>
+            <label className={`notice_1 ${style.notice_1}`}>{item.notice_one}</label>
+          </div>
+          <div>
+            <a href={`/NOTICE2/${item.notice_num}`}>
+              <label className={`notice_2 ${style.notice_2}`}>{item.notice_title}</label>
+            </a>
+          </div>
+          <div>
+            <label className={`notice_3 ${style.notice_3}`}>{item.notice_date}</label>
+          </div>
         </div>
-
-        <div className={`notice_show ${style.notice_show}`}>
-            <div>
-              <label className={`notice_1 ${style.notice_1}`}>전체</label>
-            </div>
-            <div>
-              <label className={`notice_2 ${style.notice_2}`}>롯데시네마 개인정보처리방침 개정 안내</label>
-            </div>
-            <div>
-              <label className={`notice_3 ${style.notice_3}`}>2024-01-02</label>
-            </div>
-        </div>
-
-        <div className={`notice_show ${style.notice_show}`}>
-            <div>
-              <label className={`notice_1 ${style.notice_1}`}>전체</label>
-            </div>
-            <div>
-              <label className={`notice_2 ${style.notice_2}`}>	롯데시네마 영상정보처리기기 운영 및 관리방침 개정 안내</label>
-            </div>
-            <div>
-              <label className={`notice_3 ${style.notice_3}`}>2024-01-19</label>
-            </div>
-        </div>
-
-        <div className={`notice_show ${style.notice_show}`}>
-            <div>
-              <label className={`notice_1 ${style.notice_1}`}>수원(수원역)</label>
-            </div>
-            <div>
-              <label className={`notice_2 ${style.notice_2}`}>▣ 수원관 리뉴얼 공사 안내 ▣</label>
-            </div>
-            <div>
-              <label className={`notice_3 ${style.notice_3}`}>2024-01-05</label>
-            </div>
-        </div>
-
-        <div className={`notice_show ${style.notice_show}`}>
-            <div>
-              <label className={`notice_1 ${style.notice_1}`}>동탄</label>
-            </div>
-            <div>
-              <label className={`notice_2 ${style.notice_2}`}>▣ 동탄관 방문 안내 ▣</label>
-            </div>
-            <div>
-              <label className={`notice_3 ${style.notice_3}`}>2024-01-02</label>
-            </div>
-        </div>
-
-        <div className={`notice_show ${style.notice_show}`}>
-            <div>
-              <label className={`notice_1 ${style.notice_1}`}>용산</label>
-            </div>
-            <div>
-              <label className={`notice_2 ${style.notice_2}`}>■ 롯데시네마 용산관 상영관 리뉴얼 안내 ■</label>
-            </div>
-            <div>
-              <label className={`notice_3 ${style.notice_3}`}>2023-11-05</label>
-            </div>
-        </div>
-
-        <div className={`notice_show ${style.notice_show}`}>
-            <div>
-              <label className={`notice_1 ${style.notice_1}`}>김포공항</label>
-            </div>
-            <div>
-              <label className={`notice_2 ${style.notice_2}`}>■ 김포공항관 순간 정전에 따른 사과 안내■</label>
-            </div>
-            <div>
-              <label className={`notice_3 ${style.notice_3}`}>2023-08-27</label>
-            </div>
-        </div>
-
-        <div className={`notice_show ${style.notice_show}`}>
-            <div>
-              <label className={`notice_1 ${style.notice_1}`}>가산디지털</label>
-            </div>
-            <div>
-              <label className={`notice_2 ${style.notice_2}`}>■ 롯데시네마 가산디지털 비상 대피 관련 안내 ■</label>
-            </div>
-            <div>
-              <label className={`notice_3 ${style.notice_3}`}>2023-09-05</label>
-            </div>
-        </div>
-
-        <div className={`notice_show ${style.notice_show}`}>
-            <div>
-              <label className={`notice_1 ${style.notice_1}`}>부평</label>
-            </div>
-            <div>
-              <label className={`notice_2 ${style.notice_2}`}>■ 롯데시네마 부평 재오픈 안내 ■</label>
-            </div>
-            <div>
-              <label className={`notice_3 ${style.notice_3}`}>2023-07-25</label>
-            </div>
-        </div>
-
-        <div className={`notice_show ${style.notice_show}`}>
-            <div>
-              <label className={`notice_1 ${style.notice_1}`}>광복</label>
-            </div>
-            <div>
-              <label className={`notice_2 ${style.notice_2}`}>[롯데시네마 광복 8관, 9관 임시 미운영 안내]</label>
-            </div>
-            <div>
-              <label className={`notice_3 ${style.notice_3}`}>2023-04-28</label>
-            </div>
-        </div>
-  
+      ))}
       </div>
-      <div  className={`NOTICE_page ${style.NOTICE_page}`}>
+
+      <div id="NOTICE_page" className={`NOTICE_page ${style.NOTICE_page}`}>
+        {/* 이전 페이지 버튼 */}
+        <button
+          className={`${style.pageNumber2} ${currentPage === 1 ? style.disabled : ''}`}
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+      >
+        이전
+      </button>
+      
+      {/* 페이지 번호 버튼들 */}
       {pageNumbers.map((pageNumber) => (
         <button
           key={pageNumber}
-          className={`${style.pageNumber2} ${pageNumber === currentPage ? style.active : ''}`} onClick={() => onPageChange(pageNumber)}>
+          className={`${style.pageNumber2} ${pageNumber === currentPage ? style.active : ''}`}
+          onClick={() => onPageChange(pageNumber)}
+        >
           {pageNumber}
         </button>
       ))}
+
+      {/* 다음 페이지 버튼 */}
+      <button
+        className={`${style.pageNumber2} ${currentPage === totalPages ? style.disabled : ''}`}
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+      >
+        다음
+      </button>
     </div>
   </div>
   );
