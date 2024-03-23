@@ -32,6 +32,11 @@ import Admin_Next_List from '../page_5/Admin_Next_List';
 import Admin_Arte_List from '../page_5/Admin_Arte_List';
 import Admin_Arte_Add from '../page_5/Admin_Arte_Add';
 import Admin_Arte_Edit from '../page_5/Admin_Arte_Edit';
+import Admin_Notice_List from '../page_5/Admin_Notice_List';
+import Admin_Notice_Add from '../page_5/Admin_Notice_Add';
+import Admin_Notice_Edit from '../page_5/Admin_Notice_Edit';
+import Admin_GroupForm_List from '../page_5/Admin_GroupForm_List';
+
 
 // page_6
 import Admin_consult from '../page_6/consult/Admin_consult';
@@ -84,6 +89,10 @@ const Admin_RouterComponent = () => {
                     <Route path="/admin/page_5/Admin_Arte_List" exact={true} component={Admin_Arte_List} />
                     <Route path="/admin/page_5/Admin_Arte_Add" exact={true} component={Admin_Arte_Add} />
                     <Route path="/admin/page_5/Admin_Arte_Edit" exact={true} component={Admin_Arte_Edit} />
+                    <Route path="/admin/page_5/Admin_Notice_List" exact={true} component={Admin_Notice_List} />
+                    <Route path="/admin/page_5/Admin_Notice_Add" exact={true} component={Admin_Notice_Add} />
+                    <Route path="/admin/page_5/Admin_Notice_Edit/:notice_num" exact={true} component={Admin_Notice_Edit} />
+                    <Route path="/admin/page_5/Admin_GroupForm_List" exact={true} component={Admin_GroupForm_List} />
                 </Route>
 
 
