@@ -533,11 +533,32 @@ class ApiService {
         return axios.put(serverUrl + "/page_5/NoticeUpdate" + "/" + inputData.notice_num, inputData);
     }  
 
-    // 영화삭제
+    
     noticeDelete(notice_num) {
         console.log("noticeDelete 호출", notice_num);
         return axios.delete(serverUrl + "/page_5/NoticeDelete" + "/" + notice_num);
     }
+
+    //단체대관 리스트
+    groupList(){
+        console.log('groupList() 호출!!')
+        return axios.get(serverUrl + '/page_5/GroupList'); 
+    }
+
+    groupAdd(inputData) {
+        console.log("groupAdd 호출", inputData);
+        return axios.post(serverUrl + "/page_5/GroupInsert", inputData);
+    }
+
+    // selectGroup(group_id) {
+    //     console.log("selectGroup 호출", group_id);
+    //     return axios.get(serverUrl + "/page_5/getNoticeDetail/" + notice_num);
+    // }
+
+    // groupDelete(group_id) {
+    //     console.log("groupDelete 호출", group_id);
+    //     return axios.delete(serverUrl + "/page_5/NoticeDelete" + "/" + notice_num);
+    // }
 
     
 

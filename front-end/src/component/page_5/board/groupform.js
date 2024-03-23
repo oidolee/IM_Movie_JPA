@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import style from '../../../styles/page_5/groupform.module.css';
 import group1 from '../../../assets/page_5_3/group1.png';
 import { useHistory } from 'react-router-dom'; 
+import ApiService from "../../../ApiService";
 
 
 function Form() {
@@ -14,13 +15,48 @@ function Form() {
 
     const history = useHistory(); 
 
-    const handleClick = () => {
-      // 이동하고자 하는 경로를 path 변수에 넣어줍니다.
-    const path = '/re_answer_list'; // 이동하고자 하는 경로
+    
 
-      // 페이지 이동
-      history.push(path);
+  const [addInfo, setAddInfo] = useState({
+    group_id: '',
+    group_loc: "",
+    group_type: "",
+    group_expeople: "",
+    group_date: "",
+    group_time1: "",
+    group_time2: "",
+    group_movtitle: "",
+    group_con: "",
+    group_name: "",
+    custo_name: "",
+    custo_phone1: "",
+    custo_phone2: "",
+    custo_phone3: "",
+  });
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setAddInfo({
+      ...addInfo,
+      [name]: value,
+    });
   };
+
+  const saveUpdate = (e) => {
+    e.preventDefault();
+
+    ApiService.groupAdd(addInfo)
+      .then((res) => {
+        console.log("GroupInsert 성공 : ", res.data);
+        history.push("/admin/page_5/Admin_GroupForm_List");
+      })
+      .catch((err) => {
+        console.log(addInfo);
+        console.log("GroupInsert 실패 : ", err);
+      });
+  };
+
+
   
     return (
       <div id='Form_wrappage' className={`Form_wrappage ${style.Form_wrappage}`}>
@@ -62,10 +98,10 @@ function Form() {
 
             <div className={`Form_group ${style.Form_group}`}>
               <label for="g_type">분류</label>
-                <input type="radio" id="category1" className={`category1 ${style.category1}`}  name="category" value="category1" />
+                <input type="radio" id="category1" className={`category1 ${style.category1}`}  name="category" value={addInfo.group_type} />
                 <label for="category1">단체관람</label>
                 
-                <input type="radio" id="category2" className={`category2 ${style.category2}`} name="category" value="category2" />
+                <input type="radio" id="category2" className={`category2 ${style.category2}`} name="category" value={addInfo.group_type} />
                 <label for="category2">대관</label>
                 <hr></hr>
             </div>
@@ -73,13 +109,13 @@ function Form() {
             <div className={`Form_group ${style.Form_group}`}>
               <label for="g_num">예상인원</label>
               <input type="text" id="num1" className={`num1 ${style.num1}`}  name="num" />&nbsp;
-              <label>명</label>
+              <label>{addInfo.group_expeople}명</label>
               <hr></hr>
             </div>
 
             <div className={`Form_group ${style.Form_group}`}>
               <label for="g_date">희망일</label>
-                  <input type="date" id="date1" className={`date1 ${style.date1}`}  maxlength="4" placeholder="연도 월 일"/>
+                  <input type="date" id="date1" className={`date1 ${style.date1}`}  maxlength="4" placeholder="연도 월 일" value={addInfo.group_date}/>
               <hr></hr>
               </div>
             
@@ -87,19 +123,19 @@ function Form() {
             <div className={`Form_group ${style.Form_group}`}>
               <label for="g_time">희망시간</label>
               <input type="text" id="time1" className={`time1 ${style.time1}`}  name="time1" />&nbsp;
-              <label>시~</label>
+              <label>{addInfo.group_time1}시~</label>
               <input type="text" id="time2" className={`time2 ${style.time2}`}  name="time2" />&nbsp;
-              <label>시 사이</label>
+              <label>{addInfo.group_time2}시 사이</label>
               <hr></hr>
             </div>
 
             <div className={`Form_group ${style.Form_group}`}>
             <label for="g_con">내용</label>
             <div className={`con ${style.con}`}>
-                <input type="text" id="con1" className={`con1 ${style.con1}`}  name="con1" placeholder="영화명을 입력해주세요" required /> 
-                <input type="text" id="con2" className={`con1 ${style.con2}`}  name="con2" placeholder="제목을 입력해주세요" required /> 
+                <input type="text" id="con1" className={`con1 ${style.con1}`}  name="con1" placeholder="영화명을 입력해주세요" value={addInfo.group_movtitle} /> 
+                <input type="text" id="con2" className={`con1 ${style.con2}`}  name="con2" placeholder="제목을 입력해주세요"  value={addInfo.group_title}  /> 
             </div>
-                <textarea className={`con3 ${style.con3}`} id="con3" name="con3" rows="3" placeholder="내용 및 첨부파일에 개인정보(카드번호,계좌번호,주민번호)가 포함되지 않도록 유의하여 입력해주세요." required></textarea>
+                <textarea className={`con3 ${style.con3}`} id="con3" name="con3" rows="3" placeholder="내용 및 첨부파일에 개인정보(카드번호,계좌번호,주민번호)가 포함되지 않도록 유의하여 입력해주세요." value={addInfo.group_con}  ></textarea>
             </div>
 
             
@@ -110,19 +146,19 @@ function Form() {
 
             <div className={`Form_group ${style.Form_group}`}>
               <label for="gg_group">단체명</label>
-              <input type="text" id="group_name" className={`group_name ${style.group_name}`}  name="groupname" />
+              <input type="text" id="group_name" className={`group_name ${style.group_name}`}  name="groupname" value={addInfo.group_name}/>
               <hr></hr>
             </div>
 
             <div className={`Form_group ${style.Form_group}`}>
               <label for="gg_name">성명</label>
-              <input type="text" id="name1" className={`name1 ${style.name1}`}  name="name" />
+              <input type="text" id="name1" className={`name1 ${style.name1}`}  name="name" value={addInfo.custo_name}  />
               <hr></hr>
             </div>
 
             <div className={`Form_group ${style.Form_group}`}>
               <label for="gg_tel">연락처</label>
-              <select id="tel1" className={`tel1 ${style.tel1}`} name="tel">
+              <select id="tel1" className={`tel1 ${style.tel1}`} name="tel" value={addInfo.custo_phone1}>
                 <option value="010">010</option>
                 <option value="011">011</option>
                 <option value="016">016</option>
@@ -130,8 +166,8 @@ function Form() {
                 <option value="018">018</option>
                 <option value="019">019</option>
               </select>
-              <input type="tel" id="tel2" className={`tel2 ${style.tel2}`}  name="tel" />
-              <input type="tel" id="tel3" className={`tel3 ${style.tel3}`}  name="tel" />
+              <input type="tel" id="tel2" className={`tel2 ${style.tel2}`}  name="tel"  value={addInfo.custo_phone2}/>
+              <input type="tel" id="tel3" className={`tel3 ${style.tel3}`}  name="tel"  value={addInfo.custo_phone3}/>
               
               <hr></hr>
             </div>
@@ -169,7 +205,7 @@ function Form() {
             <div className={`btn_0 ${style.btn_0}`}>
                 <button type="submit" className={`btn1 ${style.btn1}`}>취소</button>
                 <span className="gap"></span> {/* 간격 요소 */}
-                <button type="submit" className={`btn2 ${style.btn2}`} onClick={handleClick}>확인</button>
+                <button type="submit" className={`btn2 ${style.btn2}`} onClick={saveUpdate}>확인</button>
             </div>
             
           </form>
