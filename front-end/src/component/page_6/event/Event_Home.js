@@ -6,7 +6,7 @@ const EventHome = () => {
     useEffect(() => {
         // ScrollReveal 시작 코드 추가
         ScrollReveal().reveal('.scrollUp', {
-            delay: 500,
+            delay: 300,
             duration: 1000,
             origin: 'left',
             distance: '30px',
@@ -28,7 +28,7 @@ const EventHome = () => {
             <div className={`scrollUp event_section event_section1 ${style.event_section1}`}>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}>
                     <h5>쿠폰</h5>
-                    <a>더보기</a>
+                    <a href="/Event_coupon">더보기</a>
                 </div>
                 <ul>
                     <li>
