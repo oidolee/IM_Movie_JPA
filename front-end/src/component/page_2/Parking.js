@@ -77,6 +77,8 @@ function Parking() {
   const parkingList = () => {
     ApiService.parkingList()
       .then((res) => {
+        console.log("res")
+        console.log(res)
         setParkingData(res.data);
         setLists(res.data);
       })
