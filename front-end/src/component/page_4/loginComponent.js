@@ -1,50 +1,61 @@
+import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material';
-import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ApiService from '../../ApiService';
 import style from '../../styles/page_4/login.module.css';
 import SocialKakao from './SocialKakao';
 import GoogleLoginButton from './GoogleLoginButton';
 import { useCookies } from 'react-cookie'; // useCookies import
+import { setAuthToken } from '../../helpers/axios_helper';
+import { onSnsSignInButtonClickHandler } from '../../SignIn/index.tsx';
+import kakao from '../../assets/images/kakao.png'
+import naver from '../../assets/images/naver.png'
+
 
 function Login() {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const history = useHistory();
-    const [cookies, setCookie] = useCookies(['idName', 'c_email']); // 쿠키 훅 
-    // const [cookies_email, setCookie_email] = useCookies(['c_email']); // 쿠키 훅 
-    // const [cookies_cus_id, setCookies_cus_id] = useCookies(['cus_id']); // 쿠키 훅 
+    
 
     const handleLogin = () => {
         let inputData = {
-            email: id,
+            id: id,
             password: password
-        }
-
+        };
+    
         console.log(inputData);
-
+    
         ApiService.login(inputData)
             .then(res => {
                 console.log(res.data);
-                if(res.data.resultCode == 200){
-                    let name = res.data.customer.name;
-                    let c_email = res.data.customer.email;
-                    let ic_No = res.data.customer.ic_No;
-                    setCookie('idName', name)
-                    setCookie('c_email', c_email)
-                    //setCookies_cus_id('cus_id', ic_No)
+                if (res.data.token != null) {
+                    // 토큰 저장
+                    localStorage.setItem('auth_token', res.data.token);
+                    // 헤더의 상태를 업데이트하여 다시 렌더링
+                    setAuthToken(res.data.token);
                     alert("로그인 성공.")
                     history.push('/');
+                    window.location.reload();
                 } else {
                     alert("로그인 실패\n로그인 정보 확인 바랍니다.")
                 }
-                
+    
             })
             .catch(err => {
                 console.log('에러', err);
+                setAuthToken(null);
                 setMessage('로그인에 실패했습니다.');
             });
+    };
+
+    const handleLogout = () => {
+        // 로컬 스토리지에서 토큰 제거
+        localStorage.removeItem('auth_token');
+        // 토큰 상태 업데이트하여 헤더 컴포넌트 다시 렌더링
+        setAuthToken(null);
+        alert('로그아웃 되었습니다.');
     };
 
     return (
@@ -82,13 +93,14 @@ function Login() {
                 <a href='/searchPWD' id='confrimPwd' className={`confirmPassword ${style.confirmPassword}`}>비밀번호 찾기</a>
             </div>
             <br /><br />
-
-            <Button>
-             <SocialKakao />
-            </Button><br/>
-            <Button>
-                <GoogleLoginButton/>
-            </Button>
+            <div style={{ display: 'flex' }}>
+                <div className='kakao' onClick={ () => onSnsSignInButtonClickHandler('kakao')} >
+                    <Button className={`kakao ${style.kakao}`}><img src={kakao} /></Button>
+                </div>
+                <div className='naver'onClick={ () => onSnsSignInButtonClickHandler('naver')}>
+                    <Button className={`naver ${style.naver}`}><img src={naver} /></Button>
+                </div>
+            </div>
 
         </div>
     );

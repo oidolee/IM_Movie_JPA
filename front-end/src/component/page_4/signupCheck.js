@@ -63,7 +63,7 @@ class SignupCheck extends Component {
                 <h6>약관</h6>
                 <hr />
                 {/* 전체 동의 체크박스 */}
-                <div className={style.checkboxContainer}> {/* 왼쪽 정렬을 위한 스타일 추가 */}
+                <div className={style.checkboxContainer}> 
                     <Checkbox
                         checked={this.state.checked}
                         onChange={this.handleCheck}
@@ -74,7 +74,7 @@ class SignupCheck extends Component {
                 <hr />
 
                 {/* 필수 약관 1 아코디언 */}
-                <div className={style.checkboxContainer}> {/* 왼쪽 정렬을 위한 스타일 추가 */}
+                <div className={style.checkboxContainer}> 
                     <Checkbox
                         checked={this.state.requiredAgreement1}
                         onChange={() => this.handleRequiredAgreementChange('requiredAgreement1')}
@@ -93,7 +93,7 @@ class SignupCheck extends Component {
                 </Accordion>
 
                 {/* 필수 약관 2 아코디언 */}
-                <div className={style.checkboxContainer}> {/* 왼쪽 정렬을 위한 스타일 추가 */}
+                <div className={style.checkboxContainer}> 
                     <Checkbox
                         checked={this.state.requiredAgreement2}
                         onChange={() => this.handleRequiredAgreementChange('requiredAgreement2')}
@@ -112,7 +112,7 @@ class SignupCheck extends Component {
                 </Accordion>
 
                 {/* 선택 약관 아코디언 */}
-                <div className={style.checkboxContainer}> {/* 왼쪽 정렬을 위한 스타일 추가 */}
+                <div className={style.checkboxContainer}> 
                     <Checkbox
                         checked={this.state.optionalAgreement}
                         onChange={this.handleOptionalAgreementChange}
