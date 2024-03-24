@@ -45,7 +45,7 @@ public class ParkingController {
 	}
 	
 
-	// 수정
+	// 수정(기존 차량구역 자리 주차등록으로 값 업데이트)
 	@PutMapping("/save/{ip_no}") 
 	public Map<String, Object> editPark(@PathVariable("ip_no") int ip_no, @RequestBody ParkingDTO dto) 
 			throws ServletException, IOException {
@@ -76,7 +76,9 @@ public class ParkingController {
 	@PutMapping("/delete/{ip_no}") 
 	public Map<String, Object> parkDelete(@PathVariable("ip_no") int ip_no, @RequestBody ParkingDTO dto){
 		Map<String, Object> map = new HashMap<String, Object>();
-		logger.info("url - delete");
+		logger.info("url - delete dto : ");
+		System.out.println(dto);
+		
 		String resultCode = "";
 		String resultMsg = "";
 		try {

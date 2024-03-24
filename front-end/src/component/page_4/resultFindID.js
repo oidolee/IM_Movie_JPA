@@ -9,7 +9,7 @@ class resultFindID extends Component {
     }
 
     gofindPWD = () => {
-        this.props.history.push("/login");
+        this.props.history.push("/searchPWD");
     }
 
     render() {

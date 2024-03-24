@@ -109,8 +109,9 @@
     position: absolute;
     left: 0;
     top: 55px;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px 0;
+    background-color: rgba(0, 0, 0);
+    padding: 12px 0;
+    z-index: 100;
 }
 .header_section .nav >ul>li>div>ul{
     display: flex;
@@ -146,7 +147,6 @@
     line-height: 50px;
     padding: 0 20px;
     box-sizing: border-box;
-    border: 1px solid red;
 }
 
 .header_nav_son > ul >li > a{

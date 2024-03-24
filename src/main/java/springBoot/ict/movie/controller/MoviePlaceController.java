@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,17 +45,14 @@ public class MoviePlaceController {
 	} 
 	
 	//list
-	@GetMapping("/timeList")
-	public List<MoviePlaceDTO> getTimeList()
+	@PostMapping("/timeLists") 
+	public List<MoviePlaceDTO> getTimeList(@RequestBody MoviePlaceDTO dto)
 	        throws ServletException, IOException {
-		logger.info("<<< url -> timeList start");
-	    List<MoviePlaceDTO> list = service.getlistTime();
+		logger.info("<<< url -> timeList start dto :");
+		System.out.println(dto);
+	    List<MoviePlaceDTO> list = service.getlistTime(dto);
 	    System.out.println("TimeList : " + list);
 	    
 	    return list;
-	} 
-	
-	
-
-
+	} 	
 }

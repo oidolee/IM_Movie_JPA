@@ -47,11 +47,11 @@ const Event_coupon = () => {
                         <ul key={index}>
                             {couponList.slice(index, index + 3).map((couponItem, subIndex) => (
                                 <li key={subIndex}>
-                                    <a href="#">
-                                        <img src='https://cf.lottecinema.co.kr//Media/Event/692ddf478a124abe9b7e91fc9fb40d25.jpg' alt='coupon_1' />
+                                    <a href={`/Event_coupon_detail/${couponItem.ic_num}`}>
+                                        <img src={`${process.env.PUBLIC_URL}/page_6/${couponItem.ic_img}`} alt='coupon_1' />
                                     </a>
                                     <p>{couponItem.ic_name}</p>
-                                    <p>2024.03.15 ~ 2024.03.21</p>
+                                    <p>{couponItem.ic_startDate} ~ {couponItem.ic_endDate}</p>
                                 </li>
                             ))}
                         </ul>

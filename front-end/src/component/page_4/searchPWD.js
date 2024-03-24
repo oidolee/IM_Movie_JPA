@@ -48,7 +48,7 @@ class searchPWD extends Component {
         e.preventDefault();
 
         let inputData = {
-            email: this.state.email,
+            id: this.state.id,
             hp: this.state.hp
         }
         ApiService.findPWD(inputData)
@@ -56,13 +56,14 @@ class searchPWD extends Component {
             this.setState({
 
             })
-            console.log('비밀번호 찾기 성공 : ' , res.data); // 컨트롤러에서 전달함 (resultCode, resultMsg)
+            console.log('비밀번호 찾기 성공 : ' , res.data); 
             const foundPWD = res.data.foundPWD;
-            //this.props.history.push('/findID') // RouterComponet.js - ListSampleComponet 호출 
+            
             this.props.history.push('/findPWD', { foundPWD });
         })
         .catch(err =>{
             console.log('findID() 에러 !! ', err);
+            alert("이름과 휴대폰 번호를 확인 해 주세요.")
         })
         
     }
@@ -92,13 +93,13 @@ class searchPWD extends Component {
                         </Accordion.Header>
                         <Accordion.Body>
                             <div id='hpfind' className={`hpfind ${style.hpfind}`}>
-                                <div className={`text ${style.text}`}>이메일
+                                <div className={`text ${style.text}`}>아이디
                                 {/* 이름 입력필드 */}
                                 <TextField
                                     required
                                     type="text"
-                                    name="email"
-                                    value={this.state.email}
+                                    name="id"
+                                    value={this.state.id}
                                     placeholder='이메일을 입력해주세요.'
                                     onChange={this.onChange}
                                 />
