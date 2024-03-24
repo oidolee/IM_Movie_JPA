@@ -1,6 +1,19 @@
 import axios from 'axios';   // npm install axios
 
-axios.defaults.baseURL = 'http://localhost:8081'
+
+const localHost = "http://localhost:8081"; // 로컬
+const proHost = "http://3.39.155.236:8081"; // 개벌
+
+
+let serverUrl;
+
+if (process.env.NODE_ENV === 'development') {
+  serverUrl = localHost;
+} else {
+  serverUrl = proHost;
+}
+
+axios.defaults.baseURL = serverUrl
 axios.defaults.headers.post["Content-type"] = 'application/json'
 
 // 로그인이 완료시 JWT를 저장한다.
