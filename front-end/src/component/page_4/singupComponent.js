@@ -3,13 +3,14 @@ import ApiService from '../../ApiService';
 import { TextField, Button, Modal } from '@mui/material';
 import DaumPostcode from 'react-daum-postcode';
 import style from '../../styles/page_4/signup.module.css';
+import { setAuthToken } from '../../helpers/axios_helper';
 
 class SignupComponent extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            email: '',
+            id: '',
             name: '',
             password: '',
             passwordConfirm: '',
@@ -38,20 +39,20 @@ class SignupComponent extends Component {
     };
 
     // 유효성검사
-    validateEmail = (email) => {
+    validateEmail = (id) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        return emailRegex.test(email);
+        return emailRegex.test(id);
     };
-
+    // 유효성검사
     validatePassword = (password) => {
         return password.length >= 4;
     };
-
+    // 유효성검사
     validatePhone = (phone) => {
         const phoneRegex = /^010[0-9]{8}$/;
         return phoneRegex.test(phone);
     };
-
+    
     // 비밀번호 확인과 일치하는지 검사하는 함수
     checkPasswordMatch = () => {
         const { password, passwordConfirm } = this.state;
@@ -83,12 +84,34 @@ class SignupComponent extends Component {
         this.handleCloseModal();
     };
 
+    checkDuplicateEmail = () => {
+        // 현재 상태에서 이메일 값을 가져옵니다.
+        const { id } = this.state;
+    
+        // 이메일 중복을 검사하기 위해 ApiService의 메서드를 호출합니다.
+        ApiService.checkDuplicateEmail(id)
+            .then(res => {
+                // 서버로부터 받은 응답에 따라 중복 여부를 판단합니다.
+                if (res.data != 0) {
+                    // 중복된 경우 경고 메시지를 표시합니다.
+                    alert("이미 사용 중인 이메일입니다.");
+                } else {
+                    // 중복되지 않은 경우 메시지를 표시합니다.
+                    alert("사용 가능한 이메일입니다.");
+                }
+            })
+            .catch(err => {
+                // 중복 검사 과정에서 오류가 발생한 경우 오류 메시지를 표시합니다.
+                console.error("이메일 중복 체크 에러:", err);
+                alert("이메일 중복 체크에 실패했습니다.");
+            });
+    };
     onChange = (e) => {
         if (e.target.name === 'passwordConfirm') {
             this.setState({ passwordConfirm: e.target.value }, this.checkPasswordMatch);
-        } else if (e.target.name === 'email') {
+        } else if (e.target.name === 'id') { 
             const isValid = this.validateEmail(e.target.value);
-            this.setState({ email: e.target.value, emailValid: isValid });
+            this.setState({ id: e.target.value, emailValid: isValid });
         } else if (e.target.name === 'password') {
             const isValid = this.validatePassword(e.target.value);
             this.setState({ password: e.target.value, passwordValid: isValid });
@@ -97,14 +120,21 @@ class SignupComponent extends Component {
             this.setState({ hp: e.target.value, phoneValid: isValid });
         } else if (e.target.name === 'name') {
             this.setState({ name: e.target.value });
-        } else if (e.target.name === 'birthday') { // 이 부분을 수정
+        } else if (e.target.name === 'birthday') {
             this.setState({ birthday: e.target.value });
         }
     };
+    
 
     // 회원가입 시 이메일 주소 유효성을 검사하는 함수
     saveCustomer = (e) => {
         e.preventDefault();
+
+        // 필수 항목을 모두 입력 했는지 확인합니다.
+        if (!this.state.id || !this.state.name || !this.state.password || !this.state.hp || !this.state.birthday || !this.state.addr1 || !this.state.addr2) {
+            alert("모든 필수 항목을 입력하세요.");
+            return;
+        }
 
         // 이메일 주소가 유효하지 않은 경우 경고 메시지를 표시하고 함수를 종료합니다.
         if (!this.state.emailValid) {
@@ -134,19 +164,20 @@ class SignupComponent extends Component {
         const regdate = new Date();
 
         // IC_show를 기본값으로 설정
-        const show = 'y';
+        const state = 'y';
+        const role = 'ROLE_USER';
 
 
         const address = `${this.state.addr1} ${this.state.addr2}`;
         const inputData = {
-            email: this.state.email,
+            id: this.state.id,
             name: this.state.name,
             password: this.state.password,
             hp: this.state.hp,
             birthday: this.state.birthday,
             address: address,
             regdate: regdate,
-            show: show
+            state: state
         };
 
         console.log(inputData);
@@ -157,12 +188,15 @@ class SignupComponent extends Component {
                 this.setState({});
                 console.log('input 성공 : ', res.data);
 
-                if (res.data.resultCode == 200) {
+                if (res.data.token != null) {
                     alert("회원가입 성공");
+                    setAuthToken(res.data.token);
                     this.props.history.push('/login');
                 } else {
                     alert("회원가입 실패");
+                    setAuthToken(null);
                     this.props.history.push('/signCheck');
+
                 }
             })
             .catch(err => {
@@ -181,14 +215,14 @@ class SignupComponent extends Component {
                         variant="standard"
                         label="이메일"
                         type="text"
-                        name="email"
-                        value={this.state.email}
+                        name="id"
+                        value={this.state.id}
                         placeholder='이메일 입력'
                         onChange={this.onChange}
                         error={!this.state.emailValid}
                         helperText={!this.state.emailValid ? "올바른 이메일 주소를 입력하세요." : null} // 유효성 검사 실패 시 에러 메시지를 표시합니다.
                     />
-                    <Button variant="contained" color="primary" onClick={this.CheckEmail}> 인증요청 </Button>
+                    <Button variant="contained" color="primary" onClick={this.checkDuplicateEmail}> 중복확인 </Button>
                     <br /><br />
 
                     {/* 이름 입력 필드 */}

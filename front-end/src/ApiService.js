@@ -134,18 +134,18 @@ class ApiService {
 
     addStoreOrderDetail(storedData) {
             console.log('addStoreOrderDetail 호출!!', storedData);
-            return axios.post(url + "/MyPage_Store", storedData)
+            return axios.post(serverUrl + "/MyPage_Store", storedData)
         }
 
     addStoreOrder(orderData) {
         console.log('addStoreOrder 호출!!', orderData);
-        return axios.post(url + "/MyPage_Store_Order", orderData)
+        return axios.post(serverUrl + "/MyPage_Store_Order", orderData)
     }
 
     // Store Map list
     ListStore_MyPage() {
         console.log('storeList 호출');
-        return axios.get(url + "/MyPage_Store");
+        return axios.get(serverUrl + "/MyPage_Store");
     }
 
 
@@ -154,40 +154,60 @@ class ApiService {
 
     // page_4
     
-    // insert
     addCustomer(inputData) {
         console.log('addCustomer 호출', inputData);
-        return axios.post(serverUrl + "/index/save", inputData);
+        return axios.post(serverUrl + "/register", inputData);
     }
 
     // 고객리스트
      listCustomer(inputData) {
          console.log('listCustomer 호출');
-         return axios.get(serverUrl + "/index");
+         return axios.get(serverUrl + "/admin/listCustomer");
     }
 
     // 로그인 
     login(inputData) {
         console.log("login start 로그인:")
         console.log(inputData)
-        return axios.post(serverUrl + "/index/login", inputData);
+        
+        return axios.post(serverUrl + "/login", inputData);
     }
+
+    // 아이디 중복 체크 
+    checkDuplicateEmail(id) {
+        console.log("이메일 중복 체크")
+        console.log("id : " + id)
+        return axios.get(serverUrl + "/idCheck", { params: { id } });
+    }
+    
 
     // 아이디 찾기
-    findID(inputData) {
-        console.log("findID 호출")
+    searchId(inputData) {
+        console.log("searchId 호출")
         console.log(inputData)
-        return axios.post(serverUrl + "/index/findID", inputData);
+        return axios.post(serverUrl + "/searchId", inputData);
     }
 
-    // 비밀번호 찾기
+    // 비밀번호 재설정
     findPWD(inputData) {
         console.log("findPWD 호출")
         console.log(inputData)
-        return axios.post(serverUrl + "/index/searchPWD", inputData);
+        return axios.post(serverUrl + "/searchPWD", inputData);
     }
 
     // page_6
+    // 회원정보 조회
+    searchCutomer(c_email){
+        console.log("searchCutomer 호출")
+        console.log("c_email : " + c_email)
+        return axios.get(serverUrl + "/index/searchCustomer/" + c_email);
+    }
+
+    // 회원정보 수정
+    editCustomer(inputdata){
+        console.log("editCustomer 호출")
+        return axios.put(serverUrl + "/index/editCustomer" , inputdata);
+    }
 
     // 관리자
     // 1:1 문의 리스트
@@ -244,9 +264,9 @@ class ApiService {
     }
     
     // 쿠폰 상세내역(관리자)
-    couponList(ic_name){
+    couponList(ic_num){
         console.log('couponList() 호출!!')
-        return axios.get(serverUrl + '/page_6/coupon/selectCoupon/' + ic_name); 
+        return axios.get(serverUrl + '/page_6/coupon/selectCoupon/' + ic_num); 
     }
     // 쿠폰 등록
     addCoupon(inputData){
@@ -307,6 +327,11 @@ class ApiService {
         return axios.put(serverUrl + '/page_2/save/'+inputData.ip_no, inputData); 
     }
 
+    //주차 삭제
+    parkDelete(inputData){
+        console.log('parkDelete() 호출!!')
+        return axios.put(serverUrl + '/page_2/delete/'+inputData.ip_no, inputData); 
+    }
 
       // <page_2 관리자에서 멤버리스트 차트용 >
     customerList(){
@@ -483,15 +508,72 @@ class ApiService {
         return axios.get(serverUrl + '/page_5/timeList'); 
     }
 
-    reloadTimeList(place_num){
-        console.log('reloadTimeList() 호출!!',place_num)
-        return axios.get(serverUrl + '/page_5/timeList/' +place_num ); 
+    reloadTimeList(inputData){
+        console.log('reloadTimeList() 호출!!',inputData)
+        return axios.post(serverUrl + '/page_5/timeLists/', inputData); 
     }
 
     getLocation(place_num){
         console.log('getLocation() 호출!!',place_num)
         return axios.get(serverUrl + '/page_5/getLocation/' +place_num ); 
     }
+
+    //공지사항 리스트
+    noticeList(){
+        console.log('noticeList() 호출!!')
+        return axios.get(serverUrl + '/page_5/NoticeList'); 
+    }
+
+    addNotice(inputData){
+        console.log('addNotice() 호출!!',inputData)
+        return axios.post(serverUrl + '/page_5/NoticeInsert',inputData); 
+    }
+
+    
+     selectNotice(notice_num) {
+        console.log("selectUpdate 호출", notice_num);
+        return axios.get(serverUrl + "/page_5/getNoticeDetail/" + notice_num);
+    }
+
+    
+    editNotice(inputData) {
+        console.log("editNotice 호출", inputData);
+        return axios.put(serverUrl + "/page_5/NoticeUpdate" + "/" + inputData.notice_num, inputData);
+    }  
+
+    
+    noticeDelete(notice_num) {
+        console.log("noticeDelete 호출", notice_num);
+        return axios.delete(serverUrl + "/page_5/NoticeDelete" + "/" + notice_num);
+    }
+
+    //단체대관 리스트
+    groupList(){
+        console.log('groupList() 호출!!')
+        return axios.get(serverUrl + '/page_5/GroupList'); 
+    }
+
+    groupAdd(inputData) {
+        console.log("groupAdd 호출", inputData);
+        return axios.post(serverUrl + "/page_5/GroupInsert", inputData);
+    }
+
+    // selectGroup(group_id) {
+    //     console.log("selectGroup 호출", group_id);
+    //     return axios.get(serverUrl + "/page_5/getNoticeDetail/" + notice_num);
+    // }
+
+    // groupDelete(group_id) {
+    //     console.log("groupDelete 호출", group_id);
+    //     return axios.delete(serverUrl + "/page_5/NoticeDelete" + "/" + notice_num);
+    // }
+
+    
+
+
+
+
+    
       
     
 

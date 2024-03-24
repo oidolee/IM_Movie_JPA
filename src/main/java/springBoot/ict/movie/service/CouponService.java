@@ -6,11 +6,8 @@ import java.util.Optional;
 
 import javax.servlet.ServletException;
 
-import springBoot.ict.movie.dto.ConsultAnswerDTO;
-import springBoot.ict.movie.dto.ConsultDTO;
 import springBoot.ict.movie.dto.CouponCusDTO;
 import springBoot.ict.movie.dto.CouponDTO;
-import springBoot.ict.movie.dto.CustomerDTO;
 
 public interface CouponService {
 	
@@ -47,7 +44,7 @@ public interface CouponService {
 			throws ServletException, IOException;
 
 	// 쿠폰 상세내역
-	public Optional<CouponDTO> selectCoupon(String ic_name)
+	public Optional<CouponDTO> selectCoupon(int ic_num)
 			throws ServletException, IOException;
 	
 	// 고객 쿠폰 상세내역

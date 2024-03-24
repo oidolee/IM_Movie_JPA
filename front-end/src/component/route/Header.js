@@ -4,14 +4,25 @@ import { useCookies } from 'react-cookie'; // 로그인 확인용
 import { Link, useLocation } from 'react-router-dom';
 import '../../styles/main/Header.css'; 
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 
 
 
 function Header() {
+
+    const history = useHistory();
+
     const [path, setPath] = useState('/');
+
+    const [authToken, setAuthToken] = useState(null); // 토큰 상태 추가
+    //상단 메뉴바 호버
     const [isSubMenuVisible, setIsSubMenuVisible] = useState(false);
     const [currentMenuValue, setCurrentMenuValue] = useState(null);
+
+    //자손 호버
+    const [sonisSubMenuVisible, setSonIsSubMenuVisible] = useState(false);
+    const [soncurrentMenuValue, setSonCurrentMenuValue] = useState(null);
     const [cookies, setCookie, removeCookie] = useCookies(['idName']);
 
 
@@ -20,8 +31,14 @@ function Header() {
         const currentPath = window.location.pathname;
         console.log(currentPath)
         setPath(currentPath);
-    }, []);
 
+        // authToken 상태가 변경될 때마다 실행되는 부분
+        const token = localStorage.getItem('auth_token');
+        setAuthToken(token);
+        
+    }, [authToken]);
+
+    //상단 메뉴바 호버
     const handleMouseOver = (value) => {
         setIsSubMenuVisible(true);
         setCurrentMenuValue(value);
@@ -30,15 +47,27 @@ function Header() {
     const handleMouseOut = () => {
         setIsSubMenuVisible(false);
         setCurrentMenuValue(null);
-
     };
 
-    
+    //자손 호버
+    const SonhandleMouseOver = (value) => {
+        setSonIsSubMenuVisible(true);
+        setSonCurrentMenuValue(value);
+    };
+
+    const SonhandleMouseOut = () => {
+        setSonIsSubMenuVisible(false);
+        setSonCurrentMenuValue(null);
+    };
 
     const handleLogout = () => {
-        // 쿠키 제거
-        removeCookie('idName');
-        alert('로그아웃 되었습니다.')
+        /// 로그아웃 시 로컬 스토리지에서 토큰 제거
+        localStorage.removeItem('auth_token');
+        setAuthToken(null);
+        alert('로그아웃 되었습니다.');
+
+        history.push('/');
+        
     };
     //헤더 동적 처리         
     const location = useLocation();
@@ -57,26 +86,24 @@ function Header() {
 
                 <div className='right-gnb'>
                     <ul>
-                        
-                        {(cookies.idName == undefined) &&(<li><Link to="/login">로그인</Link></li>)}
-                        {cookies.idName &&(
-                            <>                              
+
+                        {/* 토큰 유무에 따라 로그인/로그아웃 버튼 표시 */}
+                        {!authToken && <li><Link to="/login">로그인</Link></li>}
+                        {authToken && (
+                            <>
                                 <li><a href="/admin">관리자</a></li>
-                                {/* <li><Link to="/admin">관리자</Link></li> */}
                                 <li><Link to="/MyPage_res">마이페이지</Link></li>
                                 <li><a href='#' onClick={handleLogout}>로그아웃</a></li>
                             </>
-                        )}                                                  
-                          <li><Link to="/customerlist">멤버쉽</Link></li>   
-                          <li><Link to="/FAQ">고객센터</Link></li>   
-
-                          {cookies.idName &&(
-                                <>
-                                    <li><Link to="/parking">주차등록</Link></li>   
-                                </>
-                            )}
-                          <li><Link to="/groupform">단체관람/대관문의</Link></li>   
+                        )}
+                        <li><Link to="/customerlist">멤버쉽</Link></li>   
+                        <li><Link to="/FAQ">고객센터</Link></li>   
+                        {authToken && (
+                            <li><Link to="/parking">주차등록</Link></li>   
+                        )}
+                        <li><Link to="/groupform">단체관람/대관문의</Link></li>   
                     </ul>
+
                     <ul className='header-member-box'>                      
                         <li>
                             {!cookies.idName &&(
@@ -95,8 +122,9 @@ function Header() {
                         </li>
                         <li><i class="bi bi-list" className='bi-list'></i></li>
                     </ul>
-                    {cookies.idName && (
-                        <p className="Header_user_name">{cookies.idName}님 환영합니다.</p>
+
+                   {authToken && (
+                        <p className="Header_user_name">사용자님 환영합니다.</p>
                     )}
 
                 </div>
@@ -136,28 +164,23 @@ function Header() {
                     </li>
 
                     <li onMouseOver={() => handleMouseOver(3)} onMouseOut={handleMouseOut}>
-                        <a href="#" onMouseEnter={() => handleMouseOver(3)} onMouseOut={handleMouseOut}>영화관</a>
+                        <a href="#" onMouseEnter={() => handleMouseOver(3)} onMouseOut={()=>{SonhandleMouseOut(); handleMouseOut()}}>영화관</a>
                         {isSubMenuVisible && currentMenuValue === 3 && (
+                        // {true && (
                             <div>
                                 <ul>
-                                    <li><a href="/theater/1">서울</a>
-                                        {/* <ul>
-                                            <li><a href="/theater/1">홍대입구</a></li>
-                                            <li><a href="/theater/2">용산</a></li>
-                                            <li><a href="/Calender2">신촌</a></li>
-                                        </ul> */}
-                                    </li>
-                                    <li><a href="/theater/2">경기</a></li>
-                                    <li><a href="/Calender2">인천</a></li>
-                                </ul>
-                             
-                            </div>
+                                    {/* <li onMouseOver={() => SonhandleMouseOver(1)}><a href="/theater/1">서울</a></li>
+                                    <li onMouseOver={() => SonhandleMouseOver(2)}><a href="/theater/2">인천</a></li>
+                                    <li onMouseOver={() => SonhandleMouseOver(3)}><a href="/theater/3">경기</a></li> */}
 
+                                    <li onMouseOver={() => SonhandleMouseOver(1)}><Link to="/theater/1">서울</Link></li>
+                                    <li onMouseOver={() => SonhandleMouseOver(2)}><Link to="/theater/3">경기</Link></li>
+                                    <li onMouseOver={() => SonhandleMouseOver(3)}><Link to="/theater/2">인천</Link></li>
+                                </ul>
+                            </div>
                             
                         )}
                     </li>
-
-                    
                     <li onMouseOver={() => handleMouseOver(4)} onMouseOut={handleMouseOut}>
                         <a href="#" onMouseEnter={() => handleMouseOver(4)} onMouseOut={handleMouseOut}>이벤트</a>
                         {isSubMenuVisible && currentMenuValue === 4 && (
@@ -189,6 +212,41 @@ function Header() {
                 </ul>
 
             </div>
+            {/* {isSubMenuVisible && currentMenuValue === 3 && ( */}
+            {sonisSubMenuVisible && (
+                    <div className='header_nav_son' >
+                        {/* {true && ( */}
+                    {/* {soncurrentMenuValue == 1 &&( */}
+                    {soncurrentMenuValue == 1 &&(
+                        <ul onMouseOut={()=>{SonhandleMouseOut(); handleMouseOut()}} onMouseOver={() => { SonhandleMouseOver(1); handleMouseOver(3); }}>
+
+                            <li><Link to="/theater/1">홍대입구</Link></li>
+                            <li><Link to="/theater/2">용산</Link></li>
+                            <li><Link to="/theater/3">합정</Link></li>
+                            <li><Link to="/theater/4">에비뉴엘</Link></li>
+                            <li><Link to="/theater/5">영등포</Link></li>
+                        </ul>
+                    )}
+                    {soncurrentMenuValue == 2 && (
+                        <ul onMouseOut={()=>{SonhandleMouseOut(); handleMouseOut()}} onMouseOver={() => { SonhandleMouseOver(2); handleMouseOver(3); }}>
+                            <li><Link to="/theater/28">안양일번가</Link></li>
+                            <li><Link to="/theater/29">광명아울렛</Link></li>
+                            <li><Link to="/theater/30">위례</Link></li>
+                        </ul>
+                    )}
+                    {soncurrentMenuValue == 3 && (
+                        <ul onMouseOut={()=>{SonhandleMouseOut(); handleMouseOut()}} onMouseOver={() => { SonhandleMouseOver(3); handleMouseOver(3); }}>
+                            <li><Link to="/theater/31">부평</Link></li>
+                            <li><Link to="/theater/38">부평갈산</Link></li>
+                            <li><Link to="/theater/40">부평역사</Link></li>
+                        </ul>
+                    )}
+
+                </div>
+      
+            
+            )}
+
 
 
             {/* <Navbar expand="lg" className="bg-body-tertiary">

@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.d3739ac5.css",
-    "main.js": "/static/js/main.902eb273.js",
+    "main.css": "/static/css/main.80eeab71.css",
+    "main.js": "/static/js/main.1648d16a.js",
     "static/js/453.9537af23.chunk.js": "/static/js/453.9537af23.chunk.js",
     "static/media/remixicon.svg?t=1708865856766": "/static/media/remixicon.7735fab8dbf8ff78afe9.svg",
     "static/media/Swiper2.jpg": "/static/media/Swiper2.6dced32d1a18d1d410e9.jpg",
@@ -11,6 +11,7 @@
     "static/media/Swiper3.jpg": "/static/media/Swiper3.7e64ad9572c4a2f95110.jpg",
     "static/media/slide_1.jpg": "/static/media/slide_1.54c504c2f1c1a800be65.jpg",
     "static/media/movie.jpg": "/static/media/movie.46d85ef6524b0a5c1a5a.jpg",
+    "static/media/RabbitAcademy2_980180.jpg": "/static/media/RabbitAcademy2_980180.8c1f68ed381ae2b9f75b.jpg",
     "static/media/storeBanner.jpg": "/static/media/storeBanner.bf07d098d0a9519252b5.jpg",
     "static/media/remixicon.woff?t=1708865856766": "/static/media/remixicon.28ceff39ee3e17dc99db.woff",
     "static/media/Swiper5.jpg": "/static/media/Swiper5.8eac91500911b17d0002.jpg",
@@ -61,12 +62,12 @@
     "static/media/IM_ticket2.png": "/static/media/IM_ticket2.83ecd6dccef900f28329.png",
     "static/media/group1.png": "/static/media/group1.1fb9f79ecc3be45172f5.png",
     "index.html": "/index.html",
-    "main.d3739ac5.css.map": "/static/css/main.d3739ac5.css.map",
-    "main.902eb273.js.map": "/static/js/main.902eb273.js.map",
+    "main.80eeab71.css.map": "/static/css/main.80eeab71.css.map",
+    "main.1648d16a.js.map": "/static/js/main.1648d16a.js.map",
     "453.9537af23.chunk.js.map": "/static/js/453.9537af23.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d3739ac5.css",
-    "static/js/main.902eb273.js"
+    "static/css/main.80eeab71.css",
+    "static/js/main.1648d16a.js"
   ]
 }

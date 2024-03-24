@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
-import springBoot.ict.movie.dao.PaymentDTO;
+import springBoot.ict.movie.dto.PaymentDTO;
 
 public interface PaymentService {
 

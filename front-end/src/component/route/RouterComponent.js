@@ -40,7 +40,6 @@ import Store_Payment_Finish from '../page_3/Store_Payment_Finish';
 import MyPage_Store from '../page_6/store_page_3/MyPage_Store';
 
 //page_4
-import listCustomer from '../page_4/listCustomer';
 import singupComponent from '../page_4/singupComponent';
 import loginComponent from '../page_4/loginComponent';
 import signupCheck from '../page_4/signupCheck';
@@ -48,6 +47,7 @@ import searchID from '../page_4/searchID';
 import resultFindID from '../page_4/resultFindID';
 import searchPWD from '../page_4/searchPWD';
 import resultFindPWD from '../page_4/resultFindPWD';
+import OAuthResponseHandler from '../page_4/OAuthResponseHandler';
 
 //page_5
 import movieMain from '../page_5/movie/movieMain';
@@ -78,6 +78,8 @@ import MyPage_consult_list from '../page_6/myinfo/MyPage_consult_list';
 import MyPage_Event from '../page_6/event/MyPage_Event';
 import Event_Home from '../page_6/event/Event_Home';
 import MyapgeConsultDetail from '../page_6/myinfo/MyPage_consult_answer';
+import Event_coupon from '../page_6/event/Event_coupon';
+import Event_coupon_detail from '../page_6/event/Event_coupon_detail';
 
 
 
@@ -131,11 +133,14 @@ const AppRouter = () => {
                                 <Route path="/login" exact={true} component={loginComponent} />
                                 <Route path="/sign-up" exact={true} component={singupComponent} />
                                 <Route path="/signCheck" exact={true} component={signupCheck} />
-                                <Route path="/customerlist" exact={true} component={listCustomer} />
+                               
                                 <Route path="/searchID" exact={true} component={searchID} />
                                 <Route path="/findID" exact={true} component={resultFindID} />
                                 <Route path="/searchPWD" exact={true} component={searchPWD} />
                                 <Route path="/findPWD" exact={true} component={resultFindPWD} />
+
+                                <Route path="/auth/oauth-response/:token/:expirationTime" component={OAuthResponseHandler} />
+                                
                             </Route>
                         
                             {/* page_5 */}
@@ -151,7 +156,7 @@ const AppRouter = () => {
                                 <Route path="/theater/:place_num" exact={true} component={gasan} />
                                 <Route path="/FAQ" exact={true} component={FAQ} />
                                 <Route path="/NOTICE" exact={true} component={NOTICE} />
-                                <Route path="/NOTICE2" exact={true} component={NOTICE2} />
+                                <Route path="/NOTICE2/:notice_num" exact={true} component={NOTICE2} />
                                 <Route path="/groupform" exact={true} component={groupform} />
                                 
                             
@@ -172,6 +177,8 @@ const AppRouter = () => {
                                 <Route path="/event_Home" exact={true} component={Event_Home} />
                                 <Route path="/MyPage_Event" exact={true} component={MyPage_Event} />
                                 <Route path="/MyPage_consult_answer/:one_id" exact={true} component={MyapgeConsultDetail} />
+                                <Route path="/Event_coupon/" exact={true} component={Event_coupon} />
+                                <Route path="/Event_coupon_detail/:ic_num" exact={true} component={Event_coupon_detail} />
                                 
                             </Route>
                             

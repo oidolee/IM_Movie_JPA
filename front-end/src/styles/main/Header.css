@@ -110,14 +110,16 @@
     left: 0;
     top: 55px;
     background-color: rgba(0, 0, 0);
-    padding: 10px 0;
+    padding: 12px 0;
+    z-index: 100;
 }
 .header_section .nav >ul>li>div>ul{
     display: flex;
     justify-content: center;
+    
 }
 .header_section .nav >ul>li>div>ul>li{
-    margin-right: 20px;
+    margin-right: 20px;    
 }
 .header_section .nav >ul>li>div>ul>li>a{
     font-size: 12px;
@@ -130,3 +132,25 @@
     color: #a7a7a7;
 }
 
+/* 하단 영화관 지역 css start*/
+.header_nav_son{
+    height: 50px;
+    margin-top: 15px;
+    background-color: rgba(0, 0, 0, 0.8);
+    /* position: relative; */
+}
+.header_nav_son > ul{
+    display: flex;
+    justify-content: center;
+}
+.header_nav_son > ul >li{
+    line-height: 50px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.header_nav_son > ul >li > a{
+    color: #a7a7a7;
+}
+
+/* 하단 영화관 지역 css end*/

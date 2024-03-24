@@ -112,6 +112,7 @@ function FAQ() {
       <Accordion.Item eventKey="0">
        <Accordion.Header className='header' >영화관 이용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;군인 할인은 어떻게 받나요?</Accordion.Header>
         <Accordion.Body>
+          <p style={{ textAlign: 'left' }}>
           [군인할인] 군인 고객님들에게 할인 혜택을 제공하고 있습니다.<br/>
           
           ■ 대상:대한민국 군장변(ROTC, 사관생도, 부사관후보생, 상근예비역, 간부포함) / 대한민국 예비군 1~2년차 / 국방부 <br/>
@@ -146,6 +147,7 @@ function FAQ() {
         - 4D, 샤롯데관 등 스페셜관은 할인대상에 포함되지 않습니다. <br/>
         - 기타할인과 중복 할인 불가합니다. <br/>
         - 본 이벤트의 혜택은 일부 영화관에서 사용 불가합니다.(전주송천) 
+        </p>
       </Accordion.Body>
       </Accordion.Item>
 

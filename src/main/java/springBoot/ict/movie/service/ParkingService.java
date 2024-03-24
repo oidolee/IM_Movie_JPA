@@ -16,6 +16,11 @@ public interface ParkingService {
 	// 수정
 	public void editPark(ParkingDTO dto)
 			throws ServletException, IOException;
+	
+	//삭제
+	public void parkDelete(ParkingDTO dto) 
+			throws ServletException, IOException;
+			
 
 //	// 등록
 //	public void savePark(ParkingDTO dto)

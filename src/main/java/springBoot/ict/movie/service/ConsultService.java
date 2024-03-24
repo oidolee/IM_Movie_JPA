@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 
 import springBoot.ict.movie.dto.ConsultAnswerDTO;
 import springBoot.ict.movie.dto.ConsultDTO;
-import springBoot.ict.movie.dto.CustomerDTO;
 
 public interface ConsultService {
 	

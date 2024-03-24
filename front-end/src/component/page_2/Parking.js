@@ -31,7 +31,7 @@ function Parking() {
     }
 
     if (ip_carnumber.length !== 4) {
-      alert("차량번호 자리수를 확인 바랍니다. \n(4자리 입력 바랍니다)")
+      alert("차량번호 자리수를 확인 바랍니다.\n(4자리 입력 바랍니다.)")
       return false;
     }
     let block = '';
@@ -41,13 +41,17 @@ function Parking() {
       // total_plot이 비어있지 않으면 "_"로 분리하여 ip_block과 ip_number에 할당
       [block, number] = total_plot.split('-');
     }
+    let now = new Date();
+    let formattedDate = now.toISOString();
+    
     let inputData = {
       ip_carnumber: ip_carnumber,
       ip_client: ip_client,
       ip_block: block,
       ip_number: number,
       ip_no: ip_no,
-      ip_inoutcheck: 'Y'
+      ip_regdate : formattedDate,
+      ip_reservation: 'Y'
     };
 
     console.log(" 주차등록 값 : ");
@@ -71,6 +75,8 @@ function Parking() {
   const parkingList = () => {
     ApiService.parkingList()
       .then((res) => {
+        console.log("res")
+        console.log(res)
         setParkingData(res.data);
         setLists(res.data);
       })
@@ -91,7 +97,7 @@ function Parking() {
     if (!parkingLot.hasOwnProperty(entry.ip_block)) {
       parkingLot[entry.ip_block] = [];
     }
-    parkingLot[entry.ip_block].push([entry.ip_number, entry.ip_inoutcheck, entry.ip_no]);
+    parkingLot[entry.ip_block].push([entry.ip_number, entry.ip_reservation, entry.ip_no]);
   }
 
   return (
@@ -128,36 +134,32 @@ function Parking() {
         </div>
 
         <Form>
+
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
             <Col sm>
-              <Form.Control
-                type="text"
-                placeholder="차량번호"
-                name="ip_carnumber"
+              <Form.Control 
+                type="text" 
+                placeholder="차량번호" 
+                name="ip_carnumber" 
                 value={ip_carnumber}
-                onChange={(e) => {
-                  let inputValue = e.target.value.trim();
-                  const regex = /^[0-9]*$/;
-                  if (regex.test(inputValue)) {
-                    // 입력값이 숫자로만 구성된 경우
-                    // 4자리 이상이면 초과하는 부분을 자르고 최대 4자리까지만 남깁니다.
-                    if (inputValue.length > 4) {
-                      inputValue = inputValue.slice(0, 4);
-                    }
-                    // 상태를 업데이트합니다.
-                    setIpCarNumber(inputValue);
-                  } else {
-                    // 문자가 입력된 경우, 문자를 제거하여 상태를 업데이트합니다.
-                    const trimmedValue = inputValue.slice(0, -1);
-                    setIpCarNumber(trimmedValue);
-                    alert("숫자만 입력해주세요");
+                onBlur={(e) => {
+                  // 입력값이 4자를 초과하는지 확인
+                  if (e.target.value.length !== 4) {
+                    // 4자를 초과하면 경고 메시지 표시
+                    alert('차량번호 4자리 입력 바랍니다.');
+                    // 입력값을 빈 문자열로 초기화
                   }
+                  setIpCarNumber(e.target.value.trim().slice(0,4));
+                }}
+                onChange={(e) => {
+                  setIpCarNumber(e.target.value.trim());
                 }}
               />
 
 
             </Col>
           </Form.Group>
+
 
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
             <Col sm>
