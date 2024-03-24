@@ -508,9 +508,9 @@ class ApiService {
         return axios.get(serverUrl + '/page_5/timeList'); 
     }
 
-    reloadTimeList(place_num){
-        console.log('reloadTimeList() 호출!!',place_num)
-        return axios.get(serverUrl + '/page_5/timeList/' +place_num ); 
+    reloadTimeList(inputData){
+        console.log('reloadTimeList() 호출!!',inputData)
+        return axios.post(serverUrl + '/page_5/timeLists/', inputData); 
     }
 
     getLocation(place_num){

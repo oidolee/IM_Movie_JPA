@@ -15,7 +15,7 @@ public interface MoviePlaceService {
 			throws ServletException, IOException;
 	
 	//리스트
-	public List<MoviePlaceDTO> getlistTime() 
+	public List<MoviePlaceDTO> getlistTime(MoviePlaceDTO dto) 
 			throws ServletException, IOException;
 	
 }

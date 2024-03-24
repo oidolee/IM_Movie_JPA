@@ -15,9 +15,9 @@ import org.hibernate.annotations.DynamicUpdate;
 import lombok.Data;
 
 @Data
+@Entity
 @Table(name = "im_parking")
 @DynamicUpdate
-@Entity
 public class ParkingDTO {
     
     @Id
@@ -32,8 +32,11 @@ public class ParkingDTO {
     private char ip_inoutcheck = 'N'; // Default value set to 'N'
     private char ip_reservation = 'N'; // Default value set to 'N'
     private String ip_client;
+    @Column(nullable = true)
     private Timestamp ip_regdate;
-    private Timestamp in_date; 
+    @Column(nullable = true)
+    private Timestamp in_date;
+    @Column(nullable = true)
     private Timestamp out_date;
     
     @PreUpdate
