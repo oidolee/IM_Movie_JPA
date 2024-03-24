@@ -45,14 +45,14 @@ public class MoviePlaceController {
 	} 
 	
 	//list
-	@PostMapping("/timeLists") 
-	public List<MoviePlaceDTO> getTimeList(@RequestBody MoviePlaceDTO dto)
-	        throws ServletException, IOException {
-		logger.info("<<< url -> timeList start dto :");
-		System.out.println(dto);
-	    List<MoviePlaceDTO> list = service.getlistTime(dto);
-	    System.out.println("TimeList : " + list);
-	    
-	    return list;
-	} 	
+//	@PostMapping("/timeLists") 
+//	public List<MoviePlaceDTO> getTimeList(@RequestBody MoviePlaceDTO dto)
+//	        throws ServletException, IOException {
+//		logger.info("<<< url -> timeList start dto :");
+//		System.out.println(dto);
+//	    List<MoviePlaceDTO> list = service.getlistTime(dto);
+//	    System.out.println("TimeList : " + list);
+//	    
+//	    return list;
+//	} 	
 }

@@ -63,6 +63,7 @@ public class CouponController {
 		try {
 
 			cpdto = service.selectCoupon(ic_num);
+			System.out.println(cpdto);
 			resultCode = "200";
 			resultMsg = "selectConsultAnswer Success";
 		} catch (Exception e) {
@@ -154,11 +155,6 @@ public class CouponController {
 			service.deleteCoupon(ic_num);		
 			resultCode = "200";
 			resultMsg = "DiscountInsert Success";
-			
-//			if(deleteCnt == 1) {
-//				resultCode = "200";
-//				resultMsg = "DiscountInsert Success";
-//			}
 		} 
 		
 		catch(Exception e) {
@@ -187,6 +183,7 @@ public class CouponController {
 		String resultMsg = "";
 
 		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println("cpcusdto: " + cpcusdto);
 
 		try {
 
