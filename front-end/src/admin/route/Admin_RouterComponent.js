@@ -39,6 +39,7 @@ import Admin_Notice_List from '../page_5/Admin_Notice_List';
 import Admin_Notice_Add from '../page_5/Admin_Notice_Add';
 import Admin_Notice_Edit from '../page_5/Admin_Notice_Edit';
 import Admin_GroupForm_List from '../page_5/Admin_GroupForm_List';
+import Admin_GroupForm_Answer from '../page_5/Admin_GroupForm_Answer';
 
 
 // page_6
@@ -101,6 +102,7 @@ const Admin_RouterComponent = () => {
                     <Route path="/admin/page_5/Admin_Notice_Add" exact={true} component={Admin_Notice_Add} />
                     <Route path="/admin/page_5/Admin_Notice_Edit/:notice_num" exact={true} component={Admin_Notice_Edit} />
                     <Route path="/admin/page_5/Admin_GroupForm_List" exact={true} component={Admin_GroupForm_List} />
+                    <Route path="/admin/page_5/Admin_GroupForm_Answer" exact={true} component={Admin_GroupForm_Answer} />
                 </Route>
 
 
