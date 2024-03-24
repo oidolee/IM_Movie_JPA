@@ -34,7 +34,7 @@ function Admin_GroupForm_List ({ history }) {
   // 등록
   const groupAdd = () => {
     window.localStorage.removeItem("group_id");
-    history.push("/board/page_5/groupform");
+    history.push("/admin/page_5/Admin_GroupForm_Answer");
   };
 
 //   // 수정
@@ -83,6 +83,7 @@ function Admin_GroupForm_List ({ history }) {
       <Table className="GroupForm_List_Content">
         <TableHead>
           <TableRow>
+            <TableCell>아이디</TableCell>
             <TableCell>영화관위치</TableCell>
             <TableCell>분류</TableCell>
             <TableCell>예상인원</TableCell>
@@ -105,7 +106,7 @@ function Admin_GroupForm_List ({ history }) {
         <TableBody>
           {lists.map((list) => (
             <TableRow key={list.group_id}>
-              
+              <TableCell>{list.c_email}</TableCell>
               <TableCell>{list.group_loc}</TableCell>
               <TableCell>{list.group_type}</TableCell>
               <TableCell>{list.group_expeople}</TableCell>
