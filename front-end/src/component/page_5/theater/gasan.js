@@ -37,6 +37,7 @@ function Place() {
   const [checkMoviTitle, setCheckMoviTitle] = useState({});
   const { place_num } = useParams(); // 영화 지점 번호 
   const [movieLocation, setMovieLocation] = useState();
+  const [selectMovieDate, setSelectMovieDate] = useState();
 
 
   const startSlide = () => {
@@ -83,11 +84,12 @@ function Place() {
     setDate(currentDate);
     setWeek(currentWeek);
     setSelectedDate(currentDate); // 처음 로딩시 오늘날짜 클릭
+    setSelectMovieDate(currentDate);
   }, []);
 
   const makeWeekArr = (date) => {
     let week = [];
-    for (let i = 0; i < 14; i++) { // 14일을 2주로 고정
+    for (let i = 0; i < 10; i++) { // 10일
       let newDate = new Date(date.valueOf() + 86400000 * i); // 현재 날짜부터 i일 뒤의 날짜를 구함
       week.push([i, newDate]); // 배열에 [인덱스, 날짜] 형태로 추가
     }
@@ -127,10 +129,10 @@ function Place() {
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
-    //영화관 상세페이지
+    console.log("place_num changed:", place_num);
     getLocation();
     reloadTimeList();
-  }, []);
+  }, [place_num]);
   console.log("place_num")
   console.log(place_num)
 
@@ -149,7 +151,12 @@ function Place() {
   };
 
   const reloadTimeList = () => {
+    let inputData = {
+      place_num : place_num
+    }
+    console.log("처음 넘기는 값 ")
     ApiService.reloadTimeList(place_num)
+   
       .then((res) => {
         console.log("places");
         setPlaces(res.data);
@@ -286,6 +293,8 @@ function Place() {
             {selectedValue === 1 && (
               <div className={`calendarwrap ${style.calendarwrap}`}>
                 <div className={style.calendarContainer}>
+
+                  <input type="text" value={selectMovieDate} />
                   <div className={style.calendarHeader}>
                     <button onClick={onPressArrowLeft}>&lt;</button>
                     <h2>
@@ -319,9 +328,6 @@ function Place() {
                       </div>
                     ))}
                   </div>
-
-
-
 
                 </div>
               </div>

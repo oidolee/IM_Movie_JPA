@@ -34,7 +34,7 @@ function Admin_Parking() {
     }
 
     if (ip_carnumber.length !== 4) {
-      alert("차량번호 자리수를 확인 바랍니다.")
+      alert("차량번호 자리수를 확인 바랍니다.\n(4자리 입력 바랍니다.)")
       return false;
     }
     let block = '';
@@ -54,6 +54,8 @@ function Admin_Parking() {
       ip_number: number,
       ip_no: ip_no,
       ip_regdate : formattedDate,
+      in_date: "2024-01-01T00:00:00", // 특정한 날짜와 시간으로 초기화
+      out_date: "2024-01-01T00:00:00", // 특정한 날짜와 시간으로 초기화
       ip_reservation: 'Y'
     };
 
@@ -78,6 +80,8 @@ function Admin_Parking() {
   const parkingList = () => {
     ApiService.parkingList()
       .then((res) => {
+        console.log("결과")
+        console.log(res.data)
         setParkingData(res.data);
         setLists(res.data);
       })
@@ -112,11 +116,13 @@ function Admin_Parking() {
       ip_carnumber: "",
       ip_reservation: 'N',
       ip_client: "",
-      ip_regdate: null,
-      in_date: null,
-      out_date: null,
+      ip_regdate:"2024-01-01T00:00:00",
+      in_date:"2024-01-01T00:00:00",
+      out_date:"2024-01-01T00:00:00",
       reservation_id: ""
     };
+    
+    console.log("주차 삭제")
     console.log(inputData)
     ApiService.parkDelete(inputData)
     .then((res) => {
@@ -132,7 +138,7 @@ function Admin_Parking() {
     <div className={`Parking ${sytle.Parking}`}>
       <Container className={`Parking_panel ${sytle.Parking_panel}`}>
         <h1>{(mode === 1) ? '주차등록' : (mode === 2) ? '삭제모드' : '수정모드'}</h1>
-
+        <p>*삭제 시 삭제모드 클릭 후 해당 구역 클릭</p>
         <div className={`Parking_seat_box ${sytle.Parking_seat_box}`}>
           {Object.keys(parkingLot).map((lot) => (
             <div key={lot} className={`Parking_lot ${sytle.Parking_lot}`}>
@@ -168,21 +174,27 @@ function Admin_Parking() {
 
         <Form>
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-            <Col sm>
-              <Form.Control type="text" placeholder="차량번호" name="ip_carnumber" value={ip_carnumber}
-                onChange={(e) => {
-                  // 입력값이 15자를 초과하는지 확인
-                  if (e.target.value.length <= 15) {
-                    // 15자 이하면 입력값 업데이트
+              <Col sm>
+                <Form.Control 
+                  type="text" 
+                  placeholder="차량번호" 
+                  name="ip_carnumber" 
+                  value={ip_carnumber}
+                  onBlur={(e) => {
+                    // 입력값이 4자를 초과하는지 확인
+                    if (e.target.value.length !== 4) {
+                      // 4자를 초과하면 경고 메시지 표시
+                      alert('차량번호 4자리 입력 바랍니다.');
+                      // 입력값을 빈 문자열로 초기화
+                    }
+                    setIpCarNumber(e.target.value.trim().slice(0,4));
+                  }}
+                  onChange={(e) => {
                     setIpCarNumber(e.target.value.trim());
-                  } else {
-                    // 15자를 초과하면 경고 메시지 표시
-                    alert('차량번호는 15자를 초과할 수 없습니다.');
-                  }
-                }}
-              />
-            </Col>
-          </Form.Group>
+                  }}
+                />
+              </Col>
+            </Form.Group>
 
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
             <Col sm>

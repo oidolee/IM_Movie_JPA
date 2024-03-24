@@ -155,17 +155,18 @@ function Header() {
                         // {true && (
                             <div>
                                 <ul>
+                                    {/* <li onMouseOver={() => SonhandleMouseOver(1)}><a href="/theater/1">서울</a></li>
+                                    <li onMouseOver={() => SonhandleMouseOver(2)}><a href="/theater/2">인천</a></li>
+                                    <li onMouseOver={() => SonhandleMouseOver(3)}><a href="/theater/3">경기</a></li> */}
+
                                     <li onMouseOver={() => SonhandleMouseOver(1)}><Link to="/theater/1">서울</Link></li>
                                     <li onMouseOver={() => SonhandleMouseOver(2)}><Link to="/theater/2">인천</Link></li>
                                     <li onMouseOver={() => SonhandleMouseOver(3)}><Link to="/theater/3">경기</Link></li>
-
                                 </ul>
                             </div>
                             
                         )}
                     </li>
-
-                    
                     <li onMouseOver={() => handleMouseOver(4)} onMouseOut={handleMouseOut}>
                         <a href="#" onMouseEnter={() => handleMouseOver(4)} onMouseOut={handleMouseOut}>이벤트</a>
                         {isSubMenuVisible && currentMenuValue === 4 && (
@@ -208,6 +209,10 @@ function Header() {
                             <li><Link to="/theater/1">홍대입구</Link></li>
                             <li><Link to="/theater/2">용산</Link></li>
                             <li><Link to="/theater/3">서울3</Link></li>
+                            
+                            {/* <li><a href="/theater/1">홍대입구</a></li>
+                            <li><a href="/theater/2">용산</a></li>
+                            <li><a href="/theater/3">서울3</a></li> */}
                         </ul>
                     )}
                     {soncurrentMenuValue == 2 && (
