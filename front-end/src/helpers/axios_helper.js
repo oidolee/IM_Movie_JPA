@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'development') {
 
 console.log(serverUrl);
 
-axios.defaults.baseURL = serverUrl;
+axios.defaults.baseURL = proHost;
 axios.defaults.headers.post["Content-Type"] = 'application/json';
 
 
