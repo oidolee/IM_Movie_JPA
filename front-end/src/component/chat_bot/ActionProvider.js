@@ -32,7 +32,7 @@ class ActionProvider {
     // 기존 기본 테스트 
 
     helloWolrdHandler = () => {
-        const message = this.createChatBotMessage("안녕하세요? \n저는 IM 챗봇입니다.")
+        const message = this.createChatBotMessage("안녕하세요? \n저는 IM 챗봇입니다. \n 무엇을 도와드릴까요?")
         this.setChatbotMessage(message);
     }
 
@@ -49,7 +49,12 @@ class ActionProvider {
     }
 
     recommandMovies = () => {
-        const message = this.createChatBotMessage("추천영화 알려줍니다.")
+        const message = this.createChatBotMessage("추천장르 알려줍니다.",
+            {
+                widget: "chooseTickeck"
+            }
+        )
+        
         this.setChatbotMessage(message);
     }
 
@@ -57,9 +62,10 @@ class ActionProvider {
     setChatbotMessage = (message) =>{
         this.setState(state => ({ ...state, messages:[...state.messages, message]}))
     }
+    //처음 부분 3가지
 
 
-    // 영화소개     
+
     movieNews = () => {
         const message = this.createChatBotMessage(
             "영화 소개를 해드릴게요!",
@@ -70,10 +76,43 @@ class ActionProvider {
         this.addMessageToState(message);
     }
 
+    // 영화소개     
+    goHome = () => {
+        const message = this.createChatBotMessage(
+            "다시 선택해주세요!",
+            {
+                widget: "options", // 위젯 설정
+            }
+        );
+        this.addMessageToState(message);
+    }
+
     //클릭시 나오게 
     tickect_1_answer = () => {
         const message = this.createChatBotMessage(
             "영화 파묘를 추천해 드립니다!",
+            {
+                widget: "tickect_1_2_Q", // 위젯 설정
+            }
+        );
+    
+        this.addMessageToState(message);
+    };
+
+    tickect_2_answer = () => {
+        const message = this.createChatBotMessage(
+            "밥 말리 원러브를 추천해 드립니다!",
+            {
+                widget: "tickect_1_2_Q", // 위젯 설정
+            }
+        );
+    
+        this.addMessageToState(message);
+    };
+
+    tickect_3_answer = () => {
+        const message = this.createChatBotMessage(
+            "돌고래 밸루를 추천해 드립니다!",
             {
                 widget: "tickect_1_2_Q", // 위젯 설정
             }

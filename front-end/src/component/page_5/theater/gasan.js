@@ -38,7 +38,8 @@ function Place() {
   const { place_num } = useParams(); // 영화 지점 번호 
   const [theaterName, setTheaterName] = useState();
   const [selectMovieDate, setSelectMovieDate] = useState();
-
+  const [dayBoxCount, setDayBoxCount] = useState(1);
+  
 
   const startSlide = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
@@ -106,6 +107,7 @@ function Place() {
     let newWeek = makeWeekArr(newDate);
     setDate(newDate);
     setWeek(newWeek);
+    setDayBoxCount(dayBoxCount-1)
   };
 
   const onPressArrowRight = () => {
@@ -113,6 +115,7 @@ function Place() {
     let newWeek = makeWeekArr(newDate);
     setDate(newDate);
     setWeek(newWeek);
+    setDayBoxCount(dayBoxCount+1)
   };
 
   const [selectedDate, setSelectedDate] = useState(null);
@@ -255,8 +258,6 @@ function Place() {
       <div className={`place_wrap1 ${style.place_wrap1}`}>
         <div className={`place_title ${style.place_title}`}>
           <label for="pp_name">{theaterName && theaterName.ticketmap_name ? theaterName.ticketmap_name : ""}점</label>
-
-
           <a
             href="/groupform"
             className={`ddgroup_btn ${style.ddgroup_btn}`}
@@ -304,9 +305,11 @@ function Place() {
               <div className={`calendarwrap ${style.calendarwrap}`}>
                 <div className={style.calendarContainer}>
 
-                  <input type="hidden" value={selectMovieDate} />
+                  <input id="todayBox" type="hidden" value={selectMovieDate} />
+                  <input id="dayBoxCount" type="hidden" value={dayBoxCount} />
                   <div className={style.calendarHeader}>
-                    <button onClick={onPressArrowLeft}>&lt;</button>
+                    
+                    <button style={{ opacity: dayBoxCount !== 1 ? '1' : '0', pointerEvents: dayBoxCount !== 1 ? 'auto' : 'none' }} onClick={onPressArrowLeft}>&lt;</button>
                     <h2>
                       {date.toLocaleString("default", {
                         month: "long",

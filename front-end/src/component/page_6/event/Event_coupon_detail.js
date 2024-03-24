@@ -3,10 +3,17 @@ import style from '../../../styles/page_6/Event_coupon_detail_moudle.css';
 import ScrollReveal from 'scrollreveal';
 import ApiService from '../../../ApiService';
 import { useParams } from 'react-router-dom';
-
+import { useCookies } from 'react-cookie';
+import { Typography, Select, MenuItem, TextField, Button } from "@mui/material";
+import { useHistory } from 'react-router-dom';
 const Event_coupon_detail = () => {
     const { ic_num } = useParams();
     const [couponList, setCouponList] = useState([]);
+    const [cookies, setCookie] = useCookies(['idName', 'c_email']);
+    const [emailCheck, setEmailCheck] = useState('');
+    const history = useHistory();
+
+
     useEffect(() => {
         // ScrollReveal 시작 코드 추가
         ScrollReveal().reveal('.scrollUp', {
@@ -18,33 +25,157 @@ const Event_coupon_detail = () => {
             reset: true
         });
         reloadCouponList();
+        if (cookies.c_email !== undefined) {
+            setEmailCheck(cookies.c_email);
+        }
     }, []); // 한 번만 실행됨
+
+    const [couponCus, setCouponCus] = useState({
+        c_email: emailCheck,
+        ic_code: '',
+        ic_name: '',
+        ic_category: '',
+        ic_point: '',
+        ic_startDate: '',
+        ic_endDate: '',
+    })
+    const onChange = (e) => {
+        const { name, value } = e.target;
+        setCouponCus(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const saveCoupon = (e) => {
+        e.preventDefault();
+
+        ApiService.addCusCoupon(couponCus)
+            .then((res) => {
+                console.log("addCoupon 성공 : ", res.data);
+                history.push("/MyPage_coupon");
+            })
+            .catch((err) => {
+                console.log("addCoupon 실패 : ", err);
+            });
+    };
+
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1, 두 자리 숫자로 만들기 위해 padStart 사용
+        const day = String(date.getDate()).padStart(2, '0'); // 두 자리 숫자로 만들기 위해 padStart 사용
+        return `${year}-${month}-${day}`;
+    };
 
     const reloadCouponList = () => {
         ApiService.couponList(ic_num)
             .then(res => {
                 console.log('res.data', res.data)
-                setCouponList(res.data.cpdto);
+                const couponData = res.data.cpdto;
+                couponData.ic_regDate = formatDate(couponData.ic_regDate); // 작성일 포맷 변경
+                setCouponList(couponData);
             })
             .catch(err => {
                 console.log('fetchCoupon() ERROR!!', err);
             })
     }
     return (
-        <div className={`event_detail ${style.event_detail}`}>
-            <div className={`event_ic_name ${style.event_ic_name}`}>
-                <div>
-                    제목 : {couponList.ic_name}
+        <div>
+            <div className={`Event_coupon_detail ${style.Event_coupon_detail}`} >
+                <div >
+                    <div className={`Event_coupon_name ${style.Event_coupon_name}`}>
+                        <h5>제목 : {couponList.ic_name}</h5>
+                    </div>
+                    <div className={`Event_coupon_regDate ${style.Event_coupon_regDate}`}>
+                        <h5>작성일 : {couponList.ic_regDate}</h5>
+                    </div>
                 </div>
                 <div>
-                    작성일 : {couponList.ic_regDate}
+                    <img src={`${process.env.PUBLIC_URL}/page_6/${couponList.ic_img}`} style={{ width: '80%' }} alt='coupon_1' />
                 </div>
-            </div>
-            <div>
-                <img src={`${process.env.PUBLIC_URL}/page_6/${couponList.ic_img}`} alt='coupon_1' />
-            </div>
-            <div>
-                {couponList.ic_content}
+                <div className={`Event_coupon_content ${style.Event_coupon_content}`}>
+                    {couponList.ic_content}
+                </div>
+                <div className={`Event_coupon_content ${style.Event_coupon_content}`}>
+
+
+                    <TextField
+                        required
+                        id="standard-required"
+                        variant="standard"
+                        label="쿠폰코드"
+                        type="text"
+                        name="ic_code"
+                        value={couponList.ic_code}
+                        onChange={onChange}
+
+                    />
+                    <TextField
+                        required
+                        id="standard-required"
+                        variant="standard"
+                        label="쿠폰 이름"
+                        type="text"
+                        name="ic_name"
+                        value={couponList.ic_name}
+                        onChange={onChange}
+                    />
+                    <br />
+                    <TextField
+                        required
+                        id="standard-required"
+                        variant="standard"
+                        label="ic_category"
+                        type="text"
+                        name="ic_category"
+                        value={couponList.ic_category}
+                        onChange={onChange}
+                    />
+                    <br />
+                    <TextField
+                        required
+                        id="standard-required"
+                        variant="standard"
+                        label="포인트"
+                        type="text"
+                        name="ic_point"
+                        value={couponList.ic_point}
+                        onChange={onChange}
+                    />
+                    <br />
+                    <br />
+
+                    <TextField
+                        required
+                        id="standard-required"
+                        variant="standard"
+                        label="쿠폰사용시작 날짜 (0000-00-00)형식"
+                        type="text"
+                        name="ic_startDate"
+                        value={couponList.ic_startDate}
+                        onChange={onChange}
+                    />
+                    <TextField
+                        required
+                        id="standard-required"
+                        variant="standard"
+                        label="쿠폰사용종료 날짜 (0000-00-00)형식"
+                        type="text"
+                        name="ic_endDate"
+                        value={couponList.ic_endDate}
+                        onChange={onChange}
+                    />
+
+                    <Button
+                        className="saveBtn"
+                        variant="contained"
+                        color="primary"
+                        onClick={saveCoupon}
+                    >
+                        쿠폰 다운로드
+                    </Button>
+                </div>
             </div>
         </div>
     );
