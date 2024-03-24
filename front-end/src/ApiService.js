@@ -170,7 +170,8 @@ class ApiService {
         console.log("login start 로그인:")
         console.log(inputData)
         
-        return axios.post(serverUrl + "/login", inputData);
+        // return axios.post(serverUrl + "/login", inputData);
+        return axios.post("http://localhost:8081/login", inputData);
     }
 
     // 아이디 중복 체크 
