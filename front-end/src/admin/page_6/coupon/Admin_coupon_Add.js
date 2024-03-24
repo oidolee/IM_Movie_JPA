@@ -28,9 +28,13 @@ function Admin_coupon_Add({ history }) {
 
     ic_code: generateUniqueRandomCode(),
     ic_name: "",
+    ic_img: "",
     ic_category: "",
     ic_point: "",
-    ic_useDate: "",
+    ic_content: "",
+    ic_contetn: "",
+    ic_startDate: "",
+    ic_endDate: "",
 
   });
 
@@ -39,6 +43,15 @@ function Admin_coupon_Add({ history }) {
     setCouponInfo(prevState => ({
       ...prevState,
       [name]: value
+    }));
+  };
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    const fileName = selectedFile ? selectedFile.name : ""; // 파일이 선택되었을 때만 파일 이름 추출
+    setCouponInfo(prevState => ({
+      ...prevState,
+      ic_img: fileName
     }));
   };
 
@@ -87,16 +100,15 @@ function Admin_coupon_Add({ history }) {
         onChange={onChange}
       />
       <br />
-      {/* <TextField
+      <TextField
         required
         id="standard-required"
         variant="standard"
-        label="ic_category"
-        type="text"
-        name="ic_category"
-        value={couponInfo.ic_category}
-        onChange={onChange}
-      /> */}
+        label="쿠폰 이미지"
+        type="file"
+        name="ic_img"
+        onChange={handleFileChange}
+      />
       <br />
       <br />
       <Select
@@ -126,14 +138,37 @@ function Admin_coupon_Add({ history }) {
         onChange={onChange}
       />
       <br />
+      <br />
       <TextField
         required
         id="standard-required"
         variant="standard"
-        label="사용기한"
+        label="쿠폰 상세 내용"
+        multiline  // 이 부분이 멀티라인을 활성화시킵니다.
         type="text"
-        name="ic_useDate"
-        value={couponInfo.ic_useDate}
+        name="ic_content"
+        value={couponInfo.ic_content}
+        onChange={onChange}
+      />
+      <br />
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="쿠폰사용시작 날짜 (0000-00-00)형식"
+        type="text"
+        name="ic_startDate"
+        value={couponInfo.ic_startDate}
+        onChange={onChange}
+      />
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="쿠폰사용종료 날짜 (0000-00-00)형식"
+        type="text"
+        name="ic_endDate"
+        value={couponInfo.ic_endDate}
         onChange={onChange}
       />
       <br />
