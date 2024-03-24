@@ -1,22 +1,31 @@
 import React from "react";
+import { useHistory } from "react-router-dom"; // React Router의 useHistory 임포트
 
 import "./Options.css";
 
 const Options = (props) => {
+  const history = useHistory(); // useHistory 훅을 이용하여 history 객체 생성
+
+  const handleOptionClick = () => {
+    history.push("/page3"); // "스토어" 페이지로 이동
+  };
+
   const options = [
     {
       text: "영화예매",
-      // handler: props.actionProvider.showTikeckPage,
-      id: 1,
-      // text: "Javascript",
       handler: props.actionProvider.handlechooseTickeck,
-      // id: 1,
+      id: 1,
     },
-    { text: "영화소식", 
-    handler: props.actionProvider.movieNews,
-      id: 2 
+    {
+      text: "영화소식",
+      handler: props.actionProvider.movieNews,
+      id: 2,
     },
-    { text: "스토어", handler: () => {}, id: 3 },
+    {
+      text: "스토어",
+      handler: props.actionProvider.handleOptionClick, // 수정된 부분: 스토어 페이지로 이동하는 함수
+      id: 3,
+    },
   ];
 
   const buttonsMarkup = options.map((option) => (
