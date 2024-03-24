@@ -1,16 +1,32 @@
-.event_detail{
-    display: inline;
+.Event_coupon_detail{
+    
     width: 980px;
-    border: 1px solid black;
+    
+    justify-content: center;
+    background-color: rgb(146, 146, 146);
+    margin: auto;
+    margin-top: 10px;
+}
+
+
+.Event_coupon_name{
+    border-bottom: 2px solid rgba(245, 245, 245, 0.5);
+    background: whitesmoke;
+    width: 80%;
+    margin: 10px auto;
     
 }
 
-.event_detail .event_ic_name{
-    display: flex;
-    border-bottom: 2px solid black;
-    background: rgb(187, 187, 187);
-    position: relative;
-    width: 980px;
-    justify-content: space-between;
-    margin: auto;
+.Event_coupon_regDate{
+    border-bottom: 2px solid rgba(245, 245, 245, 0.5);
+    background: whitesmoke;
+    width: 80%;
+    margin: 10px auto;
+}
+
+.Event_coupon_content{
+    margin-top: 10px;
+    background: whitesmoke;
+    width: 80%;
+    margin: 10px auto;
 }
