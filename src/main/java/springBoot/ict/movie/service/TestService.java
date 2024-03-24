@@ -12,8 +12,6 @@ public class TestService {
 	@Autowired
 	TestMapper testMapper;
 	
-	
-	
 	public ParkingDTO getTestNo(int ip_no) {
 		return testMapper.selectById(ip_no);
 	}

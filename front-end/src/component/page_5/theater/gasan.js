@@ -80,12 +80,16 @@ function Place() {
       now.getDate()  
     );
 
+    let currentDate_2 = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
+
+
     let currentWeek = makeWeekArr(currentDate);
     setDate(currentDate);
     setWeek(currentWeek);
     setSelectedDate(currentDate); // 처음 로딩시 오늘날짜 클릭
-    setSelectMovieDate(currentDate);
-  }, []);
+    setSelectMovieDate(currentDate_2);
+    reloadTimeList(currentDate_2);
+  }, [place_num]);
 
   const makeWeekArr = (date) => {
     let week = [];
@@ -114,7 +118,11 @@ function Place() {
   const [selectedDate, setSelectedDate] = useState(null);
 
   const handleDateClick = (clickedDate) => {
-    console.log(clickedDate)
+    let currentDate_2 = `${clickedDate.getFullYear()}-${(clickedDate.getMonth() + 1).toString().padStart(2, '0')}-${clickedDate.getDate().toString().padStart(2, '0')}`;
+    console.log("handleDateClick")
+    console.log(currentDate_2)
+    setSelectMovieDate(currentDate_2)
+    reloadTimeList(currentDate_2)
     setSelectedDate(clickedDate); // 선택된 날짜 상태 변수 업데이트
     // 여기서 선택된 날짜에 대한 추가적인 작업을 수행할 수 있습니다.
   };
@@ -129,12 +137,9 @@ function Place() {
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
-    console.log("place_num changed:", place_num);
     getLocation();
-    reloadTimeList();
+    
   }, [place_num]);
-  console.log("place_num")
-  console.log(place_num)
 
   const getLocation = () => {
     ApiService.fetchStoreMapByID(place_num)
@@ -142,23 +147,32 @@ function Place() {
 
         console.log("fetchStoreMapByID");
         setMovieLocation(res.data)
-
-
       })
       .catch((err) => {
         console.log("reloadTimeList() Error!!", err);
       });
   };
 
-  const reloadTimeList = () => {
+  const reloadTimeList = (currentDate_2) => {
+    let currentDate = new Date(currentDate_2); // currentDate_2를 Date 객체로 변환합니다.
+    currentDate.setDate(currentDate.getDate() - 1); // 날짜에서 하루를 뺍니다.
+
+    let closeTime = currentDate.toISOString().split('T')[0]; // ISO 8601 형식으로 변환한 후 시간 부분을 제거합니다.
+
+
     let inputData = {
-      place_num : place_num
+      place_num : place_num,
+      open_time : currentDate_2,
+      close_time : closeTime,
     }
     console.log("처음 넘기는 값 ")
-    ApiService.reloadTimeList(place_num)
+    console.log(inputData)
+
+    ApiService.reloadTimeList(inputData)
    
       .then((res) => {
-        console.log("places");
+        console.log("jpa result");
+        console.log(res.data);
         setPlaces(res.data);
       })
       .catch((err) => {
@@ -190,10 +204,6 @@ function Place() {
 
     categoryMap5[place.movie_id]?.push(place);
   });
-
-  console.log("checkMVObj")
-  console.log(checkMVObj)
-  console.log(movieLocation);
 
   return (
     <>

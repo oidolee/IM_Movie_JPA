@@ -25,7 +25,7 @@ public class MoviePlaceDTO {
     private String   place_title;
     private String theater_id;
     private String movie_time;
-    private Timestamp start_time;
+    private String start_time;
     private Timestamp end_time;
     private Timestamp open_time;
     private Timestamp close_time;

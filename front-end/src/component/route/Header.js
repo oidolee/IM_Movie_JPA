@@ -208,7 +208,9 @@ function Header() {
 
                             <li><Link to="/theater/1">홍대입구</Link></li>
                             <li><Link to="/theater/2">용산</Link></li>
-                            <li><Link to="/theater/3">서울3</Link></li>
+                            <li><Link to="/theater/3">합정</Link></li>
+                            <li><Link to="/theater/4">에비뉴엘</Link></li>
+                            <li><Link to="/theater/5">영등포</Link></li>
                             
                             {/* <li><a href="/theater/1">홍대입구</a></li>
                             <li><a href="/theater/2">용산</a></li>
