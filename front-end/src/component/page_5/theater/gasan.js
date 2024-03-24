@@ -36,7 +36,7 @@ function Place() {
   const [isPlayActive, setIsPlayActive] = useState(true);
   const [checkMoviTitle, setCheckMoviTitle] = useState({});
   const { place_num } = useParams(); // 영화 지점 번호 
-  const [movieLocation, setMovieLocation] = useState();
+  const [theaterName, setTheaterName] = useState();
   const [selectMovieDate, setSelectMovieDate] = useState();
 
 
@@ -145,8 +145,9 @@ function Place() {
     ApiService.fetchStoreMapByID(place_num)
       .then((res) => {
 
+        setTheaterName(res.data)
         console.log("fetchStoreMapByID");
-        setMovieLocation(res.data)
+        console.log(res.data);
       })
       .catch((err) => {
         console.log("reloadTimeList() Error!!", err);
@@ -253,7 +254,7 @@ function Place() {
 
       <div className={`place_wrap1 ${style.place_wrap1}`}>
         <div className={`place_title ${style.place_title}`}>
-          <label for="pp_name">{movieLocation && movieLocation.ticketmap_name ? movieLocation.ticketmap_name : ""}점</label>
+          <label for="pp_name">{theaterName && theaterName.ticketmap_name ? theaterName.ticketmap_name : ""}점</label>
 
 
           <a
@@ -267,8 +268,7 @@ function Place() {
 
         <div className={`place_con ${style.place_con}`}>
           <p>
-            .총 상영관 수6개관총 좌석수1,054석 <br />
-            서울 금천구 디지털로10길 9 (가산동) <br />
+            {theaterName && theaterName.ticketmap_address ? theaterName.ticketmap_address : ""} <br />
             공지사항 10/25(수) 04시 ~ 09시 한국문화진흥원 컬쳐랜드(문화상품권){" "}
             <br />
           </p>
@@ -304,7 +304,7 @@ function Place() {
               <div className={`calendarwrap ${style.calendarwrap}`}>
                 <div className={style.calendarContainer}>
 
-                  <input type="text" value={selectMovieDate} />
+                  <input type="hidden" value={selectMovieDate} />
                   <div className={style.calendarHeader}>
                     <button onClick={onPressArrowLeft}>&lt;</button>
                     <h2>
