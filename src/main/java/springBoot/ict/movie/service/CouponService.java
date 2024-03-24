@@ -6,11 +6,8 @@ import java.util.Optional;
 
 import javax.servlet.ServletException;
 
-import springBoot.ict.movie.dto.ConsultAnswerDTO;
-import springBoot.ict.movie.dto.ConsultDTO;
 import springBoot.ict.movie.dto.CouponCusDTO;
 import springBoot.ict.movie.dto.CouponDTO;
-import springBoot.ict.movie.dto.CustomerDTO;
 
 public interface CouponService {
 	
