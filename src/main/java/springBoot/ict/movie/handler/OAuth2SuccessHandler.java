@@ -21,8 +21,8 @@ public class OAuth2SuccessHandler  extends SimpleUrlAuthenticationSuccessHandler
 	
 	private final UserAuthProvider jwtProvider;
 	
-	@Value("${redirect.url.development}") // 활성 프로파일에 따른 URL 주입
-    private String redirectUrl;
+//	@Value("${redirect.url.development}") // 활성 프로파일에 따른 URL 주입
+//    private String redirectUrl;
 	
 	@Override
 	public void onAuthenticationSuccess (
@@ -39,7 +39,8 @@ public class OAuth2SuccessHandler  extends SimpleUrlAuthenticationSuccessHandler
 		
 		
 		
-        response.sendRedirect(redirectUrl + "/auth/oauth-response/" + token + "/3600");
-//		response.sendRedirect("http://localhost:3000/auth/oauth-response/" + token + "/3600");
+        //response.sendRedirect(redirectUrl + "/auth/oauth-response/" + token + "/3600");
+        //response.sendRedirect("http://localhost:3000/auth/oauth-response/" + token + "/3600");
+        response.sendRedirect("http://3.39.155.236:3000/auth/oauth-response/" + token + "/3600");
 	}
 }
