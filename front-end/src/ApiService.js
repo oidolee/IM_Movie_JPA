@@ -264,9 +264,9 @@ class ApiService {
     }
     
     // 쿠폰 상세내역(관리자)
-    couponList(ic_name){
+    couponList(ic_num){
         console.log('couponList() 호출!!')
-        return axios.get(serverUrl + '/page_6/coupon/selectCoupon/' + ic_name); 
+        return axios.get(serverUrl + '/page_6/coupon/selectCoupon/' + ic_num); 
     }
     // 쿠폰 등록
     addCoupon(inputData){

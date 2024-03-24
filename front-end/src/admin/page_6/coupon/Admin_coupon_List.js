@@ -97,7 +97,7 @@ function Admin_coupon_List({ history }) {
               <TableCell>{list.ic_name}</TableCell>
               <TableCell>{list.ic_category}</TableCell>
               <TableCell>{list.ic_point}</TableCell>
-              <TableCell>{list.ic_useDate}</TableCell>
+              <TableCell>{list.ic_startDate} ~ {list.ic_endDate}</TableCell>
               <TableCell>{list.ic_regDate}</TableCell>
               <TableCell
                 className="selectBtn"
