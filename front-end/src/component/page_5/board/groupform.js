@@ -5,6 +5,7 @@ import style from '../../../styles/page_5/groupform.module.css';
 import group1 from '../../../assets/page_5_3/group1.png';
 import { useHistory } from 'react-router-dom'; 
 import ApiService from "../../../ApiService";
+import { Modal } from '@mui/material';
 
 function Form() {
   const history = useHistory(); 
@@ -114,13 +115,19 @@ function Form() {
         <form onSubmit={handleSubmit}>
           <div className={`Form_group ${style.Form_group}`}>
             <label htmlFor="g_movie">영화관</label>
-            <button className={`mvchsbtn ${style.mvchsbtn}`}  onClick={() => openModal()}>영화관 선택</button>
+            <button className={`mvchsbtn ${style.mvchsbtn}`}  onClick={openModal}>영화관 선택</button>
             <hr></hr>
           </div>
 
           {/* 모달 */}
+          
           {showModal && (
-          <div className="modal">
+
+            <Modal closeModal={closeModal}> {/* 모달을 닫는 함수를 props로 전달 */}
+            {/* 여기에 모달 내부에 들어갈 컴포넌트를 넣어줍니다. */}
+            <h1>모달 내부 컴포넌트</h1>
+            <p>
+            <div className="modal">
             <div className="modal-content">
               <span className="close" onClick={closeModal}>&times;</span>
               <h2>영화관 선택</h2>
@@ -133,6 +140,10 @@ function Form() {
               </ul>
             </div>
           </div>
+            </p>
+            </Modal>
+            
+          
         )}
 
             <div className={`Form_group ${style.Form_group}`}>
