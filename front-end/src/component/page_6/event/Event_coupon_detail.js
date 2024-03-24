@@ -31,13 +31,13 @@ const Event_coupon_detail = () => {
             })
     }
     return (
-        <div className={`event_detail ${style.event_detail}`}>
+        <div className={`event_detail ${style.event_detail}`} style={{border: '1px solid black'}}>
             <div className={`event_ic_name ${style.event_ic_name}`}>
                 <div>
-                    제목 : {couponList.ic_name}
+                    <h5>제목 : {couponList.ic_name}</h5>
                 </div>
                 <div>
-                    작성일 : {couponList.ic_regDate}
+                    <h5>작성일 : {couponList.ic_regDate}</h5>
                 </div>
             </div>
             <div>

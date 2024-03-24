@@ -1,13 +1,16 @@
 .event_detail{
     display: inline;
     width: 980px;
-    justify-content: center;
+    border: 1px solid black;
+    
 }
 
 .event_detail .event_ic_name{
     display: flex;
     border-bottom: 2px solid black;
     background: rgb(187, 187, 187);
-    justify-content: space-between;
+    position: relative;
     width: 980px;
+    justify-content: space-between;
+    margin: auto;
 }
