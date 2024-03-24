@@ -284,6 +284,42 @@
   border-radius: 3px;
 }
 
+.modal {
+  display: block; /* 또는 display: initial; */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+/* 영화관 선택 모달창 */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 모달을 화면 중앙에 위치시킴 */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* 모달 너비 */
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
   
 
   
