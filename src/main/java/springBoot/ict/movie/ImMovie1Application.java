@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("springBoot.ict.movie.repository")
 public class ImMovie1Application {
 
     public static void main(String[] args) {
