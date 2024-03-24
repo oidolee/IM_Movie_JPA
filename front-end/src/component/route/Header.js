@@ -160,8 +160,8 @@ function Header() {
                                     <li onMouseOver={() => SonhandleMouseOver(3)}><a href="/theater/3">경기</a></li> */}
 
                                     <li onMouseOver={() => SonhandleMouseOver(1)}><Link to="/theater/1">서울</Link></li>
-                                    <li onMouseOver={() => SonhandleMouseOver(2)}><Link to="/theater/2">인천</Link></li>
-                                    <li onMouseOver={() => SonhandleMouseOver(3)}><Link to="/theater/3">경기</Link></li>
+                                    <li onMouseOver={() => SonhandleMouseOver(2)}><Link to="/theater/3">경기</Link></li>
+                                    <li onMouseOver={() => SonhandleMouseOver(3)}><Link to="/theater/2">인천</Link></li>
                                 </ul>
                             </div>
                             
@@ -211,24 +211,20 @@ function Header() {
                             <li><Link to="/theater/3">합정</Link></li>
                             <li><Link to="/theater/4">에비뉴엘</Link></li>
                             <li><Link to="/theater/5">영등포</Link></li>
-                            
-                            {/* <li><a href="/theater/1">홍대입구</a></li>
-                            <li><a href="/theater/2">용산</a></li>
-                            <li><a href="/theater/3">서울3</a></li> */}
                         </ul>
                     )}
                     {soncurrentMenuValue == 2 && (
-                        <ul>
-                            <li onMouseOver={SonhandleMouseOver} ><a href="/theater/1">경기1</a></li>
-                            <li onMouseOver={SonhandleMouseOver} onMouseOut={SonhandleMouseOut}><a href="/theater/2">경기2</a></li>
-                            <li onMouseOver={SonhandleMouseOver} onMouseOut={SonhandleMouseOut}><a href="/Calender2">경기3</a></li>
+                        <ul onMouseOut={()=>{SonhandleMouseOut(); handleMouseOut()}} onMouseOver={() => { SonhandleMouseOver(2); handleMouseOver(3); }}>
+                            <li><Link to="/theater/28">안양일번가</Link></li>
+                            <li><Link to="/theater/29">광명아울렛</Link></li>
+                            <li><Link to="/theater/30">위례</Link></li>
                         </ul>
                     )}
                     {soncurrentMenuValue == 3 && (
-                        <ul>
-                            <li onMouseOver={SonhandleMouseOver} onMouseOut={SonhandleMouseOut}><a href="/theater/1">인천1</a></li>
-                            <li onMouseOver={SonhandleMouseOver} onMouseOut={SonhandleMouseOut}><a href="/theater/2">인천2</a></li>
-                            <li onMouseOver={SonhandleMouseOver} onMouseOut={SonhandleMouseOut}><a href="/Calender2">인천3</a></li>
+                        <ul onMouseOut={()=>{SonhandleMouseOut(); handleMouseOut()}} onMouseOver={() => { SonhandleMouseOver(3); handleMouseOver(3); }}>
+                            <li><Link to="/theater/31">부평</Link></li>
+                            <li><Link to="/theater/38">부평갈산</Link></li>
+                            <li><Link to="/theater/40">부평역사</Link></li>
                         </ul>
                     )}
 
