@@ -63,10 +63,9 @@ function Admin_Header() {
                             <div class="sb_sidenav_menu">
                                 <div class="nav">
                                    
-                                    <div class="sb_sidenav_menu-heading">대분류</div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                        Pages
+                                            관리메뉴
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
                                     {/* 페이지 설정 */}
@@ -74,16 +73,15 @@ function Admin_Header() {
                                         <nav class="sb_sidenav_menu-nested nav">
 
                                             <a class="nav-link" href="/admin/page_1/Admin_Discount_List">할인</a>
-                                            <a class="nav-link" href="/admin/page_2/test_2">page_2 / Test_2</a>
-                                            <a class="nav-link" href="/admin/page_3/ListStore_Admin">page_3 / ListStore_Admin</a>
+                                            <a class="nav-link" href="/admin/page_3/ListStore_Admin">스토어 관리</a>
                                             <a class="nav-link" href="/admin/page_5/Admin_Update_List">영화 홈</a>
                                             <a class="nav-link" href="/admin/page_5/Admin_Now_List">현재상영 영화</a>
                                             <a class="nav-link" href="/admin/page_5/Admin_Next_List">상영예정 영화</a>
                                             <a class="nav-link" href="/admin/page_5/Admin_Arte_List">아르떼 영화</a>
                                             <a class="nav-link" href="/admin/page_5/Admin_Notice_List">공지사항</a>
                                             <a class="nav-link" href="/admin/page_5/Admin_GroupForm_List">단체대관문의</a>
-                                            <a class="nav-link" href="/admin/page_6/consult/Admin_consult">page_6 / 1:1문의</a>
-                                            <a class="nav-link" href="/admin/page_6/coupon/Admin_coupon_List">page_6 / 쿠폰</a>
+                                            <a class="nav-link" href="/admin/page_6/consult/Admin_consult">1:1문의</a>
+                                            <a class="nav-link" href="/admin/page_6/coupon/Admin_coupon_List">쿠폰</a>
                                             <a class="nav-link" href="/admin/page_2/parking">주차 관리</a>
                                         </nav>
                                     </div>

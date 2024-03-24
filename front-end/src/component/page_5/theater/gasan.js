@@ -28,25 +28,16 @@ import group from "../../../assets/page_5_4/group.png";
 import BobMarley_OneLove from "../../../assets/page_5/BobMarley_OneLove.jpg";
 import { colors } from "@mui/material";
 
-// Review 컴포넌트 추가
-function Review() {
-  return (
-    <div className={style.reviewContainer}>
-      <h2 className={style.reviewTitle}>관람평</h2>
-      <div className={style.reviewContent}>
-        {/* 관람평 내용을 여기에 추가 */}
-        <p>관람평 내용을 입력하세요.</p>
-      </div>
-    </div>
-  );
-}
+//시간 라이브라리
+import moment from "moment";
 
 function Place() {
   const swiperRef = useRef(null);
   const [isPlayActive, setIsPlayActive] = useState(true);
   const [checkMoviTitle, setCheckMoviTitle] = useState({});
   const { place_num } = useParams(); // 영화 지점 번호 
-  const [movieLocation, setMovieLocation] = useState();
+  const [theaterName, setTheaterName] = useState();
+  const [selectMovieDate, setSelectMovieDate] = useState();
 
 
   const startSlide = () => {
@@ -79,29 +70,36 @@ function Place() {
   };
 
   const [date, setDate] = useState(new Date());
-  const [week, setWeek] = useState([]);
+  const [movieWeek, setWeek] = useState([]);
 
   useEffect(() => {
     let now = new Date();
     let currentDate = new Date(
       now.getFullYear(),
       now.getMonth(),
-      now.getDate()
+      now.getDate()  
     );
+
+    let currentDate_2 = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
+
+
     let currentWeek = makeWeekArr(currentDate);
     setDate(currentDate);
     setWeek(currentWeek);
-  }, []);
+    setSelectedDate(currentDate); // 처음 로딩시 오늘날짜 클릭
+    setSelectMovieDate(currentDate_2);
+    reloadTimeList(currentDate_2);
+  }, [place_num]);
 
   const makeWeekArr = (date) => {
-    let day = date.getDay();
     let week = [];
-    for (let i = 0; i < 14; i++) {
-      let newDate = new Date(date.valueOf() + 86400000 * (i - day));
-      week.push([i, newDate]);
+    for (let i = 0; i < 10; i++) { // 10일
+      let newDate = new Date(date.valueOf() + 86400000 * i); // 현재 날짜부터 i일 뒤의 날짜를 구함
+      week.push([i, newDate]); // 배열에 [인덱스, 날짜] 형태로 추가
     }
     return week;
   };
+
 
   const onPressArrowLeft = () => {
     let newDate = new Date(date.valueOf() - 86400000 * 7);
@@ -120,6 +118,11 @@ function Place() {
   const [selectedDate, setSelectedDate] = useState(null);
 
   const handleDateClick = (clickedDate) => {
+    let currentDate_2 = `${clickedDate.getFullYear()}-${(clickedDate.getMonth() + 1).toString().padStart(2, '0')}-${clickedDate.getDate().toString().padStart(2, '0')}`;
+    console.log("handleDateClick")
+    console.log(currentDate_2)
+    setSelectMovieDate(currentDate_2)
+    reloadTimeList(currentDate_2)
     setSelectedDate(clickedDate); // 선택된 날짜 상태 변수 업데이트
     // 여기서 선택된 날짜에 대한 추가적인 작업을 수행할 수 있습니다.
   };
@@ -134,31 +137,43 @@ function Place() {
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
-    //영화관 상세페이지
     getLocation();
-    reloadTimeList();
-  }, []);
-  console.log("place_num")
-  console.log(place_num)
-  
+    
+  }, [place_num]);
+
   const getLocation = () => {
     ApiService.fetchStoreMapByID(place_num)
       .then((res) => {
-        
-        console.log("fetchStoreMapByID");
-        setMovieLocation(res.data)
-       
 
+        setTheaterName(res.data)
+        console.log("fetchStoreMapByID");
+        console.log(res.data);
       })
       .catch((err) => {
         console.log("reloadTimeList() Error!!", err);
       });
   };
 
-  const reloadTimeList = () => {
-    ApiService.reloadTimeList(place_num)
+  const reloadTimeList = (currentDate_2) => {
+    let currentDate = new Date(currentDate_2); // currentDate_2를 Date 객체로 변환합니다.
+    currentDate.setDate(currentDate.getDate() - 1); // 날짜에서 하루를 뺍니다.
+
+    let closeTime = currentDate.toISOString().split('T')[0]; // ISO 8601 형식으로 변환한 후 시간 부분을 제거합니다.
+
+
+    let inputData = {
+      place_num : place_num,
+      open_time : currentDate_2,
+      close_time : closeTime,
+    }
+    console.log("처음 넘기는 값 ")
+    console.log(inputData)
+
+    ApiService.reloadTimeList(inputData)
+   
       .then((res) => {
-        console.log("places");
+        console.log("jpa result");
+        console.log(res.data);
         setPlaces(res.data);
       })
       .catch((err) => {
@@ -179,24 +194,21 @@ function Place() {
 
   // let checkMVObj = [];
   let checkMVObj = {};
-  console.log("places" , places)
+  console.log("places", places)
   // console.log(categoryMap5)
-   places.forEach((place) => {
-      if (!movieMap[place.movie_id]) {
-        // console.log(place)
-        checkMVObj[place.movie_id]=place.movie_title
-        movieMap[place.movie_id] = []; // 해당 영화가 없는 경우 빈 배열을 만듭니다.
-      }
+  places.forEach((place) => {
+    if (!movieMap[place.movie_id]) {
+      // console.log(place)
+      checkMVObj[place.movie_id] = place.movie_title
+      movieMap[place.movie_id] = []; // 해당 영화가 없는 경우 빈 배열을 만듭니다.
+    }
 
-     categoryMap5[place.movie_id]?.push(place);
-   });
-  
-   console.log("checkMVObj")
-   console.log(checkMVObj)
-   console.log(movieLocation);
-  
+    categoryMap5[place.movie_id]?.push(place);
+  });
+
   return (
     <>
+      {/* 상단 swiper */}
       <div className={`mySwiper ${style.mySwiper}`}>
         <Swiper
           ref={swiperRef}
@@ -242,7 +254,7 @@ function Place() {
 
       <div className={`place_wrap1 ${style.place_wrap1}`}>
         <div className={`place_title ${style.place_title}`}>
-        <label for="pp_name">{movieLocation && movieLocation.ticketmap_name ? movieLocation.ticketmap_name : ""}점</label>
+          <label for="pp_name">{theaterName && theaterName.ticketmap_name ? theaterName.ticketmap_name : ""}점</label>
 
 
           <a
@@ -256,8 +268,7 @@ function Place() {
 
         <div className={`place_con ${style.place_con}`}>
           <p>
-            .총 상영관 수6개관총 좌석수1,054석 <br />
-            서울 금천구 디지털로10길 9 (가산동) <br />
+            {theaterName && theaterName.ticketmap_address ? theaterName.ticketmap_address : ""} <br />
             공지사항 10/25(수) 04시 ~ 09시 한국문화진흥원 컬쳐랜드(문화상품권){" "}
             <br />
           </p>
@@ -279,29 +290,21 @@ function Place() {
       <div className={`place_down ${style.place_down}`}>
         <button
           type="button"
-          className={`tit ${style.tit} ${
-            selectedValue === 1 ? style.StoreDetail_selectedTab : ""
-          }`}
+          className={`tit ${style.tit} ${selectedValue === 1 ? style.StoreDetail_selectedTab : ""
+            }`}
           onClick={() => handleSelect(1)}
           style={{ width: "50%", left: "0%", height: "70px" }}
         >
           <span>상세정보</span>
         </button>
-        <button
-          type="button"
-          className={`tit ${style.tit} ${
-            selectedValue === 2 ? style.StoreDetail_selectedTab : ""
-          }`}
-          onClick={() => handleSelect(2)}
-          style={{ width: "50%", left: "0%", height: "70px" }}
-        >
-          <span>관람평</span>
-        </button>
         <div>
+
           <div className={`place_box1 ${style.place_box1}`}>
             {selectedValue === 1 && (
               <div className={`calendarwrap ${style.calendarwrap}`}>
                 <div className={style.calendarContainer}>
+
+                  <input type="hidden" value={selectMovieDate} />
                   <div className={style.calendarHeader}>
                     <button onClick={onPressArrowLeft}>&lt;</button>
                     <h2>
@@ -313,42 +316,29 @@ function Place() {
                     <button onClick={onPressArrowRight}>&gt;</button>
                   </div>
 
+                  {/* calendarDays */}
+
                   <div className={style.calendarDays}>
-                    {week.map(([index, day]) => (
+                    {movieWeek.map(([index, day]) => (
                       <div
                         key={index}
                         className={
                           day.toDateString() === selectedDate?.toDateString()
                             ? `${style.calendarDay} ${style.calendarToday} ${style.selectedDate}`
-                            : style.calendarDay
+                            : day.getDay() === 0 // 일요일인 경우
+                              ? `${style.calendarDay} ${style.sunday}`
+                              : day.getDay() === 6 // 토요일인 경우
+                                ? `${style.calendarDay} ${style.saturday}`
+                                : style.calendarDay
                         }
                         onClick={() => handleDateClick(day)}
                       >
-                        {day.getDate()}
+                        <div>{day.getDate()}</div>
+                        <div>{day.toLocaleString("default", { weekday: "short" })}</div>
                       </div>
                     ))}
                   </div>
 
-                  <div className={style.calendarWeekdays}>
-                    {[
-                      "일",
-                      "월",
-                      "화",
-                      "수",
-                      "목",
-                      "금",
-                      "토",
-                      "일",
-                      "월",
-                      "화",
-                      "수",
-                      "목",
-                      "금",
-                      "토",
-                    ].map((day, index) => (
-                      <div key={index}>{day}</div>
-                    ))}
-                  </div>
                 </div>
               </div>
             )}
@@ -377,18 +367,18 @@ function Place() {
                       >
                         {place.movie_time}
                         <br></br>
-                        {place.theater_id} 
+                        {place.theater_id}
                       </button>
                     </div>
                   ))}
                 </div>
               )}
-            
+
               {checkMVObj[2] && (
-                  <div className={`dune1 ${style.dune1}`}>
-                    <li>{checkMVObj[2]}</li>
-                    <li>2D</li>
-                    {categoryMap5[2].slice(0, 5).map((place, index) => (
+                <div className={`dune1 ${style.dune1}`}>
+                  <li>{checkMVObj[2]}</li>
+                  <li>2D</li>
+                  {categoryMap5[2].slice(0, 5).map((place, index) => (
                     <div key={index} className={`timeb1 ${style.timeb1}`}>
                       <button
                         className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
@@ -396,103 +386,103 @@ function Place() {
                       >
                         {place.movie_time}
                         <br></br>
-                        {place.theater_id} 
+                        {place.theater_id}
                       </button>
                     </div>
-                    ))}
-                  </div>
+                  ))}
+                </div>
               )}
 
               {checkMVObj[3] && (
                 <div className={`bab1 ${style.bab1}`}>
-                    <li>{checkMVObj[3]}</li>
-                    <li>2D</li>
-                    {categoryMap5[3].slice(0, 5).map((place, index) => (
-                  <div key={index} className={`timeb1 ${style.timeb1}`}>
-                    <button
-                      className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
-                      onClick={handleClick}
-                    >
-                      {place.movie_time}
-                      <br></br>
-                      {place.theater_id} 
-                    </button>
-                  </div>
+                  <li>{checkMVObj[3]}</li>
+                  <li>2D</li>
+                  {categoryMap5[3].slice(0, 5).map((place, index) => (
+                    <div key={index} className={`timeb1 ${style.timeb1}`}>
+                      <button
+                        className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
+                        onClick={handleClick}
+                      >
+                        {place.movie_time}
+                        <br></br>
+                        {place.theater_id}
+                      </button>
+                    </div>
                   ))}
                 </div>
               )}
 
               {checkMVObj[4] && (
                 <div className={`oneandonly1 ${style.oneandonly1}`}>
-                    <li>{checkMVObj[4]}</li>
-                    <li>2D</li>
-                    {categoryMap5[4].slice(0, 5).map((place, index) => (
-                  <div key={index} className={`timeb1 ${style.timeb1}`}>
-                    <button
-                      className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
-                      onClick={handleClick}
-                    >
-                      {place.movie_time}
-                      <br></br>
-                      {place.theater_id} 
-                    </button>
-                  </div>
+                  <li>{checkMVObj[4]}</li>
+                  <li>2D</li>
+                  {categoryMap5[4].slice(0, 5).map((place, index) => (
+                    <div key={index} className={`timeb1 ${style.timeb1}`}>
+                      <button
+                        className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
+                        onClick={handleClick}
+                      >
+                        {place.movie_time}
+                        <br></br>
+                        {place.theater_id}
+                      </button>
+                    </div>
                   ))}
                 </div>
               )}
 
               {checkMVObj[5] && (
                 <div className={`wingka1 ${style.wingka1}`}>
-                    <li>{checkMVObj[5]}</li>
-                    <li>2D</li>
-                    {categoryMap5[5].slice(0, 5).map((place, index) => (
-                  <div key={index} className={`timeb1 ${style.timeb1}`}>
-                    <button
-                      className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
-                      onClick={handleClick}
-                    >
-                      {place.movie_time}
-                      <br></br>
-                      {place.theater_id} 
-                    </button>
-                  </div>
+                  <li>{checkMVObj[5]}</li>
+                  <li>2D</li>
+                  {categoryMap5[5].slice(0, 5).map((place, index) => (
+                    <div key={index} className={`timeb1 ${style.timeb1}`}>
+                      <button
+                        className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
+                        onClick={handleClick}
+                      >
+                        {place.movie_time}
+                        <br></br>
+                        {place.theater_id}
+                      </button>
+                    </div>
                   ))}
                 </div>
               )}
 
               {checkMVObj[6] && (
                 <div className={`maydecember1 ${style.maydecember1}`}>
-                    <span>{checkMVObj[6]}</span>
-                    <span>2D</span>
-                    {categoryMap5[6].slice(0, 5).map((place, index) => (
-                  <div key={index} className={`timeb1 ${style.timeb1}`}>
-                    <button
-                      className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
-                      onClick={handleClick}
-                    >
-                      {place.movie_time}
-                      <br></br>
-                      {place.theater_id} 
-                    </button>
-                  </div>
+                  <span>{checkMVObj[6]}</span>
+                  <span>2D</span>
+                  {categoryMap5[6].slice(0, 5).map((place, index) => (
+                    <div key={index} className={`timeb1 ${style.timeb1}`}>
+                      <button
+                        className={`${style.squareButton} ${isClicked ? style.clicked : ""}`}
+                        onClick={handleClick}
+                      >
+                        {place.movie_time}
+                        <br></br>
+                        {place.theater_id}
+                      </button>
+                    </div>
                   ))}
                 </div>
               )}
-                </div>
-              </div>
             </div>
           </div>
-       
-
-        <div className={`mv_lastIMG1 ${style.mv_lastIMG1}`}>
-          <ul>
-            <li>
-              <a href="#">
-                <img src={BobMarley_OneLove} alt="noitce_img_1" />
-              </a>
-            </li>
-          </ul>
         </div>
+      </div>
+
+
+      <div className={`mv_lastIMG1 ${style.mv_lastIMG1}`}>
+        <ul>
+          <li>
+            <a href="#">
+              <img src={BobMarley_OneLove} alt="noitce_img_1" />
+            </a>
+          </li>
+        </ul>
+      </div>
     </>
   );
 }

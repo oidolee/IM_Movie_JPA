@@ -33,7 +33,7 @@ function Parking() {
     }
 
     if (ip_carnumber.length !== 4) {
-      alert("차량번호 자리수를 확인 바랍니다.")
+      alert("차량번호 자리수를 확인 바랍니다.\n(4자리 입력 바랍니다.)")
       return false;
     }
     let block = '';
@@ -77,6 +77,8 @@ function Parking() {
   const parkingList = () => {
     ApiService.parkingList()
       .then((res) => {
+        console.log("res")
+        console.log(res)
         setParkingData(res.data);
         setLists(res.data);
       })
@@ -134,22 +136,30 @@ function Parking() {
         </div>
 
         <Form>
+
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
             <Col sm>
-              <Form.Control type="text" placeholder="차량번호" name="ip_carnumber" value={ip_carnumber}
-                onChange={(e) => {
-                  // 입력값이 15자를 초과하는지 확인
-                  if (e.target.value.length <= 15) {
-                    // 15자 이하면 입력값 업데이트
-                    setIpCarNumber(e.target.value.trim());
-                  } else {
-                    // 15자를 초과하면 경고 메시지 표시
-                    alert('차량번호는 15자를 초과할 수 없습니다.');
+              <Form.Control 
+                type="text" 
+                placeholder="차량번호" 
+                name="ip_carnumber" 
+                value={ip_carnumber}
+                onBlur={(e) => {
+                  // 입력값이 4자를 초과하는지 확인
+                  if (e.target.value.length !== 4) {
+                    // 4자를 초과하면 경고 메시지 표시
+                    alert('차량번호 4자리 입력 바랍니다.');
+                    // 입력값을 빈 문자열로 초기화
                   }
+                  setIpCarNumber(e.target.value.trim().slice(0,4));
+                }}
+                onChange={(e) => {
+                  setIpCarNumber(e.target.value.trim());
                 }}
               />
             </Col>
           </Form.Group>
+
 
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
             <Col sm>

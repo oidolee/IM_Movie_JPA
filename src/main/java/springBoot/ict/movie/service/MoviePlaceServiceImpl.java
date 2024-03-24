@@ -11,31 +11,32 @@ import org.springframework.stereotype.Service;
 import springBoot.ict.movie.dao.MoviePlaceRepository;
 import springBoot.ict.movie.dto.MoviePlaceDTO;
 import springBoot.ict.movie.dto.StoreMapDTO;
+import springBoot.ict.movie.repository.MoviePlaceMapper;
 
 @Service
 public class MoviePlaceServiceImpl implements MoviePlaceService {
 
-	@Autowired
-	private MoviePlaceRepository dao;
-	
-	// 상영시간표목록
-	@Override
-	public List<MoviePlaceDTO> listTime(int place_num) 
-			throws ServletException, IOException {
-		System.out.println("서비스 - listTime place_num: " + place_num);
-		
-		return dao.findAllByPlaceNum(place_num);
-	}
+    @Autowired
+    private MoviePlaceRepository dao;
 
-	public List<MoviePlaceDTO> getlistTime() 
-			throws ServletException, IOException{
-		System.out.println("서비스 -getlistTime");
-		
-		return dao.findAll();
-	}
+    @Autowired
+    private MoviePlaceMapper jpa_dao; // MoviePlaceMapper 주입
 
+    // 상영시간표목록
+    @Override
+    public List<MoviePlaceDTO> listTime(int place_num) 
+            throws ServletException, IOException {
+        System.out.println("서비스 - listTime place_num: " + place_num);
+        
+        return dao.findAllByPlaceNum(place_num);
+    }
 
-	
-	
+    public List<MoviePlaceDTO> getlistTime(MoviePlaceDTO dto) 
+            throws ServletException, IOException{
+        System.out.println("서비스 -getlistTime dto:");
+        System.out.println(dto);
+        List<MoviePlaceDTO> list = jpa_dao.selectAll(dto); // jpa_dao 초기화 후 사용
+        return list;
+    }
 
 }
