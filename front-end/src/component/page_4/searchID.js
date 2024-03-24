@@ -44,25 +44,26 @@ class SearchID extends Component {
         })
     }
 
-    findID = (e) => {
+    searchID = (e) => {
         e.preventDefault();
 
         let inputData = {
             name: this.state.name,
             hp: this.state.hp
         }
-        ApiService.findID(inputData)
+        ApiService.searchId(inputData)
         .then(res => {
             this.setState({
 
             })
             console.log('아이디찾기 성공 : ' , res.data); // 컨트롤러에서 전달함 (resultCode, resultMsg)
-            const foundEmail = res.data.foundEmail;
+            const foundEmail = res.data;
             //this.props.history.push('/findID') // RouterComponet.js - ListSampleComponet 호출 
             this.props.history.push('/findID', { foundEmail });
         })
         .catch(err =>{
             console.log('findID() 에러 !! ', err);
+            alert("이름과 휴대폰번호를 확인해 주세요.")
         })
         
     }
@@ -125,7 +126,7 @@ class SearchID extends Component {
 
                 <div id='signBtn' className={`signBtn ${style.signBtn}`}>
                     <Button id='goHome' className={`blackBtn ${style.blackBtn}`} onClick={this.goHome}>취소</Button>
-                    <Button id='gosignup' className={`redBtn ${style.redBtn}`} onClick={this.findID}>다음</Button>
+                    <Button id='gosignup' className={`redBtn ${style.redBtn}`} onClick={this.searchID}>다음</Button>
                 </div>
                 <br/><br/>
             </div>
@@ -134,49 +135,3 @@ class SearchID extends Component {
 }
 
 export default SearchID;
-
-
-
-
-
-{/* <Accordion.Item eventKey="1">
-                        <Accordion.Header onClick={() => this.handleAccordionClick("1")}>
-                            <input
-                                type="radio"
-                                id="email"
-                                name="searchType"
-                                value="email"
-                                checked={this.state.activeKey === "1"}
-                                onChange={() => this.handleRadioClick("1")}
-                            />
-                            <label htmlFor="email">이메일 주소로 찾기</label>
-                        </Accordion.Header>
-                        <Accordion.Body>
-                        <div id='hpfind' className={`hpfind ${style.hpfind}`}>
-                                <div className={`text ${style.text}`}>이름
-                                
-                                <TextField
-                                    required
-                                    type="text"
-                                    name="name"
-                                    value={this.state.name}
-                                    placeholder='이름을 입력해주세요.'
-                                    onChange={this.onChange}
-                                />
-                                </div>
-                                <br /><br />
-                                <div className={`text ${style.text}`}>휴대폰 번호
-
-                                
-                                <TextField
-                                    required
-                                    type="text"
-                                    name="hp"
-                                    value={this.state.hp}
-                                    placeholder='휴대폰 번호를 -빼고 입력해 주세요'
-                                    onChange={this.onChange}
-                                />
-                                </div>
-                            </div>
-                        </Accordion.Body>
-                    </Accordion.Item> */}

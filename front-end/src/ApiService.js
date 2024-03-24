@@ -154,37 +154,45 @@ class ApiService {
 
     // page_4
     
-    // insert
     addCustomer(inputData) {
         console.log('addCustomer 호출', inputData);
-        return axios.post(serverUrl + "/index/save", inputData);
+        return axios.post(serverUrl + "/register", inputData);
     }
 
     // 고객리스트
      listCustomer(inputData) {
          console.log('listCustomer 호출');
-         return axios.get(serverUrl + "/index");
+         return axios.get(serverUrl + "/admin/listCustomer");
     }
 
     // 로그인 
     login(inputData) {
         console.log("login start 로그인:")
         console.log(inputData)
-        return axios.post(serverUrl + "/index/login", inputData);
+        
+        return axios.post(serverUrl + "/login", inputData);
     }
+
+    // 아이디 중복 체크 
+    checkDuplicateEmail(id) {
+        console.log("이메일 중복 체크")
+        console.log("id : " + id)
+        return axios.get(serverUrl + "/idCheck", { params: { id } });
+    }
+    
 
     // 아이디 찾기
-    findID(inputData) {
-        console.log("findID 호출")
+    searchId(inputData) {
+        console.log("searchId 호출")
         console.log(inputData)
-        return axios.post(serverUrl + "/index/findID", inputData);
+        return axios.post(serverUrl + "/searchId", inputData);
     }
 
-    // 비밀번호 찾기
+    // 비밀번호 재설정
     findPWD(inputData) {
         console.log("findPWD 호출")
         console.log(inputData)
-        return axios.post(serverUrl + "/index/searchPWD", inputData);
+        return axios.post(serverUrl + "/searchPWD", inputData);
     }
 
     // page_6

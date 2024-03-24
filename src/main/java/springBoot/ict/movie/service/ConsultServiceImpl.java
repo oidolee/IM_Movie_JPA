@@ -12,10 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import springBoot.ict.movie.dao.ConsultAnswerRepository;
 import springBoot.ict.movie.dao.ConsultRepository;
-import springBoot.ict.movie.dao.CustomerRepository;
 import springBoot.ict.movie.dto.ConsultAnswerDTO;
 import springBoot.ict.movie.dto.ConsultDTO;
-import springBoot.ict.movie.dto.CustomerDTO;
 
 @Service
 public class ConsultServiceImpl implements ConsultService {

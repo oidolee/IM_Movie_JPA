@@ -40,7 +40,6 @@ import Store_Payment_Finish from '../page_3/Store_Payment_Finish';
 import MyPage_Store from '../page_6/store_page_3/MyPage_Store';
 
 //page_4
-import listCustomer from '../page_4/listCustomer';
 import singupComponent from '../page_4/singupComponent';
 import loginComponent from '../page_4/loginComponent';
 import signupCheck from '../page_4/signupCheck';
@@ -48,6 +47,7 @@ import searchID from '../page_4/searchID';
 import resultFindID from '../page_4/resultFindID';
 import searchPWD from '../page_4/searchPWD';
 import resultFindPWD from '../page_4/resultFindPWD';
+import OAuthResponseHandler from '../page_4/OAuthResponseHandler';
 
 //page_5
 import movieMain from '../page_5/movie/movieMain';
@@ -133,11 +133,14 @@ const AppRouter = () => {
                                 <Route path="/login" exact={true} component={loginComponent} />
                                 <Route path="/sign-up" exact={true} component={singupComponent} />
                                 <Route path="/signCheck" exact={true} component={signupCheck} />
-                                <Route path="/customerlist" exact={true} component={listCustomer} />
+                               
                                 <Route path="/searchID" exact={true} component={searchID} />
                                 <Route path="/findID" exact={true} component={resultFindID} />
                                 <Route path="/searchPWD" exact={true} component={searchPWD} />
                                 <Route path="/findPWD" exact={true} component={resultFindPWD} />
+
+                                <Route path="/auth/oauth-response/:token/:expirationTime" component={OAuthResponseHandler} />
+                                
                             </Route>
                         
                             {/* page_5 */}
