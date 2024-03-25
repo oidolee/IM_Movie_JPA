@@ -11,6 +11,22 @@ import ApiService from '../../ApiService';
 import { withRouter } from 'react-router-dom';
 
 
+
+
+const localHost = "http://localhost:3000/"; // 로컬
+const proHost = "http://3.39.155.236:3000/"; // 개벌
+
+let serverUrl;
+
+if (process.env.NODE_ENV === 'development') {
+  serverUrl = localHost;
+} else {
+  serverUrl = proHost;
+}
+
+console.log("현재 베이스 주소")
+console.log(serverUrl)
+
 class StoreDetail extends Component {
 
   constructor(props) {
@@ -226,7 +242,7 @@ EditStore_Admin = (e) => {
 
         <div className={`store_detail ${style.store_detail}`}>
           <div className={`main_img ${style.main_img}`}>
-            <img src={this.state.itemImage} alt="[IM과 봄] 패키지" />
+            <img src={serverUrl+this.state.itemImage} alt="[IM과 봄] 패키지" />
 
             <div style={{ width: "450px" }}>
               <Swiper
@@ -244,12 +260,11 @@ EditStore_Admin = (e) => {
 
                 <div style={{ display: "flex" }}>
                 {this.state.lists.map((item, index) => (
-
-                      <SwiperSlide  item={item} key={index}>
-                    <img src={item.itemImage} alt={`Item ${item.itemCode}`} style={{ width: "150px" }} onClick={() => this.handleItemClick(item.itemCode)}/>
-                    </SwiperSlide>
-
+                  <SwiperSlide item={item} key={index}>
+                    <img src={`${serverUrl}${item.itemImage}`} alt={`Item ${item.itemCode}`} style={{ width: "150px" }} onClick={() => this.handleItemClick(item.itemCode)}/>
+                </SwiperSlide>
                 ))}
+
                 </div>
 
                 {/* {slides.map((slideContent, index) => (

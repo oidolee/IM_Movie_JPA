@@ -6,17 +6,30 @@ import Res_movie from "../../assets/page_1/movie.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
 import Checkout from "../page_1/Checkout";
 import Modal from "react-modal";
-import { withRouter } from 'react-router-dom';
-import ApiService from '../../ApiService';
-import { Cookies, useCookies } from 'react-cookie';
+import { withRouter } from "react-router-dom";
+import ApiService from "../../ApiService";
+import { Cookies, useCookies } from "react-cookie";
 import StoreGift from "./StoreGift";
 
-class Reservation_Payment_Store extends Component {
+const localHost = "http://localhost:3000/"; // 로컬
+const proHost = "http://3.39.155.236:3000/"; // 개벌
 
+let serverUrl;
+
+if (process.env.NODE_ENV === "development") {
+  serverUrl = localHost;
+} else {
+  serverUrl = proHost;
+}
+
+console.log("현재 베이스 주소");
+console.log(serverUrl);
+
+class Reservation_Payment_Store extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      name: "",
       itemName: "",
       itemImage: "",
       totalQuantity: "",
@@ -26,60 +39,48 @@ class Reservation_Payment_Store extends Component {
     };
   }
 
-  
   componentDidMount() {
     const cookies = new Cookies();
-    const email = cookies.get('email'); // 쿠키에서 이메일 정보 가져오기
+    const email = cookies.get("email"); // 쿠키에서 이메일 정보 가져오기
     if (email) {
       this.setState({ email });
     }
 
-    const name = cookies.get('idName'); // 쿠키에서 이메일 정보 가져오기
+    const name = cookies.get("idName"); // 쿠키에서 이메일 정보 가져오기
     if (name) {
       this.setState({ name });
     }
-    console.log('name', name);
-
-
+    console.log("name", name);
 
     console.log("name", name);
     const storedData = localStorage.getItem("sampleID");
-    
+
     if (storedData) {
       const {
         totalQuantity,
         totalPrice,
         itemCode,
         itemName,
-        itemImage // 이미 추출된 itemImage 변수를 사용
+        itemImage, // 이미 추출된 itemImage 변수를 사용
       } = JSON.parse(storedData);
-  
+
       console.log("itemImage1");
       console.log(itemImage);
-  
+
       this.setState({ itemImage: itemImage }); // 최초 한 번만 setState() 호출
-      this.setState({ itemName: itemName }); 
-      this.setState({ totalQuantity: totalQuantity }); 
-      this.setState({ totalPrice: totalPrice }); 
+      this.setState({ itemName: itemName });
+      this.setState({ totalQuantity: totalQuantity });
+      this.setState({ totalPrice: totalPrice });
     } else {
       console.error("저장된 데이터가 없습니다.");
       // 저장된 데이터가 없는 경우 처리할 작업을 수행합니다.
     }
-
-
-
-
-
-
-
   }
 
-  
   state = {
     isPointClicked: false,
     showModal: false,
   };
-
 
   handlePaymentClick = () => {
     this.setState({ showModal: true });
@@ -95,24 +96,21 @@ class Reservation_Payment_Store extends Component {
     }));
   };
 
-  
   handlePayment = () => {
     const { email } = this.state;
 
     // ApiService에 쿠키로부터 가져온 이메일 정보 전달
     ApiService.addStoreOrder({ email })
-        .then(response => {
-            console.log('결제 데이터 전송 성공:', response.data);
-            // 데이터 전송 후 필요한 작업을 수행합니다.
-            // 예를 들어 페이지 이동 등...
-            this.props.history.push("/page_3/Store_Payment_Finish");
-        })
-        .catch(error => {
-            console.error('결제 데이터 전송 실패:', error);
-            // 실패 시 적절한 에러 처리를 수행합니다.
-        });
-
-
+      .then((response) => {
+        console.log("결제 데이터 전송 성공:", response.data);
+        // 데이터 전송 후 필요한 작업을 수행합니다.
+        // 예를 들어 페이지 이동 등...
+        this.props.history.push("/page_3/Store_Payment_Finish");
+      })
+      .catch((error) => {
+        console.error("결제 데이터 전송 실패:", error);
+        // 실패 시 적절한 에러 처리를 수행합니다.
+      });
 
     // localStorage에서 저장된 데이터 가져오기
     const storedData = localStorage.getItem("sampleID");
@@ -122,7 +120,7 @@ class Reservation_Payment_Store extends Component {
     } else {
       console.log("저장된 데이터가 없습니다.");
     }
-    
+
     if (storedData) {
       const {
         recipientNumber,
@@ -136,7 +134,6 @@ class Reservation_Payment_Store extends Component {
         email,
       } = JSON.parse(storedData);
 
-
       ApiService.addStoreOrderDetail({
         totalQuantity,
         totalPrice,
@@ -145,12 +142,10 @@ class Reservation_Payment_Store extends Component {
       })
         .then((response) => {
           console.log("데이터 전송 성공:", response.data);
-
         })
         .catch((error) => {
           console.error("데이터 전송 실패:", error);
         });
-
 
       // 서버로 데이터 전송
       ApiService.sendGiftMessage({
@@ -178,18 +173,14 @@ class Reservation_Payment_Store extends Component {
       // 저장된 데이터가 없는 경우 처리할 작업을 수행합니다.
     }
 
-
-
-
     this.props.history.push("/page_3/Store_Payment_Finish");
   };
 
-
   render() {
     const sysdate = moment().format("YYYY-MM-DD");
-    const { totalQuantity, totalPrice, itemCode, itemName, itemImage } = this.props;
+    const { totalQuantity, totalPrice, itemCode, itemName, itemImage } =
+      this.props;
 
-    
     return (
       <div className={`Res_Payment ${style.Res_Payment}`}>
         <div className="Res_payment_content">
@@ -199,9 +190,7 @@ class Reservation_Payment_Store extends Component {
                 <a href="#Res_step01">
                   <strong>
                     <span>
-
                       <br />
-
                     </span>
                   </strong>
                   <div className="step_content2">
@@ -222,9 +211,7 @@ class Reservation_Payment_Store extends Component {
                 <a href="#Res_step02">
                   <strong>
                     <span>
-
                       <br />
-
                     </span>
                   </strong>
                   <div className="step_content2">
@@ -241,9 +228,7 @@ class Reservation_Payment_Store extends Component {
                 <a href="#Res_step03">
                   <strong>
                     <span>
-                      
                       <br />
-                      
                     </span>
                   </strong>
                   <div className="step_content">
@@ -262,9 +247,7 @@ class Reservation_Payment_Store extends Component {
                 <a href="#Res_step04">
                   <strong>
                     <span>
-
                       <br />
-
                     </span>
                   </strong>
                 </a>
@@ -279,7 +262,10 @@ class Reservation_Payment_Store extends Component {
               <div className="menu2">
                 <ul>
                   <li className="menu2_main">
-                    <img src={this.state.itemImage} className="movie_img" />
+                    <img
+                      src={serverUrl + this.state.itemImage}
+                      className="movie_img"
+                    />
                   </li>
                   <div className="menu2_sub">
                     <ul>
@@ -322,7 +308,7 @@ class Reservation_Payment_Store extends Component {
                         handleCloseModal={this.handleCloseModal}
                       >
                         <div className={`Payment ${style.Payment}`}>
-                          <Checkout /> 
+                          <Checkout />
                           <button
                             className="Payment_close"
                             onClick={this.handleCloseModal}
@@ -382,9 +368,16 @@ class Reservation_Payment_Store extends Component {
                     <li>등등</li>
                   </ul>
                   <ul className="menu4_bottom">
-                    <li className="paymentBtn">결제금액  {this.state.totalPrice}</li>
+                    <li className="paymentBtn">
+                      결제금액 {this.state.totalPrice}
+                    </li>
                     <li>
-                      <button className="paymentBtn_total" onClick={this.handlePayment}>결제하기</button>
+                      <button
+                        className="paymentBtn_total"
+                        onClick={this.handlePayment}
+                      >
+                        결제하기
+                      </button>
                     </li>
                   </ul>
                 </div>
@@ -398,4 +391,3 @@ class Reservation_Payment_Store extends Component {
 }
 
 export default withRouter(Reservation_Payment_Store);
-
