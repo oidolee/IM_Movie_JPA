@@ -5,6 +5,8 @@ import { Link, useLocation } from 'react-router-dom';
 import '../../styles/main/Header.css'; 
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
+import apiservice from '../../ApiService';
 
 
 
@@ -14,6 +16,8 @@ function Header() {
     const history = useHistory();
 
     const [path, setPath] = useState('/');
+    const [id, setid] = useState('');
+    const [customerInfo, setCustomerInfo] = useState(null);
 
     const [authToken, setAuthToken] = useState(null); // 토큰 상태 추가
     //상단 메뉴바 호버
@@ -35,6 +39,20 @@ function Header() {
         // authToken 상태가 변경될 때마다 실행되는 부분
         const token = localStorage.getItem('auth_token');
         setAuthToken(token);
+
+        if (authToken) {
+            const decodedToken = jwtDecode(authToken); // 수정 필요
+            const email = decodedToken.iss;
+            setid(email);
+
+            // apiservice.searchCutomer(email)
+            //     .then(res=> {
+            //         console.log("res.data : " + res.data);
+                    
+            //     })
+        }
+
+        
         
     }, [authToken]);
 
@@ -124,7 +142,7 @@ function Header() {
                     </ul>
 
                    {authToken && (
-                        <p className="Header_user_name">사용자님 환영합니다.</p>
+                        <p className="Header_user_name"> 님 환영합니다.</p>
                     )}
 
                 </div>

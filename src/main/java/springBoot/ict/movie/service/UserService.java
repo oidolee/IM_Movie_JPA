@@ -116,10 +116,7 @@ public class UserService {
 	    return userRepository.findIdByNameAndHp(name, hp);
 	}
 	
-	// 비밀번호 변경을 위한 조회 
-	public String findByUserIdAndHp(String id, String hp) {
-        return userRepository.findByIdAndHp(id, hp);
-    }
+	
 	
 	// 회원정보 조회
 	public Optional<User> searchCustomer(String id) {
@@ -147,6 +144,29 @@ public class UserService {
 		
 		return userRepository.save(user);
 	}
+
+	// 비밀번호 변경을 위해 조회 
+	public User findByUserIdAndHp(String id, String hp) {
+		Optional<User> userOptional = userRepository.findByIdAndHp(id, hp);
+		return userOptional.orElse(null); // Optional에서 User 객체를 추출하고, 없을 경우에는 null 반환
+	}
+
+	// 비밀번호 변경 
+	public boolean resetPassword(String id, String hp, String newPassword) {
+	    Optional<User> optionalUser = userRepository.findByIdAndHp(id, hp);
+	    System.out.println(optionalUser);
+	    
+	    if (optionalUser.isPresent()) {
+	        User user = optionalUser.get();
+	        // 사용자가 존재하면 비밀번호를 업데이트합니다.
+	        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(newPassword)));
+	        userRepository.save(user);
+	        return true; // 비밀번호 업데이트 성공
+	    } else {
+	        return false; // 사용자가 존재하지 않음
+	    }
+	}
+		
 }
 
 

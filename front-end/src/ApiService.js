@@ -185,11 +185,18 @@ class ApiService {
         return axios.post(serverUrl + "/searchId", inputData);
     }
 
-    // 비밀번호 재설정
+    // 비밀번호 조회
     findPWD(inputData) {
         console.log("findPWD 호출")
         console.log(inputData)
         return axios.post(serverUrl + "/searchPWD", inputData);
+    }
+
+    // 비밀번호 변경
+    changePWD(password) {
+        console.log("changePWD 호출")
+        console.log(" password : " + password)
+        return axios.put(serverUrl + "/changePWD", password)
     }
 
     // page_6
