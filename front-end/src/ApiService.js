@@ -1,6 +1,4 @@
 import axios from 'axios'; // npm install -f axios@^1.3.5
-const SAMPLE_API_BASE_URL = "http://localhost:8081/samples";
-
 
 const localHost = "http://localhost:8081"; // 로컬
 const proHost = "http://3.39.155.236:8081"; // 개벌
