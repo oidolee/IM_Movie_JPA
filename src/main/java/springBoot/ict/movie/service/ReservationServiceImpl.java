@@ -18,6 +18,8 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired
 	private MoviePlaceRepository dao1;
+	
+	@Autowired
 	private ReservationRepository dao;
 	
 	@Override
