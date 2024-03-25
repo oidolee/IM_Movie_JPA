@@ -38,15 +38,9 @@ function Admin_Arte_List ({ history }) {
 
   // 수정
   const selectArte = (arte_id) => {
-    ApiService.selectArte(arte_id) 
-    .then((res) => {
-    console.log("selectArte 성공 : ", res.data);
-    history.push(`/admin/page_5/Admin_Arte_Edit/${arte_id}`);
-  })
-  .catch((err) => {
-    console.log("selectArte 실패 : ", err);
-  });
-};
+    window.localStorage.setItem("arte_id", arte_id);
+    history.push("/admin/page_5/Admin_Arte_Edit");
+  };
 
   // 삭제
   const deleteArte = (arte_id) => {
@@ -89,11 +83,9 @@ function Admin_Arte_List ({ history }) {
             <TableCell>Movie_Time</TableCell>
             <TableCell>Movie_Age</TableCell>
             <TableCell>Movie_Visitor</TableCell>
+            <TableCell>Movie_Contents</TableCell>
             <TableCell>Movie_Con</TableCell>
-            <TableCell>Movie_Pd</TableCell>
-            <TableCell>Movie_Cast</TableCell>
-            <TableCell>Movie_Trailer1</TableCell>
-            <TableCell>Movie_Trailer2</TableCell>
+            <TableCell>Movie_Trailer</TableCell>
             <TableCell>Movie_Category</TableCell>
             
             <TableCell>Edit</TableCell>
@@ -108,15 +100,13 @@ function Admin_Arte_List ({ history }) {
               </TableCell>
               <TableCell>{list.arte_image}</TableCell>
               <TableCell>{list.arte_title}</TableCell>
-              <TableCell> {new Date(list.arte_date).toLocaleDateString()} </TableCell>
+              <TableCell>{list.arte_date}</TableCell>
               <TableCell>{list.arte_time}</TableCell>
               <TableCell>{list.arte_age}</TableCell>
               <TableCell>{list.arte_visitor}</TableCell>
+              <TableCell>{list.arte_contents}</TableCell>
               <TableCell>{list.arte_con}</TableCell>
-              <TableCell>{list.arte_pd}</TableCell>
-              <TableCell>{list.arte_cast}</TableCell>
-              <TableCell>{list.arte_trailer1}</TableCell>
-              <TableCell>{list.arte_trailer2}</TableCell>
+              <TableCell>{list.arte_trailer}</TableCell>
               <TableCell>{list.arte_category}</TableCell>
               <TableCell
                 className="selectBtn"

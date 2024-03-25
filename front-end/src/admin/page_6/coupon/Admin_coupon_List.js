@@ -53,15 +53,15 @@ function Admin_coupon_List({ history }) {
   };
 
   // 수정
-  const selectCoupon = (ic_num) => {
-    history.push(`/admin/page_6/coupon/Admin_coupon_Edit/${ic_num}`);
+  const selectCoupon = (ic_name) => {
+    history.push(`/admin/page_6/coupon/Admin_coupon_Edit/${ic_name}`);
   };
 
   // 삭제
-  const deleteCoupon = (ic_num) => {
-    ApiService.deleteCoupon(ic_num)
+  const deleteCoupon = (ic_name) => {
+    ApiService.deleteCoupon(ic_name)
       .then((res) => {
-        setLists(lists.filter((list) => list.ic_num !== ic_num));
+        setLists(lists.filter((list) => list.ic_name !== ic_name));
         console.log("deleteCoupon 성공 : ", res.data);
       })
       .catch((err) => {
@@ -117,13 +117,13 @@ function Admin_coupon_List({ history }) {
               <TableCell>{list.ic_regDate}</TableCell>
               <TableCell
                 className="selectBtn"
-                onClick={() => selectCoupon(list.ic_num)}
+                onClick={() => selectCoupon(list.ic_name)}
               >
                 <Create />
               </TableCell>
               <TableCell
                 className="deleteBtn"
-                onClick={() => deleteCoupon(list.ic_num)}
+                onClick={() => deleteCoupon(list.ic_name)}
               >
                 <Delete />
               </TableCell>

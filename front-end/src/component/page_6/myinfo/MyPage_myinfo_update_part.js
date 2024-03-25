@@ -207,7 +207,7 @@ class MyPage_myinfo_update_part extends Component {
 
                 if (res.data.resultCode == 200) {
                     alert("회원정보 수정 성공");
-                    this.props.history.push('/login');
+                    this.props.history.push('/');
                 } else {
                     alert("회원정보 수정 실패");
                     this.props.history.push('/signCheck');
