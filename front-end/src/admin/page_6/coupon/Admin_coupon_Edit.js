@@ -173,7 +173,7 @@ function Admin_Update_Edit() {
         id="standard-required"
         variant="standard"
         label="ic_startDate"
-        type="text"
+        type="date"
         name="ic_startDate"
         value={updateInfo.ic_startDate}
         onChange={onChange}
@@ -184,7 +184,7 @@ function Admin_Update_Edit() {
         id="standard-required"
         variant="standard"
         label="ic_useDate"
-        type="text"
+        type="date"
         name="ic_endDate"
         value={updateInfo.ic_endDate}
         onChange={onChange}

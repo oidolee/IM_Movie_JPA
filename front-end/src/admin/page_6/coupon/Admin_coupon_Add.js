@@ -155,8 +155,8 @@ function Admin_coupon_Add({ history }) {
         required
         id="standard-required"
         variant="standard"
-        label="쿠폰사용시작 날짜 (0000-00-00)형식"
-        type="text"
+        label="쿠폰사용시작 날짜"
+        type="date"
         name="ic_startDate"
         value={couponInfo.ic_startDate}
         onChange={onChange}
@@ -165,8 +165,8 @@ function Admin_coupon_Add({ history }) {
         required
         id="standard-required"
         variant="standard"
-        label="쿠폰사용종료 날짜 (0000-00-00)형식"
-        type="text"
+        label="쿠폰사용종료 날짜"
+        type="date"
         name="ic_endDate"
         value={couponInfo.ic_endDate}
         onChange={onChange}

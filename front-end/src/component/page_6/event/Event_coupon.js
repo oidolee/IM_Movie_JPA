@@ -30,7 +30,13 @@ const Event_coupon = () => {
         ApiService.fetchCoupon()
             .then(res => {
                 console.log('res.data', res.data)
-                setCouponList(res.data);
+                const couponList = res.data.map(item => ({
+                    ...item,
+                    ic_startDate: formatDate(item.ic_startDate),
+                    ic_endDate: formatDate(item.ic_endDate),
+                    ic_regDate: formatDate(item.ic_regDate) 
+                }));
+                setCouponList(couponList);
             })
             .catch(err => {
                 console.log('fetchCoupon() ERROR!!', err);

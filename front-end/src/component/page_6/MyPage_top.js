@@ -14,6 +14,7 @@ function MyPage_top() {
     const [c_email, setC_email] = useState('');
     const [email, setEmail] = useState('');
     const [cusCouponCount, setCusCouponCount] = useState('');
+    const [userInfo, setUserInfo] = useState([]);
 
     useEffect(() => {
         // 로컬 스토리지에서 토큰 가져오기
@@ -24,10 +25,22 @@ function MyPage_top() {
             const decodedToken = jwtDecode(authToken); // 수정 필요
             const userEmail = decodedToken.iss;
             setEmail(userEmail);
+            reloadsearchCutomer(userEmail);
         }
         reloadCusCouponCount(email);
             
     }, [email]); // useEffect가 최초 한 번만 실행되도록 빈 배열을 전달
+
+    const reloadsearchCutomer = (email) => {
+        ApiService.searchCutomer(email)
+            .then(res => {
+                console.log("test" , res.data);
+                setUserInfo(res.data);
+            })
+            .catch(err => {
+                console.log('reloadConsultList() Error!!', err);
+            });
+    }
 
     const reloadCusCouponCount = (email) => {
         ApiService.countCusCoupon(email)
@@ -55,8 +68,8 @@ function MyPage_top() {
                     </div>
                     <div className={`name_place${style.name_place}`}>
                         <div className={`name${style.name}`}>
-                            <p style={{ textAlign: 'left', paddingLeft: '15px' }}>
-                                <strong>{email} 님 </strong> 반가워요! {/* 수정 필요 */}
+                            <p style={{ textAlign: 'center' , fontSize: '30px'}}>
+                                <strong>{userInfo.dto.name} 님 </strong> 반가워요! {/* 수정 필요 */}
                             </p>
                         </div>
                     </div>
@@ -88,15 +101,15 @@ function MyPage_top() {
                     </div>
                 </div>
                 <div className={`btn_wrap ${style.btn_wrap}`}>
-                    <div className={`my_point ${style.my_point}`}>
+                    {/* <div className={`my_point ${style.my_point}`}>
                             <span className="txt_img">
                                 <img src={point} alt="IM_POINT" /> 
                             </span>
                             <em>12345p</em>
-                    </div>
+                    </div> */}
                     <div className={`my_coupon ${style.my_coupon}`}>
                             총 쿠폰 개수 
-                            <em className='txt_color'> {cusCouponCount}매</em>
+                        <em className='txt_color'> {cusCouponCount}매</em>
                     </div>
                 </div>
             </div>
