@@ -187,10 +187,7 @@ function Header() {
                             <div>
                                 <ul>
                                     <li><Link to="/event_Home">홈</Link></li>
-                                    <li><Link to="/event_Home">영화</Link></li>
-                                    <li><Link to="/event_Home">시사회/무대인</Link></li>
-                                    <li><Link to="/event_Home">HOT</Link></li>
-                                    <li><Link to="/event_Home">제휴할인</Link></li>
+                                    <li><Link to="/Event_coupon">쿠폰</Link></li>
                                     <li><Link to="/event_Home">우리동네영화관</Link></li>
                                 </ul>
                             </div>

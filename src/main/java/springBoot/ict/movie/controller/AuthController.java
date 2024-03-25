@@ -18,7 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import springBoot.ict.movie.config.UserAuthProvider;
+import springBoot.ict.movie.dto.ConsultDTO;
 import springBoot.ict.movie.dto.CredentialsDTO;
 import springBoot.ict.movie.dto.SignUpDTO;
 import springBoot.ict.movie.entities.User;
@@ -139,5 +142,59 @@ public class AuthController {
         }
     }
     
+    // 회원정보 찾기
+    @GetMapping("/searchCustomer/{id}")
+    public Map<String, Object> serachCustomer(@PathVariable(name="id") String id, Model model) 
+    		throws ServletException, IOException{
+    	Optional<User> dto = null;
+        String resultCode = "";
+        String resultMsg = "";
+
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        try {
+        	
+        	dto = userService.searchCustomer(id);
+            resultCode = "200";
+            resultMsg = "searchCustomer Success";
+        } catch(Exception e) {
+            resultCode = "400";
+            resultMsg = e.getMessage();
+            e.printStackTrace();
+        }
+        map.put("resultCode", resultCode);
+        map.put("resultMsg", resultMsg);
+        map.put("dto", dto);
+        
+        return map; 
+    }
+    
+    // 회원정보 수정
+    @PutMapping("/updateCustomer")
+    public Map<String, Object> updateCustomer(@RequestBody User dto, Model model)
+    		throws ServletException, IOException{
+    	logger.info("<<< url -> updateCustomer");
+        String resultCode = "";
+        String resultMsg = "";
+
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        try {
+        	
+        	userService.updateCustomer(dto);
+            resultCode = "200";
+            resultMsg = "searchCustomer Success";
+        } catch(Exception e) {
+            resultCode = "400";
+            resultMsg = e.getMessage();
+            e.printStackTrace();
+        }
+        map.put("resultCode", resultCode);
+        map.put("resultMsg", resultMsg);
+        map.put("dto", dto);
+        
+        return map; 
+    	
+    }
     
 }

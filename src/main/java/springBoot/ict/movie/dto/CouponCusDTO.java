@@ -22,7 +22,7 @@ public class CouponCusDTO {
     @Id
     private int ic_num;			
     private String c_email;
-    private int ic_code;
+    private String ic_code;
     private String ic_name;
     private String ic_category;
     private int ic_point;

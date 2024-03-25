@@ -4,35 +4,53 @@ import style from '../../../styles/page_6/consult_module.css'
 import ApiService from '../../../ApiService';
 import { useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 
 function Consult_part() {
     const [showDetail, setShowDetail] = useState(false);
+    
     const showBox = () => {
         setShowDetail(!showDetail)
     }
     const history = useHistory();
     //const [cookies_email, setCookie_email] = useCookies(['cookies_email']); // 쿠키 훅 
-    const [emailCheck, setEmailCheck] = useState('');
+    const [email, setEmail] = useState('');
 
     const cus_grade = 'VIP';
-    const [cookies, setCookie] = useCookies(['idName','c_email']);
+    
     const [cus_name, setCus_Name] = useState('');
 
     useEffect(() => {
-        if (cookies.c_email !== undefined) {
-            setEmailCheck(cookies.c_email);
+        const authToken = localStorage.getItem("auth_token");
+        if (authToken) {
+            const decodedToken = jwtDecode(authToken); // 수정 필요
+            const userEmail = decodedToken.iss;
+            setEmail(userEmail);
+            console.log(email);
+            reloadsearchCutomer(email);
         }
+        
+    }, []);
 
-        if(cookies.idName !== undefined){
-            setCus_Name(cookies.idName);
-        }
-    }, [cookies]);
+    const reloadsearchCutomer = (email) => {
+        ApiService.searchCutomer(email)
+            .then(res =>{
+                console.log('res.data', res.data);
+                //setCus_Name(res.data.dto.name)
+            })
+            .catch(error => {
+                console.error('삭제 요청 실패:', error);
+                // 삭제 요청이 실패했을 때 필요한 동작 수행
+            });
+    }
+        
 
     
+    
     const [consultData, setConsultData] = useState({
-        c_email: emailCheck,
-        cus_name: cus_name,
+        c_email: email,
+        cus_name: '',
         ib_type: '',
         ib_type_detail: '',
         ib_title: '',
@@ -42,7 +60,7 @@ function Consult_part() {
         const { name, value } = e.target;
         setConsultData(prevState  =>({
             ...prevState,
-            c_email: emailCheck,
+            c_email: email,
             cus_name: cus_name,
             [name]: value
         }));
@@ -182,7 +200,7 @@ function Consult_part() {
                         <tr>
                             <td>이메일</td>
                             <td>
-                                <input className={`email1 ${style.email1}`} type="text" style={{ marginRight: '10px', padding: '0px 18px',backgroundColor:'rgba(211, 211, 211, 0.199)'}} value={emailCheck}></input>
+                                <input className={`email1 ${style.email1}`} type="text" style={{ marginRight: '10px', padding: '0px 18px',backgroundColor:'rgba(211, 211, 211, 0.199)'}} value={email}></input>
                             </td>
                         </tr>
                     </table>

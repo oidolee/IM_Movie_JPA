@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import React from "react";
 import style from '../../../styles/page_6/MyPage_consult_list_part_module.css';
 import ApiService from '../../../ApiService';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie'; // useCookies import
+import { jwtDecode } from 'jwt-decode';
 function MyPage_consult_list_part() {
     const [showDetailIndex, setShowDetailIndex] = useState(-1); // 상세 정보를 표시할 항목의 인덱스를 저장할 상태 추가
     const [consult, setConsult] = useState([]);
@@ -11,11 +12,14 @@ function MyPage_consult_list_part() {
     const [emailCheck, setEmailCheck] = useState('');
 
     useEffect(() => {
-        reloadConsultList(cookies.c_email);
-        
-        if (cookies.c_email !== undefined) {
-            setEmailCheck(cookies.c_email);
+        const authToken = localStorage.getItem("auth_token");
+        if (authToken) {
+            const decodedToken = jwtDecode(authToken); // 수정 필요
+            const userEmail = decodedToken.iss;
+            setEmailCheck(userEmail);
+            reloadConsultList(userEmail);
         }
+        
     }, []);
 
     const formatDate = (timestamp) => {
@@ -28,20 +32,21 @@ function MyPage_consult_list_part() {
 
     const reloadConsultList = (emailCheck) => {
         ApiService.fetchConsultCusList(emailCheck)
-        .then(res => {
-            console.log("test", res.data);
-            const consultData = res.data.map(item => ({
-                ...item,
-                ib_date: formatDate(item.ib_date) // 각 consultItem의 ib_date를 포맷 변경
-            }));
-            setConsult(consultData);
-        })
-        .catch(err => {
-            console.log('reloadConsultList() Error!!', err);
-        });
+            .then(res => {
+                console.log("test", res.data);
+                const consultData = res.data.map(item => ({
+                    ...item,
+                    ib_date: formatDate(item.ib_date) // 각 consultItem의 ib_date를 포맷 변경
+                }));
+                setConsult(consultData);
+                console.log('consultData', consultData);
+            })
+            .catch(err => {
+                console.log('fetchConsultCusList() Error!!', err);
+            });
     }
 
-    
+
 
     return (
         <div>
@@ -64,24 +69,24 @@ function MyPage_consult_list_part() {
                 </thead>
                 <tbody>
                     {consult.map((consultItem, index) => (
-                            <tr key={index}> 
-                                <input type="hidden" id='one_id_pk' value={consultItem.one_id}></input>
-                                <input type="hidden" value={consultItem.c_email}></input>
-                                <td>{consultItem.one_id}</td>
-                                <td>[{consultItem.ib_type}]</td>
-                                <td>
-                                    <Link to={`/MyPage_consult_answer/${consultItem.one_id}`} style={{ color: "black" }}>
-                                        {consultItem.ib_title}
-                                    </Link>
-                                </td>
-                                <td>{consultItem.ib_date}</td>
-                                <td>
-                                    <div className={`consult_status ${style.consult_status}`}>
-                                        {consultItem.ib_show === 'y' ? '답변대기 중' : '답변 완료'}
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
+                        <tr key={index}>
+                            <input type="hidden" id='one_id_pk' value={consultItem.one_id}></input>
+                            <input type="hidden" value={consultItem.c_email}></input>
+                            <td>{consultItem.one_id}</td>
+                            <td>[{consultItem.ib_type}]</td>
+                            <td>
+                                <Link to={`/MyPage_consult_answer/${consultItem.one_id}`} style={{ color: "black" }}>
+                                    {consultItem.ib_title}
+                                </Link>
+                            </td>
+                            <td>{consultItem.ib_date}</td>
+                            <td>
+                                <div className={`consult_status ${style.consult_status}`}>
+                                    {consultItem.ib_show === 'y' ? '답변대기 중' : '답변 완료'}
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

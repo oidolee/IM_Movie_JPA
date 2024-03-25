@@ -88,7 +88,7 @@ public class ConsultController {
     @GetMapping("/cusConsultList/{c_email}")
     public List<ConsultDTO> consultDetail(@PathVariable(name="c_email") String c_email, Model model)
             throws ServletException, IOException {
-        logger.info("<<< url -> consultList");
+        logger.info("<<< url -> consultDetail");
         List<ConsultDTO> list = service.ConsultCusList(c_email);
         model.addAttribute("list", list);
         System.out.println(list);

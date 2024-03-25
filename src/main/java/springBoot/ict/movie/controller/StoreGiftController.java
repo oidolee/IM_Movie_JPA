@@ -40,16 +40,18 @@ public class StoreGiftController {
     public SingleMessageSentResponse sendGiftMessage(@RequestBody StoreGiftDTO dto) throws ServletException, IOException {
         // 선물 정보를 저장합니다.
         service.insertStoreGift(dto);
-
+        System.out.println("Reservation_Payment_Store : ");
+        System.out.println(dto);
         // 선물 정보를 문자 메시지로 발송합니다.
-//        Message message = new Message();
+        Message message = new Message();
 //        message.setFrom(dto.getGift_recipient()); // 발신번호
-//        message.setTo(dto.getGift_recipient()); // 수신번호
-//        String messageContent = "[ IM_MOVIE 기프티콘 발급 안내 ]" + "\n" + dto.getGift_name() + " 님이 " + "기프티콘을 선물하셨습니다!\n\n"
-//                + "\n▶ 보내시는 분의 메시지: " + dto.getGift_content()
-//                + "\n▶ 상품명: " + dto.getItem_name() + "\n▶ 쿠폰 번호: " + dto.getGift_num() + "\n▶ 유효 기간: 2024.09.01" + "\n\n" + "자세한 사용내역은 IM MOVIE 홈페이지 참조부탁드립니다.\n감사합니다.";
-//
-//        message.setText(messageContent);
+        message.setFrom("01063395120"); // 발신번호
+        message.setTo(dto.getGift_recipient()); // 수신번호
+        String messageContent = "[ IM_MOVIE 기프티콘 발급 안내 ]" + "\n" + dto.getGift_name() + " 님이 " + "기프티콘을 선물하셨습니다!\n\n"
+                + "\n▶ 보내시는 분의 메시지: " + dto.getGift_content()
+                + "\n▶ 상품명: " + dto.getItem_name() + "\n▶ 쿠폰 번호: " + dto.getGift_num() + "\n▶ 유효 기간: 2024.09.01" + "\n\n" + "자세한 사용내역은 IM MOVIE 홈페이지 참조부탁드립니다.\n감사합니다.";
+
+        message.setText(messageContent);
 
 
         System.out.println(dto.getGift_name());
