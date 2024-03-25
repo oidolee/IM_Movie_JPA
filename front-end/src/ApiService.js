@@ -495,8 +495,10 @@ class ApiService {
 
     reviewList(movie_id){
         console.log('reviewList() 시작');
-        console.log(movie_id);
-        return axios.get(serverUrl + '/page_5/review/reviewList'); 
+        let go_Url = serverUrl + '/page_5/review/reviewList/'+movie_id;
+        console.log("go_Url");
+        console.log(go_Url);
+        return axios.get(go_Url); 
     }
 
     //상영시간표 리스트

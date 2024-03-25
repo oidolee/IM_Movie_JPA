@@ -16,6 +16,8 @@ import BobMarley_OneLove from '../../../assets/page_5/BobMarley_OneLove.jpg';
 // import { Link } from '@mui/material';
 
 import { Link, useHistory } from 'react-router-dom'; // 페이지이동
+import { jwtDecode } from 'jwt-decode';
+
 
 
 
@@ -50,13 +52,16 @@ function MovieDetail() {
   const [showModal, setShowModal] = useState(false); // 모달 창 열림/닫힘 상태
   const [selectedValue, setSelectedValue] = useState(1); // 선택된 값
   const [selectedTrailer, setSelectedTrailer] = useState("");
-  const [cookies, setCookie, removeCookie] = useCookies(['idName']); // 로그인 확인용
 
   const { movie_id } = useParams(); // useParams 훅을 사용하여 URL의 id 값을 가져옴
 
   //관람평 등록 값
   const [selectedStars, setSelectedStars] = useState(5); //관람평 별값
   const [reviewContents, setReviewContents] = useState('');
+
+  //아이디확인
+  const [authToken, setAuthToken] = useState(null); // 토큰 상태 추가
+  const [email, setEmail] = useState('');
 
 
   // id 값 사용 예시
@@ -91,7 +96,7 @@ function MovieDetail() {
     }
     let inputData = {
       movie_id: movie_id,
-      cus_id: cookies.cus_id,
+      cus_id: email,
       review_star: selectedStars,
       review_contents: reviewContents,
     }
@@ -100,6 +105,7 @@ function MovieDetail() {
 
     ApiService.addReview(inputData)
       .then((res) => {
+        console.log(res)
         // 변수 초기화
         setSelectedStars('5');
         setReviewContents('');
@@ -116,9 +122,23 @@ function MovieDetail() {
   }
 
   useEffect(() => {
+    // authToken 상태가 변경될 때마다 실행되는 부분
     reviewList(movie_id);
     selectLoad();
+
+    // 로컬 스토리지에서 토큰 가져오기
+    const authToken = localStorage.getItem("auth_token");
+
+    // 토큰이 존재하는지 확인 후 이메일 추출
+    if (authToken) {
+        setAuthToken(authToken)
+        const decodedToken = jwtDecode(authToken); // 수정 필요
+        const userEmail = decodedToken.iss;
+        setEmail(userEmail);
+    }
   }, []);
+
+
 
   const [getReviewlists, setGetReviewlists] = useState([]);
 
@@ -136,6 +156,7 @@ function MovieDetail() {
         console.log('parkingList Error', err);
       });
   }
+  console.log("관람평 결과")
   console.log(getReviewlists)
 
   // 영화상세
@@ -279,7 +300,7 @@ function MovieDetail() {
                 <div>
                   {/* 관람평 영역 */}
 
-                  {!cookies.idName && (
+                  {!authToken && (
                     <div className={`plz_login ${style.plz_login}`}>
                       <h4>로그인 후 관람평 등록 해주세요</h4>
 
@@ -290,7 +311,7 @@ function MovieDetail() {
                       </Link>
                     </div>
                   )}
-                  {cookies.idName && (
+                  {authToken && (
                     <div className={`star_info ${style.star_info}`}>
                       {/* <div class="star_rate type5">
                         <ul>
@@ -368,7 +389,7 @@ function MovieDetail() {
                       <img src={`https://www.lottecinema.co.kr/NLCHS/Content/images/temp/temp_reviewcharacter_0${6 - review.review_star}.jpg`} alt="image_by_rate" style={{ marginRight: '10px', width: '50px', height: '50px' }} />
 
                       <div className={`movie_review_content ${style.movie_review_content}`}>
-                        <p>작성자</p>
+                        <p>{review.cus_id}</p>
                         <p>작성일: {formattedDate}</p>
                         <p>{review.review_contents}</p>
                       </div>
