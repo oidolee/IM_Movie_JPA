@@ -38,6 +38,10 @@ function Login() {
                     alert("로그인 성공.")
                     history.push('/');
                     window.location.reload();
+                } else if (res.data.error === 'no_id') {
+                    alert("아이디가 없습니다.");
+                } else if (res.data.error === 'wrong_password') {
+                    alert("비밀번호를 확인해주세요.");
                 } else {
                     alert("로그인 실패\n로그인 정보 확인 바랍니다.")
                 }
