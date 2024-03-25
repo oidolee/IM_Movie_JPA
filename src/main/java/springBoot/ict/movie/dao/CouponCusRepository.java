@@ -15,9 +15,9 @@ public interface CouponCusRepository extends JpaRepository<CouponCusDTO, Integer
 	// 고객 쿠폰 리스트
 	@Query("SELECT cpcusdto " + 
 	        "FROM CouponCusDTO cpcusdto " + 
-	        "WHERE cpcusdto.ic_status = 'y' " + 
+	        "WHERE cpcusdto.ic_status = 'y' and cpcusdto.c_email = :c_email " + 
 	        "ORDER BY cpcusdto.ic_num DESC")
-	List<CouponCusDTO> selectCusCoupon();
+	List<CouponCusDTO> selectCusCoupon(String c_email);
 	
 	// 고객 쿠폰 갯수
 	@Query("SELECT COUNT(*) FROM CouponCusDTO cpcusdto WHERE cpcusdto.c_email = :c_email ")

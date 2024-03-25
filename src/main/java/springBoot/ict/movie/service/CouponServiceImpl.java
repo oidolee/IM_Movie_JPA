@@ -78,7 +78,7 @@ public class CouponServiceImpl implements CouponService {
 	public List<CouponCusDTO> cusCouponList(String c_email) 
 			throws ServletException, IOException {
 		
-		return cpcusdao.selectCusCoupon();
+		return cpcusdao.selectCusCoupon(c_email);
 	}
 	
 	// 고객 쿠폰 갯수
