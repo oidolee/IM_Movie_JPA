@@ -16,6 +16,7 @@ function MyPage_top() {
     const [cusCouponCount, setCusCouponCount] = useState('');
     const [userInfo, setUserInfo] = useState([]);
 
+
     useEffect(() => {
         // 로컬 스토리지에서 토큰 가져오기
         const authToken = localStorage.getItem("auth_token");
@@ -28,19 +29,21 @@ function MyPage_top() {
             reloadsearchCutomer(userEmail);
         }
         reloadCusCouponCount(email);
-            
+
     }, [email]); // useEffect가 최초 한 번만 실행되도록 빈 배열을 전달
+
 
     const reloadsearchCutomer = (email) => {
         ApiService.searchCutomer(email)
             .then(res => {
-                console.log("test" , res.data);
+                console.log("test", res.data);
                 setUserInfo(res.data);
             })
             .catch(err => {
                 console.log('reloadConsultList() Error!!', err);
             });
     }
+
 
     const reloadCusCouponCount = (email) => {
         ApiService.countCusCoupon(email)
@@ -52,10 +55,10 @@ function MyPage_top() {
                 console.log('reloadConsultList() Error!!', err);
             });
     }
-   
+
 
     return (
-        <div style={{display: 'flex'}}>
+        <div style={{ display: 'flex' }}>
             <div className={`mypage_box ${style.mypage_box}`}>
                 <div className={`my_info ${style.my_info}`}>
                     <div className={`grade_area ${style.grade_area}`}>
@@ -68,7 +71,7 @@ function MyPage_top() {
                     </div>
                     <div className={`name_place${style.name_place}`}>
                         <div className={`name${style.name}`}>
-                            <p style={{ textAlign: 'center' , fontSize: '30px'}}>
+                            <p style={{ textAlign: 'center', fontSize: '30px' }}>
                                 <strong>{userInfo.dto.name} 님 </strong> 반가워요! {/* 수정 필요 */}
                             </p>
                         </div>
@@ -102,29 +105,29 @@ function MyPage_top() {
                 </div>
                 <div className={`btn_wrap ${style.btn_wrap}`}>
                     {/* <div className={`my_point ${style.my_point}`}>
-                            <span className="txt_img">
-                                <img src={point} alt="IM_POINT" /> 
-                            </span>
-                            <em>12345p</em>
+                        <span className="txt_img">
+                            <img src={point} alt="IM_POINT" />
+                        </span>
+                        <em>12345p</em>
                     </div> */}
                     <div className={`my_coupon ${style.my_coupon}`}>
-                            총 쿠폰 개수 
+                        총 쿠폰 개수
                         <em className='txt_color'> {cusCouponCount}매</em>
                     </div>
                 </div>
             </div>
             <div className={`my_theater${style.my_theater}`}>
-                <div style={{textAlign: 'center', marginBottom:'100px', fontSize: '30px', fontWeight:'bold'}}>
+                <div style={{ textAlign: 'center', marginBottom: '100px', fontSize: '30px', fontWeight: 'bold' }}>
                     MY 영화관
                 </div>
-                <div style={{display: 'flex', justifyContent:'space-between'}}>
-                    <div style={{border: '1px solid #AFAFAF', width: '98px', height:'98px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         1st
                     </div>
-                    <div style={{border: '1px solid #AFAFAF', width: '98px', height:'98px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <div>2nd</div>
                     </div>
-                    <div style={{border: '1px solid #AFAFAF', width: '98px', height:'98px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <div>3rd</div>
                     </div>
                 </div>

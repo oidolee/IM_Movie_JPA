@@ -51,6 +51,7 @@ public class CouponController {
 	// 쿠폰 상세내역
 	@GetMapping("/selectCoupon/{ic_name}")
 	public Map<String, Object> selectConsultDetail(@PathVariable(name = "ic_name") String ic_name, Model model)
+
 			throws ServletException, IOException {
 		logger.info("<<< url -> selectConsultDetail");
 

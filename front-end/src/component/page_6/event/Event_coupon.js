@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import style from '../../../styles/page_6/Event_coupon_moudle.css';
 import ScrollReveal from 'scrollreveal';
 import ApiService from '../../../ApiService';
-import { TextField, Button} from '@mui/material';
+import { TextField, Button } from '@mui/material';
 const Event_coupon = () => {
     const [couponList, setCouponList] = useState([]);
     useEffect(() => {
@@ -34,9 +34,10 @@ const Event_coupon = () => {
                     ...item,
                     ic_startDate: formatDate(item.ic_startDate),
                     ic_endDate: formatDate(item.ic_endDate),
-                    ic_regDate: formatDate(item.ic_regDate) 
+                    ic_regDate: formatDate(item.ic_regDate)
                 }));
                 setCouponList(couponList);
+
             })
             .catch(err => {
                 console.log('fetchCoupon() ERROR!!', err);
@@ -45,7 +46,7 @@ const Event_coupon = () => {
 
     //쿠폰 조회 api -> checkCouponExistence 확인
     const checkEventCoupon = () => {
-       // TextField 요소 찾기
+        // TextField 요소 찾기
         const textField = document.getElementById('ic_code');
 
         // TextField의 값 가져오기
@@ -74,18 +75,18 @@ const Event_coupon = () => {
             console.log('쿠폰 목록이 비어 있습니다.');
             return;
         }
-    
+
         const couponExists = couponList.some(coupon => coupon.ic_code === targetIcCode);
-    
+
         if (couponExists) {
             alert(`${targetIcCode} 쿠폰이 존재합니다.`)
         } else {
             alert(`${targetIcCode} 쿠폰이 존재하지 않습니다.`)
         }
     };
-    
+
     // 예시로 'W29unZmm' 쿠폰이 존재하는지 확인
-   
+
     return (
         <div className={`event_Home ${style.event_Home}`}>
             <div className={`scrollUp event_Home_top ${style.event_Home_top}`}>
@@ -97,7 +98,7 @@ const Event_coupon = () => {
                 </ul>
             </div>
             <div className={`scrollUp event_section event_section1 ${style.event_section1}`}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignContent:'center',marginBottom: "20px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignContent: 'center', marginBottom: "20px" }}>
                     <h5>쿠폰</h5>
                     <div>
                         <TextField
@@ -108,7 +109,7 @@ const Event_coupon = () => {
                             id="ic_code"
                             placeholder='쿠폰입력'
                         />
-                        <Button variant="contained" color="primary" onClick={()=>checkEventCoupon()}> 쿠폰조회 </Button>
+                        <Button variant="contained" color="primary" onClick={() => checkEventCoupon()}> 쿠폰조회 </Button>
                     </div>
                 </div>
                 {couponList.map((coupon, index) => (
