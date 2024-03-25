@@ -39,7 +39,7 @@ import Admin_Notice_List from '../page_5/Admin_Notice_List';
 import Admin_Notice_Add from '../page_5/Admin_Notice_Add';
 import Admin_Notice_Edit from '../page_5/Admin_Notice_Edit';
 import Admin_GroupForm_List from '../page_5/Admin_GroupForm_List';
-import Admin_GroupForm_Answer from '../page_5/Admin_GroupForm_Answer';
+// import Admin_GroupForm_Answer from '../page_5/Admin_GroupForm_Answer';
 
 
 // page_6
@@ -97,12 +97,12 @@ const Admin_RouterComponent = () => {
                     <Route path="/admin/page_5/Admin_Next_List" exact={true} component={Admin_Next_List} />
                     <Route path="/admin/page_5/Admin_Arte_List" exact={true} component={Admin_Arte_List} />
                     <Route path="/admin/page_5/Admin_Arte_Add" exact={true} component={Admin_Arte_Add} />
-                    <Route path="/admin/page_5/Admin_Arte_Edit/:arte_id" exact={true} component={Admin_Arte_Edit} />
+                    <Route path="/admin/page_5/Admin_Arte_Edit" exact={true} component={Admin_Arte_Edit} />
                     <Route path="/admin/page_5/Admin_Notice_List" exact={true} component={Admin_Notice_List} />
                     <Route path="/admin/page_5/Admin_Notice_Add" exact={true} component={Admin_Notice_Add} />
                     <Route path="/admin/page_5/Admin_Notice_Edit/:notice_num" exact={true} component={Admin_Notice_Edit} />
                     <Route path="/admin/page_5/Admin_GroupForm_List" exact={true} component={Admin_GroupForm_List} />
-                    <Route path="/admin/page_5/Admin_GroupForm_Answer/:group_id" exact={true} component={Admin_GroupForm_Answer} />
+                    <Route path="/admin/page_5/Admin_GroupForm_Answer" exact={true} component={Admin_GroupForm_Answer} />
                 </Route>
 
 
@@ -114,7 +114,7 @@ const Admin_RouterComponent = () => {
                         <Route path="/admin/page_6/consult/Admin_counsult_detail_answer/:one_id" exact={true} component={Admin_counsult_detail_answer} />
                         <Route path="/admin/page_6/coupon/Admin_coupon_Add" exact={true} component={Admin_coupon_Add} />
                         <Route path="/admin/page_6/coupon/Admin_coupon_List" exact={true} component={Admin_coupon_List} />
-                        <Route path="/admin/page_6/coupon/Admin_coupon_Edit/:ic_num" exact={true} component={Admin_coupon_Edit} />
+                        <Route path="/admin/page_6/coupon/Admin_coupon_Edit/:ic_name" exact={true} component={Admin_coupon_Edit} />
                     </Route>
 
 

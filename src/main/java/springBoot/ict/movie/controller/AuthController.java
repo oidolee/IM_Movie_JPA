@@ -91,6 +91,7 @@ public class AuthController {
         return ResponseEntity.ok().build();
     }
     
+    // 고객목록
     @GetMapping("/admin/listCustomer")
     public List<User> listCustomer(HttpServletRequest req,HttpServletResponse res,Model model)
 	        throws ServletException, IOException {
@@ -126,19 +127,41 @@ public class AuthController {
         }
     }
     
-    // 비밀번호 찾기
+ // 비밀번호 찾기
     @PostMapping("/searchPWD")
-    public ResponseEntity<?> searchPWD(@RequestBody Map<String, String> requestData) {
+    public Map<String, Object> searchPWD(@RequestBody Map<String, Object> requestData) {
+        String id = (String) requestData.get("id");
+        String hp = (String) requestData.get("hp");
+        
+        // id와 hp를 이용하여 사용자 정보를 조회합니다.
+        User dto = userService.findByUserIdAndHp(id, hp);
+        Map<String, Object> map = new HashMap<>();
+        if (dto != null) {
+            // 사용자 정보가 조회가 되면  id와 hp를 반환!
+            map.put("id", id);
+            map.put("hp", hp);
+            System.out.println("id : " + id);
+            System.out.println("hp : " + hp);
+        }
+        return map;
+    }
+    
+    // 비밀번호 변경!
+    @PutMapping("/changePWD")
+    public ResponseEntity<String> changePassword(@RequestBody Map<String, String> requestData) {
         String id = requestData.get("id");
         String hp = requestData.get("hp");
-        
-        String foundPWD = userService.findByUserIdAndHp(id, hp);
-        if (foundPWD != null) {
-            Map<String, String> response = new HashMap<>();
-            response.put("foundPWD", foundPWD);
-            return ResponseEntity.ok().body(response);
+        String newPassword = requestData.get("newPassword");
+        System.out.println("id : " + id);
+        System.out.println("hp : " + hp);
+        System.out.println("newPassword : " + newPassword);
+
+        boolean success = userService.resetPassword(id, hp, newPassword);
+
+        if (success) {
+            return ResponseEntity.ok("Password updated successfully.");
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().body("Failed to update password.");
         }
     }
     
