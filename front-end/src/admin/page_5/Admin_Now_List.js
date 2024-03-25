@@ -109,7 +109,7 @@ function Admin_Now_List ({ history }) {
               </TableCell>
               <TableCell>{list.now_image}</TableCell>
               <TableCell>{list.now_title}</TableCell>
-              <TableCell> {new Date(list.now_date).toLocaleDateString()} </TableCell>
+              <TableCell>{list.now_date}</TableCell>
               <TableCell>{list.now_time}</TableCell>
               <TableCell>{list.now_age}</TableCell>
               <TableCell>{list.now_visitor}</TableCell>

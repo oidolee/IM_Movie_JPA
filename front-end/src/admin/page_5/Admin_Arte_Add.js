@@ -14,12 +14,7 @@ function Admin_Arte_Add ({ history }) {
     arte_visitor: "",
     arte_contents: "",
     arte_con: "",
-    arte_pd: "",
-    arte_cast: "",
-    arte_image2: "",
-    arte_image3: "",
-    arte_trailer1: "",
-    arte_trailer2: "",
+    arte_trailer: "",
     arte_category: "",
   });
 
@@ -143,65 +138,10 @@ function Admin_Arte_Add ({ history }) {
         required
         id="standard-required"
         variant="standard"
-        label="Movie_Pd"
+        label="Movie_Trailer"
         type="text"
-        name="arte_pd"
-        value={arteInfo.arte_pd}
-        onChange={onChange}
-      />
-      <br />
-      <TextField
-        required
-        id="standard-required"
-        variant="standard"
-        label="Movie_Cast"
-        type="text"
-        name="arte_cast"
-        value={arteInfo.arte_cast}
-        onChange={onChange}
-      />
-      <br />
-      <TextField
-        required
-        id="standard-required"
-        variant="standard"
-        label="Movie_Image2"
-        type="text"
-        name="arte_image2"
-        value={arteInfo.arte_image2}
-        onChange={onChange}
-      />
-      <br />
-      <TextField
-        required
-        id="standard-required"
-        variant="standard"
-        label="Movie_Image3"
-        type="text"
-        name="arte_image3"
-        value={arteInfo.arte_image3}
-        onChange={onChange}
-      />
-      <br />
-      <TextField
-        required
-        id="standard-required"
-        variant="standard"
-        label="Movie_Trailer1"
-        type="text"
-        name="arte_trailer1"
-        value={arteInfo.arte_trailer1}
-        onChange={onChange}
-      />
-      <br />
-      <TextField
-        required
-        id="standard-required"
-        variant="standard"
-        label="Movie_Trailer2"
-        type="text"
-        name="arte_trailer2"
-        value={arteInfo.arte_trailer2}
+        name="arte_trailer"
+        value={arteInfo.arte_trailer}
         onChange={onChange}
       />
       <br />
