@@ -116,13 +116,15 @@ const Event_coupon = () => {
                     index % 3 === 0 && (
                         <ul key={index}>
                             {couponList.slice(index, index + 3).map((couponItem, subIndex) => (
-                                <li key={subIndex}>
-                                    <a href={`/Event_coupon_detail/${couponItem.ic_num}`}>
-                                        <img src={`${process.env.PUBLIC_URL}/page_6/${couponItem.ic_img}`} alt='coupon_1' />
-                                    </a>
-                                    <p>{couponItem.ic_name}</p>
-                                    <p>{couponItem.ic_startDate} ~ {couponItem.ic_endDate}</p>
-                                </li>
+                                couponItem.ic_img && (
+                                    <li key={subIndex}>
+                                        <a href={`/Event_coupon_detail/${couponItem.ic_name}`}>
+                                            <img src={`${process.env.PUBLIC_URL}/page_6/${couponItem.ic_img}`} alt='coupon_1' />
+                                        </a>
+                                        <p>{couponItem.ic_name}</p>
+                                        <p>{couponItem.ic_startDate} ~ {couponItem.ic_endDate}</p>
+                                    </li>
+                                )
                             ))}
                         </ul>
                     )

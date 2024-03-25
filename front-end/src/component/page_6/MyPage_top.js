@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import style from '../../styles/page_6/Mypage_module.css';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import { useCookies } from 'react-cookie';
-import point from '../../assets/page_6/txt_lpoint_20210407.png';
 import { jwtDecode } from 'jwt-decode';
 import ApiService from '../../ApiService';
 
 
 
 function MyPage_top() {
-    const cus_grade = 'VIP';
-    const [cookies, setCookie, removeCookie] = useCookies(['idCheck']);
-    const [c_email, setC_email] = useState('');
-    const [email, setEmail] = useState('');
     const [cusCouponCount, setCusCouponCount] = useState('');
     const [userInfo, setUserInfo] = useState([]);
+    const [email, setEmail] = useState('');
 
 
     useEffect(() => {
@@ -27,10 +21,11 @@ function MyPage_top() {
             const userEmail = decodedToken.iss;
             setEmail(userEmail);
             reloadsearchCutomer(userEmail);
+            reloadCusCouponCount(userEmail);
         }
-        reloadCusCouponCount(email);
+        
 
-    }, [email]); // useEffect가 최초 한 번만 실행되도록 빈 배열을 전달
+    }, []); // useEffect가 최초 한 번만 실행되도록 빈 배열을 전달
 
 
     const reloadsearchCutomer = (email) => {
@@ -38,9 +33,10 @@ function MyPage_top() {
             .then(res => {
                 console.log("test", res.data);
                 setUserInfo(res.data);
+                console.log(userInfo.dto.name);
             })
             .catch(err => {
-                console.log('reloadConsultList() Error!!', err);
+                console.log('searchCutomer() Error!!', err);
             });
     }
 
@@ -72,7 +68,7 @@ function MyPage_top() {
                     <div className={`name_place${style.name_place}`}>
                         <div className={`name${style.name}`}>
                             <p style={{ textAlign: 'center', fontSize: '30px' }}>
-                                <strong>{userInfo.dto.name} 님 </strong> 반가워요! {/* 수정 필요 */}
+                                <strong> {userInfo && userInfo.dto && userInfo.dto.name}님 </strong> 반가워요! {/* 수정 필요 */}
                             </p>
                         </div>
                     </div>

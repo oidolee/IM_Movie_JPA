@@ -11,7 +11,7 @@ function MyPage_coupon_part() {
     const [cusCouponCount, setCusCouponCount] = useState('');
 
     const [cookies_email, setCookie_email] = useCookies(['cookies_email']); // 쿠키 훅 
-    const [emailCheck, setEmailCheck] = useState('');
+    const [email, setEmail] = useState('');
     const [ic_name, setIc_name] = useState('');
 
     // 상세내역
@@ -50,9 +50,9 @@ function MyPage_coupon_part() {
         if (authToken) {
             const decodedToken = jwtDecode(authToken); // 수정 필요
             const userEmail = decodedToken.iss;
-            setEmailCheck(userEmail);
-            reloadCusCouponList(emailCheck);
-            reloadCusCouponCount(emailCheck);
+            setEmail(userEmail);
+            reloadCusCouponList(userEmail);
+            reloadCusCouponCount(userEmail);
         }
 
     }, []);
@@ -94,7 +94,7 @@ function MyPage_coupon_part() {
                 setcusCouponData(cusCouponData);
             })
             .catch(err => {
-                console.log('reloadConsultList() Error!!', err);
+                console.log('fetchCusCouponCus() Error!!', err);
             });
     }
 
