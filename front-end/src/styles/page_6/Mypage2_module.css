@@ -1,0 +1,187 @@
+/* header 공통 부분 */
+/* .header_section{
+    width: 100%;
+    position: initial;
+    left: initial;
+    transform: initial;
+    margin: 0 auto;
+    background: initial;
+} */
+
+.mypage_area_movingbar {
+    width: 980px;
+    height: max-content;
+    margin: 0px auto;
+    padding: 50px 0 0 0;
+    
+    
+}
+
+.mypage_area_movingbar::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 0;
+    top: 163px;
+    height: 334px;
+    background-color: #FF7787;
+}
+
+.mypage_top_infor {
+    position: relative;
+    margin: 0 auto 35px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, .1);
+    background-color: #FFF;
+    border: 1px solid;
+    display: flex;
+    
+}
+
+/* .mypage_top_infor::before {
+    content: '';
+    position: absolute;
+    left: 599px;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background-color: #eee;
+} */
+
+.mypage_box {
+    position: relative;
+    width: 597px;
+    min-height: 355px;
+    border-right: 1px solid whitesmoke;
+    margin-right: 30px;
+    margin-left: 10px;
+}
+
+.my_info {
+    position: relative;
+    display: inline;
+    padding: 25px 30px 0 30px;
+}
+
+.my_info .grade_area {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.txt_rank_common {
+    background-color: #AFAFAF;
+}
+
+[class*="txt_rank"] {
+    display: inline-block;
+    padding: 0 10px;
+    min-width: 48px;
+    height: 22px;
+    color: #fff;
+    line-height: 22px;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Roboto';
+    border-radius: 25px;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.my_info.name {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.name_place{
+    justify-content: left;
+}
+
+.my_info .next_rank {
+    position: relative;
+    min-height: 25px;
+    line-height: 25px;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.bx_grade.merge2020 {
+    position: relative;
+    padding: 0 30px;
+    margin: 0 0 10px;
+}
+
+.MyPage_menu2 {
+    border: 1px solid ;
+    width: 100%;
+    height: auto;
+    
+}
+
+.MyPage_banner{
+    
+    width: 100%;
+    height: 200px;
+    margin-top: 10px;
+}
+
+.MyPage_banner > img{ 
+    
+    width: 100%;
+    height: 100%
+}
+
+.MyPage_myinfo_update_part{
+    margin-bottom: 10px;
+}
+
+.infograde {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn_wrap{
+    display: flex;
+    width: auto;
+    height: 60px;
+    justify-content: space-around;
+    margin-top: 100px;
+    
+}
+
+.btn_wrap .my_point{
+    width: 280px;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    box-shadow: #AFAFAF;
+    
+}
+
+.btn_wrap .my_coupon{
+    width: 280px;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    box-shadow: #AFAFAF
+
+}
+
+.my_theater{
+    display: inline;
+    margin-left: 10px;
+}
+
+.btn_txt_edit{
+    height: 15px;
+    line-height: 15px;
+    border: 0;
+    padding-left: 18px;
+    font-size: 11px;
+    color: #000;
+    background: url(https://www.lottecinema.co.kr/NLCHS/Content/images/icon/edit_15.png) no-repeat 0 center;
+}
+
+
+

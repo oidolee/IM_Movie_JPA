@@ -1,28 +1,45 @@
+/* Admin_GroupForm_Answer.css */
+
 .Admin_GroupForm_Answer {
-    width: 100%;
-    height: 100%;
-}
-
-.Admin_GroupForm_Answer .groupAnswer {
-    display: flex;
-    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .Admin_GroupForm_Answer h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
     text-align: center;
+  }
+  
+  .Admin_GroupForm_Answer p {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .Admin_GroupForm_Answer .MuiTextField-root {
     width: 100%;
-    height: 100%;
-}
-
-.Admin_GroupForm_Answer .saveBtn {
-    background-color: black;
-    padding: 10px 20px;
-    margin-top: 20px;
-}
-
-.Admin_GroupForm_Answer .saveBtn:hover {
-    background-color: #FF243E;
-}
-
-.Admin_GroupForm_Answer .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
-    width: 700px;
-    margin-top: 30px;
-}
-
+    margin-bottom: 20px;
+  }
+  
+  .Admin_GroupForm_Answer .MuiTextField-root label {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .Admin_GroupForm_Answer .MuiTextField-root input,
+  .Admin_GroupForm_Answer .MuiTextField-root textarea {
+    font-size: 16px;
+  }
+  
+  .Admin_GroupForm_Answer .MuiButton-root {
+    width: 100%;
+    font-size: 16px;
+    text-transform: none;
+  }
+  

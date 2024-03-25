@@ -4,6 +4,8 @@ import Res_movie from "../../assets/page_1/movie.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
 import ApiService from "../../ApiService";
 import { useHistory } from "react-router-dom";
+import { jwtDecode } from 'jwt-decode';
+import moment from "moment";
 
 const QuantityCounter = ({ onQuantityChange, totalQuantity }) => {
   const [quantity, setQuantity] = useState(0);
@@ -13,7 +15,7 @@ const QuantityCounter = ({ onQuantityChange, totalQuantity }) => {
       const newQuantity = quantity + 1;
       setQuantity(newQuantity);
       onQuantityChange(newQuantity);
-    } 
+    }
   };
 
   const handleDecrement = () => {
@@ -29,7 +31,7 @@ const QuantityCounter = ({ onQuantityChange, totalQuantity }) => {
   useEffect(() => {
     if (totalQuantity > 8 || quantity > 8) {
       setQuantity(0);
-    } 
+    }
   }, [totalQuantity]);
 
   return (
@@ -56,6 +58,33 @@ const Reservation_Seat = () => {
   const [childQuantity, setChildQuantity] = useState(0);
   const [disabledQuantity, setDisabledQuantity] = useState(0);
   const [lastActivityTime, setLastActivityTime] = useState(Date.now());
+
+  // 로컬 상태로 선택한 영화와 좌석 정보를 저장할 상태를 정의합니다.
+  const [selectedMovie, selectedMovieInfo] = useState(null);
+
+  // 각 인원별 가격 설정
+  const adultPrice = 10000;
+  const teenPrice = 8000;
+  const childPrice = 6000;
+  const disabledPrice = 5000;
+
+  // 총 가격 계산
+  const totalPrice =
+    adultPrice * adultQuantity +
+    teenPrice * teenQuantity +
+    childPrice * childQuantity +
+    disabledPrice * disabledQuantity;
+
+  // 페이지가 로드될 때 로컬 스토리지에서 선택한 영화와 좌석 정보를 가져와서 상태에 설정합니다.
+  useEffect(() => {
+    const selectedMovie = localStorage.getItem("selectedMovieInfo");
+
+    if (selectedMovie) {
+      selectedMovieInfo(JSON.parse(selectedMovie));
+    }
+
+    console.log("selectedMovieInfo : ", selectedMovieInfo);
+  }, []);
 
   // 로그인 상태 확인
 
@@ -128,7 +157,7 @@ const Reservation_Seat = () => {
     const { canSelectSeat } = e.target.dataset;
     const isChecked = checked;
     const seatNumber = e.target.innerText;
-  
+
     if (canSelectSeat === "true") {
       setChecked(!isChecked);
     } else {
@@ -183,7 +212,7 @@ const Reservation_Seat = () => {
     } else {
       alert("선택된 좌석 수량을 초과하였습니다.");
       return;
-      }
+    }
   };
 
   const handlePayment = () => {
@@ -198,10 +227,6 @@ const Reservation_Seat = () => {
       console.log("좌석 수량과 카운터 수량이 일치하지 않음");
       alert("인원/수량 불일치합니다. 수량을 확인해주세요.");
       return;
-    } 
-    // 좌석 수랑 인원 수 일치
-    else if(selectedSeats.length === totalQuantity) {
-      
     }
 
     const updateSeatPromises = selectedSeats.map((seat) => {
@@ -215,22 +240,33 @@ const Reservation_Seat = () => {
 
       console.log("inputData : ", inputData);
 
-      return ApiService.updateSeat(inputData)
+      return ApiService.updateSeat(inputData);
     });
-
+    
     Promise.all(updateSeatPromises)
       .then((res) => {
         console.log("모든 좌석 업데이트 성공");
         // const firstSeat = selectedSeats[0].split('-')[2];
-        // history.push(`/page_1/Reservation_Payment/${firstSeat}`); // url로 데이터 보내기 > customer 번호 보낼예정
-        const selectedSeat = selectedSeats.map(seat => seat.split('-')[2]);
-        localStorage.setItem('selectedSeat', JSON.stringify(selectedSeat));
-
+        // history.push(`/page_1/Reservation_Payment/${firstSeat}`);
+        const selectedSeat = selectedSeats.map((seat) => seat.split("-")[2]);
+        localStorage.setItem("selectedSeat", JSON.stringify(selectedSeat));
+        localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
+        localStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
+        localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+        localStorage.setItem("selectedSeatInfo", JSON.stringify({
+          adultQuantity: adultQuantity,
+          teenQuantity: teenQuantity,
+          childQuantity: childQuantity,
+          disabledQuantity: disabledQuantity,
+          totalQuantity: totalQuantity,
+          selectedSeats: selectedSeats
+        }));
         history.push("/page_1/Reservation_Payment");
       })
       .catch((err) => {
         console.log("좌석 업데이트 오류 : ", err);
       });
+
   };
 
   const handleMovie = () => {
@@ -238,7 +274,7 @@ const Reservation_Seat = () => {
     if (confirmResult) {
       history.push("/page_1/Reservation_Movie");
     }
-  }
+  };
 
   return (
     <div className={`Res_seat ${style.Res_seat}`}>
@@ -254,18 +290,24 @@ const Reservation_Seat = () => {
                     상영시간
                   </span>
                 </strong>
-                <div className="step_content2">
-                  <dl>
-                    <dt>선택한 영화 제목</dt>
-                    <dd></dd>
-                    <dt>선택한 상영관</dt>
-                    <dd></dd>
-                    <dt>선택한 상영 날짜</dt>
-                    <dd></dd>
-                    <dt>선택한 상영 시간</dt>
-                    <dd></dd>
-                  </dl>
-                </div>
+                {selectedMovie && (
+                  <div className="step_content2">
+                    <dl>
+                      <dt>선택한 영화 제목</dt>
+                      <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                        {selectedMovie.movie_title}
+                      </dd>
+                      <dt>선택한 상영관</dt>
+                      <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                        {selectedMovie.theater_id}
+                      </dd>
+                      <dt>선택한 상영 날짜/시간</dt>
+                      <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                        {selectedMovie.movie_time}
+                      </dd>
+                    </dl>
+                  </div>
+                )}
               </a>
             </li>
             <li className="step" id="step1">
@@ -281,10 +323,9 @@ const Reservation_Seat = () => {
                   <dl>
                     <dt>인원</dt>
                     <dd style={{ textAlign: "left", marginLeft: "12px" }}>
-                      성인: {adultQuantity}명, 
-                      청소년: {teenQuantity}명<br />
-                      경로: {childQuantity}명, 
-                      장애인: {disabledQuantity}명<br />
+                      성인: {adultQuantity}명, 청소년: {teenQuantity}명<br />
+                      경로: {childQuantity}명, 장애인: {disabledQuantity}명
+                      <br />
                       총: {totalQuantity}명
                     </dd>
                     <dt>좌석</dt>
@@ -312,7 +353,7 @@ const Reservation_Seat = () => {
                 <div className="step_content">
                   <dl>
                     <dt>티켓금액</dt>
-                    <dd></dd>
+                    <dd>{totalPrice}</dd>
                     <dt>할인금액</dt>
                     <dd></dd>
                     <dt>총합계</dt>
@@ -347,11 +388,15 @@ const Reservation_Seat = () => {
                   <img src={Res_movie} className="movie_img" alt="movie" />
                 </li>
                 <ul className="Res_movie_content">
-                  <li>
-                    <img src={Res_img15} className="age_img" alt="age" />
-                    <strong className="movie_name">파묘</strong> | 24.03.10(일)
-                    | 20:30 ~ 22:54 | 영등포 1관
-                  </li>
+                  {selectedMovie && (
+                    <li>
+                      <img src={Res_img15} className="age_img" alt="age" />
+                      <strong className="movie_name">
+                        {selectedMovie.movie_title}
+                      </strong>{" "}
+                      | {selectedMovie.start_time}| {selectedMovie.theater_id}
+                    </li>
+                  )}
                   <li>
                     <div>
                       <ul className="Res_cnt">
@@ -361,7 +406,10 @@ const Reservation_Seat = () => {
                             onQuantityChange={(newQuantity) => {
                               setAdultQuantity(newQuantity);
                               setTotalQuantity(
-                                newQuantity + teenQuantity + childQuantity + disabledQuantity
+                                newQuantity +
+                                  teenQuantity +
+                                  childQuantity +
+                                  disabledQuantity
                               ); // 총 수량 업데이트
                             }}
                             totalQuantity={totalQuantity}
@@ -373,7 +421,10 @@ const Reservation_Seat = () => {
                             onQuantityChange={(newQuantity) => {
                               setTeenQuantity(newQuantity);
                               setTotalQuantity(
-                                adultQuantity + newQuantity + childQuantity + disabledQuantity
+                                adultQuantity +
+                                  newQuantity +
+                                  childQuantity +
+                                  disabledQuantity
                               ); // 총 수량 업데이트
                             }}
                             totalQuantity={totalQuantity}
@@ -385,7 +436,10 @@ const Reservation_Seat = () => {
                             onQuantityChange={(newQuantity) => {
                               setChildQuantity(newQuantity);
                               setTotalQuantity(
-                                adultQuantity + teenQuantity + newQuantity + disabledQuantity
+                                adultQuantity +
+                                  teenQuantity +
+                                  newQuantity +
+                                  disabledQuantity
                               ); // 총 수량 업데이트
                             }}
                             totalQuantity={totalQuantity}
@@ -397,7 +451,10 @@ const Reservation_Seat = () => {
                             onQuantityChange={(newQuantity) => {
                               setDisabledQuantity(newQuantity);
                               setTotalQuantity(
-                                adultQuantity + teenQuantity + childQuantity + newQuantity
+                                adultQuantity +
+                                  teenQuantity +
+                                  childQuantity +
+                                  newQuantity
                               ); // 총 수량 업데이트
                             }}
                             totalQuantity={totalQuantity}
