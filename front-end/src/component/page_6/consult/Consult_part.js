@@ -9,7 +9,7 @@ import { jwtDecode } from 'jwt-decode';
 
 function Consult_part() {
     const [showDetail, setShowDetail] = useState(false);
-    
+
     const showBox = () => {
         setShowDetail(!showDetail)
     }
@@ -17,8 +17,9 @@ function Consult_part() {
     //const [cookies_email, setCookie_email] = useCookies(['cookies_email']); // 쿠키 훅 
     const [email, setEmail] = useState('');
 
+
     const cus_grade = 'VIP';
-    
+
     const [cus_name, setCus_Name] = useState('');
 
     useEffect(() => {
@@ -30,24 +31,24 @@ function Consult_part() {
             console.log(email);
             reloadsearchCutomer(email);
         }
-        
+
     }, []);
 
     const reloadsearchCutomer = (email) => {
         ApiService.searchCutomer(email)
-            .then(res =>{
+            .then(res => {
                 console.log('res.data', res.data);
-                //setCus_Name(res.data.dto.name)
+                setCus_Name(res.data.dto.name)
             })
             .catch(error => {
                 console.error('삭제 요청 실패:', error);
                 // 삭제 요청이 실패했을 때 필요한 동작 수행
             });
     }
-        
 
-    
-    
+
+
+
     const [consultData, setConsultData] = useState({
         c_email: email,
         cus_name: '',
@@ -58,14 +59,14 @@ function Consult_part() {
     });
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setConsultData(prevState  =>({
+        setConsultData(prevState => ({
             ...prevState,
             c_email: email,
             cus_name: cus_name,
             [name]: value
         }));
     }
-    
+
     const saveConsult = (e) => {
         e.preventDefault();
         // 필요한 로직 수행
@@ -75,10 +76,10 @@ function Consult_part() {
                 // 필요한 작업 수행
                 if (res.data.resultCode == '200') {
                     alert("문의 등록 성공");
-                    history.push('/MyPage_consult_list'); 
+                    history.push('/MyPage_consult_list');
                 } else {
                     alert("문의 등록 실패");
-                    history.push('/Consult'); 
+                    history.push('/Consult');
                 }
             })
             .catch(err => {
@@ -107,10 +108,10 @@ function Consult_part() {
                     <tr>
                         <td style={{ paddingRight: '20px' }}>분류 *</td>
                         <td>
-                            <select 
-                                className={`select1 ${style.select1}`} 
-                                required 
-                                value={consultData.ib_type} 
+                            <select
+                                className={`select1 ${style.select1}`}
+                                required
+                                value={consultData.ib_type}
                                 onChange={handleChange}
                                 name="ib_type"
                             >
@@ -122,9 +123,9 @@ function Consult_part() {
                                 <option value={'홈페이지'}>홈페이지</option>
                                 <option value={'개인정보'}>개인정보</option>
                             </select>
-                            <select 
-                                className={`select2 ${style.select2}`} 
-                                value={consultData.ib_type_detail} 
+                            <select
+                                className={`select2 ${style.select2}`}
+                                value={consultData.ib_type_detail}
                                 onChange={handleChange}
                                 name="ib_type_detail"
                             >
@@ -150,27 +151,27 @@ function Consult_part() {
                     <tr>
                         <td>제목 *</td>
                         <td>
-                            <input 
-                                className={`consultTitle ${style.consultTitle}`} 
-                                type="text" 
-                                placeholder="제목을 입력해주세요" 
-                                required 
-                                style={{background: 'rgba(211, 211, 211, 0.178)'}} 
-                                value={consultData.ib_title}  
+                            <input
+                                className={`consultTitle ${style.consultTitle}`}
+                                type="text"
+                                placeholder="제목을 입력해주세요"
+                                required
+                                style={{ background: 'rgba(211, 211, 211, 0.178)' }}
+                                value={consultData.ib_title}
                                 onChange={handleChange}
                                 name="ib_title"
-                                
+
                             />
                         </td>
                     </tr>
                     <tr>
                         <td>내용 *</td>
                         <td>
-                            <textarea 
-                                className={`consult_content ${style.consult_content}`} 
-                                value={consultData.ib_content} 
+                            <textarea
+                                className={`consult_content ${style.consult_content}`}
+                                value={consultData.ib_content}
                                 onChange={handleChange}
-                                name="ib_content" 
+                                name="ib_content"
                             ></textarea>
                         </td>
                     </tr>
@@ -185,30 +186,30 @@ function Consult_part() {
                     <table className={`myinfo_table ${style.myinfo_table}`}>
                         <tr>
                             <td>성명</td>
-                            <td><input className={`myname ${style.myname}`} type="text" style={{ padding: '0px 18px', width: '150px',backgroundColor:'rgba(211, 211, 211, 0.199)'}} value={cus_name}></input></td>
+                            <td><input className={`myname ${style.myname}`} type="text" style={{ padding: '0px 18px', width: '150px', backgroundColor: 'rgba(211, 211, 211, 0.199)' }} value={cus_name}></input></td>
                         </tr>
                         <tr>
                             <td>연락처</td>
                             <td>
-                                <input className={`tel1 ${style.tel1}`} type="text" style={{ marginRight: '10px', padding: '0px 18px', width: '80px',backgroundColor:'rgba(211, 211, 211, 0.199)'}}></input>
+                                <input className={`tel1 ${style.tel1}`} type="text" style={{ marginRight: '10px', padding: '0px 18px', width: '80px', backgroundColor: 'rgba(211, 211, 211, 0.199)' }}></input>
                                 -
-                                <input className={`tel2 ${style.tel2}`} type="text" style={{ marginRight: '10px', marginLeft: '10px', padding: '0px 18px', width: '150px',backgroundColor:'rgba(211, 211, 211, 0.199)'}}></input>
+                                <input className={`tel2 ${style.tel2}`} type="text" style={{ marginRight: '10px', marginLeft: '10px', padding: '0px 18px', width: '150px', backgroundColor: 'rgba(211, 211, 211, 0.199)' }}></input>
                                 -
-                                <input className={`tel3 ${style.tel3}`} type="text" style={{ marginRight: '10px', marginLeft: '10px', padding: '0px 18px', width: '150px',backgroundColor:'rgba(211, 211, 211, 0.199)'}}></input>
+                                <input className={`tel3 ${style.tel3}`} type="text" style={{ marginRight: '10px', marginLeft: '10px', padding: '0px 18px', width: '150px', backgroundColor: 'rgba(211, 211, 211, 0.199)' }}></input>
                             </td>
                         </tr>
                         <tr>
                             <td>이메일</td>
                             <td>
-                                <input className={`email1 ${style.email1}`} type="text" style={{ marginRight: '10px', padding: '0px 18px',backgroundColor:'rgba(211, 211, 211, 0.199)'}} value={email}></input>
+                                <input className={`email1 ${style.email1}`} type="text" style={{ marginRight: '10px', padding: '0px 18px', backgroundColor: 'rgba(211, 211, 211, 0.199)' }} value={email}></input>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
             <div>
-                <input type="hidden" value={consultData.ib_date}  name="ib_date" onChange={handleChange}/>
-                <input type="hidden" value={consultData.ib_show}  name="ib_show" onChange={handleChange}/>
+                <input type="hidden" value={consultData.ib_date} name="ib_date" onChange={handleChange} />
+                <input type="hidden" value={consultData.ib_show} name="ib_show" onChange={handleChange} />
                 <Button className={`btn_cancle ${style.btn_cancle}`} variant="contained" color="primary" onClick={saveConsult}> 확인 </Button>
                 <Button className={`btn_submit ${style.btn_submit}`} variant="contained" color="primary" onClick={resetForm}> 취소 </Button>
             </div>

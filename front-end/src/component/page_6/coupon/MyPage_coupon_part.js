@@ -30,7 +30,7 @@ function MyPage_coupon_part() {
         // 쿠폰 상세내역
         ApiService.couponDetailList(ic_name)
             .then(res => {
-                console.log('ic_name : ' + ic_name);
+                console.log('ic_num : ' + ic_name);
                 console.log('res.data', res.data);
                 let coupon = res.data;
                 setIc_code(coupon.cpdto.ic_code);
@@ -41,6 +41,7 @@ function MyPage_coupon_part() {
             .catch(err => {
                 console.log('couponDetailList() ERROR!!', err);
             })
+
     }
 
 
@@ -50,10 +51,10 @@ function MyPage_coupon_part() {
             const decodedToken = jwtDecode(authToken); // 수정 필요
             const userEmail = decodedToken.iss;
             setEmailCheck(userEmail);
-            reloadCusCouponList(userEmail);
-            reloadCusCouponCount(userEmail);
+            reloadCusCouponList(emailCheck);
+            reloadCusCouponCount(emailCheck);
         }
-        
+
     }, []);
 
 
@@ -110,8 +111,6 @@ function MyPage_coupon_part() {
             });
     }
 
-    
-
     // 선택삭제 
     const handleDeleteCoupon = (ic_num) => {
         console.log('선택 삭제 버튼 클릭');
@@ -119,6 +118,7 @@ function MyPage_coupon_part() {
             .then(response => {
                 console.log('삭제 요청 성공');
                 window.location.reload();
+                // 성공적으로 삭제되었을 때 필요한 동작 수행
             })
             .catch(error => {
                 console.error('삭제 요청 실패:', error);
@@ -132,11 +132,11 @@ function MyPage_coupon_part() {
             <div className={`MyPage_coupon_useable ${style.MyPage_coupon_useable}`}>
                 <p>사용 가능한 쿠폰 : {cusCouponCount} 매</p>
             </div>
-            {/* <div className={`MyPage_coupon_menu ${style.MyPage_coupon_menu}`}>
+            <div className={`MyPage_coupon_menu ${style.MyPage_coupon_menu}`}>
                 <div className={`coupon_delete_parent ${style.coupon_delete_parent}`}>
-                    
+
                 </div>
-                <div>
+                {/* <div>
                     <select className={`coupon_menu1 ${style.coupon_menu1}`}>
                         <option value='all'>전체</option>
                         <option value='movie'>영화</option>
@@ -149,11 +149,11 @@ function MyPage_coupon_part() {
                         <option value='useComplete'>사용완료</option>
                         <option value='cantUse'>기간만료</option>
                     </select>
-                </div>
+                </div> */}
                 <div className={`couponRegButton ${style.couponRegButton}`}>
-                    
+                    <button title="쿠폰 등록" > 쿠폰등록 </button>
                 </div>
-            </div> */}
+            </div>
             <div className={`coupon_detail ${style.coupon_detail}`}>
                 <table className={`coupon_detail_table ${style.coupon_detail_table}`} >
                     <colgroup>
