@@ -87,6 +87,7 @@ public class UserService {
 		user.setState(userDTO.getState());
 		user.setToken(userDTO.getToken());   // 추가, 컬럼 size 500
 		user.setRole("ROLE_USER");
+		user.setType(userDTO.getType());
 		
 		// passwordEncoder를 사용하여 암호를 일반텍스트로 저장하지 않고 해시한다.
 		user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDTO.getPassword())));
