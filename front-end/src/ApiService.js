@@ -336,6 +336,13 @@ class ApiService {
         return axios.get(serverUrl + '/admin/listCustomer'); 
     }
 
+    selectCoupon(ic_code){
+        console.log('selectCoupon() 호출!!')
+        let goUrl = serverUrl + '/page_2/selectCoupon/'+ic_code
+        console.log(goUrl);
+        return axios.get(goUrl); 
+    }
+
     // page_5
     //영화 홈 목록 리스트
     fetchMovie(){

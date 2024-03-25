@@ -99,9 +99,6 @@ class Reservation_Payment_Store extends Component {
 
   handlePayment = () => {
    
-    
-
-
     const { email } = this.state;
 
     // ApiService에 쿠키로부터 가져온 이메일 정보 전달
@@ -140,6 +137,7 @@ class Reservation_Payment_Store extends Component {
       } = JSON.parse(storedData);
 
 
+      //쿠폰등록 시작
       // 중복되지 않는 랜덤 코드 생성 함수
       const generateUniqueRandomCode = () => {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -192,8 +190,8 @@ class Reservation_Payment_Store extends Component {
         .catch((error)=>{ 
           console.error("결제 데이터 전송 실패:", error);
         })
-      return false;
 
+        //쿠폰등록 끝
 
       ApiService.addStoreOrderDetail({
         totalQuantity,
