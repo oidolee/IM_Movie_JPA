@@ -101,7 +101,7 @@ const Reservation_Movie = ({ history }) => {
     setSelectedMovie(placeData);
 
     const menuElement = document.querySelector(".menu3_left"); // 지역에 해당하는 영화 출력 위치
-    const menu4Sub = document.querySelector(".menu4_sub ul"); // menu4_sub 요소
+    const menu4Sub = document.querySelector(".menu4_sub ul"); // 선택된 영화 정보 출력 위치
 
     menuElement.innerHTML = ""; // 기존 내용 지우기
 
@@ -121,32 +121,39 @@ const Reservation_Movie = ({ history }) => {
         const menuItem = document.createElement("li");
         const link = document.createElement("a");
         link.href = "#";
-        link.textContent = `${movies[0].movie_title}`; // 영화 제목과 ID 출력  - ID: ${movieId}
+
+        // 영화 이미지 가져오기
+        const movieImage = getMovieImage(movieId);
+
+        // 영화 이미지와 제목 출력
+        if (movieImage) {
+          link.appendChild(movieImage); // 이미지 추가
+        }
+        link.appendChild(document.createTextNode(movies[0].movie_title)); // 제목 추가
+
         link.onclick = (event) => {
           event.preventDefault();
-          console.log(
-            `${movies[0].movie_title}를 클릭했습니다. ID: ${movieId}`
-          ); // 클릭한 영화 제목과 ID 출력
-
+          console.log(`${movies[0].movie_title}를 클릭했습니다. ID: ${movieId}`); // 클릭한 영화 제목과 ID 출력
+        
+          setSelectedMovie(movies); // 클릭한 영화 리스트 전달
+        
           menu4Sub.innerHTML = "";
           // 선택한 영화 정보를 출력
           movies.forEach((movieInfo) => {
             const { ip_num, movie_title, theater_id, start_time } = movieInfo;
-            const formattedStartTime = moment(start_time, "HH:mm:ss").format(
-              "HH:mm"
-            );
-
+            const formattedStartTime = moment(start_time, "HH:mm:ss").format("HH:mm");
+        
             const listItem = document.createElement("li");
             listItem.style.marginBottom = "20px";
             listItem.innerHTML = `
-                      <a href="#none">
-                          <span>
-                            ${movie_title}
-                              ${formattedStartTime}<br />
-                              ${remainingSeatsCount}/112 ${theater_id}
-                          </span>                         
-                      </a>
-                  `;
+              <a href="#none">
+                <span>
+                  ${movie_title}
+                  ${formattedStartTime}<br />
+                  ${remainingSeatsCount}/112 ${theater_id}
+                </span>                         
+              </a>
+            `;
             menu4Sub.appendChild(listItem);
           });
         };
@@ -160,14 +167,30 @@ const Reservation_Movie = ({ history }) => {
 
   // 연령에 대한 이미지
   const getMovieImage = (movieId) => {
-    if (movieId[0] === "1") {
-      return <img src={Res_imgAll} />;
-    } else if (movieId[1] === "2") {
-      return <img src={Res_img15} />;
-    } else if (movieId[2] === "3") {
-      return <img src={Res_img12} />;
-    } else if (movieId[3] === "4") {
-      return <img src={Res_img18} />;
+    if (movieId === "1") {
+      const image = document.createElement("img");
+      image.src = Res_img15;
+      return image;
+    } else if (movieId === "2") {
+      const image = document.createElement("img");
+      image.src = Res_img12;
+      return image;
+    } else if (movieId === "3") {
+      const image = document.createElement("img");
+      image.src = Res_img15;
+      return image;
+    } else if (movieId === "4") {
+      const image = document.createElement("img");
+      image.src = Res_img12;
+      return image;
+    } else if (movieId === "5") {
+      const image = document.createElement("img");
+      image.src = Res_imgAll;
+      return image;
+    } else if (movieId === "6") {
+      const image = document.createElement("img");
+      image.src = Res_img18;
+      return image;
     }
   };
 
@@ -386,34 +409,25 @@ const Reservation_Movie = ({ history }) => {
           </ul>
         </div>
         {popupOpen && selectedMovie && (
-          <div className="popup">
-            <div className="popup_content">
-              <strong>
-                {selectedMovie[0].movie_title}/{" "}
-                {moment(selectedMovie[0].start_time, "HH:mm:ss").format(
-                  "HH:mm"
-                )}
-                ({selectedMovie[0].theater_id})
-              </strong>
-              {remainingSeatsCount !== null && (
-                <p>
-                  잔여좌석 <strong>{remainingSeatsCount}</strong>/112
-                </p>
-              )}
-              <img className="Res_screen" src={Res_screen} />
-              <p>
-                본 영화는 만 <img src={Res_img15} className="Res_screen_img" />
-                세 이상 관람가 영화입니다.
-              </p>
-              <button name="n" onClick={handleCancellation}>
-                취소
-              </button>
-              <button name="y" onClick={handleConfirmation}>
-                인원/좌석 선택
-              </button>
-            </div>
-          </div>
-        )}
+  <div className="popup">
+    <div className="popup_content">
+      <strong>
+        {selectedMovie[0].movie_title}/{" "}
+        {moment(selectedMovie[0].start_time, "HH:mm:ss").format("HH:mm")} ({selectedMovie[0].theater_id})
+      </strong>
+      {remainingSeatsCount !== null && (
+        <p>잔여좌석 <strong>{remainingSeatsCount}</strong>/112</p>
+      )}
+      <img className="Res_screen" src={Res_screen} />
+      <p>
+        본 영화는 만{" "}
+        {getMovieImage(selectedMovie[0].movie_id)} 세 이상 관람가 영화입니다.
+      </p>
+      <button name="n" onClick={handleCancellation}>취소</button>
+      <button name="y" onClick={handleConfirmation}>인원/좌석 선택</button>
+    </div>
+  </div>
+)}
       </div>
     </div>
   );
