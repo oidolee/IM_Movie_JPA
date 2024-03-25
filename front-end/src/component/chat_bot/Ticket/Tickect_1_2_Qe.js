@@ -3,18 +3,25 @@ import { useHistory } from "react-router-dom";
 
 import "./Ticket.css";
 
-const Tickect_1_2_Qe = () => {
+const Tickect_1_2_Qe = (props) => {
     const history = useHistory();
 
     const handleOptionClick = (id) => {
-        history.push("/movieMain");
-      // 필요한 만큼 옵션에 대한 처리 추가
+      if (id === 1) {
+        history.push("/page3");
+      } else if (id === 2) {
+        // handleOptionClick 함수 대신 option.handler를 호출
+        props.actionProvider.goHome();
+      } else {
+        // 다른 경우에 대한 처리
+      }
     };
 
   const options = [
     { text: "영화예매하기", id: 1 },
-    { text: "처음으로", id: 2 },
-    { text: "종료", id: 3 },
+    { text: "처음으로", 
+      id: 2 
+    },
   ];
 
   const buttonsMarkup = options.map((option) => (

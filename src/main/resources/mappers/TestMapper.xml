@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="springBoot.ict.movie.repository.TestMapper">
-    <select id="selectById" resultType="springBoot.ict.movie.dto.ParkingDTO">
-        SELECT * FROM im_parking WHERE ip_no = #{ip_no}
-    </select>
-</mapper>

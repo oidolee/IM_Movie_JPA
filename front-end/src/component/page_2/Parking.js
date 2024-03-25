@@ -24,8 +24,6 @@ function Parking() {
     parkingList();
   }, []);
 
-
-
   const handleSubmit = () => {
     if (!ip_carnumber || !ip_client || !total_plot) {
       alert('모든 필드를 입력하세요.');
@@ -157,6 +155,8 @@ function Parking() {
                   setIpCarNumber(e.target.value.trim());
                 }}
               />
+
+
             </Col>
           </Form.Group>
 
