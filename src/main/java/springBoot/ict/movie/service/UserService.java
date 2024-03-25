@@ -121,6 +121,32 @@ public class UserService {
         return userRepository.findByIdAndHp(id, hp);
     }
 	
+	// 회원정보 조회
+	public Optional<User> searchCustomer(String id) {
+		
+		return userRepository.findByUserId(id);
+	}
+	
+	
+	// 회원정보 수정
+	public User updateCustomer (User dto)
+			throws ServletException, IOException{
+		User user = new User();
+		user.setId(dto.getId());  
+		user.setName(dto.getName());
+		user.setHp(dto.getHp());
+		user.setBirthday(dto.getBirthday());
+		user.setAddress(dto.getAddress());
+		user.setNo(dto.getNo());
+		user.setRegdate(dto.getRegdate());
+		user.setState(dto.getState());
+		user.setToken(dto.getToken());   // 추가, 컬럼 size 500
+		user.setRole(dto.getRole());
+		user.setPassword(passwordEncoder.encode(CharBuffer.wrap(dto.getPassword())));
+		
+		
+		return userRepository.save(user);
+	}
 }
 
 
