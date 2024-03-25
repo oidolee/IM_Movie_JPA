@@ -64,7 +64,7 @@ class listCustomer extends Component {
                             <TableCell component="th" scope="row"> {list.id} </TableCell>
                             <TableCell> {list.name} </TableCell>
                             <TableCell> {list.hp} </TableCell>
-                            <TableCell> {list.birthday} </TableCell>
+                            <TableCell> {new Date(list.birthday).toLocaleDateString()} </TableCell>
                             <TableCell> {list.address} </TableCell>
                             <TableCell> {new Date(list.regdate).toLocaleDateString()} </TableCell>
                             <TableCell> {list.state} </TableCell>

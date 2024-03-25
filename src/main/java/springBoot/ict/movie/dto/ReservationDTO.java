@@ -21,13 +21,10 @@ public class ReservationDTO {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private int res_id;
-    private int mov_id;
-    private int ip_num;
     private int st_id;
     private String c_email;    
     private int res_count;
     private int res_ticket_price;
     private Date res_sysdate;
     private String res_check;
-
 }

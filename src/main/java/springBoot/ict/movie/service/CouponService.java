@@ -44,7 +44,7 @@ public interface CouponService {
 			throws ServletException, IOException;
 
 	// 쿠폰 상세내역
-	public Optional<CouponDTO> selectCoupon(int ic_num)
+	public Optional<CouponDTO> selectCoupon(String ic_name)
 			throws ServletException, IOException;
 	
 	// 고객 쿠폰 상세내역
