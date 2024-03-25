@@ -5,6 +5,28 @@ import DaumPostcode from 'react-daum-postcode';
 import style from '../../styles/page_4/signup.module.css';
 import { setAuthToken } from '../../helpers/axios_helper';
 
+import { styled } from '@mui/material/styles';
+
+// 모달 스타일
+const CustomModal = styled(Modal)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height:600,
+}));
+
+// 모달 컨텐츠 스타일
+const ModalContent = styled('div')({
+    width: '80%',
+    maxWidth: 600,
+    maxHeight: 500, // 최대 높이 설정
+    overflowY: 'auto', // 세로 스크롤이 필요한 경우에만 스크롤 표시
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 8,
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  });
+
 class SignupComponent extends Component {
     constructor(props) {
         super(props);
@@ -222,7 +244,7 @@ class SignupComponent extends Component {
                         error={!this.state.emailValid}
                         helperText={!this.state.emailValid ? "올바른 이메일 주소를 입력하세요." : null} // 유효성 검사 실패 시 에러 메시지를 표시합니다.
                     />
-                    <Button variant="contained" color="primary" onClick={this.checkDuplicateEmail}> 중복확인 </Button>
+                    <Button variant="contained" style={{marginLeft:'50px', marginTop:'13px'}} color="primary" onClick={this.checkDuplicateEmail}> 중복확인 </Button>
                     <br /><br />
 
                     {/* 이름 입력 필드 */}
@@ -234,9 +256,11 @@ class SignupComponent extends Component {
                         type="text"
                         name="name"
                         value={this.state.name}
-                        placeholder='이름 입력'
+                        placeholder="이름 입력"
                         onChange={this.onChange}
+                        style={{ width: 330 }}
                     />
+
                     <br /><br />
 
                     {/* 비밀번호 입력 필드 */}
@@ -251,6 +275,7 @@ class SignupComponent extends Component {
                         placeholder='비밀번호 입력'
                         onChange={this.onChange}
                         error={!this.state.passwordValid}
+                        style={{ width: 330 }}
                         helperText={!this.state.passwordValid ? "비밀번호는 최소 4자리 이상이어야 합니다." : null}
                     />
                     <br /><br />
@@ -266,6 +291,7 @@ class SignupComponent extends Component {
                         placeholder='비밀번호 확인'
                         onChange={this.onChange}
                         error={!this.state.passwordMatched} // 일치하지 않을 경우 에러 상태를 설정합니다.
+                        style={{ width: 330 }}
                         helperText={!this.state.passwordMatched ? "비밀번호가 일치하지 않습니다." : null} // 일치하지 않을 경우 에러 메시지를 표시합니다.
                     />
                     <br /><br />
@@ -283,6 +309,7 @@ class SignupComponent extends Component {
                         onChange={this.onChange}
                         error={!this.state.phoneValid}
                         helperText={!this.state.phoneValid ? "올바른 핸드폰 번호를 입력하세요." : null}
+                        style={{ width: 330 }}
                         className={`singupComponent_text ${style.singupComponent_text}`}
                     />
                     <br /><br />
@@ -296,6 +323,7 @@ class SignupComponent extends Component {
                         name="birthday"
                         value={this.state.birthday}
                         onChange={this.onChange}
+                        style={{ width: 330 }}
                         className={`singupComponent_text ${style.singupComponent_text}`}
                     />
                     <br /><br />
@@ -304,27 +332,30 @@ class SignupComponent extends Component {
                     <form action="" name="form1">
                         <input type="text" name="zipcode" maxLength="5" value={this.state.zipcode} readOnly />
                         {/* 주소검색 버튼을 클릭하면 모달이 열리도록 수정합니다. */}
-                        <Button variant="contained" color="primary" onClick={this.handleDaumPostcode} id='addressBtn' className={`addressBtn ${style.addressBtn}`}>우편번호검색</Button> <br />
-                        <input type="text" name="addr1" value={this.state.addr1} readOnly />
-                        <input type="text" name="addr2" value={this.state.addr2} onChange={(e) => this.setState({ addr2: e.target.value })} />
+                        <Button variant="contained" style={{marginLeft:'40px'}} color="primary" onClick={this.handleDaumPostcode} id='addressBtn' className={`addressBtn ${style.addressBtn}`}>우편번호검색</Button> <br />
+                        <input type="text"  style={{ width: 330, marginTop:'10px' }} name="addr1" value={this.state.addr1} readOnly />
+                        <br />
+                        <input type="text" style={{ width: 330, marginTop:'10px' }} name="addr2" value={this.state.addr2} onChange={(e) => this.setState({ addr2: e.target.value })} />
                     </form>
 
                     {/* 모달 */}
-                    <Modal
-                        open={this.state.isModalOpen} // 모달 열림 여부를 상태 변수에 바인딩합니다.
-                        onClose={this.handleCloseModal} // 모달을 닫는 핸들러를 설정합니다.
+                    <div className={`addressBox ${style.addressBox}`}>
+                        <CustomModal
+                        open={this.state.isModalOpen}
+                        onClose={this.handleCloseModal}
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
-                    >
-                        <div>
-                            {/* DaumPostcode 컴포넌트를 모달 내에 렌더링합니다. */}
+                        >
+                        <ModalContent>
                             <DaumPostcode
-                                onComplete={this.handleAddressComplete}
-                                autoClose
-                                animation
+                            onComplete={this.handleAddressComplete}
+                            autoClose
+                            animation
                             />
-                        </div>
-                    </Modal>
+                        </ModalContent>
+                        </CustomModal>
+                    </div>
+
 
                     <br /> <br />
 

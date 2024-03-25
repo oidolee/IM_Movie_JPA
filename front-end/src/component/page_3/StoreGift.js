@@ -6,6 +6,19 @@ import { withRouter } from 'react-router-dom';
 import ApiService from "../../ApiService";
 import { Cookies, useCookies } from 'react-cookie';
 
+const localHost = "http://localhost:3000/"; // 로컬
+const proHost = "http://3.39.155.236:3000/"; // 개벌
+
+let serverUrl;
+
+if (process.env.NODE_ENV === 'development') {
+  serverUrl = localHost;
+} else {
+  serverUrl = proHost;
+}
+
+console.log("현재 베이스 주소")
+console.log(serverUrl)
 
 class StoreGift extends Component {
   constructor(props) {
@@ -127,7 +140,7 @@ class StoreGift extends Component {
 
         <div className={`coupon_gift_top ${style.coupon_gift_top}`}>
           <div className="StoreGift_bx_thm">
-            <img src={this.props.itemImage} width={200} />
+            <img src={serverUrl+this.props.itemImage} width={200} />
           </div>
           <div className={`bx_tit ${style.bx_tit}`}>
             <div>
