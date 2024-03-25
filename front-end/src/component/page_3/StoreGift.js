@@ -196,7 +196,6 @@ class StoreGift extends Component {
                     name="sender"
                     value={this.state.email}
                     size="20"
-                    placeholder="선물 하는 분 입력"
                     onChange={this.handleChange}
                     required
                   />
