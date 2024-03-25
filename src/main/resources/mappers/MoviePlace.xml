@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="springBoot.ict.movie.repository.MoviePlaceMapper">
+<!--     <select id="selectAll" parameterType="springBoot.ict.movie.dto.MoviePlaceDTO" resultType="springBoot.ict.movie.dto.MoviePlaceDTO"> resultType 변경
+        SELECT * FROM IM_PLACE;
+    </select> -->
+    
+    <select id="selectAll" parameterType="springBoot.ict.movie.dto.MoviePlaceDTO" resultType="springBoot.ict.movie.dto.MoviePlaceDTO"> <!-- resultType 변경 -->
+		<![CDATA[
+		    SELECT * FROM IM_PLACE
+		     WHERE place_num = #{place_num} 
+               AND open_time < #{open_time} 
+               AND close_time > #{close_time} 
+		]]>
+    </select>
+    
+  
+</mapper>
