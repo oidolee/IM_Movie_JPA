@@ -17,10 +17,8 @@ const Reservation_Movie = ({ history }) => {
   const [theaterName, setTheaterName] = useState();
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택한 영화 상태
   const [movies, setMovies] = useState([]); // 영화 목록
-  const [timeLists, setTimeLists] = useState([]); // 영화 목록
   const [remainingSeatsCount, setRemainingSeatsCount] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState(null); // 지역 클릭
-  const { place_num } = useParams(); // 영화 지점 번호
   const [groupedData, setGroupedData] = useState({});
 
   const places = {
@@ -77,35 +75,45 @@ const Reservation_Movie = ({ history }) => {
   const handleLocationClick = (location) => {
     const placeData = groupedData[location];
     console.log(`${location}에 대한 데이터:`, placeData);
-  
-    const menuElement = document.querySelector('.menu3_left'); // 지역에 해당하는 영화 출력 위치
 
-    menuElement.innerHTML = '';
-  
+    const menuElement = document.querySelector(".menu3_left"); // 지역에 해당하는 영화 출력 위치
+
+    menuElement.innerHTML = "";
+
     if (placeData) {
+      // 영화 ID를 기준으로 그룹화
+      const groupedMovies = {};
       placeData.forEach((item) => {
-        const menuItem = document.createElement('li');
-        const link = document.createElement('a');
-        link.href = '#';
-        link.textContent = item.movie_title;
+        if (!groupedMovies[item.movie_id]) {
+          groupedMovies[item.movie_id] = [item];
+        } else {
+          groupedMovies[item.movie_id].push(item);
+        }
+      });
+
+      // 그룹화된 데이터를 출력
+      Object.entries(groupedMovies).forEach(([movieId, movies]) => {
+        const menuItem = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = "#";
+        link.textContent = `${movies[0].movie_title} - ID: ${movieId}`; // 영화 제목과 ID 출력
         link.onclick = (event) => {
           event.preventDefault();
-          console.log(`${item.movie_title}를 클릭했습니다.`);
+          console.log(
+            `${movies[0].movie_title}를 클릭했습니다. ID: ${movieId}`
+          ); // 클릭한 영화 제목과 ID 출력
         };
         menuItem.appendChild(link);
         menuElement.appendChild(menuItem);
+
+        console.log(`Movie ID: ${movieId}에 대한 데이터:`, movies);
       });
     }
   };
 
-  const getPlaceNumFromLocation = (location) => {
-    let place_num = null;
-    Object.entries(places).forEach(([placeKey, placeNames]) => {
-      if (placeNames.includes(location)) {
-        place_num = placeKey;
-      }
-    });
-    return place_num;
+  const handleClick = (movie) => {
+    setSelectedMovie(movie); // 선택한 영화를 state에 저장
+    setPopupOpen(true); // 팝업 열기
   };
 
   // 연령에 대한 이미지
@@ -296,14 +304,19 @@ const Reservation_Movie = ({ history }) => {
             <li>
               <div className="menu3">
                 <ul className="menu3_left">
-                  <li>
-                    <a
-                      href="#"
-                      onClick={(event) => {
-                        event.preventDefault();
-                      }}
-                    ></a>
-                  </li>
+                  {reservation.map((movie, index) => (
+                    <li key={index}>
+                      <a
+                        href="#"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          handleClick(movie);
+                        }}
+                      >
+                        {movie.movie_title}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </li>
@@ -323,27 +336,31 @@ const Reservation_Movie = ({ history }) => {
                   <div className="menu4_main">
                     <a href="#none"></a>
                   </div>
-                  <div className="menu4_sub">
-                    <ul>
-                      <li>
-                        {remainingSeatsCount !== null &&
-                          selectedPlace &&
-                          selectedMovie && (
-                            <a href="#none" onClick={() => setPopupOpen(true)}>
-                              <span>
-                                {moment(
-                                  selectedPlace.start_time,
-                                  "HH:mm:ss"
-                                ).format("HH:mm")}
-                                <br />
-                                {remainingSeatsCount}/112{" "}
-                                {selectedPlace.theater_id}
-                              </span>
-                            </a>
-                          )}
-                      </li>
-                    </ul>
-                  </div>
+                  {selectedMovie && (
+                    <div className="menu4_sub" key={selectedMovie.movie_id}>
+                      <ul>
+                        <li>
+                          <a
+                            href="#none"
+                            onClick={() => {
+                              setPopupOpen(false);
+                              console.log(`영화 ID: ${selectedMovie.movie_id}`); // 영화 ID 출력
+                            }}
+                          >
+                            <span>
+                              {moment(
+                                selectedMovie.start_time,
+                                "HH:mm:ss"
+                              ).format("HH:mm")}
+                              <br />
+                              {remainingSeatsCount}/112{" "}
+                              {selectedMovie.theater_id}
+                            </span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </ul>
               </div>
             </li>
