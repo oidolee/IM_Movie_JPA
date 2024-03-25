@@ -43,6 +43,7 @@ class listCustomer extends Component {
                 <Table>
                     <TableHead>
                         <TableRow>
+                            <TableCell> type </TableCell>
                             <TableCell> id </TableCell>
                             <TableCell> name </TableCell>
                             <TableCell> hp </TableCell>
@@ -59,10 +60,11 @@ class listCustomer extends Component {
                     <TableBody>
                         {this.state.lists.map(list =>
                         <TableRow key={list.No}>
+                            <TableCell> {list.type} </TableCell>
                             <TableCell component="th" scope="row"> {list.id} </TableCell>
                             <TableCell> {list.name} </TableCell>
                             <TableCell> {list.hp} </TableCell>
-                            <TableCell> {list.birthday} </TableCell>
+                            <TableCell> {new Date(list.birthday).toLocaleDateString()} </TableCell>
                             <TableCell> {list.address} </TableCell>
                             <TableCell> {new Date(list.regdate).toLocaleDateString()} </TableCell>
                             <TableCell> {list.state} </TableCell>

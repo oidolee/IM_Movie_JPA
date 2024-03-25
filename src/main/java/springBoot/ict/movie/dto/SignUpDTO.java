@@ -24,6 +24,7 @@ public class SignUpDTO {
     private String address;
     private Date regdate;
     private String state;
+    private String type;
     
     private String token;
 	
