@@ -309,6 +309,7 @@ class SignupComponent extends Component {
                         onChange={this.onChange}
                         error={!this.state.phoneValid}
                         helperText={!this.state.phoneValid ? "올바른 핸드폰 번호를 입력하세요." : null}
+                        style={{ width: 330 }}
                         className={`singupComponent_text ${style.singupComponent_text}`}
                     />
                     <br /><br />
@@ -322,6 +323,7 @@ class SignupComponent extends Component {
                         name="birthday"
                         value={this.state.birthday}
                         onChange={this.onChange}
+                        style={{ width: 330 }}
                         className={`singupComponent_text ${style.singupComponent_text}`}
                     />
                     <br /><br />
@@ -330,9 +332,10 @@ class SignupComponent extends Component {
                     <form action="" name="form1">
                         <input type="text" name="zipcode" maxLength="5" value={this.state.zipcode} readOnly />
                         {/* 주소검색 버튼을 클릭하면 모달이 열리도록 수정합니다. */}
-                        <Button variant="contained" color="primary" onClick={this.handleDaumPostcode} id='addressBtn' className={`addressBtn ${style.addressBtn}`}>우편번호검색</Button> <br />
-                        <input type="text" name="addr1" value={this.state.addr1} readOnly />
-                        <input type="text" name="addr2" value={this.state.addr2} onChange={(e) => this.setState({ addr2: e.target.value })} />
+                        <Button variant="contained" style={{marginLeft:'40px'}} color="primary" onClick={this.handleDaumPostcode} id='addressBtn' className={`addressBtn ${style.addressBtn}`}>우편번호검색</Button> <br />
+                        <input type="text"  style={{ width: 330, marginTop:'10px' }} name="addr1" value={this.state.addr1} readOnly />
+                        <br />
+                        <input type="text" style={{ width: 330, marginTop:'10px' }} name="addr2" value={this.state.addr2} onChange={(e) => this.setState({ addr2: e.target.value })} />
                     </form>
 
                     {/* 모달 */}
