@@ -169,21 +169,19 @@ class Reservation_Payment_Store extends Component {
       let expiredMonth = oneWeekLater.getMonth() + 1; // 월은 0부터 시작하므로 1을 더합니다.
       let expiredDay = oneWeekLater.getDate();
 
-      // 날짜를 원하는 형식으로 조합
-      let formattedDate = year + '-' + month + '-' + day;
-      let formattedExpiredDate = expiredYear + '-' + expiredMonth + '-' + expiredDay;
-
+      // 날짜를 원하는 형식으로 조합하되 두 자리로 맞춤
+      let formattedDate = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
+      let formattedExpiredDate = expiredYear + '-' + (expiredMonth < 10 ? '0' + expiredMonth : expiredMonth) + '-' + (expiredDay < 10 ? '0' + expiredDay : expiredDay);
 
       let inputData = {
-        ic_code : generateUniqueRandomCode(),
-        ic_name : itemName,
-        ic_category : '스토어',
-        ic_point : totalPrice,
-        ic_startDate : formattedDate,
-        ic_endDate : formattedExpiredDate,
-        ic_regDate : formattedDate
-      }
-
+          ic_code: generateUniqueRandomCode(),
+          ic_name: itemName,
+          ic_category: '스토어',
+          ic_point: totalPrice,
+          ic_startDate: formattedDate,
+          ic_endDate: formattedExpiredDate,
+          ic_regDate: formattedDate
+      };
       console.log("쿠폰등록 값 : ")
       console.log(inputData)
       ApiService.addCoupon(inputData)
