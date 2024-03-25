@@ -53,7 +53,7 @@ import OAuthResponseHandler from '../page_4/OAuthResponseHandler';
 import movieMain from '../page_5/movie/movieMain';
 import movieDetail from '../page_5/movie/movieDetail';
 import movieDetail2 from '../page_5/movie/movieDetail2';
-import movieDetail3 from '../page_5/movie/movieDetail3';
+// import movieDetail3 from '../page_5/movie/movieDetail3';
 import movieUpdate from '../../admin/page_5/Admin_Update_Add';
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
@@ -76,7 +76,7 @@ import Consult from '../page_6/consult/Consult';
 import MyPage_myinfo from '../page_6/myinfo/MyPage_myinfo';
 import MyPage_myinfo_update from '../page_6/myinfo/MyPage_myinfo_update';
 import MyPage_consult_list from '../page_6/myinfo/MyPage_consult_list';
-import MyPage_consult_list2 from '../page_6/myinfo/MyPage_consult_list2';
+// import MyPage_consult_list2 from '../page_6/myinfo/MyPage_consult_list2';
 import MyPage_Event from '../page_6/event/MyPage_Event';
 import Event_Home from '../page_6/event/Event_Home';
 import MyapgeConsultDetail from '../page_6/myinfo/MyPage_consult_answer';
@@ -151,7 +151,7 @@ const AppRouter = () => {
                                 {/* <Route path="/movieDetail" exact={true} component={MovieDetail} /> */}
                                 <Route path="/movieDetail/:movie_id" exact={true} component={movieDetail} />
                                 <Route path="/movieDetail2/:now_id" exact={true} component={movieDetail2} />
-                                <Route path="/movieDetail3/:arte_id" exact={true} component={movieDetail3} />
+                                {/* <Route path="/movieDetail3/:arte_id" exact={true} component={movieDetail3} /> */}
                                 <Route path="/movieUpdate" exact={true} component={movieUpdate} />
                                 <Route path="/movieNow" exact={true} component={movieNow} />
                                 <Route path="/movieNext" exact={true} component={movieNext} />
@@ -177,7 +177,7 @@ const AppRouter = () => {
                                 <Route path="/MyPage_myinfo" exact={true} component={MyPage_myinfo} />
                                 <Route path="/MyPage_myinfo_update" exact={true} component={MyPage_myinfo_update} />
                                 <Route path="/MyPage_consult_list" exact={true} component={MyPage_consult_list} />
-                                <Route path="/MyPage_consult_list2" exact={true} component={MyPage_consult_list2} />
+                                {/* <Route path="/MyPage_consult_list2" exact={true} component={MyPage_consult_list2} /> */}
                                 <Route path="/event_Home" exact={true} component={Event_Home} />
                                 <Route path="/MyPage_Event" exact={true} component={MyPage_Event} />
                                 <Route path="/MyPage_consult_answer/:one_id" exact={true} component={MyapgeConsultDetail} />
