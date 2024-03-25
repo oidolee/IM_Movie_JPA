@@ -26,7 +26,7 @@ class EditStore_Admin extends Component {
 
 
     loadStore = () => {
-        ApiService.fetchStoreByID(window.localStorage.getItem("sampleID")) //★★★★★★★이건 어떻게 사용하는 거지???????
+        ApiService.fetchStoreByID(window.localStorage.getItem("sampleID")) 
         .then(res => {        
         let sotreEdit = res.data;
         this.setState({
@@ -84,7 +84,7 @@ class EditStore_Admin extends Component {
     render() {
         return(
             <div align="center"><br/><br/>
-                <Typography variant="h4"> Add STORE ITEM </Typography>
+                <Typography variant="h4"> Edit STORE ITEM </Typography>
                 
                      <TextField
                         required
