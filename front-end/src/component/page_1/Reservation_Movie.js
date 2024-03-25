@@ -14,16 +14,20 @@ const Reservation_Movie = ({ history }) => {
   const [reservation, setReservation] = useState([]);
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState(null); // 선택한 지역
-  const [selectedTheater, setSelectedTheater] = useState(null); // 선택한 영화관 상태
+  const [theaterName, setTheaterName] = useState();
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택한 영화 상태
   const [movies, setMovies] = useState([]); // 영화 목록
-  const [places, setPlaces] = useState([]); // 지역 목록
   const [remainingSeatsCount, setRemainingSeatsCount] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState(null); // 지역 클릭
 
+  const places = {
+    서울: ["홍대입구", "용산", "합정", "에비뉴엘", "영등포"],
+    경기: ["안양일번가", "광명아울렛", "위례"],
+    인천: ["부평", "부평갈산", "부평역사"],
+  };
+
   useEffect(() => {
     fetchMovie(); // 영화 목록
-    fetchtime1(); // 상영 시간표
   }, []);
 
   // 영화 목록
@@ -51,68 +55,61 @@ const Reservation_Movie = ({ history }) => {
     }
   };
 
-  // 상영관-지역 목록
-  const fetchtime1 = () => {
-    ApiService.fetchtime1()
-      .then((res) => {
-        // 받은 데이터 그룹화
-        const groupedData = groupByPlaceNum(res.data);
-        setPlaces(groupedData);
-        console.log("fetchtime1 성공", groupedData);
-      })
-      .catch((err) => {
-        console.log("fetchMovie 오류 : ", err);
-      });
+  const handleSelection = (region) => {
+    setSelectedPlace(region);
   };
 
-  // 그룹화
-  const groupByPlaceNum = (data) => {
-    return data.reduce((groups, item) => {
-      const group = groups[item.place_num] || [];
-      group.push(item);
-      groups[item.place_num] = group;
-      return groups;
-    }, {});
-  };
+  // // 상영관-지역 목록
+  // const fetchtime1 = () => {
+  //   ApiService.fetchtime1()
+  //     .then((res) => {
+  //       // 받은 데이터 그룹화
+  //       const groupedData = groupByPlaceNum(res.data);
+  //       setPlaces(groupedData);
+  //       console.log("fetchtime1 성공", groupedData);
+  //     })
+  //     .catch((err) => {
+  //       console.log("fetchMovie 오류 : ", err);
+  //     });
+  // };
 
-  // 지역
-  const getPlaceNum = (place_num) => {
-    if (place_num == 1) {
-      return "서울";
-    } else if (place_num == 2) {
-      return "경기/인천";
-    } else if (place_num == 3) {
-      return "충청/대전";
-    }
-  };
+  // // 그룹화
+  // const groupByPlaceNum = (data) => {
+  //   return data.reduce((groups, item) => {
+  //     const group = groups[item.place_num] || [];
+  //     group.push(item);
+  //     groups[item.place_num] = group;
+  //     return groups;
+  //   }, {});
+  // };
 
-  // 영화 선택 핸들러
-  const handleMovieSelection = (reservations) => {
-    setSelectedMovie(reservations);
-  };
+  // // 영화 선택 핸들러
+  // const handleMovieSelection = (reservations) => {
+  //   setSelectedMovie(reservations);
+  // };
 
-  // 영화관 선택 핸들러
-  const handleTheaterSelection = (subRegion) => {
-    // 선택한 영화관을 상태에 저장합니다.
-    setSelectedTheater(subRegion);
+  // // 영화관 선택 핸들러
+  // const handleTheaterSelection = (subRegion) => {
+  //   // 선택한 영화관을 상태에 저장합니다.
+  //   setSelectedTheater(subRegion);
 
-    // 서버에 선택한 영화관 정보를 전송하여 해당 영화관에 예약된 영화 목록을 받아옵니다.
-    ApiService.listReservation(subRegion)
-      .then((res) => {
-        setMovies(res.data); // 받아온 예약 목록을 상태에 저장합니다.
-      })
-      .catch((err) => {
-        console.log("Error fetching reservations:", err);
-      });
+  //   // 서버에 선택한 영화관 정보를 전송하여 해당 영화관에 예약된 영화 목록을 받아옵니다.
+  //   ApiService.listReservation(subRegion)
+  //     .then((res) => {
+  //       setMovies(res.data); // 받아온 예약 목록을 상태에 저장합니다.
+  //     })
+  //     .catch((err) => {
+  //       console.log("Error fetching reservations:", err);
+  //     });
 
-    // 선택한 지역을 설정합니다.
-    setSelectedPlace(subRegion);
-  };
+  //   // 선택한 지역을 설정합니다.
+  //   setSelectedPlace(subRegion);
+  // };
 
-  // 지역 선택 핸들러
-  const handleRegionClick = (region) => {
-    setSelectedRegion(region);
-  };
+  // // 지역 선택 핸들러
+  // const handleRegionClick = (region) => {
+  //   setSelectedRegion(region);
+  // };
 
   // 잔여 좌석 수 호출
   const fetchRemainingSeatsCount = () => {
@@ -235,37 +232,37 @@ const Reservation_Movie = ({ history }) => {
             <li>
               <div className="menu2">
                 <ul className="menu2_left">
-                  {Object.keys(places).map((placeNum) => (
-                    <li key={placeNum}>
+                  {Object.entries(places).map(([placeKey, placeName]) => (
+                    <li key={placeKey}>
                       <a
                         href="#"
                         onClick={(event) => {
                           event.preventDefault();
-                          handleTheaterSelection(placeNum);
+                          handleSelection(placeKey);
                         }}
                       >
-                        {getPlaceNum(placeNum)}
+                        {placeKey}
                       </a>
                     </li>
                   ))}
                 </ul>
                 <div className="menu2_right">
-                  <ul>
+                <ul>
                   {selectedPlace &&
-  places[selectedPlace].map((place, index) => (
-    <li className="subRegions" key={place.id}>
-      <a
-        href="#"
-        onClick={(event) => {
-          event.preventDefault();
-          handleTheaterSelection(place.place_title);
-        }}
-      >
-        {place.place_title}
-      </a>
-    </li>
-  ))}
-                  </ul>
+                    places[selectedPlace].map((place, index) => (
+                      <li className="subRegions" key={index}>
+                        <a
+                          href="#"
+                          onClick={(event) => {
+                            event.preventDefault();
+                            handleTheaterSelection(place);
+                          }}
+                        >
+                          {place}
+                        </a>
+                      </li>
+                    ))}
+                </ul>
                 </div>
               </div>
             </li>
