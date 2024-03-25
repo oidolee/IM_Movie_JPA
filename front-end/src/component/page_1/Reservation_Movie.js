@@ -77,57 +77,79 @@ const Reservation_Movie = ({ history }) => {
     console.log(`${location}에 대한 데이터:`, placeData);
 
     const menuElement = document.querySelector(".menu3_left"); // 지역에 해당하는 영화 출력 위치
+    const menu4Sub = document.querySelector(".menu4_sub ul"); // menu4_sub 요소
 
-    menuElement.innerHTML = "";
+    menuElement.innerHTML = ""; // 기존 내용 지우기
+    menu4Sub.innerHTML = ""; // 기존 내용 지우기
 
     if (placeData) {
-      // 영화 ID를 기준으로 그룹화
-      const groupedMovies = {};
-      placeData.forEach((item) => {
-        if (!groupedMovies[item.movie_id]) {
-          groupedMovies[item.movie_id] = [item];
-        } else {
-          groupedMovies[item.movie_id].push(item);
-        }
-      });
+        // 영화 ID를 기준으로 그룹화
+        const groupedMovies = {};
+        placeData.forEach((item) => {
+            if (!groupedMovies[item.movie_id]) {
+                groupedMovies[item.movie_id] = [item];
+            } else {
+                groupedMovies[item.movie_id].push(item);
+            }
+        });
 
-      // 그룹화된 데이터를 출력
-      Object.entries(groupedMovies).forEach(([movieId, movies]) => {
-        const menuItem = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = "#";
-        link.textContent = `${movies[0].movie_title} - ID: ${movieId}`; // 영화 제목과 ID 출력
-        link.onclick = (event) => {
-          event.preventDefault();
-          console.log(
-            `${movies[0].movie_title}를 클릭했습니다. ID: ${movieId}`
-          ); // 클릭한 영화 제목과 ID 출력
-        };
-        menuItem.appendChild(link);
-        menuElement.appendChild(menuItem);
+        // 그룹화된 데이터를 출력
+        Object.entries(groupedMovies).forEach(([movieId, movies]) => {
+            const menuItem = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = "#";
+            link.textContent = `${movies[0].movie_title} - ID: ${movieId}`; // 영화 제목과 ID 출력
+            link.onclick = (event) => {
+                event.preventDefault();
+                console.log(
+                    `${movies[0].movie_title}를 클릭했습니다. ID: ${movieId}`
+                ); // 클릭한 영화 제목과 ID 출력
 
-        console.log(`Movie ID: ${movieId}에 대한 데이터:`, movies);
-      });
+                // 선택한 영화 정보를 출력
+                movies.forEach((movieInfo) => {
+                    const { ip_num, movie_title, theater_id, start_time } = movieInfo;
+                    const formattedStartTime = moment(start_time, "HH:mm:ss").format("HH:mm");
+
+                    const listItem = document.createElement("li");
+                    listItem.innerHTML = `
+                        <a href="#none">
+                            <span>
+                                ${formattedStartTime}<br />
+                                ${ip_num}/112 ${theater_id} - ${movie_title}
+                            </span>
+                        </a>
+                    `;
+                    menu4Sub.appendChild(listItem);
+                });
+            };
+            menuItem.appendChild(link);
+            menuElement.appendChild(menuItem);
+
+            console.log(`Movie ID: ${movieId}에 대한 데이터:`, movies);
+        });
     }
-  };
+};
+
+
 
   const handleClick = (movie) => {
+    console.log("선택한 영화:", movie);
     setSelectedMovie(movie); // 선택한 영화를 state에 저장
     setPopupOpen(true); // 팝업 열기
   };
 
-  // 연령에 대한 이미지
-  const getMovieImage = (mov_age) => {
-    if (mov_age === "전체관람가") {
-      return <img src={Res_imgAll} />;
-    } else if (mov_age === "15세이상관람가") {
-      return <img src={Res_img15} />;
-    } else if (mov_age === "12세이상관람가") {
-      return <img src={Res_img12} />;
-    } else if (mov_age === "18세이상관람가") {
-      return <img src={Res_img18} />;
-    }
-  };
+  // // 연령에 대한 이미지
+  // const getMovieImage = (movieId) => {
+  //   if (movieId[0] === "1") {
+  //     return <img src={Res_imgAll} />;
+  //   } else if (movieId[1] === "2") {
+  //     return <img src={Res_img15} />;
+  //   } else if (movieId[2] === "3") {
+  //     return <img src={Res_img12} />;
+  //   } else if (movieId[3] === "4") {
+  //     return <img src={Res_img18} />;
+  //   }
+  // };
 
   // 컴포넌트가 마운트될 때 한 번만 API를 호출하여 잔여 좌석 수를 가져옴
   useEffect(() => {
@@ -304,17 +326,9 @@ const Reservation_Movie = ({ history }) => {
             <li>
               <div className="menu3">
                 <ul className="menu3_left">
-                  {reservation.map((movie, index) => (
-                    <li key={index}>
-                      <a
-                        href="#"
-                        onClick={(event) => {
-                          event.preventDefault();
-                          handleClick(movie);
-                        }}
-                      >
-                        {movie.movie_title}
-                      </a>
+                  {movies.map((movie) => (
+                    <li key={movie.id} onClick={() => handleClick(movie)}>
+                      {movie.title}
                     </li>
                   ))}
                 </ul>
@@ -336,31 +350,13 @@ const Reservation_Movie = ({ history }) => {
                   <div className="menu4_main">
                     <a href="#none"></a>
                   </div>
-                  {selectedMovie && (
-                    <div className="menu4_sub" key={selectedMovie.movie_id}>
-                      <ul>
-                        <li>
-                          <a
-                            href="#none"
-                            onClick={() => {
-                              setPopupOpen(false);
-                              console.log(`영화 ID: ${selectedMovie.movie_id}`); // 영화 ID 출력
-                            }}
-                          >
-                            <span>
-                              {moment(
-                                selectedMovie.start_time,
-                                "HH:mm:ss"
-                              ).format("HH:mm")}
-                              <br />
-                              {remainingSeatsCount}/112{" "}
-                              {selectedMovie.theater_id}
-                            </span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  )}
+                  <div className="menu4_sub">
+                    <ul>
+                      <li>
+                        
+                      </li>
+                    </ul>
+                  </div>
                 </ul>
               </div>
             </li>
