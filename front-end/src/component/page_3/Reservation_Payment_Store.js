@@ -16,21 +16,22 @@ class Reservation_Payment_Store extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      c_email: '',
       name: '',
       itemName: "",
       itemImage: "",
       totalQuantity: "",
       totalPrice: "",
+      email: "",
+      itemCode: "",
     };
   }
 
   
   componentDidMount() {
     const cookies = new Cookies();
-    const c_email = cookies.get('c_email'); // 쿠키에서 이메일 정보 가져오기
-    if (c_email) {
-      this.setState({ c_email });
+    const email = cookies.get('email'); // 쿠키에서 이메일 정보 가져오기
+    if (email) {
+      this.setState({ email });
     }
 
     const name = cookies.get('idName'); // 쿠키에서 이메일 정보 가져오기
@@ -96,10 +97,10 @@ class Reservation_Payment_Store extends Component {
 
   
   handlePayment = () => {
-    const { c_email } = this.state;
+    const { email } = this.state;
 
     // ApiService에 쿠키로부터 가져온 이메일 정보 전달
-    ApiService.addStoreOrder({ c_email })
+    ApiService.addStoreOrder({ email })
         .then(response => {
             console.log('결제 데이터 전송 성공:', response.data);
             // 데이터 전송 후 필요한 작업을 수행합니다.
@@ -132,6 +133,7 @@ class Reservation_Payment_Store extends Component {
         itemCode,
         itemName,
         name,
+        email,
       } = JSON.parse(storedData);
 
 
@@ -160,6 +162,7 @@ class Reservation_Payment_Store extends Component {
         totalPrice,
         itemCode,
         itemName,
+        email,
       })
         .then((response) => {
           console.log("데이터 전송 성공:", response.data);
@@ -196,20 +199,20 @@ class Reservation_Payment_Store extends Component {
                 <a href="#Res_step01">
                   <strong>
                     <span>
-                      01
+
                       <br />
-                      상영시간
+
                     </span>
                   </strong>
                   <div className="step_content2">
                     <dl>
-                      <dt>선택한 영화 제목</dt>
+                      <dt></dt>
                       <dd></dd>
-                      <dt>선택한 상영관</dt>
+                      <dt></dt>
                       <dd></dd>
-                      <dt>선택한 상영 날짜</dt>
+                      <dt></dt>
                       <dd></dd>
-                      <dt>선택한 상영 시간</dt>
+                      <dt></dt>
                       <dd></dd>
                     </dl>
                   </div>
@@ -219,7 +222,7 @@ class Reservation_Payment_Store extends Component {
                 <a href="#Res_step02">
                   <strong>
                     <span>
-                      02
+
                       <br />
 
                     </span>

@@ -45,19 +45,19 @@ public class StoreGiftController {
 //        Message message = new Message();
 //        message.setFrom(dto.getGift_name()); // 발신번호
 //        message.setTo(dto.getGift_recipient()); // 수신번호
-//        String messageContent = "IM_MOVIE 기프티콘 발급 안내" + "\n" + dto.getGift_name() + "님이 " + "기프티콘을 선물하셨습니다!\n\n[기프티콘 내용]"
-//                + "\n메시지: " + dto.getGift_content()
-//                + "\n상품명: " + dto.getItem_name() + "\n쿠폰 번호: " + dto.getGift_num() + "\n유효 기간: 2024.09.01" + "\n\n" + "자세한 사용내역은 홈페이지 참조.\nIM MOVIE 드림";
+//        String messageContent = "[ IM_MOVIE 기프티콘 발급 안내 ]" + "\n" + dto.getGift_name() + "님이 " + "기프티콘을 선물하셨습니다!\n\n"
+//                + "\n▶ 보내시는 분의 메시지: " + dto.getGift_content()
+//                + "\n▶ 상품명: " + dto.getGift_name() + "\n▶ 쿠폰 번호: " + dto.getGift_num() + "\n▶ 유효 기간: 2024.09.01" + "\n\n" + "자세한 사용내역은 IM MOVIE 홈페이지 참조부탁드립니다.\n감사합니다.";
 //
 //        message.setText(messageContent);
 
 
-    //    System.out.println(dto.getGift_name());
-    //    System.out.println(dto.getGift_recipient());
-       // System.out.println("제목: IM_MOVIE 선물하기 발급 안내" + "\n" + "안녕하세요." + dto.getGift_name() + "님이 선물 " + "\n" + dto.getGift_content());
-//        System.out.println("IM_MOVIE 기프티콘 발급 안내" + "\n" + dto.getGift_name() + "님이 " + "기프티콘을 선물하셨습니다!\n\n[기프티콘 내용]"
-//        		+ "\n메시지: " + dto.getGift_content()
-//        		+ "\n상품명: " + dto.getGift_name() + "\n쿠폰 번호: " + dto.getGift_num() + "\n유효 기간: 2024.09.01" + "\n\n" + "자세한 사용내역은 홈페이지 참조.\nIM MOVIE 드림");
+        System.out.println(dto.getGift_name());
+        System.out.println(dto.getGift_recipient());
+        //System.out.println("제목: IM_MOVIE 선물하기 발급 안내" + "\n" + "안녕하세요." + dto.getGift_name() + "님이 선물 " + "\n" + dto.getGift_content());
+        System.out.println("[ IM_MOVIE 기프티콘 발급 안내 ]" + "\n" + dto.getGift_name() + "님이 " + "기프티콘을 선물하셨습니다!\n\n"
+        		+ "\n▶ 보내시는 분의 메시지: " + dto.getGift_content()
+        		+ "\n▶ 상품명: " + dto.getGift_name() + "\n▶ 쿠폰 번호: " + dto.getGift_num() + "\n▶ 유효 기간: 2024.10.01" + "\n\n" + "자세한 사용내역은 IM MOVIE 홈페이지 참조부탁드립니다.\n감사합니다.");
         
         //System.out.println("안녕하세요 " + "님,IM 영화관에서 보내드리는 소중한 선물입니다!\n\n" + dto.getGift_recipient() + "님이 선물하셨습니다.\n\n[기프티콘 쿠폰 내용]\n쿠폰 번호: " + dto.getGift_num() + "\n유효 기간: " + expirationDate + "\n사용 조건: " + usageConditions + "\n\n선물을 받았으니 즐거운 시간을 보내시길 바랍니다. 감사합니다!\n\n IM 영화관 드림");
         //return this.messageService.sendOne(new SingleMessageSendingRequest(message));

@@ -4,8 +4,8 @@ import package1 from "../../assets/page_3/package1.jpg";
 import cancel from "../../assets/page_3/cancel.png";
 import { withRouter } from 'react-router-dom';
 import ApiService from "../../ApiService";
-import { Cookies, useCookies } from 'react-cookie';
-
+import { Cookies } from 'react-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 class StoreGift extends Component {
   constructor(props) {
@@ -20,10 +20,21 @@ class StoreGift extends Component {
       sender: "",
       message: "",
       name: '',
+      email: '',
     };
   }
 
-  componentDidMount () {
+  componentDidMount() {
+    // 로컬 스토리지에서 토큰 가져오기
+    const authToken = localStorage.getItem("auth_token");
+
+    // 토큰이 존재하는지 확인 후 이메일 추출
+    if (authToken) {
+        const decodedToken = jwtDecode(authToken);
+        const userEmail = decodedToken.iss;
+        this.setState({ email: userEmail });
+    }
+
     const cookies = new Cookies();
     const name = cookies.get('idName'); // 쿠키에서 이메일 정보 가져오기
     if (name) {
@@ -31,6 +42,7 @@ class StoreGift extends Component {
     }
     console.log('name', name);
   }
+
   closeStoreGift = () => {
     const { onClose } = this.props;
     onClose(); 
@@ -52,6 +64,7 @@ class StoreGift extends Component {
     const { name, value } = e.target;
     this.setState({
       [name]: value,
+
     });
   };
 
@@ -68,43 +81,41 @@ class StoreGift extends Component {
   };
 
   handlePayment = () => {
-  const { recipientNumber, sender, message, name } = this.state;
-  const { totalQuantity, totalPrice, itemCode, itemName, itemImage } = this.props;
+    const { recipientNumber, sender, message, name, email } = this.state;
+    const { totalQuantity, totalPrice, itemCode, itemName, itemImage } = this.props;
 
+    // 선물 받는 분 번호가 12자 이상이면 알림창 띄우기
+    if (recipientNumber.length >= 12 || recipientNumber.length < 10) {
+      alert("잘못된 형식입니다.");
+      return; // 결제 로직 중단
+    }
 
+    window.localStorage.removeItem("sampleID");
+    window.localStorage.setItem(
+      "sampleID",
+      JSON.stringify({
+        recipientNumber,
+        sender,
+        message,
+        totalQuantity,
+        totalPrice,
+        itemCode,
+        itemName,
+        itemImage,
+        name,
+        email,
+      })
+    );
 
-  // 선물 받는 분 번호가 12자 이상이면 알림창 띄우기
-  if (recipientNumber.length >= 12 || recipientNumber.length < 10) {
-    alert("잘못된 형식입니다.");
-    return; // 결제 로직 중단
-  }
-
-  window.localStorage.removeItem("sampleID");
-  window.localStorage.setItem(
-    "sampleID",
-    JSON.stringify({
-      recipientNumber,
-      sender,
-      message,
-      totalQuantity,
-      totalPrice,
-      itemCode,
-      itemName,
-      itemImage,
-      name,
-    })
-  );
-
-  // 상태 초기화
-  this.setState({
-    recipientNumber: "",
-    sender: "",
-    message: ""
-  });
+    // 상태 초기화
+    this.setState({
+      recipientNumber: "",
+      sender: "",
+      message: "",
+    });
 
     this.props.history.push("/page_3/Reservation_Payment_Store");
-};
-
+  };
 
   render() {
     return (
@@ -169,7 +180,7 @@ class StoreGift extends Component {
                     type="text"
                     className={`g_input ${style.g_input}`}
                     name="sender"
-                    value={this.state.name}
+                    value={this.state.email}
                     size="20"
                     placeholder="선물 하는 분 입력"
                     onChange={this.handleChange}
