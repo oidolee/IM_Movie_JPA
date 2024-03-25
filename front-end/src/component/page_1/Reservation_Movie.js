@@ -8,7 +8,7 @@ import Res_img12 from "../../assets/page_1/12.jpg";
 import Res_imgAll from "../../assets/page_1/all.jpg";
 import Res_screen from "../../assets/page_1/screen.png";
 import ApiService from "../../ApiService";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const Reservation_Movie = ({ history }) => {
   const [reservation, setReservation] = useState([]);
@@ -17,8 +17,11 @@ const Reservation_Movie = ({ history }) => {
   const [theaterName, setTheaterName] = useState();
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택한 영화 상태
   const [movies, setMovies] = useState([]); // 영화 목록
+  const [timeLists, setTimeLists] = useState([]); // 영화 목록
   const [remainingSeatsCount, setRemainingSeatsCount] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState(null); // 지역 클릭
+  const { place_num } = useParams(); // 영화 지점 번호
+  const [groupedData, setGroupedData] = useState({});
 
   const places = {
     서울: ["홍대입구", "용산", "합정", "에비뉴엘", "영등포"],
@@ -26,20 +29,65 @@ const Reservation_Movie = ({ history }) => {
     인천: ["부평", "부평갈산", "부평역사"],
   };
 
-  useEffect(() => {
-    fetchMovie(); // 영화 목록
-  }, []);
-
   // 영화 목록
-  const fetchMovie = () => {
-    ApiService.fetchMovie()
+  const listReservation = () => {
+    ApiService.listReservation()
       .then((res) => {
         setMovies(res.data);
-        console.log("fetchMovie 성공", res.data);
+        console.log("listReservation 성공", res.data);
+
+        // 그룹화된 데이터 사용 예시
+        const data = res.data;
+        const newData = {}; // 새로운 데이터 객체 생성
+
+        data.forEach((item) => {
+          const { place_num } = item;
+          let place;
+          switch (place_num) {
+            case 1:
+              place = "홍대입구";
+              break;
+            case 2:
+              place = "용산";
+              break;
+            case 3:
+              place = "합정";
+              break;
+            default:
+              place = "기타";
+              break;
+          }
+
+          // newData에 해당 place가 없으면 빈 배열로 초기화하고, 있으면 기존 배열을 사용합니다.
+          newData[place] = [...(newData[place] || []), item];
+        });
+
+        // setGroupedData를 통해 상태를 업데이트합니다.
+        setGroupedData(newData);
       })
       .catch((err) => {
-        console.log("fetchMovie 오류 : ", err);
+        console.log("listReservation 오류 : ", err);
       });
+  };
+
+  useEffect(() => {
+    listReservation();
+  }, []);
+
+  const handleLocationClick = (location) => {
+    const placeData = groupedData[location];
+    console.log(`${location}에 대한 데이터:`, placeData);
+    // 여기서 placeData를 사용하여 메뉴를 표시하도록 설정할 수 있습니다.
+  };
+
+  const getPlaceNumFromLocation = (location) => {
+    let place_num = null;
+    Object.entries(places).forEach(([placeKey, placeNames]) => {
+      if (placeNames.includes(location)) {
+        place_num = placeKey;
+      }
+    });
+    return place_num;
   };
 
   // 연령에 대한 이미지
@@ -55,61 +103,10 @@ const Reservation_Movie = ({ history }) => {
     }
   };
 
-  const handleSelection = (region) => {
-    setSelectedPlace(region);
-  };
-
-  // // 상영관-지역 목록
-  // const fetchtime1 = () => {
-  //   ApiService.fetchtime1()
-  //     .then((res) => {
-  //       // 받은 데이터 그룹화
-  //       const groupedData = groupByPlaceNum(res.data);
-  //       setPlaces(groupedData);
-  //       console.log("fetchtime1 성공", groupedData);
-  //     })
-  //     .catch((err) => {
-  //       console.log("fetchMovie 오류 : ", err);
-  //     });
-  // };
-
-  // // 그룹화
-  // const groupByPlaceNum = (data) => {
-  //   return data.reduce((groups, item) => {
-  //     const group = groups[item.place_num] || [];
-  //     group.push(item);
-  //     groups[item.place_num] = group;
-  //     return groups;
-  //   }, {});
-  // };
-
-  // // 영화 선택 핸들러
-  // const handleMovieSelection = (reservations) => {
-  //   setSelectedMovie(reservations);
-  // };
-
-  // // 영화관 선택 핸들러
-  // const handleTheaterSelection = (subRegion) => {
-  //   // 선택한 영화관을 상태에 저장합니다.
-  //   setSelectedTheater(subRegion);
-
-  //   // 서버에 선택한 영화관 정보를 전송하여 해당 영화관에 예약된 영화 목록을 받아옵니다.
-  //   ApiService.listReservation(subRegion)
-  //     .then((res) => {
-  //       setMovies(res.data); // 받아온 예약 목록을 상태에 저장합니다.
-  //     })
-  //     .catch((err) => {
-  //       console.log("Error fetching reservations:", err);
-  //     });
-
-  //   // 선택한 지역을 설정합니다.
-  //   setSelectedPlace(subRegion);
-  // };
-
-  // // 지역 선택 핸들러
-  // const handleRegionClick = (region) => {
-  //   setSelectedRegion(region);
-  // };
+  // 컴포넌트가 마운트될 때 한 번만 API를 호출하여 잔여 좌석 수를 가져옴
+  useEffect(() => {
+    fetchRemainingSeatsCount();
+  }, []);
 
   // 잔여 좌석 수 호출
   const fetchRemainingSeatsCount = () => {
@@ -126,11 +123,6 @@ const Reservation_Movie = ({ history }) => {
         console.log("API 호출 오류:", err);
       });
   };
-
-  // 컴포넌트가 마운트될 때 한 번만 API를 호출하여 잔여 좌석 수를 가져옴
-  useEffect(() => {
-    fetchRemainingSeatsCount();
-  }, []);
 
   const handleConfirmation = () => {
     setPopupOpen(false);
@@ -232,13 +224,13 @@ const Reservation_Movie = ({ history }) => {
             <li>
               <div className="menu2">
                 <ul className="menu2_left">
-                  {Object.entries(places).map(([placeKey, placeName]) => (
+                  {Object.entries(places).map(([placeKey, placeNames]) => (
                     <li key={placeKey}>
                       <a
                         href="#"
                         onClick={(event) => {
                           event.preventDefault();
-                          handleSelection(placeKey);
+                          setSelectedRegion(placeKey);
                         }}
                       >
                         {placeKey}
@@ -247,22 +239,32 @@ const Reservation_Movie = ({ history }) => {
                   ))}
                 </ul>
                 <div className="menu2_right">
-                <ul>
-                  {selectedPlace &&
-                    places[selectedPlace].map((place, index) => (
-                      <li className="subRegions" key={index}>
-                        <a
-                          href="#"
-                          onClick={(event) => {
-                            event.preventDefault();
-                            handleTheaterSelection(place);
-                          }}
-                        >
-                          {place}
-                        </a>
-                      </li>
-                    ))}
-                </ul>
+                  <ul>
+                    {selectedRegion && (
+                      <div>
+                        {Object.entries(places).map(
+                          ([placeKey, placeNames]) => (
+                            <div key={placeKey}>
+                              {placeKey === selectedRegion &&
+                                placeNames.map((location, index) => (
+                                  <li className="subRegions" key={index}>
+                                    <a
+                                      href="#"
+                                      onClick={(event) => {
+                                        event.preventDefault();
+                                        handleLocationClick(location);
+                                      }}
+                                    >
+                                      {location}
+                                    </a>
+                                  </li>
+                                ))}
+                            </div>
+                          )
+                        )}
+                      </div>
+                    )}
+                  </ul>
                 </div>
               </div>
             </li>
@@ -276,20 +278,14 @@ const Reservation_Movie = ({ history }) => {
             <li>
               <div className="menu3">
                 <ul className="menu3_left">
-                  {movies.map((movie) => (
-                    <li key={movie.mov_id}>
-                      <a
-                        href="#"
-                        onClick={(event) => {
-                          event.preventDefault();
-                          handleMovieSelection(movie);
-                        }}
-                      >
-                        {getMovieImage(movie.mov_age)}
-                        {movie.mov_title}
-                      </a>
-                    </li>
-                  ))}
+                  <li>
+                    <a
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    ></a>
+                  </li>
                 </ul>
               </div>
             </li>
@@ -306,14 +302,9 @@ const Reservation_Movie = ({ history }) => {
                   <li>
                     <Reservation_Swiper />
                   </li>
-                  {selectedMovie && (
-                    <div className="menu4_main">
-                      <a href="#none">
-                        {getMovieImage(selectedMovie.mov_age)}
-                        {selectedMovie.mov_title}
-                      </a>
-                    </div>
-                  )}
+                  <div className="menu4_main">
+                    <a href="#none"></a>
+                  </div>
                   <div className="menu4_sub">
                     <ul>
                       <li>

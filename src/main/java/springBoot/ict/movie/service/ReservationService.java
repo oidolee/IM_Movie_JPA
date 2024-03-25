@@ -5,11 +5,12 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
+import springBoot.ict.movie.dto.MoviePlaceDTO;
 import springBoot.ict.movie.dto.ReservationDTO;
 
 public interface ReservationService {
 
-//	// 지역에 해당하는 영화 목록
-//	public List<ReservationDTO> ReservationList()
-//		throws ServletException, IOException;
+	// 지역에 해당하는 영화 목록
+	public List<MoviePlaceDTO> ReservationList()
+		throws ServletException, IOException;
 }

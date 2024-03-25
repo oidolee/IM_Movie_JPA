@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import springBoot.ict.movie.dto.MoviePlaceDTO;
 import springBoot.ict.movie.dto.ReservationDTO;
 import springBoot.ict.movie.service.ReservationServiceImpl;
 
@@ -30,18 +31,18 @@ public class ReservationController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
 		
-//	// 목록
-//    @GetMapping("/ReservationList")
-//    public List<ReservationDTO> ReservationList(Model model)
-//            throws ServletException, IOException {
-//    	
-//        logger.info("url - ReservationList");
-//        
-//        List<ReservationDTO> list = service.ReservationList();
-//        model.addAttribute("list", list);
-//        
-//        return list;
-//    }
+	// 목록
+    @GetMapping("/ReservationList")
+    public List<MoviePlaceDTO> ReservationList(Model model)
+            throws ServletException, IOException {
+    	
+        logger.info("url - ReservationList");
+        
+        List<MoviePlaceDTO> list = service.ReservationList();
+        model.addAttribute("list", list);
+        
+        return list;
+    }
 
 
 }
