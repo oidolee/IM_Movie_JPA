@@ -29,5 +29,4 @@ public class ReservationDTO {
     private int res_ticket_price;
     private Date res_sysdate;
     private String res_check;
-
 }

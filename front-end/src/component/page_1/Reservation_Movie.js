@@ -17,6 +17,7 @@ const Reservation_Movie = ({ history }) => {
   const [remainingSeatsCount, setRemainingSeatsCount] = useState(null); // 잔여 좌석
   const [selectedRegion, setSelectedRegion] = useState(null); // 지역
   const [groupedData, setGroupedData] = useState({}); // 지역 그룹화
+  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null);
 
   const places = {
     서울: ["홍대입구", "용산", "합정", "에비뉴엘", "영등포"],
@@ -142,10 +143,12 @@ const Reservation_Movie = ({ history }) => {
           menu4Sub.innerHTML = "";
           // 선택한 영화 정보를 출력
           movies.forEach((movieInfo) => {
-            const { ip_num, movie_title, theater_id, start_time } = movieInfo;
-            const formattedStartTime = moment(start_time, "HH:mm:ss").format(
+            const { ip_num, movie_title, theater_id, movie_time } = movieInfo;
+            const formattedStartTime = moment(movie_time, "HH:mm:ss").format(
               "HH:mm"
             );
+
+            setSelectedMovieInfo(movieInfo);
 
             const listItem = document.createElement("li");
             listItem.style.marginBottom = "20px";
@@ -222,11 +225,12 @@ const Reservation_Movie = ({ history }) => {
   const handleConfirmation = () => {
     setPopupOpen(false);
 
-     // 선택한 영화 정보와 좌석 정보를 로컬 스토리지에 저장
-  localStorage.setItem("selectedMovie", JSON.stringify(selectedMovie));
-  localStorage.setItem("selectedSeat", JSON.stringify(selectedSeat));
+    // 선택한 영화 정보와 좌석 정보를 로컬 스토리지에 저장
+    localStorage.setItem(
+      "selectedMovieInfo",
+      JSON.stringify(selectedMovieInfo)
+    );
 
-  
     history.push("/page_1/Reservation_Seat");
   };
 
@@ -255,18 +259,24 @@ const Reservation_Movie = ({ history }) => {
                     상영시간
                   </span>
                 </strong>
-                <div className="step_content">
-                  <dl>
-                    <dt>선택한 영화 제목</dt>
-                    <dd></dd>
-                    <dt>선택한 상영관</dt>
-                    <dd></dd>
-                    <dt>선택한 상영 날짜</dt>
-                    <dd></dd>
-                    <dt>선택한 상영 시간</dt>
-                    <dd></dd>
-                  </dl>
-                </div>
+                {selectedMovieInfo && (
+                  <div className="step_content">
+                    <dl>
+                      <dt>선택한 영화 제목</dt>
+                      <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                        {selectedMovieInfo.movie_title}
+                      </dd>
+                      <dt>선택한 상영관</dt>
+                      <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                        {selectedMovieInfo.theater_id}
+                      </dd>
+                      <dt>선택한 상영 날짜/시간</dt>
+                      <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                        {selectedMovieInfo.movie_time}
+                      </dd>
+                    </dl>
+                  </div>
+                )}
               </a>
             </li>
             <li className="step">

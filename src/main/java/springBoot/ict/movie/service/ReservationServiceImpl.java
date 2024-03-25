@@ -18,6 +18,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired
 	private MoviePlaceRepository dao1;
+	private ReservationRepository dao;
 	
 	@Override
 	// 지역에 해당하는 영화 목록
@@ -30,5 +31,18 @@ public class ReservationServiceImpl implements ReservationService {
 		
 		return dao1.findAll();
 	}
+
+	@Override
+	public void ReservationInsert(ReservationDTO dto) 
+		throws ServletException, IOException {
+		
+		System.out.println("ReservationServiceImpl - ReservationInsert");
+		
+		System.out.println(dao.save(dto));
+		
+		dao.save(dto);
+	}
+	
+
 
 }

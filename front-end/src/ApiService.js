@@ -30,12 +30,18 @@ class ApiService {
     
     // --------------------------------------------Seat 끝--------------------------------------------
     // --------------------------------------------Reservation 시작--------------------------------------------
-    // 목록
+    // 지역-영화 목록
     listReservation() {
         console.log("listReservation 호출");
         return axios.get(serverUrl + "/page_1/ReservationList");
     }
 
+    // 예약 정보 추가
+    addReservation(inputData2) {
+        console.log("addReservation 호출", inputData2);
+        return axios.post(serverUrl + "/page_1/ReservationInsert", inputData2);
+    }
+    
 
     // --------------------------------------------Reservation 끝--------------------------------------------
     // --------------------------------------------Payment 시작--------------------------------------------

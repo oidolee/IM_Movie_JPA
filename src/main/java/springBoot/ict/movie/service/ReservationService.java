@@ -13,4 +13,8 @@ public interface ReservationService {
 	// 지역에 해당하는 영화 목록
 	public List<MoviePlaceDTO> ReservationList()
 		throws ServletException, IOException;
+	
+	// 지역에 해당하는 영화 목록
+	public void ReservationInsert(ReservationDTO dto)
+		throws ServletException, IOException;
 }
