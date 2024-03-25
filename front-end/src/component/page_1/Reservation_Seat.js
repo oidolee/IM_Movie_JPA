@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import style from "../../styles/page_1/Reservation_Seat.css";
 import Res_movie from "../../assets/page_1/movie.jpg";
+import Res_img18 from "../../assets/page_1/18.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
+import Res_img12 from "../../assets/page_1/12.jpg";
+import Res_imgAll from "../../assets/page_1/all.jpg";
 import ApiService from "../../ApiService";
 import { useHistory } from "react-router-dom";
 import { jwtDecode } from 'jwt-decode';
@@ -57,12 +60,11 @@ const Reservation_Seat = () => {
   const [teenQuantity, setTeenQuantity] = useState(0);
   const [childQuantity, setChildQuantity] = useState(0);
   const [disabledQuantity, setDisabledQuantity] = useState(0);
-  const [lastActivityTime, setLastActivityTime] = useState(Date.now());
 
-  // 로컬 상태로 선택한 영화와 좌석 정보를 저장할 상태를 정의합니다.
+  // 선태한 영화 상태 저장
   const [selectedMovie, selectedMovieInfo] = useState(null);
 
-  // 각 인원별 가격 설정
+  // 가격 설정
   const adultPrice = 10000;
   const teenPrice = 8000;
   const childPrice = 6000;
@@ -75,7 +77,7 @@ const Reservation_Seat = () => {
     childPrice * childQuantity +
     disabledPrice * disabledQuantity;
 
-  // 페이지가 로드될 때 로컬 스토리지에서 선택한 영화와 좌석 정보를 가져와서 상태에 설정합니다.
+  // 영화 정보 get
   useEffect(() => {
     const selectedMovie = localStorage.getItem("selectedMovieInfo");
 
@@ -83,7 +85,7 @@ const Reservation_Seat = () => {
       selectedMovieInfo(JSON.parse(selectedMovie));
     }
 
-    console.log("selectedMovieInfo : ", selectedMovieInfo);
+    console.log("selectedMovie : ", selectedMovie);
   }, []);
 
   // 로그인 상태 확인
@@ -246,8 +248,6 @@ const Reservation_Seat = () => {
     Promise.all(updateSeatPromises)
       .then((res) => {
         console.log("모든 좌석 업데이트 성공");
-        // const firstSeat = selectedSeats[0].split('-')[2];
-        // history.push(`/page_1/Reservation_Payment/${firstSeat}`);
         const selectedSeat = selectedSeats.map((seat) => seat.split("-")[2]);
         localStorage.setItem("selectedSeat", JSON.stringify(selectedSeat));
         localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
@@ -266,7 +266,6 @@ const Reservation_Seat = () => {
       .catch((err) => {
         console.log("좌석 업데이트 오류 : ", err);
       });
-
   };
 
   const handleMovie = () => {
@@ -385,16 +384,16 @@ const Reservation_Seat = () => {
             <div className="Res_seat2_header">
               <ul className="Res_movie">
                 <li>
-                  <img src={Res_movie} className="movie_img" alt="movie" />
+                  {/* <img src={Res_movie} className="movie_img" alt="movie" /> */}
                 </li>
                 <ul className="Res_movie_content">
                   {selectedMovie && (
                     <li>
-                      <img src={Res_img15} className="age_img" alt="age" />
+                      {/* <img src={Res_img15} className="age_img" alt="age" /> */}
                       <strong className="movie_name">
                         {selectedMovie.movie_title}
                       </strong>{" "}
-                      | {selectedMovie.start_time}| {selectedMovie.theater_id}
+                      | {selectedMovie.theater_id}
                     </li>
                   )}
                   <li>

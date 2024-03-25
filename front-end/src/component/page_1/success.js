@@ -68,6 +68,16 @@ const Success = () => {
     console.log("selectedMovieInfo : ", storedSelectedMovieInfo);
     console.log("setSelectedSeats : ", storedSelectedSeats);
     console.log("setTotalPrice : ", storedTotalPrice);
+
+    // 결제 성공 후 페이지 이동
+    const confirmation = window.confirm(
+      "결제가 성공적으로 이루어졌습니다."
+    );
+    if (confirmation) {
+      window.location.assign("/");
+    } else {
+      window.location.assign("/");
+    }
   }, [location]);
 
   useEffect(() => {
@@ -105,7 +115,9 @@ const Success = () => {
     }
   }, [selectedSeats, selectedMovieInfo, totalQuantity, totalPrice]);
 
-  return <div></div>;
+
+  return 
+    <div></div>;
 };
 
 export default Success;
