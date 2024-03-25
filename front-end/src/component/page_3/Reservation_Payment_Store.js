@@ -362,10 +362,6 @@ class Reservation_Payment_Store extends Component {
               <li>
                 <div className="menu4">
                   <ul className="menu4_top">
-                    <li>예약정보</li>
-                    <li>카드</li>
-                    <li>금액</li>
-                    <li>등등</li>
                   </ul>
                   <ul className="menu4_bottom">
                     <li className="paymentBtn">

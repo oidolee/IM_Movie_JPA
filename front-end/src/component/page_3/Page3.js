@@ -93,7 +93,6 @@ class Page3 extends Component {
                       className={`store_item ${style.store_item}`}
                       key={item.itemCode}
                     >
-                      {/* <a href={`/page_3/EditStore_Admin?${item.itemCode}`} className={`store_item ${style.store_item}`} key={index}> */}
                       <div className={`store_img ${style.store_img}`}>
                         <img
                           src={item.itemImage}
@@ -147,7 +146,6 @@ class Page3 extends Component {
                       className={`store_item ${style.store_item}`}
                       key={item.itemCode}
                     >
-                      {/* <a href={`/page_3/EditStore_Admin?${item.itemCode}`} className={`store_item ${style.store_item}`} key={index}> */}
                       <div className={`store_img ${style.store_img}`}>
                         <img
                           src={item.itemImage}
@@ -204,7 +202,6 @@ class Page3 extends Component {
                       className={`store_item ${style.store_item}`}
                       key={item.itemCode}
                     >
-                      {/* <a href={`/page_3/EditStore_Admin?${item.itemCode}`} className={`store_item ${style.store_item}`} key={index}> */}
                       <div className={`store_img ${style.store_img}`}>
                         <img
                           src={item.itemImage}

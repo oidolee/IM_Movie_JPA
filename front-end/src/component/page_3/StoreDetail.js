@@ -267,11 +267,6 @@ EditStore_Admin = (e) => {
 
                 </div>
 
-                {/* {slides.map((slideContent, index) => (
-                      <SwiperSlide key={slideContent} virtualIndex={index}>
-                          {slideContent}
-                      </SwiperSlide>
-                      ))} */}
               </Swiper>
             </div>
           </div>

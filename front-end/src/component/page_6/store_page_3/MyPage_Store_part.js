@@ -43,7 +43,7 @@ class MyPage_Store_part extends Component {
                             {/* 반복문 써서 날짜 정보 나오게끔 */}
                             <table>
                                 <tr>
-                                    <td>2024.03.18(월)</td>
+                                    <td>2024.03.26(화)</td>
                                     {/* 나중에 포이치문 쓸거여 */}
                                 </tr>
                             </table>
@@ -77,7 +77,7 @@ class MyPage_Store_part extends Component {
                                             </tr>
                                             <tr>
                                                 <th>유효기간</th>
-                                                <td colSpan={2}>온라인 상품권 2024-03-18 ~ 2026-03-20</td>
+                                                <td colSpan={2}>온라인 상품권 2024-03-26 ~ 2026-03-25</td>
                                             </tr>
                                            
                                             <tr>
@@ -93,7 +93,7 @@ class MyPage_Store_part extends Component {
                                     <table>
                                         <tr>
                                             <th>결제일시</th>
-                                            <td colSpan={5}>0000-00-00 00:00:00</td>
+                                            <td colSpan={5}>2024-03-26</td>
                                         </tr>
                                         <tr>
                                             <td><strong>주문금액</strong></td>
