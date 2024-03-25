@@ -334,7 +334,7 @@ class ApiService {
       // <page_2 관리자에서 멤버리스트 차트용 >
     customerList(){
         console.log('customerList() 호출!!')
-        return axios.get(serverUrl + '/index'); 
+        return axios.get(serverUrl + '/admin/listCustomer'); 
     }
 
     // page_5

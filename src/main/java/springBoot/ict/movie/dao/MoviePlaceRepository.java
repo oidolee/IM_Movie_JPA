@@ -1,8 +1,8 @@
 package springBoot.ict.movie.dao;
 
 import java.util.List;
-import java.util.Optional;
 
+import org.apache.ibatis.annotations.Select;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,5 +14,4 @@ public interface MoviePlaceRepository extends JpaRepository<MoviePlaceDTO, Integ
     @Query("SELECT p FROM MoviePlaceDTO p WHERE p.place_num = :place_num")
     List<MoviePlaceDTO> findAllByPlaceNum(@Param("place_num") int place_num);
     
-    List<MoviePlaceDTO> findAll();
 }
