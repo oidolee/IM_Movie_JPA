@@ -42,7 +42,7 @@ function Form() {
     ApiService.groupAdd(addInfo)
       .then((res) => {
         console.log("GroupInsert 성공 : ", res.data);
-        history.push("/");
+        history.push("/admin/page_5/Admin_GroupForm_List");
       })
       .catch((err) => {
         console.log(addInfo);
@@ -227,12 +227,6 @@ function Form() {
               <input type="tel" id="tel3" className={`tel3 ${style.tel3}`}  name="custo_phone3"  value={addInfo.custo_phone3} onChange={onChange}/>
               
               <hr></hr>
-            </div>
-
-            <div className={`Form_group ${style.Form_group}`}>
-            <label for="gg_mail">이메일</label>
-            <input type="text" id="email" className={`email1 ${style.email1}`}  name="c_email" value={addInfo.c_email} onChange={onChange} />
-            <hr></hr>
             </div>
 
             <div className={`Form_make3 ${style.Form_make3}`}>
