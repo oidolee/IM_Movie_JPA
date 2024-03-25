@@ -77,7 +77,25 @@ const Reservation_Movie = ({ history }) => {
   const handleLocationClick = (location) => {
     const placeData = groupedData[location];
     console.log(`${location}에 대한 데이터:`, placeData);
-    // 여기서 placeData를 사용하여 메뉴를 표시하도록 설정할 수 있습니다.
+  
+    const menuElement = document.querySelector('.menu3_left'); // 지역에 해당하는 영화 출력 위치
+
+    menuElement.innerHTML = '';
+  
+    if (placeData) {
+      placeData.forEach((item) => {
+        const menuItem = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = '#';
+        link.textContent = item.movie_title;
+        link.onclick = (event) => {
+          event.preventDefault();
+          console.log(`${item.movie_title}를 클릭했습니다.`);
+        };
+        menuItem.appendChild(link);
+        menuElement.appendChild(menuItem);
+      });
+    }
   };
 
   const getPlaceNumFromLocation = (location) => {
