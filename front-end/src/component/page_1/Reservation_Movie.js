@@ -11,15 +11,12 @@ import ApiService from "../../ApiService";
 import { useHistory, useParams } from "react-router-dom";
 
 const Reservation_Movie = ({ history }) => {
-  const [reservation, setReservation] = useState([]);
-  const [popupOpen, setPopupOpen] = useState(false);
-  const [selectedPlace, setSelectedPlace] = useState(null); // 선택한 지역
-  const [theaterName, setTheaterName] = useState();
+  const [popupOpen, setPopupOpen] = useState(false); // 팝업
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택한 영화 상태
   const [movies, setMovies] = useState([]); // 영화 목록
-  const [remainingSeatsCount, setRemainingSeatsCount] = useState(null);
-  const [selectedRegion, setSelectedRegion] = useState(null); // 지역 클릭
-  const [groupedData, setGroupedData] = useState({});
+  const [remainingSeatsCount, setRemainingSeatsCount] = useState(null); // 잔여 좌석
+  const [selectedRegion, setSelectedRegion] = useState(null); // 지역
+  const [groupedData, setGroupedData] = useState({}); // 지역 그룹화
 
   const places = {
     서울: ["홍대입구", "용산", "합정", "에비뉴엘", "영등포"],
@@ -51,6 +48,30 @@ const Reservation_Movie = ({ history }) => {
             case 3:
               place = "합정";
               break;
+            case 4:
+              place = "에비뉴엘";
+              break;
+            case 5:
+              place = "영등포";
+              break;
+            case 28:
+              place = "안양일번가";
+              break;
+            case 29:
+              place = "광명아울렛";
+              break;
+            case 30:
+              place = "위례";
+              break;
+            case 31:
+              place = "부평";
+              break;
+            case 38:
+              place = "부평갈산";
+              break;
+            case 40:
+              place = "부평역사";
+              break;
             default:
               place = "기타";
               break;
@@ -76,80 +97,79 @@ const Reservation_Movie = ({ history }) => {
     const placeData = groupedData[location];
     console.log(`${location}에 대한 데이터:`, placeData);
 
+    // 클릭한 영화 정보를 저장
+    setSelectedMovie(placeData);
+
     const menuElement = document.querySelector(".menu3_left"); // 지역에 해당하는 영화 출력 위치
     const menu4Sub = document.querySelector(".menu4_sub ul"); // menu4_sub 요소
 
     menuElement.innerHTML = ""; // 기존 내용 지우기
-    menu4Sub.innerHTML = ""; // 기존 내용 지우기
 
     if (placeData) {
-        // 영화 ID를 기준으로 그룹화
-        const groupedMovies = {};
-        placeData.forEach((item) => {
-            if (!groupedMovies[item.movie_id]) {
-                groupedMovies[item.movie_id] = [item];
-            } else {
-                groupedMovies[item.movie_id].push(item);
-            }
-        });
+      // 영화 ID를 기준으로 그룹화
+      const groupedMovies = {};
+      placeData.forEach((item) => {
+        if (!groupedMovies[item.movie_id]) {
+          groupedMovies[item.movie_id] = [item];
+        } else {
+          groupedMovies[item.movie_id].push(item);
+        }
+      });
 
-        // 그룹화된 데이터를 출력
-        Object.entries(groupedMovies).forEach(([movieId, movies]) => {
-            const menuItem = document.createElement("li");
-            const link = document.createElement("a");
-            link.href = "#";
-            link.textContent = `${movies[0].movie_title} - ID: ${movieId}`; // 영화 제목과 ID 출력
-            link.onclick = (event) => {
-                event.preventDefault();
-                console.log(
-                    `${movies[0].movie_title}를 클릭했습니다. ID: ${movieId}`
-                ); // 클릭한 영화 제목과 ID 출력
+      // 그룹화된 데이터를 출력
+      Object.entries(groupedMovies).forEach(([movieId, movies]) => {
+        const menuItem = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = "#";
+        link.textContent = `${movies[0].movie_title}`; // 영화 제목과 ID 출력  - ID: ${movieId}
+        link.onclick = (event) => {
+          event.preventDefault();
+          console.log(
+            `${movies[0].movie_title}를 클릭했습니다. ID: ${movieId}`
+          ); // 클릭한 영화 제목과 ID 출력
 
-                // 선택한 영화 정보를 출력
-                movies.forEach((movieInfo) => {
-                    const { ip_num, movie_title, theater_id, start_time } = movieInfo;
-                    const formattedStartTime = moment(start_time, "HH:mm:ss").format("HH:mm");
+          menu4Sub.innerHTML = "";
+          // 선택한 영화 정보를 출력
+          movies.forEach((movieInfo) => {
+            const { ip_num, movie_title, theater_id, start_time } = movieInfo;
+            const formattedStartTime = moment(start_time, "HH:mm:ss").format(
+              "HH:mm"
+            );
 
-                    const listItem = document.createElement("li");
-                    listItem.innerHTML = `
-                        <a href="#none">
-                            <span>
-                                ${formattedStartTime}<br />
-                                ${ip_num}/112 ${theater_id} - ${movie_title}
-                            </span>
-                        </a>
-                    `;
-                    menu4Sub.appendChild(listItem);
-                });
-            };
-            menuItem.appendChild(link);
-            menuElement.appendChild(menuItem);
+            const listItem = document.createElement("li");
+            listItem.style.marginBottom = "20px";
+            listItem.innerHTML = `
+                      <a href="#none">
+                          <span>
+                            ${movie_title}
+                              ${formattedStartTime}<br />
+                              ${remainingSeatsCount}/112 ${theater_id}
+                          </span>                         
+                      </a>
+                  `;
+            menu4Sub.appendChild(listItem);
+          });
+        };
+        menuItem.appendChild(link);
+        menuElement.appendChild(menuItem);
 
-            console.log(`Movie ID: ${movieId}에 대한 데이터:`, movies);
-        });
+        console.log(`Movie ID: ${movieId}에 대한 데이터:`, movies);
+      });
     }
-};
-
-
-
-  const handleClick = (movie) => {
-    console.log("선택한 영화:", movie);
-    setSelectedMovie(movie); // 선택한 영화를 state에 저장
-    setPopupOpen(true); // 팝업 열기
   };
 
-  // // 연령에 대한 이미지
-  // const getMovieImage = (movieId) => {
-  //   if (movieId[0] === "1") {
-  //     return <img src={Res_imgAll} />;
-  //   } else if (movieId[1] === "2") {
-  //     return <img src={Res_img15} />;
-  //   } else if (movieId[2] === "3") {
-  //     return <img src={Res_img12} />;
-  //   } else if (movieId[3] === "4") {
-  //     return <img src={Res_img18} />;
-  //   }
-  // };
+  // 연령에 대한 이미지
+  const getMovieImage = (movieId) => {
+    if (movieId[0] === "1") {
+      return <img src={Res_imgAll} />;
+    } else if (movieId[1] === "2") {
+      return <img src={Res_img15} />;
+    } else if (movieId[2] === "3") {
+      return <img src={Res_img12} />;
+    } else if (movieId[3] === "4") {
+      return <img src={Res_img18} />;
+    }
+  };
 
   // 컴포넌트가 마운트될 때 한 번만 API를 호출하여 잔여 좌석 수를 가져옴
   useEffect(() => {
@@ -182,6 +202,11 @@ const Reservation_Movie = ({ history }) => {
   };
 
   const sysdate = moment().format("YYYY-MM-DD");
+
+  const handlePopupOpen = () => {
+    // 팝업을 열고 선택한 영화 정보를 설정
+    setPopupOpen(true);
+  };
 
   return (
     <div className={`Res_Movie ${style.Res_Movie}`}>
@@ -350,11 +375,9 @@ const Reservation_Movie = ({ history }) => {
                   <div className="menu4_main">
                     <a href="#none"></a>
                   </div>
-                  <div className="menu4_sub">
+                  <div className="menu4_sub" onClick={handlePopupOpen}>
                     <ul>
-                      <li>
-                        
-                      </li>
+                      <li></li>
                     </ul>
                   </div>
                 </ul>
@@ -366,11 +389,11 @@ const Reservation_Movie = ({ history }) => {
           <div className="popup">
             <div className="popup_content">
               <strong>
-                {selectedMovie.res_movie_name}/{" "}
-                {moment(selectedMovie.res_movie_time, "HH:mm:ss").format(
+                {selectedMovie[0].movie_title}/{" "}
+                {moment(selectedMovie[0].start_time, "HH:mm:ss").format(
                   "HH:mm"
                 )}
-                ({selectedMovie.theater_id})
+                ({selectedMovie[0].theater_id})
               </strong>
               {remainingSeatsCount !== null && (
                 <p>
