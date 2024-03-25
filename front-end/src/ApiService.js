@@ -261,9 +261,9 @@ class ApiService {
     }
     
     // 쿠폰 상세내역(관리자)
-    couponDetailList(ic_num){
+    couponDetailList(ic_name){
         console.log('couponList() 호출!!')
-        return axios.get(serverUrl + '/page_6/coupon/selectCoupon/' + ic_num); 
+        return axios.get(serverUrl + '/page_6/coupon/selectCoupon/' + ic_name); 
     }
     // 쿠폰 등록
     addCoupon(inputData){
@@ -301,7 +301,7 @@ class ApiService {
     // 고객 쿠폰 삭제(숨김처리)
     deleteCusCoupon(ic_num){
         console.log('deleteCusCoupon() 호출!!')
-        return axios.put(serverUrl + '/page_6/coupon/deleteCusCoupon' + ic_num);
+        return axios.put(serverUrl + '/page_6/coupon/deleteCusCoupon/' + ic_num);
     }
 
     // 고객 쿠폰 갯수

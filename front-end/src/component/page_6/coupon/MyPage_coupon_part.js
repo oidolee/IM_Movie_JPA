@@ -21,22 +21,25 @@ function MyPage_coupon_part() {
     const [ic_startDate, setIc_startDate] = useState('');
     const [ic_endDate, setIc_endDate] = useState('');
     const [ic_num, setIc_num] = useState('');
-    
 
 
-   
-    const showBox = (ic_num) => {
+
+
+    const showBox = (ic_name) => {
         setShowDetail(!showDetail)
         // 쿠폰 상세내역
-        ApiService.couponDetailList(ic_num)
+        ApiService.couponDetailList(ic_name)
             .then(res => {
-                console.log('ic_num : ' + ic_num);
+                console.log('ic_name : ' + ic_name);
                 console.log('res.data', res.data);
                 let coupon = res.data;
                 setIc_code(coupon.cpdto.ic_code);
                 setIc_point(coupon.cpdto.ic_point);
                 setIc_regDate(formatDate(coupon.cpdto.ic_regDate));
-                
+
+            })
+            .catch(err => {
+                console.log('couponDetailList() ERROR!!', err);
             })
     }
 
@@ -47,10 +50,11 @@ function MyPage_coupon_part() {
             const decodedToken = jwtDecode(authToken); // 수정 필요
             const userEmail = decodedToken.iss;
             setEmailCheck(userEmail);
+            reloadCusCouponList(userEmail);
+            reloadCusCouponCount(userEmail);
         }
-        reloadCusCouponList(emailCheck);
-        reloadCusCouponCount(emailCheck);
-    }, [emailCheck]);
+        
+    }, []);
 
 
     const formatDate = (timestamp) => {
@@ -91,13 +95,13 @@ function MyPage_coupon_part() {
             .catch(err => {
                 console.log('reloadConsultList() Error!!', err);
             });
-}
+    }
 
     // 사용가능한 쿠폰갯수
-    const reloadCusCouponCount = (emailCheck) => {
-        ApiService.countCusCoupon(emailCheck)
+    const reloadCusCouponCount = (email) => {
+        ApiService.countCusCoupon(email)
             .then(res => {
-                console.log("test" , res.data);
+                console.log("test", res.data);
                 setCusCouponCount(res.data);
                 console.log(cusCouponCount);
             })
@@ -106,13 +110,15 @@ function MyPage_coupon_part() {
             });
     }
 
+    
+
     // 선택삭제 
     const handleDeleteCoupon = (ic_num) => {
         console.log('선택 삭제 버튼 클릭');
         ApiService.deleteCusCoupon(ic_num)
             .then(response => {
                 console.log('삭제 요청 성공');
-                // 성공적으로 삭제되었을 때 필요한 동작 수행
+                window.location.reload();
             })
             .catch(error => {
                 console.error('삭제 요청 실패:', error);
@@ -126,9 +132,9 @@ function MyPage_coupon_part() {
             <div className={`MyPage_coupon_useable ${style.MyPage_coupon_useable}`}>
                 <p>사용 가능한 쿠폰 : {cusCouponCount} 매</p>
             </div>
-            <div className={`MyPage_coupon_menu ${style.MyPage_coupon_menu}`}>
+            {/* <div className={`MyPage_coupon_menu ${style.MyPage_coupon_menu}`}>
                 <div className={`coupon_delete_parent ${style.coupon_delete_parent}`}>
-                    <button className="coupon_delete_child" title='선택삭제'  >선택 삭제</button>
+                    
                 </div>
                 <div>
                     <select className={`coupon_menu1 ${style.coupon_menu1}`}>
@@ -145,9 +151,9 @@ function MyPage_coupon_part() {
                     </select>
                 </div>
                 <div className={`couponRegButton ${style.couponRegButton}`}>
-                    <button title="쿠폰 등록" > 쿠폰등록 </button>
+                    
                 </div>
-            </div>
+            </div> */}
             <div className={`coupon_detail ${style.coupon_detail}`}>
                 <table className={`coupon_detail_table ${style.coupon_detail_table}`} >
                     <colgroup>
@@ -166,18 +172,18 @@ function MyPage_coupon_part() {
                     </tr>
                     {cusCouponData.map((cusCouponDataItem, index) => (
                         <tr className={`coupon_detail_detail1 ${style.coupon_detail_detail1}`} key={index}>
-                            <td><input type="checkbox" id="ic_num" name="ic_num" value={cusCouponDataItem.ic_num}></input></td>
+                            <td><button className="coupon_delete_child" title='선택삭제' onClick={() => handleDeleteCoupon(cusCouponDataItem.ic_num)}>삭제</button></td>
                             <td>{cusCouponDataItem.ic_category}</td>
 
-                            <td style={{ textAlign: "center" }} onClick={() => showBox(cusCouponDataItem.ic_num)}>
+                            <td style={{ textAlign: "center" }} onClick={() => showBox(cusCouponDataItem.ic_name)}>
                                 {cusCouponDataItem.ic_name}
                             </td>
                             <td>{cusCouponDataItem.ic_startDate}부터 ~ {cusCouponDataItem.ic_endDate}까지</td>
 
                             <td>
                                 {cusCouponDataItem.ic_status === 'y' ? '사용가능' :
-                                cusCouponDataItem.ic_status === 'n' ? '사용완료' :
-                                cusCouponDataItem.ic_status === 'e' ? '기간만료' : '알 수 없음'}
+                                    cusCouponDataItem.ic_status === 'n' ? '사용완료' :
+                                        cusCouponDataItem.ic_status === 'e' ? '기간만료' : '알 수 없음'}
                             </td>
                         </tr>
                     ))}

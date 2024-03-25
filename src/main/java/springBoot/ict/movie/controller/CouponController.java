@@ -49,8 +49,8 @@ public class CouponController {
 	}
 
 	// 쿠폰 상세내역
-	@GetMapping("/selectCoupon/{ic_num}")
-	public Map<String, Object> selectConsultDetail(@PathVariable(name = "ic_num") int ic_num, Model model)
+	@GetMapping("/selectCoupon/{ic_name}")
+	public Map<String, Object> selectConsultDetail(@PathVariable(name = "ic_name") String ic_name, Model model)
 			throws ServletException, IOException {
 		logger.info("<<< url -> selectConsultDetail");
 
@@ -62,7 +62,7 @@ public class CouponController {
 
 		try {
 
-			cpdto = service.selectCoupon(ic_num);
+			cpdto = service.selectCoupon(ic_name);
 			System.out.println(cpdto);
 			resultCode = "200";
 			resultMsg = "selectConsultAnswer Success";

@@ -90,10 +90,10 @@ public class CouponServiceImpl implements CouponService {
 
 	// 쿠폰 상세내역(관리자)
 	@Override
-	public Optional<CouponDTO> selectCoupon(int ic_num) 
+	public Optional<CouponDTO> selectCoupon(String ic_name) 
 			throws ServletException, IOException {
 		
-		Optional<CouponDTO> cpdto = cpdao.selectCouponDetail(ic_num);
+		Optional<CouponDTO> cpdto = cpdao.selectCouponDetail(ic_name);
 		
 		return cpdto;
 	}
