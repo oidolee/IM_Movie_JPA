@@ -29,8 +29,8 @@ public class WebConfig {
 		
 		System.out.println("<<< WebConfig-1 >>>");
 		config.setAllowCredentials(true);
-		config.addAllowedOrigin("http://3.39.155.236:3000");
 		config.addAllowedOrigin("http://localhost:3000");
+		config.addAllowedOrigin("http://3.39.155.236:3000");
 		config.setAllowedHeaders(Arrays.asList(
 					HttpHeaders.AUTHORIZATION,
 					HttpHeaders.CONTENT_TYPE,
@@ -44,6 +44,9 @@ public class WebConfig {
 					HttpMethod.PUT.name(),
 					HttpMethod.DELETE.name()
 				));
+
+		config.addAllowedMethod("*"); // 배포테스트
+		config.addAllowedHeader("*");
 		
 		config.setMaxAge(3600L);   // 옵션 요청이 수락되는 시간 30분
 		source.registerCorsConfiguration("/**", config);  // Spring Security 필터전에 사용하기 위해 요청에 적용
