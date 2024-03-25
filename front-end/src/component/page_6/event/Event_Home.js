@@ -33,19 +33,19 @@ const EventHome = () => {
                 <ul>
                     <li>
                         <a href="#">
-                            <img src='https://cf.lottecinema.co.kr//Media/Event/692ddf478a124abe9b7e91fc9fb40d25.jpg' alt='coupon_1' />
+                            <img src='https://cf.lottecinema.co.kr//Media/Event/61254ebb80554f8382f8b3a9827c0723.png' alt='coupon_1' />
                         </a>
                         <p>2024.03.15 ~ 2024.03.21</p>
                     </li>
                     <li>
                         <a href="#">
-                            <img src='https://cf.lottecinema.co.kr//Media/Event/f7a6e421af46446c9d64e9b4e38a71fc.jpg' alt='coupon_2' />
+                            <img src='https://cf.lottecinema.co.kr//Media/Event/a6df32e16d5d41a9acfae39139775cf9.jpg' alt='coupon_2' />
                         </a>
                         <p>2024.03.15 ~ 2024.03.21</p>
                     </li>
                     <li>
                         <a href="#">
-                            <img src='https://cf.lottecinema.co.kr//Media/Event/ea9b773da64943a8a876f7cb8d19deb8.jpg' alt='coupon_3' />
+                            <img src='https://cf.lottecinema.co.kr//Media/Event/c287281b445d416c86790ff32015a60c.jpg' alt='coupon_3' />
                         </a>
                         <p>2024.03.15 ~ 2024.04.21</p>
                     </li>
@@ -56,19 +56,19 @@ const EventHome = () => {
                 <ul>
                     <li>
                         <a href="#">
-                            <img src='https://cf.lottecinema.co.kr//Media/Event/da0a81fa98d4470daf2dd2344024cf44.jpg' alt='greeding_1' />
+                            <img src='https://cf.lottecinema.co.kr//Media/Event/419e1e047130420dacf2f750523b28f6.jpg' alt='greeding_1' />
                         </a>
                         <p>2024.03.15 ~ 2024.03.21</p>
                     </li>
                     <li>
                         <a href="#">
-                            <img src='https://cf.lottecinema.co.kr//Media/Event/fd1311690570402eb783a9dbd6651548.jpg' alt='greeding_2' />
+                            <img src='https://cf.lottecinema.co.kr//Media/Event/b4e04438e2da4c0ba87a623946988175.jpg' alt='greeding_2' />
                         </a>
                         <p>2024.03.15 ~ 2024.03.21</p>
                     </li>
                     <li>
                         <a href="#">
-                            <img src='https://cf.lottecinema.co.kr//Media/Event/d1036ca775d54db9a8add7f22c505b29.jpg' alt='greeding_3' />
+                            <img src='https://cf.lottecinema.co.kr//Media/Event/2f82885e1338494f9d64b64163863950.jpg' alt='greeding_3' />
                         </a>
                         <p>2024.03.15 ~ 2024.04.21</p>
                     </li>
@@ -92,8 +92,8 @@ const EventHome = () => {
                     <li>
                         <a className={`bn_tit ${style.bn_tit}`}>
                             <span class="txt_zone ty5">수유</span>
-                            <strong>[수유] 조조시간 확대 시행 (~12시까지)</strong>
-                            <span class="bn_tit_date">2024.02.21 ~ 2024.12.31</span>
+                            <strong>[가산] 심야 극장 개장 (~02시까지)</strong>
+                            <span class="bn_tit_date">2024.03.21 ~ 2024.06.31</span>
                         </a>
                         <div class="bn_cont" style={{ display: "none" }}>
                             내용2
@@ -103,8 +103,8 @@ const EventHome = () => {
                     <li>
                         <a className={`bn_tit ${style.bn_tit}`}>
                             <span class="txt_zone ty2">수유</span>
-                            <strong>[수유3] 조조시간 확대 시행 (~12시까지)</strong>
-                            <span class="bn_tit_date">2024.02.21 ~ 2024.12.31</span>
+                            <strong>[신촌] ICT 문화 시작</strong>
+                            <span class="bn_tit_date">2024.02.21 ~ 2024.04.03</span>
                         </a>
                         <div class="bn_cont" style={{ display: "none" }}>
                             내용3

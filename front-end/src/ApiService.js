@@ -335,7 +335,7 @@ class ApiService {
         console.log('customerList() 호출!!')
         return axios.get(serverUrl + '/admin/listCustomer'); 
     }
-
+    
     // page_5
     //영화 홈 목록 리스트
     fetchMovie(){

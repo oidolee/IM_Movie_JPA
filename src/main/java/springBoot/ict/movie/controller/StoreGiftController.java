@@ -43,7 +43,8 @@ public class StoreGiftController {
 
         // 선물 정보를 문자 메시지로 발송합니다.
         Message message = new Message();
-        message.setFrom(dto.getGift_recipient()); // 발신번호
+//        message.setFrom(dto.getGift_recipient()); // 발신번호
+        message.setFrom("027397235"); // 발신번호
         message.setTo(dto.getGift_recipient()); // 수신번호
         String messageContent = "[ IM_MOVIE 기프티콘 발급 안내 ]" + "\n" + dto.getGift_name() + " 님이 " + "기프티콘을 선물하셨습니다!\n\n"
                 + "\n▶ 보내시는 분의 메시지: " + dto.getGift_content()

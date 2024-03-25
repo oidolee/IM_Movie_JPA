@@ -38,6 +38,7 @@ class Reservation_Payment_Store extends Component {
       itemCode: "",
     };
   }
+  
 
   componentDidMount() {
     const cookies = new Cookies();
@@ -97,6 +98,10 @@ class Reservation_Payment_Store extends Component {
   };
 
   handlePayment = () => {
+   
+    
+
+
     const { email } = this.state;
 
     // ApiService에 쿠키로부터 가져온 이메일 정보 전달
@@ -133,6 +138,64 @@ class Reservation_Payment_Store extends Component {
         name,
         email,
       } = JSON.parse(storedData);
+
+
+      // 중복되지 않는 랜덤 코드 생성 함수
+      const generateUniqueRandomCode = () => {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        const existingCodes = new Set(); // 중복 코드를 추적하기 위한 Set
+
+        do {
+          result = '';
+          for (let i = 0; i < 8; i++) { // 코드 길이는 8로 가정
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+          }
+        } while (existingCodes.has(result)); // 생성된 코드가 중복될 경우 다시 생성
+
+        existingCodes.add(result); // 생성된 코드를 Set에 추가하여 중복을 피함
+        return result;
+      };
+
+      // 오늘 날짜
+      let today = new Date();
+      let year = today.getFullYear();
+      let month = today.getMonth() + 1; // 월은 0부터 시작하므로 1을 더합니다.
+      let day = today.getDate();
+
+      // 오늘로부터 일주일 후의 날짜 계산
+      let oneWeekLater = new Date(today.getTime() + (7 * 24 * 60 * 60 * 1000));
+      let expiredYear = oneWeekLater.getFullYear();
+      let expiredMonth = oneWeekLater.getMonth() + 1; // 월은 0부터 시작하므로 1을 더합니다.
+      let expiredDay = oneWeekLater.getDate();
+
+      // 날짜를 원하는 형식으로 조합
+      let formattedDate = year + '-' + month + '-' + day;
+      let formattedExpiredDate = expiredYear + '-' + expiredMonth + '-' + expiredDay;
+
+
+      let inputData = {
+        ic_code : generateUniqueRandomCode(),
+        ic_name : itemName,
+        ic_category : '스토어',
+        ic_point : totalPrice,
+        ic_startDate : formattedDate,
+        ic_endDate : formattedExpiredDate,
+        ic_regDate : formattedDate
+      }
+
+      console.log("쿠폰등록 값 : ")
+      console.log(inputData)
+      ApiService.addCoupon(inputData)
+        .then((res)=>{
+          console.log("res page_3_addCoupon 결과 : ")
+          console.log(res)
+        })
+        .catch((error)=>{ 
+          console.error("결제 데이터 전송 실패:", error);
+        })
+      return false;
+
 
       ApiService.addStoreOrderDetail({
         totalQuantity,
