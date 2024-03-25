@@ -94,6 +94,7 @@ function MyPage_consult_answer_part() {
 
     }, [one_id]);
 
+
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
         const year = date.getFullYear();
