@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import ApiService from "../../ApiService";
 import { Typography, TextField, Button } from "@mui/material";
 import style from "../../styles/admin/page_5/Admin_Arte_Edit.css";
+import { useParams } from 'react-router-dom';
 
 const Admin_Arte_Edit = ({ history }) => {
+
+  const { arte_id } = useParams();
     const [arteInfo, setArteInfo] = useState({
       arte_id: "",
       arte_image: "",
@@ -14,19 +17,23 @@ const Admin_Arte_Edit = ({ history }) => {
       arte_visitor: "",
       arte_contents: "",
       arte_con: "",
-      arte_trailer: "",
+      arte_pd: "",
+      arte_cast: "",
+      arte_image2: "",
+      arte_image3: "",
+      arte_trailer1: "",
+      arte_trailer2: "",
       arte_category: "",
   });
 
   useEffect(() => {
-    selectLoad();
-  }, []);
+    selectLoad(arte_id);
+  }, [arte_id]);
 
-  const selectLoad = () => {
-    ApiService.selectArte(window.localStorage.getItem("arte_id"))
+  const selectLoad = (arte_id) => {
+    ApiService.selectArte(arte_id)
       .then((res) => {
         let list = res.data;
-
         setArteInfo({
           arte_id: list.dto.arte_id,
           arte_image: list.dto.arte_image,
@@ -37,7 +44,12 @@ const Admin_Arte_Edit = ({ history }) => {
           arte_visitor: list.dto.arte_visitor,
           arte_contents: list.dto.arte_contents,
           arte_con: list.dto.arte_con,
-          arte_trailer: list.dto.arte_trailer,
+          arte_pd: list.dto.arte_pd,
+          arte_cast: list.dto.arte_cast,
+          arte_image2: list.dto.arte_image2,
+          arte_image3: list.dto.arte_image3,
+          arte_trailer1: list.dto.arte_trailer1,
+          arte_trailer2: list.dto.arte_trailer2,
           arte_category: list.dto.arte_category,
         });
         console.log("selectByIdUpdate 성공 : ", res.data);
@@ -163,7 +175,7 @@ const Admin_Arte_Edit = ({ history }) => {
         variant="standard"
         label="Movie_Contents"
         type="text"
-        name="arte_contents:"
+        name="arte_contents"
         value={arteInfo.arte_contents}
         onChange={onChange}
       />
@@ -180,18 +192,79 @@ const Admin_Arte_Edit = ({ history }) => {
         onChange={onChange}
       />
       <br />
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Pd"
+        type="text"
+        name="arte_pd"
+        value={arteInfo.arte_pd}
+        onChange={onChange}
+      />
+      <br />
 
       <TextField
         required
         id="standard-required"
         variant="standard"
-        label="Movie_Trailer"
+        label="Movie_Cast"
         type="text"
-        name="arte_trailer"
-        value={arteInfo.arte_trailer}
+        name="arte_cast"
+        value={arteInfo.arte_cast}
         onChange={onChange}
       />
       <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Img2"
+        type="text"
+        name="arte_image2"
+        value={arteInfo.arte_image2}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Img3"
+        type="text"
+        name="arte_image3"
+        value={arteInfo.arte_image3}
+        onChange={onChange}
+      />
+      <br />
+
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Trailer1"
+        type="text"
+        name="arte_trailer1"
+        value={arteInfo.arte_trailer1}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Trailer2"
+        type="text"
+        name="arte_trailer2"
+        value={arteInfo.arte_trailer2}
+        onChange={onChange}
+      />
+      <br />
+
 
       <TextField
         required

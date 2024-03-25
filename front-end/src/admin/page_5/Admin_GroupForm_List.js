@@ -12,13 +12,21 @@ import style from "../../styles/admin/page_5/Admin_GroupForm_List.css";
 import ApiService from "../../ApiService";
 import { Create, Delete } from "@mui/icons-material";
 import { useParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie'; // useCookies import
 
 function Admin_GroupForm_List ({ history }) {
   const [lists, setLists] = useState([]);
+  const [cookies, setCookie] = useCookies(['c_email', 'idName']);
+  const [emailCheck, setEmailCheck] = useState('');
+  
   
   useEffect(() => {
-    groupList();
-  }, []);
+    groupList(cookies.c_email);
+    
+    if (cookies.c_email !== undefined) {
+        setEmailCheck(cookies.c_email);
+    }
+}, []);
 
   // 목록
   const groupList = () => {
@@ -32,9 +40,9 @@ function Admin_GroupForm_List ({ history }) {
   };
 
   // 등록
-  const groupAdd = () => {
+  const groupAdd = (group_id) => {
     window.localStorage.removeItem("group_id");
-    history.push("/admin/page_5/Admin_GroupForm_Answer");
+    history.push('/admin/page_5/Admin_GroupForm_Answer/' + group_id);
   };
 
 //   // 수정
@@ -98,6 +106,7 @@ function Admin_GroupForm_List ({ history }) {
             <TableCell>연락처1</TableCell>
             <TableCell>연락처2</TableCell>
             <TableCell>연락처3</TableCell>
+            <TableCell>답변완료상태</TableCell>
             
             <TableCell>답변</TableCell>
             <TableCell>삭제</TableCell>
@@ -121,6 +130,7 @@ function Admin_GroupForm_List ({ history }) {
               <TableCell>{list.custo_phone1}</TableCell>
               <TableCell>{list.custo_phone2}</TableCell>
               <TableCell>{list.custo_phone3}</TableCell>
+              <TableCell>{list.gr_show === 'y' ? '답변대기 중' : '답변 완료'}</TableCell>
               <TableCell
                 className="selectBtn"
                 onClick={() => groupAdd(list.group_id)}

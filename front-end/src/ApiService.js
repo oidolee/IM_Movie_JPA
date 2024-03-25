@@ -3,7 +3,6 @@ import axios from 'axios'; // npm install -f axios@^1.3.5
 const localHost = "http://localhost:8081"; // 로컬
 const proHost = "http://3.39.155.236:8081"; // 개벌
 
-
 let serverUrl;
 
 if (process.env.NODE_ENV === 'development') {
@@ -30,12 +29,18 @@ class ApiService {
     
     // --------------------------------------------Seat 끝--------------------------------------------
     // --------------------------------------------Reservation 시작--------------------------------------------
-    // 목록
+    // 지역-영화 목록
     listReservation() {
         console.log("listReservation 호출");
         return axios.get(serverUrl + "/page_1/ReservationList");
     }
 
+    // 예약 정보 추가
+    addReservation(inputData2) {
+        console.log("addReservation 호출", inputData2);
+        return axios.post(serverUrl + "/page_1/ReservationInsert", inputData2);
+    }
+    
 
     // --------------------------------------------Reservation 끝--------------------------------------------
     // --------------------------------------------Payment 시작--------------------------------------------
@@ -197,14 +202,13 @@ class ApiService {
     // 회원정보 조회
     searchCutomer(c_email){
         console.log("searchCutomer 호출")
-        console.log("c_email : " + c_email)
-        return axios.get(serverUrl + "/index/searchCustomer/" + c_email);
+        return axios.get(serverUrl + "/searchCustomer/" + c_email);
     }
 
     // 회원정보 수정
-    editCustomer(inputdata){
-        console.log("editCustomer 호출")
-        return axios.put(serverUrl + "/index/editCustomer" , inputdata);
+    updateCustomer(inputdata){
+        console.log("updateCustomer 호출")
+        return axios.put(serverUrl + "/updateCustomer" , inputdata);
     }
 
     // 관리자
@@ -262,13 +266,14 @@ class ApiService {
     }
     
     // 쿠폰 상세내역(관리자)
-    couponList(ic_num){
+    couponDetailList(ic_name){
         console.log('couponList() 호출!!')
-        return axios.get(serverUrl + '/page_6/coupon/selectCoupon/' + ic_num); 
+        return axios.get(serverUrl + '/page_6/coupon/selectCoupon/' + ic_name); 
     }
     // 쿠폰 등록
     addCoupon(inputData){
         console.log('addCoupon() 호출!!')
+        console.log(inputData)
         return axios.post(serverUrl + '/page_6/coupon/saveCoupon', inputData); 
     }
 
@@ -302,7 +307,7 @@ class ApiService {
     // 고객 쿠폰 삭제(숨김처리)
     deleteCusCoupon(ic_num){
         console.log('deleteCusCoupon() 호출!!')
-        return axios.put(serverUrl + '/page_6/coupon/deleteCusCoupon' + ic_num);
+        return axios.put(serverUrl + '/page_6/coupon/deleteCusCoupon/' + ic_num);
     }
 
     // 고객 쿠폰 갯수
@@ -334,7 +339,14 @@ class ApiService {
       // <page_2 관리자에서 멤버리스트 차트용 >
     customerList(){
         console.log('customerList() 호출!!')
-        return axios.get(serverUrl + '/index'); 
+        return axios.get(serverUrl + '/admin/listCustomer'); 
+    }
+
+    selectCoupon(ic_code){
+        console.log('selectCoupon() 호출!!')
+        let goUrl = serverUrl + '/page_2/selectCoupon/'+ic_code
+        console.log(goUrl);
+        return axios.get(goUrl); 
     }
 
     // page_5
@@ -473,7 +485,7 @@ class ApiService {
     // 아르떼1건조회
     selectArte(arte_id) {
         console.log("selectArte 호출", arte_id);
-        return axios.get(serverUrl + "/page_5/ArteDetailList" + "/" + arte_id);
+        return axios.get(serverUrl+ "/page_5/ArteDetailList/"+ arte_id);
     }
 
     // 영화 아르떼수정
@@ -483,11 +495,11 @@ class ApiService {
     }  
 
     // 영화 아르떼 삭제
-    deleteArte(arte_id) {
-        console.log("deleteNext 호출", arte_id);
+    deleteArte = (arte_id) => {
+        console.log("deleteArte 호출", arte_id);
         return axios.delete(serverUrl + "/page_5/ArteDelete" + "/" + arte_id);
     }
-
+    
     addReview(inputData){
         console.log('addReview() review등록시작');
         console.log(inputData);
@@ -496,8 +508,10 @@ class ApiService {
 
     reviewList(movie_id){
         console.log('reviewList() 시작');
-        console.log(movie_id);
-        return axios.get(serverUrl + '/page_5/review/reviewList'); 
+        let go_Url = serverUrl + '/page_5/review/reviewList/'+movie_id;
+        console.log("go_Url");
+        console.log(go_Url);
+        return axios.get(go_Url); 
     }
 
     //상영시간표 리스트
@@ -546,15 +560,60 @@ class ApiService {
     }
 
     //단체대관 리스트
+
+    //관리자목록
     groupList(){
         console.log('groupList() 호출!!')
         return axios.get(serverUrl + '/page_5/GroupList'); 
     }
 
+    //고객등록
     groupAdd(inputData) {
         console.log("groupAdd 호출", inputData);
         return axios.post(serverUrl + "/page_5/GroupInsert", inputData);
     }
+
+    // 고객 문의 답변 등록
+    addanswer(inputData) {
+        console.log('addanswer 호출', inputData);
+        return axios.post(serverUrl + "/page_5/saveAnswer", inputData);
+    }
+
+    // 고객 문의 답변 후 상태 업데이트
+    updateGroupData(group_id){
+        console.log('updateGroupData 호출');
+        return axios.put(serverUrl + "/page_5/completeGroupAnswer/" + group_id);
+    }
+
+    // 고객 문의 상세
+    GroupDetail(group_id){
+        console.log('GroupDetail() 호출!!')
+        return axios.get(serverUrl + '/page_5/select/' + group_id); 
+    }
+
+     // 고객 문의 답변 리스트
+     GroupAnswer(group_id){
+        console.log('GroupAnswer() 호출!!')
+        
+        return axios.get(serverUrl + '/page_5/groupAnswer/'+ group_id); 
+    }
+
+    
+    // 고객
+    // 1:1 문의 리스트
+    GroupCusList(c_email){
+        console.log('GroupCusList() 호출!!')
+        return axios.get(serverUrl + '/page_5/cusGroupList/' + c_email); 
+    }
+
+    // 고객
+    // 1:1 문의 리스트
+    fetchConsultCusList(c_email){
+        console.log('fetchConsultCusList() 호출!!')
+        return axios.get(serverUrl + '/page_6/cusConsultList/' + c_email); 
+    }
+
+
 
     // selectGroup(group_id) {
     //     console.log("selectGroup 호출", group_id);

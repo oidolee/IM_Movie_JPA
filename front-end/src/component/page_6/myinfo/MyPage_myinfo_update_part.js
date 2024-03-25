@@ -4,14 +4,17 @@ import { TextField, Button, Modal } from '@mui/material';
 import DaumPostcode from 'react-daum-postcode';
 import style from '../../../styles/page_4/signup.module.css';
 import { withCookies } from 'react-cookie';
+import { jwtDecode } from 'jwt-decode';
+
+import { withRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
 class MyPage_myinfo_update_part extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            cookies: props.cookies,
-            email: '',
+            no: '',
+            id: '',
             name: '',
             password: '',
             passwordConfirm: '',
@@ -29,28 +32,34 @@ class MyPage_myinfo_update_part extends Component {
         };
     }
     componentDidMount() {
-        const { cookies } = this.props;
-        const email = cookies.get('c_email');
-        
-        if (email !== undefined) {
-            // setState를 사용하여 이메일 상태를 업데이트합니다.
-            this.setState({ 
-                email: email,
-             });
-            this.reloadUserInfo(email);
+        const authToken = localStorage.getItem("auth_token");
+        if (authToken) {
+            const decodedToken = jwtDecode(authToken); // 수정 필요
+            const userEmail = decodedToken.iss;
+            this.setState({ email: userEmail });
+            this.reloadUserInfo(userEmail);
+            console.log(userEmail);
         }
     }
 
     reloadUserInfo = (email) => {
+        const formatDate = (timestamp) => {
+            const date = new Date(timestamp);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1, 두 자리 숫자로 만들기 위해 padStart 사용
+            const day = String(date.getDate()).padStart(2, '0'); // 두 자리 숫자로 만들기 위해 padStart 사용
+            return `${year}-${month}-${day}`;
+        };
         if (!email) return;
         ApiService.searchCutomer(email)
             .then(res => {
                 console.log("res.data.dto", res.data.dto);
                 this.setState(prevState => ({
-                    
+                    no: res.data.dto.no,
+                    id: res.data.dto.id,
                     name: res.data.dto.name,
                     hp: res.data.dto.hp,
-                    birthday: res.data.dto.birthday,
+                    birthday: formatDate(res.data.dto.birthday),
                     userInfo: {
                         ...prevState.userInfo,
                         isModalOpen: false,
@@ -177,7 +186,8 @@ class MyPage_myinfo_update_part extends Component {
 
         const address = `${this.state.addr1} ${this.state.addr2}`;
         const inputData = {
-            email: this.state.email,
+            no: this.state.no,
+            id: this.state.id,
             name: this.state.name,
             password: this.state.password,
             hp: this.state.hp,
@@ -190,7 +200,7 @@ class MyPage_myinfo_update_part extends Component {
         console.log(inputData);
 
         // 수정처리 
-        ApiService.editCustomer(inputData)
+        ApiService.updateCustomer(inputData)
             .then(res => {
                 this.setState({});
                 console.log('input 성공 : ', res.data);
@@ -204,7 +214,7 @@ class MyPage_myinfo_update_part extends Component {
                 }
             })
             .catch(err => {
-                console.log('editCustomer() 에러 ', err);
+                console.log('updateCustomer() 에러 ', err);
             });
     };
 
@@ -217,16 +227,25 @@ class MyPage_myinfo_update_part extends Component {
                     <TextField
                         required
                         variant="standard"
+                        label="번호"
+                        type="hidden"
+                        name="no"
+                        value={this.state.no}
+                        
+                    />
+                    <TextField
+                        required
+                        variant="standard"
                         label="이메일"
                         type="text"
                         name="email"
-                        value={this.state.email}
+                        value={this.state.id}
                         placeholder='이메일 입력'
                         onChange={this.onChange}
                         error={!this.state.emailValid}
                         helperText={!this.state.emailValid ? "올바른 이메일 주소를 입력하세요." : null} // 유효성 검사 실패 시 에러 메시지를 표시합니다.
                     />
-                    <Button variant="contained" color="primary" onClick={this.CheckEmail}> 인증요청 </Button>
+                    
                     <br /><br />
 
                     {/* 이름 입력 필드 */}
@@ -340,4 +359,4 @@ class MyPage_myinfo_update_part extends Component {
     }
 }
 
-export default withCookies(MyPage_myinfo_update_part);
+export default withRouter(MyPage_myinfo_update_part);

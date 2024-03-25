@@ -17,14 +17,14 @@ function Mypage_mid_nav() {
             </NavDropdown>
             <Nav.Link href="/MyPage_coupon">쿠폰함</Nav.Link>
             <Nav.Link href="/MyPage_Event">MY 이벤트</Nav.Link>
-            <NavDropdown title="MY 무비로그" href="/MyPage_wishMovie">
+            {/* <NavDropdown title="MY 무비로그" href="/MyPage_wishMovie">
               <Nav.Link href="/MyPage_wishMovie">보고싶어요</Nav.Link>
-            </NavDropdown>
+            </NavDropdown> */}
             <Nav.Link href="/consult">1:1 문의</Nav.Link>
             <NavDropdown title="MY 정보 관리" href="/MyPage_myinfo">
               <Nav.Link href="/MyPage_myinfo">회원정보관리</Nav.Link>
               <Nav.Link href="/MyPage_consult_list">1:1문의내역</Nav.Link>
-              <Nav.Link href="/MyPage_consult_list">대관예약문의</Nav.Link>
+              <Nav.Link href="/MyPage_consult_list2">대관예약문의</Nav.Link>
             </NavDropdown>
           </Nav>
         </Container>

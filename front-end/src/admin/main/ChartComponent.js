@@ -12,6 +12,7 @@ const ChartComponent = () => {
   const fetchCustomerData = () => {
     ApiService.customerList()
       .then((res) => {
+        console.log(res.data)
         setCustomerList(res.data);
         renderChart(res.data);
       })
@@ -21,9 +22,11 @@ const ChartComponent = () => {
   };
 
   const renderChart = (data) => {
+ 
     const labels = generateLabels(); // x축에 들어갈 날짜 데이터 생성
     const memberCountByDate = calculateMemberCountByDate(data, labels); // 각 날짜별 회원 수 계산
-
+    console.log("memberCountByDate")
+    console.log(memberCountByDate)
     const chartArea = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(chartArea, {
       type: 'bar',
@@ -76,14 +79,24 @@ const ChartComponent = () => {
 
   const calculateMemberCountByDate = (data, labels) => {
     const memberCountByDate = [];
-
+  
     labels.forEach((label) => {
-      const count = data.filter((item) => item.regdate.slice(0, 10) === label).length;
+      const count = data.filter((item) => {
+        if (item.regdate) {
+          // Unix timestamp를 JavaScript Date 객체로 변환
+          const date = new Date(item.regdate);
+          // Date 객체를 날짜 문자열로 변환하여 비교
+          return date.toISOString().slice(0, 10) === label;
+        }
+        return false;
+      }).length;
       memberCountByDate.push(count);
     });
-
+  
     return memberCountByDate;
   };
+  
+  
 
   return (
     <div className="chartCon">

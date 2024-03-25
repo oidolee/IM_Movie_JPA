@@ -78,7 +78,7 @@ public class CouponServiceImpl implements CouponService {
 	public List<CouponCusDTO> cusCouponList(String c_email) 
 			throws ServletException, IOException {
 		
-		return cpcusdao.selectCusCoupon();
+		return cpcusdao.selectCusCoupon(c_email);
 	}
 	
 	// 고객 쿠폰 갯수
@@ -90,10 +90,10 @@ public class CouponServiceImpl implements CouponService {
 
 	// 쿠폰 상세내역(관리자)
 	@Override
-	public Optional<CouponDTO> selectCoupon(int ic_num) 
+	public Optional<CouponDTO> selectCoupon(String ic_name) 
 			throws ServletException, IOException {
 		
-		Optional<CouponDTO> cpdto = cpdao.selectCouponDetail(ic_num);
+		Optional<CouponDTO> cpdto = cpdao.selectCouponDetail(ic_name);
 		
 		return cpdto;
 	}

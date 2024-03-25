@@ -76,7 +76,6 @@
 .event_Home .event_section2 > ul > li{
     position: relative;
     margin-bottom: 20px;
-    border: 2px solid #eee;
     border-radius: 10px;
 }
 .event_Home .event_section2 a:hover{

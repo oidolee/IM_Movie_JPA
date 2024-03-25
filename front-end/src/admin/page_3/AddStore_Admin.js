@@ -65,7 +65,7 @@ class AddStore_Admin extends Component {
                         name="itemType"
                         value={this.state.itemType}
                         onChange={this.onChange}
-                        style={{ width: '9%' }} 
+                        style={{ width: '200px' }} 
                     >
                         <MenuItem value="베스트">베스트</MenuItem>
                         <MenuItem value="관람권">관람권</MenuItem>

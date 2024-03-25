@@ -15,7 +15,7 @@ public interface ReviewService {
 		throws ServletException, IOException;
 
 	//목록
-	public List<ReviewDTO> reviewList();
+	public List<ReviewDTO> reviewList(String movie_id);
 	
 //	// 등록
 //	public void savePark(ParkingDTO dto)
