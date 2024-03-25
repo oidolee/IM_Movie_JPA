@@ -97,12 +97,12 @@ const Admin_RouterComponent = () => {
                     <Route path="/admin/page_5/Admin_Next_List" exact={true} component={Admin_Next_List} />
                     <Route path="/admin/page_5/Admin_Arte_List" exact={true} component={Admin_Arte_List} />
                     <Route path="/admin/page_5/Admin_Arte_Add" exact={true} component={Admin_Arte_Add} />
-                    <Route path="/admin/page_5/Admin_Arte_Edit/:arte_id" exact={true} component={Admin_Arte_Edit} />
+                    <Route path="/admin/page_5/Admin_Arte_Edit" exact={true} component={Admin_Arte_Edit} />
                     <Route path="/admin/page_5/Admin_Notice_List" exact={true} component={Admin_Notice_List} />
                     <Route path="/admin/page_5/Admin_Notice_Add" exact={true} component={Admin_Notice_Add} />
                     <Route path="/admin/page_5/Admin_Notice_Edit/:notice_num" exact={true} component={Admin_Notice_Edit} />
                     <Route path="/admin/page_5/Admin_GroupForm_List" exact={true} component={Admin_GroupForm_List} />
-                    {/* <Route path="/admin/page_5/Admin_GroupForm_Answer/:group_id" exact={true} component={Admin_GroupForm_Answer} /> */}
+                    <Route path="/admin/page_5/Admin_GroupForm_Answer" exact={true} component={Admin_GroupForm_Answer} />
                 </Route>
 
 
