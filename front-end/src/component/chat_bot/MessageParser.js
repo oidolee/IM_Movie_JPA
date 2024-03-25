@@ -26,14 +26,6 @@ class MessageParser {
       if (lowercase.includes("안녕") || lowercase.includes("반가워") || lowercase.includes("hi")) {
         this.actionProvider.helloWolrdHandler();
       }
-
-      if(lowercase.includes("투두")){
-        this.actionProvider.todosHandler();
-      }
-
-      if (lowercase.includes("javascript") || lowercase.includes("js")) {
-        this.actionProvider.handlechooseTickeck();
-      }
       
     }
   }
