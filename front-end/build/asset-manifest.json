@@ -62,15 +62,6 @@
     "static/media/IM_ticket2.png": "/static/media/IM_ticket2.83ecd6dccef900f28329.png",
     "static/media/group1.png": "/static/media/group1.1fb9f79ecc3be45172f5.png",
     "index.html": "/index.html",
-<<<<<<< HEAD
-    "main.d1344eaa.css.map": "/static/css/main.d1344eaa.css.map",
-    "main.6f552660.js.map": "/static/js/main.6f552660.js.map",
-    "453.9537af23.chunk.js.map": "/static/js/453.9537af23.chunk.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.d1344eaa.css",
-    "static/js/main.6f552660.js"
-=======
     "main.4d166ac6.css.map": "/static/css/main.4d166ac6.css.map",
     "main.705ca703.js.map": "/static/js/main.705ca703.js.map",
     "453.9537af23.chunk.js.map": "/static/js/453.9537af23.chunk.js.map"
@@ -78,6 +69,5 @@
   "entrypoints": [
     "static/css/main.4d166ac6.css",
     "static/js/main.705ca703.js"
->>>>>>> page_2
   ]
 }

@@ -240,11 +240,7 @@ EditStore_Admin = (e) => {
 
         <div className={`store_detail ${style.store_detail}`}>
           <div className={`main_img ${style.main_img}`}>
-<<<<<<< HEAD
-            <img src={"http://localhost:3000/"+this.state.itemImage} alt="[IM과 봄] 패키지" />
-=======
             <img src={serverUrl+this.state.itemImage} alt="[IM과 봄] 패키지" />
->>>>>>> page_2
 
             <div style={{ width: "450px" }}>
               <Swiper
