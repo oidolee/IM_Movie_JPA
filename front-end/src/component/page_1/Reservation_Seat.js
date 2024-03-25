@@ -242,39 +242,25 @@ const Reservation_Seat = () => {
 
       return ApiService.updateSeat(inputData);
     });
-
-    const inputData2 = {
-      mov_id: 1,
-      ip_num: 1,
-      st_id: 1,
-      c_email: "1",
-      res_count: totalQuantity,
-      res_ticket_price: totalPrice,
-      res_sysdate: new Date().toISOString(),
-      res_check: "y", 
-    };
-  
-    // 예약 정보 저장
-    try {
-      ApiService.addReservation(inputData2)
-        .then((response) => {
-          console.log("예약 정보 저장 성공", response.data);
-        })
-        .catch((error) => {
-          console.error("예약 정보 저장 실패", error);
-        });
-    } catch (error) {
-      console.error("예약 정보 저장 중 오류 발생", error);
-    }
     
     Promise.all(updateSeatPromises)
       .then((res) => {
         console.log("모든 좌석 업데이트 성공");
         // const firstSeat = selectedSeats[0].split('-')[2];
-        // history.push(`/page_1/Reservation_Payment/${firstSeat}`); // url로 데이터 보내기 > customer 번호 보낼예정
+        // history.push(`/page_1/Reservation_Payment/${firstSeat}`);
         const selectedSeat = selectedSeats.map((seat) => seat.split("-")[2]);
         localStorage.setItem("selectedSeat", JSON.stringify(selectedSeat));
-
+        localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
+        localStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
+        localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+        localStorage.setItem("selectedSeatInfo", JSON.stringify({
+          adultQuantity: adultQuantity,
+          teenQuantity: teenQuantity,
+          childQuantity: childQuantity,
+          disabledQuantity: disabledQuantity,
+          totalQuantity: totalQuantity,
+          selectedSeats: selectedSeats
+        }));
         history.push("/page_1/Reservation_Payment");
       })
       .catch((err) => {

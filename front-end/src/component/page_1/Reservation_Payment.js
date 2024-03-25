@@ -11,13 +11,48 @@ import { useLocation } from "react-router-dom";
 
 const Reservation_Payment = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [totalQuantity, setTotalQuantity] = useState(0);
+  const [totalQuantity, setTotalQuantity] = useState([]);
+  const [totalPrice, setTotalPrice] = useState([]);
   const [isPointClicked, setIsPointClicked] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  
+  const [selectedMovie, selectedMovieInfo] = useState(null);
+  const [adultQuantity, setAdultQuantity] = useState(0);
+  const [teenQuantity, setTeenQuantity] = useState(0);
+  const [childQuantity, setChildQuantity] = useState(0);
+  const [disabledQuantity, setDisabledQuantity] = useState(0);
+
   const selectedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
   console.log("선택된 좌석 번호 : ", selectedSeat);
-  
+
+  useEffect(() => {
+    const selectedMovieInfo = JSON.parse(
+      localStorage.getItem("selectedMovieInfo")
+    );
+    const storedSelectedSeats = JSON.parse(
+      localStorage.getItem("selectedSeats")
+    );
+    const storedTotalPrice = JSON.parse(localStorage.getItem("totalPrice"));
+    const seatInfo = JSON.parse(localStorage.getItem("selectedSeatInfo"));
+    console.log(seatInfo.totalQuantity)
+
+    if (seatInfo) {
+      setAdultQuantity(seatInfo.adultQuantity);
+      setTeenQuantity(seatInfo.teenQuantity);
+      setChildQuantity(seatInfo.childQuantity);
+      setDisabledQuantity(seatInfo.disabledQuantity);
+      setTotalQuantity(seatInfo.totalQuantity);
+      setSelectedSeats(storedSelectedSeats); 
+      setTotalPrice(storedTotalPrice); 
+    }
+
+    console.log("selectedMovieInfo : ", selectedMovieInfo);
+    console.log("setSelectedSeats : ", storedSelectedSeats);
+    console.log("setTotalPrice : ", storedTotalPrice);
+    console.log("totalQuantity : ", seatInfo.totalQuantity);
+    localStorage.setItem("totalQuantity", JSON.stringify(seatInfo.totalQuantity));
+    
+  }, []);
+
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -31,7 +66,6 @@ const Reservation_Payment = () => {
   };
 
   const sysdate = moment().format("YYYY-MM-DD");
-
 
   return (
     <div className={`Res_Payment ${style.Res_Payment}`}>
@@ -47,18 +81,24 @@ const Reservation_Payment = () => {
                     상영시간
                   </span>
                 </strong>
-                <div className="step_content2">
-                  <dl>
-                    <dt>선택한 영화 제목</dt>
-                    <dd></dd>
-                    <dt>선택한 상영관</dt>
-                    <dd></dd>
-                    <dt>선택한 상영 날짜</dt>
-                    <dd></dd>
-                    <dt>선택한 상영 시간</dt>
-                    <dd></dd>
-                  </dl>
-                </div>
+                {selectedMovie && (
+                  <div className="step_content2">
+                    <dl>
+                      <dt>선택한 영화 제목</dt>
+                      <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                        {selectedMovie.movie_title}
+                      </dd>
+                      <dt>선택한 상영관</dt>
+                      <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                        {selectedMovie.theater_id}
+                      </dd>
+                      <dt>선택한 상영 날짜/시간</dt>
+                      <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                        {selectedMovie.movie_time}
+                      </dd>
+                    </dl>
+                  </div>
+                )}
               </a>
             </li>
             <li className="step" id="step2">
@@ -73,9 +113,21 @@ const Reservation_Payment = () => {
                 <div className="step_content2">
                   <dl>
                     <dt>인원</dt>
-                    <dd></dd>
+                    <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                      성인: {adultQuantity}명, 청소년: {teenQuantity}명<br />
+                      경로: {childQuantity}명, 장애인: {disabledQuantity}명
+                      <br />
+                      총: {totalQuantity}명
+                    </dd>
                     <dt>좌석</dt>
-                    <dd></dd>
+                    <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                      {selectedSeats.map((seat, index) => (
+                        <span key={index}>
+                          {seat}
+                          {index % 2 === 1 ? <br /> : ", "}
+                        </span>
+                      ))}
+                    </dd>
                   </dl>
                 </div>
               </a>
@@ -91,12 +143,10 @@ const Reservation_Payment = () => {
                 </strong>
                 <div className="step_content">
                   <dl>
-                    <dt>티켓금액</dt>
-                    <dd></dd>
-                    <dt>할인금액</dt>
-                    <dd></dd>
-                    <dt>총합계</dt>
-                    <dd></dd>
+                    <dt>결제금액</dt>
+                    <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                      {totalPrice}
+                    </dd>
                   </dl>
                 </div>
               </a>
@@ -169,10 +219,7 @@ const Reservation_Payment = () => {
                         <Checkout handleCloseModal={handleCloseModal} />
                       </div>
                     </Modal>
-                    <button
-                      className="point_seat"
-                      onClick={handlePointClick}
-                    >
+                    <button className="point_seat" onClick={handlePointClick}>
                       포인트
                     </button>
                   </li>
@@ -213,12 +260,6 @@ const Reservation_Payment = () => {
             </div>
             <li>
               <div className="menu4">
-                {/* <ul className="menu4_top">
-                  <li>예약정보</li>
-                  <li>카드</li>
-                  <li>금액</li>
-                  <li>등등</li>
-                </ul> */}
                 <ul className="menu4_bottom">
                   <li className="paymentBtn">
                     <span>상품금액</span>
