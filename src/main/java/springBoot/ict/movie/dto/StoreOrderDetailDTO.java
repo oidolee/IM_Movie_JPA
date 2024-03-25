@@ -28,6 +28,8 @@ public class StoreOrderDetailDTO {
     }
 //    @JsonProperty("orderCode")
 //    private String order_code;
+    @JsonProperty("itemCode")
+    private int item_code;   
     @JsonProperty("itemName")
     private String item_name;
     @JsonProperty("totalPrice")

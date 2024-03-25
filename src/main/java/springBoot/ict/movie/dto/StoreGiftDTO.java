@@ -36,7 +36,7 @@ public class StoreGiftDTO {
     private String item_name;      
     @JsonProperty("recipientNumber")
     private String gift_recipient;
-    @JsonProperty("name")
+    @JsonProperty("email")
     private String gift_name;
     @JsonProperty("message")
     private String gift_content;

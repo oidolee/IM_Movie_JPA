@@ -21,7 +21,7 @@ class Page3 extends Component {
     super(props);
 
     this.state = {
-      lists: [], // 5. 리스트 데이터
+      lists: [], 
       message: null,
     };
   }
@@ -80,6 +80,7 @@ class Page3 extends Component {
 
           <div className={`page3_store2 ${style.page3_store2}`}>
             <h3 className={`store_title ${style.store_title}`} id="store1">
+              베스트
             </h3>
 
             <div className={`page3_flex ${style.page3_flex}`}>
@@ -92,7 +93,6 @@ class Page3 extends Component {
                       className={`store_item ${style.store_item}`}
                       key={item.itemCode}
                     >
-                      {/* <a href={`/page_3/EditStore_Admin?${item.itemCode}`} className={`store_item ${style.store_item}`} key={index}> */}
                       <div className={`store_img ${style.store_img}`}>
                         <img
                           src={item.itemImage}
@@ -134,6 +134,7 @@ class Page3 extends Component {
             <h3 className={`store_title ${style.store_title}`} id="store2">
               관람권
             </h3>
+
           
             <div className={`page3_flex ${style.page3_flex}`}>
               {this.state.lists.map(
@@ -145,7 +146,6 @@ class Page3 extends Component {
                       className={`store_item ${style.store_item}`}
                       key={item.itemCode}
                     >
-                      {/* <a href={`/page_3/EditStore_Admin?${item.itemCode}`} className={`store_item ${style.store_item}`} key={index}> */}
                       <div className={`store_img ${style.store_img}`}>
                         <img
                           src={item.itemImage}
@@ -202,7 +202,6 @@ class Page3 extends Component {
                       className={`store_item ${style.store_item}`}
                       key={item.itemCode}
                     >
-                      {/* <a href={`/page_3/EditStore_Admin?${item.itemCode}`} className={`store_item ${style.store_item}`} key={index}> */}
                       <div className={`store_img ${style.store_img}`}>
                         <img
                           src={item.itemImage}

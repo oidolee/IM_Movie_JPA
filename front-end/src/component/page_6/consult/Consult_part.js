@@ -4,10 +4,12 @@ import style from '../../../styles/page_6/consult_module.css'
 import ApiService from '../../../ApiService';
 import { useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 
 function Consult_part() {
     const [showDetail, setShowDetail] = useState(false);
+    
     const showBox = () => {
         setShowDetail(!showDetail)
     }
@@ -16,23 +18,30 @@ function Consult_part() {
     const [emailCheck, setEmailCheck] = useState('');
 
     const cus_grade = 'VIP';
-    const [cookies, setCookie] = useCookies(['idName','c_email']);
+    
     const [cus_name, setCus_Name] = useState('');
 
     useEffect(() => {
-        if (cookies.c_email !== undefined) {
-            setEmailCheck(cookies.c_email);
+        const authToken = localStorage.getItem("auth_token");
+        if (authToken) {
+            const decodedToken = jwtDecode(authToken); // 수정 필요
+            const userEmail = decodedToken.iss;
+            setEmailCheck(userEmail);
+            
         }
+        ApiService.searchCutomer(emailCheck)
+        .then(res =>{
+            console.log('res.data', res.data);
+            //setCus_Name(res.data.dto.name)
+        })
+        
+    }, []);
 
-        if(cookies.idName !== undefined){
-            setCus_Name(cookies.idName);
-        }
-    }, [cookies]);
-
+    
     
     const [consultData, setConsultData] = useState({
         c_email: emailCheck,
-        cus_name: cus_name,
+        cus_name: '',
         ib_type: '',
         ib_type_detail: '',
         ib_title: '',

@@ -4,6 +4,7 @@ import style from '../../../styles/page_6/MyPage_consult_list_part_module.css';
 import ApiService from '../../../ApiService';
 import {Link} from 'react-router-dom';
 import { useCookies } from 'react-cookie'; // useCookies import
+import { jwtDecode } from 'jwt-decode';
 function MyPage_consult_list_part() {
     const [showDetailIndex, setShowDetailIndex] = useState(-1); // 상세 정보를 표시할 항목의 인덱스를 저장할 상태 추가
     const [consult, setConsult] = useState([]);
@@ -11,11 +12,13 @@ function MyPage_consult_list_part() {
     const [emailCheck, setEmailCheck] = useState('');
 
     useEffect(() => {
-        reloadConsultList(cookies.c_email);
-        
-        if (cookies.c_email !== undefined) {
-            setEmailCheck(cookies.c_email);
+        const authToken = localStorage.getItem("auth_token");
+        if (authToken) {
+            const decodedToken = jwtDecode(authToken); // 수정 필요
+            const userEmail = decodedToken.iss;
+            setEmailCheck(userEmail);
         }
+        reloadConsultList(emailCheck);
     }, []);
 
     const formatDate = (timestamp) => {
@@ -28,17 +31,18 @@ function MyPage_consult_list_part() {
 
     const reloadConsultList = (emailCheck) => {
         ApiService.fetchConsultCusList(emailCheck)
-        .then(res => {
-            console.log("test", res.data);
-            const consultData = res.data.map(item => ({
-                ...item,
-                ib_date: formatDate(item.ib_date) // 각 consultItem의 ib_date를 포맷 변경
-            }));
-            setConsult(consultData);
-        })
-        .catch(err => {
-            console.log('reloadConsultList() Error!!', err);
-        });
+            .then(res => {
+                console.log("test", res.data);
+                const consultData = res.data.map(item => ({
+                    ...item,
+                    ib_date: formatDate(item.ib_date) // 각 consultItem의 ib_date를 포맷 변경
+                }));
+                setConsult(consultData);
+                console.log('consultData', consultData);
+            })
+            .catch(err => {
+                console.log('fetchConsultCusList() Error!!', err);
+            });
     }
 
     

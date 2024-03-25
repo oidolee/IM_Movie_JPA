@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import style from '../../../styles/page_6/Event_coupon_moudle.css';
 import ScrollReveal from 'scrollreveal';
 import ApiService from '../../../ApiService';
-
+import { TextField, Button} from '@mui/material';
 const Event_coupon = () => {
     const [couponList, setCouponList] = useState([]);
     useEffect(() => {
@@ -18,6 +18,14 @@ const Event_coupon = () => {
         reloadCouponList();
     }, []); // 한 번만 실행됨
 
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1, 두 자리 숫자로 만들기 위해 padStart 사용
+        const day = String(date.getDate()).padStart(2, '0'); // 두 자리 숫자로 만들기 위해 padStart 사용
+        return `${year}-${month}-${day}`;
+    };
+
     const reloadCouponList = () => {
         ApiService.fetchCoupon()
             .then(res => {
@@ -28,6 +36,50 @@ const Event_coupon = () => {
                 console.log('fetchCoupon() ERROR!!', err);
             })
     }
+
+    //쿠폰 조회 api -> checkCouponExistence 확인
+    const checkEventCoupon = () => {
+       // TextField 요소 찾기
+        const textField = document.getElementById('ic_code');
+
+        // TextField의 값 가져오기
+        const ic_code = textField.value.trim();
+
+        // 값이 비어 있는지 확인
+        if (!ic_code) {
+            // 값이 비어 있음을 알림
+            alert('쿠폰을 입력해주세요.');
+            return;
+        }
+        ApiService.fetchCoupon(ic_code)
+            .then(res => {
+                setCouponList(res.data);
+                console.log(couponList)
+                checkCouponExistence(couponList, ic_code);
+            })
+            .catch(err => {
+                console.log('fetchCoupon() ERROR!!', err);
+            })
+    }
+
+    //쿠폰 조회 체크
+    const checkCouponExistence = (couponList, targetIcCode) => {
+        if (!couponList || couponList.length === 0) {
+            console.log('쿠폰 목록이 비어 있습니다.');
+            return;
+        }
+    
+        const couponExists = couponList.some(coupon => coupon.ic_code === targetIcCode);
+    
+        if (couponExists) {
+            alert(`${targetIcCode} 쿠폰이 존재합니다.`)
+        } else {
+            alert(`${targetIcCode} 쿠폰이 존재하지 않습니다.`)
+        }
+    };
+    
+    // 예시로 'W29unZmm' 쿠폰이 존재하는지 확인
+   
     return (
         <div className={`event_Home ${style.event_Home}`}>
             <div className={`scrollUp event_Home_top ${style.event_Home_top}`}>
@@ -39,8 +91,19 @@ const Event_coupon = () => {
                 </ul>
             </div>
             <div className={`scrollUp event_section event_section1 ${style.event_section1}`}>
-                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignContent:'center',marginBottom: "20px" }}>
                     <h5>쿠폰</h5>
+                    <div>
+                        <TextField
+                            required
+                            variant="standard"
+                            label="쿠폰"
+                            type="text"
+                            id="ic_code"
+                            placeholder='쿠폰입력'
+                        />
+                        <Button variant="contained" color="primary" onClick={()=>checkEventCoupon()}> 쿠폰조회 </Button>
+                    </div>
                 </div>
                 {couponList.map((coupon, index) => (
                     index % 3 === 0 && (

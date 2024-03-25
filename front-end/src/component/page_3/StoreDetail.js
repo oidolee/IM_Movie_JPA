@@ -258,22 +258,13 @@ EditStore_Admin = (e) => {
 
                 <div style={{ display: "flex" }}>
                 {this.state.lists.map((item, index) => (
-                    <SwiperSlide  item={item} key={index}>
-                        {item.itemCode === 6 ? (
-                            <img src={item.itemImage} alt={`Item ${item.itemCode}`} style={{ width: "150px" }} onClick={() => this.handleItemClick(item.itemCode)}/>
-                        ) : (
-                            <img src={`${serverUrl}${item.itemImage}`} alt={`Item ${item.itemCode}`} style={{ width: "150px" }} onClick={() => this.handleItemClick(item.itemCode)}/>
-                        )}
-                    </SwiperSlide>
+                  <SwiperSlide item={item} key={index}>
+                    <img src={`${serverUrl}${item.itemImage}`} alt={`Item ${item.itemCode}`} style={{ width: "150px" }} onClick={() => this.handleItemClick(item.itemCode)}/>
+                </SwiperSlide>
                 ))}
 
                 </div>
 
-                {/* {slides.map((slideContent, index) => (
-                      <SwiperSlide key={slideContent} virtualIndex={index}>
-                          {slideContent}
-                      </SwiperSlide>
-                      ))} */}
               </Swiper>
             </div>
           </div>

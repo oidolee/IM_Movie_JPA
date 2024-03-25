@@ -6,10 +6,11 @@ import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { Typography, Select, MenuItem, TextField, Button } from "@mui/material";
 import { useHistory } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 const Event_coupon_detail = () => {
     const { ic_num } = useParams();
     const [couponList, setCouponList] = useState([]);
-    const [cookies, setCookie] = useCookies(['idName', 'c_email']);
+    const [email, setEmail] = useState('');
     const [emailCheck, setEmailCheck] = useState('');
     const history = useHistory();
 
@@ -25,13 +26,18 @@ const Event_coupon_detail = () => {
             reset: true
         });
         reloadCouponList();
-        if (cookies.c_email !== undefined) {
-            setEmailCheck(cookies.c_email);
+        const authToken = localStorage.getItem("auth_token");
+
+        // 토큰이 존재하는지 확인 후 이메일 추출
+        if (authToken) {
+            const decodedToken = jwtDecode(authToken); // 수정 필요
+            const userEmail = decodedToken.iss;
+            setEmail(userEmail);
         }
     }, []); // 한 번만 실행됨
 
     const [couponCus, setCouponCus] = useState({
-        c_email: emailCheck,
+        c_email: email,
         ic_code: '',
         ic_name: '',
         ic_category: '',
@@ -49,14 +55,23 @@ const Event_coupon_detail = () => {
 
     const saveCoupon = (e) => {
         e.preventDefault();
+        const couponCus = {
+            c_email: email,
+            ic_code: couponList.ic_code,
+            ic_name: couponList.ic_name,
+            ic_category: couponList.ic_category,
+            ic_point: couponList.ic_point,
+            ic_startDate: couponList.ic_startDate,
+            ic_endDate: couponList.ic_endDate
+        };
 
         ApiService.addCusCoupon(couponCus)
             .then((res) => {
-                console.log("addCoupon 성공 : ", res.data);
+                console.log("addCusCoupon 성공 : ", res.data);
                 history.push("/MyPage_coupon");
             })
             .catch((err) => {
-                console.log("addCoupon 실패 : ", err);
+                console.log("addCusCoupon 실패 : ", err);
             });
     };
 
@@ -69,7 +84,7 @@ const Event_coupon_detail = () => {
     };
 
     const reloadCouponList = () => {
-        ApiService.couponList(ic_num)
+        ApiService.couponDetailList(ic_num)
             .then(res => {
                 console.log('res.data', res.data)
                 const couponData = res.data.cpdto;

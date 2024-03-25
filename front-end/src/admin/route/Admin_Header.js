@@ -55,6 +55,7 @@ function Admin_Header() {
                                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                         <nav class="sb_sidenav_menu-nested nav">
 
+                                            <Link to="/admin/page_1/Admin_Discount_List">할인 go</Link>
                                             <a class="nav-link" href="/admin/page_1/Admin_Discount_List">할인</a>
                                             <a class="nav-link" href="/admin/page_3/ListStore_Admin">스토어 관리</a>
                                             <a class="nav-link" href="/admin/page_5/Admin_Update_List">영화 홈</a>

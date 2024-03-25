@@ -196,14 +196,13 @@ class ApiService {
     // 회원정보 조회
     searchCutomer(c_email){
         console.log("searchCutomer 호출")
-        console.log("c_email : " + c_email)
-        return axios.get(serverUrl + "/index/searchCustomer/" + c_email);
+        return axios.get(serverUrl + "/searchCustomer/" + c_email);
     }
 
     // 회원정보 수정
-    editCustomer(inputdata){
-        console.log("editCustomer 호출")
-        return axios.put(serverUrl + "/index/editCustomer" , inputdata);
+    updateCustomer(inputdata){
+        console.log("updateCustomer 호출")
+        return axios.put(serverUrl + "/updateCustomer" , inputdata);
     }
 
     // 관리자
@@ -261,13 +260,14 @@ class ApiService {
     }
     
     // 쿠폰 상세내역(관리자)
-    couponList(ic_num){
+    couponDetailList(ic_num){
         console.log('couponList() 호출!!')
         return axios.get(serverUrl + '/page_6/coupon/selectCoupon/' + ic_num); 
     }
     // 쿠폰 등록
     addCoupon(inputData){
         console.log('addCoupon() 호출!!')
+        console.log(inputData)
         return axios.post(serverUrl + '/page_6/coupon/saveCoupon', inputData); 
     }
 
@@ -334,6 +334,13 @@ class ApiService {
     customerList(){
         console.log('customerList() 호출!!')
         return axios.get(serverUrl + '/admin/listCustomer'); 
+    }
+
+    selectCoupon(ic_code){
+        console.log('selectCoupon() 호출!!')
+        let goUrl = serverUrl + '/page_2/selectCoupon/'+ic_code
+        console.log(goUrl);
+        return axios.get(goUrl); 
     }
 
     // page_5
