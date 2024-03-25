@@ -56,7 +56,7 @@ public class ReviewController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
-			
+			System.out.println("");
 			service.addReview(dto);
 			resultCode = "200";
 			resultMsg = "addReview Success";
@@ -77,14 +77,15 @@ public class ReviewController {
 	
 	
 	// 목록
-	@GetMapping("/reviewList") 
-	public List<ReviewDTO> reviewList(Model model) 
+	@GetMapping("/reviewList/{movie_id}") 
+	public List<ReviewDTO> reviewList(@PathVariable("movie_id") String movie_id) 
 		throws ServletException, IOException {
 		
 		logger.info("url - DiscountList");
+		System.out.println("movie_id start : " + movie_id);
 		
-		List<ReviewDTO> list = service.reviewList();
-		model.addAttribute("list", list);
+		List<ReviewDTO> list = service.reviewList(movie_id);
+		
 		System.out.println("reviewList : " + list);
 		return list;
 	}

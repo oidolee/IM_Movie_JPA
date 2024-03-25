@@ -21,22 +21,16 @@ public class ReviewServiceImpl implements ReviewService{
 	public void addReview(ReviewDTO dto) 
 			throws ServletException, IOException {
 		System.out.println("ReviewServiceImpl - addReview");
-		
 		System.out.println(dto);		
-		
 		dao.save(dto);
 	}
 
-
-
-	public List<ReviewDTO> reviewList() {
-	System.out.println("ReviewServiceImpl - reviewList");
-		
-		System.out.println(dao.findAll());
-		
-		return dao.findAll();
+	public List<ReviewDTO> reviewList(String movie_id) {
+	    System.out.println("ReviewServiceImpl - reviewList");
+	    // 수정된 부분: movie_id에 해당하는 리뷰만을 조회하도록 쿼리를 수정
+	    List<ReviewDTO> reviews = dao.findReviewsByMovieId(movie_id);
+	    System.out.println(reviews);
+	    return reviews;
 	}
-
-
 
 }
