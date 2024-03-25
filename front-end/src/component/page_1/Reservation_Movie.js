@@ -133,16 +133,20 @@ const Reservation_Movie = ({ history }) => {
 
         link.onclick = (event) => {
           event.preventDefault();
-          console.log(`${movies[0].movie_title}를 클릭했습니다. ID: ${movieId}`); // 클릭한 영화 제목과 ID 출력
-        
+          console.log(
+            `${movies[0].movie_title}를 클릭했습니다. ID: ${movieId}`
+          ); // 클릭한 영화 제목과 ID 출력
+
           setSelectedMovie(movies); // 클릭한 영화 리스트 전달
-        
+
           menu4Sub.innerHTML = "";
           // 선택한 영화 정보를 출력
           movies.forEach((movieInfo) => {
             const { ip_num, movie_title, theater_id, start_time } = movieInfo;
-            const formattedStartTime = moment(start_time, "HH:mm:ss").format("HH:mm");
-        
+            const formattedStartTime = moment(start_time, "HH:mm:ss").format(
+              "HH:mm"
+            );
+
             const listItem = document.createElement("li");
             listItem.style.marginBottom = "20px";
             listItem.innerHTML = `
@@ -217,6 +221,12 @@ const Reservation_Movie = ({ history }) => {
 
   const handleConfirmation = () => {
     setPopupOpen(false);
+
+     // 선택한 영화 정보와 좌석 정보를 로컬 스토리지에 저장
+  localStorage.setItem("selectedMovie", JSON.stringify(selectedMovie));
+  localStorage.setItem("selectedSeat", JSON.stringify(selectedSeat));
+
+  
     history.push("/page_1/Reservation_Seat");
   };
 
@@ -409,25 +419,34 @@ const Reservation_Movie = ({ history }) => {
           </ul>
         </div>
         {popupOpen && selectedMovie && (
-  <div className="popup">
-    <div className="popup_content">
-      <strong>
-        {selectedMovie[0].movie_title}/{" "}
-        {moment(selectedMovie[0].start_time, "HH:mm:ss").format("HH:mm")} ({selectedMovie[0].theater_id})
-      </strong>
-      {remainingSeatsCount !== null && (
-        <p>잔여좌석 <strong>{remainingSeatsCount}</strong>/112</p>
-      )}
-      <img className="Res_screen" src={Res_screen} />
-      <p>
-        본 영화는 만{" "}
-        {getMovieImage(selectedMovie[0].movie_id)} 세 이상 관람가 영화입니다.
-      </p>
-      <button name="n" onClick={handleCancellation}>취소</button>
-      <button name="y" onClick={handleConfirmation}>인원/좌석 선택</button>
-    </div>
-  </div>
-)}
+          <div className="popup">
+            <div className="popup_content">
+              <strong>
+                {selectedMovie[0].movie_title}/{" "}
+                {moment(selectedMovie[0].start_time, "HH:mm:ss").format(
+                  "HH:mm"
+                )}{" "}
+                ({selectedMovie[0].theater_id})
+              </strong>
+              {remainingSeatsCount !== null && (
+                <p>
+                  잔여좌석 <strong>{remainingSeatsCount}</strong>/112
+                </p>
+              )}
+              <img className="Res_screen" src={Res_screen} />
+              <p>
+                본 영화는 만 {getMovieImage(selectedMovie[0].movie_id)} 세 이상
+                관람가 영화입니다.
+              </p>
+              <button name="n" onClick={handleCancellation}>
+                취소
+              </button>
+              <button name="y" onClick={handleConfirmation}>
+                인원/좌석 선택
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

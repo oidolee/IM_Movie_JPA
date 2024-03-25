@@ -57,6 +57,18 @@ const Reservation_Seat = () => {
   const [disabledQuantity, setDisabledQuantity] = useState(0);
   const [lastActivityTime, setLastActivityTime] = useState(Date.now());
 
+  // 로컬 상태로 선택한 영화와 좌석 정보를 저장할 상태를 정의합니다.
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
+  // 페이지가 로드될 때 로컬 스토리지에서 선택한 영화와 좌석 정보를 가져와서 상태에 설정합니다.
+  useEffect(() => {
+    const storedMovie = localStorage.getItem("selectedMovie");
+
+    if (storedMovie) {
+      setSelectedMovie(JSON.parse(storedMovie));
+    }
+  }, []);
+
   // 로그인 상태 확인
 
   // 사용자 움직임 감지
@@ -349,7 +361,7 @@ const Reservation_Seat = () => {
                 <ul className="Res_movie_content">
                   <li>
                     <img src={Res_img15} className="age_img" alt="age" />
-                    <strong className="movie_name">파묘</strong> | 24.03.10(일)
+                    <strong className="movie_name">{selectedMovie.title}</strong> | 24.03.10(일)
                     | 20:30 ~ 22:54 | 영등포 1관
                   </li>
                   <li>
