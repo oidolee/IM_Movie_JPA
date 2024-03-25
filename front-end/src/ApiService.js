@@ -191,11 +191,18 @@ class ApiService {
         return axios.post(serverUrl + "/searchId", inputData);
     }
 
-    // 비밀번호 재설정
+    // 비밀번호 조회
     findPWD(inputData) {
         console.log("findPWD 호출")
         console.log(inputData)
         return axios.post(serverUrl + "/searchPWD", inputData);
+    }
+
+    // 비밀번호 변경
+    changePWD(password) {
+        console.log("changePWD 호출")
+        console.log(" password : " + password)
+        return axios.put(serverUrl + "/changePWD", password)
     }
 
     // page_6
@@ -266,9 +273,9 @@ class ApiService {
     }
     
     // 쿠폰 상세내역(관리자)
-    couponDetailList(ic_num){
+    couponDetailList(ic_name){
         console.log('couponList() 호출!!')
-        return axios.get(serverUrl + '/page_6/coupon/selectCoupon/' + ic_num); 
+        return axios.get(serverUrl + '/page_6/coupon/selectCoupon/' + ic_name); 
     }
     // 쿠폰 등록
     addCoupon(inputData){
@@ -307,7 +314,7 @@ class ApiService {
     // 고객 쿠폰 삭제(숨김처리)
     deleteCusCoupon(ic_num){
         console.log('deleteCusCoupon() 호출!!')
-        return axios.put(serverUrl + '/page_6/coupon/deleteCusCoupon' + ic_num);
+        return axios.put(serverUrl + '/page_6/coupon/deleteCusCoupon/' + ic_num);
     }
 
     // 고객 쿠폰 갯수

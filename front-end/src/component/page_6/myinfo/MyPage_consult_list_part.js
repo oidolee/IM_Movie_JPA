@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import React from "react";
 import style from '../../../styles/page_6/MyPage_consult_list_part_module.css';
 import ApiService from '../../../ApiService';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie'; // useCookies import
 import { jwtDecode } from 'jwt-decode';
 function MyPage_consult_list_part() {
@@ -17,8 +17,9 @@ function MyPage_consult_list_part() {
             const decodedToken = jwtDecode(authToken); // 수정 필요
             const userEmail = decodedToken.iss;
             setEmailCheck(userEmail);
+            reloadConsultList(userEmail);
         }
-        reloadConsultList(emailCheck);
+        
     }, []);
 
     const formatDate = (timestamp) => {
@@ -45,7 +46,7 @@ function MyPage_consult_list_part() {
             });
     }
 
-    
+
 
     return (
         <div>
@@ -68,24 +69,24 @@ function MyPage_consult_list_part() {
                 </thead>
                 <tbody>
                     {consult.map((consultItem, index) => (
-                            <tr key={index}> 
-                                <input type="hidden" id='one_id_pk' value={consultItem.one_id}></input>
-                                <input type="hidden" value={consultItem.c_email}></input>
-                                <td>{consultItem.one_id}</td>
-                                <td>[{consultItem.ib_type}]</td>
-                                <td>
-                                    <Link to={`/MyPage_consult_answer/${consultItem.one_id}`} style={{ color: "black" }}>
-                                        {consultItem.ib_title}
-                                    </Link>
-                                </td>
-                                <td>{consultItem.ib_date}</td>
-                                <td>
-                                    <div className={`consult_status ${style.consult_status}`}>
-                                        {consultItem.ib_show === 'y' ? '답변대기 중' : '답변 완료'}
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
+                        <tr key={index}>
+                            <input type="hidden" id='one_id_pk' value={consultItem.one_id}></input>
+                            <input type="hidden" value={consultItem.c_email}></input>
+                            <td>{consultItem.one_id}</td>
+                            <td>[{consultItem.ib_type}]</td>
+                            <td>
+                                <Link to={`/MyPage_consult_answer/${consultItem.one_id}`} style={{ color: "black" }}>
+                                    {consultItem.ib_title}
+                                </Link>
+                            </td>
+                            <td>{consultItem.ib_date}</td>
+                            <td>
+                                <div className={`consult_status ${style.consult_status}`}>
+                                    {consultItem.ib_show === 'y' ? '답변대기 중' : '답변 완료'}
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

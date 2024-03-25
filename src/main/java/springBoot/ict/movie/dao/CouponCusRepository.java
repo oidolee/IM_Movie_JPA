@@ -4,12 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import springBoot.ict.movie.dto.ConsultAnswerDTO;
 import springBoot.ict.movie.dto.ConsultDTO;
 import springBoot.ict.movie.dto.CouponCusDTO;
 
+@Transactional
 public interface CouponCusRepository extends JpaRepository<CouponCusDTO, Integer> {
 	
 	// 고객 쿠폰 리스트
@@ -20,11 +23,12 @@ public interface CouponCusRepository extends JpaRepository<CouponCusDTO, Integer
 	List<CouponCusDTO> selectCusCoupon(String c_email);
 	
 	// 고객 쿠폰 갯수
-	@Query("SELECT COUNT(*) FROM CouponCusDTO cpcusdto WHERE cpcusdto.c_email = :c_email ")
+	@Query("SELECT COUNT(*) FROM CouponCusDTO cpcusdto WHERE cpcusdto.c_email = :c_email and cpcusdto.ic_status = 'y' ")
 	int countCusCoupon(String c_email);
 	
 	
 	// 고객 쿠폰 삭제
+	@Modifying
 	@Query("UPDATE CouponCusDTO SET ic_status = 'n' WHERE ic_num = :ic_num")
 	int deleteCusCoupon(int ic_num);
 	
