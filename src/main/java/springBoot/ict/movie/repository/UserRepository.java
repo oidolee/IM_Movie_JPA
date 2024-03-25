@@ -22,8 +22,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("SELECT u.id FROM User u WHERE u.name = :name AND u.hp = :hp")
     String findIdByNameAndHp(@Param("name") String name, @Param("hp") String hp);
 	
-	// 비밀번호 재설정 
-	@Query("SELECT u.password FROM User u WHERE u.id = :id AND u.hp = :hp")
-	 String findByIdAndHp(String id, String hp);
-
+	// 아이디와 휴대폰 번호로 사용자 조회
+    @Query("SELECT u FROM User u WHERE u.id = :id AND u.hp = :hp")
+    Optional<User> findByIdAndHp(@Param("id") String id, @Param("hp") String hp);
+	
+	
 }

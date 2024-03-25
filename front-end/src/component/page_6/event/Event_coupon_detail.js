@@ -120,7 +120,7 @@ const Event_coupon_detail = () => {
                         id="standard-required"
                         variant="standard"
                         label="쿠폰코드"
-                        type="text"
+                        type="hidden"
                         name="ic_code"
                         value={couponList.ic_code}
                         onChange={onChange}
@@ -131,7 +131,7 @@ const Event_coupon_detail = () => {
                         id="standard-required"
                         variant="standard"
                         label="쿠폰 이름"
-                        type="text"
+                        type="hidden"
                         name="ic_name"
                         value={couponList.ic_name}
                         onChange={onChange}
@@ -142,7 +142,7 @@ const Event_coupon_detail = () => {
                         id="standard-required"
                         variant="standard"
                         label="ic_category"
-                        type="text"
+                        type="hidden"
                         name="ic_category"
                         value={couponList.ic_category}
                         onChange={onChange}
@@ -153,7 +153,7 @@ const Event_coupon_detail = () => {
                         id="standard-required"
                         variant="standard"
                         label="포인트"
-                        type="text"
+                        type="hidden"
                         name="ic_point"
                         value={couponList.ic_point}
                         onChange={onChange}
@@ -166,7 +166,7 @@ const Event_coupon_detail = () => {
                         id="standard-required"
                         variant="standard"
                         label="쿠폰사용시작 날짜 (0000-00-00)형식"
-                        type="text"
+                        type="hidden"
                         name="ic_startDate"
                         value={couponList.ic_startDate}
                         onChange={onChange}
@@ -176,7 +176,7 @@ const Event_coupon_detail = () => {
                         id="standard-required"
                         variant="standard"
                         label="쿠폰사용종료 날짜 (0000-00-00)형식"
-                        type="text"
+                        type="hidden"
                         name="ic_endDate"
                         value={couponList.ic_endDate}
                         onChange={onChange}

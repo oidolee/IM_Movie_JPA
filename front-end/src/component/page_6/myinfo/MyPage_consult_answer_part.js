@@ -94,6 +94,14 @@ function MyPage_consult_answer_part() {
 
     }, [one_id]);
 
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1, 두 자리 숫자로 만들기 위해 padStart 사용
+        const day = String(date.getDate()).padStart(2, '0'); // 두 자리 숫자로 만들기 위해 padStart 사용
+        return `${year}-${month}-${day}`;
+    };
+
     const reloadConsultDetail = (one_id) => {
         ApiService.fetchConsultDetail(one_id)
             .then(res => {
@@ -104,7 +112,7 @@ function MyPage_consult_answer_part() {
                 setIb_type_detail(consult.csdto.ib_type_detail)
                 setIb_title(consult.csdto.ib_title)
                 setIb_content(consult.csdto.ib_content)
-                setIb_date(consult.csdto.ib_date)
+                setIb_date(formatDate(consult.csdto.ib_date))
                 setIb_show(consult.csdto.ib_show)
                 console.log("consult : " + consult);
             })

@@ -53,13 +53,9 @@ class searchPWD extends Component {
         }
         ApiService.findPWD(inputData)
         .then(res => {
-            this.setState({
-
-            })
-            console.log('비밀번호 찾기 성공 : ' , res.data); 
-            const foundPWD = res.data.foundPWD;
-            
-            this.props.history.push('/findPWD', { foundPWD });
+            console.log("비밀번호 찾기 성공 : ", res.data);
+            // 비밀번호를 찾는 요청이 성공하면, 비밀번호 재설정 페이지로 이동!!
+            this.props.history.push('/findPWD', { id: this.state.id, hp: this.state.hp });
         })
         .catch(err =>{
             console.log('findID() 에러 !! ', err);
@@ -135,49 +131,3 @@ class searchPWD extends Component {
 }
 
 export default searchPWD;
-
-
-
-
-
-{/* <Accordion.Item eventKey="1">
-                        <Accordion.Header onClick={() => this.handleAccordionClick("1")}>
-                            <input
-                                type="radio"
-                                id="email"
-                                name="searchType"
-                                value="email"
-                                checked={this.state.activeKey === "1"}
-                                onChange={() => this.handleRadioClick("1")}
-                            />
-                            <label htmlFor="email">이메일 주소로 찾기</label>
-                        </Accordion.Header>
-                        <Accordion.Body>
-                        <div id='hpfind' className={`hpfind ${style.hpfind}`}>
-                                <div className={`text ${style.text}`}>이름
-                                
-                                <TextField
-                                    required
-                                    type="text"
-                                    name="name"
-                                    value={this.state.name}
-                                    placeholder='이름을 입력해주세요.'
-                                    onChange={this.onChange}
-                                />
-                                </div>
-                                <br /><br />
-                                <div className={`text ${style.text}`}>휴대폰 번호
-
-                                
-                                <TextField
-                                    required
-                                    type="text"
-                                    name="hp"
-                                    value={this.state.hp}
-                                    placeholder='휴대폰 번호를 -빼고 입력해 주세요'
-                                    onChange={this.onChange}
-                                />
-                                </div>
-                            </div>
-                        </Accordion.Body>
-                    </Accordion.Item> */}

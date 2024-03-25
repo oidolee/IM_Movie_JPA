@@ -188,6 +188,7 @@ class SignupComponent extends Component {
         // IC_show를 기본값으로 설정
         const state = 'y';
         const role = 'ROLE_USER';
+        const type = "web";
 
 
         const address = `${this.state.addr1} ${this.state.addr2}`;
@@ -199,7 +200,9 @@ class SignupComponent extends Component {
             birthday: this.state.birthday,
             address: address,
             regdate: regdate,
-            state: state
+            state: state,
+            role: role,
+            type: type,
         };
 
         console.log(inputData);

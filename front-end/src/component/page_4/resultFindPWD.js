@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import style from '../../styles/page_4/resultFindID.module.css';
 import { Button, TextField } from '@mui/material';
+import ApiService from '../../ApiService';
 
 class resultFindID extends Component {
     constructor(props) {
         super(props);
         this.state = {
+
             password: '',
             passwordConfirm: '',
             passwordValid: true,
@@ -13,8 +15,33 @@ class resultFindID extends Component {
         };
     }
 
-    gologin = () => {
-        this.props.history.push("/login");
+
+    
+
+    change = () => {
+        
+        const { id, hp } = this.props.location.state;
+
+        const requestData = {
+            id: id,
+            hp: hp,
+            newPassword: this.state.password // 입력한 새로운 비밀번호를 가져옵니다.
+        };
+
+        ApiService.changePWD(requestData)
+            .then(res => {
+                this.setState({
+
+                })
+                console.log("비밀번호 변경 성공 : ", res.data);
+                alert("비밀번호 변경 성공 \n 변경된 비밀번호로 로그인 해주세요")
+                this.props.history.push("/login");
+            })
+            .catch(err => {
+                console.log("비밀번호 변경 실패", err);
+                alert("변경 실패")
+            })
+        
     }
 
     onChange = (e) => {
@@ -39,7 +66,7 @@ class resultFindID extends Component {
     };
 
     render() {
-        const foundPWD = this.props.location.state.foundPWD;
+        
 
         // 비밀번호를 찾은 경우
         return (
@@ -88,7 +115,7 @@ class resultFindID extends Component {
                     />
                     <br /><br />
 
-                    <Button id="redBtn" className={`redBtn ${style.redBtn}`} onClick={this.gologin}>로그인</Button>
+                    <Button id="redBtn" className={`redBtn ${style.redBtn}`} onClick={this.change}>변경</Button>
                 </div>
             </div>
         );
