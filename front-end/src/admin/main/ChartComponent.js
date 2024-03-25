@@ -82,9 +82,11 @@ const ChartComponent = () => {
   
     labels.forEach((label) => {
       const count = data.filter((item) => {
-        console.log(item)
-        if (item.regdate && typeof item.regdate === 'string') {
-          return item.regdate.slice(0, 10) === label;
+        if (item.regdate) {
+          // Unix timestamp를 JavaScript Date 객체로 변환
+          const date = new Date(item.regdate);
+          // Date 객체를 날짜 문자열로 변환하여 비교
+          return date.toISOString().slice(0, 10) === label;
         }
         return false;
       }).length;
@@ -92,7 +94,8 @@ const ChartComponent = () => {
     });
   
     return memberCountByDate;
-  };g
+  };
+  
   
 
   return (
