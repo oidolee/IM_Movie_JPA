@@ -183,12 +183,15 @@ function MovieDetail() {
     ApiService.selectUpdate(movie_id)
       .then((res) => {
         let list = res.data;
-        console.log('res.data : ' + res.data)
+        let mov_date_final = list.dto.mov_date; 
+        let getMovDate = new Date(mov_date_final);
+        let formattedMovDate = getMovDate.toLocaleDateString(); // Date 객체를 원하는 형식의 문자열로 변환
+
         setDetailInfo({
           movie_id: list.dto.movie_id,
           mov_image: list.dto.mov_image,
           mov_title: list.dto.mov_title,
-          mov_date: list.dto.mov_date,
+          mov_date: formattedMovDate,
           mov_time: list.dto.mov_time,
           mov_age: list.dto.mov_age,
           mov_visitor: list.dto.mov_visitor,

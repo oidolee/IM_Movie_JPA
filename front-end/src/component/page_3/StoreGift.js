@@ -194,7 +194,7 @@ class StoreGift extends Component {
                     type="text"
                     className={`g_input ${style.g_input}`}
                     name="sender"
-                    value={this.state.email}
+                    value={this.state.sender}
                     size="20"
                     onChange={this.handleChange}
                     required
