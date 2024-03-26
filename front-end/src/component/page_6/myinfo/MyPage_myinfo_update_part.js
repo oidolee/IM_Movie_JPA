@@ -59,6 +59,10 @@ class MyPage_myinfo_update_part extends Component {
                     id: res.data.dto.id,
                     name: res.data.dto.name,
                     hp: res.data.dto.hp,
+                    role: res.data.dto.role,
+                    state: res.data.dto.state,
+                    token: res.data.dto.token,
+                    type: res.data.dto.type,
                     birthday: formatDate(res.data.dto.birthday),
                     userInfo: {
                         ...prevState.userInfo,
@@ -180,8 +184,7 @@ class MyPage_myinfo_update_part extends Component {
         // IC_regdate를 현재 날짜로 설정
         const regdate = new Date();
 
-        // IC_show를 기본값으로 설정
-        const show = 'y';
+        
 
 
         const address = `${this.state.addr1} ${this.state.addr2}`;
@@ -194,6 +197,10 @@ class MyPage_myinfo_update_part extends Component {
             birthday: this.state.birthday,
             address: address,
             regdate: regdate,
+            role: this.state.role,
+            state: this.state.state,
+            token: this.state.token,
+            type: this.state.type
             
         };
 
@@ -207,7 +214,7 @@ class MyPage_myinfo_update_part extends Component {
 
                 if (res.data.resultCode == 200) {
                     alert("회원정보 수정 성공");
-                    this.props.history.push('/login');
+                    this.props.history.push('/');
                 } else {
                     alert("회원정보 수정 실패");
                     this.props.history.push('/signCheck');

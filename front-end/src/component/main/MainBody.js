@@ -73,7 +73,7 @@ const MainBody = () => {
       origin: 'left',
       distance: '30px',
       easing: 'ease',
-      reset: true
+      reset: false
     });
   }, []); // 컴포넌트가 마운트될 때 한 번만 실행됨
 

@@ -3,6 +3,7 @@ import { loadPaymentWidget } from "@tosspayments/payment-widget-sdk";
 import { nanoid } from "nanoid";
 import style from "../../styles/page_1/Checkout.css";
 import { useCookies } from 'react-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 const clientKey = "test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq";
 const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
@@ -16,6 +17,18 @@ const App = ({ handleCloseModal }) => {
   const paymentMethodsWidgetRef = useRef(null);
   const [price, setPrice] = useState(10000);
   const [cookies] = useCookies(['c_email', 'idName']); // 쿠키 가져오기
+
+//   useEffect(() => {
+//     // 로컬 스토리지에서 토큰 가져오기
+//     const authToken = localStorage.getItem("auth_token");
+
+//     // 토큰이 존재하는지 확인 후 이메일 추출
+//     if (authToken) {
+//         const decodedToken = jwtDecode(authToken); // 수정 필요
+//         const userEmail = decodedToken.iss;
+//         setEmail(userEmail);
+//     }
+// }, []); // useEffect가 최초 한 번만 실행되도록 빈 배열을 전달
 
   useEffect(() => {
     const fetchPaymentWidget = async () => {

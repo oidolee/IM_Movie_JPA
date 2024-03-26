@@ -8,7 +8,6 @@ import Res_img12 from "../../assets/page_1/12.jpg";
 import Res_imgAll from "../../assets/page_1/all.jpg";
 import Res_screen from "../../assets/page_1/screen.png";
 import ApiService from "../../ApiService";
-import { useHistory, useParams } from "react-router-dom";
 
 const Reservation_Movie = ({ history }) => {
   const [popupOpen, setPopupOpen] = useState(false); // 팝업
@@ -17,7 +16,7 @@ const Reservation_Movie = ({ history }) => {
   const [remainingSeatsCount, setRemainingSeatsCount] = useState(null); // 잔여 좌석
   const [selectedRegion, setSelectedRegion] = useState(null); // 지역
   const [groupedData, setGroupedData] = useState({}); // 지역 그룹화
-  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null);
+  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 최종 영화 정보 저장
 
   const places = {
     서울: ["홍대입구", "용산", "합정", "에비뉴엘", "영등포"],
@@ -78,11 +77,11 @@ const Reservation_Movie = ({ history }) => {
               break;
           }
 
-          // newData에 해당 place가 없으면 빈 배열로 초기화하고, 있으면 기존 배열을 사용합니다.
+          // newData에 해당 place가 없으면 빈 배열로 초기화하
           newData[place] = [...(newData[place] || []), item];
         });
 
-        // setGroupedData를 통해 상태를 업데이트합니다.
+        // setGroupedData를 통해 상태 업데이트
         setGroupedData(newData);
       })
       .catch((err) => {
@@ -92,7 +91,25 @@ const Reservation_Movie = ({ history }) => {
 
   useEffect(() => {
     listReservation();
+    fetchRemainingSeatsCount();
   }, []);
+
+  // 잔여 좌석 수 호출
+  const fetchRemainingSeatsCount = () => {
+    ApiService.listSeat()
+      .then((res) => {
+        // st_check가 "r" 또는 "y"가 아닌 좌석들의 수
+        const remainingSeats = res.data.filter(
+          (seat) => seat.st_check !== "r" && seat.st_check !== "y"
+        ).length;
+        console.log("잔여 좌석 수:", remainingSeats);
+        setRemainingSeatsCount(remainingSeats);
+      })
+      .catch((err) => {
+        console.log("API 호출 오류:", err);
+      });
+  };
+
 
   const handleLocationClick = (location) => {
     const placeData = groupedData[location];
@@ -143,8 +160,8 @@ const Reservation_Movie = ({ history }) => {
           menu4Sub.innerHTML = "";
           // 선택한 영화 정보를 출력
           movies.forEach((movieInfo) => {
-            const { ip_num, movie_title, theater_id, movie_time } = movieInfo;
-            const formattedStartTime = moment(movie_time, "HH:mm:ss").format(
+            const { ip_num, movie_title, theater_id, start_time } = movieInfo;
+            const formattedStartTime = moment(start_time, "HH:mm:ss").format(
               "HH:mm"
             );
 
@@ -199,27 +216,6 @@ const Reservation_Movie = ({ history }) => {
       image.src = Res_img18;
       return image;
     }
-  };
-
-  // 컴포넌트가 마운트될 때 한 번만 API를 호출하여 잔여 좌석 수를 가져옴
-  useEffect(() => {
-    fetchRemainingSeatsCount();
-  }, []);
-
-  // 잔여 좌석 수 호출
-  const fetchRemainingSeatsCount = () => {
-    ApiService.listSeat()
-      .then((res) => {
-        // st_check가 "r" 또는 "y"가 아닌 좌석들의 수
-        const remainingSeats = res.data.filter(
-          (seat) => seat.st_check !== "r" && seat.st_check !== "y"
-        ).length;
-        console.log("잔여 좌석 수:", remainingSeats);
-        setRemainingSeatsCount(remainingSeats);
-      })
-      .catch((err) => {
-        console.log("API 호출 오류:", err);
-      });
   };
 
   const handleConfirmation = () => {
@@ -394,11 +390,11 @@ const Reservation_Movie = ({ history }) => {
             <li>
               <div className="menu3">
                 <ul className="menu3_left">
-                  {movies.map((movie) => (
+                  {/* {movies.map((movie) => (
                     <li key={movie.id} onClick={() => handleClick(movie)}>
                       {movie.title}
                     </li>
-                  ))}
+                  ))} */}
                 </ul>
               </div>
             </li>

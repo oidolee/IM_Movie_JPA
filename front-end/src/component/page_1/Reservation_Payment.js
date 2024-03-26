@@ -33,7 +33,7 @@ const Reservation_Payment = () => {
     );
     const storedTotalPrice = JSON.parse(localStorage.getItem("totalPrice"));
     const seatInfo = JSON.parse(localStorage.getItem("selectedSeatInfo"));
-    console.log(seatInfo.totalQuantity)
+    console.log(seatInfo.totalQuantity);
 
     if (seatInfo) {
       setAdultQuantity(seatInfo.adultQuantity);
@@ -41,16 +41,18 @@ const Reservation_Payment = () => {
       setChildQuantity(seatInfo.childQuantity);
       setDisabledQuantity(seatInfo.disabledQuantity);
       setTotalQuantity(seatInfo.totalQuantity);
-      setSelectedSeats(storedSelectedSeats); 
-      setTotalPrice(storedTotalPrice); 
+      setSelectedSeats(storedSelectedSeats);
+      setTotalPrice(storedTotalPrice);
     }
 
     console.log("selectedMovieInfo : ", selectedMovieInfo);
     console.log("setSelectedSeats : ", storedSelectedSeats);
     console.log("setTotalPrice : ", storedTotalPrice);
     console.log("totalQuantity : ", seatInfo.totalQuantity);
-    localStorage.setItem("totalQuantity", JSON.stringify(seatInfo.totalQuantity));
-    
+    localStorage.setItem(
+      "totalQuantity",
+      JSON.stringify(seatInfo.totalQuantity)
+    );
   }, []);
 
   const handleCloseModal = () => {
@@ -174,18 +176,31 @@ const Reservation_Payment = () => {
                 <li className="menu2_main">
                   <img src={Res_movie} className="movie_img" alt="movie" />
                 </li>
-                <div className="menu2_sub">
-                  <ul>
-                    <li>
-                      <img src={Res_img15} className="age_img" alt="age" />
-                      <strong>파묘</strong>
-                    </li>
-                    <li>일시 2024-03-07 (목) 17:05 ~ 19~29</li>
-                    <li>영화관 건대입구</li>
-                    <li>인원 성인1</li>
-                    <li>좌석 D3</li>
-                  </ul>
-                </div>
+                {selectedMovie && (
+                  <div className="menu2_sub">
+                    <ul>
+                      <li>
+                        <img src={Res_img15} className="age_img" alt="age" />
+                        <strong>{selectedMovie.movie_title}</strong>
+                      </li>
+                      <li>일시 2024-03-07 (목) 17:05 ~ 19~29</li>
+                      <li>
+                        성인: {adultQuantity}명, 청소년: {teenQuantity}명<br />
+                        경로: {childQuantity}명, 장애인: {disabledQuantity}명
+                        <br />
+                        총: {totalQuantity}명
+                      </li>
+                      <li>
+                        {selectedSeats.map((seat, index) => (
+                          <span key={index}>
+                            {seat}
+                            {index % 2 === 1 ? <br /> : ", "}
+                          </span>
+                        ))}
+                      </li>
+                    </ul>
+                  </div>
+                )}
                 <a href="/page3">
                   <img src={Res_event} className="event_img" alt="event" />
                 </a>
@@ -267,7 +282,7 @@ const Reservation_Payment = () => {
                   <li className="paymentBtn">할인금액</li>
                   <li className="paymentBtn">결제금액</li>
                   <li>
-                    <button className="paymentBtn_total">결제하기</button>
+                    <button className="paymentBtn_total"></button>
                   </li>
                 </ul>
               </div>

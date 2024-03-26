@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'development') {
   serverUrl = proHost;
 }
 
-console.log("현재 베이스 주소")
+console.log("현재 베이스 주소 StoreDetail")
 console.log(serverUrl)
 
 class StoreDetail extends Component {
@@ -251,9 +251,9 @@ EditStore_Admin = (e) => {
                 slidesPerView={3}
                 centeredSlides={true}
                 spaceBetween={30}
-                pagination={{
-                  type: "fraction",
-                }}
+                // pagination={{
+                //   type: "fraction",
+                // }}
                 navigation={true}
                 virtual
               >
@@ -262,6 +262,7 @@ EditStore_Admin = (e) => {
                 {this.state.lists.map((item, index) => (
                   <SwiperSlide item={item} key={index}>
                     <img src={`${serverUrl}${item.itemImage}`} alt={`Item ${item.itemCode}`} style={{ width: "150px" }} onClick={() => this.handleItemClick(item.itemCode)}/>
+                    <div>{item.itemName}</div>
                 </SwiperSlide>
                 ))}
 

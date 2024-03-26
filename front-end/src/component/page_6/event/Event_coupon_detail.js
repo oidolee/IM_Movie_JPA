@@ -8,7 +8,7 @@ import { Typography, Select, MenuItem, TextField, Button } from "@mui/material";
 import { useHistory } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 const Event_coupon_detail = () => {
-    const { ic_num } = useParams();
+    const { ic_name } = useParams();
     const [couponList, setCouponList] = useState([]);
     const [email, setEmail] = useState('');
     const [emailCheck, setEmailCheck] = useState('');
@@ -23,9 +23,9 @@ const Event_coupon_detail = () => {
             origin: 'left',
             distance: '30px',
             easing: 'ease',
-            reset: true
+            reset: false
         });
-        reloadCouponList();
+        reloadCouponList(ic_name);
         const authToken = localStorage.getItem("auth_token");
 
         // 토큰이 존재하는지 확인 후 이메일 추출
@@ -83,8 +83,8 @@ const Event_coupon_detail = () => {
         return `${year}-${month}-${day}`;
     };
 
-    const reloadCouponList = () => {
-        ApiService.couponDetailList(ic_num)
+    const reloadCouponList = (ic_name) => {
+        ApiService.couponDetailList(ic_name)
             .then(res => {
                 console.log('res.data', res.data)
                 const couponData = res.data.cpdto;

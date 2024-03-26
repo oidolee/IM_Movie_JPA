@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'development') {
   serverUrl = proHost;
 }
 
-console.log("현재 베이스 주소")
+console.log("현재 베이스 주소 storegift")
 console.log(serverUrl)
 
 class StoreGift extends Component {
@@ -35,26 +35,21 @@ class StoreGift extends Component {
       message: "",
       name: '',
       email: '',
+      userName : ''
     };
   }
 
   componentDidMount() {
     // 로컬 스토리지에서 토큰 가져오기
     const authToken = localStorage.getItem("auth_token");
-
     // 토큰이 존재하는지 확인 후 이메일 추출
     if (authToken) {
         const decodedToken = jwtDecode(authToken);
         const userEmail = decodedToken.iss;
         this.setState({ email: userEmail });
-    }
-
-    const cookies = new Cookies();
-    const name = cookies.get('idName'); // 쿠키에서 이메일 정보 가져오기
-    if (name) {
-      this.setState({ name });
-    }
-    console.log('name', name);
+        console.log(userEmail)
+        this.reloadsearchCutomer(userEmail)
+      }
   }
 
   closeStoreGift = () => {
@@ -95,7 +90,7 @@ class StoreGift extends Component {
   };
 
   handlePayment = () => {
-    const { recipientNumber, sender, message, name, email } = this.state;
+    const { recipientNumber, sender, message, name, email, userName } = this.state;
     const { totalQuantity, totalPrice, itemCode, itemName, itemImage } = this.props;
 
     // 선물 받는 분 번호가 12자 이상이면 알림창 띄우기
@@ -118,6 +113,7 @@ class StoreGift extends Component {
         itemImage,
         name,
         email,
+        userName,
       })
     );
 
@@ -131,7 +127,22 @@ class StoreGift extends Component {
     this.props.history.push("/page_3/Reservation_Payment_Store");
   };
 
-  render() {
+  reloadsearchCutomer = (email) => {
+    ApiService.searchCutomer(email)
+    .then(res => {
+      console.log("이름", res.data);
+      this.setState({
+        userName: res.data.dto.name,
+      });
+      
+      console.log(res.data.name);
+    })
+    .catch(err => {
+      console.log('searchCutomer() Error!!', err);
+    });
+  }
+
+  render() {       
     return (
       <div id="layerCouponGift" className="layer_coupon_gift">
         <strong className={`hidden ${style.hidden}`}>레이어 팝업 시작</strong>
@@ -193,10 +204,9 @@ class StoreGift extends Component {
                   <input
                     type="text"
                     className={`g_input ${style.g_input}`}
-                    name="sender"
-                    value={this.state.email}
+                    name="userName"
+                    value={this.state.userName}
                     size="20"
-                    placeholder="선물 하는 분 입력"
                     onChange={this.handleChange}
                     required
                   />
