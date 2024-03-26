@@ -63,7 +63,7 @@ import FAQ from '../page_5/board/FAQ';
 import NOTICE from '../page_5/board/NOTICE';
 import NOTICE2 from '../page_5/board/NOTICE2';
 import groupform from '../page_5/board/groupform';
-import re_answer_list from '../page_5/board/re_answer_list';
+
 
 
 //page_6
@@ -75,8 +75,8 @@ import MyPage_wishMovie from '../page_6/movielog/MyPage_wishMovie';
 import Consult from '../page_6/consult/Consult';
 import MyPage_myinfo from '../page_6/myinfo/MyPage_myinfo';
 import MyPage_myinfo_update from '../page_6/myinfo/MyPage_myinfo_update';
-import MyPage_consult_list from '../page_6/myinfo/MyPage_consult_list';
-// import MyPage_consult_list2 from '../page_6/myinfo/MyPage_consult_list2';
+import MyPage_consult_list from '../page_6/myinfo/MyPage_consult_list'; 
+import MyPage_consult_list2 from '../page_6/myinfo/MyPage_consult_list2';
 import MyPage_Event from '../page_6/event/MyPage_Event';
 import Event_Home from '../page_6/event/Event_Home';
 import MyapgeConsultDetail from '../page_6/myinfo/MyPage_consult_answer';
@@ -148,7 +148,6 @@ const AppRouter = () => {
                             {/* page_5 */}
                             <Route>
                                 <Route path="/movieMain" exact={true} component={movieMain} />
-                                {/* <Route path="/movieDetail" exact={true} component={MovieDetail} /> */}
                                 <Route path="/movieDetail/:movie_id" exact={true} component={movieDetail} />
                                 <Route path="/movieDetail2/:now_id" exact={true} component={movieDetail2} />
                                 {/* <Route path="/movieDetail3/:arte_id" exact={true} component={movieDetail3} /> */}
@@ -177,7 +176,7 @@ const AppRouter = () => {
                                 <Route path="/MyPage_myinfo" exact={true} component={MyPage_myinfo} />
                                 <Route path="/MyPage_myinfo_update" exact={true} component={MyPage_myinfo_update} />
                                 <Route path="/MyPage_consult_list" exact={true} component={MyPage_consult_list} />
-                                {/* <Route path="/MyPage_consult_list2" exact={true} component={MyPage_consult_list2} /> */}
+                                <Route path="/MyPage_consult_list2" exact={true} component={MyPage_consult_list2} />
                                 <Route path="/event_Home" exact={true} component={Event_Home} />
                                 <Route path="/MyPage_Event" exact={true} component={MyPage_Event} />
                                 <Route path="/MyPage_consult_answer/:one_id" exact={true} component={MyapgeConsultDetail} />
