@@ -1,17 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import style from '../../../styles/page_5/groupform.module.css';
 import group1 from '../../../assets/page_5_3/group1.png';
 import { useHistory } from 'react-router-dom'; 
 import ApiService from "../../../ApiService";
+import { jwtDecode } from 'jwt-decode';
+
 
 
 function Form() {
   const history = useHistory(); 
+  const [email, setEmail] = useState('');
+  useEffect(() => {
+    const authToken = localStorage.getItem("auth_token");
+    if (authToken) {
+        const decodedToken = jwtDecode(authToken); // 수정 필요
+        const userEmail = decodedToken.iss;
+        setEmail(userEmail);
+        
+    }
+    
+}, []);
 
   const [addInfo, setAddInfo] = useState({
     group_id: '',
+    c_email: email,
     group_loc: "",
     group_type: "",
     group_expeople: "",
@@ -25,7 +39,7 @@ function Form() {
     custo_name: "",
     custo_phone1: "",
     custo_phone2: "",
-    custo_phone3: "",
+    custo_phone3: "", 
   });
 
   const onChange = (e) => {
@@ -146,10 +160,6 @@ function Form() {
               </div>
             )}
              
-          
-         
-
-       
 
             <div className={`Form_group ${style.Form_group}`}>
             <label for="g_type">분류</label>
@@ -228,6 +238,11 @@ function Form() {
               
               <hr></hr>
             </div>
+
+            <div className={`Form_group ${style.Form_group}`}>
+            <label for="gg_email">이메일</label>
+            <input type="text" id="email1" className={`email1 ${style.email1}`}  name="c_email" value={email} onChange={onChange} />
+              </div>
 
             <div className={`Form_make3 ${style.Form_make3}`}>
                 <p>개인정보 수집에 대한 동의</p> 

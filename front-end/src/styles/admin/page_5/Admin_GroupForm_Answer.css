@@ -1,28 +1,18 @@
-.Admin_GroupForm_Answer {
-    width: 100%;
-    height: 100%;
-}
+/* Admin_GroupForm_Answer.css */
 
-.Admin_GroupForm_Answer .groupAnswer {
-    display: flex;
-    justify-content: center;
+.Admin_Notice_Add {
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .noticeAdd {
     text-align: center;
-    width: 100%;
-    height: 100%;
-}
-
-.Admin_GroupForm_Answer .saveBtn {
-    background-color: black;
-    padding: 10px 20px;
+    margin-bottom: 20px;
+  }
+  
+  .saveBtn {
     margin-top: 20px;
-}
-
-.Admin_GroupForm_Answer .saveBtn:hover {
-    background-color: #FF243E;
-}
-
-.Admin_GroupForm_Answer .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
-    width: 700px;
-    margin-top: 30px;
-}
-
+  }
+  
+  /* Additional styles can be added as per requirement */
+  

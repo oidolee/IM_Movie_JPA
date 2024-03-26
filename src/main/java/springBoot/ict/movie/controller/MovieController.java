@@ -615,7 +615,7 @@ public class MovieController {
 				  
 				 // 아르떼영화 상세페이지
 				    @GetMapping("/ArteDetailList/{arte_id}") 
-				    public Map<String, Object> ArteDetailList(@PathVariable("ArteDetailList") int arte_id) 
+				    public Map<String, Object> ArteDetailList(@PathVariable("arte_id") int arte_id) 
 				            throws ServletException, IOException {
 				                
 				        logger.info("url - ArteDetailList");
