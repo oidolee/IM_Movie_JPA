@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import React from "react";
-// import style from '../../../styles/page_6/MyPage_consult_list_part2_module.css';
 import style from '../../../styles/page_6/MyPage_consult_list_part_module.css';
 import ApiService from '../../../ApiService';
 import {Link} from 'react-router-dom';
@@ -46,6 +45,7 @@ function MyPage_consult_list_part2() {
                     ...item,
                     now_grdate: formatDate(item.now_grdate) // 각 consultItem의 ib_date를 포맷 변경
                 }));
+                console.log(groupData);
                 setGroup(groupData);
             })
             .catch(err => {
@@ -82,7 +82,7 @@ function MyPage_consult_list_part2() {
                                 <td>{groupItem.group_id}</td>
                                 <td>[{groupItem.group_type}]</td>
                                 <td>
-                                    <Link to={`/MyPage_consult_answer/${groupItem.group_id}`} style={{ color: "black" }}>
+                                    <Link to={`/MyPage_consult_answer_2/${groupItem.group_id}`} style={{ color: "black" }}>
                                         {groupItem.group_title}
                                     </Link>
                                 </td>

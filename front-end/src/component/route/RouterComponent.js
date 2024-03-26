@@ -79,7 +79,8 @@ import MyPage_consult_list from '../page_6/myinfo/MyPage_consult_list';
 import MyPage_consult_list2 from '../page_6/myinfo/MyPage_consult_list2';
 import MyPage_Event from '../page_6/event/MyPage_Event';
 import Event_Home from '../page_6/event/Event_Home';
-import MyapgeConsultDetail from '../page_6/myinfo/MyPage_consult_answer';
+import MypageConsultDetail from '../page_6/myinfo/MyPage_consult_answer';
+import MypageConsultDetail2 from '../page_6/myinfo/MyPage_consult_answer2';
 import Event_coupon from '../page_6/event/Event_coupon';
 import Event_coupon_detail from '../page_6/event/Event_coupon_detail';
 
@@ -179,7 +180,8 @@ const AppRouter = () => {
                                 <Route path="/MyPage_consult_list2" exact={true} component={MyPage_consult_list2} />
                                 <Route path="/event_Home" exact={true} component={Event_Home} />
                                 <Route path="/MyPage_Event" exact={true} component={MyPage_Event} />
-                                <Route path="/MyPage_consult_answer/:one_id" exact={true} component={MyapgeConsultDetail} />
+                                <Route path="/MyPage_consult_answer/:one_id" exact={true} component={MypageConsultDetail} />
+                                <Route path="/MyPage_consult_answer_2/:group_id" exact={true} component={MypageConsultDetail2} />
                                 <Route path="/Event_coupon/" exact={true} component={Event_coupon} />
                                 <Route path="/Event_coupon_detail/:ic_name" exact={true} component={Event_coupon_detail} />
                                 

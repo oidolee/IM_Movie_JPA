@@ -574,7 +574,7 @@ class ApiService {
     //단체대관 리스트
     groupList(){
         console.log('groupList() 호출!!')
-        return axios.get(serverUrl + '/page_5/GroupList'); 
+        return axios.get(serverUrl + '/page_5/GroupList' ); 
     }
 
     groupAdd(inputData) {
@@ -582,31 +582,42 @@ class ApiService {
         return axios.post(serverUrl + "/page_5/GroupInsert", inputData);
     }
 
-     // 1:1 문의 상세
-     groupDetail(group_id){
-        console.log('groupDetail() 호출!!')
-        return axios.get(serverUrl + '/page_5/selectGroupAnswer/' + group_id); 
+    // 고객
+    //  대관 문의 리스트
+    GroupCusList(c_email){
+        console.log('GroupCusList() 호출!!')
+        return axios.get(serverUrl + '/page_5/cusGroupList/' + c_email); 
     }
 
-    // 1:1 문의 답변 등록
+     // 대관 문의 상세
+     groupDetail(group_id){
+        console.log('groupDetail() 호출!!')
+        return axios.get(serverUrl + '/page_5/select/' + group_id); 
+    }
+
+    // 대관 문의  답변 등록
     addgroupAnwser(inputData) {
         console.log('addgroupAnwser 호출', inputData);
         return axios.post(serverUrl + "/page_5/saveAnswer", inputData);
     }
 
-     // 1:1 문의 답변 후 상태 업데이트
+     // 대관 문의  답변 후 상태 업데이트
      updategroupData(group_id){
         console.log('updategroupData 호출');
         return axios.put(serverUrl + "/page_5/completeGroupAnswer/" + group_id);
     }
 
     
-    // 1:1 문의 답변 리스트
+    // 대관 문의  답변 리스트
     GroupAnswer(group_id){
         console.log('GroupAnswer() 호출!!')
         
         return axios.get(serverUrl + '/page_5/groupAnswer/'+ group_id); 
     }
+
+   
+
+    
 
 
     // selectGroup(group_id) {

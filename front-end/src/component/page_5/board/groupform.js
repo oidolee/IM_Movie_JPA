@@ -38,6 +38,19 @@ function Form() {
 
   }, []);
 
+    const reloadSearchcustomer = (email) => {
+      ApiService.searchCutomer(email)
+          .then(res => {
+              console.log('res.data', res.data);
+              setCus_Name(res.data.dto.name)
+          })
+          .catch(error => {
+              console.error('요청 실패:', error);
+              // 삭제 요청이 실패했을 때 필요한 동작 수행
+          });
+    }
+
+
   const [addInfo, setAddInfo] = useState({
     group_id: '',
     c_email: email,
@@ -51,7 +64,7 @@ function Form() {
     group_title: "",
     group_con: "",
     group_name: "",
-    custo_name: "",
+    custo_name: cus_name,
     custo_phone1: "",
     custo_phone2: "",
     custo_phone3: "",
@@ -61,6 +74,8 @@ function Form() {
     const { name, value } = e.target;
     setAddInfo({
       ...addInfo,
+      c_email:email,
+      custo_name: cus_name,
       [name]: value,
     });
   };

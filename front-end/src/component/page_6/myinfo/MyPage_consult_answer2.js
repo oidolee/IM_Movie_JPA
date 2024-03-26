@@ -3,8 +3,8 @@ import React, {Component} from 'react';
 import style from '../../../styles/page_6/Mypage_module.css'
 import Mypage_mid_nav from '../Mypage_mid_nav'
 import MyPage_top from '../MyPage_top'
-import MyPage_consult_list_part2 from './MyPage_consult_list_part2'
-class MyPage_consult_list2 extends Component{
+import MyPage_consult_answer_part2 from './MyPage_consult_answer_part2'
+class MyPage_consult_answer2 extends Component{
     render(){
         return(
             <div>
@@ -18,7 +18,7 @@ class MyPage_consult_list2 extends Component{
                             <Mypage_mid_nav />
                         </div>
                         <div>
-                            <MyPage_consult_list_part2 />
+                            <MyPage_consult_answer_part2 />
                         </div>
                     </div>
                     <div className={`MyPage_banner ${style.MyPage_banner}`} id='MyPage_banner'>
@@ -30,4 +30,4 @@ class MyPage_consult_list2 extends Component{
     }
 }
 
-export default MyPage_consult_list2;
+export default MyPage_consult_answer2;

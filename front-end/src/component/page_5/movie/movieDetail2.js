@@ -235,9 +235,11 @@ function MovieDetail2() {
             </div>
 
             <div className={`btn_wrap2 ${style.btn_wrap2}`}>
+            <Link to="/page_1/Reservation_Movie">
               <button className={`detail_btn4 ${style.detail_btn4}`} id="13">
                 예매하기
               </button>
+              </Link>
             </div>
           </div>
         </div>
