@@ -390,11 +390,11 @@ const Reservation_Movie = ({ history }) => {
             <li>
               <div className="menu3">
                 <ul className="menu3_left">
-                  {movies.map((movie) => (
+                  {/* {movies.map((movie) => (
                     <li key={movie.id} onClick={() => handleClick(movie)}>
                       {movie.title}
                     </li>
-                  ))}
+                  ))} */}
                 </ul>
               </div>
             </li>

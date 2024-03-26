@@ -1,6 +1,7 @@
 package springBoot.ict.movie.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 
@@ -25,6 +26,17 @@ public class PaymentServiceImpl implements PaymentService {
 		System.out.println(dto);
 		
 		dao.save(dto);
+	}
+	
+	@Override
+	public List<PaymentDTO> PaymentList(String ic_email) 
+		throws ServletException, IOException {
+		
+		System.out.println("PaymentServiceImpl - PaymentList");
+		
+		List<PaymentDTO> list = dao.PaymentList(ic_email);
+		System.out.println("list : " + list);
+		return list;
 	}
 
 }
