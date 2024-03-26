@@ -76,10 +76,10 @@ function MyPage_res_part() {
                             <input type="hidden" value={reservationInfoItem.c_email}></input>
                             <td>{reservationInfoItem.pay_id}</td>
                             <td>{reservationInfoItem.pay_order_name}</td>
-                            <td>{reservationInfoItem.pay_amount} 원</td>
                             <td>
                                 {reservationInfoItem.pay_sysdate}
                             </td>
+                            <td>{reservationInfoItem.pay_amount} 원</td>
                         </tr>
                     ))}
                     <tr>
