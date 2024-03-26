@@ -149,7 +149,6 @@ function Header() {
                                 )}
                             </>
                         )}
-                        <li><Link to="/customerlist">멤버쉽</Link></li>
                         <li><Link to="/FAQ">고객센터</Link></li>
                         {authToken && (
                             <li><Link to="/parking">주차등록</Link></li>
