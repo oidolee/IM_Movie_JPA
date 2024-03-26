@@ -163,13 +163,14 @@ const Reservation_Movie = ({ history }) => {
 
           // 선택한 영화 정보 출력
           movies.forEach((movieInfo) => {
-            const { movie_id, movie_title, theater_id, movie_time } = movieInfo;
+            const { ip_num, movie_title, theater_id, movie_time } = movieInfo;
             const formattedStartTime = moment(movie_time, "HH:mm:ss").format(
               "HH:mm"
             );
 
             // 최종 선택한 영화 정보
             setSelectedMovieInfo(movieInfo);
+            console.log(movieInfo)
 
             const listItem = document.createElement("li");
             listItem.innerHTML = `
@@ -240,8 +241,12 @@ const Reservation_Movie = ({ history }) => {
   const sysdate = moment().format("YYYY-MM-DD");
 
   const handlePopupOpen = () => {
-    // 팝업을 열고 선택한 영화 정보를 설정
     setPopupOpen(true);
+    // if (selectedMovie && selectedMovie.length > 0) {
+    //   setSelectedMovieInfo(selectedMovie[0]);
+    // }
+
+    console.log("팝업이 열릴 때 selectedMovieInfo:", selectedMovieInfo);
   };
 
   return (
