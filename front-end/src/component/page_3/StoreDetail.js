@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'development') {
   serverUrl = proHost;
 }
 
-console.log("현재 베이스 주소")
+console.log("현재 베이스 주소 StoreDetail")
 console.log(serverUrl)
 
 class StoreDetail extends Component {
