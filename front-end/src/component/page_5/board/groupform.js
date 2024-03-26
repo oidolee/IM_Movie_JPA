@@ -12,16 +12,32 @@ import { jwtDecode } from 'jwt-decode';
 function Form() {
   const history = useHistory(); 
   const [email, setEmail] = useState('');
+
+  const [cus_name, setCus_Name] = useState('');
+
   useEffect(() => {
     const authToken = localStorage.getItem("auth_token");
     if (authToken) {
         const decodedToken = jwtDecode(authToken); // 수정 필요
         const userEmail = decodedToken.iss;
         setEmail(userEmail);
-        
+        reloadSearchcustomer(userEmail);
     }
     
 }, []);
+
+    const reloadSearchcustomer = (email) => {
+      ApiService.searchCutomer(email)
+          .then(res => {
+              console.log('res.data', res.data);
+              setCus_Name(res.data.dto.name)
+          })
+          .catch(error => {
+              console.error('요청 실패:', error);
+              // 삭제 요청이 실패했을 때 필요한 동작 수행
+          });
+    }
+
 
   const [addInfo, setAddInfo] = useState({
     group_id: '',
@@ -36,7 +52,7 @@ function Form() {
     group_title: "",
     group_con: "",
     group_name: "",
-    custo_name: "",
+    custo_name: cus_name,
     custo_phone1: "",
     custo_phone2: "",
     custo_phone3: "", 
@@ -46,6 +62,8 @@ function Form() {
     const { name, value } = e.target;
     setAddInfo({
       ...addInfo,
+      c_email:email,
+      custo_name: cus_name,
       [name]: value,
     });
   };
@@ -56,7 +74,7 @@ function Form() {
     ApiService.groupAdd(addInfo)
       .then((res) => {
         console.log("GroupInsert 성공 : ", res.data);
-        history.push("/admin/page_5/Admin_GroupForm_List");
+        history.push("/");
       })
       .catch((err) => {
         console.log(addInfo);
@@ -217,7 +235,7 @@ function Form() {
 
             <div className={`Form_group ${style.Form_group}`}>
               <label for="gg_name">성명</label>
-              <input type="text" id="name1" className={`name1 ${style.name1}`}  name="custo_name" value={addInfo.custo_name} onChange={onChange} />
+              <input type="text" id="name1" className={`name1 ${style.name1}`}  name="custo_name" value={cus_name} onChange={onChange} />
               <hr></hr>
             </div>
 
@@ -276,8 +294,8 @@ function Form() {
 
             <div className={`btn_0 ${style.btn_0}`}>
                 <button type="submit" className={`btn1 ${style.btn1}`}>취소</button>
-                <span className="gap"></span> {/* 간격 요소 */}
-                <button type="submit" className={`btn2 ${style.btn2}`} onClick={saveUpdate}>확인</button>
+                  <span className="gap"></span> {/* 간격 요소 */}
+                <button className={`btn2 ${style.btn2}`} onClick={saveUpdate}>확인</button>
             </div>
             
             </form>

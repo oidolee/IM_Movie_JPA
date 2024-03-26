@@ -70,7 +70,7 @@ public class GroupFormServiceImpl implements GroupFormService {
 			throws ServletException, IOException {
 		System.out.println("서비스 - insertGroupAnswer");
 		
-		 System.out.println("csadao.save(dto) : " + dao2.save(dto));
+		 System.out.println("dao2.save(dto) : " + dao2.save(dto));
 		
 		 return dao2.save(dto);
 	}
