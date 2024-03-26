@@ -337,7 +337,7 @@ const Reservation_Movie = ({ history }) => {
               <div className="menu2">
                 <ul className="menu2_left">
                   {Object.entries(places).map(([placeKey, placeNames]) => (
-                    <li key={placeKey}>
+                    <li key={placeKey} className="region">
                       <a
                         href="#"
                         onClick={(event) => {
@@ -359,7 +359,7 @@ const Reservation_Movie = ({ history }) => {
                             <div key={placeKey}>
                               {placeKey === selectedRegion &&
                                 placeNames.map((location, index) => (
-                                  <li className="subRegions" key={index}>
+                                  <li className="subRegion" key={index}>
                                     <a
                                       href="#"
                                       onClick={(event) => {

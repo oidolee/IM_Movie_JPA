@@ -271,21 +271,16 @@
     margin: 0;
     width: 450px;
     height: 250px;
-    /* margin-left: 12px; */
     background-color: white;
     padding: 10px;
 }
 
-.Res_Movie .menu2_left .subRegions.active {
-    background-color: white;
-    height: 60px;
-}
-
-.Res_Movie .menu2_left .subRegions {
-    height: 60px;
+.Res_Movie .menu2_left .region {
+    height: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-weight: 600;
 }
 
 .Res_Movie .menu2_right {
