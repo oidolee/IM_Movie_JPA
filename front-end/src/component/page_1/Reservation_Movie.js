@@ -110,12 +110,11 @@ const Reservation_Movie = ({ history }) => {
       });
   };
 
-
   const handleLocationClick = (location) => {
     const placeData = groupedData[location];
     console.log(`${location}에 대한 데이터:`, placeData);
 
-    // 클릭한 영화 정보를 저장
+    // 클릭한 영화 정보 저장
     setSelectedMovie(placeData);
 
     const menuElement = document.querySelector(".menu3_left"); // 지역에 해당하는 영화 출력 위치
@@ -158,14 +157,16 @@ const Reservation_Movie = ({ history }) => {
           setSelectedMovie(movies); // 클릭한 영화 리스트 전달
 
           menu4Sub.innerHTML = "";
-          // 선택한 영화 정보를 출력
+
+          // 선택한 영화 정보 출력
           movies.forEach((movieInfo) => {
             const { ip_num, movie_title, theater_id, start_time } = movieInfo;
             const formattedStartTime = moment(start_time, "HH:mm:ss").format(
               "HH:mm"
             );
-
-            setSelectedMovieInfo(movieInfo);
+            
+            // 최종 선택한 영화 정보
+            setSelectedMovieInfo(movieInfo); 
 
             const listItem = document.createElement("li");
             listItem.style.marginBottom = "20px";
