@@ -13,10 +13,10 @@ function Mypage_mid_nav() {
             <NavDropdown title="결제내역" href="/MyPage_res">
               <Nav.Link href="/MyPage_res">예매내역</Nav.Link>
               <Nav.Link href="/MyPage_Store">스토어내역</Nav.Link>
-              <Nav.Link href="/MyPage_resCancle">취소내역</Nav.Link>
+              {/* <Nav.Link href="/MyPage_resCancle">취소내역</Nav.Link> */}
             </NavDropdown>
             <Nav.Link href="/MyPage_coupon">쿠폰함</Nav.Link>
-            <Nav.Link href="/MyPage_Event">MY 이벤트</Nav.Link>
+            {/* <Nav.Link href="/MyPage_Event">MY 이벤트</Nav.Link> */}
             {/* <NavDropdown title="MY 무비로그" href="/MyPage_wishMovie">
               <Nav.Link href="/MyPage_wishMovie">보고싶어요</Nav.Link>
             </NavDropdown> */}
@@ -24,7 +24,7 @@ function Mypage_mid_nav() {
             <NavDropdown title="MY 정보 관리" href="/MyPage_myinfo">
               <Nav.Link href="/MyPage_myinfo">회원정보관리</Nav.Link>
               <Nav.Link href="/MyPage_consult_list">1:1문의내역</Nav.Link>
-              <Nav.Link href="/MyPage_consult_list">대관예약문의</Nav.Link>
+              <Nav.Link href="/MyPage_consult_list2">대관예약문의</Nav.Link>
             </NavDropdown>
           </Nav>
         </Container>

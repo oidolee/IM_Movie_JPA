@@ -14,15 +14,22 @@ const Reservation_Movie = ({ history }) => {
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택한 영화 상태
   const [movies, setMovies] = useState([]); // 영화 목록
   const [remainingSeatsCount, setRemainingSeatsCount] = useState(null); // 잔여 좌석
-  const [selectedRegion, setSelectedRegion] = useState(null); // 지역
+  const [selectedRegion, setSelectedRegion] = useState("서울"); // 지역
   const [groupedData, setGroupedData] = useState({}); // 지역 그룹화
   const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 최종 영화 정보 저장
+  const [selectedLocationData, setSelectedLocationData] = useState(null);
 
   const places = {
     서울: ["홍대입구", "용산", "합정", "에비뉴엘", "영등포"],
     경기: ["안양일번가", "광명아울렛", "위례"],
     인천: ["부평", "부평갈산", "부평역사"],
   };
+
+  useEffect(() => {
+    listReservation();
+    fetchRemainingSeatsCount();
+    handleLocationClick("홍대입구");
+  }, []);
 
   // 영화 목록
   const listReservation = () => {
@@ -89,11 +96,6 @@ const Reservation_Movie = ({ history }) => {
       });
   };
 
-  useEffect(() => {
-    listReservation();
-    fetchRemainingSeatsCount();
-  }, []);
-
   // 잔여 좌석 수 호출
   const fetchRemainingSeatsCount = () => {
     ApiService.listSeat()
@@ -110,12 +112,12 @@ const Reservation_Movie = ({ history }) => {
       });
   };
 
-
+  // handleLocationClick 함수를 수정하여 클릭하지 않아도 해당 지역의 영화 정보가 표시되도록 합니다.
   const handleLocationClick = (location) => {
     const placeData = groupedData[location];
     console.log(`${location}에 대한 데이터:`, placeData);
 
-    // 클릭한 영화 정보를 저장
+    // 클릭한 영화 정보 저장
     setSelectedMovie(placeData);
 
     const menuElement = document.querySelector(".menu3_left"); // 지역에 해당하는 영화 출력 위치
@@ -158,26 +160,28 @@ const Reservation_Movie = ({ history }) => {
           setSelectedMovie(movies); // 클릭한 영화 리스트 전달
 
           menu4Sub.innerHTML = "";
-          // 선택한 영화 정보를 출력
+
+          // 선택한 영화 정보 출력
           movies.forEach((movieInfo) => {
-            const { ip_num, movie_title, theater_id, start_time } = movieInfo;
-            const formattedStartTime = moment(start_time, "HH:mm:ss").format(
+            const { ip_num, movie_title, theater_id, movie_time } = movieInfo;
+            const formattedStartTime = moment(movie_time, "HH:mm:ss").format(
               "HH:mm"
             );
 
+            // 최종 선택한 영화 정보
             setSelectedMovieInfo(movieInfo);
+            console.log(movieInfo)
 
             const listItem = document.createElement("li");
-            listItem.style.marginBottom = "20px";
             listItem.innerHTML = `
-              <a href="#none">
-                <span>
-                  ${movie_title}
-                  ${formattedStartTime}<br />
-                  ${remainingSeatsCount}/112 ${theater_id}
-                </span>                         
-              </a>
-            `;
+            <a href="#none">
+              <span>
+                ${movie_title}
+                ${formattedStartTime}<br />
+                ${remainingSeatsCount}/112 ${theater_id}
+              </span>                         
+            </a>
+          `;
             menu4Sub.appendChild(listItem);
           });
         };
@@ -237,8 +241,12 @@ const Reservation_Movie = ({ history }) => {
   const sysdate = moment().format("YYYY-MM-DD");
 
   const handlePopupOpen = () => {
-    // 팝업을 열고 선택한 영화 정보를 설정
     setPopupOpen(true);
+    // if (selectedMovie && selectedMovie.length > 0) {
+    //   setSelectedMovieInfo(selectedMovie[0]);
+    // }
+
+    console.log("팝업이 열릴 때 selectedMovieInfo:", selectedMovieInfo);
   };
 
   return (
@@ -337,7 +345,7 @@ const Reservation_Movie = ({ history }) => {
               <div className="menu2">
                 <ul className="menu2_left">
                   {Object.entries(places).map(([placeKey, placeNames]) => (
-                    <li key={placeKey}>
+                    <li key={placeKey} className="region">
                       <a
                         href="#"
                         onClick={(event) => {
@@ -359,7 +367,7 @@ const Reservation_Movie = ({ history }) => {
                             <div key={placeKey}>
                               {placeKey === selectedRegion &&
                                 placeNames.map((location, index) => (
-                                  <li className="subRegions" key={index}>
+                                  <li className="subRegion" key={index}>
                                     <a
                                       href="#"
                                       onClick={(event) => {
@@ -389,13 +397,7 @@ const Reservation_Movie = ({ history }) => {
             </div>
             <li>
               <div className="menu3">
-                <ul className="menu3_left">
-                  {movies.map((movie) => (
-                    <li key={movie.id} onClick={() => handleClick(movie)}>
-                      {movie.title}
-                    </li>
-                  ))}
-                </ul>
+                <ul className="menu3_left"></ul>
               </div>
             </li>
           </ul>
@@ -415,24 +417,22 @@ const Reservation_Movie = ({ history }) => {
                     <a href="#none"></a>
                   </div>
                   <div className="menu4_sub" onClick={handlePopupOpen}>
-                    <ul>
-                      <li></li>
-                    </ul>
+                    <ul></ul>
                   </div>
                 </ul>
               </div>
             </li>
           </ul>
         </div>
-        {popupOpen && selectedMovie && (
+        {popupOpen && selectedMovieInfo && (
           <div className="popup">
             <div className="popup_content">
               <strong>
-                {selectedMovie[0].movie_title}/{" "}
-                {moment(selectedMovie[0].start_time, "HH:mm:ss").format(
+                {selectedMovieInfo.movie_title}/{" "}
+                {moment(selectedMovieInfo.movie_time, "HH:mm:ss").format(
                   "HH:mm"
                 )}{" "}
-                ({selectedMovie[0].theater_id})
+                ({selectedMovieInfo.theater_id})
               </strong>
               {remainingSeatsCount !== null && (
                 <p>
@@ -440,10 +440,7 @@ const Reservation_Movie = ({ history }) => {
                 </p>
               )}
               <img className="Res_screen" src={Res_screen} />
-              <p>
-                본 영화는 만 {getMovieImage(selectedMovie[0].movie_id)} 세 이상
-                관람가 영화입니다.
-              </p>
+              <p>영화/관람일자 확인해주세요.</p>
               <button name="n" onClick={handleCancellation}>
                 취소
               </button>

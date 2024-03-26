@@ -1,99 +1,95 @@
-import React, { Component } from 'react';
+import React from 'react';
 import style from '../../../styles/page_6/MyPage_res_module.css'
+import Table from 'react-bootstrap/Table';
+import { useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
+import ApiService from '../../../ApiService';
 
 
-class MyPage_res_part extends Component {
-    render() {
-        return (
-            <div className={`MyPage_resMoive ${style.MyPage_resMoive}`}>
-                <div className={`MyPage_res_date_List ${style.MyPage_res_date_List}`}>
-                    {/* 반복문 써서 날짜 정보 나오게끔 */}
-                    <table>
-                        <tr>
-                            <td>0000.00.00</td>
-                            {/* 나중에 포이치문 쓸거여 */}
-                        </tr>
-                        <tr>
-                            <td>날짜</td>
-                        </tr>
-                        <tr>
-                            <td>날짜</td>
-                        </tr>
-                        <tr>
-                            <td>날짜</td>
-                        </tr>
-                    </table>
-                </div>
-                <div className={`MyPage_res_MovieInfo ${style.MyPage_res_MovieInfo}`}>
-                    <div className={`MyPage_res_MovieInfo_small ${style.MyPage_res_MovieInfo_small}`}>
-                        <div className={`movie_Name ${style.movie_Name}`}>
-                            <strong>영화 이름</strong>
-                        </div>
-                        <div className={`movie_Name ${style.movie_Name}`}>
-                            <strong>가격</strong>
-                        </div>
-                        <div className={`res_code ${style.res_code}`}>
-                            예매번호 0000000
-                        </div>
-                        <div className={`cancle_accept ${style.cancle_accept}`}>
-                            {/* 영화 시작 30분 전에는 취소 불가능 */}
-                            취소가능
-                        </div>
-                    </div>
-                    <div className={`MyPage_res_MovieInfo_detail ${style.MyPage_res_MovieInfo_detail}`}>
-                        <div className={`movie_info ${style.movie_info}`}>
-                            <div className={`movie_img ${style.movie_img}`}>
-                                <img src='#' alt='영화포스터' />
-                            </div>
-                            <div className={`movie_info_detail ${style.movie_info_detail}`}>
-                                <table>
-                                    <tr>
-                                        <th>상영일시</th>
-                                        <td>0000.00.00</td>
-                                        <td>1234</td>
-                                    </tr>
-                                    <tr>
-                                        <th>상영관</th>
-                                        <td colSpan={2}>1234</td>
-                                    </tr>
-                                    <tr>
-                                        <th>관람인원</th>
-                                        <td colSpan={2}>0명</td>
-                                    </tr>
-                                    <tr>
-                                        <th>좌석</th>
-                                        <td colSpan={2}>h1 h2 석</td>
-                                    </tr>
-                                    <tr>
-                                        <td colSpan={3}>
-                                            <button className={`cancle_res ${style.cancle_res}`}>결제취소</button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <hr/>
-                        <div className={`movice_purchase_date ${style.movice_purchase_date}`}>
-                            <table>
-                                <tr>
-                                    <th>결제일시</th>
-                                    <td colSpan={5}>0000-00-00 00:00:00</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>주문금액</strong></td>
-                                    <td>0000000원</td>
-                                    <td><strong>할인금액</strong></td>
-                                    <td>0000000원</td>
-                                    <td><strong>총 결제 금액</strong></td>
-                                    <td style={{color: 'red'}}>0000000원</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
+function MyPage_res_part() {
+
+    const [reservationInfo, setReservationInfo] = useState([]);
+    const [emailCheck, setEmailCheck] = useState('');
+    const [totalAmount, setTotalAmount] = useState(0);
+
+    useEffect(() => {
+        const authToken = localStorage.getItem("auth_token");
+        if (authToken) {
+            const decodedToken = jwtDecode(authToken); // 수정 필요
+            const userEmail = decodedToken.iss;
+            setEmailCheck(userEmail);
+            reloadReservationInfo(userEmail);
+        }
+
+    }, []);
+
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1, 두 자리 숫자로 만들기 위해 padStart 사용
+        const day = String(date.getDate()).padStart(2, '0'); // 두 자리 숫자로 만들기 위해 padStart 사용
+        return `${year}-${month}-${day}`;
+    };
+
+    const reloadReservationInfo = (emailCheck) => {
+        ApiService.listPayment(emailCheck)
+            .then(res => {
+                console.log("res.data", res.data);
+                const reservationInfo = res.data.list.map(item => ({
+                    ...item,
+                    pay_sysdate: formatDate(item.pay_sysdate),
+                   
+                }));
+                
+                console.log("reservationInfo", reservationInfo);
+                const calculatedTotalAmount = reservationInfo.reduce((acc, item) => {
+                    console.log("pay_Amount type:", typeof item.pay_amount);
+                    console.log("pay_Amount value:", item.pay_amount);
+                    return acc + item.pay_amount;
+                }, 0);
+                
+                setTotalAmount(calculatedTotalAmount);
+                setReservationInfo(reservationInfo);
+                
+            })
+            .catch(err => {
+                console.log('listPayment() Error!!', err);
+            });
     }
+
+
+    return (
+        <div className={`MyPage_resMoive ${style.MyPage_resMoive}`}>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>상품</th>
+                        <th>결제금액</th>
+                        <th>날짜</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {reservationInfo.map((reservationInfoItem, index) => (
+                        <tr key={index}>
+                            <input type="hidden" id='one_id_pk' value={reservationInfoItem.one_id}></input>
+                            <input type="hidden" value={reservationInfoItem.c_email}></input>
+                            <td>{reservationInfoItem.pay_id}</td>
+                            <td>{reservationInfoItem.pay_order_name}</td>
+                            <td>{reservationInfoItem.pay_amount} 원</td>
+                            <td>
+                                {reservationInfoItem.pay_sysdate}
+                            </td>
+                        </tr>
+                    ))}
+                    <tr>
+                        <td colSpan={3}>총 금액 : </td>
+                        <td>{totalAmount} 원</td>
+                    </tr>
+                </tbody>
+            </Table>
+        </div>
+    )
 }
 
 export default MyPage_res_part;

@@ -47,6 +47,40 @@ public class Oauth2UserServiceImpl extends DefaultOAuth2UserService {
 		
 		
 		
+//		네이버
+//		{
+//			"resultcode":"00",
+//			"message":"success",
+//			"response":{
+//				"id":"ZyscV2igSHOA7EX5vhgsjtRPSgRQP-VuycMsPQ6OeqQ",
+//				"email":"wwrr40@naver.com",
+//				"mobile":"010-2657-5800",
+//				"mobile_e164":"+821026575800",
+//				"name":"정호진"
+//			}
+//		}
+//
+//		카카오
+//		{
+//			"id":3378423710,
+//
+//
+//
+//			"connected_at":"2024-03-07T06:58:39Z",
+//			"properties":{"nickname":"정호진"},
+//			"kakao_account":{
+//					"profile_nickname_needs_agreement":false,
+//					"profile":{
+//							"nickname":"정호진",
+//							"is_default_nickname":false},
+//							"has_email":true,"email_needs_agreement":false,
+//							"is_email_valid":true,
+//							"is_email_verified":true,
+//							"email":"wwrr400@gmail.com"
+//			}
+//		}
+		
+		
 		if (oauthClientName.equals("kakao")) {
 		    userId = "kakao_" + oAuth2User.getAttributes().get("id");
 		    // Kakao 계정에서 이메일 주소 추출
