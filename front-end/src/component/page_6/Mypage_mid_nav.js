@@ -24,7 +24,7 @@ function Mypage_mid_nav() {
             <NavDropdown title="MY 정보 관리" href="/MyPage_myinfo">
               <Nav.Link href="/MyPage_myinfo">회원정보관리</Nav.Link>
               <Nav.Link href="/MyPage_consult_list">1:1문의내역</Nav.Link>
-              <Nav.Link href="/MyPage_consult_list">대관예약문의</Nav.Link>
+              <Nav.Link href="/MyPage_consult_list2">대관예약문의</Nav.Link>
             </NavDropdown>
           </Nav>
         </Container>

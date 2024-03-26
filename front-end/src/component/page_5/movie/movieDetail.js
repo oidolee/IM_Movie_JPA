@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie'; // 로그인 확인용
 import { useParams } from 'react-router-dom';
 import ApiService from '../../../ApiService';
 
+
 // 이미지
 import movie1 from "../../../assets/page_5/movie1.jpg";
 import heart from "../../../assets/page_5_5/heart.png";
@@ -257,9 +258,11 @@ function MovieDetail() {
             </div>
 
             <div className={`btn_wrap2 ${style.btn_wrap2}`}>
+            <Link to="/page_1/Reservation_Movie">
               <button className={`detail_btn4 ${style.detail_btn4}`} id="13">
                 예매하기
               </button>
+              </Link>
             </div>
           </div>
         </div>

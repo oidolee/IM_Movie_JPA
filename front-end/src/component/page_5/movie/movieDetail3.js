@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import style from "../../../styles/page_5/movieDetail2.module.css";
+import style from "../../../styles/page_5/movieDetail3.module.css";
 import { useCookies } from 'react-cookie'; // 로그인 확인용
 import { useParams } from 'react-router-dom';
 import ApiService from '../../../ApiService';
@@ -46,13 +46,13 @@ function StarRating({ maxStars, selectedStars, onStarClick }) {
 }
 
 //상세페이지
-function MovieDetail2() {
+function MovieDetail3() {
   const [showModal, setShowModal] = useState(false); // 모달 창 열림/닫힘 상태
   const [selectedValue, setSelectedValue] = useState(1); // 선택된 값
   const [selectedTrailer, setSelectedTrailer] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(['idName']); // 로그인 확인용
 
-  const { now_id } = useParams(); // useParams 훅을 사용하여 URL의 id 값을 가져옴
+  const { arte_id } = useParams(); // useParams 훅을 사용하여 URL의 id 값을 가져옴
 
   const history = useHistory();
 
@@ -62,7 +62,7 @@ function MovieDetail2() {
 
 
   // id 값 사용 예시
-  console.log("now_id:", now_id);
+  console.log("arte_id:", arte_id);
 
   const handleTrailerClick = (trailerUrl) => {
     setSelectedTrailer(trailerUrl);
@@ -92,7 +92,7 @@ function MovieDetail2() {
       return;
     }
     let inputData = {
-      now_id: now_id,
+      arte_id: arte_id,
       cus_id: cookies.cus_id,
       review_star: selectedStars,
       review_contents: reviewContents,
@@ -108,7 +108,7 @@ function MovieDetail2() {
         alert("관람평 등록 완료 ")
         // window.location.reload();
         // history.push("/movieDetail/" + movie_id);
-        reviewList(now_id);
+        reviewList(arte_id);
         setSelectedValue(2);
       })
       .catch((error) => {
@@ -118,16 +118,16 @@ function MovieDetail2() {
   }
 
   useEffect(() => {
-    reviewList(now_id);
+    reviewList(arte_id);
     selectLoad();
   }, []);
 
   const [getReviewlists, setGetReviewlists] = useState([]);
 
   // 관람평
-  const reviewList = (now_id) => {
+  const reviewList = (arte_id) => {
     console.log("reviewList start")
-    ApiService.reviewList(now_id)
+    ApiService.reviewList(arte_id)
       .then((res) => {
         console.log(res.data)
         setGetReviewlists(res.data)
@@ -142,46 +142,46 @@ function MovieDetail2() {
 
   // 영화상세
   const [detailInfo, setDetailInfo] = useState({
-    now_id: "",
-    now_image: "",
-    now_title: "",
-    now_date: "",
-    now_time: "",
-    now_age: "",
-    now_visitor: "",
-    now_contents: "",
-    now_con: "",
-    now_pd: "",
-    now_cast: "",
-    now_image2: "",
-    now_image3: "",
-    now_trailer1: "",
-    now_trailer2: "",
-    now_category: "",
+    arte_id: "",
+    arte_image: "",
+    arte_title: "",
+    arte_date: "",
+    arte_time: "",
+    arte_age: "",
+    arte_visitor: "",
+    arte_contents: "",
+    arte_con: "",
+    arte_pd: "",
+    arte_cast: "",
+    arte_image2: "",
+    arte_image3: "",
+    arte_trailer1: "",
+    arte_trailer2: "",
+    arte_category: "",
   });
 
   const selectLoad = () => {
-    ApiService.selectNow(now_id)
+    ApiService.selectArte(arte_id)
       .then(res => {
         let list = res.data;
         console.log('res.data : ' + res.data)
         setDetailInfo({
-          now_id: list.dto.now_id,
-          now_image: list.dto.now_image,
-          now_title: list.dto.now_title,
-          now_date: list.dto.now_date,
-          now_time: list.dto.now_time,
-          now_age: list.dto.now_age,
-          now_visitor: list.dto.now_visitor,
-          now_contents: list.dto.now_contents,
-          now_con: list.dto.now_con,
-          now_pd: list.dto.now_pd,
-          now_cast: list.dto.now_cast,
-          now_image2: list.dto.now_image2,
-          now_image3: list.dto.now_image3,
-          now_trailer1: list.dto.now_trailer1,
-          now_trailer2: list.dto.now_trailer2,
-          now_category: list.dto.now_category,
+          arte_id: list.dto.arte_id,
+          arte_image: list.dto.arte_image,
+          arte_title: list.dto.arte_title,
+          arte_date: list.dto.arte_date,
+          arte_time: list.dto.arte_time,
+          arte_age: list.dto.arte_age,
+          arte_visitor: list.dto.arte_visitor,
+          arte_contents: list.dto.arte_contents,
+          arte_con: list.dto.arte_con,
+          arte_pd: list.dto.arte_pd,
+          arte_cast: list.dto.arte_cast,
+          arte_image2: list.dto.arte_image2,
+          arte_image3: list.dto.arte_image3,
+          arte_trailer1: list.dto.arte_trailer1,
+          arte_trailer2: list.dto.arte_trailer2,
+          arte_category: list.dto.arte_category,
         });
         console.log("selectByIdUpdate 성공 : ", res.data);
       })
@@ -195,23 +195,23 @@ function MovieDetail2() {
       <div className={`detail_movie_wrap ${style.detail_movie_wrap}`}>
         <div className={`detail_info ${style.detail_info}`}>
           <div className={`detail_img_box ${style.detail_img_box}`}>
-          <img src={`${process.env.PUBLIC_URL}/page_5/${detailInfo.now_image}`} alt="파묘상세" style={{ width: "250px" }} />
+          <img src={`${process.env.PUBLIC_URL}/page_5/${detailInfo.arte_image}`} alt="파묘상세" style={{ width: "250px" }} />
           </div>
 
           <div className={`detail_text ${style.detail_text}`}>
             <div className={`detail_title ${style.detail_title}`}>
-              <label for="pp_name">{detailInfo.now_title}</label>
+              <label for="pp_name">{detailInfo.arte_title}</label>
             </div>
 
             <div className={`detail_con ${style.detail_con}`}>
               <div className={`detail_con1 ${style.detail_con1}`}>
-                <label for="de_date">{detailInfo.now_date} 개봉</label>
-                <label for="de_time">| {detailInfo.now_time}분 |</label>
+                <label for="de_date">{detailInfo.arte_date} 개봉</label>
+                <label for="de_time">| {detailInfo.arte_date}분 |</label>
                 <label for="de_age">
                   {" "}
-                  <span style={{ color: "orange" }}>{detailInfo.now_age}</span>
+                  <span style={{ color: "orange" }}>{detailInfo.arte_age}</span>
                 </label>
-                <label for="de_num">| {detailInfo.now_visitor}</label>
+                <label for="de_num">| {detailInfo.arte_visitor}</label>
               </div>
             </div>
 
@@ -230,16 +230,14 @@ function MovieDetail2() {
 
             <div id="section4" className={`detail_box ${style.detail_box}`}>
               <p className={`detail_con2 ${style.detail_con2}`}>
-              {detailInfo.now_contents}
+              {detailInfo.arte_contents}
               </p>
             </div>
 
             <div className={`btn_wrap2 ${style.btn_wrap2}`}>
-            <Link to="/page_1/Reservation_Movie">
               <button className={`detail_btn4 ${style.detail_btn4}`} id="13">
                 예매하기
               </button>
-              </Link>
             </div>
           </div>
         </div>
@@ -267,14 +265,14 @@ function MovieDetail2() {
                 <div>
                   <p>영화정보</p>
                   <p>
-                    <span style={{ color: "gray" }}>.장르</span> {detailInfo.now_con}
+                    <span style={{ color: "gray" }}>.장르</span> {detailInfo.arte_con}
                   </p>
                   <p>
-                    <span style={{ color: "gray" }}>.감독</span> {detailInfo.now_pd}
+                    <span style={{ color: "gray" }}>.감독</span> {detailInfo.arte_pd}
                   </p>
                   <p>
                     <span style={{ color: "gray" }}>.출연</span>{" "}
-                    {detailInfo.now_cast}
+                    {detailInfo.arte_cast}
                   </p>
                 </div>
               )}
@@ -398,15 +396,15 @@ function MovieDetail2() {
         </div>
         <button
           className={`detail_trailer1 ${style.detail_trailer1}`}
-          onClick={() => handleTrailerClick(detailInfo.now_trailer1)}
+          onClick={() => handleTrailerClick(detailInfo.arte_trailer1)}
         >
-          <img src={`${process.env.PUBLIC_URL}/page_5_1/${detailInfo.now_image2}`} alt="트레일러1" />
+          <img src={`${process.env.PUBLIC_URL}/page_5_1/${detailInfo.arte_image2}`} alt="트레일러1" />
         </button>
         <button
           className={`detail_trailer1 ${style.detail_trailer2}`}
-          onClick={() => handleTrailerClick(detailInfo.now_trailer2)}
+          onClick={() => handleTrailerClick(detailInfo.arte_trailer2)}
         >
-          <img src={`${process.env.PUBLIC_URL}/page_5_1/${detailInfo.now_image3}`} alt="트레일러2" />
+          <img src={`${process.env.PUBLIC_URL}/page_5_1/${detailInfo.arte_image3}`} alt="트레일러2" />
         </button>
       </div>
 
@@ -437,4 +435,4 @@ function MovieDetail2() {
   );
 }
 
-export default MovieDetail2;
+export default MovieDetail3;
