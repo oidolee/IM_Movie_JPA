@@ -17,8 +17,6 @@ const Reservation_Movie = ({ history }) => {
   const [selectedRegion, setSelectedRegion] = useState("서울"); // 지역
   const [groupedData, setGroupedData] = useState({}); // 지역 그룹화
   const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 최종 영화 정보 저장
-  const [selectedLocationData, setSelectedLocationData] = useState(null);
-
   const places = {
     서울: ["홍대입구", "용산", "합정", "에비뉴엘", "영등포"],
     경기: ["안양일번가", "광명아울렛", "위례"],
@@ -112,7 +110,6 @@ const Reservation_Movie = ({ history }) => {
       });
   };
 
-  // handleLocationClick 함수를 수정하여 클릭하지 않아도 해당 지역의 영화 정보가 표시되도록 합니다.
   const handleLocationClick = (location) => {
     const placeData = groupedData[location];
     console.log(`${location}에 대한 데이터:`, placeData);
@@ -158,19 +155,20 @@ const Reservation_Movie = ({ history }) => {
           ); // 클릭한 영화 제목과 ID 출력
 
           setSelectedMovie(movies); // 클릭한 영화 리스트 전달
+          console.log("setSelectedMovie : ", movies)
 
           menu4Sub.innerHTML = "";
 
           // 선택한 영화 정보 출력
           movies.forEach((movieInfo) => {
-            const { ip_num, movie_title, theater_id, movie_time } = movieInfo;
+            const { movie_id, movie_title, theater_id, movie_time } = movieInfo;
             const formattedStartTime = moment(movie_time, "HH:mm:ss").format(
               "HH:mm"
             );
 
+            setSelectedMovieInfo(movieInfo)
             // 최종 선택한 영화 정보
-            setSelectedMovieInfo(movieInfo);
-            console.log(movieInfo)
+            console.log("setSelectedMovieInfo : ", movieInfo);
 
             const listItem = document.createElement("li");
             listItem.innerHTML = `
@@ -191,6 +189,15 @@ const Reservation_Movie = ({ history }) => {
         console.log(`Movie ID: ${movieId}에 대한 데이터:`, movies);
       });
     }
+  };
+
+  const handlePopupOpen = () => {
+    setPopupOpen(true);
+    // if (selectedMovie && selectedMovie.length > 0) {
+    //   setSelectedMovieInfo(selectedMovie[0]);
+    // }
+
+    console.log("팝업이 열릴 때 selectedMovieInfo:", selectedMovieInfo);
   };
 
   // 연령에 대한 이미지
@@ -239,15 +246,6 @@ const Reservation_Movie = ({ history }) => {
   };
 
   const sysdate = moment().format("YYYY-MM-DD");
-
-  const handlePopupOpen = () => {
-    setPopupOpen(true);
-    // if (selectedMovie && selectedMovie.length > 0) {
-    //   setSelectedMovieInfo(selectedMovie[0]);
-    // }
-
-    console.log("팝업이 열릴 때 selectedMovieInfo:", selectedMovieInfo);
-  };
 
   return (
     <div className={`Res_Movie ${style.Res_Movie}`}>
