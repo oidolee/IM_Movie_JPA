@@ -179,6 +179,7 @@ class FaqMoiveLocation extends Component {
                     {this.state.lists && this.state.lists.map((item, index) => (
                       item.ticketmap_address.includes('서울') && ( // 서울이라는 단어가 포함된 주소를 가진 항목만 출력
                         <li key={index}>
+                          {/* EditStore_Map 네이버맵 , EditStore_MapName 문의 지점입력  */}
                           <a onClick={() => { this.EditStore_Map(item.ticketmap_no); this.EditStore_MapName(item.ticketmap_name); }}>
                             <span>{item.ticketmap_name}</span>
                           </a>
@@ -194,7 +195,7 @@ class FaqMoiveLocation extends Component {
                     {this.state.lists && this.state.lists.map((item, index) => (
                       item.ticketmap_address.includes('경기') && ( // 서울이라는 단어가 포함된 주소를 가진 항목만 출력
                         <li key={index}>
-                          <a onClick={() => this.EditStore_Map(item.ticketmap_no)}>
+                          <a onClick={() => { this.EditStore_Map(item.ticketmap_no); this.EditStore_MapName(item.ticketmap_name); }}>
                             <span>{item.ticketmap_name}</span>
                           </a>
                         </li>
@@ -209,7 +210,7 @@ class FaqMoiveLocation extends Component {
                     {this.state.lists && this.state.lists.map((item, index) => (
                       item.ticketmap_address.includes('인천') && ( // 서울이라는 단어가 포함된 주소를 가진 항목만 출력
                         <li key={index}>
-                          <a onClick={() => this.EditStore_Map(item.ticketmap_no)}>
+                          <a onClick={() => { this.EditStore_Map(item.ticketmap_no); this.EditStore_MapName(item.ticketmap_name); }}>
                             <span>{item.ticketmap_name}</span>
                           </a>
                         </li>
@@ -224,7 +225,7 @@ class FaqMoiveLocation extends Component {
                     {this.state.lists && this.state.lists.map((item, index) => (
                       item.ticketmap_address.includes('충남') && ( // 서울이라는 단어가 포함된 주소를 가진 항목만 출력
                         <li key={index}>
-                          <a onClick={() => this.EditStore_Map(item.ticketmap_no)}>
+                          <a onClick={() => { this.EditStore_Map(item.ticketmap_no); this.EditStore_MapName(item.ticketmap_name); }}>
                             <span>{item.ticketmap_name}</span>
                           </a>
                         </li>
@@ -239,7 +240,7 @@ class FaqMoiveLocation extends Component {
                     {this.state.lists && this.state.lists.map((item, index) => (
                       item.ticketmap_address.includes('강원') && ( // 서울이라는 단어가 포함된 주소를 가진 항목만 출력
                         <li key={index}>
-                          <a onClick={() => this.EditStore_Map(item.ticketmap_no)}>
+                          <a onClick={() => { this.EditStore_Map(item.ticketmap_no); this.EditStore_MapName(item.ticketmap_name); }}>
                             <span>{item.ticketmap_name}</span>
                           </a>
                         </li>

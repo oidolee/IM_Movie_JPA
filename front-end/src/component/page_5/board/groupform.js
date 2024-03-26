@@ -23,6 +23,7 @@ function Form() {
     });
   };
   useEffect(() => {
+    window.localStorage.removeItem("ticketmap_name");
     const authToken = localStorage.getItem("auth_token");
     if (authToken) {
       const decodedToken = jwtDecode(authToken); // 수정 필요
@@ -71,11 +72,20 @@ function Form() {
     console.log(addInfo)
     ApiService.groupAdd(addInfo)
       .then((res) => {
-        alert("대관문의 성공 입니다.")
-        console.log("GroupInsert 성공 : ", res.data);
-        window.location.href="/";
+        console.log("GroupInsert 결과 : ", res.data);
+
+        window.localStorage.removeItem("ticketmap_name");
+        
+        if (res.data.resultCode != 200) {
+            alert("대관문의 등록 오류 입니다.");
+        } else {
+            console.log("GroupInsert 성공 : ", res.data.resultCode);
+            alert("대관문의 성공 입니다.");
+            window.location.href="/";
+        }
       })
       .catch((err) => {
+        window.localStorage.removeItem("ticketmap_name");
         console.log(addInfo);
         console.log("GroupInsert 실패 : ", err);
       });
