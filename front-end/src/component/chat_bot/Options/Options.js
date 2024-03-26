@@ -28,8 +28,15 @@ const Options = (props) => {
     },
   ];
 
+
   const buttonsMarkup = options.map((option) => (
-    <button key={option.id} onClick={option.handler} className="option-button">
+    <button key={option.id} onClick={() => {
+      if(option.id === 3) {
+        handleOptionClick(); // id가 3일 때만 handleOptionClick 함수 호출
+      } else {
+        option.handler(); // 그 외에는 각 option의 handler 호출
+      }
+    }} className="option-button">
       {option.text}
     </button>
   ));

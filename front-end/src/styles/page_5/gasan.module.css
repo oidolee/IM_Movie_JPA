@@ -321,3 +321,8 @@ font-size: 13px;
 .saturday {
   color: blue; /* 토요일 텍스트 색상을 파란색으로 지정 */
 }
+
+.theater_btn_wrap{
+  text-align: left;
+  padding-left: 84px;
+}

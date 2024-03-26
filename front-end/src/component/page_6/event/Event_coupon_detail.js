@@ -23,7 +23,7 @@ const Event_coupon_detail = () => {
             origin: 'left',
             distance: '30px',
             easing: 'ease',
-            reset: true
+            reset: false
         });
         reloadCouponList(ic_name);
         const authToken = localStorage.getItem("auth_token");

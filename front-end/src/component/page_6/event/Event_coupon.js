@@ -13,7 +13,7 @@ const Event_coupon = () => {
             origin: 'left',
             distance: '30px',
             easing: 'ease',
-            reset: true
+            reset: false
         });
         reloadCouponList();
     }, []); // 한 번만 실행됨
@@ -83,6 +83,7 @@ const Event_coupon = () => {
         } else {
             alert(`${targetIcCode} 쿠폰이 존재하지 않습니다.`)
         }
+        reloadCouponList();
     };
 
     // 예시로 'W29unZmm' 쿠폰이 존재하는지 확인
