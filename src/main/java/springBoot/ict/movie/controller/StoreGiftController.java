@@ -60,8 +60,8 @@ public class StoreGiftController {
         		+ "\n▶ 보내시는 분의 메시지: " + dto.getGift_content()
         		+ "\n▶ 상품명: " + dto.getItem_name() + "\n▶ 쿠폰 번호: " + dto.getGift_num() + "\n▶ 유효 기간: 2024.10.01" + "\n\n" + "자세한 사용내역은 IM MOVIE 홈페이지 참조부탁드립니다.\n감사합니다.");
         
-        //return this.messageService.sendOne(new SingleMessageSendingRequest(message));
-        return null;
+        return this.messageService.sendOne(new SingleMessageSendingRequest(message));
+        //return null;
     }
     
     // 스토어 리스트 조회
