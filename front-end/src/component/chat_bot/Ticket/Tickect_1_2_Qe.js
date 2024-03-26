@@ -8,7 +8,7 @@ const Tickect_1_2_Qe = (props) => {
 
     const handleOptionClick = (id) => {
       if (id === 1) {
-        history.push("/page3");
+        history.push("/page_1/Reservation_Movie");
       } else if (id === 2) {
         // handleOptionClick 함수 대신 option.handler를 호출
         props.actionProvider.goHome();

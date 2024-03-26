@@ -1,20 +1,8 @@
-/* header 공통 부분 */
-/* .header_section{
-    width: 100%;
-    position: initial;
-    left: initial;
-    transform: initial;
-    margin: 0 auto;
-    background: initial;
-} */
-
 .mypage_area_movingbar {
     width: 980px;
     height: max-content;
     margin: 0px auto;
     padding: 50px 0 0 0;
-    
-    
 }
 
 .mypage_area_movingbar::before {
@@ -38,16 +26,6 @@
     display: flex;
     
 }
-
-/* .mypage_top_infor::before {
-    content: '';
-    position: absolute;
-    left: 599px;
-    top: 0;
-    width: 1px;
-    height: 100%;
-    background-color: #eee;
-} */
 
 .mypage_box {
     position: relative;
@@ -148,7 +126,6 @@
     width: auto;
     height: 60px;
     justify-content: space-around;
-    margin-top: 100px;
     
 }
 
@@ -162,10 +139,10 @@
 
 .btn_wrap .my_coupon{
     width: 280px;
-    border: 1px solid whitesmoke;
+    border: 1px solid #a7a7a7;
     border-radius: 10px;
-    box-shadow: #AFAFAF
-
+    box-shadow: #AFAFAF;
+    line-height: 58px;
 }
 
 .my_theater{
@@ -183,5 +160,18 @@
     background: url(https://www.lottecinema.co.kr/NLCHS/Content/images/icon/edit_15.png) no-repeat 0 center;
 }
 
+.my_coupon_box a{
+    color: #000;
+}
+.my_coupon_box div{
+    background-color: blanchedalmond;
+}
 
+
+.my_coupon_box div:hover{
+    background-color: rgb(204, 105, 105);
+    color: white;
+    cursor: pointer;
+    
+}
 
