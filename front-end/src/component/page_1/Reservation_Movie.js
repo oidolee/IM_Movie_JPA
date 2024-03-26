@@ -121,75 +121,75 @@ const Reservation_Movie = ({ history }) => {
     const menu4Sub = document.querySelector(".menu4_sub ul"); // 선택된 영화 정보 출력 위치
 
     menuElement.innerHTML = ""; // 기존 내용 지우기
+    menu4Sub.innerHTML = ""; // 기존 내용 지우기
 
     if (placeData) {
-      // 영화 ID를 기준으로 그룹화
-      const groupedMovies = {};
-      placeData.forEach((item) => {
-        if (!groupedMovies[item.movie_id]) {
-          groupedMovies[item.movie_id] = [item];
-        } else {
-          groupedMovies[item.movie_id].push(item);
-        }
-      });
+        // 영화 ID를 기준으로 그룹화
+        const groupedMovies = {};
+        placeData.forEach((item) => {
+            if (!groupedMovies[item.movie_id]) {
+                groupedMovies[item.movie_id] = [item];
+            } else {
+                groupedMovies[item.movie_id].push(item);
+            }
+        });
 
-      // 그룹화된 데이터를 출력
-      Object.entries(groupedMovies).forEach(([movieId, movies]) => {
-        const menuItem = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = "#";
+        // 그룹화된 데이터를 출력
+        Object.entries(groupedMovies).forEach(([movieId, movies]) => {
+            const menuItem = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = "#";
 
-        // 영화 이미지 가져오기
-        const movieImage = getMovieImage(movieId);
+            // 영화 이미지 가져오기
+            const movieImage = getMovieImage(movieId);
 
-        // 영화 이미지와 제목 출력
-        if (movieImage) {
-          link.appendChild(movieImage); // 이미지 추가
-        }
-        link.appendChild(document.createTextNode(movies[0].movie_title)); // 제목 추가
+            // 영화 이미지와 제목 출력
+            if (movieImage) {
+                link.appendChild(movieImage); // 이미지 추가
+            }
+            link.appendChild(document.createTextNode(movies[0].movie_title)); // 제목 추가
 
-        link.onclick = (event) => {
-          event.preventDefault();
-          console.log(
-            `${movies[0].movie_title}를 클릭했습니다. ID: ${movieId}`
-          ); // 클릭한 영화 제목과 ID 출력
+            link.onclick = (event) => {
+                event.preventDefault();
+                console.log(
+                    `${movies[0].movie_title}를 클릭했습니다. ID: ${movieId}`
+                ); // 클릭한 영화 제목과 ID 출력
 
-          setSelectedMovie(movies); // 클릭한 영화 리스트 전달
-          console.log("setSelectedMovie : ", movies)
+                setSelectedMovie(movies); // 클릭한 영화 리스트 전달
+                console.log("setSelectedMovie : ", movies);
 
-          menu4Sub.innerHTML = "";
+                menu4Sub.innerHTML = "";
 
-          // 선택한 영화 정보 출력
-          movies.forEach((movieInfo) => {
-            const { movie_id, movie_title, theater_id, movie_time } = movieInfo;
-            const formattedStartTime = moment(movie_time, "HH:mm:ss").format(
-              "HH:mm"
-            );
+                movies.forEach((movieInfo, index) => {
+                  const { movie_id, movie_title, theater_id, movie_time } = movieInfo;
+                  const formattedStartTime = moment(movie_time, "HH:mm:ss").format(
+                      "HH:mm"
+                  );
+          
+                  const listItem = document.createElement("li");
+                  listItem.innerHTML = `
+                  <a href="#none">
+                      <span>
+                      ${movie_title}
+                      ${formattedStartTime}<br />
+                      ${remainingSeatsCount}/112 ${theater_id}
+                      </span>                         
+                  </a>
+                  `;
+                  menu4Sub.appendChild(listItem);
+                  setSelectedMovieInfo(movieInfo);
+                });
+            };
+            menuItem.appendChild(link);
+            menuElement.appendChild(menuItem);
 
-            setSelectedMovieInfo(movieInfo)
-            // 최종 선택한 영화 정보
-            console.log("setSelectedMovieInfo : ", movieInfo);
-
-            const listItem = document.createElement("li");
-            listItem.innerHTML = `
-            <a href="#none">
-              <span>
-                ${movie_title}
-                ${formattedStartTime}<br />
-                ${remainingSeatsCount}/112 ${theater_id}
-              </span>                         
-            </a>
-          `;
-            menu4Sub.appendChild(listItem);
-          });
-        };
-        menuItem.appendChild(link);
-        menuElement.appendChild(menuItem);
-
-        console.log(`Movie ID: ${movieId}에 대한 데이터:`, movies);
-      });
+            console.log(`Movie ID: ${movieId}에 대한 데이터:`, movies);
+        });
     }
-  };
+};
+
+
+
 
   const handlePopupOpen = () => {
     setPopupOpen(true);
