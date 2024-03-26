@@ -17,6 +17,7 @@ function Header() {
 
     const [path, setPath] = useState('/');
     const [id, setid] = useState('');
+    const [userName, setUserName] = useState('');
     const [customerInfo, setCustomerInfo] = useState(null);
 
     const [authToken, setAuthToken] = useState(null); // 토큰 상태 추가
@@ -50,6 +51,7 @@ function Header() {
                 .then(res => {
                     console.log(res.data);
                     const role = res.data.dto.role;
+                    setUserName(res.data.dto.name)
                     console.log("role : " + role);
                     // 역할에 따라 메뉴 표시를 다르게 설정
                     if (role === "ROLE_ADMIN") {
@@ -176,7 +178,7 @@ function Header() {
                     </ul>
 
                     {authToken && (
-                        <p className="Header_user_name"> 님 환영합니다.</p>
+                        <p className="Header_user_name"> {userName}님 환영합니다.</p>
                     )}
 
                 </div>
