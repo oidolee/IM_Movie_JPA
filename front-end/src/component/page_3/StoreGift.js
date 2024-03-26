@@ -35,7 +35,8 @@ class StoreGift extends Component {
       message: "",
       name: '',
       email: '',
-      userName : ''
+      userName : '',
+      detailRegDate : ''
     };
   }
 
@@ -50,8 +51,18 @@ class StoreGift extends Component {
         console.log(userEmail)
         this.reloadsearchCutomer(userEmail)
       }
+
+    // 오늘 날짜를 구하여 detailRegDate에 할당
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+    this.setState({ detailRegDate: formattedDate });
+    console.log('detailRegDate------', this.state.detailRegDate);
   }
 
+  
   closeStoreGift = () => {
     const { onClose } = this.props;
     onClose(); 
@@ -114,6 +125,7 @@ class StoreGift extends Component {
         name,
         email,
         userName,
+        detailRegDate: this.state.detailRegDate,
       })
     );
 
