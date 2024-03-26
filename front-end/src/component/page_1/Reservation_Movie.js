@@ -179,6 +179,7 @@ const Reservation_Movie = ({ history }) => {
                   menu4Sub.appendChild(listItem);
                   setSelectedMovieInfo(movieInfo);
                 });
+
             };
             menuItem.appendChild(link);
             menuElement.appendChild(menuItem);
