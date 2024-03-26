@@ -256,6 +256,8 @@ function Place() {
       </div>
 
       <div className={`place_wrap1 ${style.place_wrap1}`}>
+
+        
         <div className={`place_title ${style.place_title}`}>
           <label for="pp_name">{theaterName && theaterName.ticketmap_name ? theaterName.ticketmap_name : ""}점</label>
           <a
@@ -275,16 +277,16 @@ function Place() {
           </p>
         </div>
 
-        <div className={`btn_wrap ${style.btn_wrap}`}>
-          <button className={`place_btn ${style.place_btn}`} id="4">
-            <img src={traffic} alt="대중교통 안내 " />
-          </button>
-          <button className={`place_btn ${style.place_btn}`} id="5">
-            <img src={carpark} alt="자가용/주차안내" />
-          </button>
-          <button className={`place_btn ${style.place_btn}`} id="6">
-            <img src={map} alt="지도보기" />
-          </button>
+        <div className={`theater_btn_wrap ${style.theater_btn_wrap}`}>
+            <button className={`place_btn ${style.place_btn}`} id="4">
+              <img src={traffic} alt="대중교통 안내 " />
+            </button>
+            <button className={`place_btn ${style.place_btn}`} id="5">
+              <img src={carpark} alt="자가용/주차안내" />
+            </button>
+            <button className={`place_btn ${style.place_btn}`} id="6">
+              <img src={map} alt="지도보기" />
+            </button>
         </div>
       </div>
 

@@ -13,7 +13,7 @@ const Event_coupon = () => {
             origin: 'left',
             distance: '30px',
             easing: 'ease',
-            reset: true
+            reset: false
         });
         reloadCouponList();
     }, []); // 한 번만 실행됨

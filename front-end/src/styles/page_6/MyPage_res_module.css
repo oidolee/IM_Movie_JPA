@@ -1,9 +1,8 @@
 .MyPage_resMoive{
     display: flex;
-    border: 1px solid;
     margin: 5px;
     width: 973px;
-    justify-content: center;
+
 }
 
 .MyPage_resMoive .MyPage_res_date_List{

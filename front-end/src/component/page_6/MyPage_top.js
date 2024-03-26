@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import style from '../../styles/page_6/Mypage_module.css';
 import { jwtDecode } from 'jwt-decode';
 import ApiService from '../../ApiService';
+import { Link } from 'react-router-dom'; // 페이지이동
 
 
 
@@ -61,9 +62,6 @@ function MyPage_top() {
                         <div>
                             <span className={`txt_rank_common ${style.txt_rank_common}`}>일반</span>
                         </div>
-                        <div className={`profile_set ${style.profile_set}`}>
-                            <button type="button" className={`btn_txt_edit ${style.btn_txt_edit}`} title="레이어 팝업 열기">편집</button>
-                        </div>
                     </div>
                     <div className={`name_place${style.name_place}`}>
                         <div className={`name${style.name}`}>
@@ -113,19 +111,28 @@ function MyPage_top() {
                 </div>
             </div>
             <div className={`my_theater${style.my_theater}`}>
-                <div style={{ textAlign: 'center', marginBottom: '100px', fontSize: '30px', fontWeight: 'bold' }}>
+                <div style={{ textAlign: 'center', marginTop: '60px',marginBottom: '60px', fontSize: '30px', fontWeight: 'bold' }}>
                     MY 영화관
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        1st
-                    </div>
-                    <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <div>2nd</div>
-                    </div>
-                    <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <div>3rd</div>
-                    </div>
+                <div className={`my_coupon_box ${style.my_coupon_box}`} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    
+                    <Link to="/theater/1" className={`plz_login_button ${style.plz_login_button}`}>
+                        <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            홍대입구
+                        </div>
+                    </Link>
+
+                    <Link to="/theater/2" className={`plz_login_button ${style.plz_login_button}`}>
+                        <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            용산
+                        </div>
+                    </Link>
+
+                    <Link to="/theater/3" className={`plz_login_button ${style.plz_login_button}`}>
+                        <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            합정
+                        </div>
+                    </Link>
                 </div>
 
             </div>
