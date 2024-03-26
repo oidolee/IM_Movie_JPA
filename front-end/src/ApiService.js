@@ -577,6 +577,33 @@ class ApiService {
         return axios.post(serverUrl + "/page_5/GroupInsert", inputData);
     }
 
+     // 1:1 문의 상세
+     groupDetail(group_id){
+        console.log('groupDetail() 호출!!')
+        return axios.get(serverUrl + '/page_5/selectGroupAnswer/' + group_id); 
+    }
+
+    // 1:1 문의 답변 등록
+    addgroupAnwser(inputData) {
+        console.log('addgroupAnwser 호출', inputData);
+        return axios.post(serverUrl + "/page_5/saveAnswer", inputData);
+    }
+
+     // 1:1 문의 답변 후 상태 업데이트
+     updategroupData(group_id){
+        console.log('updategroupData 호출');
+        return axios.put(serverUrl + "/page_5/completeGroupAnswer/" + group_id);
+    }
+
+    
+    // 1:1 문의 답변 리스트
+    GroupAnswer(group_id){
+        console.log('GroupAnswer() 호출!!')
+        
+        return axios.get(serverUrl + '/page_5/groupAnswer/'+ group_id); 
+    }
+
+
     // selectGroup(group_id) {
     //     console.log("selectGroup 호출", group_id);
     //     return axios.get(serverUrl + "/page_5/getNoticeDetail/" + notice_num);

@@ -11,16 +11,22 @@ import {
 import style from "../../styles/admin/page_5/Admin_GroupForm_List.css";
 import ApiService from "../../ApiService";
 import { Create, Delete } from "@mui/icons-material";
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
-function Admin_GroupForm_List ({ history }) {
+
+function Admin_GroupForm_List () {
   const [lists, setLists] = useState([]);
-  
-  useEffect(() => {
-    groupList();
-  }, []);
+  const history = useHistory();
+  const [email, setEmail] = useState('');
+  const { group_Id } = useParams();
 
-  // 목록
+  
+ useEffect(() => {
+  groupList();
+}, []);
+  
+
+// 목록
   const groupList = () => {
     ApiService.groupList()
       .then((res) => {
@@ -31,10 +37,20 @@ function Admin_GroupForm_List ({ history }) {
       });
   };
 
+  const c_email = '{list.c_email}';
+  const group_name = '{list.group_name}';
+  const custo_name = '{list.custo_name}';
+
+  let inputData = {
+    group_id: {group_Id},
+    c_email: {c_email},
+    group_name: {group_name},
+    custo_name: {custo_name},
+  }
+
   // 등록
-  const groupAdd = () => {
-    window.localStorage.removeItem("group_id");
-    history.push("/admin/page_5/Admin_GroupForm_Answer");
+  const groupAdd = (inputData) => {
+    history.push(`/admin/page_5/Admin_GroupForm_Answer/${inputData.group_Id}`);
   };
 
 //   // 수정
@@ -70,16 +86,7 @@ function Admin_GroupForm_List ({ history }) {
       </Typography>
       <br />
       <br />
-      {/* <Button
-        variant="contained"
-        color="primary"
-        className="Add_btn"
-        onClick={noticeAdd}
-      >
-        등록하기
-      </Button>
-      <br />
-      <br /> */}
+      
       <Table className="GroupForm_List_Content">
         <TableHead>
           <TableRow>
@@ -98,19 +105,19 @@ function Admin_GroupForm_List ({ history }) {
             <TableCell>연락처1</TableCell>
             <TableCell>연락처2</TableCell>
             <TableCell>연락처3</TableCell>
+            <TableCell>답변상태</TableCell>
             
             <TableCell>답변</TableCell>
-            <TableCell>삭제</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {lists.map((list) => (
-            <TableRow key={list.group_id}>
+            <TableRow key={list.group_id} onClick={() => groupAdd(list.group_id)}>
               <TableCell>{list.c_email}</TableCell>
               <TableCell>{list.group_loc}</TableCell>
               <TableCell>{list.group_type}</TableCell>
               <TableCell>{list.group_expeople}</TableCell>
-              <TableCell>{list.group_date}</TableCell>
+              <TableCell> {new Date(list.group_date).toLocaleDateString()} </TableCell>
               <TableCell>{list.group_time1}</TableCell>
               <TableCell>{list.group_time2}</TableCell>
               <TableCell>{list.group_movtitle}</TableCell>
@@ -121,18 +128,13 @@ function Admin_GroupForm_List ({ history }) {
               <TableCell>{list.custo_phone1}</TableCell>
               <TableCell>{list.custo_phone2}</TableCell>
               <TableCell>{list.custo_phone3}</TableCell>
+              <TableCell>{list.gr_show === 'y' ? '답변대기 중' : '답변 완료'}</TableCell>
               <TableCell
                 className="selectBtn"
-                onClick={() => groupAdd(list.group_id)}
+                onClick={() => groupAdd(inputData)}
               >
                 <Create />
               </TableCell>
-              {/* <TableCell
-                className="deleteBtn"
-                onClick={() => groupDelete(list.group_id)}
-              >
-                <Delete />
-              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>
