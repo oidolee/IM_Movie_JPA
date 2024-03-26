@@ -90,7 +90,7 @@ class StoreGift extends Component {
   };
 
   handlePayment = () => {
-    const { recipientNumber, sender, message, name, email } = this.state;
+    const { recipientNumber, sender, message, name, email, userName } = this.state;
     const { totalQuantity, totalPrice, itemCode, itemName, itemImage } = this.props;
 
     // 선물 받는 분 번호가 12자 이상이면 알림창 띄우기
@@ -113,6 +113,7 @@ class StoreGift extends Component {
         itemImage,
         name,
         email,
+        userName,
       })
     );
 
@@ -206,7 +207,6 @@ class StoreGift extends Component {
                     name="userName"
                     value={this.state.userName}
                     size="20"
-                    placeholder="선물 하는 분 입력"
                     onChange={this.handleChange}
                     required
                   />

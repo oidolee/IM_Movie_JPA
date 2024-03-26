@@ -67,7 +67,7 @@ class MyPage_Store_part extends Component {
                             <div className={`MyPage_res_MovieInfo_detail ${style.MyPage_res_MovieInfo_detail}`}>
                                 <div className={`movie_info ${style.movie_info}`}>
                                     <div className={`movie_img ${style.movie_img}`}>
-                                        <img src='#' alt='영화포스터' />
+
                                     </div>
                                     <div className={`movie_info_detail ${style.movie_info_detail}`}>
                                         <table>
@@ -96,10 +96,6 @@ class MyPage_Store_part extends Component {
                                             <td colSpan={5}>2024-03-26</td>
                                         </tr>
                                         <tr>
-                                            <td><strong>주문금액</strong></td>
-                                            <td>0000000원</td>
-                                            <td><strong>할인금액</strong></td>
-                                            <td>0000000원</td>
                                             <td><strong>총 결제 금액</strong></td>
                                             <td style={{color: 'red'}}>{item.totalPrice}원</td>
                                         </tr>

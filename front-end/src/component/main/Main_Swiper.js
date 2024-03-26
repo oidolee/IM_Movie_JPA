@@ -14,6 +14,9 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import slide_1 from '../../assets/main/slide_1.jpg'
 import slide_2 from '../../assets/main/slide_2.jpg'
 import slide_3 from '../../assets/main/slide_3.png'
+import slide_4 from '../../assets/main/slide_4.jpg'
+import slide_5 from '../../assets/main/slide_5.jpg'
+
 
 export default function Main_Swiper() {
   const swiperRef = useRef(null);
@@ -68,6 +71,14 @@ export default function Main_Swiper() {
 
         <SwiperSlide>
           <img src={slide_3} alt='slide_3'></img>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <img src={slide_4} alt='slide_4'></img>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <img src={slide_5} alt='slide_5'></img>
         </SwiperSlide>
         
         <div className='page_2 Main_Swiper_control_box'>

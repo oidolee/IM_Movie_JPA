@@ -15,7 +15,7 @@ function MyPage_myifo_part() {
             <div>
                 <ul className={`MyPage__myinfo_box ${style.MyPage__myinfo_box}`}>
                     <li>
-                        <a href='/MyPage_myinfo_update' style={{ background: 'grey' }}>
+                        <a href='/MyPage_myinfo_update'>
                             <span>
                                 <img src="	https://www.lottecinema.co.kr/NLCHS/Content/images/member/ic_my_menu_1.png" alt="회원 정보 변경"></img>
                             </span>

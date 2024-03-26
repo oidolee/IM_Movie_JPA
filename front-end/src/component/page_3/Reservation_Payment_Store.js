@@ -36,6 +36,7 @@ class Reservation_Payment_Store extends Component {
       totalPrice: "",
       email: "",
       itemCode: "",
+      userName: "",
     };
   }
   
@@ -134,6 +135,7 @@ class Reservation_Payment_Store extends Component {
         itemName,
         name,
         email,
+        userName,
       } = JSON.parse(storedData);
 
 
@@ -217,6 +219,8 @@ class Reservation_Payment_Store extends Component {
         itemCode,
         itemName,
         email,
+        userName,
+        
       })
         .then((response) => {
           console.log("데이터 전송 성공:", response.data);

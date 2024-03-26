@@ -50,6 +50,11 @@ class ApiService {
         return axios.post(serverUrl + "/page_1/PaymentInsert", inputData);
     }
 
+    listPayment(email) {
+        console.log("listPayment 호출", email);
+        return axios.get(serverUrl + "/page_1/PaymentList/" + email);
+    }
+
     
     // --------------------------------------------Payment 끝--------------------------------------------
     // --------------------------------------------Discount 시작--------------------------------------------
