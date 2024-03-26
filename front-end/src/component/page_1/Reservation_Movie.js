@@ -169,7 +169,6 @@ const Reservation_Movie = ({ history }) => {
             setSelectedMovieInfo(movieInfo); 
 
             const listItem = document.createElement("li");
-            listItem.style.marginBottom = "20px";
             listItem.innerHTML = `
               <a href="#none">
                 <span>
@@ -391,11 +390,6 @@ const Reservation_Movie = ({ history }) => {
             <li>
               <div className="menu3">
                 <ul className="menu3_left">
-                  {/* {movies.map((movie) => (
-                    <li key={movie.id} onClick={() => handleClick(movie)}>
-                      {movie.title}
-                    </li>
-                  ))} */}
                 </ul>
               </div>
             </li>
@@ -425,15 +419,15 @@ const Reservation_Movie = ({ history }) => {
             </li>
           </ul>
         </div>
-        {popupOpen && selectedMovie && (
+        {popupOpen && selectedMovieInfo && (
           <div className="popup">
             <div className="popup_content">
               <strong>
-                {selectedMovie[0].movie_title}/{" "}
-                {moment(selectedMovie[0].start_time, "HH:mm:ss").format(
+                {selectedMovieInfo.movie_title}/{" "}
+                {moment(selectedMovieInfo.start_time, "HH:mm:ss").format(
                   "HH:mm"
                 )}{" "}
-                ({selectedMovie[0].theater_id})
+                ({selectedMovieInfo.theater_id})
               </strong>
               {remainingSeatsCount !== null && (
                 <p>
@@ -442,8 +436,7 @@ const Reservation_Movie = ({ history }) => {
               )}
               <img className="Res_screen" src={Res_screen} />
               <p>
-                본 영화는 만 {getMovieImage(selectedMovie[0].movie_id)} 세 이상
-                관람가 영화입니다.
+                영화/관람일자 확인해주세요.
               </p>
               <button name="n" onClick={handleCancellation}>
                 취소

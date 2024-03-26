@@ -190,22 +190,33 @@
     margin-right: 10px;
 }
 
-.Res_Movie .Res_screen_img {
-    margin: 0;
-    height: 18px;
-    width: 18px;
-    
+.Res_Movie .menu4_sub ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 350px;
 }
 
 .Res_Movie .menu4_sub li {
-    height: 50px;
-    width: 150px;
+    height: 55px;
+    width: 155px;
     border-radius: 4px;
     border: 1px solid #ddd;
     cursor: pointer;
     font-size: 14px;
     text-align: center;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    padding-top: 5px;
 }
+
+.Res_Movie .menu4_sub li:hover,
+.Res_Movie .menu4_sub li:hover a {
+    background-color: #FF243E;
+    border: 1px solid #FF243E;
+    color: white;
+} 
+
 
 .Res_Movie .popup {
     position: fixed;
@@ -257,10 +268,12 @@
 }
 
 .Res_Movie .Res_screen {
+    margin: 0;
     width: 450px;
     height: 250px;
-    margin-left: 15px;
+    /* margin-left: 12px; */
     background-color: white;
+    padding: 10px;
 }
 
 .Res_Movie .menu2_left .subRegions.active {
