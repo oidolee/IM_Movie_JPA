@@ -53,7 +53,7 @@ import OAuthResponseHandler from '../page_4/OAuthResponseHandler';
 import movieMain from '../page_5/movie/movieMain';
 import movieDetail from '../page_5/movie/movieDetail';
 import movieDetail2 from '../page_5/movie/movieDetail2';
-// import movieDetail3 from '../page_5/movie/movieDetail3';
+import movieDetail3 from '../page_5/movie/movieDetail3';
 import movieUpdate from '../../admin/page_5/Admin_Update_Add';
 import movieNow from '../page_5/movie/movieNow';
 import movieNext from '../page_5/movie/movieNext';
@@ -150,7 +150,7 @@ const AppRouter = () => {
                                 <Route path="/movieMain" exact={true} component={movieMain} />
                                 <Route path="/movieDetail/:movie_id" exact={true} component={movieDetail} />
                                 <Route path="/movieDetail2/:now_id" exact={true} component={movieDetail2} />
-                                {/* <Route path="/movieDetail3/:arte_id" exact={true} component={movieDetail3} /> */}
+                                <Route path="/movieDetail3/:arte_id" exact={true} component={movieDetail3} />
                                 <Route path="/movieUpdate" exact={true} component={movieUpdate} />
                                 <Route path="/movieNow" exact={true} component={movieNow} />
                                 <Route path="/movieNext" exact={true} component={movieNext} />

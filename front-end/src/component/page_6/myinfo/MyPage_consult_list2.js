@@ -1,6 +1,7 @@
 
 import React, {Component} from 'react';
-import style from '../../../styles/page_6/Mypage2_module.css'
+// import style from '../../../styles/page_6/Mypage2_module.css'
+import style from '../../../styles/page_6/Mypage_module.css'
 import Mypage_mid_nav from '../Mypage_mid_nav'
 import MyPage_top from '../MyPage_top'
 import MyPage_consult_list_part2 from './MyPage_consult_list_part2'
