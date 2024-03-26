@@ -24,6 +24,11 @@ const Reservation_Movie = ({ history }) => {
     인천: ["부평", "부평갈산", "부평역사"],
   };
 
+  useEffect(() => {
+    listReservation();
+    fetchRemainingSeatsCount();
+  }, []);
+
   // 영화 목록
   const listReservation = () => {
     ApiService.listReservation()
@@ -88,12 +93,7 @@ const Reservation_Movie = ({ history }) => {
         console.log("listReservation 오류 : ", err);
       });
   };
-
-  useEffect(() => {
-    listReservation();
-    fetchRemainingSeatsCount();
-  }, []);
-
+  
   // 잔여 좌석 수 호출
   const fetchRemainingSeatsCount = () => {
     ApiService.listSeat()
