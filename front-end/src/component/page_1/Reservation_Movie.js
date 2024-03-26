@@ -14,9 +14,10 @@ const Reservation_Movie = ({ history }) => {
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택한 영화 상태
   const [movies, setMovies] = useState([]); // 영화 목록
   const [remainingSeatsCount, setRemainingSeatsCount] = useState(null); // 잔여 좌석
-  const [selectedRegion, setSelectedRegion] = useState(null); // 지역
+  const [selectedRegion, setSelectedRegion] = useState("서울"); // 지역
   const [groupedData, setGroupedData] = useState({}); // 지역 그룹화
   const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 최종 영화 정보 저장
+  const [selectedLocationData, setSelectedLocationData] = useState(null);
 
   const places = {
     서울: ["홍대입구", "용산", "합정", "에비뉴엘", "영등포"],
@@ -27,73 +28,74 @@ const Reservation_Movie = ({ history }) => {
   useEffect(() => {
     listReservation();
     fetchRemainingSeatsCount();
+    handleLocationClick("홍대입구");
   }, []);
 
   // 영화 목록
-  const listReservation = () => {
-    ApiService.listReservation()
-      .then((res) => {
-        setMovies(res.data);
-        console.log("listReservation 성공", res.data);
+const listReservation = () => {
+  ApiService.listReservation()
+    .then((res) => {
+      setMovies(res.data);
+      console.log("listReservation 성공", res.data);
 
-        // 그룹화된 데이터 사용 예시
-        const data = res.data;
-        const newData = {}; // 새로운 데이터 객체 생성
+      // 그룹화된 데이터 사용 예시
+      const data = res.data;
+      const newData = {}; // 새로운 데이터 객체 생성
 
-        data.forEach((item) => {
-          const { place_num } = item;
-          let place;
-          switch (place_num) {
-            case 1:
-              place = "홍대입구";
-              break;
-            case 2:
-              place = "용산";
-              break;
-            case 3:
-              place = "합정";
-              break;
-            case 4:
-              place = "에비뉴엘";
-              break;
-            case 5:
-              place = "영등포";
-              break;
-            case 28:
-              place = "안양일번가";
-              break;
-            case 29:
-              place = "광명아울렛";
-              break;
-            case 30:
-              place = "위례";
-              break;
-            case 31:
-              place = "부평";
-              break;
-            case 38:
-              place = "부평갈산";
-              break;
-            case 40:
-              place = "부평역사";
-              break;
-            default:
-              place = "기타";
-              break;
-          }
+      data.forEach((item) => {
+        const { place_num } = item;
+        let place;
+        switch (place_num) {
+          case 1:
+            place = "홍대입구";
+            break;
+          case 2:
+            place = "용산";
+            break;
+          case 3:
+            place = "합정";
+            break;
+          case 4:
+            place = "에비뉴엘";
+            break;
+          case 5:
+            place = "영등포";
+            break;
+          case 28:
+            place = "안양일번가";
+            break;
+          case 29:
+            place = "광명아울렛";
+            break;
+          case 30:
+            place = "위례";
+            break;
+          case 31:
+            place = "부평";
+            break;
+          case 38:
+            place = "부평갈산";
+            break;
+          case 40:
+            place = "부평역사";
+            break;
+          default:
+            place = "기타";
+            break;
+        }
 
-          // newData에 해당 place가 없으면 빈 배열로 초기화하
-          newData[place] = [...(newData[place] || []), item];
-        });
-
-        // setGroupedData를 통해 상태 업데이트
-        setGroupedData(newData);
-      })
-      .catch((err) => {
-        console.log("listReservation 오류 : ", err);
+        // newData에 해당 place가 없으면 빈 배열로 초기화하
+        newData[place] = [...(newData[place] || []), item];
       });
-  };
-  
+
+      // setGroupedData를 통해 상태 업데이트
+      setGroupedData(newData);
+    })
+    .catch((err) => {
+      console.log("listReservation 오류 : ", err);
+    });
+};
+
   // 잔여 좌석 수 호출
   const fetchRemainingSeatsCount = () => {
     ApiService.listSeat()
@@ -110,84 +112,85 @@ const Reservation_Movie = ({ history }) => {
       });
   };
 
-  const handleLocationClick = (location) => {
-    const placeData = groupedData[location];
-    console.log(`${location}에 대한 데이터:`, placeData);
+  // handleLocationClick 함수를 수정하여 클릭하지 않아도 해당 지역의 영화 정보가 표시되도록 합니다.
+const handleLocationClick = (location) => {
+  const placeData = groupedData[location];
+  console.log(`${location}에 대한 데이터:`, placeData);
 
-    // 클릭한 영화 정보 저장
-    setSelectedMovie(placeData);
+  // 클릭한 영화 정보 저장
+  setSelectedMovie(placeData);
 
-    const menuElement = document.querySelector(".menu3_left"); // 지역에 해당하는 영화 출력 위치
-    const menu4Sub = document.querySelector(".menu4_sub ul"); // 선택된 영화 정보 출력 위치
+  const menuElement = document.querySelector(".menu3_left"); // 지역에 해당하는 영화 출력 위치
+  const menu4Sub = document.querySelector(".menu4_sub ul"); // 선택된 영화 정보 출력 위치
 
-    menuElement.innerHTML = ""; // 기존 내용 지우기
+  menuElement.innerHTML = ""; // 기존 내용 지우기
 
-    if (placeData) {
-      // 영화 ID를 기준으로 그룹화
-      const groupedMovies = {};
-      placeData.forEach((item) => {
-        if (!groupedMovies[item.movie_id]) {
-          groupedMovies[item.movie_id] = [item];
-        } else {
-          groupedMovies[item.movie_id].push(item);
-        }
-      });
+  if (placeData) {
+    // 영화 ID를 기준으로 그룹화
+    const groupedMovies = {};
+    placeData.forEach((item) => {
+      if (!groupedMovies[item.movie_id]) {
+        groupedMovies[item.movie_id] = [item];
+      } else {
+        groupedMovies[item.movie_id].push(item);
+      }
+    });
 
-      // 그룹화된 데이터를 출력
-      Object.entries(groupedMovies).forEach(([movieId, movies]) => {
-        const menuItem = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = "#";
+    // 그룹화된 데이터를 출력
+    Object.entries(groupedMovies).forEach(([movieId, movies]) => {
+      const menuItem = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = "#";
 
-        // 영화 이미지 가져오기
-        const movieImage = getMovieImage(movieId);
+      // 영화 이미지 가져오기
+      const movieImage = getMovieImage(movieId);
 
-        // 영화 이미지와 제목 출력
-        if (movieImage) {
-          link.appendChild(movieImage); // 이미지 추가
-        }
-        link.appendChild(document.createTextNode(movies[0].movie_title)); // 제목 추가
+      // 영화 이미지와 제목 출력
+      if (movieImage) {
+        link.appendChild(movieImage); // 이미지 추가
+      }
+      link.appendChild(document.createTextNode(movies[0].movie_title)); // 제목 추가
 
-        link.onclick = (event) => {
-          event.preventDefault();
-          console.log(
-            `${movies[0].movie_title}를 클릭했습니다. ID: ${movieId}`
-          ); // 클릭한 영화 제목과 ID 출력
+      link.onclick = (event) => {
+        event.preventDefault();
+        console.log(
+          `${movies[0].movie_title}를 클릭했습니다. ID: ${movieId}`
+        ); // 클릭한 영화 제목과 ID 출력
 
-          setSelectedMovie(movies); // 클릭한 영화 리스트 전달
+        setSelectedMovie(movies); // 클릭한 영화 리스트 전달
 
-          menu4Sub.innerHTML = "";
+        menu4Sub.innerHTML = "";
 
-          // 선택한 영화 정보 출력
-          movies.forEach((movieInfo) => {
-            const { ip_num, movie_title, theater_id, start_time } = movieInfo;
-            const formattedStartTime = moment(start_time, "HH:mm:ss").format(
-              "HH:mm"
-            );
-            
-            // 최종 선택한 영화 정보
-            setSelectedMovieInfo(movieInfo); 
+        // 선택한 영화 정보 출력
+        movies.forEach((movieInfo) => {
+          const { movie_id, movie_title, theater_id, start_time } = movieInfo;
+          const formattedStartTime = moment(start_time, "HH:mm:ss").format(
+            "HH:mm"
+          );
 
-            const listItem = document.createElement("li");
-            listItem.innerHTML = `
-              <a href="#none">
-                <span>
-                  ${movie_title}
-                  ${formattedStartTime}<br />
-                  ${remainingSeatsCount}/112 ${theater_id}
-                </span>                         
-              </a>
-            `;
-            menu4Sub.appendChild(listItem);
-          });
-        };
-        menuItem.appendChild(link);
-        menuElement.appendChild(menuItem);
+          // 최종 선택한 영화 정보
+          setSelectedMovieInfo(movieInfo);
 
-        console.log(`Movie ID: ${movieId}에 대한 데이터:`, movies);
-      });
-    }
-  };
+          const listItem = document.createElement("li");
+          listItem.innerHTML = `
+            <a href="#none">
+              <span>
+                ${movie_title}
+                ${formattedStartTime}<br />
+                ${remainingSeatsCount}/112 ${theater_id}
+              </span>                         
+            </a>
+          `;
+          menu4Sub.appendChild(listItem);
+        });
+      };
+      menuItem.appendChild(link);
+      menuElement.appendChild(menuItem);
+
+      console.log(`Movie ID: ${movieId}에 대한 데이터:`, movies);
+    });
+  }
+};
 
   // 연령에 대한 이미지
   const getMovieImage = (movieId) => {
@@ -389,8 +392,7 @@ const Reservation_Movie = ({ history }) => {
             </div>
             <li>
               <div className="menu3">
-                <ul className="menu3_left">
-                </ul>
+                <ul className="menu3_left"></ul>
               </div>
             </li>
           </ul>
@@ -435,9 +437,7 @@ const Reservation_Movie = ({ history }) => {
                 </p>
               )}
               <img className="Res_screen" src={Res_screen} />
-              <p>
-                영화/관람일자 확인해주세요.
-              </p>
+              <p>영화/관람일자 확인해주세요.</p>
               <button name="n" onClick={handleCancellation}>
                 취소
               </button>
