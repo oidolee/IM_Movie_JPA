@@ -279,15 +279,15 @@ const Reservation_Seat = () => {
   // 연령에 대한 이미지
   const getMovieImage = (movieId) => {
     switch (movieId) {
-      case "1":
-      case "3":
+      case 1:
+      case 3:
         return <img src={Res_img15} className="age_img" alt="age" />;
-      case "2":
-      case "4":
+      case 2:
+      case 4:
         return <img src={Res_img12} className="age_img" alt="age" />;
-      case "5":
+      case 5:
         return <img src={Res_imgAll} className="age_img" alt="age" />;
-      case "6":
+      case 6:
         return <img src={Res_img18} className="age_img" alt="age" />;
       default:
         return null;      
