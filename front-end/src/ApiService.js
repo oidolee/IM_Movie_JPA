@@ -45,9 +45,9 @@ class ApiService {
     // --------------------------------------------Reservation 끝--------------------------------------------
     // --------------------------------------------Payment 시작--------------------------------------------
     // 결제 정보 저장
-    insertPayment(inputData) {
-        console.log("insertPayment 호출", inputData);
-        return axios.post(serverUrl + "/page_1/PaymentInsert", inputData);
+    insertPayment(inputData1) {
+        console.log("insertPayment 호출", inputData1);
+        return axios.post(serverUrl + "/page_1/PaymentInsert", inputData1);
     }
 
     listPayment(email) {

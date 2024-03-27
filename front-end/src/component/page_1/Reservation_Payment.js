@@ -65,7 +65,6 @@ const Reservation_Payment = () => {
       setTotalPrice(storedTotalPrice);
     }
 
-    console.log("selectedMovieInfo : ", selectedMovieInfo);
     console.log("setSelectedSeats : ", storedSelectedSeats);
     console.log("setTotalPrice : ", storedTotalPrice);
     console.log("totalQuantity : ", seatInfo.totalQuantity);

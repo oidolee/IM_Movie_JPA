@@ -95,7 +95,7 @@ const Reservation_Seat = () => {
         setSelectedMovieInfo(parsedMovieInfo);
         console.log(parsedMovieInfo);
       } catch (error) {
-        console.error("영화 정보를 파싱하는 중 오류 발생:", error);
+        console.error("영화 정보를 파싱하는 중 오류 발생 :", error);
       }
     }
     // 좌석 정보 가져오기
