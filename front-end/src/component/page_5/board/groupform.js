@@ -14,6 +14,8 @@ function Form() {
   const [email, setEmail] = useState('');
   const [movieLocation, setMovieLocation] = useState(''); // 영화관선택 값
   const [cus_name, setCus_Name] = useState(''); // 영화관선택 값
+  const [yes, setYes] = useState(false); // 동의 여부 체크
+
 
   const handleLocationChange = (location) => {
     setMovieLocation(location);
@@ -83,8 +85,39 @@ function Form() {
     });
   };
 
+  const handleCancel = () => {
+    setMovieLocation('');
+    setCus_Name('');
+    setYes(false);
+    setAddInfo({
+      group_id: '',
+      c_email: email,
+      group_loc: '',
+      group_type: "",
+      group_expeople: "",
+      group_date: "",
+      group_time1: "",
+      group_time2: "",
+      group_movtitle: "",
+      group_title: "",
+      group_con: "",
+      group_name: "",
+      custo_name: "",
+      custo_phone1: "",
+      custo_phone2: "",
+      custo_phone3: "",
+    });
+  };
+
   const saveUpdate = (e) => {
     e.preventDefault();
+
+    const agreed = document.getElementById('yes').checked;
+
+    if (!agreed) {
+      alert("개인정보 수집에 대한 이용약관에 동의해주세요.");
+      return; // Stop further execution
+    }
 
     console.log("addInfo : ")
     console.log(addInfo)
@@ -141,6 +174,7 @@ function Form() {
     e.preventDefault();
   };
 
+  
 
   return (
     <div id='Form_wrappage' className={`Form_wrappage ${style.Form_wrappage}`}>
@@ -318,7 +352,7 @@ function Form() {
           </div>
 
           <div className={`btn_0 ${style.btn_0}`}>
-            <button type="submit" className={`btn1 ${style.btn1}`}>취소</button>
+            <button type="submit" className={`btn1 ${style.btn1}`} onClick={handleCancel}>취소</button>
             <span className="gap"></span> {/* 간격 요소 */}
             <button type="submit" className={`btn2 ${style.btn2}`} onClick={saveUpdate}>확인</button>
           </div>

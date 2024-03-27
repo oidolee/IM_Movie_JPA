@@ -52,9 +52,10 @@ function MovieNext() {
     }
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (next_id) => {
     // 버튼을 클릭하면 '/detail' 경로로 이동합니다.
-    history.push("/movieDetail");
+    console.log("next_id = " + next_id);
+    history.push("/movieDetail4/"+next_id);
   };
 
   const [movienext, setMovienext] = useState([]);
@@ -74,7 +75,6 @@ function MovieNext() {
   };
 
   const categoryMap2 = {
-    0: [],
     1: [],
     2: [],
     3: [],
@@ -84,6 +84,7 @@ function MovieNext() {
     7: [],
     8: [],
     9: [],
+    10: [],
   };
 
   movienext.forEach((movie) => {
@@ -135,13 +136,13 @@ function MovieNext() {
             </div>  
 
             <div className={`next_movie_list ${style.next_movie_list}`} style={{ display: 'flex', justifyContent: 'center' }}>
-              {categoryMap2[0].slice(0, 5).map((movie, index) => (
+              {categoryMap2[1].slice(0, 5).map((movie, index) => (
                   <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
                     <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.next_image}`} style={{ width: '200px', height: 'auto' }} />
                     <Card.Body>
-                      <Card.Title>{movie.next_title}</Card.Title>
+                    <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.next_title}</Card.Title>
                       <Card.Text>{movie.next_time}분</Card.Text>
-                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={handleButtonClick} >상세정보</Button>
+                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={() => handleButtonClick(movie.next_id)} >상세정보</Button>
                     </Card.Body>
                   </Card>
                 ))}
@@ -152,26 +153,13 @@ function MovieNext() {
             </div>
 
             <div className={`next_movie_list ${style.next_movie_list}`} style={{ display: 'flex', justifyContent: 'center' }}>
-              {categoryMap2[1].slice(0, 5).map((movie, index) => (
-                  <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
-                    <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.next_image}`} style={{ width: '200px', height: 'auto' }} />
-                    <Card.Body>
-                      <Card.Title>{movie.next_title}</Card.Title>
-                      <Card.Text>{movie.next_time}분</Card.Text>
-                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={handleButtonClick} >상세정보</Button>
-                    </Card.Body>
-                  </Card>
-                ))}
-            </div>
-
-            <div className={`next_movie_list ${style.next_movie_list}`} style={{ display: 'flex', justifyContent: 'center' }}>
               {categoryMap2[2].slice(0, 5).map((movie, index) => (
                   <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
                     <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.next_image}`} style={{ width: '200px', height: 'auto' }} />
                     <Card.Body>
-                      <Card.Title>{movie.next_title}</Card.Title>
+                    <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.next_title}</Card.Title>
                       <Card.Text>{movie.next_time}분</Card.Text>
-                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={handleButtonClick} >상세정보</Button>
+                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={() => handleButtonClick(movie.next_id)} >상세정보</Button>
                     </Card.Body>
                   </Card>
                 ))}
@@ -182,9 +170,9 @@ function MovieNext() {
                   <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
                     <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.next_image}`} style={{ width: '200px', height: 'auto' }} />
                     <Card.Body>
-                      <Card.Title>{movie.next_title}</Card.Title>
+                    <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.next_title}</Card.Title>
                       <Card.Text>{movie.next_time}분</Card.Text>
-                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={handleButtonClick} >상세정보</Button>
+                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={() => handleButtonClick(movie.next_id)} >상세정보</Button>
                     </Card.Body>
                   </Card>
                 ))}
@@ -195,9 +183,9 @@ function MovieNext() {
                   <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
                     <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.next_image}`} style={{ width: '200px', height: 'auto' }} />
                     <Card.Body>
-                      <Card.Title>{movie.next_title}</Card.Title>
+                    <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.next_title}</Card.Title>
                       <Card.Text>{movie.next_time}분</Card.Text>
-                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={handleButtonClick} >상세정보</Button>
+                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={() => handleButtonClick(movie.next_id)} >상세정보</Button>
                     </Card.Body>
                   </Card>
                 ))}
@@ -208,9 +196,9 @@ function MovieNext() {
                   <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
                     <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.next_image}`} style={{ width: '200px', height: 'auto' }} />
                     <Card.Body>
-                      <Card.Title>{movie.next_title}</Card.Title>
+                    <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.next_title}</Card.Title>
                       <Card.Text>{movie.next_time}분</Card.Text>
-                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={handleButtonClick} >상세정보</Button>
+                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={() => handleButtonClick(movie.next_id)} >상세정보</Button>
                     </Card.Body>
                   </Card>
                 ))}
@@ -221,9 +209,9 @@ function MovieNext() {
                   <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
                     <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.next_image}`} style={{ width: '200px', height: 'auto' }} />
                     <Card.Body>
-                      <Card.Title>{movie.next_title}</Card.Title>
+                    <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.next_title}</Card.Title>
                       <Card.Text>{movie.next_time}분</Card.Text>
-                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={handleButtonClick} >상세정보</Button>
+                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={() => handleButtonClick(movie.next_id)}>상세정보</Button>
                     </Card.Body>
                   </Card>
                 ))}
@@ -234,9 +222,9 @@ function MovieNext() {
                   <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
                     <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.next_image}`} style={{ width: '200px', height: 'auto' }} />
                     <Card.Body>
-                      <Card.Title>{movie.next_title}</Card.Title>
+                    <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.next_title}</Card.Title>
                       <Card.Text>{movie.next_time}분</Card.Text>
-                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={handleButtonClick} >상세정보</Button>
+                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={() => handleButtonClick(movie.next_id)} >상세정보</Button>
                     </Card.Body>
                   </Card>
                 ))}
@@ -247,22 +235,35 @@ function MovieNext() {
                   <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
                     <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.next_image}`} style={{ width: '200px', height: 'auto' }} />
                     <Card.Body>
-                      <Card.Title>{movie.next_title}</Card.Title>
+                    <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.next_title}</Card.Title>
                       <Card.Text>{movie.next_time}분</Card.Text>
-                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={handleButtonClick} >상세정보</Button>
+                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={() => handleButtonClick(movie.next_id)} >상세정보</Button>
+                    </Card.Body>
+                  </Card>
+                ))}
+            </div>
+
+            <div className={`next_movie_list ${style.next_movie_list}`} style={{ display: 'flex', justifyContent: 'center' }}>
+              {categoryMap2[9].slice(0, 5).map((movie, index) => (
+                  <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
+                    <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.next_image}`} style={{ width: '200px', height: 'auto' }} />
+                    <Card.Body>
+                    <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.next_title}</Card.Title>
+                      <Card.Text>{movie.next_time}분</Card.Text>
+                      <Button className={`primary_button3 ${style.primary_button3}`} onClick={() => handleButtonClick(movie.next_id)} >상세정보</Button>
                     </Card.Body>
                   </Card>
                 ))}
             </div>
 
             <div className={`next_movie_list2 ${style.next_movie_list2}`} style={{ display: 'flex', justifyContent: 'center' }}>
-              {categoryMap2[9].slice(0, 5).map((movie, index) => (
+              {categoryMap2[10].slice(0, 5).map((movie, index) => (
                   <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
                     <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.next_image}`} style={{ width: '200px', height: 'auto' }} />
                     <Card.Body>
-                      <Card.Title>{movie.next_title}</Card.Title>
+                    <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.next_title}</Card.Title>
                       <Card.Text>{movie.next_time}분</Card.Text>
-                      <Button className={`primary_button3 ${style.primary_button3}`}  onClick={handleButtonClick} >상세정보</Button>
+                      <Button className={`primary_button3 ${style.primary_button3}`}   onClick={() => handleButtonClick(movie.next_id)} >상세정보</Button>
                     </Card.Body>
                   </Card>
                 ))}

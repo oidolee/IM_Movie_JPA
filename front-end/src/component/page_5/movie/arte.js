@@ -69,8 +69,7 @@ function MovieArte() {
                   <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
                     <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.arte_image}`} style={{ width: '200px', height: 'auto' }} />
                     <Card.Body>
-                      <Card.Title>{movie.arte_title}</Card.Title>
-                      <Card.Text>{movie.arte_time}분</Card.Text>
+                    <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.arte_title}</Card.Title>
                       <Button className={`primary_button4 ${style.primary_button4}`}  onClick={() => handleButtonClick(movie.arte_id)}>상세정보</Button>
                     </Card.Body>
                   </Card>
@@ -82,7 +81,7 @@ function MovieArte() {
                   <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
                     <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.arte_image}`} style={{ width: '200px', height: 'auto' }} />
                     <Card.Body>
-                      <Card.Title>{movie.arte_title}</Card.Title>
+                    <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.arte_title}</Card.Title>
                       <Card.Text>{movie.arte_time}분</Card.Text>
                       <Button className={`primary_button4 ${style.primary_button4}`}  onClick={() => handleButtonClick(movie.arte_id)} >상세정보</Button>
                     </Card.Body>

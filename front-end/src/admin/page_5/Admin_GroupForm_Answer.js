@@ -100,6 +100,9 @@ function Admin_GroupForm_Answer() {
             이메일: {answerInfo.c_email}
           </Typography>
           <Typography variant="subtitle1" style={{ marginBottom: "20px" }}>
+            영화관위치: {answerInfo.group_loc}
+          </Typography>
+          <Typography variant="subtitle1" style={{ marginBottom: "20px" }}>
             단체명:{answerInfo.group_name}
           </Typography>
           <Typography variant="subtitle1" style={{ marginBottom: "20px" }}>

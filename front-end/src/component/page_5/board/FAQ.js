@@ -53,6 +53,7 @@ function FIND() {
 function FAQ() {
   const currentPage = 1; // 예시로 현재 페이지를 1로 설정
   const totalPages = 2; // 예시로 총 페이지 수를 7로 설정
+  const [searchResults, setSearchResults] = useState([]);
 
   // 페이지 변경 시 처리할 함수
   const onPageChange = (pageNumber) => {
@@ -65,6 +66,14 @@ function FAQ() {
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
+
+  // 검색 처리 함수
+  const handleSearch = (searchTerm) => {
+    // 여기서 검색 처리 로직을 구현하고 검색 결과를 설정합니다.
+    console.log("검색어:", searchTerm);
+    // 예시로 검색 결과를 빈 배열로 설정합니다.
+    setSearchResults([]);
+  };
 
   return (
     <div id="FAQ_wrappage" className={`FAQ_wrappage ${style.FAQ_wrappage}`}>
@@ -113,7 +122,7 @@ function FAQ() {
           </button>
         </div>
       </div>
-      <FIND /> {/* 검색창 컴포넌트 추가 */}
+      <FIND onSearch={handleSearch} />
       <div
         id="accordian_all"
         className={`accordian_all ${style.accordian_all}`}
