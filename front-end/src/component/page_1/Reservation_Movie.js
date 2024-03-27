@@ -100,6 +100,14 @@ const Reservation_Movie = ({ history }) => {
       });
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchRemainingSeatsCount();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []); 
+
   // 잔여 좌석 수 호출
   const fetchRemainingSeatsCount = () => {
     ApiService.listSeat()
