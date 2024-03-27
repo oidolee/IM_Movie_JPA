@@ -67,13 +67,13 @@ const Reservation_Seat = () => {
   const [disabledQuantity, setDisabledQuantity] = useState(0);
   const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 선택한 영화 정보
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     listSeat(); // 일정 주기마다 좌석 상태를 가져옴
-  //   }, 5000); // 5초마다 업데이트
-  
-  //   return () => clearInterval(interval); // 컴포넌트가 언마운트될 때 clearInterval로 interval을 정리
-  // }, [seats]); // seats 상태가 변경될 때만 useEffect가 호출되도록 설정
+  useEffect(() => {
+    const interval = setInterval(() => {
+        listSeat();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []); 
   
   
   // 가격 설정
@@ -89,11 +89,6 @@ const Reservation_Seat = () => {
     childPrice * childQuantity +
     disabledPrice * disabledQuantity;
 
-  // 로그인 상태 확인
-
-  // 사용자 움직임 감지
-
-  // 중복 예매 방지
 
   // 좌석 정보 가져오기
   useEffect(() => {
@@ -115,7 +110,7 @@ const Reservation_Seat = () => {
     ApiService.listSeat()
       .then((res) => {
         setSeats(res.data);
-        console.log("listSeat 성공");
+        // console.log("listSeat 성공");
       })
       .catch((err) => {
         console.log("listSeat 오류 : ", err);

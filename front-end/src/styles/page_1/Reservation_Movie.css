@@ -283,6 +283,10 @@
     font-weight: 600;
 }
 
+.Res_Movie .menu2_left .region a {
+    margin-left: 30px;
+}
+
 .Res_Movie .menu2_right {
     width: 100%;
 }
