@@ -26,8 +26,15 @@ const Reservation_Movie = ({ history }) => {
   useEffect(() => {
     listReservation();
     fetchRemainingSeatsCount();
-  }, []);
-
+  }, []); // 의존성 배열이 비어있으므로 한 번만 실행됨
+  
+  useEffect(() => {
+    if (Object.keys(groupedData).length > 0) {
+      // groupedData가 업데이트될 때만 실행됨
+      handleLocationClick("홍대입구");
+    }
+  }, [groupedData]);
+  
   // 영화 목록
   const listReservation = () => {
     ApiService.listReservation()
