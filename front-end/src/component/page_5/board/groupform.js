@@ -13,6 +13,7 @@ function Form() {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [movieLocation, setMovieLocation] = useState(''); // 영화관선택 값
+  const [cus_name, setCus_Name] = useState(''); // 영화관선택 값
 
   const handleLocationChange = (location) => {
     setMovieLocation(location);
@@ -34,8 +35,8 @@ function Form() {
         ...addInfo,
         c_email: userEmail  // movieLocation 값을 최신으로 업데이트
       });
+      reloadSearchcustomer(userEmail)
     }
-
   }, []);
 
     const reloadSearchcustomer = (email) => {
@@ -43,6 +44,8 @@ function Form() {
           .then(res => {
               console.log('res.data', res.data);
               setCus_Name(res.data.dto.name)
+
+              
           })
           .catch(error => {
               console.error('요청 실패:', error);
@@ -257,7 +260,7 @@ function Form() {
 
           <div className={`Form_group ${style.Form_group}`}>
             <label for="gg_name">성명</label>
-            <input type="text" id="name1" className={`name1 ${style.name1}`} name="custo_name" value={addInfo.custo_name} onChange={onChange} />
+            <input type="text" id="name1" className={`name1 ${style.name1}`} name="custo_name" value={cus_name} onChange={onChange} />
             <hr></hr>
           </div>
 
