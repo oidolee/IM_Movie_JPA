@@ -95,7 +95,7 @@ const Success = () => {
       }
   };
 
-  return <div>{/* 필요한 UI를 구성할 수 있습니다. */}</div>;
+  return <div></div>;
 };
 
 export default Success;
