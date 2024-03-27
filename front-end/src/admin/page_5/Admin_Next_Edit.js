@@ -2,28 +2,35 @@ import React, { useState, useEffect } from "react";
 import ApiService from "../../ApiService";
 import { Typography, TextField, Button } from "@mui/material";
 import style from "../../styles/admin/page_5/Admin_Next_Edit.css";
+import { useParams } from 'react-router-dom';
 
 const Admin_Next_Edit = ({ history }) => {
+  const { next_id } = useParams();
     const [nextInfo, setNextInfo] = useState({
-    next_id: "",
-    next_image: "",
-    next_title: "",
-    next_date: "",
-    next_time: "",
-    next_age: "",
-    next_visitor: "",
-    next_contents: "",
-    next_con: "",
-    next_trailer: "",
-    next_category: "",
+      next_id: "",
+      next_image: "",
+      next_title: "",
+      next_date: "",
+      next_time: "",
+      next_age: "",
+      next_visitor: "",
+      next_contents: "",
+      next_con: "",
+      next_pd: "",
+      next_cast: "",
+      next_image2: "",
+      next_image3: "",
+      next_trailer1: "",
+      next_trailer2: "",
+      next_category: "",
   });
 
   useEffect(() => {
-    selectLoad();
-  }, []);
+    selectLoad(next_id);
+  }, [next_id]);
 
-  const selectLoad = () => {
-    ApiService.selectNext(window.localStorage.getItem("next_id"))
+  const selectLoad = (next_id) => {
+    ApiService.selectNext(next_id)
       .then((res) => {
         let list = res.data;
 
@@ -37,7 +44,12 @@ const Admin_Next_Edit = ({ history }) => {
           next_visitor: list.dto.next_visitor,
           next_contents: list.dto.next_contents,
           next_con: list.dto.next_con,
-          next_trailer: list.dto.next_trailer,
+          next_pd: list.dto.next_pd,
+          next_cast: list.dto.next_cast,
+          next_image2: list.dto.next_image2,
+          next_image3: list.dto.next_image3,
+          next_trailer1: list.dto.next_trailer1,
+          next_trailer2: list.dto.next_trailer2,
           next_category: list.dto.next_category,
         });
         console.log("selectByIdUpdate 성공 : ", res.data);
@@ -163,7 +175,7 @@ const Admin_Next_Edit = ({ history }) => {
         variant="standard"
         label="Movie_Contents"
         type="text"
-        name="next_contents:"
+        name="next_contents"
         value={nextInfo.next_contents}
         onChange={onChange}
       />
@@ -185,10 +197,70 @@ const Admin_Next_Edit = ({ history }) => {
         required
         id="standard-required"
         variant="standard"
-        label="Movie_Trailer"
+        label="Movie_Img2"
         type="text"
-        name="next_trailer"
-        value={nextInfo.next_trailer}
+        name="next_image2"
+        value={nextInfo.next_image2}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Img3"
+        type="text"
+        name="next_image3"
+        value={nextInfo.next_image3}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Pd"
+        type="text"
+        name="next_pd"
+        value={nextInfo.next_pd}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Cast"
+        type="text"
+        name="next_cast"
+        value={nextInfo.next_cast}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Trailer1"
+        type="text"
+        name="next_trailer1"
+        value={nextInfo.next_trailer1}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Trailer2"
+        type="text"
+        name="next_trailer2"
+        value={nextInfo.next_trailer2}
         onChange={onChange}
       />
       <br />

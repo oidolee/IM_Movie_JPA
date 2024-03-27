@@ -25,13 +25,13 @@
 
 .detail_text{
   margin-bottom: 70px;
+  margin-left:auto;
 }
 
 .detail_title {
   font-weight: bold; /* 제목 굵게 */
   margin-top: 50px;
-  margin-right:50%;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
 }
 

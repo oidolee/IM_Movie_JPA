@@ -14,16 +14,27 @@ const Reservation_Movie = ({ history }) => {
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택한 영화 상태
   const [movies, setMovies] = useState([]); // 영화 목록
   const [remainingSeatsCount, setRemainingSeatsCount] = useState(null); // 잔여 좌석
-  const [selectedRegion, setSelectedRegion] = useState(null); // 지역
+  const [selectedRegion, setSelectedRegion] = useState("서울"); // 지역
   const [groupedData, setGroupedData] = useState({}); // 지역 그룹화
   const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 최종 영화 정보 저장
-
   const places = {
     서울: ["홍대입구", "용산", "합정", "에비뉴엘", "영등포"],
     경기: ["안양일번가", "광명아울렛", "위례"],
     인천: ["부평", "부평갈산", "부평역사"],
   };
 
+  useEffect(() => {
+    listReservation();
+    fetchRemainingSeatsCount();
+  }, []); 
+  
+  useEffect(() => {
+    if (Object.keys(groupedData).length > 0) {
+      // groupedData가 업데이트될 때만 실행됨
+      handleLocationClick("홍대입구");
+    }
+  }, [groupedData]);
+  
   // 영화 목록
   const listReservation = () => {
     ApiService.listReservation()
@@ -90,9 +101,12 @@ const Reservation_Movie = ({ history }) => {
   };
 
   useEffect(() => {
-    listReservation();
-    fetchRemainingSeatsCount();
-  }, []);
+    const interval = setInterval(() => {
+      fetchRemainingSeatsCount();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []); 
 
   // 잔여 좌석 수 호출
   const fetchRemainingSeatsCount = () => {
@@ -110,18 +124,18 @@ const Reservation_Movie = ({ history }) => {
       });
   };
 
-
   const handleLocationClick = (location) => {
     const placeData = groupedData[location];
     console.log(`${location}에 대한 데이터:`, placeData);
 
-    // 클릭한 영화 정보를 저장
+    // 클릭한 영화 정보 저장
     setSelectedMovie(placeData);
 
     const menuElement = document.querySelector(".menu3_left"); // 지역에 해당하는 영화 출력 위치
     const menu4Sub = document.querySelector(".menu4_sub ul"); // 선택된 영화 정보 출력 위치
 
     menuElement.innerHTML = ""; // 기존 내용 지우기
+    menu4Sub.innerHTML = ""; // 기존 내용 지우기
 
     if (placeData) {
       // 영화 ID를 기준으로 그룹화
@@ -156,37 +170,47 @@ const Reservation_Movie = ({ history }) => {
           ); // 클릭한 영화 제목과 ID 출력
 
           setSelectedMovie(movies); // 클릭한 영화 리스트 전달
+          console.log("setSelectedMovie : ", movies);
 
           menu4Sub.innerHTML = "";
-          // 선택한 영화 정보를 출력
-          movies.forEach((movieInfo) => {
-            const { ip_num, movie_title, theater_id, start_time } = movieInfo;
-            const formattedStartTime = moment(start_time, "HH:mm:ss").format(
+
+          movies.forEach((movieInfo, index) => {
+            const { movie_id, place_num, movie_title, theater_id, movie_time, ip_num, start_time } =
+              movieInfo;
+            const formattedStartTime = moment(movie_time, "HH:mm:ss").format(
               "HH:mm"
             );
 
+            const listItem = document.createElement("li");
+            listItem.innerHTML = `
+            <a href="#none">
+                <span>
+                    ${movie_title}
+                    ${formattedStartTime}<br />
+                    ${remainingSeatsCount}/112 ${theater_id}
+                </span>                         
+            </a>
+        `;
+            menu4Sub.appendChild(listItem);
             setSelectedMovieInfo(movieInfo);
 
-            const listItem = document.createElement("li");
-            listItem.style.marginBottom = "20px";
-            listItem.innerHTML = `
-              <a href="#none">
-                <span>
-                  ${movie_title}
-                  ${formattedStartTime}<br />
-                  ${remainingSeatsCount}/112 ${theater_id}
-                </span>                         
-              </a>
-            `;
-            menu4Sub.appendChild(listItem);
+            // 새로 추가할 코드 시작
+            listItem.addEventListener("click", () => {
+              console.log(`선택된 영화 정보 ${index + 1}:`, movieInfo);
+              handlePopupOpen(movieInfo);
+            });
           });
         };
         menuItem.appendChild(link);
         menuElement.appendChild(menuItem);
-
-        console.log(`Movie ID: ${movieId}에 대한 데이터:`, movies);
       });
     }
+  };
+
+  const handlePopupOpen = (movieInfo) => {
+    setSelectedMovieInfo(movieInfo);
+    setPopupOpen(true); // 팝업 열기
+    console.log("팝업이 열릴 때 selectedMovieInfo:", movieInfo);
   };
 
   // 연령에 대한 이미지
@@ -221,10 +245,18 @@ const Reservation_Movie = ({ history }) => {
   const handleConfirmation = () => {
     setPopupOpen(false);
 
-    // 선택한 영화 정보와 좌석 정보를 로컬 스토리지에 저장
+    // 선택한 영화 정보를 로컬 스토리지에 저장 (필요한 정보만 추출하여 저장)
     localStorage.setItem(
       "selectedMovieInfo",
-      JSON.stringify(selectedMovieInfo)
+      JSON.stringify({
+        movie_id: selectedMovieInfo.movie_id,
+        place_num: selectedMovieInfo.place_num,
+        movie_title: selectedMovieInfo.movie_title,
+        theater_id: selectedMovieInfo.theater_id,
+        movie_time: selectedMovieInfo.movie_time,
+        ip_num: selectedMovieInfo.ip_num,
+        start_time: selectedMovieInfo.start_time,
+      })
     );
 
     history.push("/page_1/Reservation_Seat");
@@ -234,12 +266,31 @@ const Reservation_Movie = ({ history }) => {
     setPopupOpen(false);
   };
 
-  const sysdate = moment().format("YYYY-MM-DD");
-
-  const handlePopupOpen = () => {
-    // 팝업을 열고 선택한 영화 정보를 설정
-    setPopupOpen(true);
+  const handleRegionClick = (placeKey) => {
+    if (selectedRegion === placeKey) {
+      setSelectedRegion(null);
+    } else {
+      setSelectedRegion(placeKey);
+    }
   };
+
+  const handleSubRegionClick = (placeNames) => {
+    if (selectedRegion === placeNames) {
+      setSelectedRegion(null);
+    } else {
+      setSelectedRegion(placeNames);
+    }
+  };
+
+  const handleMovieClick = (movieId) => {
+    if (selectedMovie === movieId) {
+      setSelectedMovie(null);
+    } else {
+      setSelectedMovie(movieId);
+    }
+  };
+
+  const sysdate = moment().format("YYYY-MM-DD");
 
   return (
     <div className={`Res_Movie ${style.Res_Movie}`}>
@@ -337,13 +388,24 @@ const Reservation_Movie = ({ history }) => {
               <div className="menu2">
                 <ul className="menu2_left">
                   {Object.entries(places).map(([placeKey, placeNames]) => (
-                    <li key={placeKey}>
+                    <li key={placeKey} className="region"
+                    onClick={(event) => {
+                      handleRegionClick(placeKey);
+                        }}
+                        style={{
+                          backgroundColor: selectedRegion === placeKey ? 'white' : 'initial', 
+                        }}
+                    >
                       <a
                         href="#"
                         onClick={(event) => {
                           event.preventDefault();
                           setSelectedRegion(placeKey);
+                          handleRegionClick(placeKey);
                         }}
+                        style={{ 
+                          color: selectedRegion === placeKey ? 'black' : 'initial',
+                        }}       
                       >
                         {placeKey}
                       </a>
@@ -359,13 +421,14 @@ const Reservation_Movie = ({ history }) => {
                             <div key={placeKey}>
                               {placeKey === selectedRegion &&
                                 placeNames.map((location, index) => (
-                                  <li className="subRegions" key={index}>
+                                  <li className="subRegion" key={index}>
                                     <a
                                       href="#"
                                       onClick={(event) => {
                                         event.preventDefault();
                                         handleLocationClick(location);
                                       }}
+                                      
                                     >
                                       {location}
                                     </a>
@@ -390,11 +453,14 @@ const Reservation_Movie = ({ history }) => {
             <li>
               <div className="menu3">
                 <ul className="menu3_left">
-                  {/* {movies.map((movie) => (
-                    <li key={movie.id} onClick={() => handleClick(movie)}>
-                      {movie.title}
-                    </li>
-                  ))} */}
+                  {movies.map(
+                    (movieInfo, index) =>
+                      movieInfo.place_num === 1 && (
+                        <li key={index}>
+                          <a href="#">{movieInfo.movie_title}</a>
+                        </li>
+                      )
+                  )}
                 </ul>
               </div>
             </li>
@@ -414,9 +480,31 @@ const Reservation_Movie = ({ history }) => {
                   <div className="menu4_main">
                     <a href="#none"></a>
                   </div>
-                  <div className="menu4_sub" onClick={handlePopupOpen}>
+                  <div className="menu4_sub">
                     <ul>
-                      <li></li>
+                      {movies.map(
+                        (movieInfo, index) =>
+                          movieInfo.movie_id === 1 &&
+                          movieInfo.place_num === 1 && (
+                            <li
+                              key={index}
+                              onClick={() => handlePopupOpen(movieInfo)}
+                            >
+                              <a href="#none">
+                                <span>
+                                  {movieInfo.movie_title}
+                                  {moment(
+                                    movieInfo.movie_time,
+                                    "HH:mm:ss"
+                                  ).format("HH:mm")}{" "}
+                                  <br />
+                                  {remainingSeatsCount}/112{" "}
+                                  {movieInfo.theater_id}
+                                </span>
+                              </a>
+                            </li>
+                          )
+                      )}
                     </ul>
                   </div>
                 </ul>
@@ -424,26 +512,21 @@ const Reservation_Movie = ({ history }) => {
             </li>
           </ul>
         </div>
-        {popupOpen && selectedMovie && (
+        {popupOpen && selectedMovieInfo && remainingSeatsCount && (
           <div className="popup">
             <div className="popup_content">
               <strong>
-                {selectedMovie[0].movie_title}/{" "}
-                {moment(selectedMovie[0].start_time, "HH:mm:ss").format(
+                {selectedMovieInfo.movie_title}/{" "}
+                {moment(selectedMovieInfo.movie_time, "HH:mm:ss").format(
                   "HH:mm"
                 )}{" "}
-                ({selectedMovie[0].theater_id})
+                ({selectedMovieInfo.theater_id})
               </strong>
-              {remainingSeatsCount !== null && (
-                <p>
-                  잔여좌석 <strong>{remainingSeatsCount}</strong>/112
-                </p>
-              )}
-              <img className="Res_screen" src={Res_screen} />
               <p>
-                본 영화는 만 {getMovieImage(selectedMovie[0].movie_id)} 세 이상
-                관람가 영화입니다.
+                잔여좌석 <strong>{remainingSeatsCount}</strong>/112
               </p>
+              <img className="Res_screen" src={Res_screen} />
+              <p>영화/관람일자 확인해주세요.</p>
               <button name="n" onClick={handleCancellation}>
                 취소
               </button>

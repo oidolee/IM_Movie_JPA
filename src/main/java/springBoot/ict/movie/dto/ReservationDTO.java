@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 @Entity
@@ -22,7 +24,8 @@ public class ReservationDTO {
     @Id
     private int res_id;
     private int st_id;
-    private String c_email;    
+    @JsonProperty("ic_email")
+    private String IC_Email;    
     private int res_count;
     private int res_ticket_price;
     private Date res_sysdate;

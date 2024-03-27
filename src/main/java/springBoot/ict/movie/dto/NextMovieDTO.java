@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="next_movie")
+@Table(name="NEXT_MOVIE")
 @Data
 public class NextMovieDTO {
 	
@@ -26,7 +26,12 @@ public class NextMovieDTO {
     private String next_visitor;
     private String next_contents;
     private String next_con;
-    private String next_trailer;
+    private String next_pd;
+    private String next_cast;
+    private String next_image2;
+    private String next_image3;
+    private String next_trailer1;
+    private String next_trailer2;
     private String next_category;
 
 }

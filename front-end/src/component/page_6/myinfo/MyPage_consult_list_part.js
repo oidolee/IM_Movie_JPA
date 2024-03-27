@@ -14,7 +14,7 @@ function MyPage_consult_list_part() {
     useEffect(() => {
         const authToken = localStorage.getItem("auth_token");
         if (authToken) {
-            const decodedToken = jwtDecode(authToken); // 수정 필요
+            const decodedToken = jwtDecode(authToken); 
             const userEmail = decodedToken.iss;
             setEmailCheck(userEmail);
             reloadConsultList(userEmail);
@@ -37,7 +37,7 @@ function MyPage_consult_list_part() {
                 console.log("test", res.data);
                 const consultData = res.data.map(item => ({
                     ...item,
-                    ib_date: formatDate(item.ib_date) // 각 consultItem의 ib_date를 포맷 변경
+                    ib_date: formatDate(item.ib_date) 
                 }));
                 setConsult(consultData);
                 console.log('consultData', consultData);

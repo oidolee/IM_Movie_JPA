@@ -17,9 +17,6 @@ import { useParams, useHistory } from 'react-router-dom';
 function Admin_GroupForm_List () {
   const [lists, setLists] = useState([]);
   const history = useHistory();
-  const [email, setEmail] = useState('');
-  const { group_Id } = useParams();
-
   
  useEffect(() => {
   groupList();
@@ -37,21 +34,11 @@ function Admin_GroupForm_List () {
       });
   };
 
-  const c_email = '{list.c_email}';
-  const group_name = '{list.group_name}';
-  const custo_name = '{list.custo_name}';
 
-  let inputData = {
-    group_id: {group_Id},
-    c_email: {c_email},
-    group_name: {group_name},
-    custo_name: {custo_name},
-  }
-
-  // 등록
-  const groupAdd = (inputData) => {
-    history.push(`/admin/page_5/Admin_GroupForm_Answer/${inputData.group_Id}`);
-  };
+ // 등록
+const groupAdd = (group_id) => {
+  history.push(`/admin/page_5/Admin_GroupForm_Answer/${group_id}`);
+};
 
 //   // 수정
 //   const selectGroup = (group_id) => {
@@ -65,17 +52,17 @@ function Admin_GroupForm_List () {
 //     });
 //   };
 
-//   // 삭제
-//   const groupDelete = (group_id) => {
-//     ApiService.groupDelete(group_id)
-//       .then((res) => {
-//         setLists(lists.filter((list) => list.group_id !== group_id));
-//         console.log("groupDelete 성공 : ", res.data);
-//       })
-//       .catch((err) => {
-//         console.log("groupDelete 실패 : ", err);
-//       });
-//   };
+  // // 삭제
+  // const groupDelete = (group_id) => {
+  //   ApiService.groupDelete(group_id)
+  //     .then((res) => {
+  //       setLists(lists.filter((list) => list.group_id !== group_id));
+  //       console.log("groupDelete 성공 : ", res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log("groupDelete 실패 : ", err);
+  //     });
+  // };
 
   return (
     <div className={`Admin_GroupForm_List ${style.Admin_GroupForm_List}`}>
@@ -130,11 +117,17 @@ function Admin_GroupForm_List () {
               <TableCell>{list.custo_phone3}</TableCell>
               <TableCell>{list.gr_show === 'y' ? '답변대기 중' : '답변 완료'}</TableCell>
               <TableCell
-                className="selectBtn"
-                onClick={() => groupAdd(inputData)}
+              className="selectBtn"
+              onClick={() => groupAdd(list.group_id)}
+            >
+              <Create />
+            </TableCell>
+            {/* <TableCell
+                className="deleteBtn"
+                onClick={() => groupDelete(list.group_id)}
               >
-                <Create />
-              </TableCell>
+                <Delete />
+              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>

@@ -67,6 +67,15 @@ const MainBody = () => {
   ];
 
   useEffect(() => {
+    console.log(localStorage)
+    for (var i = localStorage.length - 1; i >= 0; i--) {
+        var key = localStorage.key(i);
+        // "auth_token", "kakao", "naver"로 시작하는 키를 가진 값을 제외하고 삭제
+        if (!(/^auth_token|^kakao|^naver/.test(key))) {
+            localStorage.removeItem(key);
+        }
+    }
+  
     ScrollReveal().reveal('.scrollUp', {
       delay: 500,
       duration: 1000,

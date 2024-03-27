@@ -21,7 +21,6 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public List<StoreDTO> listStore() throws ServletException, IOException {
 		System.out.println("서비스 - listStore");
-		
 		System.out.println(dao.findAll());
 		
 		return dao.findAll();
@@ -31,7 +30,6 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public void insertStore(StoreDTO dto) throws ServletException, IOException {
 		System.out.println("서비스 - insertStore");
-		
 		System.out.println(dto);
 		
 		dao.save(dto);
@@ -42,7 +40,6 @@ public class StoreServiceImpl implements StoreService {
 	public void updateStore(StoreDTO dto) throws ServletException, IOException {
 		System.out.println("서비스 - updateStore");
 		
-    
 	    // 저장 또는 업데이트합니다.
 	    dao.save(dto);
 	}

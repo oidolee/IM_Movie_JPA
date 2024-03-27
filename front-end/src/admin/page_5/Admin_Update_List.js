@@ -109,7 +109,7 @@ function Admin_Update_List ({ history }) {
               </TableCell>
               <TableCell>{list.mov_image}</TableCell>
               <TableCell>{list.mov_title}</TableCell>
-              <TableCell>{list.mov_date}</TableCell>
+              <TableCell> {new Date(list.mov_date).toLocaleDateString()} </TableCell>
               <TableCell>{list.mov_time}</TableCell>
               <TableCell>{list.mov_age}</TableCell>
               <TableCell>{list.mov_visitor}</TableCell>

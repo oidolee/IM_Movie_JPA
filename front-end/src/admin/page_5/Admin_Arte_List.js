@@ -83,7 +83,6 @@ function Admin_Arte_List ({ history }) {
             <TableCell>Movie_Time</TableCell>
             <TableCell>Movie_Age</TableCell>
             <TableCell>Movie_Visitor</TableCell>
-            <TableCell>Movie_Contents</TableCell>
             <TableCell>Movie_Con</TableCell>
             <TableCell>Movie_Trailer</TableCell>
             <TableCell>Movie_Category</TableCell>
@@ -100,11 +99,10 @@ function Admin_Arte_List ({ history }) {
               </TableCell>
               <TableCell>{list.arte_image}</TableCell>
               <TableCell>{list.arte_title}</TableCell>
-              <TableCell>{list.arte_date}</TableCell>
+              <TableCell> {new Date(list.arte_date).toLocaleDateString()} </TableCell>
               <TableCell>{list.arte_time}</TableCell>
               <TableCell>{list.arte_age}</TableCell>
               <TableCell>{list.arte_visitor}</TableCell>
-              <TableCell>{list.arte_contents}</TableCell>
               <TableCell>{list.arte_con}</TableCell>
               <TableCell>{list.arte_trailer}</TableCell>
               <TableCell>{list.arte_category}</TableCell>

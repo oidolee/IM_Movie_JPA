@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS IM_SocialCustomer (
 );
 
 SELECT * from IM_Customer;
+
 SELECT * from IM_SocialCustomer;
 
 Commit;

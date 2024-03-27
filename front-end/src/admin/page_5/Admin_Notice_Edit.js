@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ApiService from "../../ApiService";
 import { Typography, TextField, Button,Select,MenuItem } from "@mui/material";
-import style from "../../styles/admin/page_5/Admin_Update_Edit.css";
+import style from "../../styles/admin/page_5/Admin_Notice_Edit.css";
 import { useParams } from 'react-router-dom';
 
 const Admin_Notice_Edit = ({ history }) => {
@@ -80,6 +80,12 @@ const Admin_Notice_Edit = ({ history }) => {
 
         <MenuItem value="서울">서울</MenuItem>
         <MenuItem value="경기/인천">경기/인천</MenuItem>
+        <MenuItem value="동탄">동탄</MenuItem>
+        <MenuItem value="수원(수원역)">수원(수원역)</MenuItem>
+        <MenuItem value="부평역">부평역</MenuItem>
+        <MenuItem value="영등포">영등포</MenuItem>
+        <MenuItem value="홍대입구">홍대입구</MenuItem>
+        <MenuItem value="전체">전체</MenuItem>
       </Select>
       <br />
 
@@ -100,6 +106,7 @@ const Admin_Notice_Edit = ({ history }) => {
         id="standard-required"
         variant="standard"
         label="내용"
+        multiline
         type="text"
         name="notice_con"
         value={editInfo.notice_con}

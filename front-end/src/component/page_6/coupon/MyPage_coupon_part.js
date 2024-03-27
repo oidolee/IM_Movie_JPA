@@ -48,7 +48,7 @@ function MyPage_coupon_part() {
     useEffect(() => {
         const authToken = localStorage.getItem("auth_token");
         if (authToken) {
-            const decodedToken = jwtDecode(authToken); // 수정 필요
+            const decodedToken = jwtDecode(authToken);
             const userEmail = decodedToken.iss;
             setEmail(userEmail);
             reloadCusCouponList(userEmail);

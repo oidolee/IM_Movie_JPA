@@ -50,7 +50,7 @@ public class CouponController {
 
 	// 쿠폰 상세내역
 	@GetMapping("/selectCoupon/{ic_name}")
-	public Map<String, Object> selectConsultDetail(@PathVariable(name = "ic_name") String ic_name, Model model)
+	public Map<String, Object> selectCouponDetail(@PathVariable(name = "ic_name") String ic_name, Model model)
 
 			throws ServletException, IOException {
 		logger.info("<<< url -> selectConsultDetail");
@@ -82,7 +82,8 @@ public class CouponController {
 
 	// 쿠폰 등록
 	@PostMapping("/saveCoupon")
-	public Map<String, Object> couponInsert(@RequestBody CouponDTO cpdto) throws ServletException, IOException {
+	public Map<String, Object> couponInsert(@RequestBody CouponDTO cpdto) 
+			throws ServletException, IOException {
 		logger.info("<<< url - couponInsert >>>");
 
 		System.out.println("<<< url - couponInsert >>>");

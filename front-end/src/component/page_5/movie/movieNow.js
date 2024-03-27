@@ -137,7 +137,7 @@ function MovieNow() {
           <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
              <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.now_image}`} style={{ width: '200px', height: 'auto' }} />
             <Card.Body>
-              <Card.Title>{movie.now_title}</Card.Title>
+            <Card.Title style={{ fontSize: "15px",fontWeight: "bold"}}>{movie.now_title}</Card.Title>
               <Card.Text>{movie.now_time}분</Card.Text>
               <Button className={`primary_button2 ${style.primary_button2}`}   onClick={() => handleButtonClick(movie.now_id)} >상세정보</Button>
             </Card.Body>
@@ -154,7 +154,7 @@ function MovieNow() {
           <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
             <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.now_image}`} style={{ width: '200px', height: 'auto' }} />
             <Card.Body>
-              <Card.Title>{movie.now_title}</Card.Title>
+            <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.now_title}</Card.Title>
               <Card.Text>{movie.now_time}분</Card.Text>
               <Button className={`primary_button2 ${style.primary_button2}`}  onClick={() => handleButtonClick(movie.now_id)}>상세정보</Button>
             </Card.Body>
@@ -167,7 +167,7 @@ function MovieNow() {
           <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
             <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.now_image}`} style={{ width: '200px', height: 'auto' }} />
             <Card.Body>
-              <Card.Title>{movie.now_title}</Card.Title>
+            <Card.Title style={{ fontSize: "14px",fontWeight: "bold" }}>{movie.now_title}</Card.Title>
               <Card.Text>{movie.now_time}분</Card.Text>
               <Button className={`primary_button2 ${style.primary_button2}`}  onClick={() => handleButtonClick(movie.now_id)}>상세정보</Button>
             </Card.Body>
@@ -180,7 +180,7 @@ function MovieNow() {
           <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
             <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.now_image}`} style={{ width: '200px', height: 'auto' }} />
             <Card.Body>
-              <Card.Title>{movie.now_title}</Card.Title>
+            <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.now_title}</Card.Title>
               <Card.Text>{movie.now_time}분</Card.Text>
               <Button className={`primary_button2 ${style.primary_button2}`}  onClick={() => handleButtonClick(movie.now_id)}>상세정보</Button>
             </Card.Body>
@@ -193,7 +193,7 @@ function MovieNow() {
           <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
             <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.now_image}`} style={{ width: '200px', height: 'auto' }} />
             <Card.Body>
-              <Card.Title>{movie.now_title}</Card.Title>
+            <Card.Title style={{ fontSize: "14px",fontWeight: "bold" }}>{movie.now_title}</Card.Title>
               <Card.Text>{movie.now_time}분</Card.Text>
               <Button className={`primary_button2 ${style.primary_button2}`}   onClick={() => handleButtonClick(movie.now_id)}>상세정보</Button>
             </Card.Body>
@@ -206,7 +206,7 @@ function MovieNow() {
           <Card key={index} style={{ width: '202px', margin: '0 10px' }}>
             <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.now_image}`} style={{ width: '200px', height: 'auto' }} />
             <Card.Body>
-              <Card.Title>{movie.now_title}</Card.Title>
+            <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.now_title}</Card.Title>
               <Card.Text>{movie.now_time}분</Card.Text>
               <Button className={`primary_button2 ${style.primary_button2}`}   onClick={() => handleButtonClick(movie.now_id)}>상세정보</Button>
             </Card.Body>

@@ -45,9 +45,9 @@ class ApiService {
     // --------------------------------------------Reservation 끝--------------------------------------------
     // --------------------------------------------Payment 시작--------------------------------------------
     // 결제 정보 저장
-    insertPayment(inputData) {
-        console.log("insertPayment 호출", inputData);
-        return axios.post(serverUrl + "/page_1/PaymentInsert", inputData);
+    insertPayment(inputData1) {
+        console.log("insertPayment 호출", inputData1);
+        return axios.post(serverUrl + "/page_1/PaymentInsert", inputData1);
     }
 
     listPayment(email) {
@@ -223,6 +223,26 @@ class ApiService {
         return axios.put(serverUrl + "/updateCustomer" , inputdata);
     }
 
+    // MY 영화관
+    // MY 영화관 상세정보
+    selectTheater(c_email){
+        console.log("selectTheater 호출")
+        return axios.get(serverUrl + "/page_6/theater/theaterDetail/" + c_email);
+    }
+
+    // MY 영화관 등록하기
+    insertTheater(inputData){
+        console.log("selectTheater 호출")
+        return axios.post(serverUrl + "/page_6/theater/saveTheater" , inputData);
+    }
+    
+    // MY 영화관 수정하기
+    updateTheater(inputData){
+        console.log("selectTheater 호출")
+        console.log('inputData'. inputData);
+        return axios.put(serverUrl + "/page_6/theater/updateTheater" , inputData);
+    }
+
     // 관리자
     // 1:1 문의 리스트
     fetchConsult(){
@@ -299,7 +319,7 @@ class ApiService {
 
     // 쿠폰 삭제(관리자)
     deleteCoupon(ic_num){
-        console.log('updateCoupon() 호출!!')
+        console.log('deleteCoupon() 호출!!')
         return axios.delete(serverUrl + '/page_6/coupon/deleteCoupon/' + ic_num); 
     }
 
@@ -574,7 +594,7 @@ class ApiService {
     //단체대관 리스트
     groupList(){
         console.log('groupList() 호출!!')
-        return axios.get(serverUrl + '/page_5/GroupList'); 
+        return axios.get(serverUrl + '/page_5/GroupList' ); 
     }
 
     groupAdd(inputData) {
@@ -582,31 +602,43 @@ class ApiService {
         return axios.post(serverUrl + "/page_5/GroupInsert", inputData);
     }
 
-     // 1:1 문의 상세
-     groupDetail(group_id){
-        console.log('groupDetail() 호출!!')
-        return axios.get(serverUrl + '/page_5/selectGroupAnswer/' + group_id); 
+    // 고객
+    //  대관 문의 리스트
+    GroupCusList(c_email){
+        console.log('GroupCusList() 호출!!')
+        return axios.get(serverUrl + '/page_5/cusGroupList/' + c_email); 
     }
 
-    // 1:1 문의 답변 등록
+     // 대관 문의 상세
+     groupDetail(group_id){
+        console.log('groupDetail() 호출!!')
+        return axios.get(serverUrl + '/page_5/select/' + group_id); 
+    }
+
+    // 대관 문의  답변 등록
     addgroupAnwser(inputData) {
         console.log('addgroupAnwser 호출', inputData);
         return axios.post(serverUrl + "/page_5/saveAnswer", inputData);
     }
 
-     // 1:1 문의 답변 후 상태 업데이트
+     // 대관 문의  답변 후 상태 업데이트
      updategroupData(group_id){
         console.log('updategroupData 호출');
         return axios.put(serverUrl + "/page_5/completeGroupAnswer/" + group_id);
     }
 
     
-    // 1:1 문의 답변 리스트
+    // 대관 문의  답변 리스트
     GroupAnswer(group_id){
         console.log('GroupAnswer() 호출!!')
         
         return axios.get(serverUrl + '/page_5/groupAnswer/'+ group_id); 
     }
+
+   
+   
+
+    
 
 
     // selectGroup(group_id) {

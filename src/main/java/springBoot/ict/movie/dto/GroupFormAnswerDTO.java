@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="GROUP_ANSWER")
+@Table(name="RE_ANSWER")
 @Data
 public class GroupFormAnswerDTO {
     
@@ -20,7 +20,7 @@ public class GroupFormAnswerDTO {
     private int group_id_aws;  
     private int  group_id;   
     private String re_title;   
-    private String re_content;
+    private String re_con;
     private Date   re_date;
     
     public GroupFormAnswerDTO() {

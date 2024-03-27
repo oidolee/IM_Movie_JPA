@@ -31,9 +31,15 @@ function Header() {
     const [cookies, setCookie, removeCookie] = useCookies(['idName']);
     const [role, setRole] = useState(''); // Role state 추가
 
+    
+
 
     // 페이지 로딩 시 경로 설정 (실제로는 해당 경로를 얻는 방법에 따라 다를 수 있음)
     useEffect(() => {
+
+        
+
+
         const currentPath = window.location.pathname;
         console.log(currentPath)
         setPath(currentPath);
@@ -99,7 +105,7 @@ function Header() {
 
     const handleLogout = () => {
         /// 로그아웃 시 로컬 스토리지에서 토큰 제거
-        localStorage.removeItem('auth_token');
+        localStorage.clear();
         setAuthToken(null);
         alert('로그아웃 되었습니다.');
 
