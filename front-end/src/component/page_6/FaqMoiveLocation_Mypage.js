@@ -116,16 +116,30 @@ class FaqMoiveLocation_Mypage extends Component {
       .then(res => {
         const cusTheater = res.data.tdto;
         console.log("cusTheater", cusTheater);
-        this.setState({
-          it_no: cusTheater.it_no,
-          c_email: cusTheater.c_email,
-          theaters: [ // theaters 배열 초기화
-            { ticketmap_no: cusTheater.ticketmap_no1, ic_my_theater: cusTheater.ic_my_theater_1 },
-            { ticketmap_no: cusTheater.ticketmap_no2, ic_my_theater: cusTheater.ic_my_theater_2 },
-            { ticketmap_no: cusTheater.ticketmap_no3, ic_my_theater: cusTheater.ic_my_theater_3 }
-          ],
+        if(cusTheater == null){
+          this.setState({
+            it_no: 1,
+            c_email: email,
+            theaters: [ // theaters 배열 초기화
+              { ticketmap_no: 1, ic_my_theater: "홍대입구" },
+              { ticketmap_no: 2, ic_my_theater: "용산" },
+              { ticketmap_no: 3, ic_my_theater: "합정" }
+            ],
+  
+          })
+        }else {
 
-        })
+          this.setState({
+            it_no: cusTheater.it_no,
+            c_email: cusTheater.c_email,
+            theaters: [ // theaters 배열 초기화
+              { ticketmap_no: cusTheater.ticketmap_no1, ic_my_theater: cusTheater.ic_my_theater_1 },
+              { ticketmap_no: cusTheater.ticketmap_no2, ic_my_theater: cusTheater.ic_my_theater_2 },
+              { ticketmap_no: cusTheater.ticketmap_no3, ic_my_theater: cusTheater.ic_my_theater_3 }
+            ],
+  
+          })
+        }
       })
   }
 

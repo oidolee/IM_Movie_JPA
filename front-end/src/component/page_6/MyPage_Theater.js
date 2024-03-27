@@ -40,7 +40,24 @@ function MyPage_Theater() {
         ApiService.selectTheater(email)
             .then(res => {
                 console.log("userTheater", res.data);
-                setUserTheater(res.data.tdto);
+                console.log("userTheater email", email);
+                let checkTdto = res.data.tdto
+                if(res.data.tdto == null){
+                    console.log("userTheatertdto", res.data.tdto);
+                    checkTdto = {
+                        c_email: email,
+                        it_no: 1,
+                        ic_my_theater_1: "홍대입구",
+                        ic_my_theater_2: "용산",
+                        ic_my_theater_3: "합정",
+                        ticketmap_no1: 1,
+                        ticketmap_no2: 2,
+                        ticketmap_no3: 3
+                      }
+                      console.log("userTheatertdto after", checkTdto);
+                      
+                }
+                setUserTheater(checkTdto);
             })
             .catch(err => {
                 console.log('searchCutomer() Error!!', err);
@@ -83,7 +100,6 @@ function MyPage_Theater() {
                 )}
             </div>
             <div className={`my_coupon_box ${style.my_coupon_box}`} style={{ display: 'flex', justifyContent: 'space-between' }}>
-
                 <Link to={`/theater/${userTheater.ticketmap_no1}`} className={`plz_login_button ${style.plz_login_button}`}>
                     <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         {userTheater.ic_my_theater_1}
