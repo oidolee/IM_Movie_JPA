@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import style from "../../styles/page_1/Reservation_Seat.css";
-import Res_movie from "../../assets/page_1/movie.jpg";
+import Res_movie1 from "../../assets/page_1/movie1.jpg";
 import Res_img18 from "../../assets/page_1/18.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
 import Res_img12 from "../../assets/page_1/12.jpg";
