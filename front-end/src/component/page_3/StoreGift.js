@@ -35,7 +35,8 @@ class StoreGift extends Component {
       message: "",
       name: '',
       email: '',
-      userName : ''
+      userName : '',
+      detailRegDate : ''
     };
   }
 
@@ -50,8 +51,18 @@ class StoreGift extends Component {
         console.log(userEmail)
         this.reloadsearchCutomer(userEmail)
       }
+
+    // 오늘 날짜를 구하여 detailRegDate에 할당
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+    this.setState({ detailRegDate: formattedDate });
+    console.log('detailRegDate------', this.state.detailRegDate);
   }
 
+  
   closeStoreGift = () => {
     const { onClose } = this.props;
     onClose(); 
@@ -90,7 +101,7 @@ class StoreGift extends Component {
   };
 
   handlePayment = () => {
-    const { recipientNumber, sender, message, name, email } = this.state;
+    const { recipientNumber, sender, message, name, email, userName } = this.state;
     const { totalQuantity, totalPrice, itemCode, itemName, itemImage } = this.props;
 
     // 선물 받는 분 번호가 12자 이상이면 알림창 띄우기
@@ -113,6 +124,8 @@ class StoreGift extends Component {
         itemImage,
         name,
         email,
+        userName,
+        detailRegDate: this.state.detailRegDate,
       })
     );
 
@@ -206,7 +219,6 @@ class StoreGift extends Component {
                     name="userName"
                     value={this.state.userName}
                     size="20"
-                    placeholder="선물 하는 분 입력"
                     onChange={this.handleChange}
                     required
                   />

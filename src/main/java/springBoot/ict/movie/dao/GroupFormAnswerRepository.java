@@ -14,5 +14,5 @@ public interface GroupFormAnswerRepository extends JpaRepository<GroupFormAnswer
 
 	// 1:1문의 답변 리스트
 		@Query("SELECT ca FROM GroupFormAnswerDTO ca WHERE ca.group_id = :group_id")
-		List<GroupFormAnswerDTO> selectGroup(@Param("group_id") int group_id);
+	List<GroupFormAnswerDTO> selectGroup(@Param("group_id") int group_id);
 }

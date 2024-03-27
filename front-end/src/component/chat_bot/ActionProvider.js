@@ -24,13 +24,8 @@ class ActionProvider {
         }))
     }
 
-    // set1 end
-
-
-
 
     // 기존 기본 테스트 
-
     helloWolrdHandler = () => {
         const message = this.createChatBotMessage("안녕하세요? \n저는 IM 챗봇입니다. \n 무엇을 도와드릴까요?")
         this.setChatbotMessage(message);

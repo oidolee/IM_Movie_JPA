@@ -140,6 +140,7 @@ public class UserService {
 		user.setState(dto.getState());
 		user.setToken(dto.getToken());   // 추가, 컬럼 size 500
 		user.setRole(dto.getRole());
+		user.setType(dto.getType());
 		user.setPassword(passwordEncoder.encode(CharBuffer.wrap(dto.getPassword())));
 		
 		

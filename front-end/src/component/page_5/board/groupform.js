@@ -1,17 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import style from '../../../styles/page_5/groupform.module.css';
 import group1 from '../../../assets/page_5_3/group1.png';
 import { useHistory } from 'react-router-dom'; 
 import ApiService from "../../../ApiService";
+import { jwtDecode } from 'jwt-decode';
+
 
 
 function Form() {
   const history = useHistory(); 
+  const [email, setEmail] = useState('');
+
+  const [cus_name, setCus_Name] = useState('');
+
+  useEffect(() => {
+    const authToken = localStorage.getItem("auth_token");
+    if (authToken) {
+        const decodedToken = jwtDecode(authToken); // 수정 필요
+        const userEmail = decodedToken.iss;
+        setEmail(userEmail);
+        reloadSearchcustomer(userEmail);
+    }
+    
+}, []);
+
+    const reloadSearchcustomer = (email) => {
+      ApiService.searchCutomer(email)
+          .then(res => {
+              console.log('res.data', res.data);
+              setCus_Name(res.data.dto.name)
+          })
+          .catch(error => {
+              console.error('요청 실패:', error);
+              // 삭제 요청이 실패했을 때 필요한 동작 수행
+          });
+    }
+
 
   const [addInfo, setAddInfo] = useState({
     group_id: '',
+    c_email: email,
     group_loc: "",
     group_type: "",
     group_expeople: "",
@@ -22,16 +52,18 @@ function Form() {
     group_title: "",
     group_con: "",
     group_name: "",
-    custo_name: "",
+    custo_name: cus_name,
     custo_phone1: "",
     custo_phone2: "",
-    custo_phone3: "",
+    custo_phone3: "", 
   });
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setAddInfo({
       ...addInfo,
+      c_email:email,
+      custo_name: cus_name,
       [name]: value,
     });
   };
@@ -42,7 +74,7 @@ function Form() {
     ApiService.groupAdd(addInfo)
       .then((res) => {
         console.log("GroupInsert 성공 : ", res.data);
-        history.push("/admin/page_5/Admin_GroupForm_List");
+        history.push("/");
       })
       .catch((err) => {
         console.log(addInfo);
@@ -146,10 +178,6 @@ function Form() {
               </div>
             )}
              
-          
-         
-
-       
 
             <div className={`Form_group ${style.Form_group}`}>
             <label for="g_type">분류</label>
@@ -207,7 +235,7 @@ function Form() {
 
             <div className={`Form_group ${style.Form_group}`}>
               <label for="gg_name">성명</label>
-              <input type="text" id="name1" className={`name1 ${style.name1}`}  name="custo_name" value={addInfo.custo_name} onChange={onChange} />
+              <input type="text" id="name1" className={`name1 ${style.name1}`}  name="custo_name" value={cus_name} onChange={onChange} />
               <hr></hr>
             </div>
 
@@ -228,6 +256,11 @@ function Form() {
               
               <hr></hr>
             </div>
+
+            <div className={`Form_group ${style.Form_group}`}>
+            <label for="gg_email">이메일</label>
+            <input type="text" id="email1" className={`email1 ${style.email1}`}  name="c_email" value={email} onChange={onChange} />
+              </div>
 
             <div className={`Form_make3 ${style.Form_make3}`}>
                 <p>개인정보 수집에 대한 동의</p> 
@@ -261,8 +294,8 @@ function Form() {
 
             <div className={`btn_0 ${style.btn_0}`}>
                 <button type="submit" className={`btn1 ${style.btn1}`}>취소</button>
-                <span className="gap"></span> {/* 간격 요소 */}
-                <button type="submit" className={`btn2 ${style.btn2}`} onClick={saveUpdate}>확인</button>
+                  <span className="gap"></span> {/* 간격 요소 */}
+                <button className={`btn2 ${style.btn2}`} onClick={saveUpdate}>확인</button>
             </div>
             
             </form>
