@@ -24,10 +24,9 @@ function MyPage_consult_answer_part2() {
 
     const history = useHistory();
 
-    const [groupAnswerData, setGroupAnswerData] = useState({
-        re_con: '',
-        group_id: ''
-    });
+    const [groupAnswerData, setGroupAnswerData] = useState([
+
+    ]);
     const [groupData, setGroupData] = useState({
         gr_show: 'n'
     });
@@ -101,7 +100,7 @@ function MyPage_consult_answer_part2() {
     const reloadGroupDetail = (group_id) => {
         ApiService.groupDetail(group_id)
             .then(res => {
-                console.log('group_id : ' + group_id)
+                console.log('group_id : ' , group_id)
                 console.log("test", res.data);
                 let group = res.data;
                 setGroup_type(group.dto.group_type)
@@ -121,6 +120,7 @@ function MyPage_consult_answer_part2() {
             .then(res => {
                 console.log("answer", res.data);
                 setGroupAnswerList(res.data);
+                
 
             })
             .catch(err => {
@@ -164,6 +164,10 @@ function MyPage_consult_answer_part2() {
                                             <span className={`circleBefore2 ${style.circleBefore2}`}></span>
                                         </div>
                                         <dd style={{ width: '100%', marginLeft: '15px' }}>
+                                            <pre>
+                                                {groupAnswerListItem.re_title}
+                                            </pre>
+
                                             <pre>
                                                 {groupAnswerListItem.re_con}
                                             </pre>

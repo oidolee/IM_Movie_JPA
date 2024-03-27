@@ -99,7 +99,7 @@ function Admin_Notice_List ({ history }) {
               
               <TableCell>{list.notice_one}</TableCell>
               <TableCell>{list.notice_title}</TableCell>
-              <TableCell>{list.notice_date}</TableCell>
+              <TableCell> {new Date(list.notice_date).toLocaleDateString()} </TableCell>
               <TableCell>{list.notice_cnt}</TableCell>
               <TableCell>{list.notice_con}</TableCell>
               <TableCell

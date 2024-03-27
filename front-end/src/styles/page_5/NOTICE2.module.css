@@ -38,10 +38,19 @@
 
   .con4{
     width:100%;
-    height:300px;
+    height:auto;
+    padding-top: 10px;
    margin-right: 200px;
    text-align: left;
   
+  }
+
+  .notice_con1 {
+    text-align: justify; /* 텍스트를 양쪽 정렬로 설정 */
+  }
+  
+  .notice_con1 .con4 {
+    margin-top: 10px; /* 내용 위 여백 추가 */
   }
   
   .btn4{

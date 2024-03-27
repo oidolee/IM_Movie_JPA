@@ -228,7 +228,7 @@ function MovieDetail() {
 
             <div className={`detail_con ${style.detail_con}`}>
               <div className={`detail_con1 ${style.detail_con1}`}>
-                <label htmlFor="de_date">{detailInfo.mov_date} 개봉</label>
+                <label htmlFor="de_date">{new Date(detailInfo.mov_date).toLocaleDateString()} 개봉</label>
                 <label htmlFor="de_time">| {detailInfo.mov_time}분 |</label>
                 <label htmlFor="de_age">
                   {" "}

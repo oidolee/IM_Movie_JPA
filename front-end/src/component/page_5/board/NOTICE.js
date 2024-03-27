@@ -143,7 +143,7 @@ function NOTICE() {
             </a>
           </div>
           <div>
-            <label className={`notice_3 ${style.notice_3}`}>{item.notice_date}</label>
+            <label className={`notice_3 ${style.notice_3}`}>{new Date(item.notice_date).toLocaleDateString()}</label> 
           </div>
         </div>
       ))}
