@@ -41,8 +41,8 @@ function Consult_part() {
                 setCus_Name(res.data.dto.name)
             })
             .catch(error => {
-                console.error('삭제 요청 실패:', error);
-                // 삭제 요청이 실패했을 때 필요한 동작 수행
+                console.error('요청 실패:', error);
+                
             });
     }
 

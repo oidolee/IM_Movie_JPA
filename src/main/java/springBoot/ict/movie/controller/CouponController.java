@@ -82,7 +82,8 @@ public class CouponController {
 
 	// 쿠폰 등록
 	@PostMapping("/saveCoupon")
-	public Map<String, Object> couponInsert(@RequestBody CouponDTO cpdto) throws ServletException, IOException {
+	public Map<String, Object> couponInsert(@RequestBody CouponDTO cpdto) 
+			throws ServletException, IOException {
 		logger.info("<<< url - couponInsert >>>");
 
 		System.out.println("<<< url - couponInsert >>>");

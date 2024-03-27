@@ -11,11 +11,7 @@ function MyPage_consult_list_part() {
     const [emailCheck, setEmailCheck] = useState('');
 
     useEffect(() => {
-        reloadConsultList(cookies.c_email);
-        
-        if (cookies.c_email !== undefined) {
-            setEmailCheck(cookies.c_email);
-        }
+        reloadConsultList();
     }, []);
 
     const formatDate = (timestamp) => {
