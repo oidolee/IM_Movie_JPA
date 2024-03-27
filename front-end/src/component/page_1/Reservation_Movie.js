@@ -193,8 +193,8 @@ const Reservation_Movie = ({ history }) => {
   };
 
   const handlePopupOpen = (movieInfo) => {
-    setPopupOpen(true);
     setSelectedMovieInfo(movieInfo);
+    setPopupOpen(true); // 팝업 열기
     console.log("팝업이 열릴 때 selectedMovieInfo:", movieInfo);
   };
 
@@ -230,10 +230,15 @@ const Reservation_Movie = ({ history }) => {
   const handleConfirmation = () => {
     setPopupOpen(false);
 
-    // 선택한 영화 정보와 좌석 정보를 로컬 스토리지에 저장
+    // 선택한 영화 정보를 로컬 스토리지에 저장 (필요한 정보만 추출하여 저장)
     localStorage.setItem(
       "selectedMovieInfo",
-      JSON.stringify(selectedMovieInfo)
+      JSON.stringify({
+        movie_id: selectedMovieInfo.movie_id,
+        movie_title: selectedMovieInfo.movie_title,
+        theater_id: selectedMovieInfo.theater_id,
+        movie_time: selectedMovieInfo.movie_time,
+      })
     );
 
     history.push("/page_1/Reservation_Seat");
@@ -393,7 +398,17 @@ const Reservation_Movie = ({ history }) => {
             </div>
             <li>
               <div className="menu3">
-                <ul className="menu3_left"></ul>
+                <ul className="menu3_left">
+                  {selectedMovie &&
+                    selectedMovie.map((movieInfo, index) => (
+                      <li key={index}>
+                        <a
+                          href="#none"
+                          onClick={() => handlePopupOpen(movieInfo)}
+                        ></a>
+                      </li>
+                    ))}
+                </ul>
               </div>
             </li>
           </ul>
@@ -412,8 +427,25 @@ const Reservation_Movie = ({ history }) => {
                   <div className="menu4_main">
                     <a href="#none"></a>
                   </div>
-                  <div className="menu4_sub" onClick={handlePopupOpen}>
-                    <ul></ul>
+                  <div className="menu4_sub">
+                    <ul>
+                      {movies.map((movieInfo, index) => (
+                        <li
+                          key={index}
+                          onClick={() => handlePopupOpen(movieInfo)}
+                        >
+                          <a href="#none">
+                            <span>
+                              {movieInfo.movie_title}{" "}
+                              {moment(movieInfo.movie_time, "HH:mm:ss").format(
+                                "HH:mm"
+                              )}{" "}
+                              ({movieInfo.theater_id})
+                            </span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </ul>
               </div>
