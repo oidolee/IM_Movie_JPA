@@ -66,7 +66,7 @@ function MyPage_top() {
                     <div className={`name_place${style.name_place}`}>
                         <div className={`name${style.name}`}>
                             <p style={{ textAlign: 'center', fontSize: '30px' }}>
-                                <strong> {userInfo && userInfo.dto && userInfo.dto.name}님 </strong> 반가워요! {/* 수정 필요 */}
+                                <strong> {userInfo && userInfo.dto && userInfo.dto.name}님 </strong> 반가워요!
                             </p>
                         </div>
                     </div>

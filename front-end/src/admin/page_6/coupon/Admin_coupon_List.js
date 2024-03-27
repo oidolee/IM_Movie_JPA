@@ -23,7 +23,7 @@ function Admin_coupon_List({ history }) {
   const couponList = () => {
     ApiService.fetchCoupon()
       .then(res => {
-        
+
         const list = res.data.map(list => ({
           ...list,
           ic_startDate: formatDate(list.ic_startDate),
@@ -43,12 +43,12 @@ function Admin_coupon_List({ history }) {
     const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1, 두 자리 숫자로 만들기 위해 padStart 사용
     const day = String(date.getDate()).padStart(2, '0'); // 두 자리 숫자로 만들기 위해 padStart 사용
     return `${year}-${month}-${day}`;
-};
+  };
 
 
   // 등록
   const CouponAdd = () => {
-    
+
     history.push("/admin/page_6/coupon/Admin_coupon_Add");
   };
 
@@ -58,15 +58,28 @@ function Admin_coupon_List({ history }) {
   };
 
   // 삭제
-  const deleteCoupon = (ic_name) => {
-    ApiService.deleteCoupon(ic_name)
-      .then((res) => {
-        setLists(lists.filter((list) => list.ic_name !== ic_name));
-        console.log("deleteCoupon 성공 : ", res.data);
-      })
-      .catch((err) => {
-        console.log("deleteCoupon 실패 : ", err);
-      });
+  const deleteCoupon = (ic_num) => {
+
+    const result = window.confirm('삭제 하시겠습니까?');
+
+    if (result) {
+      // 확인을 클릭했을 때의 동작
+      ApiService.deleteCoupon(ic_num)
+        .then((res) => {
+          setLists(lists.filter((list) => list.ic_num !== ic_num));
+          console.log("deleteCoupon 성공 : ", res.data);
+          alert("삭제 되었습니다.")
+        })
+        .catch((err) => {
+          console.log("deleteCoupon 실패 : ", err);
+        });
+        
+    } else {
+      // 취소를 클릭했을 때의 동작
+      console.log('사용자가 취소를 클릭했습니다.');
+    }
+
+
   };
 
   return (
@@ -123,7 +136,7 @@ function Admin_coupon_List({ history }) {
               </TableCell>
               <TableCell
                 className="deleteBtn"
-                onClick={() => deleteCoupon(list.ic_name)}
+                onClick={() => deleteCoupon(list.ic_num)}
               >
                 <Delete />
               </TableCell>
