@@ -1,14 +1,15 @@
 import { useSearchParams } from "react-router-dom"
 
 export function FailPage() {
-  const [searchParams] = useSearchParams()
 
-  // 고객에게 실패 사유 알려주고 다른 페이지로 이동
-
+  const confirmation = window.alert(
+    "결제가 실패했습니다. 메인화면으로 이동합니다."
+  );
+  if (confirmation) {
+    window.location.assign("/");
+  }
   return (
     <div>
-      <h1>결제 실패</h1>
-      <div>{`사유: ${searchParams.get("message")}`}</div>
     </div>
   )
 }

@@ -103,12 +103,18 @@ const App = ({ handleCloseModal }) => {
         orderName: selectedMovieInfo.movie_title,
         customerName: customer.name,
         customerEmail: userEmail,
-        successUrl: `${window.location.origin}/success?orderId=${orderId}&orderName=${encodeURIComponent(selectedMovieInfo.movie_title)}&customerEmail=${encodeURIComponent(userEmail)}&totalPrice=${totalPrice}`,
+        successUrl: `${
+          window.location.origin
+        }/success?orderId=${orderId}&orderName=${encodeURIComponent(
+          selectedMovieInfo.movie_title
+        )}&customerEmail=${encodeURIComponent(
+          userEmail
+        )}&totalPrice=${totalPrice}`,
         failUrl: `${window.location.origin}/fail`,
       });
-  } catch (err) {
-    console.log(err);
-  }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
