@@ -16,9 +16,9 @@ const Success = () => {
   useEffect(() => {
     // 결제 정보와 선택된 영화 정보 로드
     const orderId = queryParams.get("orderId");
-    const selectedMovieTitle = localStorage.getItem("selectedMovieTitle");
-    const customerEmail = localStorage.getItem("customerEmail");
-    const totalPrice = localStorage.getItem("totalPrice");
+    const selectedMovieTitle = queryParams.get("selectedMovieTitle");
+    const customerEmail = queryParams.get("customerEmail");
+    const totalPrice = queryParams.get("totalPrice");
 
     // 결제 정보 출력
     console.log("결제 정보:", { orderId, selectedMovieTitle, customerEmail });
