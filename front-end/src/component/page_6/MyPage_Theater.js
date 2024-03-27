@@ -86,19 +86,19 @@ function MyPage_Theater() {
 
                 <Link to={`/theater/${userTheater.ticketmap_no1}`} className={`plz_login_button ${style.plz_login_button}`}>
                     <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        {userTheater.ic_my_theater_first}
+                        {userTheater.ic_my_theater_1}
                     </div>
                 </Link>
 
                 <Link to={`/theater/${userTheater.ticketmap_no2}`} className={`plz_login_button ${style.plz_login_button}`}>
                     <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        {userTheater.ic_my_theater_second}
+                        {userTheater.ic_my_theater_2}
                     </div>
                 </Link>
 
                 <Link to={`/theater/${userTheater.ticketmap_no3}`} className={`plz_login_button ${style.plz_login_button}`}>
                     <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        {userTheater.ic_my_theater_third}
+                        {userTheater.ic_my_theater_3}
                     </div>
                 </Link>
             </div>

@@ -239,7 +239,8 @@ class ApiService {
     // MY 영화관 수정하기
     updateTheater(inputData){
         console.log("selectTheater 호출")
-        return axios.post(serverUrl + "/page_6/theater/updateTheater" + inputData);
+        console.log('inputData'. inputData);
+        return axios.put(serverUrl + "/page_6/theater/updateTheater" , inputData);
     }
 
     // 관리자
