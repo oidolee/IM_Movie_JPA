@@ -40,15 +40,45 @@ const Reservation_Payment = () => {
     const unlisten = history.listen((location, action) => {
       if (action === "POP") {
         console.log("Handle seat called by history.listen()");
-        handleSeat(); // 뒤로가기 버튼을 눌렀을 때 handleSeat() 함수 호출
+        const confirmResult = window.confirm("입력된 좌석이 사라집니다.");
+        if (confirmResult) {
+          const updateSeatPromises = selectedSeats.map((seat) => {
+            const [lot, seatNumber, ip_no] = seat.split("-");
+            const inputData = {
+              st_id: ip_no,
+              st_row: lot,
+              st_column: seatNumber,
+              st_check: "n",
+            };
+  
+            console.log("inputData : ", inputData);
+  
+            return ApiService.updateSeat(inputData);
+          });
+  
+          Promise.all(updateSeatPromises)
+            .then(() => {
+              history.push("/page_1/Reservation_Seat");
+  
+              localStorage.removeItem("selectedSeat");
+              localStorage.removeItem("selectedSeats");
+              localStorage.removeItem("totalQuantity");
+              localStorage.removeItem("totalPrice");
+              localStorage.removeItem("selectedSeatInfo");
+            })
+            .catch((error) => {
+              console.error("좌석 정보 업데이트 중 오류 발생:", error);
+            });
+        }
       }
     });
   
     return () => {
       unlisten();
     };
-  }, [history]);
+  }, [selectedSeats, history]); // 의존성 배열에 selectedSeats와 history를 추가합니다.
   
+
   useEffect(() => {
     const storedMovieInfo = localStorage.getItem("selectedMovieInfo");
     if (storedMovieInfo) {
@@ -138,53 +168,35 @@ const Reservation_Payment = () => {
   const handleSeat = () => {
     const confirmResult = window.confirm("입력된 좌석이 사라집니다.");
     if (confirmResult) {
-      const updateSeatsAndHandleBack = () => {
-        const updateSeatPromises = selectedSeats.map((seat) => {
-          const [lot, seatNumber, ip_no] = seat.split("-");
-          const inputData = {
-            st_id: ip_no,
-            st_row: lot,
-            st_column: seatNumber,
-            st_check: "n",
-          };
-  
-          console.log("inputData : ", inputData);
-  
-          return ApiService.updateSeat(inputData);
+      const updateSeatPromises = selectedSeats.map((seat) => {
+        const [lot, seatNumber, ip_no] = seat.split("-");
+        const inputData = {
+          st_id: ip_no,
+          st_row: lot,
+          st_column: seatNumber,
+          st_check: "n",
+        };
+
+        console.log("inputData : ", inputData);
+
+        return ApiService.updateSeat(inputData);
+      });
+
+      Promise.all(updateSeatPromises)
+        .then(() => {
+          history.push("/page_1/Reservation_Seat");
+
+          localStorage.removeItem("selectedSeat");
+          localStorage.removeItem("selectedSeats");
+          localStorage.removeItem("totalQuantity");
+          localStorage.removeItem("totalPrice");
+          localStorage.removeItem("selectedSeatInfo");
+        })
+        .catch((error) => {
+          console.error("좌석 정보 업데이트 중 오류 발생:", error);
         });
-  
-        Promise.all(updateSeatPromises)
-          .then(() => {
-            // 좌석 업데이트 후 원하는 페이지로 리다이렉트
-            window.location.href = "/page_1/Reservation_Seat";
-  
-            // 로컬 스토리지 초기화
-            localStorage.removeItem("selectedSeat");
-            localStorage.removeItem("selectedSeats");
-            localStorage.removeItem("totalQuantity");
-            localStorage.removeItem("totalPrice");
-            localStorage.removeItem("selectedSeatInfo");
-          })
-          .catch((error) => {
-            console.error("좌석 정보 업데이트 중 오류 발생:", error);
-          });
-      };
-  
-      // 뒤로가기 버튼 처리 함수
-      const handleBack = () => {
-        updateSeatsAndHandleBack();
-        window.removeEventListener("popstate", handleBack);
-      };
-  
-      // 뒤로가기 버튼 클릭 감지
-      window.addEventListener("popstate", handleBack);
-  
-      // 뒤로가기 버튼 시뮬레이션
-      window.history.back();
     }
   };
-  
-  
 
   // 연령에 대한 이미지
   const getMovieImage = (movieId) => {
