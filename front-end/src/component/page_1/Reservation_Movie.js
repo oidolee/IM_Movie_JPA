@@ -257,6 +257,14 @@ const Reservation_Movie = ({ history }) => {
     }
   };
 
+  const handleSubRegionClick = (placeNames) => {
+    if (selectedRegion === placeNames) {
+      setSelectedRegion(null);
+    } else {
+      setSelectedRegion(placeNames);
+    }
+  };
+
   const handleMovieClick = (movieId) => {
     if (selectedMovie === movieId) {
       setSelectedMovie(null);
@@ -396,14 +404,14 @@ const Reservation_Movie = ({ history }) => {
                             <div key={placeKey}>
                               {placeKey === selectedRegion &&
                                 placeNames.map((location, index) => (
-                                  <li className="subRegion" key={index}
-                                  >
+                                  <li className="subRegion" key={index}>
                                     <a
                                       href="#"
                                       onClick={(event) => {
                                         event.preventDefault();
                                         handleLocationClick(location);
                                       }}
+                                      
                                     >
                                       {location}
                                     </a>
