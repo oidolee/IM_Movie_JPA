@@ -396,7 +396,7 @@ const Reservation_Seat = () => {
                     <dd style={{ textAlign: "left", marginLeft: "12px" }}>
                       {totalQuantity}명
                     </dd>
-                    <dt>총합계</dt>
+                    <dt>총 합계</dt>
                     <dd style={{ textAlign: "left", marginLeft: "12px" }}>
                       {totalPrice.toLocaleString()}원
                     </dd>

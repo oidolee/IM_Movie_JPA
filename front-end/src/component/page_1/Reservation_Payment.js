@@ -16,6 +16,8 @@ import Checkout from "./Checkout";
 import Modal from "react-modal";
 import ApiService from "../../ApiService";
 import { useHistory  } from "react-router-dom";
+import bottom1 from "../../assets/page_3/bottom1.jpg";
+import bottom2 from "../../assets/page_3/bottom2.jpg";
 
 const Reservation_Payment = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -269,7 +271,7 @@ const Reservation_Payment = () => {
                     <dd style={{ textAlign: "left", marginLeft: "12px" }}>
                       {totalQuantity}명
                     </dd>
-                    <dt>총합계</dt>
+                    <dt>총 합계</dt>
                     <dd style={{ textAlign: "left", marginLeft: "12px" }}>
                       {totalPrice.toLocaleString()}원
                     </dd>
@@ -328,8 +330,8 @@ const Reservation_Payment = () => {
                   </div>
                 )}
                 <a href="/page3">
-                  <img src={Res_event} className="event_img" alt="event" />
-                </a>
+                  <img src={Res_event} className="event_img1" alt="event" />
+                </a>      
               </ul>
             </div>
           </ul>
@@ -400,6 +402,12 @@ const Reservation_Payment = () => {
               <li>결제하기</li>
             </div>
             <li>
+              <div className="event2">
+              <img src={bottom2} className="event_img2" alt="event" />
+              <img src={bottom1} className="event_img2" alt="event" />
+              </div>
+            </li>
+            <li>
               <div className="menu4">
                 <ul className="menu4_bottom">
                   <li className="paymentBtn">
@@ -408,7 +416,7 @@ const Reservation_Payment = () => {
                   <li className="paymentBtn">할인금액</li>
                   <li className="paymentBtn">결제금액: {totalPrice.toLocaleString()}</li>
                   <li>
-                    <button className="paymentBtn_total"></button>
+                    <button className="paymentBtn_total">결제완료</button>
                   </li>
                 </ul>
               </div>
