@@ -72,6 +72,19 @@ const Reservation_Payment = () => {
       "totalQuantity",
       JSON.stringify(seatInfo.totalQuantity || 0)
     );
+
+    const handleBackButton = (event) => {
+      // 뒤로 가기 버튼이 클릭되었을 때 실행할 동작
+      handleSeat();
+    };
+  
+    // 뒤로 가기 버튼 이벤트 핸들러 등록
+    window.onpopstate = handleBackButton;
+  
+    // 컴포넌트가 언마운트될 때 이벤트 핸들러 제거
+    return () => {
+      window.onpopstate = null;
+    };
   }, []);
 
   const handleCloseModal = () => {
