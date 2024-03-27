@@ -221,7 +221,7 @@ class Reservation_Payment_Store extends Component {
         itemName,
         email,
         userName,
-
+        detailRegDate,
       })
         .then((response) => {
           console.log("데이터 전송 성공:", response.data);

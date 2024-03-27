@@ -47,13 +47,5 @@ public class StoreOrderDetailDTO {
     	 if (detail_regDate == null) {
     		 detail_regDate = new Date(); // 현재 날짜로 설정
          }
-//        
-//        if (in_date == null) {
-//           in_date = new Timestamp(System.currentTimeMillis());
-//        }
-//        
-//        if (out_date == null) {
-//           out_date = new Timestamp(System.currentTimeMillis());
-//        }
     }
 }
