@@ -429,22 +429,26 @@ const Reservation_Movie = ({ history }) => {
                   </div>
                   <div className="menu4_sub">
                     <ul>
-                      {movies.map((movieInfo, index) => (
-                        <li
-                          key={index}
-                          onClick={() => handlePopupOpen(movieInfo)}
-                        >
-                          <a href="#none">
-                            <span>
-                              {movieInfo.movie_title}{" "}
-                              {moment(movieInfo.movie_time, "HH:mm:ss").format(
-                                "HH:mm"
-                              )}{" "}
-                              ({movieInfo.theater_id})
-                            </span>
-                          </a>
-                        </li>
-                      ))}
+                      {movies.map(
+                        (movieInfo, index) =>
+                          movieInfo.movie_id === 1 && (
+                            <li
+                              key={index}
+                              onClick={() => handlePopupOpen(movieInfo)}
+                            >
+                              <a href="#none">
+                                <span>
+                                  {movieInfo.movie_title}{" "}
+                                  {moment(
+                                    movieInfo.movie_time,
+                                    "HH:mm:ss"
+                                  ).format("HH:mm")}{" "}
+                                  ({movieInfo.theater_id})
+                                </span>
+                              </a>
+                            </li>
+                          )
+                      )}
                     </ul>
                   </div>
                 </ul>
