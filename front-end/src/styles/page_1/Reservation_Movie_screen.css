@@ -192,12 +192,13 @@
     margin-right: 10px;
 }
 
-
 .Res_screen .menu4_sub ul {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-content: center;
     width: 350px;
+    margin-left: 100px;
 }
 
 .Res_screen .menu4_sub li {
@@ -209,7 +210,7 @@
     font-size: 14px;
     text-align: center;
     margin-bottom: 20px;
-    margin-left: 17px;
+    margin-left: 18px;
     padding-top: 5px;
 }
 

@@ -26,7 +26,7 @@ const Reservation_Movie = ({ history }) => {
   useEffect(() => {
     listReservation();
     fetchRemainingSeatsCount();
-  }, []); // 의존성 배열이 비어있으므로 한 번만 실행됨
+  }, []); 
   
   useEffect(() => {
     if (Object.keys(groupedData).length > 0) {

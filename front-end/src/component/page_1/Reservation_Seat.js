@@ -73,7 +73,7 @@ const Reservation_Seat = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []); // 빈 배열로 설정하여 컴포넌트가 처음 마운트될 때만 실행되도록 함
+  }, []); 
   
   
   // 가격 설정
