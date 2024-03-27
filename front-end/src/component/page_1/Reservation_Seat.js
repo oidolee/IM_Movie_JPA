@@ -65,8 +65,7 @@ const Reservation_Seat = () => {
   const [teenQuantity, setTeenQuantity] = useState(0);
   const [childQuantity, setChildQuantity] = useState(0);
   const [disabledQuantity, setDisabledQuantity] = useState(0);
-  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 영화 정보
-  const [selectedMovie, setSelectedMovie] = useState(null); // 삭제필요
+  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 선택한 영화 정보
 
   // 가격 설정
   const adultPrice = 10000;
@@ -333,20 +332,20 @@ const Reservation_Seat = () => {
                     상영시간
                   </span>
                 </strong>
-                {selectedMovie && (
+                {selectedMovieInfo && (
                   <div className="step_content2">
                     <dl>
                       <dt>선택한 영화 제목</dt>
                       <dd style={{ textAlign: "left", marginLeft: "12px" }}>
-                        {selectedMovie.movie_title}
+                        {selectedMovieInfo.movie_title}
                       </dd>
                       <dt>선택한 상영관</dt>
                       <dd style={{ textAlign: "left", marginLeft: "12px" }}>
-                        {selectedMovie.theater_id}
+                        {selectedMovieInfo.theater_id}
                       </dd>
-                      <dt>선택한 상영 날짜/시간</dt>
+                      <dt>선택한 상영 시간</dt>
                       <dd style={{ textAlign: "left", marginLeft: "12px" }}>
-                        {selectedMovie.movie_time}
+                        {selectedMovieInfo.movie_time}
                       </dd>
                     </dl>
                   </div>
@@ -368,8 +367,6 @@ const Reservation_Seat = () => {
                     <dd style={{ textAlign: "left", marginLeft: "12px" }}>
                       성인: {adultQuantity}명, 청소년: {teenQuantity}명<br />
                       경로: {childQuantity}명, 장애인: {disabledQuantity}명
-                      <br />
-                      총: {totalQuantity}명
                     </dd>
                     <dt>좌석</dt>
                     <dd style={{ textAlign: "left", marginLeft: "12px" }}>
@@ -395,12 +392,14 @@ const Reservation_Seat = () => {
                 </strong>
                 <div className="step_content">
                   <dl>
-                    <dt>티켓금액</dt>
-                    <dd>{totalPrice}</dd>
-                    <dt>할인금액</dt>
-                    <dd></dd>
+                    <dt>총 인원</dt>
+                    <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                      {totalQuantity}명
+                    </dd>
                     <dt>총합계</dt>
-                    <dd></dd>
+                    <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                      {totalPrice.toLocaleString()}원
+                    </dd>
                   </dl>
                 </div>
               </a>
@@ -422,16 +421,18 @@ const Reservation_Seat = () => {
           <ul>
             <div className="Res_tit">
               <li>
-                인원/좌석 선택 <p>인원은 최대 8명까지 가능합니다.</p>
+                인원/좌석 선택{" "}
+                <p>
+                  인원은 최대 8명까지 가능합니다. / 성인: 10,000 / 청소년: 8,000
+                  / 경로: 6,000 / 장애인: 5,000
+                </p>
               </li>
             </div>
             <div className="Res_seat2_header">
               <ul className="Res_movie">
-              {selectedMovieInfo && (
-                <li>
-                {getTitleMovieImage(selectedMovieInfo.movie_id)}
-                </li>
-              )}
+                {selectedMovieInfo && (
+                  <li>{getTitleMovieImage(selectedMovieInfo.movie_id)}</li>
+                )}
                 <ul className="Res_movie_content">
                   {selectedMovieInfo && (
                     <li>
@@ -458,7 +459,7 @@ const Reservation_Seat = () => {
                                   teenQuantity +
                                   childQuantity +
                                   disabledQuantity
-                              ); // 총 수량 업데이트
+                              );
                             }}
                             totalQuantity={totalQuantity}
                           />
@@ -473,7 +474,7 @@ const Reservation_Seat = () => {
                                   newQuantity +
                                   childQuantity +
                                   disabledQuantity
-                              ); // 총 수량 업데이트
+                              );
                             }}
                             totalQuantity={totalQuantity}
                           />
@@ -488,7 +489,7 @@ const Reservation_Seat = () => {
                                   teenQuantity +
                                   newQuantity +
                                   disabledQuantity
-                              ); // 총 수량 업데이트
+                              );
                             }}
                             totalQuantity={totalQuantity}
                           />
@@ -503,13 +504,10 @@ const Reservation_Seat = () => {
                                   teenQuantity +
                                   childQuantity +
                                   newQuantity
-                              ); // 총 수량 업데이트
+                              );
                             }}
                             totalQuantity={totalQuantity}
                           />
-                        </li>
-                        <li>
-                          <span>{totalQuantity}명</span>
                         </li>
                       </ul>
                     </div>
@@ -571,7 +569,10 @@ const Reservation_Seat = () => {
               </div>
             </div>
             <div className="seat_payment">
-              <span>총 합계 : 0원 </span>
+              <span>
+                총 인원: {totalQuantity} / 총 합계:{" "}
+                {totalPrice.toLocaleString()}
+              </span>
               <div>
                 <button name="paymentBtn" onClick={handlePayment}>
                   결제하기

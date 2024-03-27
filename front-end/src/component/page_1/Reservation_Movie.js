@@ -160,7 +160,7 @@ const Reservation_Movie = ({ history }) => {
           menu4Sub.innerHTML = "";
 
           movies.forEach((movieInfo, index) => {
-            const { movie_id, place_num, movie_title, theater_id, movie_time, ip_num } =
+            const { movie_id, place_num, movie_title, theater_id, movie_time, ip_num, start_time } =
               movieInfo;
             const formattedStartTime = moment(movie_time, "HH:mm:ss").format(
               "HH:mm"
@@ -240,6 +240,7 @@ const Reservation_Movie = ({ history }) => {
         theater_id: selectedMovieInfo.theater_id,
         movie_time: selectedMovieInfo.movie_time,
         ip_num: selectedMovieInfo.ip_num,
+        start_time: selectedMovieInfo.start_time,
       })
     );
 
