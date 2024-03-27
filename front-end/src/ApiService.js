@@ -223,6 +223,25 @@ class ApiService {
         return axios.put(serverUrl + "/updateCustomer" , inputdata);
     }
 
+    // MY 영화관
+    // MY 영화관 상세정보
+    selectTheater(c_email){
+        console.log("selectTheater 호출")
+        return axios.get(serverUrl + "/page_6/theater/theaterDetail/" + c_email);
+    }
+
+    // MY 영화관 등록하기
+    insertTheater(inputData){
+        console.log("selectTheater 호출")
+        return axios.post(serverUrl + "/page_6/theater/saveTheater" , inputData);
+    }
+    
+    // MY 영화관 수정하기
+    updateTheater(inputData){
+        console.log("selectTheater 호출")
+        return axios.post(serverUrl + "/page_6/theater/updateTheater" + inputData);
+    }
+
     // 관리자
     // 1:1 문의 리스트
     fetchConsult(){
@@ -299,7 +318,7 @@ class ApiService {
 
     // 쿠폰 삭제(관리자)
     deleteCoupon(ic_num){
-        console.log('updateCoupon() 호출!!')
+        console.log('deleteCoupon() 호출!!')
         return axios.delete(serverUrl + '/page_6/coupon/deleteCoupon/' + ic_num); 
     }
 

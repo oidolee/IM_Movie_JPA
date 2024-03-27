@@ -150,6 +150,21 @@
     margin-left: 10px;
 }
 
+.my_theater .btn_setup {
+    position: absolute;
+    right: 0;
+    top: 26px;
+}
+
+.btn_setup{
+    border: 0;
+    margin-left: 100px;
+    width: 16px;
+    height: 16px;
+    background: #FFF;
+    background-image: url(https://www.lottecinema.co.kr/NLCHS/Content/images/icon/setup.png);
+}
+
 .btn_txt_edit{
     height: 15px;
     line-height: 15px;
