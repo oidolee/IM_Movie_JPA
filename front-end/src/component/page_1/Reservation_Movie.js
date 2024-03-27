@@ -385,7 +385,7 @@ const Reservation_Movie = ({ history }) => {
                       handleRegionClick(placeKey);
                         }}
                         style={{
-                          backgroundColor: selectedRegion === placeKey ? 'black' : 'initial', 
+                          backgroundColor: selectedRegion === placeKey ? 'white' : 'initial', 
                         }}
                     >
                       <a
@@ -396,7 +396,7 @@ const Reservation_Movie = ({ history }) => {
                           handleRegionClick(placeKey);
                         }}
                         style={{ 
-                          color: selectedRegion === placeKey ? 'white' : 'initial',
+                          color: selectedRegion === placeKey ? 'black' : 'initial',
                         }}       
                       >
                         {placeKey}
