@@ -26,7 +26,7 @@ const Reservation_Movie = ({ history }) => {
   useEffect(() => {
     listReservation();
     fetchRemainingSeatsCount();
-  }, []); // 의존성 배열이 비어있으므로 한 번만 실행됨
+  }, []); 
   
   useEffect(() => {
     if (Object.keys(groupedData).length > 0) {
@@ -99,6 +99,14 @@ const Reservation_Movie = ({ history }) => {
         console.log("listReservation 오류 : ", err);
       });
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchRemainingSeatsCount();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []); 
 
   // 잔여 좌석 수 호출
   const fetchRemainingSeatsCount = () => {
@@ -385,7 +393,7 @@ const Reservation_Movie = ({ history }) => {
                       handleRegionClick(placeKey);
                         }}
                         style={{
-                          backgroundColor: selectedRegion === placeKey ? 'black' : 'initial', 
+                          backgroundColor: selectedRegion === placeKey ? 'white' : 'initial', 
                         }}
                     >
                       <a
@@ -396,7 +404,7 @@ const Reservation_Movie = ({ history }) => {
                           handleRegionClick(placeKey);
                         }}
                         style={{ 
-                          color: selectedRegion === placeKey ? 'white' : 'initial',
+                          color: selectedRegion === placeKey ? 'black' : 'initial',
                         }}       
                       >
                         {placeKey}
