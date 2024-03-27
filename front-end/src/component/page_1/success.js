@@ -9,10 +9,9 @@ const Success = () => {
   // 상태 값 정의
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
-  const [userEmail, setUserEmail] = useState(""); // userEmail 상태 추가
-  const [totalPrice, setTotalPrice] = useState(0); // totalPrice 상태 추가
-  const [customer, setCustomer] = useState([]);
-  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 선택한 영화 정보
+  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(0);
+  
 
   useEffect(() => {
     // 결제 정보와 선택된 영화 정보 로드
@@ -20,12 +19,6 @@ const Success = () => {
     const selectedMovieTitle = localStorage.getItem("selectedMovieTitle");
     const customerEmail = localStorage.getItem("customerEmail");
     const totalPrice = localStorage.getItem("totalPrice");
-
-    // userEmail 상태 설정
-    setUserEmail(customerEmail);
-
-    // 선택된 영화 정보 설정
-    setSelectedMovieInfo({ movie_title: selectedMovieTitle });
 
     // 결제 정보 출력
     console.log("결제 정보:", { orderId, selectedMovieTitle, customerEmail });
@@ -46,6 +39,9 @@ const Success = () => {
       ApiService.insertPayment(inputData)
         .then((res) => {
           console.log("결제 정보 저장 성공", res.data);
+          const storedSelectedMovieInfo = JSON.parse(
+            localStorage.getItem("selectedMovieInfo")
+          );
           const storedSelectedSeats = JSON.parse(
             localStorage.getItem("selectedSeats")
           );
@@ -54,7 +50,13 @@ const Success = () => {
           );
 
           setSelectedSeats(storedSelectedSeats); // 선택된 좌석 설정
-          setTotalPrice(storedTotalPrice); // totalPrice 설정
+
+          // 나머지 정보 설정
+          if (storedSelectedMovieInfo) {
+            setTotalPrice(storedTotalPrice);
+            setSelectedMovieInfo(storedSelectedMovieInfo);
+          }
+          console.log("selectedMovieInfo : ", storedSelectedMovieInfo);
           console.log("setSelectedSeats : ", storedSelectedSeats);
           console.log("setTotalPrice : ", storedTotalPrice);
         })
@@ -74,7 +76,7 @@ const Success = () => {
       // API에 전송할 데이터 구성
       const inputData2 = {
         st_id: parseInt(selectedSeats[0].slice(-2), 10), // 좌석 ID
-        c_email: userEmail,
+        c_email: "11",
         res_count: totalQuantity, // 총 수량
         res_ticket_price: totalPrice,
         res_sysdate: new Date().toISOString(),
@@ -102,7 +104,7 @@ const Success = () => {
         console.error("예약 정보 저장 중 오류 발생", error);
       }
     }
-  }, [selectedSeats, selectedMovieInfo, totalQuantity, totalPrice, userEmail]);
+  }, [selectedSeats, selectedMovieInfo, totalQuantity, totalPrice]);
 
   return <div></div>;
 };

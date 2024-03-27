@@ -106,14 +106,18 @@ const App = ({ handleCloseModal }) => {
         successUrl: `${window.location.origin}/success?orderId=${orderId}&orderName=${selectedMovieInfo.movie_title}&customerEmail=${userEmail}&amount=${totalPrice}`,
         failUrl: `${window.location.origin}/fail`,
       });
-      
-      localStorage.setItem("orderId", orderId);
-      localStorage.setItem("selectedMovieTitle", selectedMovieInfo.movie_title);
-      localStorage.setItem("customerEmail", userEmail);
-      localStorage.setItem("totalPrice", totalPrice);
-    } catch (err) {
-      console.log(err);
-    }
+
+      // 데이터를 JSON 형식으로 묶어 로컬 스토리지에 저장
+    const paymentData = {
+      orderId: orderId,
+      selectedMovieTitle: selectedMovieInfo.movie_title,
+      customerEmail: userEmail,
+      totalPrice: totalPrice
+    };
+    localStorage.setItem("paymentData", JSON.stringify(paymentData));
+  } catch (err) {
+    console.log(err);
+  }
   };
 
   return (
