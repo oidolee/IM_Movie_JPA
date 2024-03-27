@@ -17,9 +17,9 @@ class FaqMoiveLocation_Mypage extends Component {
       it_no: '',
       c_email: '',
       theaters: [ // theaters 배열 초기화
-        { ticketmap_no: '', ic_my_theater: '' },
-        { ticketmap_no: '', ic_my_theater: '' },
-        { ticketmap_no: '', ic_my_theater: '' }
+        { ticketmap_no1: '', ic_my_theater_1: '' },
+        { ticketmap_no2: '', ic_my_theater_2: '' },
+        { ticketmap_no3: '', ic_my_theater_3: '' }
       ],
       submitted: false
     };
@@ -42,32 +42,31 @@ class FaqMoiveLocation_Mypage extends Component {
     });
   }
 
-  // 영화관 정보 입력 핸들러
-  handleTheaterChange = (index, e) => {
-    const { name, value } = e.target;
-    const { theaters } = this.state;
-    theaters[index][name] = value;
-    this.setState({ theaters });
-  }
-
   // 등록 버튼 클릭 핸들러
   handleRegister = () => {
     const { theaters } = this.state;
-
-    // 각 영화관 정보가 모두 입력되었는지 확인
-    if (theaters.every(theater => theater.ticketmap_no && theater.ic_my_theater)) {
-      // ApiService를 사용하여 서버에 정보 전송
-      ApiService.insertTheater(theaters)
-        .then(response => {
-          console.log("등록 완료:", response.data);
-          this.setState({ submitted: true });
-        })
-        .catch(error => {
-          console.error("등록 실패:", error);
-        });
-    } else {
-      alert("모든 영화관 정보를 입력하세요.");
+    console.log(theaters)
+    let inputData = {
+      it_no: this.state.it_no,
+      c_email: this.state.c_email,
+      ic_my_theater_1: theaters[0].ic_my_theater,
+      ic_my_theater_2: theaters[1].ic_my_theater,
+      ic_my_theater_3: theaters[2].ic_my_theater,
+      ticketmap_no1: theaters[0].ticketmap_no,
+      ticketmap_no2: theaters[1].ticketmap_no,
+      ticketmap_no3: theaters[2].ticketmap_no,
     }
+    console.log(inputData)
+    
+    // ApiService를 사용하여 서버에 정보 전송
+    ApiService.updateTheater(inputData)
+      .then(response => {
+        console.log("등록 완료:", response.data);
+        this.setState({ submitted: true });
+      })
+      .catch(error => {
+        console.error("등록 실패:", error);
+      });
   };
 
   createMap = () => {
@@ -119,9 +118,9 @@ class FaqMoiveLocation_Mypage extends Component {
           it_no: cusTheater.it_no,
           c_email: cusTheater.c_email,
           theaters: [ // theaters 배열 초기화
-            { ticketmap_no: cusTheater.ticketmap_no1, ic_my_theater: cusTheater.ic_my_theater_first },
-            { ticketmap_no: cusTheater.ticketmap_no2, ic_my_theater: cusTheater.ic_my_theater_second },
-            { ticketmap_no: cusTheater.ticketmap_no3, ic_my_theater: cusTheater.ic_my_theater_third }
+            { ticketmap_no: cusTheater.ticketmap_no1, ic_my_theater: cusTheater.ic_my_theater_1 },
+            { ticketmap_no: cusTheater.ticketmap_no2, ic_my_theater: cusTheater.ic_my_theater_2 },
+            { ticketmap_no: cusTheater.ticketmap_no3, ic_my_theater: cusTheater.ic_my_theater_3 }
           ],
 
         })
@@ -153,35 +152,43 @@ class FaqMoiveLocation_Mypage extends Component {
       });
   }
 
+
+  // 영화관 정보 입력 핸들러
+  handleTheaterChange = (index, e) => {
+    const { name, value } = e.target;
+    const { theaters } = this.state;
+    const updatedTheaters = [...theaters]; // 불변성 유지를 위해 새로운 배열 생성
+    updatedTheaters[index] = { ...updatedTheaters[index], [name]: value }; // 해당 인덱스의 요소만 업데이트
+    this.setState({ theaters: updatedTheaters });
+  }
+  
+
   // edit 버튼 클릭 시 실행되는 함수
   EditStore_Map = (ticketmap_no) => {
-    console.log("edit 버튼 호출");
     window.localStorage.setItem("movie_location", ticketmap_no);
     ApiService.fetchStoreMapByID(ticketmap_no)
       .then(res => {
-        // API에서 받아온 데이터를 상태에 설정하여 지도를 다시 렌더링합니다.
+        const { ticketmap_no, ticketmap_latitude, ticketmap_longitude, ticketmap_name } = res.data;
+        const { theaters } = this.state;
+        const updatedTheaters = theaters.map(theater => {
+          if (theater.ticketmap_no === ticketmap_no) {
+            return { ticketmap_no: ticketmap_no, ic_my_theater: ticketmap_name };
+          }
+          return theater;
+        });
         this.setState({
-          ticketmap_no: res.data.ticketmap_no,
-          ticketmap_latitude: res.data.ticketmap_latitude,
-          ticketmap_longitude: res.data.ticketmap_longitude
+          ticketmap_no: ticketmap_no,
+          ticketmap_latitude: ticketmap_latitude,
+          ticketmap_longitude: ticketmap_longitude,
+          theaters: updatedTheaters,
         }, () => {
-          // setState 후에 새로운 데이터로 지도를 다시 생성합니다.
           this.createMap();
         });
-
       })
-
-
       .catch(error => {
         console.error('Error fetching store map by ID:', error);
       });
-      const theaters = [...this.state.theaters];
-      theaters.forEach(theater => {
-        theater.ticketmap_no = '';
-        theater.ic_my_theater = '';
-      });
-      this.setState({ theaters });
-  }
+  };
 
   EditStore_MapName = (ticketmap_name) => {
     window.localStorage.setItem("ticketmap_name", ticketmap_name);
@@ -203,6 +210,21 @@ class FaqMoiveLocation_Mypage extends Component {
 
   saveTheater = () => {
     console.log("내마음속에 저장");
+  };
+
+  handleReset = () => {
+    this.setState({
+      theaters: [
+        { ticketmap_no: '', ic_my_theater: '' },
+        { ticketmap_no: '', ic_my_theater: '' },
+        { ticketmap_no: '', ic_my_theater: '' }
+      ],
+      ticketmap_no: '', // 추가: 선택한 영화관 정보도 초기화
+      ticketmap_latitude: '',
+      ticketmap_longitude: ''
+    }, () => {
+      this.storeListMap();
+    });
   };
 
   render() {
@@ -263,7 +285,7 @@ class FaqMoiveLocation_Mypage extends Component {
                     item.ticketmap_address.includes('서울') && ( // 서울이라는 단어가 포함된 주소를 가진 항목만 출력
                       <li key={index}>
                         {/* EditStore_Map 네이버맵 , EditStore_MapName 문의 지점입력  */}
-                        <a onClick={() => { this.EditStore_Map(item.ticketmap_no); this.EditStore_MapName(item.ticketmap_name); this.setState({}) }}>
+                        <a onClick={() => { this.EditStore_Map(item.ticketmap_no); this.EditStore_MapName(item.ticketmap_name); }}>
                           <span>{item.ticketmap_name}</span>
                         </a>
                       </li>
@@ -364,8 +386,8 @@ class FaqMoiveLocation_Mypage extends Component {
                 </React.Fragment>
               ))}
               <li>
-                <button >등록</button>
-                <button type="reset">취소</button>
+                <button onClick={this.handleRegister}>등록</button>
+                {/* <button type="button" onClick={this.handleReset}>취소</button> */}
               </li>
             </ul>
             <div>

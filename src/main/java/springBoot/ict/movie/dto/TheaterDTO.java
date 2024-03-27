@@ -19,11 +19,11 @@ public class TheaterDTO {
     @Id
     private int it_no;
     private String c_email;
-    private String ic_my_theater_first;
+    private String ic_my_theater_1;
     private int ticketmap_no1;
-    private String ic_my_theater_second;
+    private String ic_my_theater_2;
     private int ticketmap_no2;
-    private String ic_my_theater_third;
+    private String ic_my_theater_3;
     private int ticketmap_no3;
    
 }
