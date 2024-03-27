@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import style from "../../styles/page_1/Reservation_Seat.css";
-import Res_movie1 from "../../assets/page_1/movie1.jpg";
+import Res_movie1 from "../../assets/page_5/movie1.jpg"; // 파묘
+import Res_movie2 from "../../assets/page_5/movie2.jpg"; // 듄2
+import Res_movie3 from "../../assets/page_5/movie6.jpg"; // 밥말리
+import Res_movie4 from "../../assets/page_5/movie9.jpg"; // 원 앤 온리
+import Res_movie5 from "../../assets/page_5/movie4.jpg"; // 윙카
+import Res_movie6 from "../../assets/page_5/movie8.jpg"; // 메이 디셈버
 import Res_img18 from "../../assets/page_1/18.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
 import Res_img12 from "../../assets/page_1/12.jpg";
 import Res_imgAll from "../../assets/page_1/all.jpg";
 import ApiService from "../../ApiService";
 import { useHistory } from "react-router-dom";
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 import moment from "moment";
 
 const QuantityCounter = ({ onQuantityChange, totalQuantity }) => {
@@ -60,7 +65,7 @@ const Reservation_Seat = () => {
   const [teenQuantity, setTeenQuantity] = useState(0);
   const [childQuantity, setChildQuantity] = useState(0);
   const [disabledQuantity, setDisabledQuantity] = useState(0);
-  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 영화 정보 
+  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 영화 정보
   const [selectedMovie, setSelectedMovie] = useState(null); // 삭제필요
 
   // 가격 설정
@@ -89,15 +94,13 @@ const Reservation_Seat = () => {
       try {
         const parsedMovieInfo = JSON.parse(storedMovieInfo);
         setSelectedMovieInfo(parsedMovieInfo);
-        console.log(parsedMovieInfo)
+        console.log(parsedMovieInfo);
       } catch (error) {
         console.error("영화 정보를 파싱하는 중 오류 발생:", error);
       }
     }
     // 좌석 정보 가져오기
     listSeat();
-
-    
   }, []);
 
   const listSeat = () => {
@@ -245,7 +248,7 @@ const Reservation_Seat = () => {
 
       return ApiService.updateSeat(inputData);
     });
-    
+
     Promise.all(updateSeatPromises)
       .then((res) => {
         console.log("모든 좌석 업데이트 성공");
@@ -254,14 +257,17 @@ const Reservation_Seat = () => {
         localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
         localStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
         localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
-        localStorage.setItem("selectedSeatInfo", JSON.stringify({
-          adultQuantity: adultQuantity,
-          teenQuantity: teenQuantity,
-          childQuantity: childQuantity,
-          disabledQuantity: disabledQuantity,
-          totalQuantity: totalQuantity,
-          selectedSeats: selectedSeats
-        }));
+        localStorage.setItem(
+          "selectedSeatInfo",
+          JSON.stringify({
+            adultQuantity: adultQuantity,
+            teenQuantity: teenQuantity,
+            childQuantity: childQuantity,
+            disabledQuantity: disabledQuantity,
+            totalQuantity: totalQuantity,
+            selectedSeats: selectedSeats,
+          })
+        );
         history.push("/page_1/Reservation_Payment");
       })
       .catch((err) => {
@@ -290,9 +296,28 @@ const Reservation_Seat = () => {
       case 6:
         return <img src={Res_img18} className="age_img" alt="age" />;
       default:
-        return null;      
+        return null;
     }
-  }; 
+  };
+
+  const getTitleMovieImage = (movieId) => {
+    switch (movieId) {
+      case 1:
+        return <img src={Res_movie1} className="movie_img" alt="movie" />;
+      case 2:
+        return <img src={Res_movie2} className="movie_img" alt="movie" />;
+      case 3:
+        return <img src={Res_movie3} className="movie_img" alt="movie" />;
+      case 4:
+        return <img src={Res_movie4} className="movie_img" alt="movie" />;
+      case 5:
+        return <img src={Res_movie5} className="movie_img" alt="movie" />;
+      case 6:
+        return <img src={Res_movie6} className="movie_img" alt="movie" />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className={`Res_seat ${style.Res_seat}`}>
@@ -402,17 +427,22 @@ const Reservation_Seat = () => {
             </div>
             <div className="Res_seat2_header">
               <ul className="Res_movie">
+              {selectedMovieInfo && (
                 <li>
-                  {/* <img src={Res_movie} className="movie_img" alt="movie" /> */}
+                {getTitleMovieImage(selectedMovieInfo.movie_id)}
                 </li>
+              )}
                 <ul className="Res_movie_content">
                   {selectedMovieInfo && (
                     <li>
                       {getMovieImage(selectedMovieInfo.movie_id)}
                       <strong className="movie_name">
                         {selectedMovieInfo.movie_title}
-                      </strong>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{selectedMovieInfo.movie_time}
-                      &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{selectedMovieInfo.theater_id}
+                      </strong>
+                      &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                      {selectedMovieInfo.movie_time}
+                      &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                      {selectedMovieInfo.theater_id}
                     </li>
                   )}
                   <li>
