@@ -26,7 +26,6 @@ const Reservation_Movie = ({ history }) => {
   useEffect(() => {
     listReservation();
     fetchRemainingSeatsCount();
-    handleLocationClick("홍대입구");
   }, []);
 
   // 영화 목록
@@ -401,15 +400,18 @@ const Reservation_Movie = ({ history }) => {
             <li>
               <div className="menu3">
                 <ul className="menu3_left">
-                  {selectedMovie &&
-                    selectedMovie.map((movieInfo, index) => (
-                      <li key={index}>
-                        <a
-                          href="#none"
-                          onClick={() => handlePopupOpen(movieInfo)}
-                        ></a>
-                      </li>
-                    ))}
+                  {movies.map(
+                    (movieInfo, index) =>
+                      movieInfo.movie_id === 1 &&
+                      movieInfo.place_num === 1 && (
+                        <li key={index}>
+                          <a
+                            href="#none"
+                            onClick={() => handlePopupOpen(movieInfo)}
+                          ></a>
+                        </li>
+                      )
+                  )}
                 </ul>
               </div>
             </li>
