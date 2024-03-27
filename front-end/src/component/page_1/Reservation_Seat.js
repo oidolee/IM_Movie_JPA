@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import style from "../../styles/page_1/Reservation_Seat.css";
-import Res_movie from "../../assets/page_1/movie.jpg";
+import Res_movie1 from "../../assets/page_5/movie1.jpg"; // 파묘
+import Res_movie2 from "../../assets/page_5/movie2.jpg"; // 듄2
+import Res_movie3 from "../../assets/page_5/movie6.jpg"; // 밥말리
+import Res_movie4 from "../../assets/page_5/movie9.jpg"; // 원 앤 온리
+import Res_movie5 from "../../assets/page_5/movie4.jpg"; // 윙카
+import Res_movie6 from "../../assets/page_5/movie8.jpg"; // 메이 디셈버
 import Res_img18 from "../../assets/page_1/18.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
 import Res_img12 from "../../assets/page_1/12.jpg";
 import Res_imgAll from "../../assets/page_1/all.jpg";
 import ApiService from "../../ApiService";
 import { useHistory } from "react-router-dom";
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 import moment from "moment";
 
 const QuantityCounter = ({ onQuantityChange, totalQuantity }) => {
@@ -60,9 +65,7 @@ const Reservation_Seat = () => {
   const [teenQuantity, setTeenQuantity] = useState(0);
   const [childQuantity, setChildQuantity] = useState(0);
   const [disabledQuantity, setDisabledQuantity] = useState(0);
-
-  // 선태한 영화 상태 저장
-  const [selectedMovie, selectedMovieInfo] = useState(null);
+  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 선택한 영화 정보
 
   // 가격 설정
   const adultPrice = 10000;
@@ -77,17 +80,6 @@ const Reservation_Seat = () => {
     childPrice * childQuantity +
     disabledPrice * disabledQuantity;
 
-  // 영화 정보 get
-  useEffect(() => {
-    const selectedMovie = localStorage.getItem("selectedMovieInfo");
-
-    if (selectedMovie) {
-      selectedMovieInfo(JSON.parse(selectedMovie));
-    }
-
-    console.log("selectedMovie : ", selectedMovie);
-  }, []);
-
   // 로그인 상태 확인
 
   // 사용자 움직임 감지
@@ -96,6 +88,17 @@ const Reservation_Seat = () => {
 
   // 좌석 정보 가져오기
   useEffect(() => {
+    const storedMovieInfo = localStorage.getItem("selectedMovieInfo");
+    if (storedMovieInfo) {
+      try {
+        const parsedMovieInfo = JSON.parse(storedMovieInfo);
+        setSelectedMovieInfo(parsedMovieInfo);
+        console.log(parsedMovieInfo);
+      } catch (error) {
+        console.error("영화 정보를 파싱하는 중 오류 발생:", error);
+      }
+    }
+    // 좌석 정보 가져오기
     listSeat();
   }, []);
 
@@ -244,7 +247,7 @@ const Reservation_Seat = () => {
 
       return ApiService.updateSeat(inputData);
     });
-    
+
     Promise.all(updateSeatPromises)
       .then((res) => {
         console.log("모든 좌석 업데이트 성공");
@@ -253,14 +256,17 @@ const Reservation_Seat = () => {
         localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
         localStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
         localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
-        localStorage.setItem("selectedSeatInfo", JSON.stringify({
-          adultQuantity: adultQuantity,
-          teenQuantity: teenQuantity,
-          childQuantity: childQuantity,
-          disabledQuantity: disabledQuantity,
-          totalQuantity: totalQuantity,
-          selectedSeats: selectedSeats
-        }));
+        localStorage.setItem(
+          "selectedSeatInfo",
+          JSON.stringify({
+            adultQuantity: adultQuantity,
+            teenQuantity: teenQuantity,
+            childQuantity: childQuantity,
+            disabledQuantity: disabledQuantity,
+            totalQuantity: totalQuantity,
+            selectedSeats: selectedSeats,
+          })
+        );
         history.push("/page_1/Reservation_Payment");
       })
       .catch((err) => {
@@ -272,6 +278,43 @@ const Reservation_Seat = () => {
     const confirmResult = window.confirm("입력된 정보가 모두 사라집니다.");
     if (confirmResult) {
       history.push("/page_1/Reservation_Movie");
+    }
+  };
+
+  // 연령에 대한 이미지
+  const getMovieImage = (movieId) => {
+    switch (movieId) {
+      case 1:
+      case 3:
+        return <img src={Res_img15} className="age_img" alt="age" />;
+      case 2:
+      case 4:
+        return <img src={Res_img12} className="age_img" alt="age" />;
+      case 5:
+        return <img src={Res_imgAll} className="age_img" alt="age" />;
+      case 6:
+        return <img src={Res_img18} className="age_img" alt="age" />;
+      default:
+        return null;
+    }
+  };
+
+  const getTitleMovieImage = (movieId) => {
+    switch (movieId) {
+      case 1:
+        return <img src={Res_movie1} className="movie_img" alt="movie" />;
+      case 2:
+        return <img src={Res_movie2} className="movie_img" alt="movie" />;
+      case 3:
+        return <img src={Res_movie3} className="movie_img" alt="movie" />;
+      case 4:
+        return <img src={Res_movie4} className="movie_img" alt="movie" />;
+      case 5:
+        return <img src={Res_movie5} className="movie_img" alt="movie" />;
+      case 6:
+        return <img src={Res_movie6} className="movie_img" alt="movie" />;
+      default:
+        return null;
     }
   };
 
@@ -289,20 +332,20 @@ const Reservation_Seat = () => {
                     상영시간
                   </span>
                 </strong>
-                {selectedMovie && (
+                {selectedMovieInfo && (
                   <div className="step_content2">
                     <dl>
                       <dt>선택한 영화 제목</dt>
                       <dd style={{ textAlign: "left", marginLeft: "12px" }}>
-                        {selectedMovie.movie_title}
+                        {selectedMovieInfo.movie_title}
                       </dd>
                       <dt>선택한 상영관</dt>
                       <dd style={{ textAlign: "left", marginLeft: "12px" }}>
-                        {selectedMovie.theater_id}
+                        {selectedMovieInfo.theater_id}
                       </dd>
-                      <dt>선택한 상영 날짜/시간</dt>
+                      <dt>선택한 상영 시간</dt>
                       <dd style={{ textAlign: "left", marginLeft: "12px" }}>
-                        {selectedMovie.movie_time}
+                        {selectedMovieInfo.movie_time}
                       </dd>
                     </dl>
                   </div>
@@ -324,8 +367,6 @@ const Reservation_Seat = () => {
                     <dd style={{ textAlign: "left", marginLeft: "12px" }}>
                       성인: {adultQuantity}명, 청소년: {teenQuantity}명<br />
                       경로: {childQuantity}명, 장애인: {disabledQuantity}명
-                      <br />
-                      총: {totalQuantity}명
                     </dd>
                     <dt>좌석</dt>
                     <dd style={{ textAlign: "left", marginLeft: "12px" }}>
@@ -351,12 +392,14 @@ const Reservation_Seat = () => {
                 </strong>
                 <div className="step_content">
                   <dl>
-                    <dt>티켓금액</dt>
-                    <dd>{totalPrice}</dd>
-                    <dt>할인금액</dt>
-                    <dd></dd>
-                    <dt>총합계</dt>
-                    <dd></dd>
+                    <dt>총 인원</dt>
+                    <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                      {totalQuantity}명
+                    </dd>
+                    <dt>총 합계</dt>
+                    <dd style={{ textAlign: "left", marginLeft: "12px" }}>
+                      {totalPrice.toLocaleString()}원
+                    </dd>
                   </dl>
                 </div>
               </a>
@@ -378,22 +421,29 @@ const Reservation_Seat = () => {
           <ul>
             <div className="Res_tit">
               <li>
-                인원/좌석 선택 <p>인원은 최대 8명까지 가능합니다.</p>
+                인원/좌석 선택{" "}
+                <p>
+                  인원은 최대 8명까지 가능합니다. / 성인: 10,000 / 청소년: 8,000
+                  / 경로: 6,000 / 장애인: 5,000
+                </p>
               </li>
             </div>
             <div className="Res_seat2_header">
               <ul className="Res_movie">
-                <li>
-                  {/* <img src={Res_movie} className="movie_img" alt="movie" /> */}
-                </li>
+                {selectedMovieInfo && (
+                  <li>{getTitleMovieImage(selectedMovieInfo.movie_id)}</li>
+                )}
                 <ul className="Res_movie_content">
-                  {selectedMovie && (
+                  {selectedMovieInfo && (
                     <li>
-                      {/* <img src={Res_img15} className="age_img" alt="age" /> */}
+                      {getMovieImage(selectedMovieInfo.movie_id)}
                       <strong className="movie_name">
-                        {selectedMovie.movie_title}
-                      </strong>{" "}
-                      | {selectedMovie.theater_id}
+                        {selectedMovieInfo.movie_title}
+                      </strong>
+                      &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                      {selectedMovieInfo.movie_time}
+                      &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                      {selectedMovieInfo.theater_id}
                     </li>
                   )}
                   <li>
@@ -409,7 +459,7 @@ const Reservation_Seat = () => {
                                   teenQuantity +
                                   childQuantity +
                                   disabledQuantity
-                              ); // 총 수량 업데이트
+                              );
                             }}
                             totalQuantity={totalQuantity}
                           />
@@ -424,7 +474,7 @@ const Reservation_Seat = () => {
                                   newQuantity +
                                   childQuantity +
                                   disabledQuantity
-                              ); // 총 수량 업데이트
+                              );
                             }}
                             totalQuantity={totalQuantity}
                           />
@@ -439,7 +489,7 @@ const Reservation_Seat = () => {
                                   teenQuantity +
                                   newQuantity +
                                   disabledQuantity
-                              ); // 총 수량 업데이트
+                              );
                             }}
                             totalQuantity={totalQuantity}
                           />
@@ -454,13 +504,10 @@ const Reservation_Seat = () => {
                                   teenQuantity +
                                   childQuantity +
                                   newQuantity
-                              ); // 총 수량 업데이트
+                              );
                             }}
                             totalQuantity={totalQuantity}
                           />
-                        </li>
-                        <li>
-                          <span>{totalQuantity}명</span>
                         </li>
                       </ul>
                     </div>
@@ -522,7 +569,10 @@ const Reservation_Seat = () => {
               </div>
             </div>
             <div className="seat_payment">
-              <span>총 합계 : 0원 </span>
+              <span>
+                총 인원: {totalQuantity} / 총 합계:{" "}
+                {totalPrice.toLocaleString()}
+              </span>
               <div>
                 <button name="paymentBtn" onClick={handlePayment}>
                   결제하기

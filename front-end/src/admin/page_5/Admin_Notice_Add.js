@@ -56,6 +56,12 @@ function Admin_Notice_Add ({ history }) {
 
         <MenuItem value="서울">서울</MenuItem>
         <MenuItem value="경기/인천">경기/인천</MenuItem>
+        <MenuItem value="동탄">동탄</MenuItem>
+        <MenuItem value="수원(수원역)">수원(수원역)</MenuItem>
+        <MenuItem value="부평역">부평역</MenuItem>
+        <MenuItem value="영등포">영등포</MenuItem>
+        <MenuItem value="홍대입구">홍대입구</MenuItem>
+        <MenuItem value="전체">전체</MenuItem>
       </Select>
       <br />
       <TextField
@@ -74,6 +80,7 @@ function Admin_Notice_Add ({ history }) {
         id="standard-required"
         variant="standard"
         label="내용"
+        multiline
         type="text"
         name="notice_con"
         value={addInfo.notice_con}

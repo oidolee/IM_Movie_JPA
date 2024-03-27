@@ -205,8 +205,8 @@ function MovieDetail3() {
 
             <div className={`detail_con ${style.detail_con}`}>
               <div className={`detail_con1 ${style.detail_con1}`}>
-                <label for="de_date">{detailInfo.arte_date} 개봉</label>
-                <label for="de_time">| {detailInfo.arte_date}분 |</label>
+                <label for="de_date">{new Date(detailInfo.arte_date).toLocaleDateString()} 개봉</label>
+                <label for="de_time">| {detailInfo.arte_time}분 |</label>
                 <label for="de_age">
                   {" "}
                   <span style={{ color: "orange" }}>{detailInfo.arte_age}</span>
@@ -235,9 +235,11 @@ function MovieDetail3() {
             </div>
 
             <div className={`btn_wrap2 ${style.btn_wrap2}`}>
+            <Link to="/page_1/Reservation_Movie">
               <button className={`detail_btn4 ${style.detail_btn4}`} id="13">
                 예매하기
               </button>
+              </Link>
             </div>
           </div>
         </div>

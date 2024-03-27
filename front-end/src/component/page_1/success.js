@@ -4,29 +4,32 @@ import ApiService from "../../ApiService";
 
 const Success = () => {
   const location = useLocation();
+  const queryParams = new URLSearchParams(location.search); // URL 쿼리 파라미터 가져오기
 
   // 상태 값 정의
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [totalQuantity, setTotalQuantity] = useState(0); // 초기값 0으로 설정
-  const [totalPrice, setTotalPrice] = useState([]);
+  const [totalQuantity, setTotalQuantity] = useState(0);
   const [selectedMovieInfo, setSelectedMovieInfo] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(0);
+  
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
+    // 결제 정보와 선택된 영화 정보 로드
     const orderId = queryParams.get("orderId");
-    const orderName = queryParams.get("orderName");
-    const customerEmail = queryParams.get("customerEmail");
-    const payAmount = queryParams.get("amount");
+    const selectedMovieTitle = localStorage.getItem("selectedMovieTitle");
+    const customerEmail = localStorage.getItem("customerEmail");
+    const totalPrice = localStorage.getItem("totalPrice");
 
-    console.log("결제 정보:", { orderId, orderName, customerEmail });
+    // 결제 정보 출력
+    console.log("결제 정보:", { orderId, selectedMovieTitle, customerEmail });
 
     // API에 전송할 데이터 구성
     const inputData = {
       pay_name: orderId,
-      pay_order_name: orderName,
-      ic_email: "11",
-      pay_amount: payAmount,
-      pay_company: "토스",
+      pay_order_name: selectedMovieTitle,
+      ic_email: customerEmail,
+      pay_amount: totalPrice,
+      pay_company: "IM",
       pay_check: "y",
       pay_sysdate: new Date().toISOString(),
     };
@@ -42,7 +45,9 @@ const Success = () => {
           const storedSelectedSeats = JSON.parse(
             localStorage.getItem("selectedSeats")
           );
-          const storedTotalPrice = JSON.parse(localStorage.getItem("totalPrice"));
+          const storedTotalPrice = JSON.parse(
+            localStorage.getItem("totalPrice")
+          );
 
           setSelectedSeats(storedSelectedSeats); // 선택된 좌석 설정
 
@@ -61,7 +66,6 @@ const Success = () => {
     } catch (error) {
       console.error("결제 정보 저장 중 오류 발생", error);
     }
-
   }, [location]);
 
   useEffect(() => {
@@ -69,14 +73,11 @@ const Success = () => {
     setTotalQuantity(selectedSeats.length);
 
     if (selectedMovieInfo && totalQuantity > 0) {
-      const resCount = totalQuantity; // 총 수량으로 설정
-      const st_id = parseInt(selectedSeats[0].slice(-2), 10);
-
       // API에 전송할 데이터 구성
       const inputData2 = {
-        st_id: st_id,
+        st_id: parseInt(selectedSeats[0].slice(-2), 10), // 좌석 ID
         c_email: "11",
-        res_count: resCount,
+        res_count: totalQuantity, // 총 수량
         res_ticket_price: totalPrice,
         res_sysdate: new Date().toISOString(),
         res_check: "y",
@@ -103,7 +104,6 @@ const Success = () => {
         console.error("예약 정보 저장 중 오류 발생", error);
       }
     }
-
   }, [selectedSeats, selectedMovieInfo, totalQuantity, totalPrice]);
 
   return <div></div>;

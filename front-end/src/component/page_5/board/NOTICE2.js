@@ -126,7 +126,7 @@ function NOTICE() {
           
           <div className={`notice_show3 ${style.notice_show3}`}>
             <label className={`notice_5 ${style.notice_5}`}>등록일</label>
-            <label className={`notice_6 ${style.notice_6}`}>| {noticeInfo.notice_date}</label>
+            <label className={`notice_6 ${style.notice_6}`}>| {new Date(noticeInfo.notice_date).toLocaleDateString()}</label>
         
             <label className={`notice_7 ${style.notice_7}`}>조회수</label>
             <label className={`notice_8 ${style.notice_8}`}>| {noticeInfo.notice_cnt}</label>
@@ -135,7 +135,12 @@ function NOTICE() {
 
         <div className={`notice_con1 ${style.notice_con1}`}>
         <div className={`con4 ${style.con4}`} id="con3" rows="3"  required>
-          {noticeInfo.notice_con}
+          {noticeInfo.notice_con.split('\n').map((line, index) => (
+          <React.Fragment key={index}>
+          {line}
+          <br />
+          </React.Fragment>
+           ))}
         </div>
       </div>
       <hr />

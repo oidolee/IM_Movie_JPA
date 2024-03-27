@@ -12,7 +12,7 @@ function Admin_GroupForm_Answer() {
   const [reAnswerInfo, setReAnswerInfo] = useState({
     re_title: "",
     re_con: "",
-    group_Id: group_id,
+    group_id: "",
     gr_show: "n",
   });
 
@@ -35,6 +35,7 @@ function Admin_GroupForm_Answer() {
     const { name, value } = e.target;
     setReAnswerInfo({
       ...reAnswerInfo,
+      group_id: group_id,
       [name]: value,
     });
   };
@@ -46,7 +47,7 @@ function Admin_GroupForm_Answer() {
     const requestBody = {
       re_title: reAnswerInfo.re_title,
       re_con: reAnswerInfo.re_con,
-      group_Id: group_id,
+      group_id: group_id,
     };
 
     ApiService.addgroupAnwser(requestBody)
