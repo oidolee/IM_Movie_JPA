@@ -160,7 +160,7 @@ const Reservation_Movie = ({ history }) => {
           menu4Sub.innerHTML = "";
 
           movies.forEach((movieInfo, index) => {
-            const { movie_id, place_num, movie_title, theater_id, movie_time } =
+            const { movie_id, place_num, movie_title, theater_id, movie_time, ip_num } =
               movieInfo;
             const formattedStartTime = moment(movie_time, "HH:mm:ss").format(
               "HH:mm"
@@ -200,32 +200,34 @@ const Reservation_Movie = ({ history }) => {
 
   // 연령에 대한 이미지
   const getMovieImage = (movieId) => {
-    if (movieId === "1") {
+    if (movieId === "1" || movieId === "3") {
       const image = document.createElement("img");
       image.src = Res_img15;
+      image.className = "age_img"; // 이미지 클래스 설정
+      image.alt = "age"; // 이미지 대체 텍스트 설정
       return image;
-    } else if (movieId === "2") {
+    } else if (movieId === "2" || movieId === "4") {
       const image = document.createElement("img");
       image.src = Res_img12;
-      return image;
-    } else if (movieId === "3") {
-      const image = document.createElement("img");
-      image.src = Res_img15;
-      return image;
-    } else if (movieId === "4") {
-      const image = document.createElement("img");
-      image.src = Res_img12;
+      image.className = "age_img"; // 이미지 클래스 설정
+      image.alt = "age"; // 이미지 대체 텍스트 설정
       return image;
     } else if (movieId === "5") {
       const image = document.createElement("img");
       image.src = Res_imgAll;
+      image.className = "age_img"; // 이미지 클래스 설정
+      image.alt = "age"; // 이미지 대체 텍스트 설정
       return image;
     } else if (movieId === "6") {
       const image = document.createElement("img");
       image.src = Res_img18;
+      image.className = "age_img"; // 이미지 클래스 설정
+      image.alt = "age"; // 이미지 대체 텍스트 설정
       return image;
+    } else {
+      return null;
     }
-  };
+  };  
 
   const handleConfirmation = () => {
     setPopupOpen(false);
@@ -239,6 +241,7 @@ const Reservation_Movie = ({ history }) => {
         movie_title: selectedMovieInfo.movie_title,
         theater_id: selectedMovieInfo.theater_id,
         movie_time: selectedMovieInfo.movie_time,
+        ip_num: selectedMovieInfo.ip_num,
       })
     );
 

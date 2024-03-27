@@ -60,9 +60,8 @@ const Reservation_Seat = () => {
   const [teenQuantity, setTeenQuantity] = useState(0);
   const [childQuantity, setChildQuantity] = useState(0);
   const [disabledQuantity, setDisabledQuantity] = useState(0);
-
-  // 선태한 영화 상태 저장
-  const [selectedMovie, selectedMovieInfo] = useState(null);
+  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 영화 정보 
+  const [selectedMovie, setSelectedMovie] = useState(null); // 삭제필요
 
   // 가격 설정
   const adultPrice = 10000;
@@ -77,17 +76,6 @@ const Reservation_Seat = () => {
     childPrice * childQuantity +
     disabledPrice * disabledQuantity;
 
-  // 영화 정보 get
-  useEffect(() => {
-    const selectedMovie = localStorage.getItem("selectedMovieInfo");
-
-    if (selectedMovie) {
-      selectedMovieInfo(JSON.parse(selectedMovie));
-    }
-
-    console.log("selectedMovie : ", selectedMovie);
-  }, []);
-
   // 로그인 상태 확인
 
   // 사용자 움직임 감지
@@ -96,7 +84,20 @@ const Reservation_Seat = () => {
 
   // 좌석 정보 가져오기
   useEffect(() => {
+    const storedMovieInfo = localStorage.getItem("selectedMovieInfo");
+    if (storedMovieInfo) {
+      try {
+        const parsedMovieInfo = JSON.parse(storedMovieInfo);
+        setSelectedMovieInfo(parsedMovieInfo);
+        console.log(parsedMovieInfo)
+      } catch (error) {
+        console.error("영화 정보를 파싱하는 중 오류 발생:", error);
+      }
+    }
+    // 좌석 정보 가져오기
     listSeat();
+
+    
   }, []);
 
   const listSeat = () => {
@@ -275,6 +276,24 @@ const Reservation_Seat = () => {
     }
   };
 
+  // 연령에 대한 이미지
+  const getMovieImage = (movieId) => {
+    switch (movieId) {
+      case "1":
+      case "3":
+        return <img src={Res_img15} className="age_img" alt="age" />;
+      case "2":
+      case "4":
+        return <img src={Res_img12} className="age_img" alt="age" />;
+      case "5":
+        return <img src={Res_imgAll} className="age_img" alt="age" />;
+      case "6":
+        return <img src={Res_img18} className="age_img" alt="age" />;
+      default:
+        return null;      
+    }
+  }; 
+
   return (
     <div className={`Res_seat ${style.Res_seat}`}>
       <div className="Res_seat_content">
@@ -387,13 +406,13 @@ const Reservation_Seat = () => {
                   {/* <img src={Res_movie} className="movie_img" alt="movie" /> */}
                 </li>
                 <ul className="Res_movie_content">
-                  {selectedMovie && (
+                  {selectedMovieInfo && (
                     <li>
-                      {/* <img src={Res_img15} className="age_img" alt="age" /> */}
+                      {getMovieImage(selectedMovieInfo.movie_id)}
                       <strong className="movie_name">
-                        {selectedMovie.movie_title}
-                      </strong>{" "}
-                      | {selectedMovie.theater_id}
+                        {selectedMovieInfo.movie_title}
+                      </strong>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{selectedMovieInfo.movie_time}
+                      &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{selectedMovieInfo.theater_id}
                     </li>
                   )}
                   <li>
