@@ -12,23 +12,31 @@ const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
 // 시크릿 키 test_sk_ex6BJGQOVDxv2GKPJdBnVW4w2zNb
 // http://localhost:3000/success?paymentType=NORMAL&orderId=xygn4_PUn0O91OCQt1QNf&paymentKey=jvX2KBP9QADpexMgkW36obk1elyyXJVGbR5ozO06yLYlaEJ7&amount=100
 
+
+// searchCutomer : 회원정보조회
+
+
 const App = ({ handleCloseModal }) => {
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
-  const [price, setPrice] = useState(10000);
-  const [cookies] = useCookies(['c_email', 'idName']); // 쿠키 가져오기
+  const [userEmail, setUserEmail] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0); // totalPrice 상태 추가
 
-//   useEffect(() => {
-//     // 로컬 스토리지에서 토큰 가져오기
-//     const authToken = localStorage.getItem("auth_token");
+  useEffect(() => {
+    const authToken = localStorage.getItem("auth_token");
+    if (authToken) {
+        const decodedToken = jwtDecode(authToken);
+        const user = decodedToken.iss;
+        setUserEmail(user);
+        console.log("사용자 이메일:", user);
+    }
 
-//     // 토큰이 존재하는지 확인 후 이메일 추출
-//     if (authToken) {
-//         const decodedToken = jwtDecode(authToken); // 수정 필요
-//         const userEmail = decodedToken.iss;
-//         setEmail(userEmail);
-//     }
-// }, []); // useEffect가 최초 한 번만 실행되도록 빈 배열을 전달
+     // 로컬 스토리지에서 totalPrice 가져오기
+     const totalPrice = JSON.parse(localStorage.getItem("totalPrice"));
+     if (totalPrice) {
+       setPrice(totalPrice);
+     }
+}, []);
 
   useEffect(() => {
     const fetchPaymentWidget = async () => {
@@ -36,7 +44,7 @@ const App = ({ handleCloseModal }) => {
 
       const paymentMethodsWidget = paymentWidget.renderPaymentMethods(
         "#payment-widget",
-        price
+        totalPrice
       );
 
       paymentWidgetRef.current = paymentWidget;
@@ -44,7 +52,7 @@ const App = ({ handleCloseModal }) => {
     };
 
     fetchPaymentWidget();
-  }, [price]);
+  }, [totalPrice]);
 
   useEffect(() => {
     const paymentMethodsWidget = paymentMethodsWidgetRef.current;
@@ -54,24 +62,22 @@ const App = ({ handleCloseModal }) => {
     }
 
     paymentMethodsWidget.updateAmount(
-      price,
+      totalPrice,
       paymentMethodsWidget.UPDATE_REASON.COUPON
     );
-  }, [price]);
+  }, [totalPrice]);
 
   const handlePayment = async () => {
     const paymentWidget = paymentWidgetRef.current;
-
-    console.log("이름: " ,cookies['idName'], "이메일: ", cookies['c_email']);
 
     try {
       const orderId = nanoid(); // orderId 변수 선언
       await paymentWidget?.requestPayment({
         orderId: orderId, // orderId 변수 사용
         orderName: "티켓",
-        customerName: cookies['idName'],
-        customerEmail: cookies['c_email'],
-        successUrl: `${window.location.origin}/success?orderId=${orderId}&orderName=티켓&customerEmail=${cookies['c_email']}&amount=${price}`,
+        customerName: "사용자",
+        customerEmail: userEmail,
+        successUrl: `${window.location.origin}/success?orderId=${orderId}&orderName=티켓&customerEmail=${userEmail}&amount=${totalPrice}`,
         failUrl: `${window.location.origin}/fail`
       });
     } catch (err) {
