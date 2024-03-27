@@ -161,7 +161,8 @@ const Reservation_Movie = ({ history }) => {
           menu4Sub.innerHTML = "";
 
           movies.forEach((movieInfo, index) => {
-            const { movie_id, movie_title, theater_id, movie_time } = movieInfo;
+            const { movie_id, place_num, movie_title, theater_id, movie_time } =
+              movieInfo;
             const formattedStartTime = moment(movie_time, "HH:mm:ss").format(
               "HH:mm"
             );
@@ -235,6 +236,7 @@ const Reservation_Movie = ({ history }) => {
       "selectedMovieInfo",
       JSON.stringify({
         movie_id: selectedMovieInfo.movie_id,
+        place_num: selectedMovieInfo.place_num,
         movie_title: selectedMovieInfo.movie_title,
         theater_id: selectedMovieInfo.theater_id,
         movie_time: selectedMovieInfo.movie_time,
@@ -431,19 +433,22 @@ const Reservation_Movie = ({ history }) => {
                     <ul>
                       {movies.map(
                         (movieInfo, index) =>
-                          movieInfo.movie_id === 1 && (
+                          movieInfo.movie_id === 1 &&
+                          movieInfo.place_num === 1 && (
                             <li
                               key={index}
                               onClick={() => handlePopupOpen(movieInfo)}
                             >
                               <a href="#none">
                                 <span>
-                                  {movieInfo.movie_title}{" "}
+                                  {movieInfo.movie_title}
                                   {moment(
                                     movieInfo.movie_time,
                                     "HH:mm:ss"
                                   ).format("HH:mm")}{" "}
-                                  ({movieInfo.theater_id})
+                                  <br />
+                                  {remainingSeatsCount}/112{" "}
+                                  {movieInfo.theater_id}
                                 </span>
                               </a>
                             </li>
