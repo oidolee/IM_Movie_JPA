@@ -64,7 +64,7 @@ function Form() {
     group_title: "",
     group_con: "",
     group_name: "",
-    custo_name: cus_name,
+    custo_name: "",
     custo_phone1: "",
     custo_phone2: "",
     custo_phone3: "",
