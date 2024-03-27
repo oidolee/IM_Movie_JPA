@@ -1,10 +1,13 @@
 package springBoot.ict.movie.dto;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -42,4 +45,16 @@ public class StoreGiftDTO {
     private String gift_content;
     @JsonProperty("totalQuantity")
     private int gift_count;
+    @JsonProperty("detailRegDate")
+    private Date detail_regDate;
+    
+    @PreUpdate
+    public void preUpdate() {
+         //ip_regdate 값이 null인 경우에만 업데이트를 수행합니다.
+    	 if (detail_regDate == null) {
+    		 detail_regDate = new Date(); // 현재 날짜로 설정
+         }
+    }
+    
+    
 }
