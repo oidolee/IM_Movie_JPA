@@ -15,7 +15,7 @@ import Res_imgAll from "../../assets/page_1/all.jpg";
 import Checkout from "./Checkout";
 import Modal from "react-modal";
 import ApiService from "../../ApiService";
-import { useHistory  } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import bottom1 from "../../assets/page_3/bottom1.jpg";
 import bottom2 from "../../assets/page_3/bottom2.jpg";
 
@@ -99,12 +99,12 @@ const Reservation_Payment = () => {
           st_column: seatNumber,
           st_check: "n",
         };
-  
+
         console.log("inputData : ", inputData);
-  
+
         return ApiService.updateSeat(inputData);
       });
-  
+
       Promise.all(updateSeatPromises)
         .then(() => {
           localStorage.removeItem("selectedSeat");
@@ -113,7 +113,7 @@ const Reservation_Payment = () => {
           localStorage.removeItem("totalPrice");
           localStorage.removeItem("selectedSeatInfo");
           localStorage.removeItem("selectedMovieInfo");
-          
+
           history.push("/page_1/Reservation_Movie");
         })
         .catch((error) => {
@@ -133,12 +133,12 @@ const Reservation_Payment = () => {
           st_column: seatNumber,
           st_check: "n",
         };
-  
+
         console.log("inputData : ", inputData);
-  
+
         return ApiService.updateSeat(inputData);
       });
-  
+
       Promise.all(updateSeatPromises)
         .then(() => {
           localStorage.removeItem("selectedSeat");
@@ -146,7 +146,7 @@ const Reservation_Payment = () => {
           localStorage.removeItem("totalQuantity");
           localStorage.removeItem("totalPrice");
           localStorage.removeItem("selectedSeatInfo");
-          
+
           history.push("/page_1/Reservation_Seat");
         })
         .catch((error) => {
@@ -154,7 +154,12 @@ const Reservation_Payment = () => {
         });
     }
   };
-  
+
+  window.addEventListener('beforeunload', function (e) {
+    // handleSeat 함수 실행
+    handleSeat();
+  });
+
   // 연령에 대한 이미지
   const getMovieImage = (movieId) => {
     switch (movieId) {
@@ -197,7 +202,7 @@ const Reservation_Payment = () => {
       <div className="Res_payment_content">
         <div className="Res_menu1">
           <ul>
-          <li className="step" id="step2" onClick={handleMovie}>
+            <li className="step" id="step2" onClick={handleMovie}>
               <a href="#Res_step01">
                 <strong>
                   <span>
@@ -298,27 +303,31 @@ const Reservation_Payment = () => {
             </div>
             <div className="menu2">
               <ul>
-              {selectedMovieInfo && (
-                <li className="menu2_main">
-                {getTitleMovieImage(selectedMovieInfo.movie_id)}
-                </li>
-              )}
+                {selectedMovieInfo && (
+                  <li className="menu2_main">
+                    {getTitleMovieImage(selectedMovieInfo.movie_id)}
+                  </li>
+                )}
                 {selectedMovieInfo && (
                   <div className="menu2_sub">
                     <ul>
                       <li>
-                      {getMovieImage(selectedMovieInfo.movie_id)}
+                        {getMovieImage(selectedMovieInfo.movie_id)}
                         <strong>{selectedMovieInfo.movie_title}</strong>
                       </li>
-                      <li>일시: {sysdate} / {selectedMovieInfo.movie_time}</li>
+                      <li>
+                        일시: {sysdate} / {selectedMovieInfo.movie_time}
+                      </li>
                       <li>
                         성인: {adultQuantity}명, 청소년: {teenQuantity}명<br />
                         경로: {childQuantity}명, 장애인: {disabledQuantity}명
-                        <br /><br />
+                        <br />
+                        <br />
                         총: {totalQuantity}명
                       </li>
                       <li>
-                        좌석: {selectedSeats.map((seat, index) => (
+                        좌석:{" "}
+                        {selectedSeats.map((seat, index) => (
                           <span key={index}>
                             {seat}
                             {index % 2 === 1 ? <br /> : ", "}
@@ -330,7 +339,7 @@ const Reservation_Payment = () => {
                 )}
                 <a href="/page3">
                   <img src={Res_event} className="event_img1" alt="event" />
-                </a>      
+                </a>
               </ul>
             </div>
           </ul>
@@ -361,11 +370,11 @@ const Reservation_Payment = () => {
                         <Checkout handleCloseModal={handleCloseModal} />
                       </div>
                     </Modal>
-                    <button className="point_seat" onClick={handlePointClick}>
+                    {/* <button className="point_seat" onClick={handlePointClick}>
                       포인트
-                    </button>
+                    </button> */}
                   </li>
-                  <div className="point_seat_main">
+                  {/* <div className="point_seat_main">
                     <ul className="point_seat_sub">
                       {isPointClicked && (
                         <div className="usePoint">
@@ -389,7 +398,7 @@ const Reservation_Payment = () => {
                         </div>
                       )}
                     </ul>
-                  </div>
+                  </div> */}
                 </ul>
               </div>
             </li>
@@ -402,20 +411,22 @@ const Reservation_Payment = () => {
             </div>
             <li>
               <div className="event2">
-              <img src={bottom2} className="event_img2" alt="event" />
-              <img src={bottom1} className="event_img2" alt="event" />
+                <img src={bottom2} className="event_img2" alt="event" />
+                <img src={bottom1} className="event_img2" alt="event" />
               </div>
             </li>
             <li>
               <div className="menu4">
                 <ul className="menu4_bottom">
                   <li className="paymentBtn">
-                    <span>상품금액</span>
+                    상품금액: {totalPrice.toLocaleString()}
                   </li>
-                  <li className="paymentBtn">할인금액</li>
-                  <li className="paymentBtn">결제금액: {totalPrice.toLocaleString()}</li>
+
+                  <li className="paymentBtn">
+                    결제금액: {totalPrice.toLocaleString()}
+                  </li>
                   <li>
-                    <button className="paymentBtn_total">결제완료</button>
+                    <button className="paymentBtn_total">결제</button>
                   </li>
                 </ul>
               </div>
