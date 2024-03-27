@@ -249,6 +249,22 @@ const Reservation_Movie = ({ history }) => {
     setPopupOpen(false);
   };
 
+  const handleRegionClick = (placeKey) => {
+    if (selectedRegion === placeKey) {
+      setSelectedRegion(null);
+    } else {
+      setSelectedRegion(placeKey);
+    }
+  };
+
+  const handleMovieClick = (movieId) => {
+    if (selectedMovie === movieId) {
+      setSelectedMovie(null);
+    } else {
+      setSelectedMovie(movieId);
+    }
+  };
+
   const sysdate = moment().format("YYYY-MM-DD");
 
   return (
@@ -347,13 +363,24 @@ const Reservation_Movie = ({ history }) => {
               <div className="menu2">
                 <ul className="menu2_left">
                   {Object.entries(places).map(([placeKey, placeNames]) => (
-                    <li key={placeKey} className="region">
+                    <li key={placeKey} className="region"
+                    onClick={(event) => {
+                      handleRegionClick(placeKey);
+                        }}
+                        style={{
+                          backgroundColor: selectedRegion === placeKey ? 'black' : 'initial', 
+                        }}
+                    >
                       <a
                         href="#"
                         onClick={(event) => {
                           event.preventDefault();
                           setSelectedRegion(placeKey);
+                          handleRegionClick(placeKey);
                         }}
+                        style={{ 
+                          color: selectedRegion === placeKey ? 'white' : 'initial',
+                        }}       
                       >
                         {placeKey}
                       </a>
@@ -369,7 +396,8 @@ const Reservation_Movie = ({ history }) => {
                             <div key={placeKey}>
                               {placeKey === selectedRegion &&
                                 placeNames.map((location, index) => (
-                                  <li className="subRegion" key={index}>
+                                  <li className="subRegion" key={index}
+                                  >
                                     <a
                                       href="#"
                                       onClick={(event) => {
@@ -402,13 +430,9 @@ const Reservation_Movie = ({ history }) => {
                 <ul className="menu3_left">
                   {movies.map(
                     (movieInfo, index) =>
-                      movieInfo.movie_id === 1 &&
                       movieInfo.place_num === 1 && (
                         <li key={index}>
-                          <a
-                            href="#none"
-                            onClick={() => handlePopupOpen(movieInfo)}
-                          ></a>
+                          <a href="#">{movieInfo.movie_title}</a>
                         </li>
                       )
                   )}
