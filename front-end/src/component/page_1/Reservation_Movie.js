@@ -229,14 +229,13 @@ const Reservation_Movie = ({ history }) => {
 
   const handleConfirmation = () => {
     setPopupOpen(false);
-  
+
     // 선택한 영화 정보와 좌석 정보를 로컬 스토리지에 저장
-    localStorage.setItem("selectedMovieInfo", JSON.stringify(selectedMovieInfo));
-  
-    // 필요한 정보만 추출하여 사용
-    const { movie_title, movie_time, theater_id } = selectedMovieInfo;
-    console.log("팝업이 닫힐 때 선택된 영화 정보:", { movie_title, movie_time, theater_id });
-  
+    localStorage.setItem(
+      "selectedMovieInfo",
+      JSON.stringify(selectedMovieInfo)
+    );
+
     history.push("/page_1/Reservation_Seat");
   };
 
