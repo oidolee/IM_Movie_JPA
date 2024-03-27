@@ -26,11 +26,10 @@ const Reservation_Movie = ({history}) => {
   useEffect(() => {
     listReservation();
     fetchRemainingSeatsCount();
-  }, []); // 의존성 배열이 비어있으므로 한 번만 실행됨
+  }, []); 
   
   useEffect(() => {
     if (Object.keys(groupedData).length > 0) {
-      // groupedData가 업데이트될 때만 실행됨
       handleLocationClick("홍대입구");
     }
   }, [groupedData]);
@@ -88,11 +87,9 @@ const Reservation_Movie = ({history}) => {
               break;
           }
 
-          // newData에 해당 place가 없으면 빈 배열로 초기화하
           newData[place] = [...(newData[place] || []), item];
         });
 
-        // setGroupedData를 통해 상태 업데이트
         setGroupedData(newData);
       })
       .catch((err) => {
@@ -100,11 +97,9 @@ const Reservation_Movie = ({history}) => {
       });
   };
 
-  // 잔여 좌석 수 호출
   const fetchRemainingSeatsCount = () => {
     ApiService.listSeat()
       .then((res) => {
-        // st_check가 "r" 또는 "y"가 아닌 좌석들의 수
         const remainingSeats = res.data.filter(
           (seat) => seat.st_check !== "r" && seat.st_check !== "y"
         ).length;
@@ -123,9 +118,9 @@ const Reservation_Movie = ({history}) => {
     // 클릭한 영화 정보 저장
     setSelectedMovie(placeData);
 
-    const menu4Sub = document.querySelector(".menu4_sub ul"); // 선택된 영화 정보 출력 위치
+    const menu4Sub = document.querySelector(".menu4_sub ul"); 
 
-    menu4Sub.innerHTML = ""; // 기존 내용 지우기
+    menu4Sub.innerHTML = "";
 
     if (placeData) {
         placeData.forEach((movieInfo, index) => {
@@ -145,7 +140,6 @@ const Reservation_Movie = ({history}) => {
             menu4Sub.appendChild(listItem);
             setSelectedMovieInfo(movieInfo);
 
-            // 새로 추가할 코드 시작
             listItem.addEventListener("click", () => {
                 console.log(`선택된 영화 정보 ${index + 1}:`, movieInfo);
                 handlePopupOpen(movieInfo);
@@ -156,37 +150,8 @@ const Reservation_Movie = ({history}) => {
 
   const handlePopupOpen = (movieInfo) => {
     setSelectedMovieInfo(movieInfo);
-    setPopupOpen(true); // 팝업 열기
+    setPopupOpen(true); 
     console.log("팝업이 열릴 때 selectedMovieInfo:", movieInfo);
-  };
-
-  // 연령에 대한 이미지
-  const getMovieImage = (movieId) => {
-    if (movieId === "1") {
-      const image = document.createElement("img");
-      image.src = Res_img15;
-      return image;
-    } else if (movieId === "2") {
-      const image = document.createElement("img");
-      image.src = Res_img12;
-      return image;
-    } else if (movieId === "3") {
-      const image = document.createElement("img");
-      image.src = Res_img15;
-      return image;
-    } else if (movieId === "4") {
-      const image = document.createElement("img");
-      image.src = Res_img12;
-      return image;
-    } else if (movieId === "5") {
-      const image = document.createElement("img");
-      image.src = Res_imgAll;
-      return image;
-    } else if (movieId === "6") {
-      const image = document.createElement("img");
-      image.src = Res_img18;
-      return image;
-    }
   };
 
   const handleConfirmation = () => {
@@ -218,22 +183,6 @@ const Reservation_Movie = ({history}) => {
       setSelectedRegion(null);
     } else {
       setSelectedRegion(placeKey);
-    }
-  };
-
-  const handleSubRegionClick = (placeNames) => {
-    if (selectedRegion === placeNames) {
-      setSelectedRegion(null);
-    } else {
-      setSelectedRegion(placeNames);
-    }
-  };
-
-  const handleMovieClick = (movieId) => {
-    if (selectedMovie === movieId) {
-      setSelectedMovie(null);
-    } else {
-      setSelectedMovie(movieId);
     }
   };
 
