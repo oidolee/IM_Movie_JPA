@@ -76,15 +76,16 @@
 
 .myinfo_table>tr>td{
     border-bottom: 1px solid rgb(207, 207, 207);
-    padding: 7px 4px;
+    padding: 15px 13px;;
     height: 20px;
     text-align: left;
+    padding-right: 0;
 }
 
 
 
 .consult_content{
-    margin:50px 144px 50px 50px;
+    margin:50px 144px 50px 0;
     width:85%;
     height:300px;
     padding-top:10px;

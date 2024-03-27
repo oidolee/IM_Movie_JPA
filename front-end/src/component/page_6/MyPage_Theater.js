@@ -88,7 +88,7 @@ function MyPage_Theater() {
                     <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         {userTheater.ic_my_theater_1}
                     </div>
-                </Link>
+                </Link> 
 
                 <Link to={`/theater/${userTheater.ticketmap_no2}`} className={`plz_login_button ${style.plz_login_button}`}>
                     <div style={{ border: '1px solid #AFAFAF', width: '98px', height: '98px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

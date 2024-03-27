@@ -21,11 +21,12 @@ class FaqMoiveLocation_Mypage extends Component {
         { ticketmap_no2: '', ic_my_theater_2: '' },
         { ticketmap_no3: '', ic_my_theater_3: '' }
       ],
-      submitted: false
+      submitted: false,
+      checkselectedValue: 0, // 초기값으로 0을 설정
+      selectedRadioIndex : 0
     };
     // this.theaterState = {
-    //   it_no: '',
-    //   c_email: '',
+    //   it_no: '',//   c_email: '',
     //   ic_my_theater_first: '',
     //   ic_my_theater_second: '',
     //   ic_my_theater_third: '',
@@ -61,8 +62,9 @@ class FaqMoiveLocation_Mypage extends Component {
     // ApiService를 사용하여 서버에 정보 전송
     ApiService.updateTheater(inputData)
       .then(response => {
-        console.log("등록 완료:", response.data);
         this.setState({ submitted: true });
+        alert("등록 완료");
+        window.location.reload()
       })
       .catch(error => {
         console.error("등록 실패:", error);
@@ -176,14 +178,28 @@ class FaqMoiveLocation_Mypage extends Component {
           }
           return theater;
         });
+        console.log(ticketmap_no)
         this.setState({
+        
           ticketmap_no: ticketmap_no,
           ticketmap_latitude: ticketmap_latitude,
           ticketmap_longitude: ticketmap_longitude,
           theaters: updatedTheaters,
         }, () => {
           this.createMap();
+          this.setState(prevState => ({
+            theaters: prevState.theaters.map((theater, index) => {
+              if (index === prevState.selectedRadioIndex) {
+                return { ...theater, ticketmap_no: ticketmap_no };
+              }
+              return theater;
+            })
+          }));
+         
         });
+      
+       
+        
       })
       .catch(error => {
         console.error('Error fetching store map by ID:', error);
@@ -194,6 +210,15 @@ class FaqMoiveLocation_Mypage extends Component {
     window.localStorage.setItem("ticketmap_name", ticketmap_name);
     // 부모 컴포넌트로 값을 전달
     this.props.onLocationChange(ticketmap_name);
+
+    this.setState(prevState => ({
+      theaters: prevState.theaters.map((theater, index) => {
+        if (index === prevState.selectedRadioIndex) {
+          return { ...theater, ic_my_theater: ticketmap_name };
+        }
+        return theater;
+      })
+    }));
   }
 
 
@@ -355,10 +380,27 @@ class FaqMoiveLocation_Mypage extends Component {
               </div>
             )}
             {/* 각 영화관 입력 폼 */}
-            <ul style={{ display: 'inline' }}>
+            <ul style={{ display: 'inline', marginTop:"30px" }}>
               {this.state.theaters.map((theater, index) => (
                 <React.Fragment key={index}>
+                 <li style={{display: "flex"}}>
+
+                   <input 
+                      type="radio" 
+                      id={`check_radio_${index}`} 
+                      name="check_radio" 
+                      checked={this.state.selectedRadioIndex === index} // 선택된 값이 0일 때만 체크
+                      onChange={() => this.setState({ selectedRadioIndex: index })} // 라디오 버튼이 변경될 때 선택된 값을 설정
+                      value={index+1}
+                    />
+                    <p style={{color:"black", margin:0, marginLeft:"10px"}}>
+                      {index+1}순위
+                    </p>
+                    
+                 </li>
+
                   <li>
+                   
                     <input
                       required
                       id={`ticketmap_no${index + 1}`}
@@ -387,7 +429,6 @@ class FaqMoiveLocation_Mypage extends Component {
               ))}
               <li>
                 <button onClick={this.handleRegister}>등록</button>
-                {/* <button type="button" onClick={this.handleReset}>취소</button> */}
               </li>
             </ul>
             <div>
