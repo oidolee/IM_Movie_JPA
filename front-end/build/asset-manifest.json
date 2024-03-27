@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.e3e43043.css",
-    "main.js": "/static/js/main.20fbb78c.js",
+    "main.css": "/static/css/main.07394d64.css",
+    "main.js": "/static/js/main.03dc8e00.js",
     "static/js/453.9537af23.chunk.js": "/static/js/453.9537af23.chunk.js",
     "static/media/remixicon.svg?t=1708865856766": "/static/media/remixicon.7735fab8dbf8ff78afe9.svg",
     "static/media/slide_4.jpg": "/static/media/slide_4.8a189c5fa7ebe7cdce47.jpg",
@@ -11,7 +11,6 @@
     "static/media/remixicon.ttf?t=1708865856766": "/static/media/remixicon.4c942de19d980993f612.ttf",
     "static/media/Swiper3.jpg": "/static/media/Swiper3.7e64ad9572c4a2f95110.jpg",
     "static/media/slide_1.jpg": "/static/media/slide_1.54c504c2f1c1a800be65.jpg",
-    "static/media/movie.jpg": "/static/media/movie.46d85ef6524b0a5c1a5a.jpg",
     "static/media/RabbitAcademy2_980180.jpg": "/static/media/RabbitAcademy2_980180.8c1f68ed381ae2b9f75b.jpg",
     "static/media/storeBanner.jpg": "/static/media/storeBanner.bf07d098d0a9519252b5.jpg",
     "static/media/remixicon.woff?t=1708865856766": "/static/media/remixicon.28ceff39ee3e17dc99db.woff",
@@ -24,6 +23,7 @@
     "static/media/remixicon.woff2?t=1708865856766": "/static/media/remixicon.39f4def56d0e8712909a.woff2",
     "static/media/TheBraveBeluga.png": "/static/media/TheBraveBeluga.55bbfd8f32834148eb67.png",
     "static/media/slide_2.jpg": "/static/media/slide_2.0eff4646ed1fa3741bc0.jpg",
+    "static/media/movie4.jpg": "/static/media/movie4.ed8ae699ef58a6ef03f3.jpg",
     "static/media/movie71.jpg": "/static/media/movie71.c1573d6fa03a072e3d53.jpg",
     "static/media/IM_package3.png": "/static/media/IM_package3.eada1987a3778161fd74.png",
     "static/media/movie70.jpg": "/static/media/movie70.23ee3295ca6ebd1ac996.jpg",
@@ -33,7 +33,9 @@
     "static/media/movie13.jpg": "/static/media/movie13.60a99939d9bb63d7d125.jpg",
     "static/media/movie8.jpg": "/static/media/movie8.e27c4fd389c4228af72d.jpg",
     "static/media/movie12.jpg": "/static/media/movie12.9f1434d47ba80721d186.jpg",
+    "static/media/movie2.jpg": "/static/media/movie2.34b76b0488dfc8db4110.jpg",
     "static/media/Swiper1.jpg": "/static/media/Swiper1.3b9a540a6cc25dd20ee1.jpg",
+    "static/media/movie9.jpg": "/static/media/movie9.0c727041a709fda5a44c.jpg",
     "static/media/trailer2.png": "/static/media/trailer2.e55f21c780b8166ccf95.png",
     "static/media/movie5.jpg": "/static/media/movie5.6ad9ea0a9ffe35cc68ac.jpg",
     "static/media/movie72.jpg": "/static/media/movie72.a8a64c32375d43d6e99c.jpg",
@@ -64,12 +66,12 @@
     "static/media/IM_ticket2.png": "/static/media/IM_ticket2.83ecd6dccef900f28329.png",
     "static/media/group1.png": "/static/media/group1.1fb9f79ecc3be45172f5.png",
     "index.html": "/index.html",
-    "main.e3e43043.css.map": "/static/css/main.e3e43043.css.map",
-    "main.20fbb78c.js.map": "/static/js/main.20fbb78c.js.map",
+    "main.07394d64.css.map": "/static/css/main.07394d64.css.map",
+    "main.03dc8e00.js.map": "/static/js/main.03dc8e00.js.map",
     "453.9537af23.chunk.js.map": "/static/js/453.9537af23.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e3e43043.css",
-    "static/js/main.20fbb78c.js"
+    "static/css/main.07394d64.css",
+    "static/js/main.03dc8e00.js"
   ]
 }
