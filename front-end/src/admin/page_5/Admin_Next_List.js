@@ -38,9 +38,16 @@ function Admin_Next_List ({ history }) {
 
   // 수정
   const selectNext = (next_id) => {
-    window.localStorage.setItem("next_id", next_id);
-    history.push("/admin/page_5/Admin_Next_Edit");
+    ApiService.selectNext(next_id) 
+    .then((res) => {
+      console.log("selectUpdate 성공 : ", res.data);
+      history.push(`/admin/page_5/Admin_Next_Edit/${next_id}`)
+    })
+    .catch((err) => {
+      console.log("selectUpdate 실패 : ", err);
+    });
   };
+  
 
   // 삭제
   const deleteNext = (next_id) => {
@@ -83,9 +90,13 @@ function Admin_Next_List ({ history }) {
             <TableCell>Movie_Time</TableCell>
             <TableCell>Movie_Age</TableCell>
             <TableCell>Movie_Visitor</TableCell>
-            <TableCell>Movie_Contents</TableCell>
             <TableCell>Movie_Con</TableCell>
-            <TableCell>Movie_Trailer</TableCell>
+            <TableCell>Movie_Pd</TableCell>
+            <TableCell>Movie_Cast</TableCell>
+            <TableCell>Movie_Image2</TableCell>
+            <TableCell>Movie_Image3</TableCell>
+            <TableCell>Movie_Trailer1</TableCell>
+            <TableCell>Movie_Trailer2</TableCell>
             <TableCell>Movie_Category</TableCell>
             
             <TableCell>Edit</TableCell>
@@ -100,13 +111,17 @@ function Admin_Next_List ({ history }) {
               </TableCell>
               <TableCell>{list.next_image}</TableCell>
               <TableCell>{list.next_title}</TableCell>
-              <TableCell>{list.next_date}</TableCell>
+              <TableCell> {new Date(list.next_date).toLocaleDateString()} </TableCell>
               <TableCell>{list.next_time}</TableCell>
               <TableCell>{list.next_age}</TableCell>
               <TableCell>{list.next_visitor}</TableCell>
-              <TableCell>{list.next_contents}</TableCell>
               <TableCell>{list.next_con}</TableCell>
-              <TableCell>{list.next_trailer}</TableCell>
+              <TableCell>{list.next_pd}</TableCell>
+              <TableCell>{list.next_cast}</TableCell>
+              <TableCell>{list.next_image2}</TableCell>
+              <TableCell>{list.next_image3}</TableCell>
+              <TableCell>{list.next_trailer1}</TableCell>
+              <TableCell>{list.next_trailer2}</TableCell>
               <TableCell>{list.next_category}</TableCell>
               <TableCell
                 className="selectBtn"

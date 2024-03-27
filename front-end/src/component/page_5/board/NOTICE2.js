@@ -77,6 +77,18 @@ function NOTICE() {
     history.goBack();
   };
 
+   // 조회수 상태를 관리할 객체 생성
+   const [viewCounts, setViewCounts] = useState({});
+
+   // 공지사항 항목 클릭 시 조회수 증가 함수
+   const increaseViewCount = (noticeId) => {
+     setViewCounts((prevCounts) => ({
+       ...prevCounts,
+       [noticeId]: (prevCounts[noticeId] || 0) + 1,
+     }));
+   };
+ 
+
   return (
     <div
       id="NOTICE_wrappage2"
@@ -127,9 +139,6 @@ function NOTICE() {
           <div className={`notice_show3 ${style.notice_show3}`}>
             <label className={`notice_5 ${style.notice_5}`}>등록일</label>
             <label className={`notice_6 ${style.notice_6}`}>| {new Date(noticeInfo.notice_date).toLocaleDateString()}</label>
-        
-            <label className={`notice_7 ${style.notice_7}`}>조회수</label>
-            <label className={`notice_8 ${style.notice_8}`}>| {noticeInfo.notice_cnt}</label>
           </div>
         </div>
 

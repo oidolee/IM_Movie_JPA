@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import ApiService from "../../ApiService";
 import { Typography, TextField, Button } from "@mui/material";
 import style from "../../styles/admin/page_5/Admin_Now_Edit.css";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 const Admin_Now_Edit = ({ history }) => {
-   const { now_id } = useParams();
-    const [nowInfo, setNowInfo] = useState({
+  const { now_id } = useParams();
+  const [nowInfo, setNowInfo] = useState({
     now_id: "",
     now_image: "",
     now_title: "",
@@ -94,7 +94,7 @@ const Admin_Now_Edit = ({ history }) => {
         type="text"
         name="now_id"
         value={nowInfo.now_id}
-        />
+      />
       <br />
 
       <TextField
