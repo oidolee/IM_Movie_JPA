@@ -14,16 +14,6 @@ const Success = () => {
 
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState([]);
-  const [totalPriceFromLocalStorage, setTotalPriceFromLocalStorage] = useState([]);
-  const [isPointClicked, setIsPointClicked] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState(null);
-  const [adultQuantity, setAdultQuantity] = useState(0);
-  const [teenQuantity, setTeenQuantity] = useState(0);
-  const [childQuantity, setChildQuantity] = useState(0);
-  const [disabledQuantity, setDisabledQuantity] = useState(0);
-  const storedMovieInfo = localStorage.getItem("selectedMovieInfo");
-  const [selectedMovieInfo, setSelectedMovieInfo] = useState({}); // 선택한 영화 정보
   const [payments, setPayments] = useState([]); // 결제
   const [reservation, setReservation] = useState([]); // 예약 
 
@@ -31,41 +21,19 @@ const Success = () => {
   console.log("선택된 좌석 번호 : ", selectedSeat);
 
   useEffect(() => {
-    if (storedMovieInfo) {
-      try {
-        const parsedMovieInfo = JSON.parse(storedMovieInfo);
-        setSelectedMovieInfo(parsedMovieInfo);
-        console.log("영화", parsedMovieInfo);
-      } catch (error) {
-        console.error("영화 정보를 파싱하는 중 오류 발생:", error);
-      }
-    }
 
     const storedSelectedSeats = JSON.parse(
       localStorage.getItem("selectedSeats")
     );
     const storedTotalPrice = JSON.parse(localStorage.getItem("totalPrice"));
     const seatInfo = JSON.parse(localStorage.getItem("selectedSeatInfo"));
-    console.log(seatInfo.totalQuantity);
-
     if (seatInfo) {
-      setAdultQuantity(seatInfo.adultQuantity);
-      setTeenQuantity(seatInfo.teenQuantity);
-      setChildQuantity(seatInfo.childQuantity);
-      setDisabledQuantity(seatInfo.disabledQuantity);
-      setTotalQuantity(seatInfo.totalQuantity);
-      setSelectedSeats(storedSelectedSeats);
-      setTotalPriceFromLocalStorage(storedTotalPrice);
+      setTotalQuantity(seatInfo.totalQuantity || 0);
     }
 
     console.log("setSelectedSeats : ", storedSelectedSeats);
     console.log("setTotalPrice : ", storedTotalPrice);
-    console.log("totalQuantity : ", seatInfo.totalQuantity);
-    localStorage.setItem(
-      "totalQuantity",
-      JSON.stringify(seatInfo.totalQuantity || 0)
-    );
-  }, [storedMovieInfo]);
+  }, []);
 
   useEffect(() => {
     // 여기서 필요한 처리를 수행하세요.
@@ -74,13 +42,43 @@ const Success = () => {
     console.log("고객 이메일:", customerEmail);
     console.log("총 가격:", totalPrice);
 
-    // 결제 정보를 백엔드로 전송합니다.
-    insertPayment();
+    // 이미 결제가 이루어졌는지 확인
+    if (payments.length === 0) {
+      insertPayment();
+    }
+    // 이미 예약이 이루어졌는지 확인
+    if (reservation.length === 0) {
+      addReservation();
+    }
 
-    // 예약 정보를 백엔드로 전송합니다.
-    addReservation();
+  }, [orderId, orderName, customerEmail, totalPrice, totalQuantity]);
 
-  }, [orderId, orderName, customerEmail, totalPrice]);
+  const addReservation = () => {
+    // 예약할 좌석 정보를 담은 배열
+    const reservationsData = selectedSeat.map(seatId => ({
+      st_id: seatId,
+      ic_email: customerEmail,
+      res_count: totalQuantity,
+      res_ticket_price: totalPrice,
+      res_sysdate: new Date().toISOString(),
+      res_check: "y",
+    }));
+
+    // 각 좌석에 대한 예약 정보를 서버에 전달
+    const reservationPromises = reservationsData.map(reservation => {
+      return ApiService.addReservation(reservation);
+    });
+
+    Promise.all(reservationPromises)
+      .then(responses => {
+        // 모든 예약이 완료된 후에 상태 업데이트
+        setReservation(responses.map(res => res.data));
+        console.log("모든 예약이 완료되었습니다.");
+      })
+      .catch(err => {
+        console.error("예약 작업 중 오류가 발생하였습니다.", err);
+      });
+  };
 
   const insertPayment = () => {
     const inputData1 = {
@@ -95,35 +93,27 @@ const Success = () => {
 
     ApiService.insertPayment(inputData1)
       .then(res => {
-        setPayments(res.data);
-        console.log("insertPayment 성공", res.data);
+        setPayments([res.data]); // 배열로 감싸서 상태 업데이트
+        console.log("결제가 완료되었습니다.");
       })
       .catch(err => {
-        console.log("insertPayment 오류: ", err);
+        console.error("결제 작업 중 오류가 발생하였습니다.", err);
       })
   }
 
-  const addReservation = () => {
-    const inputData2 = {
-      mov_id: selectedMovieInfo.movie_id,
-      ip_num: selectedMovieInfo.ip_num,
-      st_id: selectedSeat,
-      ic_email: customerEmail,
-      res_count: totalQuantity,
-      res_ticket_price: totalPrice,
-      res_sysdate: new Date().toISOString(),
-      res_check: "y",
-    }
+  const updateSeatPromises = selectedSeats.map((seat) => {
+    const [lot, seatNumber, ip_no] = seat.split("-");
+    const inputData = {
+      st_id: ip_no,
+      st_row: lot,
+      st_column: seatNumber,
+      st_check: "y",
+    };
 
-    ApiService.addReservation(inputData2)
-      .then(res => {
-        setReservation(res.data);
-        console.log("addReservation 성공", res.data);
-      })
-      .catch(err => {
-        console.log("addReservation 오류: ", err);
-      })
-  }
+    console.log("inputData : ", inputData);
+
+    return ApiService.updateSeat(inputData);
+  });
 
   return (
     <div>
