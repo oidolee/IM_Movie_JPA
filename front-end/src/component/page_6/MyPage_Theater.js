@@ -43,10 +43,10 @@ function MyPage_Theater() {
                 console.log("userTheater email", email);
                 let checkTdto = res.data.tdto
                 if(res.data.tdto == null){
+                    
                     console.log("userTheatertdto", res.data.tdto);
                     checkTdto = {
-                        c_email: email,
-                        it_no: 1,
+                        c_email: email,                     
                         ic_my_theater_1: "홍대입구",
                         ic_my_theater_2: "용산",
                         ic_my_theater_3: "합정",
@@ -55,6 +55,10 @@ function MyPage_Theater() {
                         ticketmap_no3: 3
                       }
                       console.log("userTheatertdto after", checkTdto);
+                      ApiService.insertTheater(checkTdto)
+                        .then((res)=>{
+                            console.log(res.data)
+                        })
                       
                 }
                 setUserTheater(checkTdto);
