@@ -17,4 +17,8 @@ public interface SeatService {
 	public void SeatUpdate(SeatDTO dto)
 		throws ServletException, IOException;
 	
+	// 1건 좌석 조회
+	public SeatDTO SeatDetailList(int st_id)
+		throws ServletException, IOException;
+	
 }

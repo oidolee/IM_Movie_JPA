@@ -40,6 +40,21 @@ public class SeatServiceImpl implements SeatService {
 		
 	    dao.save(dto);
 	}
+
+	// 1건 좌석 조회
+	@Override
+	public SeatDTO SeatDetailList(int st_id) 
+		throws ServletException, IOException {
+		
+		System.out.println("SeatServiceImpl - SeatDetailList");
+		
+		SeatDTO dto = dao.SeatDetailList(st_id);
+		
+		System.out.println(st_id);	
+		System.out.println(dto);
+		
+		return dto;
+	}
 	
 
 }
