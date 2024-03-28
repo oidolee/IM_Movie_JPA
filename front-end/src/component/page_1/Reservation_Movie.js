@@ -28,8 +28,8 @@ const Reservation_Movie = ({ history }) => {
 
   // 컴포넌트가 마운트될 때와 groupedData가 변경될 때 실행
   useEffect(() => {
-    listReservation();
     fetchRemainingSeatsCount();
+    listReservation();
   }, []); 
 
   // groupedData가 업데이트될 때 실행
@@ -111,7 +111,7 @@ const Reservation_Movie = ({ history }) => {
         const remainingSeats = res.data.filter(
           (seat) => seat.st_check !== "r" && seat.st_check !== "y"
         ).length; // "r" 또는 "y"가 아닌 좌석의 수 계산
-        // console.log("잔여 좌석 수:", remainingSeats);
+        console.log("잔여 좌석 수:", remainingSeats);
         setRemainingSeatsCount(remainingSeats); // 잔여 좌석 수 상태 업데이트
       })
       .catch((err) => {
