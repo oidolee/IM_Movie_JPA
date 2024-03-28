@@ -118,7 +118,7 @@ class Reservation_Payment_Store extends Component {
     const storedData = localStorage.getItem("sampleID");
     if (storedData) {
       const parsedData = JSON.parse(storedData);
-      console.log("R p store==============" + parsedData);
+      console.log("R p store==============", parsedData);
     } else {
       console.log("저장된 데이터가 없습니다.");
     }
@@ -342,8 +342,8 @@ class Reservation_Payment_Store extends Component {
                         <strong>{this.state.itemName}</strong>
                       </li>
                       <li>온라인 관람권 2개</li>
-                      <li>수량</li>
-                      <li>{this.state.totalQuantity}</li>
+                      <li>수량 {this.state.totalQuantity} 개 </li>
+                      <li></li>
                     </ul>
                   </div>
                   <a href="/page3">
@@ -434,7 +434,7 @@ class Reservation_Payment_Store extends Component {
                   </ul>
                   <ul className="menu4_bottom">
                     <li className="paymentBtn">
-                      결제금액 {this.state.totalPrice}
+                      결제금액 {this.state.totalPrice} 원
                     </li>
                     <li>
                       <button

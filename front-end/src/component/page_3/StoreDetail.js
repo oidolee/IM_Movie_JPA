@@ -185,7 +185,7 @@ EditStore_Admin = (e) => {
   };
 
   Payment_Store = () => {
-    const { totalQuantity, totalPrice, itemName, itemCode, itemImage  } = this.props;
+    const { totalQuantity, totalPrice, itemName, itemCode, itemImage  } = this.state;
 
   // 로컬 스토리지에서 sampleID 제거
   window.localStorage.removeItem("sampleID");
@@ -194,8 +194,8 @@ EditStore_Admin = (e) => {
   window.localStorage.setItem(
     "sampleID",
     JSON.stringify({
-      totalQuantity,
-      totalPrice,
+      totalQuantity: this.state.quantity,
+      totalPrice: this.state.price,
       itemName,
       itemCode,
       itemImage,
