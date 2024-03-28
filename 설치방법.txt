@@ -1,0 +1,8 @@
+*설치 주의사항
+
+	1. https://github.com/oidolee/IM_Movie_JPA 클론
+
+    2.이클립스 import 및 설치
+        ImMovie1Application 실행
+
+

@@ -198,7 +198,7 @@ class StoreGift extends Component {
                 <th> 선물 받는 분 </th>
                 <td>
                   <input
-                    type="text"
+                    type="password"
                     className={`g_input ${style.g_input}`}
                     name="recipientNumber"
                     value={this.state.recipientNumber}
