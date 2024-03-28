@@ -216,7 +216,7 @@ function Form() {
           </div>
 
           <input
-            type="text"
+            type="hidden"
             id="movie_location"
             className={`movie_location ${style.movie_location}`}
             name="movie_location"
