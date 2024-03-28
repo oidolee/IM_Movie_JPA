@@ -80,7 +80,7 @@ const Reservation_Payment = () => {
     return () => {
       unlisten();
     };
-  }, [selectedSeats, history]); // 의존성 배열에 selectedSeats와 history를 추가합니다.
+  }, [selectedSeats, history]);
 
   useEffect(() => {
     const storedMovieInfo = localStorage.getItem("selectedMovieInfo");
