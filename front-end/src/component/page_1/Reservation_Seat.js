@@ -66,15 +66,6 @@ const Reservation_Seat = () => {
   const [childQuantity, setChildQuantity] = useState(0);
   const [disabledQuantity, setDisabledQuantity] = useState(0);
   const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 선택한 영화 정보
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-        listSeat();
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []); 
-  
   
   // 가격 설정
   const adultPrice = 10000;
@@ -88,7 +79,6 @@ const Reservation_Seat = () => {
     teenPrice * teenQuantity +
     childPrice * childQuantity +
     disabledPrice * disabledQuantity;
-
 
   // 좌석 정보 가져오기
   useEffect(() => {
