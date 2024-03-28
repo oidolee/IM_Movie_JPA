@@ -29,7 +29,7 @@ function Consult_part() {
             const userEmail = decodedToken.iss;
             setEmail(userEmail);
             console.log(email);
-            reloadsearchCutomer(email);
+            reloadsearchCutomer(userEmail);
         }
 
     }, []);
@@ -99,10 +99,6 @@ function Consult_part() {
 
     return (
         <div className={`Consult ${style.Consult}`}>
-            <div className={`Consult_name${style.Consult_name}`}>
-                <p><strong>문의내용(<span className="haveto">* 필수 입력</span>)</strong></p>
-                <hr></hr>
-            </div>
             <div className={`Consult_table1${style.Consult_table1}`}>
                 <table className={`Consult_table ${style.Consult_table}`}>
                     <tr>
@@ -178,8 +174,8 @@ function Consult_part() {
                 </table>
             </div>
             <div className={`myinfo ${style.myinfo}`}>
-                <div className={`myinfo_name${style.Consult_name}`}>
-                    <p>고객정보(<span className="haveto">* 필수 입력</span>)</p>
+                <div style={{marginTop:"20px", fontWeight:"bold", fontSize:"20px" }} className={`myinfo_name${style.Consult_name}`}>
+                    <p>고객정보</p>
                     <hr></hr>
                 </div>
                 <div>
@@ -210,7 +206,7 @@ function Consult_part() {
             <div>
                 <input type="hidden" value={consultData.ib_date} name="ib_date" onChange={handleChange} />
                 <input type="hidden" value={consultData.ib_show} name="ib_show" onChange={handleChange} />
-                <Button className={`btn_cancle ${style.btn_cancle}`} variant="contained" color="primary" onClick={saveConsult}> 확인 </Button>
+                <Button style={{margin:"20px"}} className={`btn_cancle ${style.btn_cancle}`} variant="contained" color="primary" onClick={saveConsult}> 확인 </Button>
                 <Button className={`btn_submit ${style.btn_submit}`} variant="contained" color="primary" onClick={resetForm}> 취소 </Button>
             </div>
         </div>

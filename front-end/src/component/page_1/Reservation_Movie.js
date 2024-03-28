@@ -10,24 +10,29 @@ import Res_screen from "../../assets/page_1/screen.png";
 import ApiService from "../../ApiService";
 
 const Reservation_Movie = ({ history }) => {
-  const [popupOpen, setPopupOpen] = useState(false); // 팝업
+
+  const [movies, setMovies] = useState([]); // 영화 목록 상태
+  const [selectedRegion, setSelectedRegion] = useState("서울"); // 선택한 지역 상태
+  const [groupedData, setGroupedData] = useState({}); // 그룹화된 데이터 상태
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택한 영화 상태
-  const [movies, setMovies] = useState([]); // 영화 목록
-  const [remainingSeatsCount, setRemainingSeatsCount] = useState(null); // 잔여 좌석
-  const [selectedRegion, setSelectedRegion] = useState("서울"); // 지역
-  const [groupedData, setGroupedData] = useState({}); // 지역 그룹화
-  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 최종 영화 정보 저장
+  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 선택한 영화 정보 상태
+  const [remainingSeatsCount, setRemainingSeatsCount] = useState(null); // 잔여 좌석 수 상태
+  const [popupOpen, setPopupOpen] = useState(false); // 팝업 여부 상태
+
+  // 지역별 영화관 목록
   const places = {
     서울: ["홍대입구", "용산", "합정", "에비뉴엘", "영등포"],
     경기: ["안양일번가", "광명아울렛", "위례"],
     인천: ["부평", "부평갈산", "부평역사"],
   };
 
+  // 컴포넌트가 마운트될 때와 groupedData가 변경될 때 실행
   useEffect(() => {
     listReservation();
     fetchRemainingSeatsCount();
   }, []); 
-  
+
+  // groupedData가 업데이트될 때 실행
   useEffect(() => {
     if (Object.keys(groupedData).length > 0) {
       // groupedData가 업데이트될 때만 실행됨
@@ -35,17 +40,17 @@ const Reservation_Movie = ({ history }) => {
     }
   }, [groupedData]);
   
-  // 영화 목록
+  // 영화 목록 가져오기
   const listReservation = () => {
     ApiService.listReservation()
       .then((res) => {
         setMovies(res.data);
         console.log("listReservation 성공", res.data);
 
-        // 그룹화된 데이터 사용 예시
         const data = res.data;
-        const newData = {}; // 새로운 데이터 객체 생성
+        const newData = {}; // 그룹화된 새로운 데이터 객체 생성
 
+        // 데이터 그룹화
         data.forEach((item) => {
           const { place_num } = item;
           let place;
@@ -92,41 +97,32 @@ const Reservation_Movie = ({ history }) => {
           newData[place] = [...(newData[place] || []), item];
         });
 
-        // setGroupedData를 통해 상태 업데이트
-        setGroupedData(newData);
+        setGroupedData(newData); // 그룹화된 데이터 상태 업데이트
       })
       .catch((err) => {
         console.log("listReservation 오류 : ", err);
       });
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      fetchRemainingSeatsCount();
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []); 
-
-  // 잔여 좌석 수 호출
+  // 잔여 좌석 수 가져오기
   const fetchRemainingSeatsCount = () => {
     ApiService.listSeat()
       .then((res) => {
-        // st_check가 "r" 또는 "y"가 아닌 좌석들의 수
         const remainingSeats = res.data.filter(
           (seat) => seat.st_check !== "r" && seat.st_check !== "y"
-        ).length;
-        console.log("잔여 좌석 수:", remainingSeats);
-        setRemainingSeatsCount(remainingSeats);
+        ).length; // "r" 또는 "y"가 아닌 좌석의 수 계산
+        // console.log("잔여 좌석 수:", remainingSeats);
+        setRemainingSeatsCount(remainingSeats); // 잔여 좌석 수 상태 업데이트
       })
       .catch((err) => {
         console.log("API 호출 오류:", err);
       });
   };
 
+  // 지역 클릭 시 처리 함수
   const handleLocationClick = (location) => {
-    const placeData = groupedData[location];
-    console.log(`${location}에 대한 데이터:`, placeData);
+    const placeData = groupedData[location]; // 선택한 지역에 대한 데이터 가져오기
+    console.log(`${location}에 대한 데이터:`, placeData); // 선택한 영화 목록 업데이트
 
     // 클릭한 영화 정보 저장
     setSelectedMovie(placeData);
@@ -134,8 +130,8 @@ const Reservation_Movie = ({ history }) => {
     const menuElement = document.querySelector(".menu3_left"); // 지역에 해당하는 영화 출력 위치
     const menu4Sub = document.querySelector(".menu4_sub ul"); // 선택된 영화 정보 출력 위치
 
-    menuElement.innerHTML = ""; // 기존 내용 지우기
-    menu4Sub.innerHTML = ""; // 기존 내용 지우기
+    menuElement.innerHTML = ""; 
+    menu4Sub.innerHTML = ""; 
 
     if (placeData) {
       // 영화 ID를 기준으로 그룹화
@@ -192,9 +188,11 @@ const Reservation_Movie = ({ history }) => {
             </a>
         `;
             menu4Sub.appendChild(listItem);
+
+            // 최종 선택된 영화 정보
             setSelectedMovieInfo(movieInfo);
 
-            // 새로 추가할 코드 시작
+            // 최종 선택된 영화 정보 팝업창으로 전달
             listItem.addEventListener("click", () => {
               console.log(`선택된 영화 정보 ${index + 1}:`, movieInfo);
               handlePopupOpen(movieInfo);
@@ -207,10 +205,37 @@ const Reservation_Movie = ({ history }) => {
     }
   };
 
+  // 팝업 열기 함수
   const handlePopupOpen = (movieInfo) => {
     setSelectedMovieInfo(movieInfo);
-    setPopupOpen(true); // 팝업 열기
+    setPopupOpen(true);
     console.log("팝업이 열릴 때 selectedMovieInfo:", movieInfo);
+  };
+
+  // 팝업 확인 처리 함수
+  const handleConfirmation = () => {
+    setPopupOpen(false);
+
+    // 선택한 영화 정보를 로컬 스토리지에 저장 (필요한 정보만 추출하여 저장)
+    localStorage.setItem(
+      "selectedMovieInfo",
+      JSON.stringify({
+        movie_id: selectedMovieInfo.movie_id,
+        place_num: selectedMovieInfo.place_num,
+        movie_title: selectedMovieInfo.movie_title,
+        theater_id: selectedMovieInfo.theater_id,
+        movie_time: selectedMovieInfo.movie_time,
+        ip_num: selectedMovieInfo.ip_num,
+        start_time: selectedMovieInfo.start_time,
+      })
+    );
+
+    history.push("/page_1/Reservation_Seat");
+  };
+
+  // 팝업 취소 처리 함수
+  const handleCancellation = () => {
+    setPopupOpen(false);
   };
 
   // 연령에 대한 이미지
@@ -242,31 +267,9 @@ const Reservation_Movie = ({ history }) => {
     }
   };
 
-  const handleConfirmation = () => {
-    setPopupOpen(false);
-
-    // 선택한 영화 정보를 로컬 스토리지에 저장 (필요한 정보만 추출하여 저장)
-    localStorage.setItem(
-      "selectedMovieInfo",
-      JSON.stringify({
-        movie_id: selectedMovieInfo.movie_id,
-        place_num: selectedMovieInfo.place_num,
-        movie_title: selectedMovieInfo.movie_title,
-        theater_id: selectedMovieInfo.theater_id,
-        movie_time: selectedMovieInfo.movie_time,
-        ip_num: selectedMovieInfo.ip_num,
-        start_time: selectedMovieInfo.start_time,
-      })
-    );
-
-    history.push("/page_1/Reservation_Seat");
-  };
-
-  const handleCancellation = () => {
-    setPopupOpen(false);
-  };
-
+   // 지역 클릭 처리 함수
   const handleRegionClick = (placeKey) => {
+    // 선택한 지역이 현재 선택된 지역과 같으면 선택 해제, 아니면 선택
     if (selectedRegion === placeKey) {
       setSelectedRegion(null);
     } else {
@@ -274,6 +277,7 @@ const Reservation_Movie = ({ history }) => {
     }
   };
 
+  // 하위 지역 클릭 처리 함수
   const handleSubRegionClick = (placeNames) => {
     if (selectedRegion === placeNames) {
       setSelectedRegion(null);
@@ -282,6 +286,7 @@ const Reservation_Movie = ({ history }) => {
     }
   };
 
+  // 영화 클릭 처리 함수
   const handleMovieClick = (movieId) => {
     if (selectedMovie === movieId) {
       setSelectedMovie(null);
@@ -290,6 +295,7 @@ const Reservation_Movie = ({ history }) => {
     }
   };
 
+  
   const sysdate = moment().format("YYYY-MM-DD");
 
   return (

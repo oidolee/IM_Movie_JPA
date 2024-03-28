@@ -34,10 +34,10 @@ function Form() {
         </Nav>
   
         <div className={`Form_box ${style.Form_box}`}>
-          <button className={`Form_grp01 ${style.Form_grp01}`} id="8"><img src={group1} alt='그룹1'/></button>
+          <button style={{marginTop:"20px"}} className={`Form_grp01 ${style.Form_grp01}`} id="8"><img src={group1} alt='그룹1'/></button>
         </div>
   
-        <div className={`Form_make ${style.Form_make}`}>
+        <div style={{textAlign:"center", marginTop:"20px"}} className={`Form_make ${style.Form_make}`}>
           <p>문의내용</p>
           <hr></hr>
         </div>
