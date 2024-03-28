@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ApiService from '../../../ApiService';
 import style from '../../../styles/page_6/MyPage_coupon_module.css'
+import Table from 'react-bootstrap/Table';
 import { jwtDecode } from 'jwt-decode';
 import { useCookies } from 'react-cookie'; // useCookies import
 
@@ -150,11 +151,51 @@ function MyPage_coupon_part() {
                         <option value='cantUse'>기간만료</option>
                     </select>
                 </div> */}
-                <div className={`couponRegButton ${style.couponRegButton}`}>
+                {/* <div className={`couponRegButton ${style.couponRegButton}`}>
                     <button title="쿠폰 등록" > 쿠폰등록 </button>
-                </div>
+                </div> */}
             </div>
-            <div className={`coupon_detail ${style.coupon_detail}`}>
+            <div className={`MyPage_resMoive ${style.MyPage_resMoive}`}>
+                <Table striped bordered hover>
+                    <colgroup>
+                        <col style={{ width: '8%' }} />
+                        <col style={{ width: '10%' }} />
+                        <col />
+                        <col style={{ width: '15%' }} />
+                        <col style={{ width: '10%' }} />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>삭제</th>
+                            <th>분류</th>
+                            <th style={{ textAlign: 'center' }}>쿠폰명</th>
+                            <th>유효기간</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {cusCouponData.map((cusCouponDataItem, index) => (
+                            <tr className={`coupon_detail_detail1 ${style.coupon_detail_detail1}`} key={index}>
+                                <td><button className={`coupon_delete_child ${style.coupon_delete_child}`} title='선택삭제' onClick={() => handleDeleteCoupon(cusCouponDataItem.ic_num)}>삭제</button></td>
+                                <td>{cusCouponDataItem.ic_category}</td>
+
+                                <td style={{ textAlign: "center" }} onClick={() => showBox(cusCouponDataItem.ic_name)}>
+                                    {cusCouponDataItem.ic_name}
+                                </td>
+                                <td>{cusCouponDataItem.ic_startDate}부터 ~ {cusCouponDataItem.ic_endDate}까지</td>
+
+                                <td>
+                                    {cusCouponDataItem.ic_status === 'y' ? '사용가능' :
+                                        cusCouponDataItem.ic_status === 'n' ? '사용완료' :
+                                            cusCouponDataItem.ic_status === 'e' ? '기간만료' : '알 수 없음'}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            </div>
+
+            {/* <div className={`coupon_detail ${style.coupon_detail}`}>
                 <table className={`coupon_detail_table ${style.coupon_detail_table}`} >
                     <colgroup>
                         <col style={{ width: '5%' }} />
@@ -188,13 +229,40 @@ function MyPage_coupon_part() {
                         </tr>
                     ))}
                 </table>
-            </div>
+            </div> */}
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 {showDetail && (
 
                     <div className={`MyPage_coupon ${style.MyPage_coupon}`}>
-                        <div style={{ display: 'flex', justifyContent: 'center' }}>
-                            <table>
+                        <div style={{ display: 'flex', justifyContent: 'center',  width: '300px'}}>
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>쿠폰 상세내역</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr className={`coupon_detail_detail ${style.coupon_detail_detail}`}>
+                                        <td colSpan={6} className={`coupon_detail_detail_detail ${style.coupon_detail_detail_detail}`}>
+                                            <table className={`innerTable ${style.innerTable}`}>
+                                                <tr>
+                                                    <td>할인권 번호</td>
+                                                    <td>{ic_code}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>할인금액</td>
+                                                    <td>{ic_point}원</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>발급 일자</td>
+                                                    <td>{ic_regDate}</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                            {/* <table>
                                 <tr>
                                     <th>쿠폰 상세내역</th>
                                 </tr>
@@ -216,7 +284,7 @@ function MyPage_coupon_part() {
                                         </table>
                                     </td>
                                 </tr>
-                            </table>
+                            </table> */}
                         </div>
                     </div>
                 )}
