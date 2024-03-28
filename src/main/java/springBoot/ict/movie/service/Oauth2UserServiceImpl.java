@@ -73,7 +73,8 @@ public class Oauth2UserServiceImpl extends DefaultOAuth2UserService {
 //					"profile":{
 //							"nickname":"정호진",
 //							"is_default_nickname":false},
-//							"has_email":true,"email_needs_agreement":false,
+//							"has_email":true,
+//							"email_needs_agreement":false,
 //							"is_email_valid":true,
 //							"is_email_verified":true,
 //							"email":"wwrr400@gmail.com"

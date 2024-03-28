@@ -50,6 +50,10 @@ function Login() {
             .catch(err => {
                 console.log('에러', err);
                 alert("로그인 실패\n로그인 정보 확인 바랍니다.")
+
+                
+
+
                 setMessage('로그인에 실패했습니다.');
             });
     };
