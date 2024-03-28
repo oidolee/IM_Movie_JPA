@@ -519,7 +519,7 @@ const Reservation_Payment = () => {
                     결제금액: {totalPrice.toLocaleString()}
                   </li>
                   <li>
-                    <button className="paymentBtn_total">결제</button>
+                    <button className="paymentBtn_total"   onClick={handlePaymentClick}>결제</button>
                   </li>
                 </ul>
               </div>

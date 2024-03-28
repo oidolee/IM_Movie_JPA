@@ -45,8 +45,11 @@ public class StoreGiftDTO {
     private String gift_content;
     @JsonProperty("totalQuantity")
     private int gift_count;
+    @JsonProperty("ic_code")
+    private String ic_code;
     @JsonProperty("detailRegDate")
     private Date detail_regDate;
+
     
     @PreUpdate
     public void preUpdate() {
