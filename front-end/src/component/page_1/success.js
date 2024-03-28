@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import ApiService from "../../ApiService";
 
 const Success = () => {
-  const history = useHistory();
-  const [searchParams] = useSearchParams();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
 
-  const orderId = searchParams.get("orderId");
-  const orderName = searchParams.get("orderName");
-  const customerEmail = searchParams.get("customerEmail");
-  const totalPrice = searchParams.get("amount");
+  const orderId = queryParams.get("orderId");
+  const orderName = queryParams.get("orderName");
+  const customerEmail = queryParams.get("customerEmail");
+  const totalPrice = queryParams.get("totalPrice");
 
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
+
+  const selectedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
+  console.log("선택된 좌석 번호 : ", selectedSeat);
 
   useEffect(() => {
     const storedSelectedSeats = JSON.parse(
@@ -27,79 +30,69 @@ const Success = () => {
   useEffect(() => {
     if (orderId && orderName && customerEmail && totalPrice && totalQuantity) {
       addReservation();
-    }
-  }, [orderId, orderName, customerEmail, totalPrice, totalQuantity]);  
-
-  const addReservation = async () => {
-    try {
-      const reservationsData = selectedSeats.map((seatId) => ({
-        st_id: seatId,
-        ic_email: customerEmail,
-        res_count: totalQuantity,
-        res_ticket_price: totalPrice,
-        res_sysdate: new Date().toISOString(),
-        res_check: "y",
-      }));
-
-      await Promise.all(
-        reservationsData.map((reservation) =>
-          ApiService.addReservation(reservation)
-        )
-      );
-      
       insertPayment();
-    } catch (error) {
-      console.log("예약 추가 실패:", error);
-    }
-  };
-
-  const insertPayment = async () => {
-    try {
-      const paymentData = {
-        pay_name: orderId,
-        pay_order_name: orderName,
-        ic_email: customerEmail,
-        pay_amount: totalPrice,
-        pay_company: "IM",
-        pay_sysdate: new Date().toISOString(),
-        pay_check: "y",
-      };
-
-      await ApiService.insertPayment(paymentData);
-      
       updateSeatStatus();
-    } catch (error) {
-      console.log("결제 정보 추가 실패:", error);
     }
+  }, [orderId, orderName, customerEmail, totalPrice, totalQuantity]);
+
+  const addReservation = () => {
+    const reservationsData = selectedSeat.map((seatId) => ({
+      st_id: seatId,
+      ic_email: customerEmail,
+      res_count: totalQuantity,
+      res_ticket_price: totalPrice,
+      res_sysdate: new Date().toISOString(),
+      res_check: "y",
+    }));
+
+    reservationsData.forEach((reservation) => {
+      ApiService.addReservation(reservation)
+        .then((res) => console.log("예약 추가 성공:", res.data))
+        .catch((err) => console.log("예약 추가 실패:", err));
+    });
   };
 
-  const updateSeatStatus = async () => {
-    try {
-      await Promise.all(
-        selectedSeats.map((seat) => {
-          const [lot, seatNumber, ip_no] = seat.split("-");
-          const seatData = {
-            st_id: ip_no,
-            st_row: lot,
-            st_column: seatNumber,
-            st_check: "y",
-          };
-          return ApiService.updateSeat(seatData);
-        })
-      );
+  const insertPayment = () => {
+    const paymentData = {
+      pay_name: orderId,
+      pay_order_name: orderName,
+      ic_email: customerEmail,
+      pay_amount: totalPrice,
+      pay_company: "IM",
+      pay_sysdate: new Date().toISOString(),
+      pay_check: "y",
+    };
 
+    ApiService.insertPayment(paymentData)
+      .then((res) => console.log("결제 정보 추가 성공:", res.data))
+      .catch((err) => console.log("결제 정보 추가 실패:", err));
+  };
+
+  const updateSeatStatus = () => {
+    const seatPromises = selectedSeats.map((seat) => {
+      const [lot, seatNumber, ip_no] = seat.split("-");
+      const seatData = {
+        st_id: ip_no,
+        st_row: lot,
+        st_column: seatNumber,
+        st_check: "y",
+      };
+      return ApiService.updateSeat(seatData);
+    });
+
+    Promise.all(seatPromises)
+      .then(() => console.log("좌석 업데이트가 완료되었습니다."))
+      .catch((err) =>
+        console.error("좌석 업데이트 작업 중 오류가 발생하였습니다.", err)
+      );
       const confirmation = window.confirm(
         "결제가 성공적으로 이루어졌습니다. 확인하시겠습니까?"
       );
-
       if (confirmation) {
-        history.push("/MyPage_res");
+        window.location.assign("/MyPage_res");
       } else {
-        history.push("/");
+        window.location.assign("/");
       }
-    } catch (error) {
-      console.error("좌석 업데이트 작업 중 오류가 발생하였습니다.", error);
-    }
   };
 
   return <div></div>;
