@@ -59,7 +59,7 @@ public class StoreGiftController {
         		+ "\n▶ 보내시는 분: " + dto.getGift_name()
                 + "\n▶ 보내시는 분의 메시지: " + dto.getGift_content()
                 + "\n▶ 상품명: " + dto.getItem_name() 
-                + "\n▶ 쿠폰 번호: " + dto.getGift_num() 
+                + "\n▶ 쿠폰 번호: " + dto.getIc_code() 
                 + "\n▶ 수량: " + dto.getGift_count() 
                 + "\n▶ 유효 기간: " + formattedExpirationDate
                 + "\n\n" 

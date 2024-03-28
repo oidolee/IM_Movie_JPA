@@ -79,7 +79,7 @@ const Event_coupon = () => {
         const couponExists = couponList.some(coupon => coupon.ic_code === targetIcCode);
 
         if (couponExists) {
-            alert(`${targetIcCode} 쿠폰이 존재합니다.`)
+            alert(`${targetIcCode} 쿠폰이 존재합니다.\n현장사용 가능합니다.`)
         } else {
             alert(`${targetIcCode} 쿠폰이 존재하지 않습니다.`)
         }

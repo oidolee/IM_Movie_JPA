@@ -26,14 +26,14 @@ function MyPage_Theater() {
 
         // 토큰이 존재하는지 확인 후 이메일 추출
         if (authToken) {
-            const decodedToken = jwtDecode(authToken); // 수정 필요
+            const decodedToken = jwtDecode(authToken);
             const userEmail = decodedToken.iss;
             setEmail(userEmail);
             reloadTheaterInfo(userEmail);
         }
 
 
-    }, []); // useEffect가 최초 한 번만 실행되도록 빈 배열을 전달
+    }, []); 
 
 
     const reloadTheaterInfo = (email) => {

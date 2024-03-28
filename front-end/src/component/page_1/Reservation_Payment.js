@@ -33,6 +33,10 @@ const Reservation_Payment = () => {
   const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 선택한 영화 정보
   const history = useHistory();
 
+  // 페이지 벗어나면 모든 정보 리셋
+
+  // 좌석 예약인 상태로 10분 경과하면 리셋
+
   const selectedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
   console.log("선택된 좌석 번호 : ", selectedSeat);
 
@@ -40,7 +44,7 @@ const Reservation_Payment = () => {
     const unlisten = history.listen((location, action) => {
       if (action === "POP") {
         console.log("Handle seat called by history.listen()");
-        const confirmResult = window.confirm("입력된 좌석이 사라집니다.");
+        const confirmResult = window.confirm("입력된 모든 정보가 사라집니다.");
         if (confirmResult) {
           const updateSeatPromises = selectedSeats.map((seat) => {
             const [lot, seatNumber, ip_no] = seat.split("-");
@@ -50,16 +54,16 @@ const Reservation_Payment = () => {
               st_column: seatNumber,
               st_check: "n",
             };
-  
+
             console.log("inputData : ", inputData);
-  
+
             return ApiService.updateSeat(inputData);
           });
-  
+
           Promise.all(updateSeatPromises)
             .then(() => {
-              history.push("/page_1/Reservation_Seat");
-  
+              history.push("/page_1/Reservation_Movie");
+
               localStorage.removeItem("selectedSeat");
               localStorage.removeItem("selectedSeats");
               localStorage.removeItem("totalQuantity");
@@ -72,12 +76,11 @@ const Reservation_Payment = () => {
         }
       }
     });
-  
+
     return () => {
       unlisten();
     };
-  }, [selectedSeats, history]); // 의존성 배열에 selectedSeats와 history를 추가합니다.
-  
+  }, [selectedSeats, history]);
 
   useEffect(() => {
     const storedMovieInfo = localStorage.getItem("selectedMovieInfo");
@@ -133,7 +136,9 @@ const Reservation_Payment = () => {
 
   const handleMovie = () => {
     const confirmResult = window.confirm("입력된 정보가 모두 사라집니다.");
-    if (confirmResult) {
+    
+    // 좌석 정보를 업데이트하고 페이지를 이동하는 함수
+    const updateSeatAndNavigate = (destination) => {
       const updateSeatPromises = selectedSeats.map((seat) => {
         const [lot, seatNumber, ip_no] = seat.split("-");
         const inputData = {
@@ -142,32 +147,40 @@ const Reservation_Payment = () => {
           st_column: seatNumber,
           st_check: "n",
         };
-
-        console.log("inputData : ", inputData);
-
         return ApiService.updateSeat(inputData);
       });
-
+  
       Promise.all(updateSeatPromises)
         .then(() => {
+          // 페이지 이동
+          history.push(destination);
+          // 로컬 스토리지에서 관련 정보 제거
           localStorage.removeItem("selectedSeat");
           localStorage.removeItem("selectedSeats");
           localStorage.removeItem("totalQuantity");
           localStorage.removeItem("totalPrice");
           localStorage.removeItem("selectedSeatInfo");
-          localStorage.removeItem("selectedMovieInfo");
-
-          history.push("/page_1/Reservation_Movie");
+          if(destination === "/page_1/Reservation_Movie") {
+            localStorage.removeItem("selectedMovieInfo");
+          }
         })
         .catch((error) => {
           console.error("좌석 정보 업데이트 중 오류 발생:", error);
         });
+    };
+  
+    // 확인을 누른 경우
+    if (confirmResult) {
+      updateSeatAndNavigate("/page_1/Reservation_Movie");
     }
   };
+  
 
   const handleSeat = () => {
     const confirmResult = window.confirm("입력된 좌석이 사라집니다.");
-    if (confirmResult) {
+  
+    // 좌석 정보를 업데이트하고 페이지를 이동하는 함수
+    const updateSeatAndNavigate = (destination) => {
       const updateSeatPromises = selectedSeats.map((seat) => {
         const [lot, seatNumber, ip_no] = seat.split("-");
         const inputData = {
@@ -176,16 +189,14 @@ const Reservation_Payment = () => {
           st_column: seatNumber,
           st_check: "n",
         };
-
-        console.log("inputData : ", inputData);
-
         return ApiService.updateSeat(inputData);
       });
-
+  
       Promise.all(updateSeatPromises)
         .then(() => {
-          history.push("/page_1/Reservation_Seat");
-
+          // 페이지 이동
+          history.push(destination);
+          // 로컬 스토리지에서 관련 정보 제거
           localStorage.removeItem("selectedSeat");
           localStorage.removeItem("selectedSeats");
           localStorage.removeItem("totalQuantity");
@@ -195,6 +206,11 @@ const Reservation_Payment = () => {
         .catch((error) => {
           console.error("좌석 정보 업데이트 중 오류 발생:", error);
         });
+    };
+  
+    // 확인을 누른 경우
+    if (confirmResult) {
+      updateSeatAndNavigate("/page_1/Reservation_Seat");
     }
   };
 

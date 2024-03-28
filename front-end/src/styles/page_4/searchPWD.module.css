@@ -22,7 +22,7 @@
 
 .customTextField1 {
     
-    margin-left: 65px;
+    margin-left: 50px;
 }
 
 .customTextField2 {
@@ -65,3 +65,8 @@
 .wrappage h5 {
     text-align: left;
 }
+
+.customTextField1 {
+    width: 350px; /* 원하는 너비 값으로 조정하세요 */
+}
+

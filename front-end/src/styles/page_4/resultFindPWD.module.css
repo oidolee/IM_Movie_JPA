@@ -1,0 +1,17 @@
+.wrappage {
+    width: 950px;
+    margin: 0 auto;
+}
+
+.result .redBtn {
+    background-color: red;
+    color: white;
+    width: 120px;
+    margin-left: 10px;
+}
+
+.result .blackBtn {
+    background-color: black;
+    color: white;
+    width: 120px;
+}

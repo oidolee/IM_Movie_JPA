@@ -18,7 +18,7 @@ class ApiService {
     // page_1
     // --------------------------------------------Seat 시작--------------------------------------------
     listSeat() {
-        console.log("listSeat 호출");
+        // console.log("listSeat 호출");
         return axios.get(serverUrl + "/page_1/SeatList");
     }
 

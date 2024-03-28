@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import style from '../../styles/page_4/resultFindID.module.css';
+import style from '../../styles/page_4/resultFindPWD.module.css';
 import { Button, TextField } from '@mui/material';
 import ApiService from '../../ApiService';
 
@@ -76,23 +76,23 @@ class resultFindID extends Component {
 
 
                 <div id='result' className={`result ${style.result}`}>
-                    <br /><br />
-                    비밀번호 재설정
                     <br />
-                    입력하신 정보와 일치하는 계정의 비밀번호를 재설정합니다.
-                    <hr />
-                    비밀번호 재설정
+                    
+                    <br /><br /><br /><br />
+                    <h4><strong>비밀번호 재설정</strong></h4>
                     <br /><br />
 
                     {/* 비밀번호 입력 필드 */}
                     
                     <TextField
                         required
+                        style={{ width: '350px' }} // width 값을 설정합니다.
                         variant="standard"
                         label="비밀번호"
                         type="password"
                         name="password"
                         value={this.state.password}
+                        InputProps={{ classes: { root: `${style.customTextField1}` } }}
                         placeholder='비밀번호 입력'
                         onChange={this.onChange}
                         error={!this.state.passwordValid}
@@ -103,19 +103,26 @@ class resultFindID extends Component {
                     
                     <TextField
                         required
+                        style={{ width: '350px' }} // width 값을 설정합니다.
                         variant="standard"
                         label="비밀번호 확인"
                         type="password"
                         name="passwordConfirm"
                         value={this.state.passwordConfirm}
+                        InputProps={{ classes: { root: `${style.customTextField1} ${style.customInput}` } }}
                         placeholder='비밀번호 확인'
                         onChange={this.onChange}
                         error={!this.state.passwordMatched} // 일치하지 않을 경우 에러 상태를 설정합니다.
                         helperText={!this.state.passwordMatched ? "비밀번호가 일치하지 않습니다." : null} // 일치하지 않을 경우 에러 메시지를 표시합니다.
                     />
                     <br /><br />
+                    <strong>비밀번호 재설정</strong> 입력하신 정보와 일치하는 계정의 비밀번호를 재설정합니다.
+
+                    <br /><br /><br />
 
                     <Button id="redBtn" className={`redBtn ${style.redBtn}`} onClick={this.change}>변경</Button>
+                    <br /><br /><br /><br />
+                    
                 </div>
             </div>
         );
