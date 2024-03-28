@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { loadPaymentWidget } from "@tosspayments/payment-widget-sdk";
 import { nanoid } from "nanoid";
 import style from "../../styles/page_1/Checkout.css";
-import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
 import ApiService from "../../ApiService";
 
@@ -100,18 +99,18 @@ const App = ({ handleCloseModal }) => {
         customerEmail: userEmail,
         successUrl: `${
           window.location.origin
-        }/success?orderId=${orderId}&orderName=${encodeURIComponent(
-          selectedMovieInfo.movie_title
-        )}&customerEmail=${encodeURIComponent(
-          userEmail
-        )}&totalPrice=${totalPrice}`,
+        }/success`,
         failUrl: `${window.location.origin}/fail`,
       });
     } catch (err) {
       console.log(err);
     }
   };
-
+  // ?orderId=${orderId}&orderName=${encodeURIComponent(
+  //   selectedMovieInfo.movie_title
+  // )}&customerEmail=${encodeURIComponent(
+  //   userEmail
+  // )}&totalPrice=${totalPrice}
   return (
     <div className={`Checkout ${style.Checkout}`}>
       <div className="Checkout_content">
