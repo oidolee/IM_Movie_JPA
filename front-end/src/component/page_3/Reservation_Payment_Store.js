@@ -136,6 +136,7 @@ class Reservation_Payment_Store extends Component {
         email,
         userName,
         detailRegDate,
+        ic_code
       } = JSON.parse(storedData);
 
 
@@ -193,6 +194,9 @@ class Reservation_Payment_Store extends Component {
           console.error("결제 데이터 전송 실패:", error);
         })
 
+        //return false;
+
+
         //쿠폰등록 끝
 
       ApiService.addStoreOrderDetail({
@@ -222,6 +226,7 @@ class Reservation_Payment_Store extends Component {
         email,
         userName,
         detailRegDate,
+        ic_code: inputData.ic_code,
       })
         .then((response) => {
           console.log("데이터 전송 성공:", response.data);
