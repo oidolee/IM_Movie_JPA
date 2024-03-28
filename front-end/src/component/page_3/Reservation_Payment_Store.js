@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import moment from "moment";
 import style from "../../styles/page_1/Reservation_Payment.css";
 import Res_event from "../../assets/page_1/event.png";
-import Res_movie from "../../assets/page_1/movie.jpg";
 import Res_img15 from "../../assets/page_1/15.jpg";
 import Checkout from "../page_1/Checkout";
 import Modal from "react-modal";
@@ -119,7 +118,7 @@ class Reservation_Payment_Store extends Component {
     const storedData = localStorage.getItem("sampleID");
     if (storedData) {
       const parsedData = JSON.parse(storedData);
-      console.log("R p store==============" + parsedData);
+      console.log("R p store==============", parsedData);
     } else {
       console.log("저장된 데이터가 없습니다.");
     }
@@ -137,6 +136,7 @@ class Reservation_Payment_Store extends Component {
         email,
         userName,
         detailRegDate,
+        ic_code
       } = JSON.parse(storedData);
 
 
@@ -194,6 +194,9 @@ class Reservation_Payment_Store extends Component {
           console.error("결제 데이터 전송 실패:", error);
         })
 
+        //return false;
+
+
         //쿠폰등록 끝
 
       ApiService.addStoreOrderDetail({
@@ -222,7 +225,8 @@ class Reservation_Payment_Store extends Component {
         itemName,
         email,
         userName,
-
+        detailRegDate,
+        ic_code: inputData.ic_code,
       })
         .then((response) => {
           console.log("데이터 전송 성공:", response.data);
@@ -338,8 +342,8 @@ class Reservation_Payment_Store extends Component {
                         <strong>{this.state.itemName}</strong>
                       </li>
                       <li>온라인 관람권 2개</li>
-                      <li>수량</li>
-                      <li>{this.state.totalQuantity}</li>
+                      <li>수량 {this.state.totalQuantity} 개 </li>
+                      <li></li>
                     </ul>
                   </div>
                   <a href="/page3">
@@ -430,7 +434,7 @@ class Reservation_Payment_Store extends Component {
                   </ul>
                   <ul className="menu4_bottom">
                     <li className="paymentBtn">
-                      결제금액 {this.state.totalPrice}
+                      결제금액 {this.state.totalPrice} 원
                     </li>
                     <li>
                       <button

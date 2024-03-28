@@ -92,13 +92,17 @@ class SearchID extends Component {
                             <label htmlFor="phone">휴대폰 번호로 찾기</label>
                         </Accordion.Header>
                         <Accordion.Body>
+                            
                             <div id='hpfind' className={`hpfind ${style.hpfind}`}>
+
+                                <br />
                                 <div className={`text ${style.text}`}>이름
                                 {/* 이름 입력필드 */}
                                 <TextField
                                     required
                                     type="text"
                                     name="name"
+                                    InputProps={{ classes: { root: style.customTextField1 } }}
                                     value={this.state.name}
                                     placeholder='이름을 입력해주세요.'
                                     onChange={this.onChange}
@@ -112,11 +116,13 @@ class SearchID extends Component {
                                     required
                                     type="text"
                                     name="hp"
+                                    InputProps={{ classes: { root: style.customTextField2 } }}
                                     value={this.state.hp}
                                     placeholder='휴대폰 번호를 -빼고 입력해 주세요'
                                     onChange={this.onChange}
                                 />
                                 </div>
+                                <br />
                             </div>
                         </Accordion.Body>
                     </Accordion.Item>

@@ -52,17 +52,17 @@ const groupAdd = (group_id) => {
 //     });
 //   };
 
-//   // 삭제
-//   const groupDelete = (group_id) => {
-//     ApiService.groupDelete(group_id)
-//       .then((res) => {
-//         setLists(lists.filter((list) => list.group_id !== group_id));
-//         console.log("groupDelete 성공 : ", res.data);
-//       })
-//       .catch((err) => {
-//         console.log("groupDelete 실패 : ", err);
-//       });
-//   };
+  // // 삭제
+  // const groupDelete = (group_id) => {
+  //   ApiService.groupDelete(group_id)
+  //     .then((res) => {
+  //       setLists(lists.filter((list) => list.group_id !== group_id));
+  //       console.log("groupDelete 성공 : ", res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log("groupDelete 실패 : ", err);
+  //     });
+  // };
 
   return (
     <div className={`Admin_GroupForm_List ${style.Admin_GroupForm_List}`}>
@@ -122,6 +122,12 @@ const groupAdd = (group_id) => {
             >
               <Create />
             </TableCell>
+            {/* <TableCell
+                className="deleteBtn"
+                onClick={() => groupDelete(list.group_id)}
+              >
+                <Delete />
+              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>

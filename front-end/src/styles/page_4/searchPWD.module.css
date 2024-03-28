@@ -1,0 +1,72 @@
+/* styles.css 파일에 추가 */
+.wrappage {
+   width: 950px;
+   margin: 0 auto;
+}
+
+.accordion-button::after {
+    display: none;
+}
+
+.hpfind input {
+    height: 1px;
+    
+}
+
+.hpfind {
+    
+    text-align: left;
+    font-size: 15px;
+}
+
+
+.customTextField1 {
+    
+    margin-left: 50px;
+}
+
+.customTextField2 {
+    
+    margin-left: 20px;
+}
+
+.inputField {
+    margin-left: 20px
+}
+
+.customTextField .MuiInputBase-root {
+    margin-left: 20px;
+}
+
+.hpfind .text {
+    justify-content: center;
+    display: flex;
+    align-items: center; 
+    height: 20px; 
+}
+
+.hpfind .text .MuiInputBase-root {
+    height: 100%; 
+}
+
+.wrappage .redBtn {
+    background-color: red;
+    color: white;
+    width: 100px;
+    margin-left: 10px;
+}
+
+.wrappage .blackBtn {
+    background-color: black;
+    color: white;
+    width: 100px;
+}
+
+.wrappage h5 {
+    text-align: left;
+}
+
+.customTextField1 {
+    width: 350px; /* 원하는 너비 값으로 조정하세요 */
+}
+

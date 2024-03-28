@@ -14,7 +14,12 @@ function Admin_Next_Add ({ history }) {
     next_visitor: "",
     next_contents: "",
     next_con: "",
-    next_trailer: "",
+    next_pd: "",
+    next_cast: "",
+    next_image2: "",
+    next_image3: "",
+    next_trailer1: "",
+    next_trailer2: "",
     next_category: "",
   });
 
@@ -138,10 +143,68 @@ function Admin_Next_Add ({ history }) {
         required
         id="standard-required"
         variant="standard"
-        label="Movie_Trailer"
+        label="Movie_Pd"
         type="text"
-        name="next_trailer"
-        value={nextInfo.next_trailer}
+        name="next_pd"
+        value={nextInfo.next_pd}
+        onChange={onChange}
+      />
+      <br />
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Cast"
+        type="text"
+        name="next_cast"
+        value={nextInfo.next_cast}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Image2"
+        type="text"
+        name="next_image2"
+        value={nextInfo.next_image2}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Image3"
+        type="text"
+        name="next_image3"
+        value={nextInfo.next_image3}
+        onChange={onChange}
+      />
+      <br />
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Trailer1"
+        type="text"
+        name="next_trailer1"
+        value={nextInfo.next_trailer1}
+        onChange={onChange}
+      />
+      <br />
+
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="Movie_Trailer2"
+        type="text"
+        name="next_trailer2"
+        value={nextInfo.next_trailer2}
         onChange={onChange}
       />
       <br />

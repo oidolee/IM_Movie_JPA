@@ -3,6 +3,7 @@ import style from '../../styles/page_6/Mypage_module.css';
 import { jwtDecode } from 'jwt-decode';
 import ApiService from '../../ApiService';
 import { Link } from 'react-router-dom'; // 페이지이동
+import MyPage_Theater from './MyPage_Theater';
 
 
 
@@ -66,7 +67,7 @@ function MyPage_top() {
                     <div className={`name_place${style.name_place}`}>
                         <div className={`name${style.name}`}>
                             <p style={{ textAlign: 'center', fontSize: '30px' }}>
-                                <strong> {userInfo && userInfo.dto && userInfo.dto.name}님 </strong> 반가워요! {/* 수정 필요 */}
+                                <strong> {userInfo && userInfo.dto && userInfo.dto.name}님 </strong> 반가워요!
                             </p>
                         </div>
                     </div>
@@ -110,9 +111,12 @@ function MyPage_top() {
                     </div>
                 </div>
             </div>
-            <div className={`my_theater${style.my_theater}`}>
-                <div style={{ textAlign: 'center', marginTop: '60px',marginBottom: '60px', fontSize: '30px', fontWeight: 'bold' }}>
-                    MY 영화관
+            <div>
+                <MyPage_Theater/>
+            </div>
+            {/* <div className={`my_theater${style.my_theater}`}>
+                <div style={{ textAlign: 'left', marginTop: '60px',marginBottom: '60px', fontWeight: 'bold', display: 'flex'}}>
+                    <h3>MY 영화관</h3> <button className={`btn_setup ${style.btn_setup}`}></button>
                 </div>
                 <div className={`my_coupon_box ${style.my_coupon_box}`} style={{ display: 'flex', justifyContent: 'space-between' }}>
                     
@@ -134,8 +138,7 @@ function MyPage_top() {
                         </div>
                     </Link>
                 </div>
-
-            </div>
+            </div> */}
         </div>
     );
 }

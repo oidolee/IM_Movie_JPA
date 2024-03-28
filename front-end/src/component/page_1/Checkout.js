@@ -2,41 +2,57 @@ import React, { useEffect, useRef, useState } from "react";
 import { loadPaymentWidget } from "@tosspayments/payment-widget-sdk";
 import { nanoid } from "nanoid";
 import style from "../../styles/page_1/Checkout.css";
-import { useCookies } from 'react-cookie';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
+import ApiService from "../../ApiService";
 
-const clientKey = "test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq";
+const clientKey = "test_ck_P9BRQmyarYxDGWlq5RNZVJ07KzLN";
 const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
-
-// 클라이언트 키 test_ck_P9BRQmyarYxDGWlq5RNZVJ07KzLN
-// 시크릿 키 test_sk_ex6BJGQOVDxv2GKPJdBnVW4w2zNb
-// http://localhost:3000/success?paymentType=NORMAL&orderId=xygn4_PUn0O91OCQt1QNf&paymentKey=jvX2KBP9QADpexMgkW36obk1elyyXJVGbR5ozO06yLYlaEJ7&amount=100
 
 const App = ({ handleCloseModal }) => {
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
-  const [price, setPrice] = useState(10000);
-  const [cookies] = useCookies(['c_email', 'idName']); // 쿠키 가져오기
+  const [userEmail, setUserEmail] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [customer, setCustomer] = useState([]);
+  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null);
 
-//   useEffect(() => {
-//     // 로컬 스토리지에서 토큰 가져오기
-//     const authToken = localStorage.getItem("auth_token");
+  useEffect(() => {
+    const fetchData = async () => {
+      const authToken = localStorage.getItem("auth_token");
+      if (authToken) {
+        const decodedToken = jwtDecode(authToken);
+        const user = decodedToken.iss;
+        setUserEmail(user);
+        searchCustomer(user);
+        console.log("사용자 이메일:", user);
+      }
 
-//     // 토큰이 존재하는지 확인 후 이메일 추출
-//     if (authToken) {
-//         const decodedToken = jwtDecode(authToken); // 수정 필요
-//         const userEmail = decodedToken.iss;
-//         setEmail(userEmail);
-//     }
-// }, []); // useEffect가 최초 한 번만 실행되도록 빈 배열을 전달
+      const storedTotalPrice = JSON.parse(localStorage.getItem("totalPrice"));
+      if (storedTotalPrice) {
+        setTotalPrice(storedTotalPrice);
+      }
+    };
+
+    fetchData();
+
+    const storedMovieInfo = localStorage.getItem("selectedMovieInfo");
+    if (storedMovieInfo) {
+      try {
+        const parsedMovieInfo = JSON.parse(storedMovieInfo);
+        setSelectedMovieInfo(parsedMovieInfo);
+        console.log(parsedMovieInfo);
+      } catch (error) {
+        console.error("영화 정보를 파싱하는 중 오류 발생:", error);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const fetchPaymentWidget = async () => {
       const paymentWidget = await loadPaymentWidget(clientKey, customerKey);
-
       const paymentMethodsWidget = paymentWidget.renderPaymentMethods(
         "#payment-widget",
-        price
+        totalPrice
       );
 
       paymentWidgetRef.current = paymentWidget;
@@ -44,7 +60,7 @@ const App = ({ handleCloseModal }) => {
     };
 
     fetchPaymentWidget();
-  }, [price]);
+  }, [totalPrice]);
 
   useEffect(() => {
     const paymentMethodsWidget = paymentMethodsWidgetRef.current;
@@ -54,25 +70,40 @@ const App = ({ handleCloseModal }) => {
     }
 
     paymentMethodsWidget.updateAmount(
-      price,
+      totalPrice,
       paymentMethodsWidget.UPDATE_REASON.COUPON
     );
-  }, [price]);
+  }, [totalPrice]);
+
+  const searchCustomer = (user) => {
+    ApiService.searchCutomer(user)
+      .then((res) => {
+        setCustomer(res.data.dto);
+        console.log("searchCustomer 성공", res.data);
+      })
+      .catch((err) => {
+        console.log("searchCustomer 오류 : ", err);
+      });
+  };
 
   const handlePayment = async () => {
     const paymentWidget = paymentWidgetRef.current;
 
-    console.log("이름: " ,cookies['idName'], "이메일: ", cookies['c_email']);
-
     try {
-      const orderId = nanoid(); // orderId 변수 선언
+      const orderId = nanoid();
       await paymentWidget?.requestPayment({
-        orderId: orderId, // orderId 변수 사용
-        orderName: "티켓",
-        customerName: cookies['idName'],
-        customerEmail: cookies['c_email'],
-        successUrl: `${window.location.origin}/success?orderId=${orderId}&orderName=티켓&customerEmail=${cookies['c_email']}&amount=${price}`,
-        failUrl: `${window.location.origin}/fail`
+        orderId: orderId,
+        orderName: selectedMovieInfo.movie_title,
+        customerName: customer.name,
+        customerEmail: userEmail,
+        successUrl: `${
+          window.location.origin
+        }/success?orderId=${orderId}&orderName=${encodeURIComponent(
+          selectedMovieInfo.movie_title
+        )}&customerEmail=${encodeURIComponent(
+          userEmail
+        )}&totalPrice=${totalPrice}`,
+        failUrl: `${window.location.origin}/fail`,
       });
     } catch (err) {
       console.log(err);

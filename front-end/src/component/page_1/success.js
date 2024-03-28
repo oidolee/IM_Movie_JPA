@@ -4,107 +4,96 @@ import ApiService from "../../ApiService";
 
 const Success = () => {
   const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
 
-  // 상태 값 정의
+  const orderId = queryParams.get("orderId");
+  const orderName = queryParams.get("orderName");
+  const customerEmail = queryParams.get("customerEmail");
+  const totalPrice = queryParams.get("totalPrice");
+
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [totalQuantity, setTotalQuantity] = useState(0); // 초기값 0으로 설정
-  const [totalPrice, setTotalPrice] = useState([]);
-  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null);
+  const [totalQuantity, setTotalQuantity] = useState(0);
+
+  const selectedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
+  console.log("선택된 좌석 번호 : ", selectedSeat);
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const orderId = queryParams.get("orderId");
-    const orderName = queryParams.get("orderName");
-    const customerEmail = queryParams.get("customerEmail");
-    const payAmount = queryParams.get("amount");
+    const storedSelectedSeats = JSON.parse(
+      localStorage.getItem("selectedSeats")
+    );
+    const storedTotalQuantity =
+      JSON.parse(localStorage.getItem("selectedSeatInfo"))?.totalQuantity || 0;
+    setSelectedSeats(storedSelectedSeats);
+    setTotalQuantity(storedTotalQuantity);
+  }, []);
 
-    console.log("결제 정보:", { orderId, orderName, customerEmail });
+  useEffect(() => {
+    if (orderId && orderName && customerEmail && totalPrice && totalQuantity) {
+      addReservation();
+      insertPayment();
+      updateSeatStatus();
+    }
+  }, [orderId, orderName, customerEmail, totalPrice, totalQuantity]);
 
-    // API에 전송할 데이터 구성
-    const inputData = {
+  const addReservation = () => {
+    const reservationsData = selectedSeat.map((seatId) => ({
+      st_id: seatId,
+      ic_email: customerEmail,
+      res_count: totalQuantity,
+      res_ticket_price: totalPrice,
+      res_sysdate: new Date().toISOString(),
+      res_check: "y",
+    }));
+
+    reservationsData.forEach((reservation) => {
+      ApiService.addReservation(reservation)
+        .then((res) => console.log("예약 추가 성공:", res.data))
+        .catch((err) => console.log("예약 추가 실패:", err));
+    });
+  };
+
+  const insertPayment = () => {
+    const paymentData = {
       pay_name: orderId,
       pay_order_name: orderName,
-      ic_email: "11",
-      pay_amount: payAmount,
-      pay_company: "토스",
-      pay_check: "y",
+      ic_email: customerEmail,
+      pay_amount: totalPrice,
+      pay_company: "IM",
       pay_sysdate: new Date().toISOString(),
+      pay_check: "y",
     };
 
-    // 결제 정보 저장 및 선택된 영화 정보 로드
-    try {
-      ApiService.insertPayment(inputData)
-        .then((res) => {
-          console.log("결제 정보 저장 성공", res.data);
-          const storedSelectedMovieInfo = JSON.parse(
-            localStorage.getItem("selectedMovieInfo")
-          );
-          const storedSelectedSeats = JSON.parse(
-            localStorage.getItem("selectedSeats")
-          );
-          const storedTotalPrice = JSON.parse(localStorage.getItem("totalPrice"));
+    ApiService.insertPayment(paymentData)
+      .then((res) => console.log("결제 정보 추가 성공:", res.data))
+      .catch((err) => console.log("결제 정보 추가 실패:", err));
+  };
 
-          setSelectedSeats(storedSelectedSeats); // 선택된 좌석 설정
-
-          // 나머지 정보 설정
-          if (storedSelectedMovieInfo) {
-            setTotalPrice(storedTotalPrice);
-            setSelectedMovieInfo(storedSelectedMovieInfo);
-          }
-          console.log("selectedMovieInfo : ", storedSelectedMovieInfo);
-          console.log("setSelectedSeats : ", storedSelectedSeats);
-          console.log("setTotalPrice : ", storedTotalPrice);
-        })
-        .catch((error) => {
-          console.error("결제 정보 저장 실패", error);
-        });
-    } catch (error) {
-      console.error("결제 정보 저장 중 오류 발생", error);
-    }
-
-  }, [location]);
-
-  useEffect(() => {
-    // 좌석 정보가 변경될 때마다 총 수량 업데이트
-    setTotalQuantity(selectedSeats.length);
-
-    if (selectedMovieInfo && totalQuantity > 0) {
-      const resCount = totalQuantity; // 총 수량으로 설정
-      const st_id = parseInt(selectedSeats[0].slice(-2), 10);
-
-      // API에 전송할 데이터 구성
-      const inputData2 = {
-        st_id: st_id,
-        c_email: "11",
-        res_count: resCount,
-        res_ticket_price: totalPrice,
-        res_sysdate: new Date().toISOString(),
-        res_check: "y",
+  const updateSeatStatus = () => {
+    const seatPromises = selectedSeats.map((seat) => {
+      const [lot, seatNumber, ip_no] = seat.split("-");
+      const seatData = {
+        st_id: ip_no,
+        st_row: lot,
+        st_column: seatNumber,
+        st_check: "y",
       };
+      return ApiService.updateSeat(seatData);
+    });
 
-      // 예약 정보 저장 및 결제 성공 후 페이지 이동
-      try {
-        ApiService.addReservation(inputData2)
-          .then((res) => {
-            console.log("예약 정보 저장 성공", res.data);
-            const confirmation = window.confirm(
-              "결제가 성공적으로 이루어졌습니다. 확인하시겠습니까?"
-            );
-            if (confirmation) {
-              window.location.assign("/MyPage_res");
-            } else {
-              window.location.assign("/");
-            }
-          })
-          .catch((error) => {
-            console.error("예약 정보 저장 실패", error);
-          });
-      } catch (error) {
-        console.error("예약 정보 저장 중 오류 발생", error);
+    Promise.all(seatPromises)
+      .then(() => console.log("좌석 업데이트가 완료되었습니다."))
+      .catch((err) =>
+        console.error("좌석 업데이트 작업 중 오류가 발생하였습니다.", err)
+      );
+      const confirmation = window.confirm(
+        "결제가 성공적으로 이루어졌습니다. 확인하시겠습니까?"
+      );
+      if (confirmation) {
+        window.location.assign("/MyPage_res");
+      } else {
+        window.location.assign("/");
       }
-    }
-
-  }, [selectedSeats, selectedMovieInfo, totalQuantity, totalPrice]);
+  };
 
   return <div></div>;
 };

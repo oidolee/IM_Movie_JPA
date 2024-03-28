@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import style from '../../styles/page_4/searchID.module.css';
+import style from '../../styles/page_4/searchPWD.module.css';
 import Accordion from 'react-bootstrap/Accordion';
 import { TextField, Button } from '@mui/material';
 import ApiService from '../../ApiService';
@@ -95,6 +95,7 @@ class searchPWD extends Component {
                                     required
                                     type="text"
                                     name="id"
+                                    InputProps={{ classes: { root: style.customTextField1 } }}
                                     value={this.state.id}
                                     placeholder='이메일을 입력해주세요.'
                                     onChange={this.onChange}
@@ -109,6 +110,7 @@ class searchPWD extends Component {
                                     type="text"
                                     name="hp"
                                     value={this.state.hp}
+                                    InputProps={{ classes: { root: style.customTextField2 } }}
                                     placeholder='휴대폰 번호를 -빼고 입력해 주세요'
                                     onChange={this.onChange}
                                 />

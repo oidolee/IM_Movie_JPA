@@ -14,11 +14,32 @@
 }
 
 .hpfind {
+    
     text-align: left;
     font-size: 15px;
 }
 
+
+.customTextField1 {
+    
+    margin-left: 65px;
+}
+
+.customTextField2 {
+    
+    margin-left: 20px;
+}
+
+.inputField {
+    margin-left: 20px
+}
+
+.customTextField .MuiInputBase-root {
+    margin-left: 20px;
+}
+
 .hpfind .text {
+    justify-content: center;
     display: flex;
     align-items: center; 
     height: 20px; 

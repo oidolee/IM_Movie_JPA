@@ -17,7 +17,7 @@ public class StoreMapServiceImpl implements StoreMapService {
 	@Autowired
 	private StoreMapRepository dao;
 	
-	// 스토어 목록
+	// 스토어 지도 목록
 	@Override
 	public List<StoreMapDTO> listStoreMap() throws ServletException, IOException {
 		System.out.println("서비스 - listStoreMap");
@@ -27,7 +27,7 @@ public class StoreMapServiceImpl implements StoreMapService {
 		return dao.findAll();
 	}
 
-	// 스토어 등록
+	// 스토어 지도 등록
 	@Override
 	public void insertStoreMap(StoreMapDTO dto) throws ServletException, IOException {
 		System.out.println("서비스 - StoreMapDTO");
@@ -37,7 +37,7 @@ public class StoreMapServiceImpl implements StoreMapService {
 		dao.save(dto);
 	}
 
-	// 스토어 수정
+	// 스토어 지도 수정
 	@Override
 	public void updateStoreMap(StoreMapDTO dto) throws ServletException, IOException {
 		System.out.println("서비스 - StoreMapDTO");
@@ -47,7 +47,7 @@ public class StoreMapServiceImpl implements StoreMapService {
 	    dao.save(dto);
 	}
 
-	// 스토어 삭제
+	// 스토어 지도 삭제
 	@Override
 	public void deleteStoreMap(int ticketmap_no) throws ServletException, IOException {
 		System.out.println("서비스 - deleteStoreMap");
@@ -55,7 +55,7 @@ public class StoreMapServiceImpl implements StoreMapService {
 		dao.deleteById(ticketmap_no);
 	}
 
-	// 스토어 상세페이지
+	// 스토어 지도 상세페이지
 	@Override
 	public StoreMapDTO findByIdMap(int ticketmap_no) throws ServletException, IOException {
 		System.out.println("서비스 - findByIdMap");

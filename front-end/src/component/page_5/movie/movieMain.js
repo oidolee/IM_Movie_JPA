@@ -142,7 +142,7 @@ function MovieMain() {
               <Card key={index} style={{ width: "202px", margin: "0 10px" }}>
                 <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.mov_image}`} style={{ width: '200px', height: 'auto' }} />
                 <Card.Body>
-                  <Card.Title>{movie.mov_title}</Card.Title>
+                <Card.Title style={{ fontSize: "15px", fontWeight: "bold" }}>{movie.mov_title}</Card.Title>
                   <Card.Text>{movie.mov_time}분</Card.Text>
                   <Button className={`primary_button ${style.primary_button}`} onClick={()=>handleButtonClick(movie.movie_id)}>상세정보</Button>
                 </Card.Body>
@@ -167,7 +167,7 @@ function MovieMain() {
               <Card key={index} style={{ width: "202px", margin: "0 10px" }}>
                  <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.mov_image}`} style={{ width: '200px', height: 'auto' }} />
                 <Card.Body>
-                  <Card.Title>{movie.mov_title}</Card.Title>
+                <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.mov_title}</Card.Title>
                   <Card.Text>{movie.mov_time}분</Card.Text>
                   <Button className={`primary_button ${style.primary_button}`} onClick={()=>handleButtonClick(movie.movie_id)}>상세정보</Button>
                 </Card.Body>
@@ -192,7 +192,7 @@ function MovieMain() {
               <Card key={index} style={{ width: "202px", margin: "0 10px" }}>
                  <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/page_5/${movie.mov_image}`} style={{ width: '200px', height: 'auto' }} />
                 <Card.Body>
-                  <Card.Title>{movie.mov_title}</Card.Title>
+                <Card.Title style={{ fontSize: "15px",fontWeight: "bold" }}>{movie.mov_title}</Card.Title>
                   <Card.Text>{movie.mov_time}분</Card.Text>
                   <Button className={`primary_button ${style.primary_button}`} onClick={()=>handleButtonClick(movie.movie_id)}>상세정보</Button>
                 </Card.Body>

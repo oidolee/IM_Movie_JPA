@@ -48,11 +48,11 @@ function Header() {
         const token = localStorage.getItem('auth_token');
         setAuthToken(token);
 
-        if (authToken) {
-            const decodedToken = jwtDecode(authToken); // 수정 필요
+        if (authToken !== null) {
+            const decodedToken = jwtDecode(authToken);
             const email = decodedToken.iss;
             setid(email);
-
+        
             apiservice.searchCutomer(email)
                 .then(res => {
                     console.log(res.data);

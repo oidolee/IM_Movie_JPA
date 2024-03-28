@@ -121,10 +121,10 @@ EditStore_Admin = (e) => {
           this.setState({                    
           })
           console.log('input 성공 : ', res.data);  // 컨트롤러에서 전달함(resultCode, resultMsg)
-          this.props.history.push('ListStore_Admin');  // RouterComponent.js - ListSampleComponent 호출
+          this.props.history.push('DetailStore');  // RouterComponent.js - ListSampleComponent 호출
       })
       .catch(err => {
-          console.log('EditStore_Admin() 에러!! : ', err);
+          console.log('DetailStore() 에러!! : ', err);
       });
 
 }
@@ -185,7 +185,7 @@ EditStore_Admin = (e) => {
   };
 
   Payment_Store = () => {
-    const { totalQuantity, totalPrice, itemName, itemCode, itemImage  } = this.props;
+    const { totalQuantity, totalPrice, itemName, itemCode, itemImage  } = this.state;
 
   // 로컬 스토리지에서 sampleID 제거
   window.localStorage.removeItem("sampleID");
@@ -194,8 +194,8 @@ EditStore_Admin = (e) => {
   window.localStorage.setItem(
     "sampleID",
     JSON.stringify({
-      totalQuantity,
-      totalPrice,
+      totalQuantity: this.state.quantity,
+      totalPrice: this.state.price,
       itemName,
       itemCode,
       itemImage,
@@ -251,9 +251,6 @@ EditStore_Admin = (e) => {
                 slidesPerView={3}
                 centeredSlides={true}
                 spaceBetween={30}
-                // pagination={{
-                //   type: "fraction",
-                // }}
                 navigation={true}
                 virtual
               >
@@ -263,11 +260,9 @@ EditStore_Admin = (e) => {
                   <SwiperSlide item={item} key={index}>
                     <img src={`${serverUrl}${item.itemImage}`} alt={`Item ${item.itemCode}`} style={{ width: "150px" }} onClick={() => this.handleItemClick(item.itemCode)}/>
                     <div>{item.itemName}</div>
-                </SwiperSlide>
+                  </SwiperSlide>
                 ))}
-
                 </div>
-
               </Swiper>
             </div>
           </div>
@@ -374,10 +369,10 @@ EditStore_Admin = (e) => {
               <button className="btn_col1 ty7" onClick={this.Payment_Store}>구매하기</button>
             </div>
 
-            {/* 선물하기 모달/팝업 조건부 렌더링 */}
+            {/* 선물하기 모달창 */}
             {isStoreGiftOpen && 
             <StoreGift onClose={this.closeStoreGift} totalQuantity={quantity} totalPrice={this.state.itemSalePrice * quantity} itemCode={this.state.itemCode} itemName={this.state.itemName}  itemImage={this.state.itemImage}/>}
-            {/* 온라인 사용권 모달/팝업 조건부 렌더링 */}
+            {/* 온라인 사용권 모달창 */}
             {isStoreTicketOpen && <StoreTicket onClose={this.closeStoreTicket} />}
           </div>
         </div>
@@ -403,7 +398,7 @@ EditStore_Admin = (e) => {
             <div className={`StoreDetail_bottom ${style.StoreDetail_bottom}`}>
               {selectedValue === 1 && (
                 <div>
-                  - 구성 : 2D영화관람권 2매 (롯데시네마 회원 ID당 1일 4매 구매
+                  - 구성 : 2D영화관람권 2매 (IM 회원 ID당 1일 4매 구매
                   가능)
                   <br />
                   - 유효기간 : 구매일로부터 6개월(관람일 기준), 유효기간 내
@@ -415,8 +410,8 @@ EditStore_Admin = (e) => {
                   관람권 사용 시 VIP 승급금액은 관람권 판매금액으로 반영
                   <br />
                   - 상품 확인은 마이시네마 > 나의 쿠폰함에서 가능, 영화관람권은
-                  롯데시네마 홈페이지, 모바일 웹/앱에서 사용가능, 매점교환권은
-                  롯데시네마 매점에서 쿠폰 제시 후 사용가능 (매점 사용불가 매장
+                  IM 홈페이지, 모바일 웹/앱에서 사용가능, 매점교환권은
+                  IM 매점에서 쿠폰 제시 후 사용가능 (매점 사용불가 매장
                   확인 요망)
                   <br />
                 </div>

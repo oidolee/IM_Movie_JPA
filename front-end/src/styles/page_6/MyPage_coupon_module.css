@@ -66,5 +66,23 @@
 
 .innerTable {
     margin: 0 auto;
+    width: 500px;
+    height: 100px;
+    
+    
+    font-weight: bold;
     /* 가운데 정렬을 위해 margin을 사용합니다. */
+}
+
+.innerTable >tr {
+    border-bottom: 1px solid rgb(153, 153, 153);
+    /* 가운데 정렬을 위해 margin을 사용합니다. */
+}
+
+.coupon_delete_child{
+    border-radius: 3px;
+    border: 0;
+    background-color: brown;
+    color: white;
+    width: 50px;
 }
