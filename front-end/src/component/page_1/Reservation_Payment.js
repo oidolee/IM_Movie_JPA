@@ -33,6 +33,10 @@ const Reservation_Payment = () => {
   const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 선택한 영화 정보
   const history = useHistory();
 
+  // 페이지 벗어나면 모든 정보 리셋
+
+  // 좌석 예약인 상태로 10분 경과하면 리셋
+
   const selectedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
   console.log("선택된 좌석 번호 : ", selectedSeat);
 
@@ -170,6 +174,7 @@ const Reservation_Payment = () => {
       updateSeatAndNavigate("/page_1/Reservation_Movie");
     }
   };
+  
 
   const handleSeat = () => {
     const confirmResult = window.confirm("입력된 좌석이 사라집니다.");
