@@ -86,8 +86,6 @@ function Admin_Notice_List ({ history }) {
             <TableCell>구분</TableCell>
             <TableCell>제목</TableCell>
             <TableCell>등록일</TableCell>
-            <TableCell>조회수</TableCell>
-            <TableCell>내용</TableCell>
             
             <TableCell>Edit</TableCell>
             <TableCell>Delete</TableCell>
@@ -100,8 +98,6 @@ function Admin_Notice_List ({ history }) {
               <TableCell>{list.notice_one}</TableCell>
               <TableCell>{list.notice_title}</TableCell>
               <TableCell> {new Date(list.notice_date).toLocaleDateString()} </TableCell>
-              <TableCell>{list.notice_cnt}</TableCell>
-              <TableCell>{list.notice_con}</TableCell>
               <TableCell
                 className="selectBtn"
                 onClick={() => selectNotice(list.notice_num)}
