@@ -41,9 +41,78 @@ const Reservation_Payment = () => {
   console.log("선택된 좌석 번호 : ", selectedSeat);
 
   useEffect(() => {
+    // 타이머 시작 시간
+    const timerStartTime = new Date();
+    console.log("타이머 시작 시간:", timerStartTime);
+  
+    // 타이머 시작
+    const timer = setInterval(() => {
+      console.log("타이머 시작");
+  
+      // 현재 시간
+      const currentTime = new Date();
+  
+      // 1분 경과한 좌석의 상태를 업데이트
+      updateSeatStatus(currentTime);
+  
+      // 타이머 종료 시간
+      const timerEndTime = new Date();
+      console.log("타이머 종료 시간:", timerEndTime);
+    }, 60000); // 1분에 한 번씩 실행
+  
+    // 컴포넌트가 언마운트될 때 타이머 정리
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+  
+  const updateSeatStatus = (currentTime) => {
+    const updatePromises = [];
+    selectedSeat.forEach(seat => {
+      ApiService.selectSeat(seat)
+        .then(seatInfo => {
+          if (seatInfo.st_check === "r") {
+            const seatStartTime = new Date(seatInfo.start_time);
+            const elapsedMinutes = Math.floor((currentTime - seatStartTime) / (1000 * 60));
+            if (elapsedMinutes >= 1) {
+              const [lot, seatNumber, ip_no] = seat.split("-");
+              const inputData = {
+                st_id: ip_no,
+                st_row: lot,
+                st_column: seatNumber,
+                st_check: "n",
+              };
+  
+              console.log("inputData : ", inputData);
+  
+              updatePromises.push(ApiService.updateSeat(inputData));
+            }
+          }
+        })
+        .catch(error => {
+          console.error("좌석 정보를 가져오는 중 오류 발생:", error);
+        });
+    });
+  
+    Promise.all(updatePromises)
+      .then(() => {
+        console.log("모든 좌석 상태가 업데이트되었습니다.");
+        alert("시간 초과로 메인화면으로 이동합니다.");
+        history.push("/");
+      })
+      .catch(error => {
+        console.error("좌석 상태 업데이트 중 오류 발생:", error);
+      });
+  };
+  
+  
+  
+  
+   
+
+  useEffect(() => {
     const unlisten = history.listen((location, action) => {
       if (action === "POP") {
-        console.log("Handle seat called by history.listen()");
         const confirmResult = window.confirm("입력된 모든 정보가 사라집니다.");
         if (confirmResult) {
           const updateSeatPromises = selectedSeats.map((seat) => {
