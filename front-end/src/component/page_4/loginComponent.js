@@ -43,14 +43,17 @@ function Login() {
                 } else if (res.data.error === 'wrong_password') {
                     alert("비밀번호를 확인해주세요.");
                 } else {
-                    alert("로그인 실패\n로그인 정보 확인 바랍니다.")
+                   
                 }
     
             })
             .catch(err => {
                 console.log('에러', err);
                 alert("로그인 실패\n로그인 정보 확인 바랍니다.")
+
                 
+
+
                 setMessage('로그인에 실패했습니다.');
             });
     };
