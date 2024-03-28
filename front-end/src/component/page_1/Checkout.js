@@ -8,14 +8,13 @@ import ApiService from "../../ApiService";
 const clientKey = "test_ck_P9BRQmyarYxDGWlq5RNZVJ07KzLN";
 const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
 
-
 const App = ({ handleCloseModal }) => {
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
   const [userEmail, setUserEmail] = useState("");
-  const [totalPrice, setTotalPrice] = useState(0); // totalPrice 상태 추가
+  const [totalPrice, setTotalPrice] = useState(0);
   const [customer, setCustomer] = useState([]);
-  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 선택한 영화 정보
+  const [selectedMovieInfo, setSelectedMovieInfo] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +23,7 @@ const App = ({ handleCloseModal }) => {
         const decodedToken = jwtDecode(authToken);
         const user = decodedToken.iss;
         setUserEmail(user);
-        searchCutomer(user);
+        searchCustomer(user);
         console.log("사용자 이메일:", user);
       }
 
@@ -76,14 +75,14 @@ const App = ({ handleCloseModal }) => {
     );
   }, [totalPrice]);
 
-  const searchCutomer = (user) => {
+  const searchCustomer = (user) => {
     ApiService.searchCutomer(user)
       .then((res) => {
         setCustomer(res.data.dto);
-        console.log("searchCutomer 성공", res.data);
+        console.log("searchCustomer 성공", res.data);
       })
       .catch((err) => {
-        console.log("searchCutomer 오류 : ", err);
+        console.log("searchCustomer 오류 : ", err);
       });
   };
 
@@ -99,18 +98,18 @@ const App = ({ handleCloseModal }) => {
         customerEmail: userEmail,
         successUrl: `${
           window.location.origin
-        }/success`,
+        }/success?orderId=${orderId}&orderName=${encodeURIComponent(
+          selectedMovieInfo.movie_title
+        )}&customerEmail=${encodeURIComponent(
+          userEmail
+        )}&totalPrice=${totalPrice}`,
         failUrl: `${window.location.origin}/fail`,
       });
     } catch (err) {
       console.log(err);
     }
   };
-  // ?orderId=${orderId}&orderName=${encodeURIComponent(
-  //   selectedMovieInfo.movie_title
-  // )}&customerEmail=${encodeURIComponent(
-  //   userEmail
-  // )}&totalPrice=${totalPrice}
+
   return (
     <div className={`Checkout ${style.Checkout}`}>
       <div className="Checkout_content">
