@@ -50,16 +50,16 @@ const Reservation_Payment = () => {
               st_column: seatNumber,
               st_check: "n",
             };
-  
+
             console.log("inputData : ", inputData);
-  
+
             return ApiService.updateSeat(inputData);
           });
-  
+
           Promise.all(updateSeatPromises)
             .then(() => {
               history.push("/page_1/Reservation_Seat");
-  
+
               localStorage.removeItem("selectedSeat");
               localStorage.removeItem("selectedSeats");
               localStorage.removeItem("totalQuantity");
@@ -72,12 +72,11 @@ const Reservation_Payment = () => {
         }
       }
     });
-  
+
     return () => {
       unlisten();
     };
   }, [selectedSeats, history]); // 의존성 배열에 selectedSeats와 history를 추가합니다.
-  
 
   useEffect(() => {
     const storedMovieInfo = localStorage.getItem("selectedMovieInfo");
@@ -162,6 +161,34 @@ const Reservation_Payment = () => {
         .catch((error) => {
           console.error("좌석 정보 업데이트 중 오류 발생:", error);
         });
+    } else {
+      const updateSeatPromises = selectedSeats.map((seat) => {
+        const [lot, seatNumber, ip_no] = seat.split("-");
+        const inputData = {
+          st_id: ip_no,
+          st_row: lot,
+          st_column: seatNumber,
+          st_check: "n",
+        };
+
+        console.log("inputData : ", inputData);
+
+        return ApiService.updateSeat(inputData);
+      });
+
+      Promise.all(updateSeatPromises)
+        .then(() => {
+          history.push("/");
+
+          localStorage.removeItem("selectedSeat");
+          localStorage.removeItem("selectedSeats");
+          localStorage.removeItem("totalQuantity");
+          localStorage.removeItem("totalPrice");
+          localStorage.removeItem("selectedSeatInfo");
+        })
+        .catch((error) => {
+          console.error("좌석 정보 업데이트 중 오류 발생:", error);
+        });
     }
   };
 
@@ -185,6 +212,34 @@ const Reservation_Payment = () => {
       Promise.all(updateSeatPromises)
         .then(() => {
           history.push("/page_1/Reservation_Seat");
+
+          localStorage.removeItem("selectedSeat");
+          localStorage.removeItem("selectedSeats");
+          localStorage.removeItem("totalQuantity");
+          localStorage.removeItem("totalPrice");
+          localStorage.removeItem("selectedSeatInfo");
+        })
+        .catch((error) => {
+          console.error("좌석 정보 업데이트 중 오류 발생:", error);
+        });
+    } else {
+      const updateSeatPromises = selectedSeats.map((seat) => {
+        const [lot, seatNumber, ip_no] = seat.split("-");
+        const inputData = {
+          st_id: ip_no,
+          st_row: lot,
+          st_column: seatNumber,
+          st_check: "n",
+        };
+
+        console.log("inputData : ", inputData);
+
+        return ApiService.updateSeat(inputData);
+      });
+
+      Promise.all(updateSeatPromises)
+        .then(() => {
+          history.push("/");
 
           localStorage.removeItem("selectedSeat");
           localStorage.removeItem("selectedSeats");
