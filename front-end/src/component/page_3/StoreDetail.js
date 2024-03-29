@@ -305,10 +305,10 @@ EditStore_Admin = (e) => {
                   </td>
                   <td>
                     <span className={`txt_price ${style.txt_price}`}>
-                      {this.state.itemSalePrice}<em>원</em>
+                      {this.state.itemSalePrice.toLocaleString()}<em>원</em>
                     </span>
                     <span className={`txt_price_ins ${style.txt_price_ins}`}>
-                      {this.state.itemPrice}
+                      {this.state.itemPrice.toLocaleString()}
                     </span>
                   </td>
                 </tr>
@@ -358,7 +358,7 @@ EditStore_Admin = (e) => {
               총 상품금액
               <strong className={`txt_price_str ${style.txt_price_str}`}>
                 {" "}
-                {this.state.itemSalePrice * this.state.quantity}
+                {(this.state.itemSalePrice * this.state.quantity).toLocaleString()}
                 <em>원</em>
               </strong>
             </div>
