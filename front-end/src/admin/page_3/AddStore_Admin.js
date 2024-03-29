@@ -55,7 +55,7 @@ class AddStore_Admin extends Component {
     render() {
         return(
             <div align="center"><br/><br/>
-                <Typography variant="h4"> Add STORE ITEM </Typography>
+                <Typography variant="h4"> 스토어 상품 등록 </Typography>
                 <TextField
                         required
                         select
