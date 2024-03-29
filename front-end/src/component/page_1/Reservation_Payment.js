@@ -71,6 +71,7 @@ const Reservation_Payment = () => {
     selectedSeat.forEach(seat => {
       ApiService.selectSeat(seat)
         .then(seatInfo => {
+          console.log("seatInfo", seatInfo)
           if (seatInfo.st_check === "r") {
             const seatStartTime = new Date(seatInfo.start_time);
             const elapsedMinutes = Math.floor((currentTime - seatStartTime) / (1000 * 60));
@@ -103,12 +104,7 @@ const Reservation_Payment = () => {
       .catch(error => {
         console.error("좌석 상태 업데이트 중 오류 발생:", error);
       });
-  };
-  
-  
-  
-  
-   
+  }; 
 
   useEffect(() => {
     const unlisten = history.listen((location, action) => {
@@ -493,35 +489,7 @@ const Reservation_Payment = () => {
                         <Checkout handleCloseModal={handleCloseModal} />
                       </div>
                     </Modal>
-                    {/* <button className="point_seat" onClick={handlePointClick}>
-                      포인트
-                    </button> */}
                   </li>
-                  {/* <div className="point_seat_main">
-                    <ul className="point_seat_sub">
-                      {isPointClicked && (
-                        <div className="usePoint">
-                          <li>회원ID : </li>
-                          <li>잔여 포인트 : </li>
-                          <li>
-                            사용 포인트 :{" "}
-                            <input
-                              type="text"
-                              placeholder="사용할 포인트 입력하세요."
-                            />
-                          </li>
-                          <li>
-                            <button
-                              className="usePointBtn"
-                              onClick={handlePointClick}
-                            >
-                              사용
-                            </button>
-                          </li>
-                        </div>
-                      )}
-                    </ul>
-                  </div> */}
                 </ul>
               </div>
             </li>
