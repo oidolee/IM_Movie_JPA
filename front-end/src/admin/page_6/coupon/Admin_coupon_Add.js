@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ApiService from "../../../ApiService";
 import { Typography, Select, MenuItem, TextField, Button } from "@mui/material";
+import InputLabel from '@mui/material/InputLabel';
 import style from "../../../styles/admin/page_5/Admin_Arte_Add.css";
 
 
@@ -29,6 +30,7 @@ function Admin_coupon_Add({ history }) {
     ic_code: generateUniqueRandomCode(),
     ic_name: "",
     ic_img: "",
+    ic_img_detail: "",
     ic_category: "",
     ic_point: "",
     ic_content: "",
@@ -51,7 +53,8 @@ function Admin_coupon_Add({ history }) {
     const fileName = selectedFile ? selectedFile.name : ""; // 파일이 선택되었을 때만 파일 이름 추출
     setCouponInfo(prevState => ({
       ...prevState,
-      ic_img: fileName
+      ic_img: fileName,
+      ic_img_detail: fileName
     }));
   };
 
@@ -86,7 +89,12 @@ function Admin_coupon_Add({ history }) {
         name="ic_code"
         value={couponInfo.ic_code}
         onChange={onChange}
-        
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
       />
       <br />
       <TextField
@@ -98,6 +106,12 @@ function Admin_coupon_Add({ history }) {
         name="ic_name"
         value={couponInfo.ic_name}
         onChange={onChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
       />
       <br />
       <TextField
@@ -108,6 +122,31 @@ function Admin_coupon_Add({ history }) {
         type="file"
         name="ic_img"
         onChange={handleFileChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
+      />
+      <br />
+      <br />
+
+      <br />
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="쿠폰 상세설명 이미지"
+        type="file"
+        name="ic_img_detail"
+        onChange={handleFileChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
       />
       <br />
       <br />
@@ -136,6 +175,12 @@ function Admin_coupon_Add({ history }) {
         name="ic_point"
         value={couponInfo.ic_point}
         onChange={onChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
       />
       <br />
       <br />
@@ -149,6 +194,12 @@ function Admin_coupon_Add({ history }) {
         name="ic_content"
         value={couponInfo.ic_content}
         onChange={onChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
       />
       <br />
       <TextField
@@ -160,6 +211,12 @@ function Admin_coupon_Add({ history }) {
         name="ic_startDate"
         value={couponInfo.ic_startDate}
         onChange={onChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
       />
       <TextField
         required
@@ -170,6 +227,12 @@ function Admin_coupon_Add({ history }) {
         name="ic_endDate"
         value={couponInfo.ic_endDate}
         onChange={onChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
       />
       <br />
       <br />

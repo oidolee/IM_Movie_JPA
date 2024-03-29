@@ -1,6 +1,7 @@
 .Admin_Arte_Add {
-    width: 100%;
+    width: 800px;
     height: 100%;
+    margin: 0 auto;
 }
 
 .Admin_Arte_Add .arteAdd {
