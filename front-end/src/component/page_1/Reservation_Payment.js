@@ -21,6 +21,7 @@ import bottom2 from "../../assets/page_3/bottom2.jpg";
 
 const Reservation_Payment = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [selectedSeat, setSelectedSeat] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState([]);
   const [totalPrice, setTotalPrice] = useState([]);
   const [isPointClicked, setIsPointClicked] = useState(false);
@@ -33,82 +34,100 @@ const Reservation_Payment = () => {
   const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 선택한 영화 정보
   const history = useHistory();
 
-  // 페이지 벗어나면 모든 정보 리셋
+  useEffect(() => {
+    const storedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
+    setSelectedSeat(storedSeat);
+    console.log("selectedSeat: ", storedSeat);
 
-  // 좌석 예약인 상태로 10분 경과하면 리셋
+    const storedMovieInfo = localStorage.getItem("selectedMovieInfo");
+    if (storedMovieInfo) {
+      try {
+        const parsedMovieInfo = JSON.parse(storedMovieInfo);
+        setSelectedMovieInfo(parsedMovieInfo);
+        console.log(parsedMovieInfo);
+      } catch (error) {
+        console.error("영화 정보를 파싱하는 중 오류 발생:", error);
+      }
+    }
 
-  const selectedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
-  console.log("선택된 좌석 번호 : ", selectedSeat);
+    const storedSelectedSeats = JSON.parse(localStorage.getItem("selectedSeats"));
+    setSelectedSeats(storedSelectedSeats);
+    console.log("setSelectedSeats : ", storedSelectedSeats);
+
+    const storedTotalPrice = JSON.parse(localStorage.getItem("totalPrice"));
+    const seatInfo = JSON.parse(localStorage.getItem("selectedSeatInfo"));
+    console.log(seatInfo.totalQuantity);
+
+    if (seatInfo) {
+      setAdultQuantity(seatInfo.adultQuantity);
+      setTeenQuantity(seatInfo.teenQuantity);
+      setChildQuantity(seatInfo.childQuantity);
+      setDisabledQuantity(seatInfo.disabledQuantity);
+      setTotalQuantity(seatInfo.totalQuantity);
+      setTotalPrice(storedTotalPrice);
+    }
+
+    console.log("setTotalPrice : ", storedTotalPrice);
+    console.log("totalQuantity : ", seatInfo.totalQuantity);
+    localStorage.setItem(
+      "totalQuantity",
+      JSON.stringify(seatInfo.totalQuantity || 0)
+    );
+  }, []);
 
   useEffect(() => {
-    // 타이머 시작 시간
+
     const timerStartTime = new Date();
     console.log("타이머 시작 시간:", timerStartTime);
-  
+
     // 타이머 시작
     const timer = setInterval(() => {
-      console.log("타이머 시작");
-  
-      // 현재 시간
+
       const currentTime = new Date();
-  
-      // 1분 경과한 좌석의 상태를 업데이트
       updateSeatStatus(currentTime);
-  
+
       // 타이머 종료 시간
       const timerEndTime = new Date();
       console.log("타이머 종료 시간:", timerEndTime);
-    }, 60000); // 1분에 한 번씩 실행
-  
-    // 컴포넌트가 언마운트될 때 타이머 정리
+    }, 60000);
+
     return () => {
       clearInterval(timer);
     };
   }, []);
-  
+
+  // 1분 동안(테스트를 위해 1분으로 설정) 결제 완료 안할 시 좌석 초기화 - 타이머 설정
   const updateSeatStatus = (currentTime) => {
-    const updatePromises = [];
-    selectedSeat.forEach(seat => {
-      ApiService.selectSeat(seat)
-        .then(seatInfo => {
-          if (seatInfo.st_check === "r") {
-            const seatStartTime = new Date(seatInfo.start_time);
-            const elapsedMinutes = Math.floor((currentTime - seatStartTime) / (1000 * 60));
-            if (elapsedMinutes >= 1) {
-              const [lot, seatNumber, ip_no] = seat.split("-");
-              const inputData = {
-                st_id: ip_no,
-                st_row: lot,
-                st_column: seatNumber,
-                st_check: "n",
-              };
-  
-              console.log("inputData : ", inputData);
-  
-              updatePromises.push(ApiService.updateSeat(inputData));
-            }
-          }
-        })
-        .catch(error => {
-          console.error("좌석 정보를 가져오는 중 오류 발생:", error);
-        });
+    console.log("selectedSeats : ", selectedSeats );
+    const selectSeatPromises = selectedSeats.map((seat) => {
+      const [lot, seatNumber, ip_no] = seat.split("-");
+      const inputData = {
+        st_id: ip_no,
+        st_row: lot,
+        st_column: seatNumber,
+        st_check: "n",
+      };
+
+      console.log("inputData : ", inputData);
+
+      return ApiService.updateSeat(inputData);
     });
-  
-    Promise.all(updatePromises)
+
+    Promise.all(selectSeatPromises)
       .then(() => {
-        console.log("모든 좌석 상태가 업데이트되었습니다.");
         alert("시간 초과로 메인화면으로 이동합니다.");
         history.push("/");
+
+        localStorage.removeItem("selectedSeat");
+        localStorage.removeItem("selectedSeats");
+        localStorage.removeItem("totalQuantity");
+        localStorage.removeItem("totalPrice");
+        localStorage.removeItem("selectedSeatInfo");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("좌석 상태 업데이트 중 오류 발생:", error);
       });
   };
-  
-  
-  
-  
-   
 
   useEffect(() => {
     const unlisten = history.listen((location, action) => {
@@ -151,44 +170,6 @@ const Reservation_Payment = () => {
     };
   }, [selectedSeats, history]);
 
-  useEffect(() => {
-    const storedMovieInfo = localStorage.getItem("selectedMovieInfo");
-    if (storedMovieInfo) {
-      try {
-        const parsedMovieInfo = JSON.parse(storedMovieInfo);
-        setSelectedMovieInfo(parsedMovieInfo);
-        console.log(parsedMovieInfo);
-      } catch (error) {
-        console.error("영화 정보를 파싱하는 중 오류 발생:", error);
-      }
-    }
-
-    const storedSelectedSeats = JSON.parse(
-      localStorage.getItem("selectedSeats")
-    );
-    const storedTotalPrice = JSON.parse(localStorage.getItem("totalPrice"));
-    const seatInfo = JSON.parse(localStorage.getItem("selectedSeatInfo"));
-    console.log(seatInfo.totalQuantity);
-
-    if (seatInfo) {
-      setAdultQuantity(seatInfo.adultQuantity);
-      setTeenQuantity(seatInfo.teenQuantity);
-      setChildQuantity(seatInfo.childQuantity);
-      setDisabledQuantity(seatInfo.disabledQuantity);
-      setTotalQuantity(seatInfo.totalQuantity);
-      setSelectedSeats(storedSelectedSeats);
-      setTotalPrice(storedTotalPrice);
-    }
-
-    console.log("setSelectedSeats : ", storedSelectedSeats);
-    console.log("setTotalPrice : ", storedTotalPrice);
-    console.log("totalQuantity : ", seatInfo.totalQuantity);
-    localStorage.setItem(
-      "totalQuantity",
-      JSON.stringify(seatInfo.totalQuantity || 0)
-    );
-  }, []);
-
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -205,7 +186,7 @@ const Reservation_Payment = () => {
 
   const handleMovie = () => {
     const confirmResult = window.confirm("입력된 정보가 모두 사라집니다.");
-    
+
     // 좌석 정보를 업데이트하고 페이지를 이동하는 함수
     const updateSeatAndNavigate = (destination) => {
       const updateSeatPromises = selectedSeats.map((seat) => {
@@ -218,7 +199,7 @@ const Reservation_Payment = () => {
         };
         return ApiService.updateSeat(inputData);
       });
-  
+
       Promise.all(updateSeatPromises)
         .then(() => {
           // 페이지 이동
@@ -229,7 +210,7 @@ const Reservation_Payment = () => {
           localStorage.removeItem("totalQuantity");
           localStorage.removeItem("totalPrice");
           localStorage.removeItem("selectedSeatInfo");
-          if(destination === "/page_1/Reservation_Movie") {
+          if (destination === "/page_1/Reservation_Movie") {
             localStorage.removeItem("selectedMovieInfo");
           }
         })
@@ -237,17 +218,16 @@ const Reservation_Payment = () => {
           console.error("좌석 정보 업데이트 중 오류 발생:", error);
         });
     };
-  
+
     // 확인을 누른 경우
     if (confirmResult) {
       updateSeatAndNavigate("/page_1/Reservation_Movie");
     }
   };
-  
 
   const handleSeat = () => {
     const confirmResult = window.confirm("입력된 좌석이 사라집니다.");
-  
+
     // 좌석 정보를 업데이트하고 페이지를 이동하는 함수
     const updateSeatAndNavigate = (destination) => {
       const updateSeatPromises = selectedSeats.map((seat) => {
@@ -260,7 +240,7 @@ const Reservation_Payment = () => {
         };
         return ApiService.updateSeat(inputData);
       });
-  
+
       Promise.all(updateSeatPromises)
         .then(() => {
           // 페이지 이동
@@ -276,7 +256,7 @@ const Reservation_Payment = () => {
           console.error("좌석 정보 업데이트 중 오류 발생:", error);
         });
     };
-  
+
     // 확인을 누른 경우
     if (confirmResult) {
       updateSeatAndNavigate("/page_1/Reservation_Seat");
@@ -493,35 +473,7 @@ const Reservation_Payment = () => {
                         <Checkout handleCloseModal={handleCloseModal} />
                       </div>
                     </Modal>
-                    {/* <button className="point_seat" onClick={handlePointClick}>
-                      포인트
-                    </button> */}
                   </li>
-                  {/* <div className="point_seat_main">
-                    <ul className="point_seat_sub">
-                      {isPointClicked && (
-                        <div className="usePoint">
-                          <li>회원ID : </li>
-                          <li>잔여 포인트 : </li>
-                          <li>
-                            사용 포인트 :{" "}
-                            <input
-                              type="text"
-                              placeholder="사용할 포인트 입력하세요."
-                            />
-                          </li>
-                          <li>
-                            <button
-                              className="usePointBtn"
-                              onClick={handlePointClick}
-                            >
-                              사용
-                            </button>
-                          </li>
-                        </div>
-                      )}
-                    </ul>
-                  </div> */}
                 </ul>
               </div>
             </li>
@@ -549,7 +501,12 @@ const Reservation_Payment = () => {
                     결제금액: {totalPrice.toLocaleString()}
                   </li>
                   <li>
-                    <button className="paymentBtn_total"   onClick={handlePaymentClick}>결제</button>
+                    <button
+                      className="paymentBtn_total"
+                      onClick={handlePaymentClick}
+                    >
+                      결제하기
+                    </button>
                   </li>
                 </ul>
               </div>

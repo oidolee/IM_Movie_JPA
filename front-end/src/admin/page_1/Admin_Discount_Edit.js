@@ -79,7 +79,7 @@ class Admin_Discount_Edit extends Component {
         <br />
         <br />
         <Typography variant="h5" className="discountEdit">
-          Discount_Edit
+          수정
         </Typography>
         <TextField
           required
@@ -168,7 +168,7 @@ class Admin_Discount_Edit extends Component {
         <br />
 
         <Button className="editBtn" variant="contained" color="primary" onClick={this.editDiscount}>
-          edit_Discount
+          수정완료
         </Button>
       </div>
     );

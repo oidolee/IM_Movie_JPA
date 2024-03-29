@@ -56,7 +56,6 @@ const Reservation_Seat = () => {
   const [canSelectSeat, setCanSelectSeat] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const history = useHistory();
-  const [selectedSeat, setSelectedSeat] = useState(null);
   const isChecked = false;
   const [checked, setChecked] = useState(isChecked);
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -67,6 +66,38 @@ const Reservation_Seat = () => {
   const [disabledQuantity, setDisabledQuantity] = useState(0);
   const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 선택한 영화 정보
   
+  useEffect(() => {
+    const timerStartTime = new Date();
+    console.log("타이머 시작 시간:", timerStartTime);
+    let lastMouseMoveTime = new Date();
+    const timer = setInterval(() => {
+        const currentTime = new Date();
+        const elapsedTime = currentTime - lastMouseMoveTime;
+
+        // 1분 동안(테스트를 위해 1분으로 설정) 마우스 움직임 없을 시 정보 초기화 - 타이머 설정
+        if (elapsedTime >= 60000) {
+            const timerEndTime = new Date();
+            console.log("타이머 종료 시간:", timerEndTime);
+            clearInterval(timer);
+            alert("시간 초과로 메인화면으로 이동합니다.");
+            history.push("/");
+            localStorage.removeItem("selectedMovieInfo");
+        }
+    }, 1000); // 매 초마다 체크
+
+    // 마우스 움직임 감지 이벤트 핸들러
+    const handleMouseMove = () => {
+        lastMouseMoveTime = new Date();
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+        clearInterval(timer);
+        document.removeEventListener("mousemove", handleMouseMove);
+    };
+}, []);
+ 
   // 가격 설정
   const adultPrice = 10000;
   const teenPrice = 8000;
@@ -100,7 +131,7 @@ const Reservation_Seat = () => {
     ApiService.listSeat()
       .then((res) => {
         setSeats(res.data);
-        // console.log("listSeat 성공");
+        console.log("listSeat 성공");
       })
       .catch((err) => {
         console.log("listSeat 오류 : ", err);
