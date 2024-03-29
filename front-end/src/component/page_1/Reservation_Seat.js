@@ -132,7 +132,7 @@ const Reservation_Seat = () => {
     ApiService.listSeat()
       .then((res) => {
         setSeats(res.data);
-        // console.log("listSeat 성공");
+        console.log("listSeat 성공");
       })
       .catch((err) => {
         console.log("listSeat 오류 : ", err);

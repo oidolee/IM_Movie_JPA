@@ -506,7 +506,7 @@ const Reservation_Payment = () => {
                       className="paymentBtn_total"
                       onClick={handlePaymentClick}
                     >
-                      결제
+                      결제하기
                     </button>
                   </li>
                 </ul>
