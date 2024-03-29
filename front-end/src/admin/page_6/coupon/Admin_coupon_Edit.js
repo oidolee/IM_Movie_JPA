@@ -12,6 +12,7 @@ function Admin_Update_Edit() {
     ic_num: "",
     ic_code: "",
     ic_name: ic_name,
+    ic_img: "",
     ic_category: "",
     ic_point: "",
     ic_startDate: "",
@@ -33,6 +34,8 @@ function Admin_Update_Edit() {
           ic_num: list.cpdto.ic_num,
           ic_code: list.cpdto.ic_code,
           ic_name: list.cpdto.ic_name,
+          ic_img: list.cpdto.ic_img,
+          ic_img_detail: list.cpdto.ic_img_detail,
           ic_category: list.cpdto.ic_category,
           ic_content: list.cpdto.ic_content,
           ic_point: list.cpdto.ic_point,
@@ -59,7 +62,17 @@ function Admin_Update_Edit() {
     const fileName = selectedFile ? selectedFile.name : ""; // 파일이 선택되었을 때만 파일 이름 추출
     setUpdateInfo(prevState => ({
       ...prevState,
-      ic_img: fileName
+      ic_img: fileName,
+      ic_img_detail: fileName,
+    }));
+  };
+
+  const handleImgDetailChange = (event) => {
+    const selectedFile = event.target.files[0];
+    const fileName = selectedFile ? selectedFile.name : ""; 
+    setUpdateInfo(prevState => ({
+      ...prevState,
+      ic_img_detail: fileName,
     }));
   };
 
@@ -103,6 +116,12 @@ function Admin_Update_Edit() {
         name="ic_code"
         value={updateInfo.ic_code}
         onChange={onChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
       />
       <br />
 
@@ -115,6 +134,12 @@ function Admin_Update_Edit() {
         name="ic_name"
         value={updateInfo.ic_name}
         onChange={onChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
       />
       <br />
 
@@ -126,6 +151,29 @@ function Admin_Update_Edit() {
         type="file"
         name="ic_img"
         onChange={handleFileChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
+      />
+      <br />
+      <br />
+      <TextField
+        required
+        id="standard-required"
+        variant="standard"
+        label="쿠폰 이미지"
+        type="file"
+        name="ic_img_detail"
+        onChange={handleImgDetailChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
       />
       <br />
       <br />
@@ -153,6 +201,12 @@ function Admin_Update_Edit() {
         name="ic_point"
         value={updateInfo.ic_point}
         onChange={onChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
       />
       <br />
       <br />
@@ -166,6 +220,12 @@ function Admin_Update_Edit() {
         name="ic_content"
         value={updateInfo.ic_content}
         onChange={onChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
       />
 
       <TextField
@@ -177,6 +237,12 @@ function Admin_Update_Edit() {
         name="ic_startDate"
         value={updateInfo.ic_startDate}
         onChange={onChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
       />
       <br />
       <TextField
@@ -188,6 +254,12 @@ function Admin_Update_Edit() {
         name="ic_endDate"
         value={updateInfo.ic_endDate}
         onChange={onChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          style: { marginTop: "20px" } // input 요소의 상단 여백 조정
+        }}
       />
       <br />
 

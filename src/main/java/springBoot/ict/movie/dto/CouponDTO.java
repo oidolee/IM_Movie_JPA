@@ -24,6 +24,7 @@ public class CouponDTO {
     private String ic_code;
     private String ic_name;
     private String ic_img;
+    private String ic_img_detail;
     private String ic_category;
     private int ic_point;
     private String ic_content;

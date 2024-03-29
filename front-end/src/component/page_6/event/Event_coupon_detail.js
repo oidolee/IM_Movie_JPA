@@ -107,15 +107,7 @@ const Event_coupon_detail = () => {
                     </div>
                 </div>
                 <div>
-                    <img src={`${process.env.PUBLIC_URL}/page_6/${couponList.ic_img}`} style={{ width: '80%' }} alt='coupon_1' />
-                </div>
-                <div className={`Event_coupon_content ${style.Event_coupon_content}`}>
-                    {couponList.ic_content && couponList.ic_content.split('\n').map((line, index) => (
-                        <React.Fragment key={index}>
-                            {line}
-                            <br />
-                        </React.Fragment>
-                    ))}
+                    <img src={`${process.env.PUBLIC_URL}/page_6/${couponList.ic_img_detail}`} style={{ width: '80%' }} alt='coupon_1' />
                 </div>
                 <div className={`Event_coupon_content ${style.Event_coupon_content}`}>
                     <TextField
@@ -186,9 +178,10 @@ const Event_coupon_detail = () => {
                     />
 
                     <Button
-                        className="saveBtn"
+                        className={`saveButton ${style.saveButton}`}
                         variant="contained"
                         color="primary"
+                        style={{backgroundColor: 'black'}}
                         onClick={saveCoupon}
                     >
                         쿠폰 다운로드

@@ -3,7 +3,7 @@
     width: 980px;
     
     justify-content: center;
-    background-color: rgb(146, 146, 146);
+    
     margin: auto;
     margin-top: 10px;
 }
@@ -26,7 +26,11 @@
 
 .Event_coupon_content{
     margin-top: 10px;
-    background: whitesmoke;
     width: 80%;
     margin: 10px auto;
+}
+
+.saveButton{
+    background-color: black;
+    color: white;
 }
