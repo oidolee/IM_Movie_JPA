@@ -71,7 +71,7 @@ class Admin_Discount_List extends Component {
         <br />
         <br />
         <Typography variant="h5" className="discountList">
-          Discount_List
+          할인 안내
         </Typography>
         <br />
         <br />
@@ -81,20 +81,20 @@ class Admin_Discount_List extends Component {
           className="Add_btn"
           onClick={this.discountAdd}
         >
-          Discount_Add
+          등록
         </Button>
         <br />
         <br />
         <Table className="Discount_List_Content">
           <TableHead>
             <TableRow>
-              <TableCell>Num</TableCell>
-              <TableCell>Main_Title</TableCell>
-              <TableCell>Sub_Title</TableCell>
-              <TableCell>Content</TableCell>
-              <TableCell>Main_Img</TableCell>
-              <TableCell>Show</TableCell>
-              <TableCell>Sysdate</TableCell>
+              <TableCell>할인안내</TableCell>
+              <TableCell>대제목</TableCell>
+              <TableCell>소제목</TableCell>
+              <TableCell>내용</TableCell>
+              <TableCell>이미지</TableCell>
+              <TableCell>출력여부</TableCell>
+              <TableCell>등록일</TableCell>
               <TableCell>Edit</TableCell>
               <TableCell>Delete</TableCell>
             </TableRow>
