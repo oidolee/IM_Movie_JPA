@@ -194,7 +194,7 @@ function MyPage_coupon_part() {
                     </tbody>
                 </Table>
             </div>
-
+            
             {/* <div className={`coupon_detail ${style.coupon_detail}`}>
                 <table className={`coupon_detail_table ${style.coupon_detail_table}`} >
                     <colgroup>

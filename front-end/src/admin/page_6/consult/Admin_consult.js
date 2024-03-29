@@ -44,6 +44,7 @@ function MyPage_consult_list_part() {
 
     return (
         <div>
+            <h4 style={{marginTop:"50px"}}>1:1 문의</h4>
             <table className={`consult_list ${style.consult_list}`}>
                 <colgroup>
                     <col style={{ width: '8%' }} />
@@ -53,7 +54,7 @@ function MyPage_consult_list_part() {
                     <col style={{ width: '15%' }} />
                     <col style={{ width: '8%' }} />
                 </colgroup>
-                <thead>
+                <thead style={{borderTop:"0"}}>
                     <tr>
                         <th> 번호 </th>
                         <th> 분류 </th>
@@ -78,7 +79,13 @@ function MyPage_consult_list_part() {
                                 </td>
                                 <td>{consultItem.ib_date}</td>
                                 <td>
-                                    <div className={`consult_status ${style.consult_status}`}>
+                                    <div style={{
+                                        padding: '5px',
+                                        boxSizing: 'border-box',
+                                        width: '100px',
+                                        margin: '0 auto',
+                                        backgroundColor: consultItem.ib_show === 'y' ? 'blue' : ''                                    }}
+                                    className={`consult_status ${style.consult_status}`}>
                                         {consultItem.ib_show === 'y' ? '답변대기 중' : '답변 완료'}
                                     </div>
                                 </td>
