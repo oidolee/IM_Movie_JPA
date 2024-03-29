@@ -14,10 +14,11 @@ const Success = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
 
-  const selectedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
+  useEffect(() => {
+
+    const selectedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
   console.log("선택된 좌석 번호 : ", selectedSeat);
 
-  useEffect(() => {
     const storedSelectedSeats = JSON.parse(
       localStorage.getItem("selectedSeats")
     );

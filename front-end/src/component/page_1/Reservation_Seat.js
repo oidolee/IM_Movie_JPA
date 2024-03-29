@@ -98,9 +98,7 @@ const Reservation_Seat = () => {
         document.removeEventListener("mousemove", handleMouseMove);
     };
 }, []);
-
-
-  
+ 
   // 가격 설정
   const adultPrice = 10000;
   const teenPrice = 8000;
