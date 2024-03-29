@@ -20,8 +20,8 @@ import bottom1 from "../../assets/page_3/bottom1.jpg";
 import bottom2 from "../../assets/page_3/bottom2.jpg";
 
 const Reservation_Payment = () => {
-  const [selectedSeat, setSelectedSeat] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [selectedSeat, setSelectedSeat] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState([]);
   const [totalPrice, setTotalPrice] = useState([]);
   const [isPointClicked, setIsPointClicked] = useState(false);
@@ -33,27 +33,6 @@ const Reservation_Payment = () => {
   const [disabledQuantity, setDisabledQuantity] = useState(0);
   const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 선택한 영화 정보
   const history = useHistory();
-
-  useEffect(() => {
-
-    const timerStartTime = new Date();
-    console.log("타이머 시작 시간:", timerStartTime);
-
-    // 타이머 시작
-    const timer = setInterval(() => {
-
-      const currentTime = new Date();
-      updateSeatStatus(currentTime);
-
-      // 타이머 종료 시간
-      const timerEndTime = new Date();
-      console.log("타이머 종료 시간:", timerEndTime);
-    }, 60000);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
 
   useEffect(() => {
     const storedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
@@ -71,9 +50,7 @@ const Reservation_Payment = () => {
       }
     }
 
-    const storedSelectedSeats = JSON.parse(
-      localStorage.getItem("selectedSeats")
-    );
+    const storedSelectedSeats = JSON.parse(localStorage.getItem("selectedSeats"));
     setSelectedSeats(storedSelectedSeats);
     console.log("setSelectedSeats : ", storedSelectedSeats);
 
@@ -96,6 +73,27 @@ const Reservation_Payment = () => {
       "totalQuantity",
       JSON.stringify(seatInfo.totalQuantity || 0)
     );
+  }, []);
+
+  useEffect(() => {
+
+    const timerStartTime = new Date();
+    console.log("타이머 시작 시간:", timerStartTime);
+
+    // 타이머 시작
+    const timer = setInterval(() => {
+
+      const currentTime = new Date();
+      updateSeatStatus(currentTime);
+
+      // 타이머 종료 시간
+      const timerEndTime = new Date();
+      console.log("타이머 종료 시간:", timerEndTime);
+    }, 60000);
+
+    return () => {
+      clearInterval(timer);
+    };
   }, []);
 
   // 1분 동안(테스트를 위해 1분으로 설정) 결제 완료 안할 시 좌석 초기화 - 타이머 설정

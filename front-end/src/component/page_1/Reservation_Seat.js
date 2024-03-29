@@ -56,7 +56,6 @@ const Reservation_Seat = () => {
   const [canSelectSeat, setCanSelectSeat] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const history = useHistory();
-  const [selectedSeat, setSelectedSeat] = useState(null);
   const isChecked = false;
   const [checked, setChecked] = useState(isChecked);
   const [selectedSeats, setSelectedSeats] = useState([]);
