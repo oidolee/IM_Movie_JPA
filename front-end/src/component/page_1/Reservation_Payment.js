@@ -102,8 +102,7 @@ const Reservation_Payment = () => {
     );
   }, []);
 
-  console.log("selectedSeats: ", selectedSeats);
-  
+  // 1분 동안(테스트를 위해 1분으로 설정) 결제 완료 안할 시 좌석 초기화 - 타이머 설정
   const updateSeatStatus = (currentTime) => {
     console.log("selectedSeats: ", selectedSeats);
     const selectSeatPromises = selectedSeats.map((seat) => {
