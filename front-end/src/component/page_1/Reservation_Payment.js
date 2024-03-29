@@ -74,6 +74,9 @@ const Reservation_Payment = () => {
     const storedSelectedSeats = JSON.parse(
       localStorage.getItem("selectedSeats")
     );
+    setSelectedSeats(storedSelectedSeats);
+    console.log("setSelectedSeats : ", storedSelectedSeats);
+
     const storedTotalPrice = JSON.parse(localStorage.getItem("totalPrice"));
     const seatInfo = JSON.parse(localStorage.getItem("selectedSeatInfo"));
     console.log(seatInfo.totalQuantity);
@@ -84,11 +87,9 @@ const Reservation_Payment = () => {
       setChildQuantity(seatInfo.childQuantity);
       setDisabledQuantity(seatInfo.disabledQuantity);
       setTotalQuantity(seatInfo.totalQuantity);
-      setSelectedSeats(storedSelectedSeats);
       setTotalPrice(storedTotalPrice);
     }
 
-    console.log("setSelectedSeats : ", storedSelectedSeats);
     console.log("setTotalPrice : ", storedTotalPrice);
     console.log("totalQuantity : ", seatInfo.totalQuantity);
     localStorage.setItem(
@@ -99,7 +100,7 @@ const Reservation_Payment = () => {
 
   // 1분 동안(테스트를 위해 1분으로 설정) 결제 완료 안할 시 좌석 초기화 - 타이머 설정
   const updateSeatStatus = (currentTime) => {
-    console.log("selectedSeats: ", selectedSeats);
+    console.log("selectedSeats : ", selectedSeats );
     const selectSeatPromises = selectedSeats.map((seat) => {
       const [lot, seatNumber, ip_no] = seat.split("-");
       const inputData = {
