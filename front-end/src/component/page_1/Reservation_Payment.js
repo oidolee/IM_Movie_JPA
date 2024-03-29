@@ -33,29 +33,22 @@ const Reservation_Payment = () => {
   const [selectedMovieInfo, setSelectedMovieInfo] = useState(null); // 선택한 영화 정보
   const history = useHistory();
 
-  // 페이지 벗어나면 모든 정보 리셋
-
-  // 좌석 예약인 상태로 10분 경과하면 리셋
-
   useEffect(() => {
-    // 타이머 시작 시간
+
     const timerStartTime = new Date();
     console.log("타이머 시작 시간:", timerStartTime);
 
     // 타이머 시작
     const timer = setInterval(() => {
-      // 현재 시간
-      const currentTime = new Date();
 
-      // 1분 경과한 좌석의 상태를 업데이트
+      const currentTime = new Date();
       updateSeatStatus(currentTime);
 
       // 타이머 종료 시간
       const timerEndTime = new Date();
       console.log("타이머 종료 시간:", timerEndTime);
-    }, 60000); // 1분에 한 번씩 실행
+    }, 60000);
 
-    // 컴포넌트가 언마운트될 때 타이머 정리
     return () => {
       clearInterval(timer);
     };
@@ -121,9 +114,14 @@ const Reservation_Payment = () => {
 
     Promise.all(selectSeatPromises)
       .then(() => {
-        console.log("모든 좌석 상태가 업데이트되었습니다.");
         alert("시간 초과로 메인화면으로 이동합니다.");
         history.push("/");
+
+        localStorage.removeItem("selectedSeat");
+        localStorage.removeItem("selectedSeats");
+        localStorage.removeItem("totalQuantity");
+        localStorage.removeItem("totalPrice");
+        localStorage.removeItem("selectedSeatInfo");
       })
       .catch((error) => {
         console.error("좌석 상태 업데이트 중 오류 발생:", error);
