@@ -67,35 +67,21 @@ const Reservation_Payment = () => {
   }, []);
   
   const updateSeatStatus = (currentTime) => {
-    const updatePromises = [];
-    selectedSeat.forEach(seat => {
-      ApiService.selectSeat(seat)
-        .then(seatInfo => {
-          console.log("seatInfo", seatInfo)
-          if (seatInfo.st_check === "r") {
-            const seatStartTime = new Date(seatInfo.start_time);
-            const elapsedMinutes = Math.floor((currentTime - seatStartTime) / (1000 * 60));
-            if (elapsedMinutes >= 1) {
-              const [lot, seatNumber, ip_no] = seat.split("-");
-              const inputData = {
-                st_id: ip_no,
-                st_row: lot,
-                st_column: seatNumber,
-                st_check: "n",
-              };
-  
-              console.log("inputData : ", inputData);
-  
-              updatePromises.push(ApiService.updateSeat(inputData));
-            }
-          }
-        })
-        .catch(error => {
-          console.error("좌석 정보를 가져오는 중 오류 발생:", error);
-        });
+    const selectSeatPromises = selectedSeats.map(seat => {
+      const [lot, seatNumber, ip_no] = seat.split("-");
+      const inputData = {
+        st_id: ip_no,
+        st_row: lot,
+        st_column: seatNumber,
+        st_check: "n",
+      };
+
+      console.log("inputData : ", inputData);
+
+      return ApiService.updateSeat(inputData);
     });
   
-    Promise.all(updatePromises)
+    Promise.all(selectSeatPromises)
       .then(() => {
         console.log("모든 좌석 상태가 업데이트되었습니다.");
         alert("시간 초과로 메인화면으로 이동합니다.");
