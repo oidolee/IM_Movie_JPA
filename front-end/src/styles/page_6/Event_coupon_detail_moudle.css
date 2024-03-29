@@ -11,17 +11,19 @@
 
 .Event_coupon_name{
     border-bottom: 2px solid rgba(245, 245, 245, 0.5);
-    background: whitesmoke;
+    text-align: left;
     width: 80%;
     margin: 10px auto;
+    padding-left: 10px;
     
 }
 
 .Event_coupon_regDate{
     border-bottom: 2px solid rgba(245, 245, 245, 0.5);
-    background: whitesmoke;
+    
     width: 80%;
     margin: 10px auto;
+    font-size: 13px;
 }
 
 .Event_coupon_content{
