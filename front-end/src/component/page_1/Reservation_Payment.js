@@ -20,6 +20,7 @@ import bottom1 from "../../assets/page_3/bottom1.jpg";
 import bottom2 from "../../assets/page_3/bottom2.jpg";
 
 const Reservation_Payment = () => {
+  const [selectedSeat, setSelectedSeat] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState([]);
   const [totalPrice, setTotalPrice] = useState([]);
@@ -55,8 +56,9 @@ const Reservation_Payment = () => {
   }, []);
 
   useEffect(() => {
-    const selectedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
-    console.log("selectedSeat: ", selectedSeat);
+    const storedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
+    setSelectedSeat(storedSeat);
+    console.log("selectedSeat: ", storedSeat);
 
     const storedMovieInfo = localStorage.getItem("selectedMovieInfo");
     if (storedMovieInfo) {
