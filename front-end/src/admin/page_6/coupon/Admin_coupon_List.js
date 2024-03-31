@@ -8,7 +8,7 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import style from "../../../styles/admin/page_5/Admin_Arte_List.css";
+import style from "../../../styles/admin/page_6/Admin_coupon_List.css";
 import ApiService from "../../../ApiService";
 import { Create, Delete } from "@mui/icons-material";
 
@@ -83,10 +83,10 @@ function Admin_coupon_List({ history }) {
   };
 
   return (
-    <div className={`Admin_Arte_List ${style.Admin_Arte_List}`}>
+    <div className={`Admin_Arte_List ${style.Admin_coupon_List}`}>
       <br />
       <br />
-      <Typography variant="h5" className="ArteList">
+      <Typography variant="h5" className="couponList">
         쿠폰 리스트
       </Typography>
       <br />
@@ -130,7 +130,7 @@ function Admin_coupon_List({ history }) {
               <TableCell>{list.ic_regDate}</TableCell>
               <TableCell
                 className="selectBtn"
-                onClick={() => selectCoupon(list.ic_name)}
+                onClick={() => selectCoupon(list.ic_num)}
               >
                 <Create />
               </TableCell>

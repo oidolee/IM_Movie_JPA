@@ -1,0 +1,29 @@
+.Admin_coupon_Add {
+    width: 800px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.Admin_coupon_Add .couponAdd {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.Admin_coupon_Add .saveBtn {
+    background-color: black;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
+
+.Admin_coupon_Add .saveBtn:hover {
+    background-color: #FF243E;
+}
+
+.Admin_coupon_Add .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    width: 700px;
+    margin-top: 30px;
+}
+

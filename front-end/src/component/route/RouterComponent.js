@@ -185,7 +185,7 @@ const AppRouter = () => {
                                 <Route path="/MyPage_consult_answer/:one_id" exact={true} component={MypageConsultDetail} />
                                 <Route path="/MyPage_consult_answer_2/:group_id" exact={true} component={MypageConsultDetail2} />
                                 <Route path="/Event_coupon/" exact={true} component={Event_coupon} />
-                                <Route path="/Event_coupon_detail/:ic_name" exact={true} component={Event_coupon_detail} />
+                                <Route path="/Event_coupon_detail/:ic_num" exact={true} component={Event_coupon_detail} />
                                 
                             </Route>
                             

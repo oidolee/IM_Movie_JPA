@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Select, MenuItem, TextField, Button } from "@mui/material";
 import { useHistory } from 'react-router-dom';
-import style from "../../../styles/admin/page_5/Admin_Update_Edit.css";
+import style from "../../../styles/admin/page_6/Admin_coupon_Edit.css";
 import ApiService from "../../../ApiService";
 import { useParams } from 'react-router-dom';
 
 function Admin_Update_Edit() {
   const history = useHistory();
-  const { ic_name } = useParams();
+  const { ic_num } = useParams();
   const [updateInfo, setUpdateInfo] = useState({
-    ic_num: "",
+    ic_num: ic_num,
     ic_code: "",
-    ic_name: ic_name,
+    ic_name: "",
     ic_img: "",
     ic_category: "",
     ic_point: "",
@@ -20,15 +20,15 @@ function Admin_Update_Edit() {
   });
 
   useEffect(() => {
-    selectLoad(ic_name);
+    selectLoad(ic_num);
   }, []);
 
   // 한건조회
-  const selectLoad = (ic_name) => {
-    ApiService.couponDetailList(ic_name)
+  const selectLoad = (ic_num) => {
+    ApiService.couponDetailList(ic_num)
       .then(res => {
         let list = res.data;
-        console.log('ic_name : ' + ic_name)
+        console.log('ic_num : ' + ic_num)
         console.log('data,', res.data);
         setUpdateInfo({
           ic_num: list.cpdto.ic_num,
@@ -90,10 +90,10 @@ function Admin_Update_Edit() {
   };
 
   return (
-    <div className={`Admin_Update_Edit ${style.Admin_Update_Edit}`}>
+    <div className={`Admin_Update_Edit ${style.Admin_coupon_Edit}`}>
       <br />
       <br />
-      <Typography variant="h5" className="updateEdit">
+      <Typography variant="h5" className="couponEdit">
         쿠폰 수정
       </Typography>
       <TextField
