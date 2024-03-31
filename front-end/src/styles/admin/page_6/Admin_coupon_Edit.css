@@ -1,0 +1,33 @@
+.Admin_coupon_Edit {
+    width: 100%;
+    height: 100%;
+}
+
+.Admin_coupon_Edit .couponEdit {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.Admin_coupon_Edit .editBtn {
+    background-color: black;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
+
+.Admin_coupon_Edit .editBtn:hover {
+    background-color: #FF243E;
+}
+
+.Admin_coupon_Edit .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    width: 700px;
+    margin-top: 30px;
+}
+
+.Admin_coupon_Edit .css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input.MuiSelect-select {
+    margin-top: 20px;
+    width: 680px;
+    text-align: left;
+}

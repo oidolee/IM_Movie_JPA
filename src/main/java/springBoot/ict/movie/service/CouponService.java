@@ -44,11 +44,11 @@ public interface CouponService {
 			throws ServletException, IOException;
 
 	// 쿠폰 상세내역
-	public Optional<CouponDTO> selectCoupon(String ic_name)
+	public Optional<CouponDTO> selectCoupon(int ic_num)
 			throws ServletException, IOException;
 	
 	// 고객 쿠폰 상세내역
-	public Optional<CouponCusDTO> selectCusCoupon(String ic_name) 
+	public Optional<CouponCusDTO> cusCouponDetail(int ic_num) 
 			throws ServletException, IOException;
 			
 	

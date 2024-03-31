@@ -49,8 +49,8 @@ public class CouponController {
 	}
 
 	// 쿠폰 상세내역
-	@GetMapping("/selectCoupon/{ic_name}")
-	public Map<String, Object> selectCouponDetail(@PathVariable(name = "ic_name") String ic_name, Model model)
+	@GetMapping("/selectCoupon/{ic_num}")
+	public Map<String, Object> selectCouponDetail(@PathVariable(name = "ic_num") int ic_num, Model model)
 
 			throws ServletException, IOException {
 		logger.info("<<< url -> selectConsultDetail");
@@ -63,7 +63,7 @@ public class CouponController {
 
 		try {
 
-			cpdto = service.selectCoupon(ic_name);
+			cpdto = service.selectCoupon(ic_num);
 			System.out.println(cpdto);
 			resultCode = "200";
 			resultMsg = "selectConsultAnswer Success";
@@ -258,6 +258,38 @@ public class CouponController {
 		map.put("deleteStatusCnt", deleteStatusCnt);
 
 		return map;
+	}
+	
+	// 고객 쿠폰 상세
+	@GetMapping("/couponCusDetail/{ic_num}")
+	public Map<String, Object> couponCusDetail(@PathVariable(name = "ic_num") int ic_num, Model model)
+
+			throws ServletException, IOException {
+		logger.info("<<< url -> selectConsultDetail");
+
+		Optional<CouponCusDTO> cpcusdto = null;
+		String resultCode = "";
+		String resultMsg = "";
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		try {
+
+			cpcusdto = service.cusCouponDetail(ic_num);
+			System.out.println(cpcusdto);
+			resultCode = "200";
+			resultMsg = "selectConsultAnswer Success";
+		} catch (Exception e) {
+			resultCode = "400";
+			resultMsg = e.getMessage();
+			e.printStackTrace();
+		}
+		map.put("resultCode", resultCode);
+		map.put("resultMsg", resultMsg);
+		map.put("cpcusdto", cpcusdto);
+
+		return map;
+
 	}
 
 }

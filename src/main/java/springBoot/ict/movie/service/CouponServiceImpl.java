@@ -90,18 +90,18 @@ public class CouponServiceImpl implements CouponService {
 
 	// 쿠폰 상세내역(관리자)
 	@Override
-	public Optional<CouponDTO> selectCoupon(String ic_name) 
+	public Optional<CouponDTO> selectCoupon(int ic_num) 
 		throws ServletException, IOException {
 		
-		Optional<CouponDTO> cpdto = cpdao.selectCouponDetail(ic_name);
+		Optional<CouponDTO> cpdto = cpdao.selectCouponDetail(ic_num);
 		return cpdto;
 	}
 	
 	// 고객 쿠폰 상세내역
 	@Override
-	public Optional<CouponCusDTO> selectCusCoupon(String ic_name) 
+	public Optional<CouponCusDTO> cusCouponDetail(int ic_num) 
 			throws ServletException, IOException {
-		Optional<CouponCusDTO> cpcusdto = cpcusdao.selectCusCouponDetail(ic_name);
+		Optional<CouponCusDTO> cpcusdto = cpcusdao.selectCusCouponDetail(ic_num);
 		return cpcusdto;
 	}
 	
