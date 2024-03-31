@@ -81,4 +81,40 @@ public class SeatController {
         return map;
     }
 	
+	// 1건 좌석 조회
+	@GetMapping("/SeatDetailList/{st_id}") 
+	public Map<String, Object> SeatDetailList(@PathVariable int st_id) 
+		throws ServletException, IOException {
+		
+		logger.info("url - SeatDetailList");
+		
+		System.out.println(st_id);
+		String resultCode = "";
+		String resultMsg = "";
+		DiscountDTO dto = null;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+			
+			service.SeatDetailList(st_id);
+			resultCode = "200";
+			resultMsg = "DiscountInsert Success";
+		} 
+		
+		catch(Exception e) {
+			
+			resultCode = "400";
+			resultMsg = e.getMessage();
+			e.printStackTrace();
+		}
+		
+		map.put("resultCode", resultCode);
+		map.put("resultMsg", resultMsg);
+		map.put("st_id", st_id);
+		map.put("dto", dto);
+		
+		return map;
+	}
+	
 }

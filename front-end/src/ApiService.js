@@ -27,6 +27,11 @@ class ApiService {
         return axios.put(serverUrl + "/page_1/SeatUpdate" + "/" + inputData.st_id, inputData);
     }
     
+    selectSeat(st_id) {
+        console.log("selectSeat 호출", st_id);
+        return axios.get(serverUrl + "/page_1/SeatDetailList" + "/" + st_id);
+    }
+
     // --------------------------------------------Seat 끝--------------------------------------------
     // --------------------------------------------Reservation 시작--------------------------------------------
     // 지역-영화 목록

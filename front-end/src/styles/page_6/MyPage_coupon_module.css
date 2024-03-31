@@ -86,3 +86,13 @@
     color: white;
     width: 50px;
 }
+
+.consult_list{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.consult_list tr{
+    height: 50px;
+    border-bottom: 1px solid #eee;
+}

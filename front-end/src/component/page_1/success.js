@@ -11,13 +11,16 @@ const Success = () => {
   const customerEmail = queryParams.get("customerEmail");
   const totalPrice = queryParams.get("totalPrice");
 
+  const [selectedSeat, setSelectedSeat] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
 
-  const selectedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
-  console.log("선택된 좌석 번호 : ", selectedSeat);
-
   useEffect(() => {
+
+    const storedSeat = JSON.parse(localStorage.getItem("selectedSeat"));
+    setSelectedSeat(storedSeat);
+    console.log("selectedSeat: ", storedSeat);
+
     const storedSelectedSeats = JSON.parse(
       localStorage.getItem("selectedSeats")
     );

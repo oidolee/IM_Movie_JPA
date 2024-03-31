@@ -9,6 +9,7 @@ import ticket2 from '../../assets/page_3/IM_ticket2.png'
 import foods1 from '../../assets/page_3/foods1.jpg'
 import foods2 from '../../assets/page_3/foods2.jpg'
 import foods3 from '../../assets/page_3/foods3.jpg'
+import foods4 from '../../assets/page_3/foods4.jpg'
 import bottom1 from '../../assets/page_3/bottom1.jpg'
 import bottom2 from '../../assets/page_3/bottom2.jpg'
 import style from '../../styles/page_3/StoreList.css';
@@ -114,14 +115,14 @@ class Page3 extends Component {
                             %&nbsp;
                           </span>
                           <span className={`txt_price ${style.txt_price}`}>
-                            {item.itemSalePrice}
+                            {item.itemSalePrice.toLocaleString()}
                             <em>원</em>
                           </span>
                           &nbsp;
                           <span
                             className={`txt_price_ins ${style.txt_price_ins}`}
                           >
-                            {item.itemPrice}원
+                            {item.itemPrice.toLocaleString()}원
                           </span>
                           &nbsp;
                         </div>
@@ -135,7 +136,6 @@ class Page3 extends Component {
               관람권
             </h3>
 
-          
             <div className={`page3_flex ${style.page3_flex}`}>
               {this.state.lists.map(
                 (item, index) =>

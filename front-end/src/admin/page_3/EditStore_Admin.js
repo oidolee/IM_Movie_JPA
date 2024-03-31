@@ -84,7 +84,7 @@ class EditStore_Admin extends Component {
     render() {
         return(
             <div align="center"><br/><br/>
-                <Typography variant="h4"> Edit STORE ITEM </Typography>
+                <Typography variant="h4"> 스토어 상품 수정 </Typography>
                 
                      <TextField
                         required

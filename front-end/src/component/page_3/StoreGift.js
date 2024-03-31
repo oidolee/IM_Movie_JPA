@@ -188,7 +188,7 @@ class StoreGift extends Component {
           <div className={`bx_cnt ${style.bx_cnt}`}>
             <dt>총 합계</dt>
             <dd>
-              <strong>{this.props.totalPrice}원</strong>
+              <strong>{this.props.totalPrice.toLocaleString()}원</strong>
             </dd>
           </div>
         </div>

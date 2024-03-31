@@ -1,6 +1,8 @@
 .Admin_Update_Edit {
-    width: 100%;
+    width: 800px;
     height: 100%;
+    margin: 0 auto;
+    justify-content: center;
 }
 
 .Admin_Update_Edit .updateEdit {

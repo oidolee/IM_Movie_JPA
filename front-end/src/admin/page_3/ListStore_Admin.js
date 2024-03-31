@@ -71,20 +71,20 @@ class ListStore_Admin extends Component {
         return (
             <div><br/><br/>
 
-                <Typography variant="h4" style={style}> STORE ITEM LIST </Typography><br/><br/>
-                <Button variant="contained" color="primary" onClick={this.AddStore_Admin}> Add Sample </Button>
+                <Typography variant="h4" style={style}> 스토어 상품 목록 </Typography><br/><br/>
+                <Button variant="contained" onClick={this.AddStore_Admin}> 상품 등록 </Button>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell> item_type </TableCell>
-                            <TableCell> item_name </TableCell>
-                            <TableCell> item_detail </TableCell>
-                            <TableCell> item_price </TableCell>
-                            <TableCell> item_sale_price </TableCell>
-                            <TableCell> item_image </TableCell>
-                            <TableCell> item_exp </TableCell>
-                            <TableCell> Edit </TableCell>
-                            <TableCell> Delete </TableCell>
+                            <TableCell> 상품 유형 </TableCell>
+                            <TableCell> 상품 이름 </TableCell>
+                            <TableCell> 상품 상세 구성 </TableCell>
+                            <TableCell> 소비자가격 </TableCell>
+                            <TableCell> 판매가격 </TableCell>
+                            <TableCell> 이미지 </TableCell>
+                            <TableCell> 유효기간 </TableCell>
+                            <TableCell> 편집 </TableCell>
+                            <TableCell> 삭제 </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

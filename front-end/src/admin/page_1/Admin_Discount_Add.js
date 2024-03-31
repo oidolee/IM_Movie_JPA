@@ -52,7 +52,7 @@ class Admin_Discount_Add extends Component {
         <br />
         <br />
         <Typography variant="h5" className="discountAdd">
-          Discount_Add
+          등록
         </Typography>
         <TextField
           required
@@ -105,7 +105,7 @@ class Admin_Discount_Add extends Component {
           color="primary"
           onClick={this.saveDiscount}
         >
-          save_Discount
+          등록 완료
         </Button>
       </div>
     );

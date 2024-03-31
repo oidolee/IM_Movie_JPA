@@ -305,10 +305,10 @@ EditStore_Admin = (e) => {
                   </td>
                   <td>
                     <span className={`txt_price ${style.txt_price}`}>
-                      {this.state.itemSalePrice}<em>원</em>
+                      {this.state.itemSalePrice.toLocaleString()}<em>원</em>
                     </span>
                     <span className={`txt_price_ins ${style.txt_price_ins}`}>
-                      {this.state.itemPrice}
+                      {this.state.itemPrice.toLocaleString()}
                     </span>
                   </td>
                 </tr>
@@ -358,7 +358,7 @@ EditStore_Admin = (e) => {
               총 상품금액
               <strong className={`txt_price_str ${style.txt_price_str}`}>
                 {" "}
-                {this.state.itemSalePrice * this.state.quantity}
+                {(this.state.itemSalePrice * this.state.quantity).toLocaleString()}
                 <em>원</em>
               </strong>
             </div>
@@ -401,7 +401,7 @@ EditStore_Admin = (e) => {
                   - 구성 : 2D영화관람권 2매 (IM 회원 ID당 1일 4매 구매
                   가능)
                   <br />
-                  - 유효기간 : 구매일로부터 6개월(관람일 기준), 유효기간 내
+                  - 유효기간 : 구매일로부터 12개월(관람일 기준), 유효기간 내
                   사용가능
                   <br />- 영화관람권은{" "}
                   <span style={{ color: "red" }}>2D 일반영화에만 적용 가능</span>
