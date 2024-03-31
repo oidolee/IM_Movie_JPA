@@ -119,7 +119,7 @@ const Event_coupon = () => {
                             {couponList.slice(index, index + 3).map((couponItem, subIndex) => (
                                 couponItem.ic_img && (
                                     <li key={subIndex}>
-                                        <a href={`/Event_coupon_detail/${couponItem.ic_name}`}>
+                                        <a href={`/Event_coupon_detail/${couponItem.ic_num}`}>
                                             <img src={`${process.env.PUBLIC_URL}/page_6/${couponItem.ic_img}`} alt='coupon_1' />
                                         </a>
                                         <p>{couponItem.ic_name}</p>

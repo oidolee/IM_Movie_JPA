@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ApiService from "../../../ApiService";
 import { Typography, Select, MenuItem, TextField, Button } from "@mui/material";
 import InputLabel from '@mui/material/InputLabel';
-import style from "../../../styles/admin/page_5/Admin_Arte_Add.css";
+import style from "../../../styles/admin/page_6/Admin_coupon_Add.css";
 
 
 function Admin_coupon_Add({ history }) {
@@ -74,10 +74,10 @@ function Admin_coupon_Add({ history }) {
 
 
   return (
-    <div className={`Admin_Arte_Add ${style.Admin_Arte_Add}`}>
+    <div className={`Admin_coupon_Add ${style.Admin_coupon_Add}`}>
       <br />
       <br />
-      <Typography variant="h5" className="ArteAdd">
+      <Typography variant="h5" className="couponAdd">
         쿠폰 추가
       </Typography>
       <TextField

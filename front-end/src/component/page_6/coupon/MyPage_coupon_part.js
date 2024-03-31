@@ -26,17 +26,17 @@ function MyPage_coupon_part() {
 
 
 
-    const showBox = (ic_name) => {
+    const showBox = (ic_num) => {
         setShowDetail(!showDetail)
         // 쿠폰 상세내역
-        ApiService.couponDetailList(ic_name)
+        ApiService.cusCouponDetail(ic_num)
             .then(res => {
-                console.log('ic_num : ' + ic_name);
+                console.log('ic_num : ' + ic_num);
                 console.log('res.data', res.data);
                 let coupon = res.data;
-                setIc_code(coupon.cpdto.ic_code);
-                setIc_point(coupon.cpdto.ic_point);
-                setIc_regDate(formatDate(coupon.cpdto.ic_regDate));
+                setIc_code(coupon.cpcusdto.ic_code);
+                setIc_point(coupon.cpcusdto.ic_point);
+                setIc_regDate(formatDate(coupon.cpcusdto.ic_regDate));
 
             })
             .catch(err => {
@@ -179,7 +179,7 @@ function MyPage_coupon_part() {
                                 <td><button className={`coupon_delete_child ${style.coupon_delete_child}`} title='선택삭제' onClick={() => handleDeleteCoupon(cusCouponDataItem.ic_num)}>삭제</button></td>
                                 <td>{cusCouponDataItem.ic_category}</td>
 
-                                <td style={{ textAlign: "center" }} onClick={() => showBox(cusCouponDataItem.ic_name)}>
+                                <td style={{ textAlign: "center" }} onClick={() => showBox(cusCouponDataItem.ic_num)}>
                                     {cusCouponDataItem.ic_name}
                                 </td>
                                 <td>{cusCouponDataItem.ic_startDate}부터 ~ {cusCouponDataItem.ic_endDate}까지</td>

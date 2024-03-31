@@ -33,8 +33,8 @@ public interface CouponCusRepository extends JpaRepository<CouponCusDTO, Integer
 	int deleteCusCoupon(int ic_num);
 	
 	// 고객 쿠폰 상세내역
-	@Query("SELECT cpcus FROM CouponCusDTO cpcus WHERE cpcus.ic_name = :ic_name")
-	Optional<CouponCusDTO> selectCusCouponDetail(String ic_name);
+	@Query("SELECT cpcus FROM CouponCusDTO cpcus WHERE cpcus.ic_num = :ic_num")
+	Optional<CouponCusDTO> selectCusCouponDetail(int ic_num);
 	
 	// 고객 이메일로 고객 정보 찾아오기
 //	@Query("SELECT c FROM CustomerDTO c WHERE c.email = :email")
