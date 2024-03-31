@@ -114,7 +114,7 @@ const Admin_RouterComponent = () => {
                         <Route path="/admin/page_6/consult/Admin_counsult_detail_answer/:one_id" exact={true} component={Admin_counsult_detail_answer} />
                         <Route path="/admin/page_6/coupon/Admin_coupon_Add" exact={true} component={Admin_coupon_Add} />
                         <Route path="/admin/page_6/coupon/Admin_coupon_List" exact={true} component={Admin_coupon_List} />
-                        <Route path="/admin/page_6/coupon/Admin_coupon_Edit/:ic_name" exact={true} component={Admin_coupon_Edit} />
+                        <Route path="/admin/page_6/coupon/Admin_coupon_Edit/:ic_num" exact={true} component={Admin_coupon_Edit} />
                     </Route>
 
 
