@@ -72,7 +72,7 @@ class ListStore_Admin extends Component {
             <div><br/><br/>
 
                 <Typography variant="h4" style={style}> 스토어 상품 목록 </Typography><br/><br/>
-                <Button variant="contained" color="black" onClick={this.AddStore_Admin}> 상품 등록 </Button>
+                <Button variant="contained" onClick={this.AddStore_Admin}> 상품 등록 </Button>
                 <Table>
                     <TableHead>
                         <TableRow>
