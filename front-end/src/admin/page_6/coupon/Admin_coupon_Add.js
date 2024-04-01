@@ -54,7 +54,16 @@ function Admin_coupon_Add({ history }) {
     setCouponInfo(prevState => ({
       ...prevState,
       ic_img: fileName,
-      ic_img_detail: fileName
+      
+    }));
+  };
+
+  const handleImgDetailChange = (event) => {
+    const selectedFile = event.target.files[0];
+    const fileName = selectedFile ? selectedFile.name : ""; 
+    setCouponInfo(prevState => ({
+      ...prevState,
+      ic_img_detail: fileName,
     }));
   };
 
@@ -140,7 +149,7 @@ function Admin_coupon_Add({ history }) {
         label="쿠폰 상세설명 이미지"
         type="file"
         name="ic_img_detail"
-        onChange={handleFileChange}
+        onChange={handleImgDetailChange}
         InputLabelProps={{
           shrink: true,
         }}
