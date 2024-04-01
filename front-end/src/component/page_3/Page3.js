@@ -169,7 +169,7 @@ class Page3 extends Component {
                             </span>
                           )}
                           <span className={`txt_price ${style.txt_price}`}>
-                            {item.itemSalePrice}
+                            {item.itemSalePrice.toLocaleString()}
                             <em>원</em>
                           </span>
                           &nbsp;
@@ -177,7 +177,7 @@ class Page3 extends Component {
                             <span
                               className={`txt_price_ins ${style.txt_price_ins}`}
                             >
-                              {item.itemPrice}원
+                              {item.itemPrice.toLocaleString()}원
                             </span>
                           )}
                           &nbsp;
@@ -225,7 +225,7 @@ class Page3 extends Component {
                             </span>
                           )}
                           <span className={`txt_price ${style.txt_price}`}>
-                            {item.itemSalePrice}
+                            {item.itemSalePrice.toLocaleString()}
                             <em>원</em>
                           </span>
                           &nbsp;
@@ -233,7 +233,7 @@ class Page3 extends Component {
                             <span
                               className={`txt_price_ins ${style.txt_price_ins}`}
                             >
-                              {item.itemPrice}원
+                              {item.itemPrice.toLocaleString()}원
                             </span>
                           )}
                           &nbsp;
