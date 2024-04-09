@@ -46,7 +46,7 @@ public class StoreGiftController {
         System.out.println(dto);
         // 선물 정보를 문자 메시지로 발송합니다.
         Message message = new Message();
-        message.setFrom("01063395120"); // 발신번호
+        message.setFrom(""); // 발신번호
         message.setTo(dto.getGift_recipient()); // 수신번호
         
         // 유효 기간을 발급 후 1년으로 설정합니다.
