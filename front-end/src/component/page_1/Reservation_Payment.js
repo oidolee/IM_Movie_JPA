@@ -51,8 +51,9 @@ const Reservation_Payment = () => {
     }
 
     const storedSelectedSeats = JSON.parse(localStorage.getItem("selectedSeats"));
-    setSelectedSeats(storedSelectedSeats);
-    console.log("setSelectedSeats : ", storedSelectedSeats);
+  setSelectedSeats(storedSelectedSeats);
+  console.log("setSelectedSeats : ", storedSelectedSeats);
+
 
     const storedTotalPrice = JSON.parse(localStorage.getItem("totalPrice"));
     const seatInfo = JSON.parse(localStorage.getItem("selectedSeatInfo"));
@@ -89,14 +90,14 @@ const Reservation_Payment = () => {
       // 타이머 종료 시간
       const timerEndTime = new Date();
       console.log("타이머 종료 시간:", timerEndTime);
-    }, 60000);
+    }, 180000);
 
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [selectedSeats]);
 
-  // 1분 동안(테스트를 위해 1분으로 설정) 결제 완료 안할 시 좌석 초기화 - 타이머 설정
+  // 3분 동안(테스트를 위해 3분으로 설정) 결제 완료 안할 시 좌석 초기화 - 타이머 설정
   const updateSeatStatus = (currentTime) => {
     console.log("selectedSeats : ", selectedSeats );
     const selectSeatPromises = selectedSeats.map((seat) => {

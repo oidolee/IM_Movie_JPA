@@ -326,7 +326,7 @@ class Reservation_Payment_Store extends Component {
           <div className="Res_menu2">
             <ul>
               <div className="Res_tit">
-                <li>영화선택</li>
+                <li>상품선택</li>
               </div>
               <div className="menu2">
                 <ul>
